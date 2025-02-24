@@ -1,0 +1,21 @@
+<div class="body">
+  <div class="login-container">
+    <div class="image-container">
+      <img src="assets/Q.png" alt="User Photo">
+    </div>
+    <div class="form-container">
+      <h3 class="text-center mb-3">Login</h3>
+      <form (submit)="login()">
+        <div class="mb-5">
+<!--          <label for="username" class="form-label">Username</label>-->
+          <input type="text" class="form-control" placeholder="username" id="username" name="username" [(ngModel)]="auth.username" required>
+        </div>
+        <div class="mb-5">
+<!--          <label for="password" class="form-label">Password</label>-->
+          <input type="password" class="form-control" placeholder="password" id="password" name="password" [(ngModel)]="auth.password" required>
+        </div>
+        <button type="submit" class="btn btn-primary w-100">Login</button>
+      </form>
+    </div>
+  </div>
+</div>

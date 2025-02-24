@@ -1,0 +1,97 @@
+.dashboard-container {
+  margin-top: 70px;
+  margin-left: 260px;
+  padding: 20px;
+  background-color: rgba(207, 207, 207, 0.49);
+}
+.dashboard-cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.chart-table-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-top: 20px;
+  gap: 20px;
+}
+
+.chart-container {
+  width: 40%;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card {
+  background: white;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: transform 0.3s ease-in-out;
+  width: 100%;
+  min-height: 120px;
+}
+
+.card i {
+  font-size: 28px;
+  color: #0055D8;
+  margin-bottom: 7px;
+}
+
+.card h3 {
+  font-size: 16px;
+}
+
+.card p {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+}
+
+
+.table-container {
+  width: 60%;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  background-color: #f4f4f4;
+}
+
+td.completed {
+  color: green;
+  font-weight: bold;
+}
+
+td.processing {
+  color: orange;
+  font-weight: bold;
+}
+
+td.pending {
+  color: red;
+  font-weight: bold;
+}

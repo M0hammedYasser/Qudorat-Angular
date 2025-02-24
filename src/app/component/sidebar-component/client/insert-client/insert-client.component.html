@@ -1,0 +1,38 @@
+<div class="body" >
+  <div class="register-container">
+    <h4 class="text-center mb-4">New Client</h4>
+    <form (ngSubmit)="insert()" #form="ngForm">
+      <div class="mb-3 col-6">
+        <label for="code" class="form-label">Client Code</label>
+        <input type="number" class="form-control" id="code" [value]="entry"  readonly name="code">
+      </div>
+      <div class="mb-3">
+        <label for="name" class="form-label">Name</label>
+        <input type="text" class="form-control" id="name" [(ngModel)]="client.name" name="name" required #name="ngModel">
+      </div>
+
+      <div class="row mb-3">
+        <div class="col-6">
+          <label for="email" class="form-label">Email</label>
+          <input type="email" class="form-control" id="email" [(ngModel)]="client.email" name="email" required #email="ngModel">
+        </div>
+        <div class="col-6">
+          <label for="phone" class="form-label">Phone</label>
+          <input type="text" class="form-control" id="phone" [(ngModel)]="client.phone" name="phone" required #phone="ngModel">
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <div>
+          <label for="address" class="form-label">Address</label>
+          <input type="text" class="form-control" id="address" [(ngModel)]="client.address" name="address" required #address="ngModel">
+        </div>
+
+      </div>
+
+
+      <button type="submit" class="btn btn-primary w-25 mx-auto d-block mt-4" [disabled]="!form.valid">Save</button>
+    </form>
+  </div>
+</div>
+

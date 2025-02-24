@@ -1,0 +1,46 @@
+.navbar {
+  background-color: #ffffff;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1030;
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navbar-brand {
+  margin-left: 10px;
+}
+
+.navbar-brand img {
+  width: 40px;
+  height: auto;
+}
+
+.search-bar {
+  flex-grow: 1;
+  max-width: 400px;
+  display: flex;
+  justify-content: center;
+
+}
+
+.search-bar input {
+  border-radius: 20px;
+}
+
+.search-bar button {
+  border-radius: 50%;
+}
+
+.user-profile {
+  margin-right: 10px;
+}
+.user-img {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  object-fit: cover;
+}

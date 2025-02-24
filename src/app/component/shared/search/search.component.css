@@ -1,0 +1,17 @@
+.search {
+  background-color: var(--bg);
+  color: var(--color);
+}
+
+.search::placeholder {
+  color: var(--color);
+}
+
+.input-data {
+  height: 10%;
+  width: 40%;
+  border: none;
+  font-size: 23px;
+  background-color: #ffffff;
+  color: #000000;
+}

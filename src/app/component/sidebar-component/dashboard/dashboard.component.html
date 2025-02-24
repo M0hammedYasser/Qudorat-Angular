@@ -1,0 +1,77 @@
+<div class="dashboard-container">
+  <div class="dashboard-cards">
+    <div class="card">
+      <i class="fas fa-dollar-sign"></i>
+      <h3>Total Balance</h3>
+      <p>{{ totalBalance | currency }}</p>
+    </div>
+    <div class="card">
+      <i class="fas fa-vial"></i>
+      <h3>Total Samples</h3>
+      <p>{{ totalSamples }}</p>
+    </div>
+    <div class="card">
+      <i class="fas fa-check-circle text-success"></i>
+      <h3>Completed Samples</h3>
+      <p>{{ completedSamples }}</p>
+    </div>
+    <div class="card">
+      <i class="fas fa-times-circle text-danger"></i>
+      <h3>Not Completed Samples</h3>
+      <p>{{ notCompletedSamples }}</p>
+    </div>
+
+    <div class="card">
+      <i class="fas fa-dollar-sign"></i>
+      <h3>Total Balance</h3>
+      <p>{{ totalBalance | currency }}</p>
+    </div>
+    <div class="card">
+      <i class="fas fa-vial"></i>
+      <h3>Total Samples</h3>
+      <p>{{ totalSamples }}</p>
+    </div>
+    <div class="card">
+      <i class="fas fa-check-circle text-success"></i>
+      <h3>Completed Samples</h3>
+      <p>{{ completedSamples }}</p>
+    </div>
+    <div class="card">
+      <i class="fas fa-times-circle text-danger"></i>
+      <h3>Not Completed Samples</h3>
+      <p>{{ notCompletedSamples }}</p>
+    </div>
+
+  </div>
+
+  <div class="chart-table-container">
+    <div class="chart-container">
+      <canvas id="samplesChart"></canvas>
+    </div>
+
+    <div class="table-container">
+      <table>
+        <thead>
+        <tr>
+          <th>Purpose</th>
+          <th>Date</th>
+          <th>Amount</th>
+          <th>Sample Status</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let sample of sampleData">
+          <td>{{ sample.purpose }}</td>
+          <td>{{ sample.date }}</td>
+          <td>{{ sample.amount | currency }}</td>
+          <td [class.completed]="sample.status === 'Completed'"
+              [class.processing]="sample.status === 'Processing'"
+              [class.pending]="sample.status === 'Pending'">
+            {{ sample.status }}
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

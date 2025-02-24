@@ -1,0 +1,24 @@
+<div class="body">
+  <div class="register-container">
+    <h4 class="text-center mb-4">New Project</h4>
+    <form (ngSubmit)="insert()" #form="ngForm">
+      <div class="row mb-3">
+        <div class="col-6">
+          <label for="projectName" class="form-label">Project Name</label>
+          <input type="text" class="form-control" id="projectName" [(ngModel)]="project.projectName" name="projectName" required>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-6">
+          <label for="client" class="form-label">Client Name</label>
+          <select class="form-select" aria-label="Default select example" type="text"  id="client" name="client"
+                  [(ngModel)]="project.client.id"  required>
+            <option *ngFor="let client of clients" [value]="client.id">{{client.name}}</option>
+          </select>
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-primary w-25 mx-auto d-block mt-4" [disabled]="!form.valid">Save</button>
+    </form>
+  </div>
+</div>
