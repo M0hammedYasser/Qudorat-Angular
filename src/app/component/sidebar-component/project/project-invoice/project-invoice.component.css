@@ -1,0 +1,66 @@
+.invoice-container {
+  width: 80%;
+  margin: auto;
+  padding: 100px 20px 0 150px ;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.invoice-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.left h1 {
+  font-size: 24px;
+  margin: 0;
+  color: #0055D8;
+}
+
+.right h2 {
+  font-size: 22px;
+  margin: 0;
+}
+
+.right p {
+  text-align: right;
+}
+
+.invoice-info {
+  margin: 20px 0;
+}
+
+.invoice-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.invoice-table th, .invoice-table td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: left;
+}
+
+.invoice-total {
+  text-align: right;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.download-btn {
+  display: block;
+  width: 100%;
+  background: #28a745;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.download-btn:hover {
+  background: #218838;
+}

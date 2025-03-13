@@ -1,0 +1,227 @@
+<div class="sieve-analysis-container">
+  <h1 class="header">Sieve Analysis For Sand</h1>
+  <form (ngSubmit)="insert()" #form="ngForm">
+    <div class="form-group row" style="margin-bottom: 10px">
+      <label class="col-3 col-form-label" style="margin-bottom: 0">Total Wt. of Test Sample (gm)</label>
+      <div class="col-3">
+        <input type="text" class="form-control" [(ngModel)]="sieveAnalysis.totalWeigh" name="totalWeigh" id="totalWeigh" required>
+      </div>
+    </div>
+
+
+    <div class="grid-container">
+      <div class="form-group">
+        <label class="label">Standard</label>
+        <input type="text" class="form-control" [value]="standard[0]">
+      </div>
+      <div class="form-group">
+        <label class="label">Alternative</label>
+        <input type="text" class="form-control" [value]="alertnative[0]">
+      </div>
+      <div class="form-group">
+        <label class="label">Mass Retained(gm)</label>
+        <input type="number" class="form-control" [(ngModel)]="sieveAnalysis.massRetainedA" name="massRetainedA"
+               id="massRetainedA" required>
+      </div>
+      <div class="form-group">
+        <label class="label">CVC.Min</label>
+        <input type="number" class="form-control" [(ngModel)]="sieveAnalysis.cvcMinA" name="cvcMinA" id="cvcMinA"
+               required>
+      </div>
+      <div class="form-group">
+        <label class="label">CVC.Max</label>
+        <input type="number" class="form-control" [(ngModel)]="sieveAnalysis.cvcMaxA" name="cvcMaxA" id="cvcMaxA"
+               required>
+      </div>
+      <div class="form-group">
+        <label class="label">RCC.Min</label>
+        <input type="number" class="form-control">
+      </div>
+      <div class="form-group">
+        <label class="label">RCC.Max</label>
+        <input type="number" class="form-control">
+      </div>
+      <!-- Repeat for all 49 inputs manually -->
+      <div class="form-group">
+        <input type="text" class="form-control" [value]="standard[1]">
+      </div>
+      <div class="form-group">
+        <input type="text" class="form-control" [value]="alertnative[1]">
+      </div>
+      <div class="form-group">
+        <input type="number" class="form-control" [(ngModel)]="sieveAnalysis.massRetainedB" name="massRetainedB"
+               id="massRetainedB" required>
+      </div>
+      <div class="form-group">
+        <input type="number" class="form-control" [(ngModel)]="sieveAnalysis.cvcMinB" name="cvcMinB" id="cvcMinB"
+               required>
+      </div>
+      <div class="form-group">
+        <input type="number" class="form-control" [(ngModel)]="sieveAnalysis.cvcMaxB" name="cvcMaxB" id="cvcMaxB"
+               required>
+      </div>
+      <div class="form-group">
+        <input type="number" class="form-control">
+      </div>
+      <div class="form-group">
+        <input type="number" class="form-control">
+      </div>
+      <!-- Repeat for all 49 inputs manually -->
+      <div class="form-group">
+        <input type="text" class="form-control" [value]="standard[2]">
+      </div>
+      <div class="form-group">
+        <input type="text" class="form-control" [value]="alertnative[2]">
+      </div>
+      <div class="form-group">
+        <input type="number" class="form-control" [(ngModel)]="sieveAnalysis.massRetainedC" name="massRetainedC"
+               id="massRetainedC" required>
+      </div>
+      <div class="form-group">
+        <input type="number" class="form-control" [(ngModel)]="sieveAnalysis.cvcMinC" name="cvcMinC" id="cvcMinC"
+               required>
+      </div>
+      <div class="form-group">
+        <input type="number" class="form-control" [(ngModel)]="sieveAnalysis.cvcMaxC" name="cvcMaxC" id="cvcMaxC"
+               required>
+      </div>
+      <div class="form-group">
+        <input type="number" class="form-control">
+      </div>
+      <div class="form-group">
+        <input type="number" class="form-control">
+      </div>
+      <!-- Repeat for all 49 inputs manually -->
+      <div class="form-group">
+        <input type="text" class="form-control" [value]="standard[3]">
+      </div>
+      <div class="form-group">
+        <input type="text" class="form-control" [value]="alertnative[3]">
+      </div>
+      <div class="form-group">
+        <input type="number" class="form-control" [(ngModel)]="sieveAnalysis.massRetainedD" name="massRetainedD"
+               id="massRetainedD" required>
+      </div>
+      <div class="form-group">
+        <input type="number" class="form-control" [(ngModel)]="sieveAnalysis.cvcMinD" name="cvcMinD" id="cvcMinD"
+               required>
+      </div>
+      <div class="form-group">
+        <input type="number" class="form-control" [(ngModel)]="sieveAnalysis.cvcMaxD" name="cvcMaxD" id="cvcMaxD"
+               required>
+      </div>
+      <div class="form-group">
+        <input type="number" class="form-control">
+      </div>
+      <div class="form-group">
+        <input type="number" class="form-control">
+      </div>
+      <!-- Repeat for all 49 inputs manually -->
+      <div class="form-group">
+        <input type="text" class="form-control" [value]="standard[4]">
+      </div>
+      <div class="form-group">
+        <input type="text" class="form-control" [value]="alertnative[4]">
+      </div>
+      <div class="form-group">
+        <input type="number" class="form-control" [(ngModel)]="sieveAnalysis.massRetainedE" name="massRetainedE"
+               id="massRetainedE" required>
+      </div>
+      <div class="form-group">
+        <input type="number" class="form-control" [(ngModel)]="sieveAnalysis.cvcMinE" name="cvcMinE" id="cvcMinE"
+               required>
+      </div>
+      <div class="form-group">
+        <input type="number" class="form-control" [(ngModel)]="sieveAnalysis.cvcMaxE" name="cvcMaxE" id="cvcMaxE"
+               required>
+      </div>
+      <div class="form-group">
+        <input type="number" class="form-control">
+      </div>
+      <div class="form-group">
+        <input type="number" class="form-control">
+      </div>
+      <!-- Repeat for all 49 inputs manually -->
+      <div class="form-group">
+        <input type="text" class="form-control" [value]="standard[5]">
+      </div>
+      <div class="form-group">
+        <input type="text" class="form-control" [value]="alertnative[5]">
+      </div>
+      <div class="form-group">
+        <input type="number" class="form-control" [(ngModel)]="sieveAnalysis.massRetainedF" name="massRetainedF"
+               id="massRetainedF" required>
+      </div>
+      <div class="form-group">
+        <input type="number" class="form-control" [(ngModel)]="sieveAnalysis.cvcMinF" name="cvcMinF" id="cvcMinF"
+               required>
+      </div>
+      <div class="form-group">
+        <input type="number" class="form-control" [(ngModel)]="sieveAnalysis.cvcMaxF" name="cvcMaxF" id="cvcMaxF"
+               required>
+      </div>
+      <div class="form-group">
+        <input type="number" class="form-control">
+      </div>
+      <div class="form-group">
+        <input type="number" class="form-control">
+      </div>
+      <!-- Repeat for all 49 inputs manually -->
+      <div class="form-group">
+        <input type="text" class="form-control" [value]="standard[6] ">
+      </div>
+
+      <div class="form-group">
+        <input type="text" class="form-control" [value]="alertnative[6]">
+      </div>
+      <div class="form-group">
+        <input type="number" class="form-control" [(ngModel)]="sieveAnalysis.massRetainedG" name="massRetainedG"
+               id="massRetainedG" required>
+      </div>
+      <div class="form-group">
+        <input type="number" class="form-control" [(ngModel)]="sieveAnalysis.cvcMinG" name="cvcMinG" id="cvcMinG"
+               required>
+      </div>
+      <div class="form-group">
+        <input type="number" class="form-control" [(ngModel)]="sieveAnalysis.cvcMaxG" name="cvcMaxG" id="cvcMaxG"
+               required>
+      </div>
+      <div class="form-group">
+        <input type="number" class="form-control">
+      </div>
+      <div class="form-group">
+        <input type="number" class="form-control">
+      </div>
+      <!-- Repeat for all 49 inputs manually -->
+
+      <div class="form-group">
+        <input type="text" class="form-control" [value]="standard[7] ">
+      </div>
+      <div class="form-group">
+        <input type="text" class="form-control" [value]="alertnative[7]">
+      </div>
+      <div class="form-group">
+        <input type="number" class="form-control" [(ngModel)]="sieveAnalysis.massRetainedH" name="massRetainedH"
+               id="massRetainedH" required>
+      </div>
+      <div class="form-group">
+        <input type="number" class="form-control" [(ngModel)]="sieveAnalysis.cvcMinH" name="cvcMinH" id="cvcMinH"
+               required>
+      </div>
+      <div class="form-group">
+        <input type="number" class="form-control" [(ngModel)]="sieveAnalysis.cvcMaxH" name="cvcMaxH" id="cvcMaxH"
+               required>
+      </div>
+      <div class="form-group">
+        <input type="number" class="form-control">
+      </div>
+      <div class="form-group">
+        <input type="number" class="form-control">
+      </div>
+
+    </div>
+    <button type="submit" class="btn btn-primary" [disabled]="!form.valid">Submit</button>
+  </form>
+</div>
+
+

@@ -5,12 +5,12 @@
         <i class="fas fa-tachometer-alt"></i> Dashboard</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" routerLink="/clients" routerLinkActive="activate">
+      <a class="nav-link" routerLink="/clients" routerLinkActive="activate" *ngIf="role!='ROLE_TECH'">
         <i class="fas fa-users"></i> Clients
       </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" routerLink="/projects" routerLinkActive="activate">
+      <a class="nav-link" routerLink="/projects" routerLinkActive="activate" *ngIf="role!='ROLE_TECH'">
         <i class="fa-solid fa-diagram-project"></i> Project
       </a>
     </li>
@@ -36,7 +36,7 @@
       </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" routerLink="/account" routerLinkActive="activate">
+      <a class="nav-link" routerLink="/profile" routerLinkActive="activate">
         <i class="fas fa-user"></i> Account
       </a>
     </li>
@@ -45,8 +45,8 @@
         <i class="fas fa-file-alt"></i> Test Report
       </a>
     </li>
-    <li class="nav-item">
-      <a class="nav-link" routerLink="/setting/test-manager" routerLinkActive="activate">
+    <li class="nav-item" *ngIf="role=='ROLE_ADMIN' || role=='ROLE_MANAGER'">
+      <a class="nav-link" routerLink="/setting" routerLinkActive="activate">
         <i class="fas fa-cogs"></i> Settings
       </a>
     </li>

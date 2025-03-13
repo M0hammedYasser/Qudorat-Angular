@@ -47,9 +47,15 @@ export class InsertTestComponent implements OnInit {
   }
 
   insert() {
-    this.service.insert(this.test).subscribe(() =>
-      this.router.navigateByUrl('/tests')
-    )
+    this.service.insert(this.test).subscribe({
+      next: () => {
+        this.router.navigateByUrl('/tests');
+      },
+      error: (err) => {
+        this.router.navigateByUrl('/tests');
+      }
+    });
   }
+
 
 }

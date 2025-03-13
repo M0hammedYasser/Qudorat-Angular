@@ -24,15 +24,25 @@
         <div class="col-6">
           <label for="price" class="form-label">Price</label>
           <input type="number" class="form-control" id="price" [value]="price" [(ngModel)]="test.price" name="price"
-                 readonly required>
+                  required>
         </div>
       </div>
 
-
+      <div class="row mb-3">
       <div class="col-6">
         <label for="date" class="form-label">Date</label>
         <input type="date" class="form-control" id="date" [(ngModel)]="test.date" name="date" required>
       </div>
+      <div class="col-6">
+        <label for="paid" class="form-label">is Paid</label>
+        <select class="form-select" aria-label="Default select example" type="text" id="paid"
+                name="paid" [(ngModel)]="test.paid" required>
+          <option  [value]=true>True</option>
+          <option  [value]=false>False</option>
+        </select>
+      </div>
+      </div>
+
 
 
       <button type="submit" class="btn btn-primary w-25 mx-auto d-block mt-4" [disabled]="!form.valid">Save</button>

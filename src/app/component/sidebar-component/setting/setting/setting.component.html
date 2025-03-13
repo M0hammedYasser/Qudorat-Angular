@@ -1,0 +1,17 @@
+<div class="settings-container">
+  <h2 class="settings-title">Settings</h2>
+
+  <div class="settings-grid">
+    <div class="settings-card" routerLink="/setting/test-manager" *ngIf="role=='ROLE_ADMIN' || role=='ROLE_MANAGER'">
+      <i class="fas fa-flask settings-icon"></i>
+      <h3>Test Manager</h3>
+      <p>Manage test-related configurations.</p>
+    </div>
+
+    <div class="settings-card" routerLink="/setting/user-manager" *ngIf="role=='ROLE_ADMIN'">
+      <i class="fas fa-user-cog settings-icon" ></i>
+      <h3>Users Manager</h3>
+      <p>Manage user roles and permissions.</p>
+    </div>
+  </div>
+</div>

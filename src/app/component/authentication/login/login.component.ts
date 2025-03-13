@@ -3,6 +3,7 @@ import {FormsModule} from "@angular/forms";
 import {Router, RouterLink} from "@angular/router";
 import {AuthenticationRequest} from "../../../model/authentication-request";
 import {AuthenticationService} from "../../../service/authentication/authentication.service";
+import Swal from 'sweetalert2'
 
 @Component({
   selector: 'app-login',
@@ -29,7 +30,10 @@ export class LoginComponent{
           this.router.navigateByUrl('/dashboard')
         },
         error: (err) => {
-          alert(err.error.message)
+          Swal.fire({
+            icon: "error",
+            title: `${err.error.message}`,
+          });
         }
       }
     )

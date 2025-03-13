@@ -1,0 +1,19 @@
+import { Injectable } from '@angular/core';
+import {HttpClient} from "@angular/common/http";
+import {environment} from "../../../environments/environment";
+
+@Injectable({
+  providedIn: 'root'
+})
+export class DashboardService {
+
+  constructor(private http: HttpClient) { }
+
+  totalCost(){
+    return this.http.get<number>(`${environment.url}dashboard/total-cost`);
+  }
+
+  totalSamples(){
+    return this.http.get<number>(`${environment.url}dashboard/total-samples`);
+  }
+}

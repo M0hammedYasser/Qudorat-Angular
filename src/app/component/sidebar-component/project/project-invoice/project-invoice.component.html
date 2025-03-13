@@ -1,0 +1,49 @@
+<div #invoiceContent class="invoice-container">
+  <!-- Header -->
+  <div class="invoice-header">
+    <div class="left">
+      <img src="assets/Q.png" style="width: 40px;height: 40px">
+      <h1>Qudorat Laboratory</h1>
+      <p>123 Lab Street, Riyadh, Saudi Arabia</p>
+      <p>Email: info qudorat.com | Phone: +966 123 456 789</p>
+    </div>
+    <div class="right">
+      <h2>Qutation</h2>
+      <p><strong>Invoice No:</strong> {{ invoiceNumber }}</p>
+      <p><strong>Date:</strong> {{ project.tests[0].date | date:'dd/MM/yyyy' }}</p>
+    </div>
+  </div>
+
+  <hr/>
+
+  <!-- Invoice Information -->
+  <div class="invoice-info">
+    <p><strong>Customer Name:</strong> {{ project.client.name }}</p>
+    <p><strong>Customer ID:</strong> {{ project.client.id }}</p>
+  </div>
+
+  <table class="invoice-table">
+    <thead>
+    <tr>
+      <th>Test ID</th>
+      <th>Test Name</th>
+      <th>Price (SR)</th>
+    </tr>
+    </thead>
+    <tbody>
+    <ng-container *ngFor="let test of project.tests">
+      <tr *ngIf="!test.paid">
+        <td>{{ test.id }}</td>
+        <td>{{ test.testManager.name }}</td>
+        <td>{{ test.price }}</td>
+      </tr>
+    </ng-container>
+    </tbody>
+  </table>
+
+  <div class="invoice-total">
+    <p><strong>Grand Total:</strong> {{ getTotal() | currency:'SAR' }}</p>
+  </div>
+
+  <button (click)="downloadPDF()" class="download-btn">Download PDF</button>
+</div>

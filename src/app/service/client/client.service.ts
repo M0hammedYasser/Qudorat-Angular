@@ -14,7 +14,7 @@ export class ClientService {
     return this.http.get<Client[]>(`${environment.url}client`)
   }
 
-  findById(id: number) {
+  findById(id: string) {
     return this.http.get<Client>(`${environment.url}client/${id}`)
   }
 
@@ -26,7 +26,7 @@ export class ClientService {
     return this.http.post<Client>(`${environment.url}client`, client)
   }
 
-  update(client: Client , id: number) {
+  update(client: Client , id: string) {
     return this.http.put<Client>(`${environment.url}client/${id}`, client)
   }
 

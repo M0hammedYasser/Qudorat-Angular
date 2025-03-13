@@ -3,6 +3,7 @@ import {AuthenticationRequest} from "../../model/authentication-request";
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../environments/environment";
 import {BehaviorSubject, Observable} from "rxjs";
+import {jwtDecode} from "jwt-decode";
 
 @Injectable({
   providedIn: 'root'
@@ -34,6 +35,35 @@ export class AuthenticationService {
 
   isAuthenticated(): Observable<boolean> {
     return this.isLoggedIn.asObservable();
+  }
+
+  getToken() :string{
+    return sessionStorage.getItem("token") || "";
+  }
+
+  decodeToken() {
+    return jwtDecode(this.getToken());
+  }
+
+
+  getUserName() {
+    return this.decodeToken().sub || '';
+  }
+
+  getName() {
+    return this.decodeToken().name || '';
+  }
+
+  getUserId (){
+    return this.decodeToken().id || '';
+  }
+
+  getAuthority(){
+    return this.decodeToken().authority || '';
+  }
+
+  getImagesPath(){
+    return this.decodeToken().imagePath || '';
   }
 
 }

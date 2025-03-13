@@ -34,4 +34,8 @@ export class TestService {
   delete(id: number) {
     return this.http.delete<Project>(`${environment.url}test/${id}`);
   }
+
+  changeActive(id: number) {
+    return this.http.post(`${environment.url}test/change-active/${id}` , null);
+  }
 }

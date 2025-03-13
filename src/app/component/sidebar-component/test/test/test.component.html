@@ -1,7 +1,7 @@
 <div class="container">
   <div class="head">
     <app-search (searchTextChange)="onSearchTextEntered($event)"></app-search>
-    <button class="btn btn-primary" routerLink="insert">New</button>
+    <button class="btn btn-primary" routerLink="insert" [disabled]="role!='ROLE_ADMIN' && role != 'ROLE_DATAENTRY'">New</button>
   </div>
 
   <div class="table-responsive">
@@ -9,36 +9,47 @@
       <thead class="sticky-header">
       <tr>
         <th>No</th>
-        <th>Project Name</th>
+        <th *ngIf="role=='ROLE_MANAGER' || role =='ROLE_ADMIN' || role =='ROLE_QUALITY'">Project Name</th>
         <th>Test Name</th>
-        <th>Price</th>
+        <th *ngIf="role=='ROLE_MANAGER' || role =='ROLE_ADMIN' || role =='ROLE_QUALITY'">Price</th>
+        <th *ngIf="role=='ROLE_MANAGER' || role =='ROLE_ADMIN' || role =='ROLE_QUALITY'">is Paid</th>
+        <th *ngIf="role=='ROLE_MANAGER' || role =='ROLE_ADMIN'">is Active</th>
         <th>Date</th>
-        <th>Action</th>
+        <th>Number Of Trails</th>
+        <th >Action</th>
       </tr>
       </thead>
       <tbody>
       <tr *ngFor="let test of tests | search: searchText;">
         <td>{{ test.id }}</td>
-        <td>{{ test.project.projectName }}</td>
+        <td *ngIf="role=='ROLE_MANAGER' || role =='ROLE_ADMIN' || role =='ROLE_QUALITY'">{{ test.project.projectName }}</td>
         <td>{{ test.testManager.name }}</td>
-        <td>{{ test.price }}</td>
+        <td *ngIf="role=='ROLE_MANAGER' || role =='ROLE_ADMIN' || role =='ROLE_QUALITY'">{{ test.price }}</td>
+        <td *ngIf="role=='ROLE_MANAGER' || role =='ROLE_ADMIN' || role =='ROLE_QUALITY'">
+          <i *ngIf="!test.paid" class="fas fa-times text-danger"></i>
+        </td>
+        <td (click)="changeActive(test.id)" *ngIf="role=='ROLE_MANAGER' || role =='ROLE_ADMIN'">
+          <i *ngIf="test.active" class="fas fa-check text-success"></i>
+          <i *ngIf="!test.active" class="fas fa-times text-danger"></i>
+        </td>
         <td>{{ test.date }}</td>
-        <td>
+        <td>{{test.sieveAnalyses.length}}</td>
+        <td >
           <a>
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye"
+            <svg (click)="goToTrail(test.id ,test.testManager.id)" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye"
                  viewBox="0 0 16 16">
               <path
                 d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8M1.173 8a13 13 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5s3.879 1.168 5.168 2.457A13 13 0 0 1 14.828 8q-.086.13-.195.288c-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5s-3.879-1.168-5.168-2.457A13 13 0 0 1 1.172 8z" />
               <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5M4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0" />
             </svg>
           </a>
-          <a routerLink="update/{{test.id}}">
+          <a *ngIf="role == 'ROLE_ADMIN'" routerLink="update/{{test.id}}">
             <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#0f0">
               <path
                 d="M200-200h57l391-391-57-57-391 391v57Zm-80 80v-170l528-527q12-11 26.5-17t30.5-6q16 0 31 6t26 18l55 56q12 11 17.5 26t5.5 30q0 16-5.5 30.5T817-647L290-120H120Zm640-584-56-56 56 56Zm-141 85-28-29 57 57-29-28Z" />
             </svg>
           </a>
-          <a (click)="delete(test.id)">
+          <a  *ngIf="role == 'ROLE_ADMIN'" (click)="delete(test.id)">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="red" class="bi bi-trash"
                  viewBox="0 0 16 16">
               <path

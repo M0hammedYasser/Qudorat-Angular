@@ -1,0 +1,37 @@
+<div class="admin-users-container">
+  <h2>Manage Users</h2>
+  <button class="btn btn-primary add-user-btn" routerLink = "insert"> Add New Users</button>
+
+  <table class="users-table">
+    <thead>
+    <tr>
+      <th>Name</th>
+      <th>Username</th>
+      <th>Role</th>
+      <th>Status</th>
+      <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let user of users">
+      <td>{{ user.name }}</td>
+      <td>{{ user.username }}</td>
+      <td>{{ user.authority.name }}</td>
+      <td>
+          <span [class.active]="user.isActive" [class.inactive]="!user.isActive">
+            {{ user.isActive ? "Active" : "Inactive" }}
+          </span>
+      </td>
+      <td>
+        <button *ngIf="user.authority.name !='ROLE_ADMIN'"
+          class="btn status-btn"
+          [ngClass]="user.isActive ? 'deactivate' : 'activate'"
+          (click)="toggleUserStatus(user)">
+          {{ user.isActive ? "Deactivate" : "Activate" }}
+        </button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+

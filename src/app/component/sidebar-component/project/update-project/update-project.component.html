@@ -10,10 +10,10 @@
       </div>
       <div class="row mb-3">
         <div class="col-6">
-          <label for="client" class="form-label">Client Name</label>
+          <label for="client" class="form-label">Client Code</label>
           <select class="form-select" aria-label="Default select example" type="text"  id="client" name="client"
                   [(ngModel)]="project.client.id"  required>
-            <option *ngFor="let client of clients" [value]="client.id">{{client.name}}</option>
+            <option *ngFor="let client of clients" [value]="client.id">{{client.id}}</option>
           </select>
         </div>
       </div>

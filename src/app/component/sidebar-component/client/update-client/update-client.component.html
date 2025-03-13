@@ -4,7 +4,7 @@
     <form (ngSubmit)="update()" #form="ngForm">
       <div class="mb-3 col-6">
         <label for="id" class="form-label">Client Code</label>
-        <input type="number" class="form-control" id="id" [(ngModel)]="client.id" name="id" readonly required #code="ngModel">
+        <input type="text" class="form-control" id="id" [(ngModel)]="client.id" name="id" readonly required #code="ngModel">
       </div>
       <div class="mb-3">
         <label for="name" class="form-label">Name</label>

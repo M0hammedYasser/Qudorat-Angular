@@ -1,0 +1,33 @@
+<div class="profile-body">
+  <div class="profile-container">
+    <h4 class="text-center mb-4">Profile</h4>
+
+    <!-- Profile Image & Change Photo -->
+    <div class="profile-img-container">
+      <img [src]="environment.url + 'images/' + user.image.path" alt="User Photo" class="profile-img">
+
+      <input type="file" id="photoInput" (change)="onFileSelected($event)" hidden>
+      <button class="btn btn-secondary mt-2" (click)="triggerFileInput()">📸 Change Photo</button>
+
+      <button *ngIf="selectedFile" class="btn btn-success mt-2" (click)="uploadPhoto()">⬆️ Upload</button>
+    </div>
+
+    <form #profileForm="ngForm">
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" id="username" [(ngModel)]="user.username" name="username" [readonly]="!isEditing">
+      </div>
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" id="name" [(ngModel)]="user.name" name="name" [readonly]="!isEditing">
+      </div>
+
+      <div class="button-group">
+        <button type="button" class="btn btn-primary" *ngIf="!isEditing" (click)="toggleEdit()">✏️ Update</button>
+        <button type="button" class="btn btn-success" *ngIf="isEditing" (click)="saveChanges(user.id, user.name, user.username)">💾 Save</button>
+      </div>
+
+      <button type="button" class="btn btn-danger btn-full mt-3" (click)="changePassword(user.id)">🔑 Change Password</button>
+    </form>
+  </div>
+</div>

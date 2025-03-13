@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormsModule} from "@angular/forms";
-import {JsonPipe, NgForOf} from "@angular/common";
+import {NgForOf} from "@angular/common";
 import {ClientService} from "../../../../service/client/client.service";
 import {Client} from "../../../../model/client";
 import {Project} from "../../../../model/project";
@@ -13,7 +13,6 @@ import {Router} from "@angular/router";
   imports: [
     FormsModule,
     NgForOf,
-    JsonPipe
   ],
   templateUrl: './insert-project.component.html',
   styleUrl: './insert-project.component.css'
@@ -31,9 +30,15 @@ export class InsertProjectComponent implements OnInit{
   }
 
   insert() {
-   this.service.insert(this.project).subscribe(()=>
-     this.router.navigateByUrl('/projects')
-   )
+    this.service.insert(this.project).subscribe({
+      next: () => {
+        this.router.navigateByUrl('/projects');
+      },
+      error: (err) => {
+        this.router.navigateByUrl('/projects');
+      }
+    });
   }
+
 
 }

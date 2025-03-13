@@ -1,7 +1,7 @@
 <div class="container">
   <div class="head">
     <app-search (searchTextChange)="onSearchTextEntered($event)"></app-search>
-    <button class="btn btn-primary" routerLink="insert">New</button>
+    <button class="btn btn-primary" routerLink="insert" [disabled]="role!='ROLE_ADMIN' && role != 'ROLE_DATAENTRY'">New</button>
   </div>
 
   <div class="table-responsive">
@@ -13,17 +13,17 @@
         <th>Phone</th>
         <th>Email</th>
         <th>Address</th>
-        <th>Action</th>
+        <th *ngIf="role == 'ROLE_ADMIN'">Action</th>
       </tr>
       </thead>
       <tbody>
       <tr *ngFor="let client of clients | search: searchText;">
-        <td>QL{{ client.id }}</td>
+        <td>{{ client.id }}</td>
         <td>{{ client.name }}</td>
         <td>{{ client.phone }}</td>
         <td>{{ client.email }}</td>
         <td>{{ client.address }}</td>
-        <td>
+        <td *ngIf="role == 'ROLE_ADMIN'">
           <a>
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye"
                  viewBox="0 0 16 16">

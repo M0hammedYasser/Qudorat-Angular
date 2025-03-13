@@ -4,15 +4,18 @@
     <img style="width: 100px; margin-left: 5px" src="assets/Qudorat.png" alt="Logo">
   </a>
 
-  <form *ngIf="isLogin" class="d-flex search-bar">
-    <input class="form-control me-2" type="search" placeholder="Search..." aria-label="Search">
-    <button class="btn btn-outline-primary" type="submit">
-      <i class="fas fa-search"></i>
-    </button>
-  </form>
+<!--  <form *ngIf="isLogin" class="d-flex search-bar" >-->
+<!--    <input class="form-control me-2" type="search" placeholder="Search..." aria-label="Search">-->
+<!--    <button class="btn btn-outline-primary" type="submit">-->
+<!--      <i class="fas fa-search"></i>-->
+<!--    </button>-->
+<!--  </form>-->
 
-  <div class="user-profile" >
-    <img *ngIf="isLogin" src="assets/profile.jpg" alt="User" class="user-img">
+  <div *ngIf="isLogin" style="padding-left: 1050px ; font-size: 18px ; font-style: normal ;font-weight: bold;">
+    {{ user.name }}
+  </div>
+  <div class="user-profile" routerLink="/profile">
+    <img *ngIf="isLogin" [src]="environment.url + 'images/' + user.image.path" alt="Users" class="user-img">
   </div>
 </nav>
 

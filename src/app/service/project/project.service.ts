@@ -15,7 +15,7 @@ export class ProjectService {
     return this.http.get<Project[]>(`${environment.url}project`)
   }
 
-  findById(id: number) {
+  findById(id: string) {
     return this.http.get<Project>(`${environment.url}project/${id}`)
   }
 
@@ -27,11 +27,11 @@ export class ProjectService {
     return this.http.post<Project>(`${environment.url}project`, project)
   }
 
-  update(project: Project , id: number) {
+  update(project: Project , id: string) {
     return this.http.put<Project>(`${environment.url}project/${id}`, project)
   }
 
-  delete(id: number) {
+  delete(id: string) {
     return this.http.delete<Project>(`${environment.url}project/${id}`)
   }
 }

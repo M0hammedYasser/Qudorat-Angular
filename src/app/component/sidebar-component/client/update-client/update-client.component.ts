@@ -17,7 +17,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 export class UpdateClientComponent implements OnInit {
 
   client: Client = {} as Client;
-  id : number = 0;
+  id : string = '';
 
   constructor(private service: ClientService, private router: Router , private route: ActivatedRoute) {
   }
@@ -25,6 +25,7 @@ export class UpdateClientComponent implements OnInit {
   ngOnInit() {
     this.id = this.route.snapshot.params['id'];
     this.service.findById(this.id).subscribe(res=> this.client = res);
+    alert(this.id)
   }
 
   update() {
