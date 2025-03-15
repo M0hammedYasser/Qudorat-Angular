@@ -25,7 +25,6 @@ export class UpdateClientComponent implements OnInit {
   ngOnInit() {
     this.id = this.route.snapshot.params['id'];
     this.service.findById(this.id).subscribe(res=> this.client = res);
-    alert(this.id)
   }
 
   update() {

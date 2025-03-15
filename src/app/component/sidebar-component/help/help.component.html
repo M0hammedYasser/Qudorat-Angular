@@ -1,0 +1,18 @@
+<div class="help-container">
+  <h2>Help & Instructions</h2>
+  <p>Welcome to the Help section! Browse the topics below for guidance on using this application.</p>
+
+  <div class="help-section" *ngFor="let section of helpTopics">
+    <button class="help-title" (click)="toggleSection(section)">
+      <h3>{{ section.title }}</h3>
+    </button>
+    <div class="help-content" *ngIf="section.open">
+      <ul>
+        <li *ngFor="let point of section.points">{{ point }}</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>Need More Help?</h3>
+  <p>Contact support at <a href="mailto:support@example.com">support&#64;example.com</a></p>
+</div>

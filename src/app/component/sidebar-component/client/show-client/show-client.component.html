@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="show-client.component.css">
 <div class="container">
   <div class="head">
     <app-search (searchTextChange)="onSearchTextEntered($event)"></app-search>
@@ -10,7 +11,11 @@
       <tr>
         <th>Code</th>
         <th>Name</th>
+        <th>Company Name</th>
         <th>Phone</th>
+        <th>Commercial Registration Number</th>
+        <th>Tax Identification Number</th>
+        <th>Company Representative</th>
         <th>Email</th>
         <th>Address</th>
         <th *ngIf="role == 'ROLE_ADMIN'">Action</th>
@@ -20,7 +25,11 @@
       <tr *ngFor="let client of clients | search: searchText;">
         <td>{{ client.id }}</td>
         <td>{{ client.name }}</td>
+        <td>{{ client.companyName }}</td>
         <td>{{ client.phone }}</td>
+        <td>{{ client.commercialRegistrationNumber }}</td>
+        <td>{{ client.taxIdentificationNumber }}</td>
+        <td>{{ client.companyRepresentative }}</td>
         <td>{{ client.email }}</td>
         <td>{{ client.address }}</td>
         <td *ngIf="role == 'ROLE_ADMIN'">

@@ -27,6 +27,7 @@
         <td *ngIf="role=='ROLE_MANAGER' || role =='ROLE_ADMIN' || role =='ROLE_QUALITY'">{{ test.price }}</td>
         <td *ngIf="role=='ROLE_MANAGER' || role =='ROLE_ADMIN' || role =='ROLE_QUALITY'">
           <i *ngIf="!test.paid" class="fas fa-times text-danger"></i>
+          <i *ngIf="test.paid" class="fas fa-check text-success"></i>
         </td>
         <td (click)="changeActive(test.id)" *ngIf="role=='ROLE_MANAGER' || role =='ROLE_ADMIN'">
           <i *ngIf="test.active" class="fas fa-check text-success"></i>

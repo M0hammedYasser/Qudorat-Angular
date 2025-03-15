@@ -1,4 +1,4 @@
-<div class="body" >
+<div class="body">
   <div class="register-container">
     <h4 class="text-center mb-4">New Client</h4>
     <form (ngSubmit)="insert()" #form="ngForm">
@@ -19,17 +19,33 @@
         </div>
       </div>
 
-      <div class="row mb-3">
-        <div>
-          <label for="address" class="form-label">Address</label>
-          <input type="text" class="form-control" id="address" [(ngModel)]="client.address" name="address" required #address="ngModel">
-        </div>
-
+      <div class="mb-3">
+        <label for="companyName" class="form-label">Company Name</label>
+        <input type="text" class="form-control" id="companyName" [(ngModel)]="client.companyName" name="companyName" required #companyName="ngModel">
       </div>
 
+      <div class="row mb-3">
+        <div class="col-6">
+          <label for="commercialReg" class="form-label">Commercial Registration Number</label>
+          <input type="text" class="form-control" id="commercialReg" [(ngModel)]="client.commercialRegistrationNumber" name="commercialReg" required #commercialReg="ngModel">
+        </div>
+        <div class="col-6">
+          <label for="taxId" class="form-label">Tax Identification Number</label>
+          <input type="text" class="form-control" id="taxId" [(ngModel)]="client.taxIdentificationNumber" name="taxId" required #taxId="ngModel">
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="companyRep" class="form-label">Company Representative</label>
+        <input type="text" class="form-control" id="companyRep" [(ngModel)]="client.companyRepresentative" name="companyRep" required #companyRep="ngModel">
+      </div>
+
+      <div class="mb-3">
+        <label for="address" class="form-label">Address</label>
+        <input type="text" class="form-control" id="address" [(ngModel)]="client.address" name="address" required #address="ngModel">
+      </div>
 
       <button type="submit" class="btn btn-primary w-25 mx-auto d-block mt-4" [disabled]="!form.valid">Save</button>
     </form>
   </div>
 </div>
-

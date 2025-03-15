@@ -4,14 +4,14 @@
   align-items: center;
   min-height: 90vh;
   background-color: #f8f9fa;
-  padding-top: 70px;
+  padding-top: 80px;
   margin-left: 80px;
 }
 
 .register-container {
   width: 100%;
   max-width: 800px;
-  padding: 2rem;
+  padding: 1rem;
   background: #ffffff;
   border-radius: 10px;
   box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.1);

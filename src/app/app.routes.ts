@@ -22,6 +22,8 @@ import {SettingComponent} from "./component/sidebar-component/setting/setting/se
 import {UserManagerComponent} from "./component/sidebar-component/setting/user/user-manager/user-manager.component";
 import {InsertUserComponent} from "./component/sidebar-component/setting/user/insert-user/insert-user.component";
 import {ProfileComponent} from "./component/shared/profile/profile.component";
+import {UpdateUserComponent} from "./component/sidebar-component/setting/user/update-user/update-user.component";
+import {HelpComponent} from "./component/sidebar-component/help/help.component";
 
 export const routes: Routes = [
 
@@ -55,6 +57,10 @@ export const routes: Routes = [
   {path: 'setting/test-manager', component: TestMangerComponent, canActivate: [authGuard]},
   {path: 'setting/user-manager', component: UserManagerComponent, canActivate: [authGuard]},
   {path: 'setting/user-manager/insert', component: InsertUserComponent, canActivate: [authGuard]},
+  {path: 'setting/user-manager/update/:id', component: UpdateUserComponent, canActivate: [authGuard]},
+
+
+  {path: 'help', component: HelpComponent, canActivate: [authGuard]},
 
   {path: '**', redirectTo: 'login'},
 ];

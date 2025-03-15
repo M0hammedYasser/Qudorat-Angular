@@ -5,29 +5,38 @@
 .table {
   width: 100%;
   text-align: center;
+  font-size: 12px; /* Reduced font size */
+}
+
+.table th, .table td {
+  padding: 4px 6px; /* Reduced padding */
+  white-space: nowrap; /* Prevents text wrapping */
 }
 
 .badge {
-  padding: 5px 10px;
-  font-size: 14px;
+  padding: 3px 8px;
+  font-size: 12px;
 }
 
 :host {
   display: block;
   margin-left: 250px;
-  padding: 20px;
-  margin-top: 60px;
+  padding: 15px;
+  margin-top: 50px;
 }
 
 .btn {
-  margin: -66px 0 0 900px;
+  margin: -70px 0 0 900px;
+  font-size: 16px;
+  padding: 4px 8px; /* Smaller button */
 }
-a{
-  margin: 0 4px;
+
+a {
+  margin: 0 2px;
 }
 
 .table-responsive {
-  max-height: 500px;
+  max-height: 400px; /* Slightly smaller height */
   overflow-y: auto;
 }
 
@@ -39,16 +48,34 @@ a{
 }
 
 .table-responsive::-webkit-scrollbar {
-  width: 8px;
+  width: 6px; /* Smaller scrollbar */
   background-color: #fff;
-  border-left: 2px solid #eee;
+  border-left: 1px solid #eee;
 }
 
 .table-responsive::-webkit-scrollbar-thumb {
-  background-color: rgba(207, 207, 207, 0.49);
+  background-color: rgba(207, 207, 207, 0.6);
   border-radius: 50px;
 }
 
 .table-responsive::-webkit-scrollbar-thumb:hover {
-  background: rgba(238, 236, 236, 0.8);
+  background: rgba(238, 236, 236, 0.9);
+}
+
+/* Limit column width to keep table compact */
+th:nth-child(1), td:nth-child(1) { width: 80px; }  /* Code */
+th:nth-child(2), td:nth-child(2) { width: 120px; } /* Name */
+th:nth-child(3), td:nth-child(3) { width: 140px; } /* Company Name */
+th:nth-child(4), td:nth-child(4) { width: 110px; } /* Phone */
+th:nth-child(5), td:nth-child(5) { width: 150px; } /* Commercial Reg. No */
+th:nth-child(6), td:nth-child(6) { width: 150px; } /* Tax ID */
+th:nth-child(7), td:nth-child(7) { width: 130px; } /* Representative */
+th:nth-child(8), td:nth-child(8) { width: 160px; } /* Email */
+th:nth-child(9), td:nth-child(9) { width: 180px; } /* Address */
+th:nth-child(10), td:nth-child(10) { width: 100px; } /* Action (Admin only) */
+
+/* Reduce icon size */
+svg {
+  width: 14px;
+  height: 14px;
 }

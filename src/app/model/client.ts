@@ -5,5 +5,10 @@ export interface Client {
   phone: string;
   email: string;
   address: string;
+  companyName : string;
+  commercialRegistrationNumber : string;
+  taxIdentificationNumber : string;
+  companyRepresentative : string;
+
 
 }
