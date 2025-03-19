@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {RouterLink} from "@angular/router";
+import {Router, RouterLink} from "@angular/router";
 import {AuthenticationService} from "../../../../service/authentication/authentication.service";
 import {NgIf} from "@angular/common";
 
@@ -18,12 +18,11 @@ export class SettingComponent implements OnInit {
 
   role : string = '';
 
-  constructor(private auth :AuthenticationService) {
+  constructor(private auth :AuthenticationService , private router : Router) {
   }
 
   ngOnInit() {
     this.role = this.auth.getAuthority();
-    console.log(this.role);
   }
 
 }

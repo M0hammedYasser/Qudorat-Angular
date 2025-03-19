@@ -18,7 +18,6 @@ import {TestManagerService} from "../../../../service/test-manager/test-manager.
     FormsModule,
     NgForOf,
     ReactiveFormsModule,
-    JsonPipe
   ],
   templateUrl: './insert-test.component.html',
   styleUrl: './insert-test.component.css'

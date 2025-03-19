@@ -7,6 +7,7 @@ import {User} from "../../../model/user";
 import {environment} from "../../../../environments/environment";
 import Swal from 'sweetalert2'
 import {HttpClient} from "@angular/common/http";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-profile',
@@ -26,7 +27,7 @@ export class ProfileComponent implements OnInit {
 
 
   constructor(private userService: UserService,
-              private authService: AuthenticationService , private http : HttpClient) {
+              private authService: AuthenticationService , private http : HttpClient , private router : Router) {
   }
 
   ngOnInit() {
@@ -41,8 +42,10 @@ export class ProfileComponent implements OnInit {
 
   saveChanges(id: number, name: string, username: string) {
     this.isEditing = false;
-    this.userService.updateUsername(id, name, username).subscribe();
-    window.location.reload();
+    this.userService.updateUsername(id, name, username).subscribe(()=> {
+      this.authService.logout();
+      this.router.navigate(['login']);
+    });
   }
 
 
