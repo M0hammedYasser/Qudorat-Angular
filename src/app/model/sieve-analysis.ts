@@ -8,6 +8,7 @@ export interface SieveAnalysis {
   success : boolean;
   projectName : string;
   testName : string;
+  adopter : string;
 
   massRetainedA: number;
   massRetainedB: number;

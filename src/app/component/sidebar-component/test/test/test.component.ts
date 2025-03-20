@@ -60,4 +60,6 @@ export class TestComponent implements OnInit {
       }
     });
   }
+
+    protected readonly TestService = TestService;
 }

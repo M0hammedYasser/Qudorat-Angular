@@ -4,6 +4,7 @@ import {ActivatedRoute, Router, RouterLink} from "@angular/router";
 import {TestService} from "../../../../../service/test/test.service";
 import {Test} from "../../../../../model/test";
 import {AuthenticationService} from "../../../../../service/authentication/authentication.service";
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-show-sand',
@@ -23,7 +24,8 @@ export class ShowSandComponent implements OnInit {
   id: number = 0;
   role: string = '';
 
-  constructor(private authenticationService: AuthenticationService, private activatedRoute: ActivatedRoute, private testService: TestService) {
+  constructor(private authenticationService: AuthenticationService,private router : Router ,
+              private activatedRoute: ActivatedRoute, private testService: TestService) {
   }
 
   ngOnInit() {
@@ -32,6 +34,28 @@ export class ShowSandComponent implements OnInit {
       this.test = res;
     })
     this.role = this.authenticationService.getAuthority()
+  }
+
+  adopt(id: number) {
+    const name = this.authenticationService.getName();
+
+    Swal.fire({
+      title: 'Are you sure?',
+      text: `This test ${id} will be adopted with user ${name}.`,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'OK',
+      cancelButtonText: 'Cancel'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.testService.adopt(id, name).subscribe(res => {
+          Swal.fire('Adopted!', 'The adoption process was successful.', 'success');
+          this.router.navigate(['/tests']);
+        }, err => {
+          Swal.fire('Error!', 'Something went wrong.', 'error');
+        });
+      }
+    });
   }
 
 

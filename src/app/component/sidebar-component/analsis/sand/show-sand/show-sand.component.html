@@ -1,7 +1,10 @@
 <div class="trial-container">
   <div class="header-container">
     <h1 class="header">Trial List</h1>
-    <button class="btn-add btn btn-primary" routerLink="/sands/insert/{{id}}" *ngIf="role =='ROLE_TECH' || role == 'ROLE_ADMIN'">New Trial</button>
+    <div class="button-container">
+      <button class="btn-add btn btn-primary" routerLink="/sands/insert/{{id}}" *ngIf="role =='ROLE_TECH' || role == 'ROLE_ADMIN'">New Trial</button>
+      <button class="btn-add btn btn-danger" (click)="adopt(id)" *ngIf="role =='ROLE_SUPERVISOR' || role == 'ROLE_ADMIN' && !test.adopt">Adopt</button>
+    </div>
   </div>
 
   <div class="card-container">
@@ -17,7 +20,7 @@
         <p><strong>Success :</strong> {{ temp.success? "Success" : "Falid" }}</p>
       </div>
       <button class="btn btn-primary" routerLink = "/sands/update/{{temp.id}}" *ngIf="role=='ROLE_ADMIN'">Edit</button>
-      <button class="btn btn-success" routerLink = "/sands/report/{{temp.id}}" *ngIf="role=='ROLE_ADMIN' || role=='ROLE_QUALITY' ||role=='ROLE_DATAENTRY' ">Report</button>
+      <button class="btn btn-success" routerLink = "/sands/report/{{temp.id}}" *ngIf="(role=='ROLE_ADMIN' || role=='ROLE_QUALITY' ||role=='ROLE_DATAENTRY' || role =='ROLE_SUPERVISOR') && test.adopt ">Report</button>
     </div>
   </div>
 </div>

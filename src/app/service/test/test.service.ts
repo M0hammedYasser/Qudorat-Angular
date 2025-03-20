@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Project} from "../../model/project";
 import {environment} from "../../../environments/environment";
@@ -9,9 +9,10 @@ import {Test} from "../../model/test";
 })
 export class TestService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
-  findAll(){
+  findAll() {
     return this.http.get<Test[]>(`${environment.url}test`);
   }
 
@@ -19,7 +20,7 @@ export class TestService {
     return this.http.get<Test>(`${environment.url}test/${id}`);
   }
 
-  count(){
+  count() {
     return this.http.get<number>(`${environment.url}test/count`);
   }
 
@@ -27,7 +28,7 @@ export class TestService {
     return this.http.post<Project>(`${environment.url}test`, test);
   }
 
-  update(test: Test , id: number) {
+  update(test: Test, id: number) {
     return this.http.put<Project>(`${environment.url}test/${id}`, test);
   }
 
@@ -36,6 +37,10 @@ export class TestService {
   }
 
   changeActive(id: number) {
-    return this.http.post(`${environment.url}test/change-active/${id}` , null);
+    return this.http.post(`${environment.url}test/change-active/${id}`, null);
+  }
+
+  adopt(id: number, name: string) {
+    return this.http.put(`${environment.url}test/adopt?id=${id}&name=${name}`, null);
   }
 }

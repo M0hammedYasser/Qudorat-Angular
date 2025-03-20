@@ -7,6 +7,9 @@ export interface Test {
   id: number;
   price: number
   paid: boolean;
+  adopt : boolean;
+
+  adopter : string;
   active: boolean;
   date: string;
   project: Project;

@@ -92,7 +92,7 @@ export class SandReportComponent implements AfterViewInit, OnInit {
       doc.text(`Project : ${this.sieveAnalysis.projectName}`, 120, 15);
       doc.setFontSize(12);
       doc.text(`Test : ${this.sieveAnalysis.testName}`, 120, 25);
-      doc.text(`Date: ${this.currentDate}`, 120, 35);
+      doc.text(`Adopter: ${this.sieveAnalysis.adopter}`, 120, 35);
 
       doc.line(10, 40, 200, 40);
 
