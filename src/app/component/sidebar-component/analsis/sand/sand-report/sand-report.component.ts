@@ -190,7 +190,7 @@ export class SandReportComponent implements AfterViewInit, OnInit {
 
     doc.text(`Approved by: ${this.sieveAnalysis.approveBy || 'N/A'}`, 13, 285);
     doc.text(`Test by: ${this.sieveAnalysis.testBy || 'N/A'}`, 80, 285);
-    doc.text(`Checked by: ${this.sieveAnalysis.testBy || 'N/A'}`, 150, 285);
+    doc.text(`Checked by: ${this.sieveAnalysis.activist || 'N/A'}`, 150, 285);
   }
 
 

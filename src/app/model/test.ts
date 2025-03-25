@@ -11,6 +11,7 @@ export interface Test {
 
   adopter : string;
   active: boolean;
+  activist : string
   date: string;
   project: Project;
   testManager: TestManager;

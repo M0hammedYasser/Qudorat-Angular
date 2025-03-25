@@ -14,6 +14,7 @@ export interface SieveAnalysis {
   testName: string;
   testBy: string;
   approveBy: string;
+  activist: string;
   notes: string;
 
   massRetainedA: number;

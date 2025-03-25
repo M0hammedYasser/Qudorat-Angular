@@ -31,8 +31,9 @@
           <i *ngIf="test.paid" class="fas fa-check text-success"></i>
         </td>
         <td (click)="changeActive(test.id)" *ngIf="role=='ROLE_MANAGER' || role =='ROLE_ADMIN'">
-          <i *ngIf="test.active" class="fas fa-check text-success"></i>
+<!--          <i *ngIf="test.active" class="fas fa-check text-success"></i>-->
           <i *ngIf="!test.active" class="fas fa-times text-danger"></i>
+          <span *ngIf="test.active">{{test.activist}}</span>
         </td>
         <td >
           <i *ngIf="!test.adopt" class="fas fa-times text-danger"></i>

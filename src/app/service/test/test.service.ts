@@ -36,8 +36,8 @@ export class TestService {
     return this.http.delete<Project>(`${environment.url}test/${id}`);
   }
 
-  changeActive(id: number) {
-    return this.http.post(`${environment.url}test/change-active/${id}`, null);
+  changeActive(id: number , name:string) {
+    return this.http.post(`${environment.url}test/change-active?id=${id}&name=${name}`, null);
   }
 
   adopt(id: number, name: string) {

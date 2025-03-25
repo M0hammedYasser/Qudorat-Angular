@@ -24,9 +24,9 @@ export class TestComponent implements OnInit {
 
   tests: Test[] = [];
   searchText: string = '';
-  role : string = '';
+  role: string = '';
 
-  constructor(private service: TestService, private router: Router , private authService :AuthenticationService) {
+  constructor(private service: TestService, private router: Router, private authService: AuthenticationService) {
   }
 
   ngOnInit() {
@@ -54,7 +54,7 @@ export class TestComponent implements OnInit {
   }
 
   changeActive(id: number) {
-    this.service.changeActive(id).subscribe(() => {
+    this.service.changeActive(id, this.authService.getName()).subscribe(() => {
       const test = this.tests.find(t => t.id === id);
       if (test) {
         test.active = !test.active;
@@ -62,5 +62,5 @@ export class TestComponent implements OnInit {
     });
   }
 
-    protected readonly TestService = TestService;
+  protected readonly TestService = TestService;
 }
