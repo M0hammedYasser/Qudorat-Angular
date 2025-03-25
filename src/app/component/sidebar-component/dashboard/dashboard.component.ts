@@ -2,6 +2,7 @@ import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {CurrencyPipe, NgForOf} from "@angular/common";
 import Chart from 'chart.js/auto';
 import {DashboardService} from "../../../service/dashboard/dashboard.service";
+import {forkJoin} from "rxjs";
 
 
 @Component({
@@ -14,15 +15,13 @@ import {DashboardService} from "../../../service/dashboard/dashboard.service";
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
 })
-export class DashboardComponent implements AfterViewInit, OnInit {
+export class DashboardComponent implements OnInit {
 
-  totalBalance = 0; // Example balance
-  totalSamples = 0; // Example total samples
-  completedSamples = 150; // Example completed samples
-  notCompletedSamples = this.totalSamples - this.completedSamples;
-  receivedSamples = 1000;
-  processingSamples = 200;
-  completedSamplesCount = 700;
+  totalBalance = 0;
+  totalSamples = 0;
+  completedSamples = 0;
+  notCompletedSamples = 0;
+  processingSamples = 0;
 
   sampleData = [
     {purpose: 'Medical Test', date: '2025-02-01', amount: 500, status: 'Completed'},
@@ -35,12 +34,20 @@ export class DashboardComponent implements AfterViewInit, OnInit {
   }
 
   ngOnInit() {
-    this.dashboardService.totalCost().subscribe(res=>this.totalBalance = res);
-    this.dashboardService.totalSamples().subscribe(res=>this.totalSamples = res);
-  }
-
-  ngAfterViewInit() {
-    this.createBarChart();
+    forkJoin({
+      totalBalance: this.dashboardService.totalCost(),
+      totalSamples: this.dashboardService.totalSamples(),
+      completedSamples: this.dashboardService.completeSample(),
+      notCompletedSamples: this.dashboardService.notCompleteSample(),
+      processSample : this.dashboardService.processSample()
+    }).subscribe(res => {
+      this.totalBalance = res.totalBalance;
+      this.totalSamples = res.totalSamples;
+      this.completedSamples = res.completedSamples;
+      this.notCompletedSamples = res.notCompletedSamples;
+      this.processingSamples = res.processSample;
+      this.createBarChart();
+    });
   }
 
   createBarChart() {
@@ -50,7 +57,7 @@ export class DashboardComponent implements AfterViewInit, OnInit {
         labels: ['Received', 'In Processing', 'Completed'],
         datasets: [{
           label: 'Samples',
-          data: [this.receivedSamples, this.processingSamples, this.completedSamplesCount],
+          data: [this.totalSamples, this.processingSamples, this.completedSamples],
           backgroundColor: ['#007bff', '#ffc107', '#28a745'],
           borderRadius: 5
         }]

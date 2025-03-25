@@ -2,13 +2,19 @@ import {Test} from "./test";
 
 export interface SieveAnalysis {
 
-  id : number;
-  totalWeigh : number;
-  status : string;
-  success : boolean;
-  projectName : string;
-  testName : string;
-  adopter : string;
+
+  id: number;
+  totalWeigh: number;
+  materialType: string;
+  sampleBy: string;
+  testingDate: string;
+  samplingDate: string;
+  clientName: string;
+  projectName: string;
+  testName: string;
+  testBy: string;
+  approveBy: string;
+  notes: string;
 
   massRetainedA: number;
   massRetainedB: number;
@@ -18,6 +24,25 @@ export interface SieveAnalysis {
   massRetainedF: number;
   massRetainedG: number;
   massRetainedH: number;
+  massRetainedI: number;
+  massRetainedJ: number;
+  massRetainedK: number;
+  massRetainedL: number;
+  massRetainedM: number;
+
+  passingA: number;
+  passingB: number;
+  passingC: number;
+  passingD: number;
+  passingE: number;
+  passingF: number;
+  passingG: number;
+  passingH: number;
+  passingI: number;
+  passingJ: number;
+  passingK: number;
+  passingL: number;
+  passingM: number;
 
   retainedA: number;
   retainedB: number;
@@ -27,32 +52,12 @@ export interface SieveAnalysis {
   retainedF: number;
   retainedG: number;
   retainedH: number;
-  rmassRetainedA: number;
-  rmassRetainedB: number;
-  rmassRetainedC: number;
-  rmassRetainedD: number;
-  rmassRetainedE: number;
-  rmassRetainedF: number;
-  rmassRetainedG: number;
-  rmassRetainedH: number;
+  retainedI: number;
+  retainedJ: number;
+  retainedK: number;
+  retainedL: number;
+  retainedM: number;
 
-  cvcMinA: number;
-  cvcMinB: number;
-  cvcMinC: number;
-  cvcMinD: number;
-  cvcMinE: number;
-  cvcMinF: number;
-  cvcMinG: number;
-  cvcMinH: number;
 
-  cvcMaxA: number;
-  cvcMaxB: number;
-  cvcMaxC: number;
-  cvcMaxD: number;
-  cvcMaxE: number;
-  cvcMaxF: number;
-  cvcMaxG: number;
-  cvcMaxH: number;
-
-  test:Test;
+  test: Test;
 }

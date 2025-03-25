@@ -36,7 +36,7 @@
         </td>
         <td >
           <i *ngIf="!test.adopt" class="fas fa-times text-danger"></i>
-          <i *ngIf="test.adopt">{{test.adopter}}</i>
+          <span *ngIf="test.adopt">{{test.adopter}}</span>
         </td>
         <td>{{ test.date }}</td>
         <td>{{test.sieveAnalyses.length}}</td>

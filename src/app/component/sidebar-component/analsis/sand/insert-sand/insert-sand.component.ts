@@ -20,8 +20,8 @@ import {Test} from "../../../../../model/test";
 })
 export class InsertSandComponent implements OnInit {
 
-  standard = ["9.5 mm", "4.75 mm", "2.36 mm", "1.18 mm", "600 µm", "300 µm", "150 µm", "75 µm"];
-  alertnative = ["3/8 in", "NO.4", "NO.8", "NO.16", "NO.30", "NO.50", "NO.100", "NO.200"];
+  standard = ["75", "62.5", "50", "37.0", "25.0", "19.0", "12.5", "9.5", "4.75", "2", "0.425", "0.150", "0.075"];
+  alertnative = ["3", "21/2", "2", "11/2", "1", "3/4", "1/2", "3/8", "#4", "#10", "#40", "#100", "#200"];
 
   sieveAnalysis: SieveAnalysis = {test: {} as Test} as SieveAnalysis;
   id: number = 0;
