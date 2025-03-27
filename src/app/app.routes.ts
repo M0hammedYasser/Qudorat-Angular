@@ -24,6 +24,16 @@ import {InsertUserComponent} from "./component/sidebar-component/setting/user/in
 import {ProfileComponent} from "./component/shared/profile/profile.component";
 import {UpdateUserComponent} from "./component/sidebar-component/setting/user/update-user/update-user.component";
 import {HelpComponent} from "./component/sidebar-component/help/help.component";
+import {ShowAsphaltComponent} from "./component/sidebar-component/analsis/asphalt/show-asphalt/show-asphalt.component";
+import {
+  InsertAsphaltComponent
+} from "./component/sidebar-component/analsis/asphalt/insert-asphalt/insert-asphalt.component";
+import {
+  UpdateAsphaltComponent
+} from "./component/sidebar-component/analsis/asphalt/update-asphalt/update-asphalt.component";
+import {
+  AsphaltReportComponent
+} from "./component/sidebar-component/analsis/asphalt/asphalt-report/asphalt-report.component";
 
 export const routes: Routes = [
 
@@ -49,6 +59,11 @@ export const routes: Routes = [
   { path: 'sands/insert/:id', component: InsertSandComponent, canActivate: [authGuard] },
   { path: 'sands/update/:id', component: UpdateSandComponent, canActivate: [authGuard] },
   { path: 'sands/report/:id', component: SandReportComponent, canActivate: [authGuard] },
+
+  { path: 'asphalt/:id', component: ShowAsphaltComponent, canActivate: [authGuard] },
+  { path: 'asphalt/insert/:id', component: InsertAsphaltComponent, canActivate: [authGuard] },
+  { path: 'asphalt/update/:id', component: UpdateAsphaltComponent, canActivate: [authGuard] },
+  { path: 'asphalt/report/:id', component: AsphaltReportComponent, canActivate: [authGuard] },
 
   {path: 'report', component: TestReportComponent, canActivate: [authGuard]},
 

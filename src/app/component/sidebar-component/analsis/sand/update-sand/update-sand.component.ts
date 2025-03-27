@@ -29,7 +29,6 @@ export class UpdateSandComponent implements OnInit {
   ngOnInit() {
     this.id = this.activatedRoute.snapshot.params['id'];
     this.service.findById(this.id).subscribe(res => this.sieveAnalysis = res);
-    console.log(this.sieveAnalysis.test.id);
   }
 
   insert() {

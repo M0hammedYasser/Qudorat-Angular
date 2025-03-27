@@ -1,0 +1,556 @@
+<div class="form-container">
+  <h1 class="header">
+    {{ currentStep === 1 ? 'BITUMEN' : currentStep === 2 ? 'Sieve Analysis For Sand' : 'Asphalt Marshall' }}
+  </h1>
+
+  <form #form="ngForm" (submit)="insert()">
+    <!-- STEP 1: BITUMEN -->
+    <div *ngIf="currentStep === 1" class="form-step" >
+      <div class="bitumen-form-container">
+        <div class="form-group">
+          <label class="col-form-label">Weight Sample Before (gm)</label>
+          <input type="number" class="form-control"
+                 [(ngModel)]="asphalt.bitumen.weightSampleBefore"
+                 name="weightSampleBefore" required>
+        </div>
+        <div class="form-group">
+          <label class="col-form-label">Weight Filter Before (gm)</label>
+          <input type="number" class="form-control"
+                 [(ngModel)]="asphalt.bitumen.weightFilterBefore"
+                 name="weightFilterBefore" required>
+        </div>
+        <div class="form-group">
+          <label class="col-form-label">Weight Filter After (gm)</label>
+          <input type="number" class="form-control"
+                 [(ngModel)]="asphalt.bitumen.weightFilterAfter"
+                 name="weightFilterAfter" required>
+        </div>
+        <div class="form-group">
+          <label class="col-form-label">Weight Sample After (gm)</label>
+          <input type="number" class="form-control"
+                 [(ngModel)]="asphalt.bitumen.weightSampleAfter"
+                 name="weightSampleAfter" required>
+        </div>
+      </div>
+    </div>
+    <!-- STEP 1: Sieve Analysis -->
+    <div *ngIf="currentStep === 2" class="form-step">
+      <div class="form-group row" style="margin-bottom: 10px">
+        <label class="col-3 col-form-label">Total Wt. of Test Sample (gm)</label>
+        <div class="col-3">
+          <input type="number" class="form-control" [(ngModel)]="asphalt.gradationTest.totalWeigh" name="totalWeigh"
+                 required>
+        </div>
+      </div>
+
+      <div class="grid-container">
+        <div class="form-group">
+          <label class="label">Standard</label>
+          <input type="text" class="form-control" [value]="standard[0]" readonly>
+        </div>
+        <div class="form-group">
+          <label class="label">Alternative</label>
+          <input type="text" class="form-control" [value]="alternative[0]" readonly>
+        </div>
+        <div class="form-group">
+          <label class="label">Mass Retained(gm)</label>
+          <input type="number" class="form-control" [(ngModel)]="asphalt.gradationTest.massRetainedA"
+                 name="massRetainedA" id="massRetainedA" required>
+        </div>
+        <div class="form-group">
+          <label class="label">CVC.Min</label>
+          <input type="number" class="form-control" [(ngModel)]="asphalt.gradationTest.cvcMinA" name="cvcMinA"
+                 id="cvcMinA"
+                 required>
+        </div>
+        <div class="form-group">
+          <label class="label">CVC.Max</label>
+          <input type="number" class="form-control" [(ngModel)]="asphalt.gradationTest.cvcMaxA" name="cvcMaxA"
+                 id="cvcMaxA"
+                 required>
+        </div>
+
+        <!-- Repeat for all 49 inputs manually -->
+        <div class="form-group">
+          <input type="text" class="form-control" [value]="standard[1]" readonly>
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" [value]="alternative[1]" readonly>
+        </div>
+        <div class="form-group">
+          <input type="number" class="form-control" [(ngModel)]="asphalt.gradationTest.massRetainedB"
+                 name="massRetainedB"
+                 id="massRetainedB" required>
+        </div>
+        <div class="form-group">
+          <input type="number" class="form-control" [(ngModel)]="asphalt.gradationTest.cvcMinB" name="cvcMinB"
+                 id="cvcMinB"
+                 required>
+        </div>
+        <div class="form-group">
+          <input type="number" class="form-control" [(ngModel)]="asphalt.gradationTest.cvcMaxB" name="cvcMaxB"
+                 id="cvcMaxB"
+                 required>
+        </div>
+
+        <!-- Repeat for all 49 inputs manually -->
+        <div class="form-group">
+          <input type="text" class="form-control" [value]="standard[2]" readonly>
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" [value]="alternative[2]" readonly>
+        </div>
+        <div class="form-group">
+          <input type="number" class="form-control" [(ngModel)]="asphalt.gradationTest.massRetainedC"
+                 name="massRetainedC"
+                 id="massRetainedC" required>
+        </div>
+        <div class="form-group">
+          <input type="number" class="form-control" [(ngModel)]="asphalt.gradationTest.cvcMinC" name="cvcMinC"
+                 id="cvcMinC"
+                 required>
+        </div>
+        <div class="form-group">
+          <input type="number" class="form-control" [(ngModel)]="asphalt.gradationTest.cvcMaxC" name="cvcMaxC"
+                 id="cvcMaxC"
+                 required>
+        </div>
+
+
+        <!-- Repeat for all 49 inputs manually -->
+        <div class="form-group">
+          <input type="text" class="form-control" [value]="standard[3]" readonly>
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" [value]="alternative[3]" readonly>
+        </div>
+        <div class="form-group">
+          <input type="number" class="form-control" [(ngModel)]="asphalt.gradationTest.massRetainedD"
+                 name="massRetainedD"
+                 id="massRetainedD" required>
+        </div>
+        <div class="form-group">
+          <input type="number" class="form-control" [(ngModel)]="asphalt.gradationTest.cvcMinD" name="cvcMinD"
+                 id="cvcMinD"
+                 required>
+        </div>
+        <div class="form-group">
+          <input type="number" class="form-control" [(ngModel)]="asphalt.gradationTest.cvcMaxD" name="cvcMaxD"
+                 id="cvcMaxD"
+                 required>
+        </div>
+
+
+        <!-- Repeat for all 49 inputs manually -->
+        <div class="form-group">
+          <input type="text" class="form-control" [value]="standard[4]" readonly>
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" [value]="alternative[4]" readonly>
+        </div>
+        <div class="form-group">
+          <input type="number" class="form-control" [(ngModel)]="asphalt.gradationTest.massRetainedE"
+                 name="massRetainedE"
+                 id="massRetainedE" required>
+        </div>
+        <div class="form-group">
+          <input type="number" class="form-control" [(ngModel)]="asphalt.gradationTest.cvcMinE" name="cvcMinE"
+                 id="cvcMinE"
+                 required>
+        </div>
+        <div class="form-group">
+          <input type="number" class="form-control" [(ngModel)]="asphalt.gradationTest.cvcMaxE" name="cvcMaxE"
+                 id="cvcMaxE"
+                 required>
+        </div>
+
+
+        <!-- Repeat for all 49 inputs manually -->
+        <div class="form-group">
+          <input type="text" class="form-control" [value]="standard[5]" readonly>
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" [value]="alternative[5]" readonly>
+        </div>
+        <div class="form-group">
+          <input type="number" class="form-control" [(ngModel)]="asphalt.gradationTest.massRetainedF"
+                 name="massRetainedF"
+                 id="massRetainedF" required>
+        </div>
+        <div class="form-group">
+          <input type="number" class="form-control" [(ngModel)]="asphalt.gradationTest.cvcMinF" name="cvcMinF"
+                 id="cvcMinF"
+                 required>
+        </div>
+        <div class="form-group">
+          <input type="number" class="form-control" [(ngModel)]="asphalt.gradationTest.cvcMaxF" name="cvcMaxF"
+                 id="cvcMaxF"
+                 required>
+        </div>
+
+
+        <!-- Repeat for all 49 inputs manually -->
+        <div class="form-group">
+          <input type="text" class="form-control" [value]="standard[6] " readonly>
+        </div>
+
+        <div class="form-group">
+          <input type="text" class="form-control" [value]="alternative[6]" readonly>
+        </div>
+        <div class="form-group">
+          <input type="number" class="form-control" [(ngModel)]="asphalt.gradationTest.massRetainedG"
+                 name="massRetainedG"
+                 id="massRetainedG" required>
+        </div>
+        <div class="form-group">
+          <input type="number" class="form-control" [(ngModel)]="asphalt.gradationTest.cvcMinG" name="cvcMinG"
+                 id="cvcMinG"
+                 required>
+        </div>
+        <div class="form-group">
+          <input type="number" class="form-control" [(ngModel)]="asphalt.gradationTest.cvcMaxG" name="cvcMaxG"
+                 id="cvcMaxG"
+                 required>
+        </div>
+
+
+        <!-- Repeat for all 49 inputs manually -->
+
+        <div class="form-group">
+          <input type="text" class="form-control" [value]="standard[7] " readonly>
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" [value]="alternative[7]" readonly>
+        </div>
+        <div class="form-group">
+          <input type="number" class="form-control" [(ngModel)]="asphalt.gradationTest.massRetainedH"
+                 name="massRetainedH"
+                 id="massRetainedH" required>
+        </div>
+        <div class="form-group">
+          <input type="number" class="form-control" [(ngModel)]="asphalt.gradationTest.cvcMinH" name="cvcMinH"
+                 id="cvcMinH"
+                 required>
+        </div>
+        <div class="form-group">
+          <input type="number" class="form-control" [(ngModel)]="asphalt.gradationTest.cvcMaxH" name="cvcMaxH"
+                 id="cvcMaxH"
+                 required>
+        </div>
+
+
+        <!-- Repeat for all 49 inputs manually -->
+
+        <div class="form-group">
+          <input type="text" class="form-control" [value]="standard[8]" readonly>
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" [value]="alternative[8]" readonly>
+        </div>
+        <div class="form-group">
+          <input type="number" class="form-control" [(ngModel)]="asphalt.gradationTest.massRetainedI"
+                 name="massRetainedI"
+                 id="massRetainedI" required>
+        </div>
+        <div class="form-group">
+          <input type="number" class="form-control" [(ngModel)]="asphalt.gradationTest.cvcMinI" name="cvcMinI"
+                 id="cvcMinI"
+                 required>
+        </div>
+        <div class="form-group">
+          <input type="number" class="form-control" [(ngModel)]="asphalt.gradationTest.cvcMaxI" name="cvcMaxI"
+                 id="cvcMaxI" required>
+        </div>
+
+
+        <div class="form-group">
+          <input type="text" class="form-control" [value]="standard[9]" readonly>
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" [value]="alternative[9]" readonly>
+        </div>
+        <div class="form-group">
+          <input type="number" class="form-control" [(ngModel)]="asphalt.gradationTest.massRetainedJ"
+                 name="massRetainedJ" id="massRetainedJ" required>
+        </div>
+        <div class="form-group">
+          <input type="number" class="form-control" [(ngModel)]="asphalt.gradationTest.cvcMinJ" name="cvcMinJ"
+                 id="cvcMinJ"
+                 required>
+        </div>
+        <div class="form-group">
+          <input type="number" class="form-control" [(ngModel)]="asphalt.gradationTest.cvcMaxJ" name="cvcMaxJ"
+                 id="cvcMaxJ" required>
+        </div>
+
+
+      </div>
+
+    </div>
+
+    <!-- STEP 2: Asphalt Marshall -->
+    <div *ngIf="currentStep === 3" class="form-step">
+      <div class="d-flex align-items-center gap-3 flex-wrap mb-3">
+        <div class="align-items-center">
+          <label class="col-form-label me-2">Sample By</label>
+          <input type="text" class="form-control"
+                 [(ngModel)]="asphalt.sampleBy" name="sampleBy" required>
+        </div>
+        <div class="align-items-center">
+          <label class="col-form-label me-2">Sample Date</label>
+          <input type="date" class="form-control"
+                 [(ngModel)]="asphalt.sampleDate" name="sampleDate" required>
+        </div>
+        <div class="align-items-center">
+          <label class="col-form-label me-2">Test By</label>
+          <input type="text" class="form-control"
+                 [(ngModel)]="asphalt.testBy" name="testBy" required>
+        </div>
+        <div class="align-items-center">
+          <label class="col-form-label me-2">Testing Date</label>
+          <input type="date" class="form-control"
+                 [(ngModel)]="asphalt.testingDate" name="testingDate" required>
+        </div>
+        <div class="align-items-center">
+          <label class="col-form-label me-2">Classification</label>
+          <input type="text" class="form-control"
+                 [(ngModel)]="asphalt.classification" name="classification" required>
+        </div>
+      </div>
+
+      <div class="d-flex align-items-center" style="margin: -10px 0 5px 5px">
+        <label class="col-form-label me-2">Notes</label>
+        <input type="text" class="form-control"
+               [(ngModel)]="asphalt.notes" name="notes" style="width: 1160px">
+      </div>
+
+      <div class="grid-container-asphalt">
+        <!-- Header Row -->
+        <div class="form-group">
+          <label class="label">Specimen No.</label>
+        </div>
+        <div *ngFor="let i of [1,2,3,4,5,6]" class="form-group">
+          <label class="label">{{ i }}</label>
+        </div>
+
+        <!-- Wt. in air dry gm -->
+        <div class="form-group">
+          <label class="label">Wt. in air dry gm</label>
+        </div>
+        <div class="form-group">
+          <input type="number" class="form-control" [(ngModel)]="asphalt.weightAirDryA" name="weightAirDryA" required>
+        </div>
+        <div class="form-group">
+          <input type="number" class="form-control" [(ngModel)]="asphalt.weightAirDryB" name="weightAirDryB" required>
+        </div>
+        <div class="form-group">
+          <input type="number" class="form-control" [(ngModel)]="asphalt.weightAirDryC" name="weightAirDryC" required>
+        </div>
+        <div class="form-group">
+          <input type="number" class="form-control" [(ngModel)]="asphalt.weightAirDryD" name="weightAirDryD" required>
+        </div>
+        <div class="form-group">
+          <input type="number" class="form-control" [(ngModel)]="asphalt.weightAirDryE" name="weightAirDryE" required>
+        </div>
+        <div class="form-group">
+          <input type="number" class="form-control" [(ngModel)]="asphalt.weightAirDryF" name="weightAirDryF" required>
+        </div>
+
+
+        <!-- Wt. in water gm -->
+        <div class="form-group">
+          <label class="label">Wt. in water gm</label>
+        </div>
+        <!--                <div *ngFor="let i of [0,1,2,3,4,5]" class="form-group">-->
+        <!--                  <input type="number" class="form-control"-->
+        <!--                         [(ngModel)]="formData.weightWater[i]"-->
+        <!--                         [name]="'weightWater' + i" required>-->
+        <!--                </div>-->
+
+        <div class="form-group">
+          <input type="number" class="form-control" [(ngModel)]="asphalt.weightWaterA" name="weightWaterA" required>
+        </div>
+        <div class="form-group">
+          <input type="number" class="form-control" [(ngModel)]="asphalt.weightWaterB" name="weightWaterB" required>
+        </div>
+        <div class="form-group">
+          <input type="number" class="form-control" [(ngModel)]="asphalt.weightWaterC" name="weightWaterC" required>
+        </div>
+        <div class="form-group">
+          <input type="number" class="form-control" [(ngModel)]="asphalt.weightWaterD" name="weightWaterD" required>
+        </div>
+        <div class="form-group">
+          <input type="number" class="form-control" [(ngModel)]="asphalt.weightWaterE" name="weightWaterE" required>
+        </div>
+        <div class="form-group">
+          <input type="number" class="form-control" [(ngModel)]="asphalt.weightWaterF" name="weightWaterF" required>
+        </div>
+
+        <!-- Wt. in air surf dry gm -->
+        <div class="form-group">
+          <label class="label">Wt. in air surf dry gm</label>
+        </div>
+        <div class="form-group">
+          <input type="number" class="form-control" [(ngModel)]="asphalt.weightAirSurfDryA" name="weightAirSurfDryA"
+                 required>
+        </div>
+        <div class="form-group">
+          <input type="number" class="form-control" [(ngModel)]="asphalt.weightAirSurfDryB" name="weightAirSurfDryB"
+                 required>
+        </div>
+        <div class="form-group">
+          <input type="number" class="form-control" [(ngModel)]="asphalt.weightAirSurfDryC" name="weightAirSurfDryC"
+                 required>
+        </div>
+        <div class="form-group">
+          <input type="number" class="form-control" [(ngModel)]="asphalt.weightAirSurfDryD" name="weightAirSurfDryD"
+                 required>
+        </div>
+        <div class="form-group">
+          <input type="number" class="form-control" [(ngModel)]="asphalt.weightAirSurfDryE" name="weightAirSurfDryE"
+                 required>
+        </div>
+        <div class="form-group">
+          <input type="number" class="form-control" [(ngModel)]="asphalt.weightAirSurfDryF" name="weightAirSurfDryF"
+                 required>
+        </div>
+
+
+        <!-- Stability (kg) -->
+        <div class="form-group">
+          <label class="label">Stability (kg)</label>
+        </div>
+        <div class="form-group">
+          <input type="number" class="form-control" [(ngModel)]="asphalt.stabilityA" name="stabilityA" required>
+        </div>
+        <div class="form-group">
+          <input type="number" class="form-control" [(ngModel)]="asphalt.stabilityB" name="stabilityB" required>
+        </div>
+        <div class="form-group">
+          <input type="number" class="form-control" [(ngModel)]="asphalt.stabilityC" name="stabilityC" required>
+        </div>
+        <div class="form-group">
+          <input type="number" class="form-control" [(ngModel)]="asphalt.stabilityD" name="stabilityD" required>
+        </div>
+        <div class="form-group">
+          <input type="number" class="form-control" [(ngModel)]="asphalt.stabilityE" name="stabilityE" required>
+        </div>
+        <div class="form-group">
+          <input type="number" class="form-control" [(ngModel)]="asphalt.stabilityF" name="stabilityF" required>
+        </div>
+
+        <!-- Correction factor -->
+        <div class="form-group">
+          <label class="label">Correction factor</label>
+        </div>
+        <div class="form-group">
+          <input type="number" class="form-control" [(ngModel)]="asphalt.correctionFactorA" name="correctionFactorA"
+                 required>
+        </div>
+        <div class="form-group">
+          <input type="number" class="form-control" [(ngModel)]="asphalt.correctionFactorB" name="correctionFactorB"
+                 required>
+        </div>
+        <div class="form-group">
+          <input type="number" class="form-control" [(ngModel)]="asphalt.correctionFactorC" name="correctionFactorC"
+                 required>
+        </div>
+        <div class="form-group">
+          <input type="number" class="form-control" [(ngModel)]="asphalt.correctionFactorD" name="correctionFactorD"
+                 required>
+        </div>
+        <div class="form-group">
+          <input type="number" class="form-control" [(ngModel)]="asphalt.correctionFactorE" name="correctionFactorE"
+                 required>
+        </div>
+        <div class="form-group">
+          <input type="number" class="form-control" [(ngModel)]="asphalt.correctionFactorF" name="correctionFactorF"
+                 required>
+        </div>
+
+
+        <!-- Stability (kg) for 24 Hrs. -->
+        <div class="form-group">
+          <label class="label" style="font-size: 15px">Stability (kg) for 24 Hrs.</label>
+        </div>
+        <div class="form-group">
+          <input type="number" class="form-control" disabled>
+        </div>
+        <div class="form-group">
+          <input type="number" class="form-control" disabled>
+        </div>
+        <div class="form-group">
+          <input type="number" class="form-control" disabled>
+        </div>
+        <div class="form-group">
+          <input type="number" class="form-control" [(ngModel)]="asphalt.stability24HrsD" name="stability24Hrs"
+                 required>
+        </div>
+        <div class="form-group">
+          <input type="number" class="form-control" [(ngModel)]="asphalt.stability24HrsE" name="stability24HrsE"
+                 required>
+        </div>
+        <div class="form-group">
+          <input type="number" class="form-control" [(ngModel)]="asphalt.stability24HrsF" name="stability24HrsF"
+                 required>
+        </div>
+
+
+        <!-- Flow(mm) -->
+        <div class="form-group">
+          <label class="label">Flow(mm)</label>
+        </div>
+
+        <div class="form-group">
+          <input type="number" class="form-control" [(ngModel)]="asphalt.flowA" name="flowA" required>
+        </div>
+        <div class="form-group">
+          <input type="number" class="form-control" [(ngModel)]="asphalt.flowB" name="flowB" required>
+        </div>
+        <div class="form-group">
+          <input type="number" class="form-control" [(ngModel)]="asphalt.flowC" name="flowC" required>
+        </div>
+        <div *ngFor="let i of [3,4,5]" class="form-group">
+          <input type="number" class="form-control" disabled>
+        </div>
+
+      </div>
+
+      <!-- Additional fields -->
+      <div class="d-flex align-items-center gap-3 flex-wrap mb-3" style="margin-top: 10px">
+        <div class="align-items-center">
+          <label class="col-form-label me-2">Net. Wt. Of loose mix gm</label>
+          <input type="number" class="form-control"
+                 [(ngModel)]="asphalt.netWeightOfLooseMix" name="netWeightOfLooseMix" required>
+        </div>
+        <div class="align-items-center">
+          <label class="col-form-label me-2">Net Wt. Of Flask+watergm</label>
+          <input type="number" class="form-control"
+                 [(ngModel)]="asphalt.netWeightOfFlaskWater" name="netWeightOfFlaskWater" required>
+        </div>
+        <div class="align-items-center">
+          <label class="col-form-label me-2">Wt. Flask+water+sample</label>
+          <input type="number" class="form-control"
+                 [(ngModel)]="asphalt.weightFlaskWaterSample" name="weightFlaskWaterSample" required>
+        </div>
+        <div class="align-items-center">
+          <label class="col-form-label me-2">Sp.Gravity of Asp. Bit</label>
+          <input type="number" class="form-control"
+                 [(ngModel)]="asphalt.spGravityOfAspBit" name="spGravityOfAspBit" required>
+        </div>
+        <div class="align-items-center">
+          <label class="col-form-label me-2">Bulk Sp.Gr. Comb. Agg.</label>
+          <input type="text" class="form-control"
+                 [(ngModel)]="asphalt.bulkSpGrCombAgg" name="bulkSpGrCombAgg" required>
+        </div>
+      </div>
+    </div>
+
+    <div class="navigation-buttons">
+      <button *ngIf="currentStep > 1" type="button" (click)="prevStep()" class="btn btn-secondary">Previous</button>
+      <button *ngIf="currentStep < 3" type="button" (click)="nextStep()" class="btn btn-primary">Next</button>
+      <button *ngIf="currentStep === 3" type="submit" class="btn btn-success" [disabled]="!form.valid">Submit All
+      </button>
+    </div>
+  </form>
+</div>
