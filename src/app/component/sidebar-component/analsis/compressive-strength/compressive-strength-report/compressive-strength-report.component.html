@@ -1,0 +1,148 @@
+<div class="container mt-4">
+  <h2 class="mb-3 text-center">Concrete Test Report</h2>
+
+  <!-- First Row -->
+  <div class="row mb-2">
+    <div class="col-md-6">
+      <strong>Project Name : </strong> <span>{{ compressiveStrength.projectName }}</span>
+    </div>
+    <div class="col-md-6 ">
+      <strong>Report No:</strong> <span>{{compressiveStrength.dateTested}}</span>
+    </div>
+  </div>
+
+  <!-- Second Row -->
+  <div class="row mb-2">
+    <div class="col-md-6">
+      <strong>Client : </strong> <span>{{ compressiveStrength.clientName }}</span>
+    </div>
+
+  </div>
+
+  <!-- Third Row -->
+  <div class="row mb-2">
+    <div class="col-md-6">
+      <strong>Location:</strong> <span></span>
+    </div>
+  </div>
+
+  <!-- Fourth Row -->
+  <div class="row mb-3">
+    <div class="col-md-6">
+      <strong>Supplier:</strong> <span>---</span>
+    </div>
+  </div>
+
+  <!-- Cement Content & Strength Section -->
+  <div class="row mt-3">
+    <div class="col-md-4">
+      <strong>Cement Content : </strong> <span>{{ compressiveStrength.cementContent }}</span>
+    </div>
+    <div class="col-md-4">
+      <strong>Spec. 28 Days Strength : </strong> <span>{{ compressiveStrength.specTwintyEightDayStrength }}</span>
+    </div>
+    <div class="col-md-4">
+      <strong>Spec. 07 Days Strength : </strong>
+      <span>{{ compressiveStrength.specTwintyEightDayStrength * 0.75 }}</span>
+    </div>
+  </div>
+
+  <!-- Dimension Section -->
+  <div class="row mt-3">
+    <div class="col-md-6">
+      <strong>Diameter : </strong> <span>{{ compressiveStrength.diameter }} cm</span>
+    </div>
+    <div class="col-md-6">
+      <strong>Area : </strong>
+      <span>{{ area | number : '1.2-2' }}
+        cm²</span>
+    </div>
+  </div>
+
+  <div class="row mt-2">
+    <div class="col-md-6">
+      <strong>Height : </strong> <span>{{ compressiveStrength.height }} cm</span>
+    </div>
+    <div class="col-md-6">
+      <strong>Volume : </strong>
+      <span>{{  volume | number : '1.2-2' }}
+        cm³</span>
+    </div>
+  </div>
+
+  <!-- Environmental Conditions Section -->
+  <div class="row mt-3">
+    <div class="col-md-6">
+      <strong>Date Cast : </strong> <span>{{ compressiveStrength.dateCast }}</span>
+    </div>
+    <div class="col-md-6">
+      <strong>Slump : </strong> <span>{{ compressiveStrength.slump }}</span>
+    </div>
+  </div>
+
+  <div class="row mt-2">
+    <div class="col-md-6">
+      <strong>Date Received : </strong> <span>{{ compressiveStrength.dateReceived }}</span>
+    </div>
+    <div class="col-md-6">
+      <strong>Air Temperature : </strong> <span>{{ compressiveStrength.airTemperature}}°C</span>
+    </div>
+  </div>
+
+  <div class="row mt-2">
+    <div class="col-md-6">
+      <strong>Date Tested : </strong> <span>{{ compressiveStrength.dateTested }}</span>
+    </div>
+    <div class="col-md-6">
+      <strong>Concrete Temperature : </strong> <span>{{ compressiveStrength.concreteTemperature }} °C</span>
+    </div>
+  </div>
+
+  <!-- Sample Test Results Section -->
+  <div class="mt-4">
+    <h4 class="mb-3">Sample Test Results</h4>
+    <div class="table-responsive">
+      <table class="table text-center">
+        <thead class="table">
+        <tr>
+          <th>Sample No.</th>
+          <th>Type of Structure</th>
+          <th>Age (days)</th>
+          <th>Weight (gm)</th>
+          <th>Density (gm/cm³)</th>
+          <th>Load (kN)</th>
+          <th>Strength (MPa)</th>
+          <th>Fracture Type</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td>1</td>
+          <td>---</td>
+          <td>{{compressiveStrength.sampleAAge}}</td>
+          <td>{{compressiveStrength.weightA}}</td>
+          <td>{{compressiveStrength.weightA / volume | number : '1.3-3'}}</td>
+          <td>{{compressiveStrength.loadA}}</td>
+          <td>{{compressiveStrength.loadA * 101.971/ area | number : '1.1-1'}}</td>
+          <td>{{compressiveStrength.fractureA}}</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>---</td>
+          <td>{{compressiveStrength.sampleBAge}}</td>
+          <td>{{compressiveStrength.weightB}}</td>
+          <td>{{compressiveStrength.weightB / volume | number : '1.3-3'}}</td>
+          <td>{{compressiveStrength.loadB}}</td>
+          <td>{{compressiveStrength.loadB * 101.971/ area | number : '1.1-1'}}</td>
+          <td>{{compressiveStrength.fractureB}}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div>
+    <button class="btn btn-success" (click)="generatePDF()">Download Pdf</button>
+  </div>
+
+</div>

@@ -51,6 +51,7 @@ export class TestComponent implements OnInit {
   goToTrail(testId: number, id: number) {
     if (id == 1) this.router.navigate([`/sands/${testId}`]);
     if (id == 2) this.router.navigate([`/asphalt/${testId}`]);
+    if (id == 3) this.router.navigate([`/compressive-strength/${testId}`]);
   }
 
   changeActive(id: number) {

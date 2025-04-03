@@ -34,6 +34,18 @@ import {
 import {
   AsphaltReportComponent
 } from "./component/sidebar-component/analsis/asphalt/asphalt-report/asphalt-report.component";
+import {
+  ShowCompressiveStrengthComponent
+} from "./component/sidebar-component/analsis/compressive-strength/show-compressive-strength/show-compressive-strength.component";
+import {
+  InsertCompressiveStrengthComponent
+} from "./component/sidebar-component/analsis/compressive-strength/insert-compressive-strength/insert-compressive-strength.component";
+import {
+  UpdateCompressiveStrengthComponent
+} from "./component/sidebar-component/analsis/compressive-strength/update-compressive-strength/update-compressive-strength.component";
+import {
+  CompressiveStrengthReportComponent
+} from "./component/sidebar-component/analsis/compressive-strength/compressive-strength-report/compressive-strength-report.component";
 
 export const routes: Routes = [
 
@@ -64,6 +76,11 @@ export const routes: Routes = [
   { path: 'asphalt/insert/:id', component: InsertAsphaltComponent, canActivate: [authGuard] },
   { path: 'asphalt/update/:id', component: UpdateAsphaltComponent, canActivate: [authGuard] },
   { path: 'asphalt/report/:id', component: AsphaltReportComponent, canActivate: [authGuard] },
+
+  { path: 'compressive-strength/:id', component: ShowCompressiveStrengthComponent, canActivate: [authGuard] },
+  { path: 'compressive-strength/insert/:id', component: InsertCompressiveStrengthComponent, canActivate: [authGuard] },
+  { path: 'compressive-strength/update/:id', component: UpdateCompressiveStrengthComponent, canActivate: [authGuard] },
+  { path: 'compressive-strength/report/:id', component: CompressiveStrengthReportComponent, canActivate: [authGuard] },
 
   {path: 'report', component: TestReportComponent, canActivate: [authGuard]},
 

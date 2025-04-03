@@ -28,7 +28,7 @@ export class InsertAsphaltComponent {
   asphalt: Asphalt = {test: {} as Test, gradationTest: {} as GradationTest , bitumen : {} as Bitumen} as Asphalt;
   currentStep = 1;
   standard = ['37.5', '25', '19.0', '12.5', '9.5', '4.75', '2.00', '0.425', '0.180', '0.075'];
-  alternative = ['1.5', '1', '3/4', '1/2', '3/8', '#4', '#10', '#40', '#80', '#200',];
+  alternative = ['1.5', '1', '3/4', '1/2', '3/8', '#4', '#10', '#40', '#80', '#200'];
 
   constructor(private router: Router,
               private service: AsphaltService,

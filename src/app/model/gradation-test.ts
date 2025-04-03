@@ -1,6 +1,7 @@
 export interface GradationTest {
 
 
+
   id: number;
   totalWeigh: number;
 
@@ -36,4 +37,15 @@ export interface GradationTest {
   cvcMaxH: number;
   cvcMaxI: number;
   cvcMaxJ: number;
+
+  retainedA: number;
+  retainedB: number;
+  retainedC: number;
+  retainedD: number;
+  retainedE: number;
+  retainedF: number;
+  retainedG: number;
+  retainedH: number;
+  retainedI: number;
+  retainedJ: number;
 }

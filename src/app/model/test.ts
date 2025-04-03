@@ -2,6 +2,7 @@ import {Project} from "./project";
 import {TestManager} from "./test-manager";
 import {SieveAnalysis} from "./sieve-analysis";
 import {Asphalt} from "./asphalt";
+import {CompressiveStrength} from "./compressive-strength";
 
 export interface Test {
 
@@ -18,4 +19,5 @@ export interface Test {
   testManager: TestManager;
   sieveAnalyses: SieveAnalysis[];
   asphalts: Asphalt[];
+  compressiveStrengths: CompressiveStrength[];
 }
