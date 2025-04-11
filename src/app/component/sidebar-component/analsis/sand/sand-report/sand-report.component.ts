@@ -126,7 +126,7 @@ export class SandReportComponent implements AfterViewInit, OnInit {
       doc.text(`Sample By          ${this.sieveAnalysis.sampleBy || 'N/A'}`, 13, 42);
       doc.text(`Sampling Date    ${this.sieveAnalysis.samplingDate || 'N/A'}`, 13, 48);
       doc.text(`Testing Date     ${this.sieveAnalysis.testingDate || 'N/A'}`, 140, 42);
-      doc.text(`Material Type    ${this.sieveAnalysis.materialType || 'N/A'}`, 140, 48);
+      doc.text(`Standard    ${this.sieveAnalysis.materialType || 'N/A'}`, 140, 48);
 
       doc.line(10, 55, 200, 55);
 
