@@ -137,7 +137,7 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
       doc.text(`Sample By          ${this.asphalt.sampleBy || 'N/A'}`, 13, 42);
       doc.text(`Sampling Date    ${this.asphalt.sampleDate || 'N/A'}`, 13, 48);
       doc.text(`Testing Date     ${this.asphalt.testingDate || 'N/A'}`, 130, 42);
-      doc.text(`Classification    ${this.asphalt.classification || 'N/A'}`, 130, 48);
+      doc.text(`Standard    ${this.asphalt.classification || 'N/A'}`, 130, 48);
       doc.line(10, 52, 200, 52);
 
       const bitumenColumn = ['Parameter', 'Value'];
