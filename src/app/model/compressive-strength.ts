@@ -17,6 +17,11 @@ export interface CompressiveStrength {
   notes: string;
   approveBy: string;
   activist: string;
+  nameOfTest: string;
+  consultant: string;
+  owner: string;
+  location: string;
+  sampleNo: string;
 
   cementContent: number;
   specTwintyEightDayStrength: number;
@@ -31,12 +36,28 @@ export interface CompressiveStrength {
 
   sampleAAge: number;
   sampleBAge: number;
+  sampleCAge: number;
+  sampleDAge: number;
+  sampleEAge: number;
+  sampleFAge: number;
   weightA: number;
   weightB: number;
+  weightC: number;
+  weightD: number;
+  weightE: number;
+  weightF: number;
   loadA: number;
   loadB: number;
+  loadC: number;
+  loadD: number;
+  loadE: number;
+  loadF: number;
   fractureA: number;
   fractureB: number;
+  fractureC: number;
+  fractureD: number;
+  fractureE: number;
+  fractureF: number;
 
-  test : Test;
+  test: Test;
 }

@@ -119,14 +119,11 @@ export class SandReportComponent implements AfterViewInit, OnInit {
       doc.setFontSize(11);
       doc.text(`Project         ${this.sieveAnalysis.projectName || 'N/A'}`, 13, 30);
       doc.text(`Client           ${this.sieveAnalysis.clientName || 'N/A'}`, 13, 36);
-      doc.addImage(qr, 'PNG', 135, 25, 50, 10);
-
-      // doc.line(10, 40, 200, 40);
-
+      doc.addImage(qr, 'PNG', 160, 22, 35 , 30);
       doc.text(`Sample By          ${this.sieveAnalysis.sampleBy || 'N/A'}`, 13, 42);
       doc.text(`Sampling Date    ${this.sieveAnalysis.samplingDate || 'N/A'}`, 13, 48);
-      doc.text(`Testing Date     ${this.sieveAnalysis.testingDate || 'N/A'}`, 140, 42);
-      doc.text(`Standard    ${this.sieveAnalysis.materialType || 'N/A'}`, 140, 48);
+      doc.text(`Testing Date     ${this.sieveAnalysis.testingDate || 'N/A'}`, 110, 30);
+      doc.text(`Standard    ${this.sieveAnalysis.materialType || 'N/A'}`, 110, 36);
 
       doc.line(10, 55, 200, 55);
 

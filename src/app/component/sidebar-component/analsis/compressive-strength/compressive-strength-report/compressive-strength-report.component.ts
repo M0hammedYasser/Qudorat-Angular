@@ -51,11 +51,11 @@ export class CompressiveStrengthReportComponent implements OnInit {
       doc.setFontSize(11);
       doc.text(`Project         ${this.compressiveStrength.projectName || 'N/A'}`, 13, 30);
       doc.text(`Client           ${this.compressiveStrength.clientName || 'N/A'}`, 13, 36);
-      doc.addImage(qr, 'PNG', 125, 25, 50, 10);
+      doc.addImage(qr, 'PNG', 160, 22, 35 , 30);
       doc.text(`Sample By          ${this.compressiveStrength.sampleBy || 'N/A'}`, 13, 42);
       doc.text(`Sampling Date    ${this.compressiveStrength.sampleDate || 'N/A'}`, 13, 48);
-      doc.text(`Testing Date     ${this.compressiveStrength.testingDate || 'N/A'}`, 130, 42);
-      doc.text(`Standard    ${this.compressiveStrength.classification || 'N/A'}`, 130, 48);
+      doc.text(`Testing Date     ${this.compressiveStrength.testingDate || 'N/A'}`, 110, 30);
+      doc.text(`Standard    ${this.compressiveStrength.classification || 'N/A'}`, 110, 36);
       doc.line(10, 52, 200, 52);
 
       // First Table: Cement Content & Environmental Conditions
@@ -85,10 +85,12 @@ export class CompressiveStrengthReportComponent implements OnInit {
         startY: finalY,
         head: [['NO', 'Type of Structure', 'Age (day)', 'Weight (gm)', 'Density (gm/cm³)', 'Load (kN)', 'Strength (Kgf/cm²)', 'Strength (Mpa)', 'Fracture Type']],
         body: [
-          ['1', '', this.compressiveStrength.sampleAAge, this.compressiveStrength.weightA, Number(this.compressiveStrength.weightA / this.volume).toFixed(3), this.compressiveStrength.loadA, Number(this.compressiveStrength.loadA * 101.971 / this.area).toFixed(1), Number(this.compressiveStrength.loadA * 10 / this.area).toFixed(2), this.compressiveStrength.fractureA],
-          ['2', '', this.compressiveStrength.sampleAAge, '13,780', '2.599', '497.5', '287.1', '28.15', '2'],
-          ['3', '', '', '', '', '', '', '', ''],
-          ['4', '', '', '', '', '', '', '', ''],
+            ['1', '', this.compressiveStrength.sampleAAge, this.compressiveStrength.weightA, Number(this.compressiveStrength.weightA / this.volume).toFixed(3), this.compressiveStrength.loadA, Number(this.compressiveStrength.loadA * 101.971 / this.area).toFixed(1), Number(this.compressiveStrength.loadA * 10 / this.area).toFixed(2), this.compressiveStrength.fractureA],
+            ['2', '', this.compressiveStrength.sampleBAge, this.compressiveStrength.weightB, Number(this.compressiveStrength.weightB / this.volume).toFixed(3), this.compressiveStrength.loadB, Number(this.compressiveStrength.loadB * 101.971 / this.area).toFixed(1), Number(this.compressiveStrength.loadB * 10 / this.area).toFixed(2), this.compressiveStrength.fractureB],
+            ['3', '', this.compressiveStrength.sampleCAge, this.compressiveStrength.weightC, Number(this.compressiveStrength.weightC / this.volume).toFixed(3), this.compressiveStrength.loadC, Number(this.compressiveStrength.loadC * 101.971 / this.area).toFixed(1), Number(this.compressiveStrength.loadC * 10 / this.area).toFixed(2), this.compressiveStrength.fractureC],
+            ['4', '', this.compressiveStrength.sampleDAge, this.compressiveStrength.weightD, Number(this.compressiveStrength.weightD / this.volume).toFixed(3), this.compressiveStrength.loadD, Number(this.compressiveStrength.loadD * 101.971 / this.area).toFixed(1), Number(this.compressiveStrength.loadD * 10 / this.area).toFixed(2), this.compressiveStrength.fractureD],
+            ['5', '', this.compressiveStrength.sampleEAge, this.compressiveStrength.weightE, Number(this.compressiveStrength.weightE / this.volume).toFixed(3), this.compressiveStrength.loadE, Number(this.compressiveStrength.loadE * 101.971 / this.area).toFixed(1), Number(this.compressiveStrength.loadE * 10 / this.area).toFixed(2), this.compressiveStrength.fractureE],
+            ['6', '', this.compressiveStrength.sampleFAge, this.compressiveStrength.weightF, Number(this.compressiveStrength.weightF / this.volume).toFixed(3), this.compressiveStrength.loadF, Number(this.compressiveStrength.loadF * 101.971 / this.area).toFixed(1), Number(this.compressiveStrength.loadF * 10 / this.area).toFixed(2), this.compressiveStrength.fractureF]
         ],
         theme: 'grid',
         styles: { fontSize: 9, cellPadding: 2 },

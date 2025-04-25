@@ -1,16 +1,24 @@
 .form-container {
   margin-left: 260px; /* Reduced from 260px */
-  padding: 100px 15px 0 15px; /* Kept 90px top padding */
+  padding: 80px 15px 0 15px; /* Kept 90px top padding */
   background: white;
   border-radius: 10px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
+
+
 .header {
   text-align: center;
-  font-size: 22px; /* Slightly smaller */
+  font-size: 22px;
   font-weight: bold;
-  margin-bottom: 8px; /* Reduced */
+  margin-bottom: 12px;
+}
+.head{
+  text-align: center;
+  font-size: 15px;
+  font-weight: bold;
+  margin-bottom: 5px;
 }
 
 .form-row {

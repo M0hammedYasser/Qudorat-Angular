@@ -133,11 +133,11 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
       doc.setFontSize(11);
       doc.text(`Project         ${this.asphalt.projectName || 'N/A'}`, 13, 30);
       doc.text(`Client           ${this.asphalt.clientName || 'N/A'}`, 13, 36);
-      doc.addImage(qr, 'PNG', 125, 25, 50, 10);
+      doc.addImage(qr, 'PNG', 160, 22, 35 , 30);
       doc.text(`Sample By          ${this.asphalt.sampleBy || 'N/A'}`, 13, 42);
       doc.text(`Sampling Date    ${this.asphalt.sampleDate || 'N/A'}`, 13, 48);
-      doc.text(`Testing Date     ${this.asphalt.testingDate || 'N/A'}`, 130, 42);
-      doc.text(`Standard    ${this.asphalt.classification || 'N/A'}`, 130, 48);
+      doc.text(`Testing Date     ${this.asphalt.testingDate || 'N/A'}`, 110, 30);
+      doc.text(`Standard    ${this.asphalt.classification || 'N/A'}`, 110, 36);
       doc.line(10, 52, 200, 52);
 
       const bitumenColumn = ['Parameter', 'Value'];

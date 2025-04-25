@@ -1,10 +1,11 @@
 <div class="form-container">
-  <h1 class="header">Compressive Strength Test</h1>
+  <h1 class="header">Concrete Compressive Strength Test</h1>
   <form #form="ngForm" (submit)="insert()">
     <div class="form-step">
       <div class="bitumen-form-container">
 
-        <div class="d-flex align-items-center gap-1 flex-wrap mb-1">
+        <!-- First Line -->
+        <div class="d-flex align-items-center gap-1 mb-1">
           <div class="align-items-center">
             <label class="col-form-label me-1">Sample By</label>
             <input type="text" class="form-control compact-input"
@@ -16,6 +17,16 @@
                    [(ngModel)]="compressiveStrength.sampleDate" name="sampleDate" required>
           </div>
           <div class="align-items-center">
+            <label class="col-form-label me-1">Sample No</label>
+            <input type="text" class="form-control compact-input"
+                   [(ngModel)]="compressiveStrength.sampleNo" name="sampleNo" required>
+          </div>
+          <div class="align-items-center">
+            <label class="col-form-label me-1">Test Name</label>
+            <input type="text" class="form-control compact-input"
+                   [(ngModel)]="compressiveStrength.nameOfTest" name="nameOfTest" required>
+          </div>
+          <div class="align-items-center">
             <label class="col-form-label me-1">Test By</label>
             <input type="text" class="form-control compact-input"
                    [(ngModel)]="compressiveStrength.testBy" name="testBy" required>
@@ -25,17 +36,42 @@
             <input type="date" class="form-control compact-input"
                    [(ngModel)]="compressiveStrength.testingDate" name="testingDate" required>
           </div>
+        </div>
+
+        <!-- Second Line -->
+        <div class="d-flex align-items-center gap-1 mb-1">
           <div class="align-items-center">
             <label class="col-form-label me-1">Standard</label>
             <input type="text" class="form-control compact-input"
                    [(ngModel)]="compressiveStrength.classification" name="classification" required>
           </div>
+          <div class="align-items-center">
+            <label class="col-form-label me-1">Consultant</label>
+            <input type="text" class="form-control compact-input"
+                   [(ngModel)]="compressiveStrength.consultant" name="consultant" required>
+          </div>
+          <div class="align-items-center">
+            <label class="col-form-label me-1">Owner</label>
+            <input type="text" class="form-control compact-input"
+                   [(ngModel)]="compressiveStrength.owner" name="owner" required>
+          </div>
+          <div class="align-items-center">
+            <label class="col-form-label me-1">Location</label>
+            <input type="text" class="form-control compact-input"
+                   [(ngModel)]="compressiveStrength.location" name="location" required>
+          </div>
+
         </div>
-        <div class="d-flex align-items-center mb-1" style="margin: 0 0 2px 2px">
-          <label class="col-form-label me-1">Notes</label>
-          <input type="text" class="form-control compact-input"
-                 [(ngModel)]="compressiveStrength.notes" name="notes" style="width: 1160px">
+        <!-- Notes Line -->
+        <div class="d-flex align-items-center mb-1 mt-2">
+          <label class="col-form-label me-2">Notes</label>
+          <input type="text" class="form-control"
+                 [(ngModel)]="compressiveStrength.notes" name="notes" style="flex: 1;">
         </div>
+
+
+        <h3 class="head">Concrete Compressive Strength Test</h3>
+
         <div class="form-row">
           <div class="form-group">
             <label class="col-form-label">Cement Content</label>
@@ -76,6 +112,7 @@
             <input type="number" class="form-control compact-input" [(ngModel)]="compressiveStrength.concreteTemperature" name="concreteTemperature" required>
           </div>
         </div>
+        <h3 class="head">Concrete </h3>
         <div class="form-row">
           <div class="form-group">
             <label class="col-form-label">Sample Age (days)</label>
@@ -94,6 +131,7 @@
             <input type="number" class="form-control compact-input" [(ngModel)]="compressiveStrength.fractureA" name="fractureA" required>
           </div>
         </div>
+
         <div class="form-row">
           <div class="form-group">
             <label class="col-form-label">Sample Age (days)</label>
@@ -112,6 +150,84 @@
             <input type="number" class="form-control compact-input" [(ngModel)]="compressiveStrength.fractureB" name="fractureB" required>
           </div>
         </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="col-form-label">Sample Age (days)</label>
+            <input type="number" class="form-control compact-input" [(ngModel)]="compressiveStrength.sampleCAge" name="sampleBAge" required>
+          </div>
+          <div class="form-group">
+            <label class="col-form-label">Weight (kg)</label>
+            <input type="number" class="form-control compact-input" [(ngModel)]="compressiveStrength.weightC" name="weightB" required>
+          </div>
+          <div class="form-group">
+            <label class="col-form-label">Load (kN)</label>
+            <input type="number" class="form-control compact-input" [(ngModel)]="compressiveStrength.loadC" name="loadB" required>
+          </div>
+          <div class="form-group">
+            <label class="col-form-label">Fracture (%)</label>
+            <input type="number" class="form-control compact-input" [(ngModel)]="compressiveStrength.fractureC" name="fractureB" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="col-form-label">Sample Age (days)</label>
+            <input type="number" class="form-control compact-input" [(ngModel)]="compressiveStrength.sampleDAge" name="sampleBAge" required>
+          </div>
+          <div class="form-group">
+            <label class="col-form-label">Weight (kg)</label>
+            <input type="number" class="form-control compact-input" [(ngModel)]="compressiveStrength.weightD" name="weightB" required>
+          </div>
+          <div class="form-group">
+            <label class="col-form-label">Load (kN)</label>
+            <input type="number" class="form-control compact-input" [(ngModel)]="compressiveStrength.loadD" name="loadB" required>
+          </div>
+          <div class="form-group">
+            <label class="col-form-label">Fracture (%)</label>
+            <input type="number" class="form-control compact-input" [(ngModel)]="compressiveStrength.fractureD" name="fractureB" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="col-form-label">Sample Age (days)</label>
+            <input type="number" class="form-control compact-input" [(ngModel)]="compressiveStrength.sampleEAge" name="sampleBAge" required>
+          </div>
+          <div class="form-group">
+            <label class="col-form-label">Weight (kg)</label>
+            <input type="number" class="form-control compact-input" [(ngModel)]="compressiveStrength.weightE" name="weightB" required>
+          </div>
+          <div class="form-group">
+            <label class="col-form-label">Load (kN)</label>
+            <input type="number" class="form-control compact-input" [(ngModel)]="compressiveStrength.loadE" name="loadB" required>
+          </div>
+          <div class="form-group">
+            <label class="col-form-label">Fracture (%)</label>
+            <input type="number" class="form-control compact-input" [(ngModel)]="compressiveStrength.fractureE" name="fractureB" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="col-form-label">Sample Age (days)</label>
+            <input type="number" class="form-control compact-input" [(ngModel)]="compressiveStrength.sampleFAge" name="sampleBAge" required>
+          </div>
+          <div class="form-group">
+            <label class="col-form-label">Weight (kg)</label>
+            <input type="number" class="form-control compact-input" [(ngModel)]="compressiveStrength.weightF" name="weightB" required>
+          </div>
+          <div class="form-group">
+            <label class="col-form-label">Load (kN)</label>
+            <input type="number" class="form-control compact-input" [(ngModel)]="compressiveStrength.loadF" name="loadB" required>
+          </div>
+          <div class="form-group">
+            <label class="col-form-label">Fracture (%)</label>
+            <input type="number" class="form-control compact-input" [(ngModel)]="compressiveStrength.fractureF" name="fractureB" required>
+          </div>
+        </div>
+
+
         <div class="navigation-buttons">
           <button type="submit" class="btn btn-primary" [disabled]="!form.valid">Submit</button>
         </div>

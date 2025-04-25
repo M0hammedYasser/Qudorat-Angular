@@ -22,7 +22,7 @@
   <!-- Third Row -->
   <div class="row mb-2">
     <div class="col-md-6">
-      <strong>Location:</strong> <span></span>
+      <strong>Location : </strong> <span>{{ compressiveStrength.location }}</span>
     </div>
   </div>
 
@@ -135,6 +135,46 @@
           <td>{{compressiveStrength.loadB}}</td>
           <td>{{compressiveStrength.loadB * 101.971/ area | number : '1.1-1'}}</td>
           <td>{{compressiveStrength.fractureB}}</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>---</td>
+          <td>{{compressiveStrength.sampleCAge}}</td>
+          <td>{{compressiveStrength.weightC}}</td>
+          <td>{{compressiveStrength.weightC / volume | number : '1.3-3'}}</td>
+          <td>{{compressiveStrength.loadC}}</td>
+          <td>{{compressiveStrength.loadC * 101.971/ area | number : '1.1-1'}}</td>
+          <td>{{compressiveStrength.fractureC}}</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td>---</td>
+          <td>{{compressiveStrength.sampleDAge}}</td>
+          <td>{{compressiveStrength.weightD}}</td>
+          <td>{{compressiveStrength.weightD / volume | number : '1.3-3'}}</td>
+          <td>{{compressiveStrength.loadD}}</td>
+          <td>{{compressiveStrength.loadD * 101.971/ area | number : '1.1-1'}}</td>
+          <td>{{compressiveStrength.fractureD}}</td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td>---</td>
+          <td>{{compressiveStrength.sampleEAge}}</td>
+          <td>{{compressiveStrength.weightE}}</td>
+          <td>{{compressiveStrength.weightE / volume | number : '1.3-3'}}</td>
+          <td>{{compressiveStrength.loadE}}</td>
+          <td>{{compressiveStrength.loadE * 101.971/ area | number : '1.1-1'}}</td>
+          <td>{{compressiveStrength.fractureE}}</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>---</td>
+          <td>{{compressiveStrength.sampleFAge}}</td>
+          <td>{{compressiveStrength.weightF}}</td>
+          <td>{{compressiveStrength.weightF / volume | number : '1.3-3'}}</td>
+          <td>{{compressiveStrength.loadF}}</td>
+          <td>{{compressiveStrength.loadF * 101.971/ area | number : '1.1-1'}}</td>
+          <td>{{compressiveStrength.fractureF}}</td>
         </tr>
         </tbody>
       </table>
