@@ -17,6 +17,12 @@ export interface SieveAnalysis {
   activist: string;
   notes: string;
 
+  nameOfTest: string;
+  consultant: string;
+  owner: string;
+  location: string;
+  sampleNo: string;
+
   massRetainedA: number;
   massRetainedB: number;
   massRetainedC: number;

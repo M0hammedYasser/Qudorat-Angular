@@ -2,44 +2,69 @@
   <h1 class="header">Sieve Analysis </h1>
   <form (ngSubmit)="insert()" #form="ngForm">
 
-    <div class="d-flex align-items-center gap-3 flex-wrap mb-3">
-      <div class=" align-items-center ">
-        <label class="col-form-label me-2">Total Wt. of Test Sample (gm)</label>
-        <input type="number" class="form-control" [(ngModel)]="sieveAnalysis.totalWeigh" name="totalWeigh"
-               id="totalWeigh" required>
-      </div>
-      <div class=" align-items-center">
-        <label class="col-form-label me-2">Sample By</label>
-        <input type="text" class="form-control" [(ngModel)]="sieveAnalysis.sampleBy" name="sampleBy" id="sampleBy"
-               required>
-      </div>
-      <div class=" align-items-center">
-        <label class="col-form-label me-2">Sample Date</label>
-        <input type="date" class="form-control" [(ngModel)]="sieveAnalysis.samplingDate" name="samplingDate"
-               id="samplingDate" required>
+    <!-- First Line -->
+    <div class="d-flex align-items-center gap-1 mb-1">
+      <div class="align-items-center">
+        <label class="col-form-label me-1">Sample By</label>
+        <input type="text" class="form-control compact-input"
+               [(ngModel)]="sieveAnalysis.sampleBy" name="sampleBy" required>
       </div>
       <div class="align-items-center">
-        <label class="col-form-label me-2">Test By</label>
-        <input type="text" class="form-control" [(ngModel)]="sieveAnalysis.testBy" name="testBy"
-               id="testBy" required>
-      </div>
-      <div class=" align-items-center">
-        <label class="col-form-label me-2">Testing Date</label>
-        <input type="date" class="form-control" [(ngModel)]="sieveAnalysis.testingDate" name="testingDate"
-               id="testingDate" required>
+        <label class="col-form-label me-1">Sample Date</label>
+        <input type="date" class="form-control compact-input"
+               [(ngModel)]="sieveAnalysis.samplingDate" name="samplingDate" required>
       </div>
       <div class="align-items-center">
-        <label class="col-form-label me-2">Standard</label>
-        <input type="text" class="form-control" [(ngModel)]="sieveAnalysis.materialType" name="materialType"
-               id="materialType" required>
+        <label class="col-form-label me-1">Sample No</label>
+        <input type="text" class="form-control compact-input"
+               [(ngModel)]="sieveAnalysis.sampleNo" name="sampleNo" required>
+      </div>
+      <div class="align-items-center">
+        <label class="col-form-label me-1">Test Name</label>
+        <input type="text" class="form-control compact-input"
+               [(ngModel)]="sieveAnalysis.nameOfTest" name="nameOfTest" required>
+      </div>
+      <div class="align-items-center">
+        <label class="col-form-label me-1">Test By</label>
+        <input type="text" class="form-control compact-input"
+               [(ngModel)]="sieveAnalysis.testBy" name="testBy" required>
+      </div>
+      <div class="align-items-center">
+        <label class="col-form-label me-1">Testing Date</label>
+        <input type="date" class="form-control compact-input"
+               [(ngModel)]="sieveAnalysis.testingDate" name="testingDate" required>
+      </div>
+    </div>
+
+    <!-- Second Line -->
+    <div class="d-flex align-items-center gap-1 mb-1">
+      <div class="align-items-center">
+        <label class="col-form-label me-1">Standard</label>
+        <input type="text" class="form-control compact-input"
+               [(ngModel)]="sieveAnalysis.materialType" name="materialType" required>
+      </div>
+      <div class="align-items-center">
+        <label class="col-form-label me-1">Consultant</label>
+        <input type="text" class="form-control compact-input"
+               [(ngModel)]="sieveAnalysis.consultant" name="consultant" required>
+      </div>
+      <div class="align-items-center">
+        <label class="col-form-label me-1">Owner</label>
+        <input type="text" class="form-control compact-input"
+               [(ngModel)]="sieveAnalysis.owner" name="owner" required>
+      </div>
+      <div class="align-items-center">
+        <label class="col-form-label me-1">Location</label>
+        <input type="text" class="form-control compact-input"
+               [(ngModel)]="sieveAnalysis.location" name="location" required>
       </div>
 
-      <div class=" d-flex  align-items-center" style="margin: -10px 0 -10px 5px">
-        <label class="col-form-label me-2 ">Notes</label>
-        <input type="text" class="form-control" [(ngModel)]="sieveAnalysis.notes" name="notes" style="width: 1160px"
-               id="notes" >
-      </div>
-
+    </div>
+    <!-- Notes Line -->
+    <div class="d-flex align-items-center mb-1 mt-2">
+      <label class="col-form-label me-2">Notes</label>
+      <input type="text" class="form-control"
+             [(ngModel)]="sieveAnalysis.notes" name="notes" style="flex: 1;">
     </div>
 
 

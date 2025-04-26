@@ -7,7 +7,7 @@
       <strong>Project Name : </strong> <span>{{ compressiveStrength.projectName }}</span>
     </div>
     <div class="col-md-6 ">
-      <strong>Report No:</strong> <span>{{compressiveStrength.dateTested}}</span>
+      <strong>Report No : </strong> <span>{{ compressiveStrength.sampleNo }}</span>
     </div>
   </div>
 
@@ -39,18 +39,18 @@
       <strong>Cement Content : </strong> <span>{{ compressiveStrength.cementContent }}</span>
     </div>
     <div class="col-md-4">
-      <strong>Spec. 28 Days Strength : </strong> <span>{{ compressiveStrength.specTwintyEightDayStrength }}</span>
+      <strong>Spec. 28 Days Strength : </strong> <span>{{ compressiveStrength.specTwintyEightDayStrength }} km</span>
     </div>
     <div class="col-md-4">
       <strong>Spec. 07 Days Strength : </strong>
-      <span>{{ compressiveStrength.specTwintyEightDayStrength * 0.75 }}</span>
+      <span>{{ compressiveStrength.specTwintyEightDayStrength * 0.75 }} km</span>
     </div>
   </div>
 
   <!-- Dimension Section -->
   <div class="row mt-3">
     <div class="col-md-6">
-      <strong>Diameter : </strong> <span>{{ compressiveStrength.diameter }} cm</span>
+      <strong>Diameter : </strong> <span>{{ compressiveStrength.diameter }} mm</span>
     </div>
     <div class="col-md-6">
       <strong>Area : </strong>
@@ -61,11 +61,11 @@
 
   <div class="row mt-2">
     <div class="col-md-6">
-      <strong>Height : </strong> <span>{{ compressiveStrength.height }} cm</span>
+      <strong>Height : </strong> <span>{{ compressiveStrength.height }} mm</span>
     </div>
     <div class="col-md-6">
       <strong>Volume : </strong>
-      <span>{{  volume | number : '1.2-2' }}
+      <span>{{ volume | number : '1.2-2' }}
         cm³</span>
     </div>
   </div>
@@ -85,7 +85,7 @@
       <strong>Date Received : </strong> <span>{{ compressiveStrength.dateReceived }}</span>
     </div>
     <div class="col-md-6">
-      <strong>Air Temperature : </strong> <span>{{ compressiveStrength.airTemperature}}°C</span>
+      <strong>Air Temperature : </strong> <span>{{ compressiveStrength.airTemperature }}°C</span>
     </div>
   </div>
 
@@ -116,65 +116,93 @@
         </tr>
         </thead>
         <tbody>
+        <!-- First 3 samples -->
         <tr>
           <td>1</td>
           <td>---</td>
-          <td>{{compressiveStrength.sampleAAge}}</td>
-          <td>{{compressiveStrength.weightA}}</td>
-          <td>{{compressiveStrength.weightA / volume | number : '1.3-3'}}</td>
-          <td>{{compressiveStrength.loadA}}</td>
-          <td>{{compressiveStrength.loadA * 101.971/ area | number : '1.1-1'}}</td>
-          <td>{{compressiveStrength.fractureA}}</td>
+          <td>{{ compressiveStrength.sampleAAge }}</td>
+          <td>{{ compressiveStrength.weightA }}</td>
+          <td>{{ compressiveStrength.weightA / volume | number : '1.3-3' }}</td>
+          <td>{{ compressiveStrength.loadA }}</td>
+          <td>{{ compressiveStrength.loadA * 101.971 / area | number : '1.1-1' }}</td>
+          <td>{{ compressiveStrength.fractureA }}</td>
         </tr>
         <tr>
           <td>2</td>
           <td>---</td>
-          <td>{{compressiveStrength.sampleBAge}}</td>
-          <td>{{compressiveStrength.weightB}}</td>
-          <td>{{compressiveStrength.weightB / volume | number : '1.3-3'}}</td>
-          <td>{{compressiveStrength.loadB}}</td>
-          <td>{{compressiveStrength.loadB * 101.971/ area | number : '1.1-1'}}</td>
-          <td>{{compressiveStrength.fractureB}}</td>
+          <td>{{ compressiveStrength.sampleBAge }}</td>
+          <td>{{ compressiveStrength.weightB }}</td>
+          <td>{{ compressiveStrength.weightB / volume | number : '1.3-3' }}</td>
+          <td>{{ compressiveStrength.loadB }}</td>
+          <td>{{ compressiveStrength.loadB * 101.971 / area | number : '1.1-1' }}</td>
+          <td>{{ compressiveStrength.fractureB }}</td>
         </tr>
         <tr>
           <td>3</td>
           <td>---</td>
-          <td>{{compressiveStrength.sampleCAge}}</td>
-          <td>{{compressiveStrength.weightC}}</td>
-          <td>{{compressiveStrength.weightC / volume | number : '1.3-3'}}</td>
-          <td>{{compressiveStrength.loadC}}</td>
-          <td>{{compressiveStrength.loadC * 101.971/ area | number : '1.1-1'}}</td>
-          <td>{{compressiveStrength.fractureC}}</td>
+          <td>{{ compressiveStrength.sampleCAge }}</td>
+          <td>{{ compressiveStrength.weightC }}</td>
+          <td>{{ compressiveStrength.weightC / volume | number : '1.3-3' }}</td>
+          <td>{{ compressiveStrength.loadC }}</td>
+          <td>{{ compressiveStrength.loadC * 101.971 / area | number : '1.1-1' }}</td>
+          <td>{{ compressiveStrength.fractureC }}</td>
         </tr>
+
+        <!-- Average of first 3 samples -->
+        <tr class="average-row">
+          <td>Avg 1-3</td>
+          <td>---</td>
+          <td>{{ (compressiveStrength.sampleAAge + compressiveStrength.sampleBAge + compressiveStrength.sampleCAge) / 3 | number : '1.0-0' }}</td>
+          <td>{{ (compressiveStrength.weightA + compressiveStrength.weightB + compressiveStrength.weightC) / 3 | number : '1.2-2' }}</td>
+          <td>{{ (compressiveStrength.weightA + compressiveStrength.weightB + compressiveStrength.weightC) / 3 / volume | number : '1.2-2' }}</td>
+          <td>{{ (compressiveStrength.loadA + compressiveStrength.loadB + compressiveStrength.loadC) / 3 | number : '1.2-2' }}</td>
+          <td>{{ (compressiveStrength.loadA + compressiveStrength.loadB + compressiveStrength.loadC) / 3 * 101.971 / area | number : '1.1-1' }}</td>
+          <td>{{ compressiveStrength.fractureA + compressiveStrength.fractureB + compressiveStrength.fractureC / 3 | number : '1.1-1' }}</td>
+        </tr>
+
+        <!-- Next 3 samples -->
         <tr>
           <td>4</td>
           <td>---</td>
-          <td>{{compressiveStrength.sampleDAge}}</td>
-          <td>{{compressiveStrength.weightD}}</td>
-          <td>{{compressiveStrength.weightD / volume | number : '1.3-3'}}</td>
-          <td>{{compressiveStrength.loadD}}</td>
-          <td>{{compressiveStrength.loadD * 101.971/ area | number : '1.1-1'}}</td>
-          <td>{{compressiveStrength.fractureD}}</td>
+          <td>{{ compressiveStrength.sampleDAge }}</td>
+          <td>{{ compressiveStrength.weightD }}</td>
+          <td>{{ compressiveStrength.weightD / volume | number : '1.3-3' }}</td>
+          <td>{{ compressiveStrength.loadD }}</td>
+          <td>{{ compressiveStrength.loadD * 101.971 / area | number : '1.1-1' }}</td>
+          <td>{{ compressiveStrength.fractureD }}</td>
         </tr>
         <tr>
           <td>5</td>
           <td>---</td>
-          <td>{{compressiveStrength.sampleEAge}}</td>
-          <td>{{compressiveStrength.weightE}}</td>
-          <td>{{compressiveStrength.weightE / volume | number : '1.3-3'}}</td>
-          <td>{{compressiveStrength.loadE}}</td>
-          <td>{{compressiveStrength.loadE * 101.971/ area | number : '1.1-1'}}</td>
-          <td>{{compressiveStrength.fractureE}}</td>
+          <td>{{ compressiveStrength.sampleEAge }}</td>
+          <td>{{ compressiveStrength.weightE }}</td>
+          <td>{{ compressiveStrength.weightE / volume | number : '1.3-3' }}</td>
+          <td>{{ compressiveStrength.loadE }}</td>
+          <td>{{ compressiveStrength.loadE * 101.971 / area | number : '1.1-1' }}</td>
+          <td>{{ compressiveStrength.fractureE }}</td>
         </tr>
         <tr>
-          <td>2</td>
+          <td>6</td>
           <td>---</td>
-          <td>{{compressiveStrength.sampleFAge}}</td>
-          <td>{{compressiveStrength.weightF}}</td>
-          <td>{{compressiveStrength.weightF / volume | number : '1.3-3'}}</td>
-          <td>{{compressiveStrength.loadF}}</td>
-          <td>{{compressiveStrength.loadF * 101.971/ area | number : '1.1-1'}}</td>
-          <td>{{compressiveStrength.fractureF}}</td>
+          <td>{{ compressiveStrength.sampleFAge }}</td>
+          <td>{{ compressiveStrength.weightF }}</td>
+          <td>{{ compressiveStrength.weightF / volume | number : '1.3-3' }}</td>
+          <td>{{ compressiveStrength.loadF }}</td>
+          <td>{{ compressiveStrength.loadF * 101.971 / area | number : '1.1-1' }}</td>
+          <td>{{ compressiveStrength.fractureF }}</td>
+        </tr>
+
+        <!-- Average of next 3 samples -->
+        <tr class="average-row">
+          <td>Avg 4-6</td>
+          <td>---</td>
+          <td>{{ (compressiveStrength.sampleDAge + compressiveStrength.sampleEAge + compressiveStrength.sampleFAge) / 3 | number : '1.0-0' }}</td>
+          <td>{{ (compressiveStrength.weightD + compressiveStrength.weightE + compressiveStrength.weightF) / 3 | number : '1.2-2' }}</td>
+          <td>{{ (compressiveStrength.weightD + compressiveStrength.weightE + compressiveStrength.weightF) / 3 / volume | number : '1.2-2' }}</td>
+          <td>{{ (compressiveStrength.loadD + compressiveStrength.loadE + compressiveStrength.loadF) / 3 | number : '1.2-2' }}</td>
+          <td>{{ (compressiveStrength.loadD + compressiveStrength.loadE + compressiveStrength.loadF) / 3 * 101.971 / area | number : '1.1-1' }}</td>
+          <td>{{ compressiveStrength.fractureD + compressiveStrength.fractureE + compressiveStrength.fractureF / 3 | number : '1.1-1'}}
+          </td>
         </tr>
         </tbody>
       </table>

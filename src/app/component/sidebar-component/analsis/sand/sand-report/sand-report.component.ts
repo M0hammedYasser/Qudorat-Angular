@@ -112,20 +112,27 @@ export class SandReportComponent implements AfterViewInit, OnInit {
     const qr = new Image();
     img.src = 'assets/Q.png'; // Adjust the path as needed
     qr.src = 'assets/barcode.jpg';
+
+
     img.onload = () => {
       doc.addImage(img, 'PNG', 10, 5, 20, 20);
-      doc.setFontSize(16);
+      doc.setFontSize(14);
       doc.text('Qudorat Laboratory', 35, 15);
-      doc.setFontSize(11);
-      doc.text(`Project         ${this.sieveAnalysis.projectName || 'N/A'}`, 13, 30);
-      doc.text(`Client           ${this.sieveAnalysis.clientName || 'N/A'}`, 13, 36);
-      doc.addImage(qr, 'PNG', 160, 22, 35 , 30);
-      doc.text(`Sample By          ${this.sieveAnalysis.sampleBy || 'N/A'}`, 13, 42);
-      doc.text(`Sampling Date    ${this.sieveAnalysis.samplingDate || 'N/A'}`, 13, 48);
-      doc.text(`Testing Date     ${this.sieveAnalysis.testingDate || 'N/A'}`, 110, 30);
-      doc.text(`Standard    ${this.sieveAnalysis.materialType || 'N/A'}`, 110, 36);
+      doc.text('Sieve Analysis Test' , 80 , 25)
+      doc.setFontSize(10);
+      doc.text(`Project                 ${this.sieveAnalysis.projectName || 'N/A'}`, 13, 35);
+      doc.text(`Client                   ${this.sieveAnalysis.clientName || 'N/A'}`, 13, 40);
+      doc.addImage(qr, 'PNG', 165, 27, 35, 30);
+      doc.text(`Sample No          ${this.sieveAnalysis.sampleNo || 'N/A'}`, 13, 45);
+      doc.text(`Sample By          ${this.sieveAnalysis.sampleBy || 'N/A'}`, 13, 50);
+      doc.text(`Sampling Date   ${this.sieveAnalysis.samplingDate || 'N/A'}`, 13, 55);
+      doc.text(`Test Name          ${this.sieveAnalysis.nameOfTest || 'N/A'}`, 90, 35);
+      doc.text(`Testing Date       ${this.sieveAnalysis.testingDate || 'N/A'}`, 90, 40);
+      doc.text(`Standard             ${this.sieveAnalysis.materialType || 'N/A'}`, 90, 45);
+      doc.text(`Consultant          ${this.sieveAnalysis.consultant || 'N/A'}`, 90, 50);
+      doc.text(`Owner                 ${this.sieveAnalysis.owner || 'N/A'}`, 90, 55);
+      doc.line(10, 57, 200, 57);
 
-      doc.line(10, 55, 200, 55);
 
       const tableColumn = ["Sieve sizes(Inch)", "Sieve sizes(mm)", "Retained Weight (gm)", "Retained%", "Passing%"];
       const tableRows: any[] = [];
@@ -178,16 +185,16 @@ export class SandReportComponent implements AfterViewInit, OnInit {
 
     doc.setFontSize(9);
     if (this.sieveAnalysis.notes){
-      doc.line(10, 265, 200, 265);
-      doc.text(`Remarks : ${this.sieveAnalysis.notes || ""}`, 13, 270);
+      doc.line(10, 280, 200, 280);
+      doc.text(`Remarks : ${this.sieveAnalysis.notes || ""}`, 13, 285);
     }
-    doc.line(10, 280, 200, 280);
+    doc.line(10, 288, 200, 288);
 
     doc.setFontSize(11);
 
-    doc.text(`Approved by: ${this.sieveAnalysis.approveBy || 'N/A'}`, 13, 285);
-    doc.text(`Test by: ${this.sieveAnalysis.testBy || 'N/A'}`, 80, 285);
-    doc.text(`Checked by: ${this.sieveAnalysis.activist || 'N/A'}`, 150, 285);
+    doc.text(`Approved by: ${this.sieveAnalysis.approveBy || 'N/A'}`, 13, 293);
+    doc.text(`Test by: ${this.sieveAnalysis.testBy || 'N/A'}`, 80, 293);
+    doc.text(`Checked by: ${this.sieveAnalysis.activist || 'N/A'}`, 150, 293);
   }
 
 
