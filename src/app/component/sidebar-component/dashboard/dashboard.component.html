@@ -6,10 +6,11 @@
       <p>{{ totalBalance  }}</p>
     </div>
     <div class="card">
-      <i class="fas fa-vial"></i>
+      <i class="fas fa-tools"></i>
       <h3>Total Samples</h3>
       <p>{{ totalSamples }}</p>
     </div>
+
     <div class="card">
       <i class="fas fa-check-circle text-success"></i>
       <h3>Completed Samples</h3>
@@ -27,7 +28,7 @@
       <p>{{ totalBalance }}</p>
     </div>
     <div class="card">
-      <i class="fas fa-vial"></i>
+      <i class="fas fa-tools"></i>
       <h3>Total Samples</h3>
       <p>{{ totalSamples }}</p>
     </div>
@@ -53,21 +54,24 @@
       <table>
         <thead>
         <tr>
-          <th>Purpose</th>
-          <th>Date</th>
-          <th>Amount</th>
-          <th>Sample Status</th>
+          <th>Test No</th>
+          <th>Test Name</th>
+          <th>Paid</th>
+          <th>Status</th>
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let sample of sampleData">
-          <td>{{ sample.purpose }}</td>
-          <td>{{ sample.date }}</td>
-          <td>{{ sample.amount | currency }}</td>
-          <td [class.completed]="sample.status === 'Completed'"
-              [class.processing]="sample.status === 'Processing'"
-              [class.pending]="sample.status === 'Pending'">
-            {{ sample.status }}
+        <tr *ngFor="let test of tests">
+          <td>{{ test.id }}</td>
+          <td>{{ test.name }}</td>
+          <td>
+            <i *ngIf="!test.paid" class="fas fa-times text-danger"></i>
+            <i *ngIf="test.paid" class="fas fa-check text-success"></i>
+          </td>
+          <td [class.completed]="test.status === 'Completed'"
+              [class.processing]="test.status === 'Processing'"
+              [class.pending]="test.status === 'Pending'">
+            {{ test.status }}
           </td>
         </tr>
         </tbody>

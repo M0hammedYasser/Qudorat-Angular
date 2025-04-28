@@ -6,6 +6,7 @@ import {CompressiveStrength} from "./compressive-strength";
 
 export interface Test {
 
+
   id: number;
   price: number
   paid: boolean;
@@ -20,4 +21,7 @@ export interface Test {
   sieveAnalyses: SieveAnalysis[];
   asphalts: Asphalt[];
   compressiveStrengths: CompressiveStrength[];
+
+  status: string;
+  name: string;
 }
