@@ -121,25 +121,36 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
 
   generatePDF() {
     const doc = new jsPDF();
-    const img = new Image();
+    const head = new Image();
+    const tail = new Image();
     const qr = new Image();
-    img.src = 'assets/Q.png'; // Adjust the path as needed
+
+    head.src = 'assets/head.png';
+    tail.src = 'assets/tail.png';
     qr.src = 'assets/barcode.jpg';
 
-    img.onload = () => {
-      doc.addImage(img, 'PNG', 10, 5, 20, 20);
-      doc.setFontSize(16);
-      doc.text('Qudorat Laboratory', 35, 15);
-      doc.setFontSize(11);
-      doc.text(`Project         ${this.asphalt.projectName || 'N/A'}`, 13, 30);
-      doc.text(`Client           ${this.asphalt.clientName || 'N/A'}`, 13, 36);
-      doc.addImage(qr, 'PNG', 160, 22, 35 , 30);
-      doc.text(`Sample By          ${this.asphalt.sampleBy || 'N/A'}`, 13, 42);
-      doc.text(`Sampling Date    ${this.asphalt.sampleDate || 'N/A'}`, 13, 48);
-      doc.text(`Testing Date     ${this.asphalt.testingDate || 'N/A'}`, 110, 30);
-      doc.text(`Standard    ${this.asphalt.classification || 'N/A'}`, 110, 36);
-      doc.line(10, 52, 200, 52);
+    head.onload = () => {
+      // Add header
+      doc.addImage(head, 'PNG', 0, 0, 210, 33);
 
+      // Add title and basic info
+      doc.setFontSize(14);
+      doc.text("Asphalt Marshall", 80, 36);
+      doc.setFontSize(10);
+      doc.text(`Project                 ${this.asphalt.projectName || 'N/A'}`, 13, 42);
+      doc.text(`Client                   ${this.asphalt.clientName || 'N/A'}`, 13, 47);
+      doc.addImage(qr, 'PNG', 165, 37, 35, 30);
+      doc.text(`Sample No          ${this.asphalt.sampleNo || 'N/A'}`, 13, 52);
+      doc.text(`Sample By          ${this.asphalt.sampleBy || 'N/A'}`, 13, 57);
+      doc.text(`Sampling Date   ${this.asphalt.sampleDate || 'N/A'}`, 13, 62);
+      doc.text(`Test Name          ${this.asphalt.nameOfTest || 'N/A'}`, 90, 42);
+      doc.text(`Testing Date       ${this.asphalt.testingDate || 'N/A'}`, 90, 47);
+      doc.text(`Standard             ${this.asphalt.classification || 'N/A'}`, 90, 52);
+      doc.text(`Consultant          ${this.asphalt.consultant || 'N/A'}`, 90, 57);
+      doc.text(`Owner                 ${this.asphalt.owner || 'N/A'}`, 90, 62);
+      doc.line(10, 65, 200, 65);
+
+      // First table - Bitumen data
       const bitumenColumn = ['Parameter', 'Value'];
       const bitumenRows = [
         ['Wt. sample before gm', this.asphalt.bitumen.weightSampleBefore],
@@ -151,16 +162,17 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
         ['Wt. of bit. gm', Number(this.asphalt.bitumen.weightOfBit).toFixed(1)],
         ['Perc of Bit %', Number(this.asphalt.bitumen.percOfBit).toFixed(2)],
       ];
+
       autoTable(doc, {
         head: [bitumenColumn],
         body: bitumenRows,
-        startY: 55,
-        styles: {fontSize: 9},
+        startY: 70,  // Positioned below the header
+        styles: {fontSize: 8 , cellPadding : 1.5},
         headStyles: {fillColor: [41, 128, 185]},
         alternateRowStyles: {fillColor: [240, 240, 240]},
       });
 
-      let finalY = (doc as any).lastAutoTable.finalY + 10;
+      let finalY = (doc as any).lastAutoTable.finalY + 5;
 
       const sieveColumn = [
         [' mm', 'inch', 'Ret(gm)', 'Ret%', 'Passing%', 'Min%', 'Max%']
@@ -193,89 +205,107 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
         head: sieveColumn,
         body: sieveRows,
         startY: finalY,
-        styles: {fontSize: 9},
+        styles: {fontSize: 8 , cellPadding : 1.5},
         headStyles: {fillColor: [41, 128, 185]},
         alternateRowStyles: {fillColor: [240, 240, 240]},
       });
 
-      finalY = (doc as any).lastAutoTable.finalY || 75;
+      finalY = (doc as any).lastAutoTable.finalY + 10;
 
-      const tableColumn = ['Parameter', '1', '2', '3', '4', '5', '6'];
-      const tableRows = [
-        ['% A/C by tot. wt. of mix', '', '', Number(this.asphalt.bitumen.percOfBit).toFixed(2)],
-        ['Wt. in air dry (gm)', this.asphalt.weightAirDryA, this.asphalt.weightAirDryB, this.asphalt.weightAirDryC, this.asphalt.weightAirDryD, this.asphalt.weightAirDryE, this.asphalt.weightAirDryF],
-        ['Wt. in water (gm)', this.asphalt.weightWaterA, this.asphalt.weightWaterB, this.asphalt.weightWaterC, this.asphalt.weightWaterD, this.asphalt.weightWaterE, this.asphalt.weightWaterF],
-        ['Wt. in air surf dry (gm)', this.asphalt.weightAirSurfDryA, this.asphalt.weightAirSurfDryB, this.asphalt.weightAirSurfDryC, this.asphalt.weightAirSurfDryD, this.asphalt.weightAirSurfDryE, this.asphalt.weightAirSurfDryF],
-        ['Volumes (c.c)',
-          (this.asphalt.weightAirSurfDryA - this.asphalt.weightWaterA).toFixed(1),
-          (this.asphalt.weightAirSurfDryB - this.asphalt.weightWaterB).toFixed(1),
-          (this.asphalt.weightAirSurfDryC - this.asphalt.weightWaterC).toFixed(1),
-          (this.asphalt.weightAirSurfDryD - this.asphalt.weightWaterD).toFixed(1),
-          (this.asphalt.weightAirSurfDryE - this.asphalt.weightWaterE).toFixed(1),
-          (this.asphalt.weightAirSurfDryF - this.asphalt.weightWaterF).toFixed(1)],
-        ['Bulk Sp.Gr.of Comp. mix',
-          (this.asphalt.weightAirDryA / (this.asphalt.weightAirSurfDryA - this.asphalt.weightWaterA)).toFixed(3),
-          (this.asphalt.weightAirDryB / (this.asphalt.weightAirSurfDryB - this.asphalt.weightWaterB)).toFixed(3),
-          (this.asphalt.weightAirDryC / (this.asphalt.weightAirSurfDryC - this.asphalt.weightWaterC)).toFixed(3),
-          (this.asphalt.weightAirDryD / (this.asphalt.weightAirSurfDryD - this.asphalt.weightWaterD)).toFixed(3),
-          (this.asphalt.weightAirDryE / (this.asphalt.weightAirSurfDryE - this.asphalt.weightWaterE)).toFixed(3),
-          (this.asphalt.weightAirDryF / (this.asphalt.weightAirSurfDryF - this.asphalt.weightWaterF)).toFixed(3)],
-        ['Avg Bulk Sp.Gr.of Comp. mix', '', '', '', Number(this.bulkSpOfCompMix).toFixed(3)],
-        ['Net. Wt. Of loose mix (gm)', '', '', this.asphalt.netWeightOfLooseMix],
-        ['Net Wt. Of Flask+water (gm)', '', '', this.asphalt.netWeightOfFlaskWater],
-        ['Wt. Flask+water+sample (gm)', '', '', this.asphalt.weightFlaskWaterSample],
-        ['Max. Sp. Gr of Paving mix', '', '', Number(this.maxSpOfPAvgMix).toFixed(3)],
-        ['Avg. max Sp. Gr of mix', '', '', '', Number(this.maxSpOfPAvgMix).toFixed(3)],
-        ['% Air Voids', '', '', '', Number(this.airVoid).toFixed(1)],
-        ['% Voids in mineral Agg.', '', '', '', Number(this.voidMineral).toFixed(2)],
-        ['% Voids filled with Asp.', '', '', '', Number(this.voidFilled).toFixed(1)],
-        ['Effect. Sp. Gravity of Agg.', '', '', '', Number(this.effectiveSpGravityOfAgg).toFixed(3)],
-        ['Absorbed Asp. %', '', '', '', Number(this.absorbedAps).toFixed(2)],
-        ['Effective Asp. Content %', '', '', '', Number(this.asphalt.bitumen.percOfBit - (this.absorbedAps / 100) * (100 - this.asphalt.bitumen.percOfBit)).toFixed(2)],
-        ['Stability (kg)', this.asphalt.stabilityA, this.asphalt.stabilityB, this.asphalt.stabilityC, this.asphalt.stabilityD, this.asphalt.stabilityE, this.asphalt.stabilityF],
-        ['Correction factor', this.asphalt.correctionFactorA, this.asphalt.correctionFactorB, this.asphalt.correctionFactorC, this.asphalt.correctionFactorD, this.asphalt.correctionFactorE, this.asphalt.correctionFactorF],
-        ['Corrected Stability (kg)',
-          (this.asphalt.stabilityA * this.asphalt.correctionFactorA).toFixed(0),
-          (this.asphalt.stabilityB * this.asphalt.correctionFactorB).toFixed(0),
-          (this.asphalt.stabilityC * this.asphalt.correctionFactorC).toFixed(0),
-          (this.asphalt.stabilityD * this.asphalt.correctionFactorD).toFixed(0),
-          (this.asphalt.stabilityE * this.asphalt.correctionFactorE).toFixed(0),
-          (this.asphalt.stabilityF * this.asphalt.correctionFactorF).toFixed(0)],
-        ['Stability (kg) for 30 min', '', Number(this.avgStabilityFor30Min).toFixed(0), '', '', '', ''],
-        ['Stability (kg) for 24 Hrs.', '', '', '', Number(this.asphalt.stabilityD * this.asphalt.correctionFactorD).toFixed(0), Number(this.asphalt.stabilityE * this.asphalt.correctionFactorE).toFixed(0), Number(this.asphalt.stabilityF * this.asphalt.correctionFactorF).toFixed(0)],
-        ['Stability (kg) for 24 Hrs.', '', '', '', '', Number(this.avgStabilityFor24Hrs).toFixed(0), ''],
-        ['% Loss of Stability', '', '', Number(((this.avgStabilityFor30Min - this.avgStabilityFor24Hrs) / this.avgStabilityFor30Min * 100).toFixed(1))],
-        ['Flow (mm)', this.asphalt.flowA, this.asphalt.flowB, this.asphalt.flowC, '', '', ''],
-        ['Avg. Flow (mm)', '', Number((this.asphalt.flowA + this.asphalt.flowB + this.asphalt.flowC) / 3).toFixed(2), '', '', '', ''],
-        ['Sp. Gravity of Asp. Bit.', '', '', this.asphalt.spGravityOfAspBit],
-        ['Agg. % total wt. of mix', '', '', Number(100 - this.asphalt.bitumen.percOfBit).toFixed(2)],
-        ['Bulk Sp. Gr. Comb. Agg.', '', '', this.asphalt.bulkSpGrCombAgg]
-      ];
+      // Add chart after the second table
+      setTimeout(() => {
+        const chartCanvas = document.querySelector('canvas') as HTMLCanvasElement;
+        if (chartCanvas) {
+          const chartImage = chartCanvas.toDataURL('image/png');
+          doc.addImage(chartImage, 'PNG', 10, finalY, 180, 80);
 
+          // Update finalY position after adding the chart
+          finalY += 90;  // Chart height (80) + some margin
 
-      autoTable(doc, {
-        head: [tableColumn],
-        body: tableRows,
-        startY: finalY + 10,
-        styles: {fontSize: 9},
-        headStyles: {fillColor: [41, 128, 185]},
-        alternateRowStyles: {fillColor: [240, 240, 240]},
-      });
+          // Third table - Main data table
+          const tableColumn = ['Parameter', '1', '2', '3', '4', '5', '6'];
+          const tableRows = [
+            ['% A/C by tot. wt. of mix', '', '', Number(this.asphalt.bitumen.percOfBit).toFixed(2)],
+            ['Wt. in air dry (gm)', this.asphalt.weightAirDryA, this.asphalt.weightAirDryB, this.asphalt.weightAirDryC, this.asphalt.weightAirDryD, this.asphalt.weightAirDryE, this.asphalt.weightAirDryF],
+            ['Wt. in water (gm)', this.asphalt.weightWaterA, this.asphalt.weightWaterB, this.asphalt.weightWaterC, this.asphalt.weightWaterD, this.asphalt.weightWaterE, this.asphalt.weightWaterF],
+            ['Wt. in air surf dry (gm)', this.asphalt.weightAirSurfDryA, this.asphalt.weightAirSurfDryB, this.asphalt.weightAirSurfDryC, this.asphalt.weightAirSurfDryD, this.asphalt.weightAirSurfDryE, this.asphalt.weightAirSurfDryF],
+            ['Volumes (c.c)',
+              (this.asphalt.weightAirSurfDryA - this.asphalt.weightWaterA).toFixed(1),
+              (this.asphalt.weightAirSurfDryB - this.asphalt.weightWaterB).toFixed(1),
+              (this.asphalt.weightAirSurfDryC - this.asphalt.weightWaterC).toFixed(1),
+              (this.asphalt.weightAirSurfDryD - this.asphalt.weightWaterD).toFixed(1),
+              (this.asphalt.weightAirSurfDryE - this.asphalt.weightWaterE).toFixed(1),
+              (this.asphalt.weightAirSurfDryF - this.asphalt.weightWaterF).toFixed(1)],
+            ['Bulk Sp.Gr.of Comp. mix',
+              (this.asphalt.weightAirDryA / (this.asphalt.weightAirSurfDryA - this.asphalt.weightWaterA)).toFixed(3),
+              (this.asphalt.weightAirDryB / (this.asphalt.weightAirSurfDryB - this.asphalt.weightWaterB)).toFixed(3),
+              (this.asphalt.weightAirDryC / (this.asphalt.weightAirSurfDryC - this.asphalt.weightWaterC)).toFixed(3),
+              (this.asphalt.weightAirDryD / (this.asphalt.weightAirSurfDryD - this.asphalt.weightWaterD)).toFixed(3),
+              (this.asphalt.weightAirDryE / (this.asphalt.weightAirSurfDryE - this.asphalt.weightWaterE)).toFixed(3),
+              (this.asphalt.weightAirDryF / (this.asphalt.weightAirSurfDryF - this.asphalt.weightWaterF)).toFixed(3)],
+            ['Avg Bulk Sp.Gr.of Comp. mix Gmb gm/cm3', '', '', '', Number(this.bulkSpOfCompMix).toFixed(3)],
+            ['Net. Wt. Of loose mix (gm)', '', '', this.asphalt.netWeightOfLooseMix],
+            ['Net Wt. Of Flask+water (gm)', '', '', this.asphalt.netWeightOfFlaskWater],
+            ['Wt. Flask+water+sample (gm)', '', '', this.asphalt.weightFlaskWaterSample],
+            ['Max. Sp. Gr of Paving mix', '', '', Number(this.maxSpOfPAvgMix).toFixed(3)],
+            ['Avg. max Sp. Gr of mix gmm gm/cm3', '', '', '', Number(this.maxSpOfPAvgMix).toFixed(3)],
+            ['% Air Voids', '', '', '', Number(this.airVoid).toFixed(1)],
+            ['% Voids in mineral Agg.', '', '', '', Number(this.voidMineral).toFixed(2)],
+            ['% Voids filled with Asp.', '', '', '', Number(this.voidFilled).toFixed(1)],
+            ['Effect. Sp. Gravity of Agg.', '', '', '', Number(this.effectiveSpGravityOfAgg).toFixed(3)],
+            ['Absorbed Asp. %', '', '', '', Number(this.absorbedAps).toFixed(2)],
+            ['Effective Asp. Content %', '', '', '', Number(this.asphalt.bitumen.percOfBit - (this.absorbedAps / 100) * (100 - this.asphalt.bitumen.percOfBit)).toFixed(2)],
+            ['Stability (kg)', this.asphalt.stabilityA, this.asphalt.stabilityB, this.asphalt.stabilityC, this.asphalt.stabilityD, this.asphalt.stabilityE, this.asphalt.stabilityF],
+            ['Correction factor', this.asphalt.correctionFactorA, this.asphalt.correctionFactorB, this.asphalt.correctionFactorC, this.asphalt.correctionFactorD, this.asphalt.correctionFactorE, this.asphalt.correctionFactorF],
+            ['Corrected Stability (kg)',
+              (this.asphalt.stabilityA * this.asphalt.correctionFactorA).toFixed(0),
+              (this.asphalt.stabilityB * this.asphalt.correctionFactorB).toFixed(0),
+              (this.asphalt.stabilityC * this.asphalt.correctionFactorC).toFixed(0),
+              (this.asphalt.stabilityD * this.asphalt.correctionFactorD).toFixed(0),
+              (this.asphalt.stabilityE * this.asphalt.correctionFactorE).toFixed(0),
+              (this.asphalt.stabilityF * this.asphalt.correctionFactorF).toFixed(0)],
+            ['Stability (kg) for 30 min', '', Number(this.avgStabilityFor30Min).toFixed(0), '', '', '', ''],
+            ['Stability (kg) for 24 Hrs.', '', '', '', Number(this.asphalt.stabilityD * this.asphalt.correctionFactorD).toFixed(0), Number(this.asphalt.stabilityE * this.asphalt.correctionFactorE).toFixed(0), Number(this.asphalt.stabilityF * this.asphalt.correctionFactorF).toFixed(0)],
+            ['Stability (kg) for 24 Hrs.', '', '', '', '', Number(this.avgStabilityFor24Hrs).toFixed(0), ''],
+            ['% Loss of Stability', '', '', Number(((this.avgStabilityFor30Min - this.avgStabilityFor24Hrs) / this.avgStabilityFor30Min * 100).toFixed(1))],
+            ['Flow (mm)', this.asphalt.flowA, this.asphalt.flowB, this.asphalt.flowC, '', '', ''],
+            ['Avg. Flow (mm)', '', Number((this.asphalt.flowA + this.asphalt.flowB + this.asphalt.flowC) / 3).toFixed(2), '', '', '', ''],
+            ['Sp. Gravity of Asp. Bit.', '', '', this.asphalt.spGravityOfAspBit],
+            ['Agg. % total wt. of mix', '', '', Number(100 - this.asphalt.bitumen.percOfBit).toFixed(2)],
+            ['Bulk Sp. Gr. Comb. Agg.', '', '', this.asphalt.bulkSpGrCombAgg]
+          ];
 
-      finalY = (doc as any).lastAutoTable.finalY || 100;
-      doc.line(10, finalY + 2, 200, finalY + 2);
+          autoTable(doc, {
+            head: [tableColumn],
+            body: tableRows,
+            startY: finalY,
+            styles: {fontSize: 9},
+            headStyles: {fillColor: [41, 128, 185]},
+            alternateRowStyles: {fillColor: [240, 240, 240]},
+          });
 
-      if (this.asphalt.notes) {
-        doc.text(`Remarks : ${this.asphalt.notes || ""}`, 13, finalY + 8);
-      }
+          finalY = (doc as any).lastAutoTable.finalY || 100;
 
-      doc.line(10, finalY + 10, 200, finalY + 10);
+          doc.setFontSize(9);
+          if (this.asphalt.notes) {
+            doc.line(10, 251, 200, 251);
+            doc.text(`Remarks : ${this.asphalt.notes || ""}`, 13, 255 );
+          }
 
-      doc.setFontSize(11);
-      doc.text(`Approved by: ${this.asphalt.approveBy || 'N/A'}`, 13, finalY + 15);
-      doc.text(`Test by: ${this.asphalt.testBy || 'N/A'}`, 80, finalY + 15);
-      doc.text(`Checked by: ${this.asphalt.activist || 'N/A'}`, 150, finalY + 15);
-      doc.save(`Asphalt_Report_${new Date().toISOString().slice(0, 10)}.pdf`);
+          doc.line(10, 257, 200, 257);
+
+          doc.setFontSize(10);
+          doc.text(`Approved by: ${this.asphalt.approveBy || 'N/A'}`, 13, 261);
+          doc.text(`Test by: ${this.asphalt.testBy || 'N/A'}`, 80, 261);
+          doc.text(`Checked by: ${this.asphalt.activist || 'N/A'}`, 150, 261);
+          doc.addImage(tail, 'PNG', 0, 265, 210, 33);
+
+          // Save the PDF
+          doc.save(`Asphalt_Report_${new Date().toISOString().slice(0, 10)}.pdf`);
+        } else {
+          console.error("Chart canvas not found! Ensure it is fully loaded before generating the PDF.");
+        }
+      }, 1000);
     };
   }
 

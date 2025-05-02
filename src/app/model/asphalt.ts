@@ -16,6 +16,11 @@ export interface Asphalt {
   testingDate: string;
   classification: string;
   notes: string;
+  nameOfTest: string;
+  consultant: string;
+  owner: string;
+  location: string;
+  sampleNo: string;
 
   weightAirDryA: number;
   weightAirDryB: number;

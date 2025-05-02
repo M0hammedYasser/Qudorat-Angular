@@ -38,33 +38,34 @@ export class CompressiveStrengthReportComponent implements OnInit {
 
   generatePDF() {
     const doc = new jsPDF();
-    const img = new Image();
+    const head = new Image();
+    const tail = new Image();
     const qr = new Image();
 
-    img.src = 'assets/Q.png';
+    head.src = 'assets/head.png';
+    tail .src = 'assets/tail.png';
     qr.src = 'assets/barcode.jpg';
 
-    img.onload = () => {
-      doc.addImage(img, 'PNG', 10, 5, 20, 20);
+    head.onload = () => {
+      doc.addImage(head, 'PNG', 0, 0, 210, 33);
       doc.setFontSize(14);
-      doc.text('Qudorat Laboratory', 35, 15);
-      doc.text('Portland Cement Concrete Cylinders Compressive Strength Test' , 40 , 25)
+      doc.text('Portland Cement Concrete Cylinders Compressive Strength Test' , 40 , 36)
       doc.setFontSize(10);
-      doc.text(`Project                 ${this.compressiveStrength.projectName || 'N/A'}`, 13, 35);
-      doc.text(`Client                   ${this.compressiveStrength.clientName || 'N/A'}`, 13, 40);
-      doc.addImage(qr, 'PNG', 165, 27, 35, 30);
-      doc.text(`Sample No          ${this.compressiveStrength.sampleNo || 'N/A'}`, 13, 45);
-      doc.text(`Sample By          ${this.compressiveStrength.sampleBy || 'N/A'}`, 13, 50);
-      doc.text(`Sampling Date   ${this.compressiveStrength.sampleDate || 'N/A'}`, 13, 55);
-      doc.text(`Test Name          ${this.compressiveStrength.nameOfTest || 'N/A'}`, 90, 35);
-      doc.text(`Testing Date       ${this.compressiveStrength.testingDate || 'N/A'}`, 90, 40);
-      doc.text(`Standard             ${this.compressiveStrength.classification || 'N/A'}`, 90, 45);
-      doc.text(`Consultant          ${this.compressiveStrength.consultant || 'N/A'}`, 90, 50);
-      doc.text(`Owner                 ${this.compressiveStrength.owner || 'N/A'}`, 90, 55);
-      doc.line(10, 57, 200, 57);
+      doc.text(`Project                 ${this.compressiveStrength.projectName || 'N/A'}`, 13, 42);
+      doc.text(`Client                   ${this.compressiveStrength.clientName || 'N/A'}`, 13, 47);
+      doc.addImage(qr, 'PNG', 165, 37, 35, 30);
+      doc.text(`Sample No          ${this.compressiveStrength.sampleNo || 'N/A'}`, 13, 52);
+      doc.text(`Sample By          ${this.compressiveStrength.sampleBy || 'N/A'}`, 13, 57);
+      doc.text(`Sampling Date   ${this.compressiveStrength.sampleDate || 'N/A'}`, 13, 62);
+      doc.text(`Test Name          ${this.compressiveStrength.nameOfTest || 'N/A'}`, 90, 42);
+      doc.text(`Testing Date       ${this.compressiveStrength.testingDate || 'N/A'}`, 90, 47);
+      doc.text(`Standard             ${this.compressiveStrength.classification || 'N/A'}`, 90, 52);
+      doc.text(`Consultant          ${this.compressiveStrength.consultant || 'N/A'}`, 90, 57);
+      doc.text(`Owner                 ${this.compressiveStrength.owner || 'N/A'}`, 90, 62);
+      doc.line(10, 65, 200, 65);
 
       autoTable(doc, {
-        startY: 60,
+        startY: 67,
         head: [['Parameter', 'Value', 'Unit', 'Spec', 'Value', 'Unit' ,'Value', 'Unit']],
         body: [
           ['Cement Content', this.compressiveStrength.cementContent, 'OPC', 'Spec. 28 Days Strength', this.compressiveStrength.specTwintyEightDayStrength, 'kg/cm2' ,this.compressiveStrength.specTwintyEightDayStrength /10 , 'Mpa'],
@@ -77,11 +78,11 @@ export class CompressiveStrengthReportComponent implements OnInit {
           ['Date Tested', this.compressiveStrength.dateTested, '', 'Concrete Temperature', this.compressiveStrength.concreteTemperature, '°C'],
         ],
         theme: 'grid',
-        styles: {fontSize: 9, cellPadding: 2},
+        styles: {fontSize: 8, cellPadding: 1.8},
         columnStyles: {0: {cellWidth: 50}, 3: {cellWidth: 50}},
       });
 
-      let finalY = (doc as any).lastAutoTable.finalY + 5;
+      let finalY = (doc as any).lastAutoTable.finalY + 3;
       autoTable(doc, {
         startY: finalY,
         head: [['NO', 'Type of Structure', 'Age (day)', 'Weight (gm)', 'Density (gm/cm³)', 'Load (kN)', 'Strength (Kgf/cm²)', 'Strength (Mpa)', 'Fracture Type']],
@@ -112,7 +113,7 @@ export class CompressiveStrengthReportComponent implements OnInit {
           ]
         ],
         theme: 'grid',
-        styles: {fontSize: 9, cellPadding: 2},
+        styles: {fontSize: 8, cellPadding: 1.8},
         columnStyles: {
           0: {cellWidth: 20},
           1: {cellWidth: 22},
@@ -127,7 +128,7 @@ export class CompressiveStrengthReportComponent implements OnInit {
       });
 
 
-      finalY = (doc as any).lastAutoTable.finalY + 10;
+      finalY = (doc as any).lastAutoTable.finalY + 3;
 
       // Create the table, restricted to the left side
       autoTable(doc, {
@@ -143,7 +144,7 @@ export class CompressiveStrengthReportComponent implements OnInit {
           ['TYPE 6', 'Similar to type 5 but end of cylinder is pointed'],
         ],
         theme: 'grid',
-        styles: { fontSize: 9, cellPadding: 2 },
+        styles: { fontSize: 8, cellPadding: 1.8 },
         columnStyles: {
           0: { cellWidth: 30 },
           1: { cellWidth: 70 },
@@ -151,21 +152,23 @@ export class CompressiveStrengthReportComponent implements OnInit {
       });
 
       const tableY = (doc as any).lastAutoTable.finalY;
-      doc.addImage('assets/compressiveStrength.png', 'JPEG', 115, finalY, 82, 60);
+      doc.addImage('assets/compressiveStrength.png', 'JPEG', 115, finalY, 82, 47);
 
-      finalY = (doc as any).lastAutoTable.finalY + 5;
+      finalY = (doc as any).lastAutoTable.finalY + 3;
 
 
       if (this.compressiveStrength.notes) {
-        doc.line(10, finalY + 2, 200, finalY + 2);
-        doc.text(`Remarks : ${this.compressiveStrength.notes || ""}`, 13, finalY + 8);
+        doc.line(10, finalY , 200, finalY );
+        doc.text(`Remarks : ${this.compressiveStrength.notes || ""}`, 13, finalY + 5);
       }
 
-      doc.line(10, finalY + 10, 200, finalY + 10);
-      doc.setFontSize(11);
-      doc.text(`Approved by: ${this.compressiveStrength.approveBy || 'N/A'}`, 13, finalY + 15);
-      doc.text(`Test by: ${this.compressiveStrength.testBy || 'N/A'}`, 80, finalY + 15);
-      doc.text(`Checked by: ${this.compressiveStrength.activist || 'N/A'}`, 150, finalY + 15);
+      doc.line(10, finalY + 7, 200, finalY + 7);
+      doc.setFontSize(10);
+      doc.text(`Approved by: ${this.compressiveStrength.approveBy || 'N/A'}`, 13, finalY + 12);
+      doc.text(`Test by: ${this.compressiveStrength.testBy || 'N/A'}`, 80, finalY + 12);
+      doc.text(`Checked by: ${this.compressiveStrength.activist || 'N/A'}`, 150, finalY + 12);
+
+      doc.addImage(tail, 'PNG', 0, 265, 210, 33);
 
       doc.save(`CompressiveStrengthReport_${this.compressiveStrength.testName}.pdf`);
     };
