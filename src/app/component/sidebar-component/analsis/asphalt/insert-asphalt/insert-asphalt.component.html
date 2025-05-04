@@ -291,6 +291,7 @@
     <!-- STEP 2: Asphalt Marshall -->
     <div *ngIf="currentStep === 3" class="form-step">
       <div class="d-flex align-items-center gap-3 flex-wrap mb-3">
+        <!-- Existing inputs -->
         <div class="align-items-center">
           <label class="col-form-label me-2">Sample By</label>
           <input type="text" class="form-control"
@@ -316,7 +317,45 @@
           <input type="text" class="form-control"
                  [(ngModel)]="asphalt.classification" name="classification" required>
         </div>
+
+        <!-- New inputs -->
+        <div class="align-items-center">
+          <label class="col-form-label me-2">Test Name</label>
+          <input type="text" class="form-control"
+                 [(ngModel)]="asphalt.nameOfTest" name="nameOfTest" required>
+        </div>
+        <div class="align-items-center">
+          <label class="col-form-label me-2">Consultant</label>
+          <input type="text" class="form-control"
+                 [(ngModel)]="asphalt.consultant" name="consultant" required>
+        </div>
+        <div class="align-items-center">
+          <label class="col-form-label me-2">Owner</label>
+          <input type="text" class="form-control"
+                 [(ngModel)]="asphalt.owner" name="owner" required>
+        </div>
+        <div class="align-items-center">
+          <label class="col-form-label me-2">Location</label>
+          <input type="text" class="form-control"
+                 [(ngModel)]="asphalt.location" name="location" required>
+        </div>
+        <div class="align-items-center">
+          <label class="col-form-label me-2">Sample No</label>
+          <input type="number" class="form-control"
+                 [(ngModel)]="asphalt.sampleNo" name="sampleNo" required>
+        </div>
+        <div class="align-items-center">
+          <label class="col-form-label me-2">Asphalt Type</label>
+          <input type="text" class="form-control"
+                 [(ngModel)]="asphalt.asphaltType" name="asphaltType" required>
+        </div>
+        <div class="align-items-center">
+          <label class="col-form-label me-2">Asphalt Applier</label>
+          <input type="text" class="form-control"
+                 [(ngModel)]="asphalt.asphaltApplier" name="asphaltApplier" required>
+        </div>
       </div>
+
 
       <div class="d-flex align-items-center" style="margin: -10px 0 5px 5px">
         <label class="col-form-label me-2">Notes</label>

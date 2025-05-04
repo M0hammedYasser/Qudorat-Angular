@@ -43,13 +43,13 @@ export class CompressiveStrengthReportComponent implements OnInit {
     const qr = new Image();
 
     head.src = 'assets/head.png';
-    tail .src = 'assets/tail.png';
+    tail.src = 'assets/tail.png';
     qr.src = 'assets/barcode.jpg';
 
     head.onload = () => {
       doc.addImage(head, 'PNG', 0, 0, 210, 33);
       doc.setFontSize(14);
-      doc.text('Portland Cement Concrete Cylinders Compressive Strength Test' , 40 , 36)
+      doc.text('Portland Cement Concrete Cylinders Compressive Strength Test', 40, 36)
       doc.setFontSize(10);
       doc.text(`Project                 ${this.compressiveStrength.projectName || 'N/A'}`, 13, 42);
       doc.text(`Client                   ${this.compressiveStrength.clientName || 'N/A'}`, 13, 47);
@@ -66,9 +66,9 @@ export class CompressiveStrengthReportComponent implements OnInit {
 
       autoTable(doc, {
         startY: 67,
-        head: [['Parameter', 'Value', 'Unit', 'Spec', 'Value', 'Unit' ,'Value', 'Unit']],
+        head: [['Parameter', 'Value', 'Unit', 'Spec', 'Value', 'Unit', 'Value', 'Unit']],
         body: [
-          ['Cement Content', this.compressiveStrength.cementContent, 'OPC', 'Spec. 28 Days Strength', this.compressiveStrength.specTwintyEightDayStrength, 'kg/cm2' ,this.compressiveStrength.specTwintyEightDayStrength /10 , 'Mpa'],
+          ['Cement Content', this.compressiveStrength.cementContent, 'OPC', 'Spec. 28 Days Strength', this.compressiveStrength.specTwintyEightDayStrength, 'kg/cm2', this.compressiveStrength.specTwintyEightDayStrength / 10, 'Mpa'],
           ['', '', '', 'Spec. 07 Days Strength', this.compressiveStrength.specTwintyEightDayStrength * 0.75, 'kg/cm2'],
           ['Diameter', this.compressiveStrength.diameter, 'mm', 'Area', Number(this.area).toFixed(2), 'cm²'],
           ['Height', this.compressiveStrength.height, 'mm', 'Volume', Number(this.volume).toFixed(2), 'cm³'],
@@ -91,25 +91,25 @@ export class CompressiveStrengthReportComponent implements OnInit {
           ['2', '', this.compressiveStrength.sampleBAge, this.compressiveStrength.weightB, Number(this.compressiveStrength.weightB / this.volume).toFixed(3), this.compressiveStrength.loadB, Number(this.compressiveStrength.loadB * 101.971 / this.area).toFixed(1), Number(this.compressiveStrength.loadB * 10 / this.area).toFixed(2), this.compressiveStrength.fractureB],
           ['3', '', this.compressiveStrength.sampleCAge, this.compressiveStrength.weightC, Number(this.compressiveStrength.weightC / this.volume).toFixed(3), this.compressiveStrength.loadC, Number(this.compressiveStrength.loadC * 101.971 / this.area).toFixed(1), Number(this.compressiveStrength.loadC * 10 / this.area).toFixed(2), this.compressiveStrength.fractureC],
           ['Avg 1-3', '',
-            Number((this.compressiveStrength.sampleAAge + this.compressiveStrength.sampleBAge + this.compressiveStrength.sampleCAge) / 3).toFixed(2),
-            Number((this.compressiveStrength.weightA + this.compressiveStrength.weightB + this.compressiveStrength.weightC) / 3).toFixed(2),
-            Number((this.compressiveStrength.weightA + this.compressiveStrength.weightB + this.compressiveStrength.weightC) / 3 / this.volume).toFixed(2),
-            Number((this.compressiveStrength.loadA + this.compressiveStrength.loadB + this.compressiveStrength.loadC) / 3).toFixed(2),
+            '',
+            '',
+            '',
+            '',
             Number((this.compressiveStrength.loadA + this.compressiveStrength.loadB + this.compressiveStrength.loadC) / 3 * 101.971 / this.area).toFixed(1),
             Number((this.compressiveStrength.loadA + this.compressiveStrength.loadB + this.compressiveStrength.loadC) / 3 * 10 / this.area).toFixed(2),
-            Number(this.compressiveStrength.fractureA + this.compressiveStrength.fractureB + this.compressiveStrength.fractureC / 3).toFixed(2),
+            '',
           ],
           ['4', '', this.compressiveStrength.sampleDAge, this.compressiveStrength.weightD, Number(this.compressiveStrength.weightD / this.volume).toFixed(3), this.compressiveStrength.loadD, Number(this.compressiveStrength.loadD * 101.971 / this.area).toFixed(1), Number(this.compressiveStrength.loadD * 10 / this.area).toFixed(2), this.compressiveStrength.fractureD],
           ['5', '', this.compressiveStrength.sampleEAge, this.compressiveStrength.weightE, Number(this.compressiveStrength.weightE / this.volume).toFixed(3), this.compressiveStrength.loadE, Number(this.compressiveStrength.loadE * 101.971 / this.area).toFixed(1), Number(this.compressiveStrength.loadE * 10 / this.area).toFixed(2), this.compressiveStrength.fractureE],
           ['6', '', this.compressiveStrength.sampleFAge, this.compressiveStrength.weightF, Number(this.compressiveStrength.weightF / this.volume).toFixed(3), this.compressiveStrength.loadF, Number(this.compressiveStrength.loadF * 101.971 / this.area).toFixed(1), Number(this.compressiveStrength.loadF * 10 / this.area).toFixed(2), this.compressiveStrength.fractureF],
           ['Avg 4-6', '',
-            Number((this.compressiveStrength.sampleDAge + this.compressiveStrength.sampleEAge + this.compressiveStrength.sampleFAge) / 3).toFixed(2),
-            Number((this.compressiveStrength.weightD + this.compressiveStrength.weightE + this.compressiveStrength.weightF) / 3).toFixed(2),
-            Number((this.compressiveStrength.weightD + this.compressiveStrength.weightE + this.compressiveStrength.weightF) / 3 / this.volume).toFixed(2),
-            Number((this.compressiveStrength.loadD + this.compressiveStrength.loadE + this.compressiveStrength.loadF) / 3).toFixed(2),
+            '',
+            '',
+            '',
+            '',
             Number((this.compressiveStrength.loadD + this.compressiveStrength.loadE + this.compressiveStrength.loadF) / 3 * 101.971 / this.area).toFixed(1),
             Number((this.compressiveStrength.loadD + this.compressiveStrength.loadE + this.compressiveStrength.loadF) / 3 * 10 / this.area).toFixed(2),
-            Number(this.compressiveStrength.fractureD + this.compressiveStrength.fractureE + this.compressiveStrength.fractureF / 3).toFixed(2),
+            '',
           ]
         ],
         theme: 'grid',
@@ -133,7 +133,7 @@ export class CompressiveStrengthReportComponent implements OnInit {
       // Create the table, restricted to the left side
       autoTable(doc, {
         startY: finalY,
-        margin: { right: 100 }, // leave space for the image on the right
+        margin: {right: 100}, // leave space for the image on the right
         head: [['Type', 'Description']],
         body: [
           ['TYPE 1', 'Less than 1 inch of cracking through caps'],
@@ -144,10 +144,10 @@ export class CompressiveStrengthReportComponent implements OnInit {
           ['TYPE 6', 'Similar to type 5 but end of cylinder is pointed'],
         ],
         theme: 'grid',
-        styles: { fontSize: 8, cellPadding: 1.8 },
+        styles: {fontSize: 8, cellPadding: 1.8},
         columnStyles: {
-          0: { cellWidth: 30 },
-          1: { cellWidth: 70 },
+          0: {cellWidth: 30},
+          1: {cellWidth: 70},
         },
       });
 
@@ -158,7 +158,7 @@ export class CompressiveStrengthReportComponent implements OnInit {
 
 
       if (this.compressiveStrength.notes) {
-        doc.line(10, finalY , 200, finalY );
+        doc.line(10, finalY, 200, finalY);
         doc.text(`Remarks : ${this.compressiveStrength.notes || ""}`, 13, finalY + 5);
       }
 

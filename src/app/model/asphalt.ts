@@ -22,6 +22,9 @@ export interface Asphalt {
   location: string;
   sampleNo: string;
 
+  asphaltType: string;
+  asphaltApplier: string;
+
   weightAirDryA: number;
   weightAirDryB: number;
   weightAirDryC: number;

@@ -143,12 +143,16 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
       doc.text(`Sample No          ${this.asphalt.sampleNo || 'N/A'}`, 13, 52);
       doc.text(`Sample By          ${this.asphalt.sampleBy || 'N/A'}`, 13, 57);
       doc.text(`Sampling Date   ${this.asphalt.sampleDate || 'N/A'}`, 13, 62);
+      doc.text(`Asphalt Type      ${this.asphalt.asphaltType || 'N/A'}`, 13, 67);
       doc.text(`Test Name          ${this.asphalt.nameOfTest || 'N/A'}`, 90, 42);
       doc.text(`Testing Date       ${this.asphalt.testingDate || 'N/A'}`, 90, 47);
       doc.text(`Standard             ${this.asphalt.classification || 'N/A'}`, 90, 52);
       doc.text(`Consultant          ${this.asphalt.consultant || 'N/A'}`, 90, 57);
       doc.text(`Owner                 ${this.asphalt.owner || 'N/A'}`, 90, 62);
-      doc.line(10, 65, 200, 65);
+      doc.text(`Asphalt Applier   ${this.asphalt.asphaltApplier || 'N/A'}`, 90, 67);
+      doc.line(10, 70, 200, 70);
+      doc.setFontSize(14);
+      doc.text(`BITUMEN` , 90 , 75)
 
       // First table - Bitumen data
       const bitumenColumn = ['Parameter', 'Value'];
@@ -166,7 +170,7 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
       autoTable(doc, {
         head: [bitumenColumn],
         body: bitumenRows,
-        startY: 70,  // Positioned below the header
+        startY: 77,  // Positioned below the header
         styles: {fontSize: 8 , cellPadding : 1.5},
         headStyles: {fillColor: [41, 128, 185]},
         alternateRowStyles: {fillColor: [240, 240, 240]},
@@ -174,6 +178,7 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
 
       let finalY = (doc as any).lastAutoTable.finalY + 5;
 
+      doc.text(`Sieve Analysis` , 85 , finalY - 2 )
       const sieveColumn = [
         [' mm', 'inch', 'Ret(gm)', 'Ret%', 'Passing%', 'Min%', 'Max%']
       ];
@@ -204,13 +209,14 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
       autoTable(doc, {
         head: sieveColumn,
         body: sieveRows,
-        startY: finalY,
+        startY: finalY ,
         styles: {fontSize: 8 , cellPadding : 1.5},
         headStyles: {fillColor: [41, 128, 185]},
         alternateRowStyles: {fillColor: [240, 240, 240]},
       });
 
       finalY = (doc as any).lastAutoTable.finalY + 10;
+
 
       // Add chart after the second table
       setTimeout(() => {
@@ -219,10 +225,10 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
           const chartImage = chartCanvas.toDataURL('image/png');
           doc.addImage(chartImage, 'PNG', 10, finalY, 180, 80);
 
-          // Update finalY position after adding the chart
+
           finalY += 90;  // Chart height (80) + some margin
 
-          // Third table - Main data table
+          // doc.text(`Asphalt Marshall` , 90 , finalY)
           const tableColumn = ['Parameter', '1', '2', '3', '4', '5', '6'];
           const tableRows = [
             ['% A/C by tot. wt. of mix', '', '', Number(this.asphalt.bitumen.percOfBit).toFixed(2)],
@@ -278,7 +284,7 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
           autoTable(doc, {
             head: [tableColumn],
             body: tableRows,
-            startY: finalY,
+            startY: finalY + 5,
             styles: {fontSize: 9},
             headStyles: {fillColor: [41, 128, 185]},
             alternateRowStyles: {fillColor: [240, 240, 240]},
