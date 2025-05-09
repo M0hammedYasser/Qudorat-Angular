@@ -40,7 +40,7 @@
           <span *ngIf="test.adopt">{{test.adopter}}</span>
         </td>
         <td>{{ test.date }}</td>
-        <td>{{test.sieveAnalyses.length + test.asphalts.length + test.compressiveStrengths.length}}</td>
+        <td>{{test.sieveAnalyses.length + test.asphalts.length + test.compressiveStrengths.length + test.atterbergLimits.length}}</td>
         <td >
           <a>
             <svg (click)="goToTrail(test.id ,test.testManager.id)" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye"

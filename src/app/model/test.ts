@@ -3,6 +3,7 @@ import {TestManager} from "./test-manager";
 import {SieveAnalysis} from "./sieve-analysis";
 import {Asphalt} from "./asphalt";
 import {CompressiveStrength} from "./compressive-strength";
+import {AtterbergLimits} from "./atterberg-limits";
 
 export interface Test {
 
@@ -21,6 +22,7 @@ export interface Test {
   sieveAnalyses: SieveAnalysis[];
   asphalts: Asphalt[];
   compressiveStrengths: CompressiveStrength[];
+  atterbergLimits: AtterbergLimits[];
 
   status: string;
   name: string;

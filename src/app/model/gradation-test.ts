@@ -48,4 +48,26 @@ export interface GradationTest {
   retainedH: number;
   retainedI: number;
   retainedJ: number;
+
+  gcvcMinA: number;
+  gcvcMinB: number;
+  gcvcMinC: number;
+  gcvcMinD: number;
+  gcvcMinE: number;
+  gcvcMinF: number;
+  gcvcMinG: number;
+  gcvcMinH: number;
+  gcvcMinI: number;
+  gcvcMinJ: number;
+
+  gcvcMaxA: number;
+  gcvcMaxB: number;
+  gcvcMaxC: number;
+  gcvcMaxD: number;
+  gcvcMaxE: number;
+  gcvcMaxF: number;
+  gcvcMaxG: number;
+  gcvcMaxH: number;
+  gcvcMaxI: number;
+  gcvcMaxJ: number;
 }

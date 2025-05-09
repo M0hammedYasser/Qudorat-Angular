@@ -46,6 +46,18 @@ import {
 import {
   CompressiveStrengthReportComponent
 } from "./component/sidebar-component/analsis/compressive-strength/compressive-strength-report/compressive-strength-report.component";
+import {
+  ShowAtterbergComponent
+} from "./component/sidebar-component/analsis/atterberg-limits/show-atterberg/show-atterberg.component";
+import {
+  InsertAtterbergComponent
+} from "./component/sidebar-component/analsis/atterberg-limits/insert-atterberg/insert-atterberg.component";
+import {
+  UpdateAtterbergComponent
+} from "./component/sidebar-component/analsis/atterberg-limits/update-atterberg/update-atterberg.component";
+import {
+  AtterbergReportComponent
+} from "./component/sidebar-component/analsis/atterberg-limits/atterberg-report/atterberg-report.component";
 
 export const routes: Routes = [
 
@@ -81,6 +93,11 @@ export const routes: Routes = [
   { path: 'compressive-strength/insert/:id', component: InsertCompressiveStrengthComponent, canActivate: [authGuard] },
   { path: 'compressive-strength/update/:id', component: UpdateCompressiveStrengthComponent, canActivate: [authGuard] },
   { path: 'compressive-strength/report/:id', component: CompressiveStrengthReportComponent, canActivate: [authGuard] },
+
+  { path: 'atterberg/:id', component: ShowAtterbergComponent, canActivate: [authGuard] },
+  { path: 'atterberg/insert/:id', component: InsertAtterbergComponent, canActivate: [authGuard] },
+  { path: 'atterberg/update/:id', component: UpdateAtterbergComponent, canActivate: [authGuard] },
+  { path: 'atterberg/report/:id', component: AtterbergReportComponent, canActivate: [authGuard] },
 
   {path: 'report', component: TestReportComponent, canActivate: [authGuard]},
 

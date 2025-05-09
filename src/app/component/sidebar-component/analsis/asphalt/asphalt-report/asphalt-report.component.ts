@@ -152,7 +152,7 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
       doc.text(`Asphalt Applier   ${this.asphalt.asphaltApplier || 'N/A'}`, 90, 67);
       doc.line(10, 70, 200, 70);
       doc.setFontSize(14);
-      doc.text(`BITUMEN` , 90 , 75)
+      doc.text(`BITUMEN Content Test` , 75 , 75)
 
       // First table - Bitumen data
       const bitumenColumn = ['Parameter', 'Value'];
@@ -180,42 +180,79 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
 
       doc.text(`Sieve Analysis` , 85 , finalY - 2 )
       const sieveColumn = [
-        [' mm', 'inch', 'Ret(gm)', 'Ret%', 'Passing%', 'Min%', 'Max%']
+        [
+          { content: 'mm', rowSpan: 2 },
+          { content: 'inch', rowSpan: 2 },
+          { content: 'Ret(gm)', rowSpan: 2 },
+          { content: 'Ret%', rowSpan: 2 },
+          { content: 'Passing%', rowSpan: 2 },
+          { content: 'Gmf limits', colSpan: 2 },
+          { content: 'General specifications', colSpan: 2 },
+          // Empty cells for the remaining columns (these will be filled by the colSpan)
+          '', ''
+        ],
+        [
+          // First row is already defined, this is the second row of headers
+          // These will go under the colSpan headers
+          'Min%', 'Max%', 'Min%', 'Max%'
+        ]
       ];
 
       const sieveRows = [
         ['37.5', '3/2', this.asphalt.gradationTest.massRetainedA, Number(this.asphalt.gradationTest.retainedA).toFixed(1),
-          Number(100 - this.asphalt.gradationTest.retainedA).toFixed(2), this.asphalt.gradationTest.cvcMinA, this.asphalt.gradationTest.cvcMaxA],
+          Number(100 - this.asphalt.gradationTest.retainedA).toFixed(2), this.asphalt.gradationTest.cvcMinA, this.asphalt.gradationTest.cvcMaxA
+          , this.asphalt.gradationTest.gcvcMinA, this.asphalt.gradationTest.gcvcMaxA],
         ['25', '1', this.asphalt.gradationTest.massRetainedB, Number(this.asphalt.gradationTest.retainedB).toFixed(1),
-          Number(100 - this.asphalt.gradationTest.retainedB).toFixed(2), this.asphalt.gradationTest.cvcMinB, this.asphalt.gradationTest.cvcMaxB],
+          Number(100 - this.asphalt.gradationTest.retainedB).toFixed(2), this.asphalt.gradationTest.cvcMinB, this.asphalt.gradationTest.cvcMaxB
+          , this.asphalt.gradationTest.gcvcMinB, this.asphalt.gradationTest.gcvcMaxB],
         ['19.0', '3/4', this.asphalt.gradationTest.massRetainedC, Number(this.asphalt.gradationTest.retainedC).toFixed(1),
-          Number(100 - this.asphalt.gradationTest.retainedC).toFixed(2), this.asphalt.gradationTest.cvcMinC, this.asphalt.gradationTest.cvcMaxC],
+          Number(100 - this.asphalt.gradationTest.retainedC).toFixed(2), this.asphalt.gradationTest.cvcMinC, this.asphalt.gradationTest.cvcMaxC
+          , this.asphalt.gradationTest.gcvcMinC, this.asphalt.gradationTest.gcvcMaxC],
         ['12.5', '1/2', this.asphalt.gradationTest.massRetainedD, Number(this.asphalt.gradationTest.retainedD).toFixed(1),
-          Number(100 - this.asphalt.gradationTest.retainedD).toFixed(2), this.asphalt.gradationTest.cvcMinD, this.asphalt.gradationTest.cvcMaxD],
+          Number(100 - this.asphalt.gradationTest.retainedD).toFixed(2), this.asphalt.gradationTest.cvcMinD, this.asphalt.gradationTest.cvcMaxD
+          , this.asphalt.gradationTest.gcvcMinD, this.asphalt.gradationTest.gcvcMaxD],
         ['9.5', '3/8', this.asphalt.gradationTest.massRetainedE, Number(this.asphalt.gradationTest.retainedE).toFixed(1),
-          Number(100 - this.asphalt.gradationTest.retainedE).toFixed(2), this.asphalt.gradationTest.cvcMinE, this.asphalt.gradationTest.cvcMaxE],
+          Number(100 - this.asphalt.gradationTest.retainedE).toFixed(2), this.asphalt.gradationTest.cvcMinE, this.asphalt.gradationTest.cvcMaxE
+          , this.asphalt.gradationTest.gcvcMinE, this.asphalt.gradationTest.gcvcMaxE],
         ['4.75', '#4', this.asphalt.gradationTest.massRetainedF, Number(this.asphalt.gradationTest.retainedF).toFixed(1),
-          Number(100 - this.asphalt.gradationTest.retainedF).toFixed(2), this.asphalt.gradationTest.cvcMinF, this.asphalt.gradationTest.cvcMaxF],
+          Number(100 - this.asphalt.gradationTest.retainedF).toFixed(2), this.asphalt.gradationTest.cvcMinF, this.asphalt.gradationTest.cvcMaxF
+          , this.asphalt.gradationTest.gcvcMinF, this.asphalt.gradationTest.gcvcMaxF],
         ['2.00', '#10', this.asphalt.gradationTest.massRetainedG, Number(this.asphalt.gradationTest.retainedG).toFixed(1),
-          Number(100 - this.asphalt.gradationTest.retainedG).toFixed(2), this.asphalt.gradationTest.cvcMinG, this.asphalt.gradationTest.cvcMaxG],
+          Number(100 - this.asphalt.gradationTest.retainedG).toFixed(2), this.asphalt.gradationTest.cvcMinG, this.asphalt.gradationTest.cvcMaxG
+          , this.asphalt.gradationTest.gcvcMinG, this.asphalt.gradationTest.gcvcMaxG],
         ['0.425', '#40', this.asphalt.gradationTest.massRetainedH, Number(this.asphalt.gradationTest.retainedH).toFixed(1),
-          Number(100 - this.asphalt.gradationTest.retainedH).toFixed(2), this.asphalt.gradationTest.cvcMinH, this.asphalt.gradationTest.cvcMaxH],
+          Number(100 - this.asphalt.gradationTest.retainedH).toFixed(2), this.asphalt.gradationTest.cvcMinH, this.asphalt.gradationTest.cvcMaxH
+          , this.asphalt.gradationTest.gcvcMinH, this.asphalt.gradationTest.gcvcMaxH],
         ['0.180', '#80', this.asphalt.gradationTest.massRetainedI, Number(this.asphalt.gradationTest.retainedI).toFixed(1),
-          Number(100 - this.asphalt.gradationTest.retainedI).toFixed(2), this.asphalt.gradationTest.cvcMinI, this.asphalt.gradationTest.cvcMaxI],
+          Number(100 - this.asphalt.gradationTest.retainedI).toFixed(2), this.asphalt.gradationTest.cvcMinI, this.asphalt.gradationTest.cvcMaxI
+          , this.asphalt.gradationTest.gcvcMinI, this.asphalt.gradationTest.gcvcMaxI],
         ['0.075', '#200', this.asphalt.gradationTest.massRetainedJ, Number(this.asphalt.gradationTest.retainedJ).toFixed(1),
-          Number(100 - this.asphalt.gradationTest.retainedJ).toFixed(2), this.asphalt.gradationTest.cvcMinJ, this.asphalt.gradationTest.cvcMaxJ],
+          Number(100 - this.asphalt.gradationTest.retainedJ).toFixed(2), this.asphalt.gradationTest.cvcMinJ, this.asphalt.gradationTest.cvcMaxJ
+          , this.asphalt.gradationTest.gcvcMinJ, this.asphalt.gradationTest.gcvcMaxJ],
       ];
 
       autoTable(doc, {
         head: sieveColumn,
         body: sieveRows,
-        startY: finalY ,
-        styles: {fontSize: 8 , cellPadding : 1.5},
+        startY: finalY,
+        styles: {fontSize: 8, cellPadding: 1.5},
         headStyles: {fillColor: [41, 128, 185]},
         alternateRowStyles: {fillColor: [240, 240, 240]},
+        // Add this to properly render the multi-row header
+        didParseCell: function(data) {
+          if (data.section === 'head') {
+            data.cell.styles.fillColor = [41, 128, 185]; // Maintain header color
+            if (data.row.index === 0) {
+              // First header row
+              if (data.column.dataKey === 5 || data.column.dataKey === 7) {
+                data.cell.styles.fontStyle = 'bold';
+              }
+            }
+          }
+        }
       });
 
-      finalY = (doc as any).lastAutoTable.finalY + 10;
+      finalY = (doc as any).lastAutoTable.finalY + 3;
 
 
       // Add chart after the second table
@@ -228,7 +265,6 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
 
           finalY += 90;  // Chart height (80) + some margin
 
-          // doc.text(`Asphalt Marshall` , 90 , finalY)
           const tableColumn = ['Parameter', '1', '2', '3', '4', '5', '6'];
           const tableRows = [
             ['% A/C by tot. wt. of mix', '', '', Number(this.asphalt.bitumen.percOfBit).toFixed(2)],
