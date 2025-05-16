@@ -16,6 +16,7 @@
       </div>
       <button class="btn btn-primary" routerLink = "/compressive-strength/update/{{temp.id}}" *ngIf="role=='ROLE_ADMIN'">Edit</button>
       <button class="btn btn-success" routerLink = "/compressive-strength/report/{{temp.id}}" *ngIf="(role=='ROLE_ADMIN' || role=='ROLE_QUALITY' ||role=='ROLE_DATAENTRY' || role =='ROLE_SUPERVISOR') && test.adopt ">Report</button>
+      <button class="btn btn-danger" *ngIf="role=='ROLE_ADMIN'" (click)="delete(temp.id)">Delete</button>
     </div>
   </div>
 </div>

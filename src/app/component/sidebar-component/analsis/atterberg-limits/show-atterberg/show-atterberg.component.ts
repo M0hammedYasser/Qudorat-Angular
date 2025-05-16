@@ -5,6 +5,7 @@ import {Test} from "../../../../../model/test";
 import {AuthenticationService} from "../../../../../service/authentication/authentication.service";
 import {TestService} from "../../../../../service/test/test.service";
 import Swal from "sweetalert2";
+import {AtterbergLimitsService} from "../../../../../service/atterbergLimits/atterberg-limits.service";
 
 @Component({
   selector: 'app-show-atterberg',
@@ -24,7 +25,8 @@ export class ShowAtterbergComponent implements OnInit{
   role: string = '';
 
   constructor(private authenticationService: AuthenticationService,private router : Router ,
-              private activatedRoute: ActivatedRoute, private testService: TestService) {
+              private activatedRoute: ActivatedRoute, private testService: TestService ,
+              private service:AtterbergLimitsService) {
   }
 
   ngOnInit() {
@@ -56,4 +58,11 @@ export class ShowAtterbergComponent implements OnInit{
     });
   }
 
+  delete(id: number) {
+    this.service.delete(id).subscribe(res => {
+      this.testService.findById(this.id).subscribe(res => {
+        this.test = res;
+      })
+    })
+  }
 }

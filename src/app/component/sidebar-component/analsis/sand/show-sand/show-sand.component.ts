@@ -5,6 +5,7 @@ import {TestService} from "../../../../../service/test/test.service";
 import {Test} from "../../../../../model/test";
 import {AuthenticationService} from "../../../../../service/authentication/authentication.service";
 import Swal from "sweetalert2";
+import {SieveAnalysisService} from "../../../../../service/sieve-analysis/sieve-analysis.service";
 
 @Component({
   selector: 'app-show-sand',
@@ -25,7 +26,8 @@ export class ShowSandComponent implements OnInit {
   role: string = '';
 
   constructor(private authenticationService: AuthenticationService,private router : Router ,
-              private activatedRoute: ActivatedRoute, private testService: TestService) {
+              private activatedRoute: ActivatedRoute, private testService: TestService ,
+              private service : SieveAnalysisService) {
   }
 
   ngOnInit() {
@@ -56,6 +58,14 @@ export class ShowSandComponent implements OnInit {
         });
       }
     });
+  }
+
+  delete(id: number) {
+    this.service.delete(id).subscribe(res => {
+      this.testService.findById(this.id).subscribe(res => {
+        this.test = res;
+      })
+    })
   }
 
 
