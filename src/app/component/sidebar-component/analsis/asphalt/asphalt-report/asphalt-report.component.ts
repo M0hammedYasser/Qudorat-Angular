@@ -330,8 +330,13 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
 
           doc.setFontSize(9);
           if (this.asphalt.notes) {
-            doc.line(10, 251, 200, 251);
-            doc.text(`Remarks : ${this.asphalt.notes || ""}`, 13, 255 );
+            doc.line(10, finalY, 200, finalY);
+            const splitNotes = doc.splitTextToSize(
+              `Remarks: ${this.asphalt.notes || ""}`,
+              180
+            );
+            doc.text(splitNotes, 13, finalY + 5);
+            finalY += (splitNotes.length * 7); // 7 is approximate line height
           }
 
           doc.line(10, 257, 200, 257);

@@ -24,6 +24,7 @@ export interface CompressiveStrength {
   sampleNo: string;
 
   cementContent: number;
+  cementContentType: string;
   specTwintyEightDayStrength: number;
   diameter: number;
   height: number;

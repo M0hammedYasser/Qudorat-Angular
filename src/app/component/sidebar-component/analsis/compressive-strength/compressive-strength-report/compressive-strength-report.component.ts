@@ -68,10 +68,9 @@ export class CompressiveStrengthReportComponent implements OnInit {
         startY: 67,
         head: [['Parameter', 'Value', 'Unit', 'Spec', 'Value', 'Unit', 'Value', 'Unit']],
         body: [
-          ['Cement Content', this.compressiveStrength.cementContent, 'OPC', 'Spec. 28 Days Strength', this.compressiveStrength.specTwintyEightDayStrength, 'kg/cm2', this.compressiveStrength.specTwintyEightDayStrength / 10, 'Mpa'],
-          ['', '', '', 'Spec. 07 Days Strength', this.compressiveStrength.specTwintyEightDayStrength * 0.75, 'kg/cm2'],
-          ['Diameter', this.compressiveStrength.diameter, 'mm', 'Area', Number(this.area).toFixed(2), 'cm²'],
-          ['Height', this.compressiveStrength.height, 'mm', 'Volume', Number(this.volume).toFixed(2), 'cm³'],
+          ['Cement Content', this.compressiveStrength.cementContent, this.compressiveStrength.cementContentType, 'Spec. 28 Days Strength', this.compressiveStrength.specTwintyEightDayStrength, 'kg/cm2', this.compressiveStrength.specTwintyEightDayStrength / 10, 'Mpa'],
+          ['Diameter', this.compressiveStrength.diameter, 'cm', 'Area', Number(this.area).toFixed(2), 'cm²'],
+          ['Height', this.compressiveStrength.height, 'cm', 'Volume', Number(this.volume).toFixed(2), 'cm³'],
           ['Environmental Conditions:', '', '', '', '', ''],
           ['Date Cast', this.compressiveStrength.dateCast, '', 'Slump', this.compressiveStrength.slump, 'mm'],
           ['Date Received', this.compressiveStrength.dateReceived, '', 'Air Temperature', this.compressiveStrength.airTemperature, '°C'],
@@ -159,7 +158,12 @@ export class CompressiveStrengthReportComponent implements OnInit {
 
       if (this.compressiveStrength.notes) {
         doc.line(10, finalY, 200, finalY);
-        doc.text(`Remarks : ${this.compressiveStrength.notes || ""}`, 13, finalY + 5);
+        const splitNotes = doc.splitTextToSize(
+          `Remarks: ${this.compressiveStrength.notes || ""}`,
+          180 
+        );
+        doc.text(splitNotes, 13, finalY + 5);
+        finalY += (splitNotes.length * 7); // 7 is approximate line height
       }
 
       doc.line(10, finalY + 7, 200, finalY + 7);

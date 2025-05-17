@@ -183,12 +183,17 @@ export class SandReportComponent implements AfterViewInit, OnInit {
     head.onerror = () => {
       console.error("Error loading image from assets.");
     };
-
+    let finalY = (doc as any).lastAutoTable.finalY || 100;
 
     doc.setFontSize(9);
     if (this.sieveAnalysis.notes) {
-      doc.line(10, 251, 200, 251);
-      doc.text(`Remarks : ${this.sieveAnalysis.notes || ""}`, 13, 255 );
+      doc.line(10, finalY, 200, finalY);
+      const splitNotes = doc.splitTextToSize(
+        `Remarks: ${this.sieveAnalysis.notes || ""}`,
+        180
+      );
+      doc.text(splitNotes, 13, finalY + 5);
+      finalY += (splitNotes.length * 7); // 7 is approximate line height
     }
     doc.line(10, 257, 200, 257);
 

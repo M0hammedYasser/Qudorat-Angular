@@ -221,8 +221,13 @@ export class AtterbergReportComponent implements OnInit {
 
       doc.setFontSize(9);
       if (this.atterbergLimits.notes) {
-        doc.line(10, 251, 200, 251);
-        doc.text(`Remarks : ${this.atterbergLimits.notes || ""}`, 13, 255 );
+        doc.line(10, finalY, 200, finalY);
+        const splitNotes = doc.splitTextToSize(
+          `Remarks: ${this.atterbergLimits.notes || ""}`,
+          180
+        );
+        doc.text(splitNotes, 13, finalY + 5);
+        finalY += (splitNotes.length * 7); // 7 is approximate line height
       }
       doc.line(10, 257, 200, 257);
       doc.setFontSize(10);
