@@ -27,8 +27,15 @@ export class InsertCompressiveStrengthComponent {
   insert() {
     this.id = this.activatedRoute.snapshot.params['id'];
     this.compressiveStrength.test.id = this.id;
-    this.service.insert(this.compressiveStrength).subscribe(
-      () => this.router.navigateByUrl(`/compressive-strength/${this.id}`)
-    );
+    this.service.insert(this.compressiveStrength).subscribe({
+        next: () => {
+          this.router.navigateByUrl(`/compressive-strength/${this.id}`);
+        },
+        error: (err) => {
+          this.router.navigateByUrl(`/compressive-strength/${this.id}`);
+        }
+      }
+    )
   }
+
 }
