@@ -79,7 +79,7 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
       this.chart = new Chart(ctx, {
         type: 'line',
         data: {
-          labels: ['3/2', '1', '3/4', '1/2', '3/8', '#4', '#10', '#40', '#80', "#200"],
+          labels: ['1.5', '1', '3/4', '1/2', '3/8', '#4', '#10', '#40', '#80', "#200"],
           datasets: [
             {
               label: 'Max',
@@ -199,7 +199,7 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
       ];
 
       const sieveRows = [
-        ['37.5', '3/2', this.asphalt.gradationTest.massRetainedA, Number(this.asphalt.gradationTest.retainedA).toFixed(1),
+        ['37.5', '1.5', this.asphalt.gradationTest.massRetainedA, Number(this.asphalt.gradationTest.retainedA).toFixed(1),
           Number(100 - this.asphalt.gradationTest.retainedA).toFixed(2), this.asphalt.gradationTest.cvcMinA, this.asphalt.gradationTest.cvcMaxA
           , this.asphalt.gradationTest.gcvcMinA, this.asphalt.gradationTest.gcvcMaxA],
         ['25', '1', this.asphalt.gradationTest.massRetainedB, Number(this.asphalt.gradationTest.retainedB).toFixed(1),
