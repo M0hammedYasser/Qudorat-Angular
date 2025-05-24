@@ -3,6 +3,7 @@ import {Test} from "./test";
 export interface AtterbergLimits {
 
 
+
   clientName: string;
   projectName: string;
   activist: string;
@@ -65,7 +66,7 @@ export interface AtterbergLimits {
 
   plasticLimit : number;
   liquidLimit : number;
-  plasticityIndex : number;
+  uscs: string;
 
   test: Test;
 }

@@ -290,6 +290,16 @@
             <input type="number" step="0.1" class="form-control result-input"
                    [(ngModel)]="atterbergLimits.liquidLimit" name="liquidLimit">
           </div>
+          <div class="result-row">
+            <label class="result-label">Plastic Limit (PL or wP):</label>
+            <input type="number" step="0.1" class="form-control result-input"
+                   [(ngModel)]="atterbergLimits.plasticLimit" name="plasticLimit">
+          </div>
+          <div class="result-row">
+            <label class="result-label">USCS Classification::</label>
+            <input type="text" step="0.1" class="form-control result-input"
+                   [(ngModel)]="atterbergLimits.uscs" name="uscs">
+          </div>
         </div>
 
 

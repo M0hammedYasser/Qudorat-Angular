@@ -1,16 +1,16 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {DecimalPipe} from "@angular/common";
 import {ActivatedRoute, Router} from "@angular/router";
 import {AtterbergLimits} from "../../../../../model/atterberg-limits";
 import {AtterbergLimitsService} from "../../../../../service/atterbergLimits/atterberg-limits.service";
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
+import Chart from "chart.js/auto";
 
 @Component({
   selector: 'app-atterberg-report',
   standalone: true,
   imports: [
-    DecimalPipe
   ],
   templateUrl: './atterberg-report.component.html',
   styleUrl: './atterberg-report.component.css'
@@ -19,6 +19,9 @@ export class AtterbergReportComponent implements OnInit {
 
   atterbergLimits: AtterbergLimits = {} as AtterbergLimits;
   id: number = 0;
+
+  @ViewChild('chartCanvas', {static: true}) chartCanvas!: ElementRef;
+  chart!: Chart;
 
   massOfSoil1: number = 0;
   massOfSoil2: number = 0;
@@ -62,10 +65,93 @@ export class AtterbergReportComponent implements OnInit {
       this.massOfWater6 = Number(this.atterbergLimits.massCanAndSoilWet6 - this.atterbergLimits.massCanAndSoilDry6);
       this.massOfWater7 = Number(this.atterbergLimits.massCanAndSoilWet7 - this.atterbergLimits.massCanAndSoilDry7);
       this.massOfWater8 = Number(this.atterbergLimits.massCanAndSoilWet8 - this.atterbergLimits.massCanAndSoilDry8);
-
-
+      this.createPlasticityChart();
     })
   }
+
+  createPlasticityChart(): void {
+    if (this.chart) {
+      this.chart.destroy();
+    }
+
+    // Extract values with fallback to 0 if null
+    const liquidLimit = this.atterbergLimits.liquidLimit;
+    const plasticLimit = this.atterbergLimits.plasticLimit ;
+    const plasticityIndex = liquidLimit - plasticLimit;
+
+    // Define the A-line and U-line
+    const xValues = Array.from({ length: 101 }, (_, i) => i); // 0 to 100
+    const aLine = xValues.map(x => 0.73 * (x - 20));
+    const uLine = xValues.map(x => 0.9 * (x - 8));
+
+    this.chart = new Chart(this.chartCanvas.nativeElement, {
+      type: 'scatter',
+      data: {
+        datasets: [
+          {
+            label: 'Plasticity Point',
+            data: [{ x: liquidLimit, y: plasticLimit }],
+            backgroundColor: 'orange',
+            pointRadius: 6,
+            pointHoverRadius: 8,
+            showLine: false
+          },
+          {
+            label: 'A-Line',
+            data: xValues.map((x, i) => ({ x, y: aLine[i] })),
+            borderColor: 'blue',
+            borderWidth: 2,
+            fill: false,
+            showLine: true,
+            pointRadius: 0
+          },
+          {
+            label: 'U-Line',
+            data: xValues.map((x, i) => ({ x, y: uLine[i] })),
+            borderColor: 'purple',
+            borderWidth: 2,
+            borderDash: [5, 5],
+            fill: false,
+            showLine: true,
+            pointRadius: 0
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            display: true,
+            position: 'top'
+          },
+          tooltip: {
+            mode: 'nearest'
+          }
+        },
+        scales: {
+          x: {
+            title: {
+              display: true,
+              text: 'Liquid Limit (LL or wL)'
+            },
+            min: 0,
+            max: 100
+          },
+          y: {
+            title: {
+              display: true,
+              text: 'Plasticity Index (PI)'
+            },
+            min: 0,
+            max: 60
+          }
+        }
+      }
+    });
+  }
+
+
+
 
   generatePDF() {
     const doc = new jsPDF();
@@ -197,9 +283,9 @@ export class AtterbergReportComponent implements OnInit {
         startY: (doc as any).lastAutoTable.finalY + 10,
         body: [
           ['Liquid Limit (LL or wL) (%):', this.atterbergLimits.liquidLimit],
-          ['Plastic Limit (PL or wP) (%):', Number(((this.massOfWater1 / this.massOfSoil1) + (this.massOfWater2 / this.massOfSoil2) + (this.massOfWater3 / this.massOfSoil3) + (this.massOfWater4 / this.massOfSoil4)) / 4 * 100).toFixed(2)],
-          ['Plasticity Index (PI) (%):', Number((this.atterbergLimits.liquidLimit) - ((this.massOfWater1 / this.massOfSoil1) + (this.massOfWater2 / this.massOfSoil2) + (this.massOfWater3 / this.massOfSoil3) + (this.massOfWater4 / this.massOfSoil4)) / 4 * 100).toFixed(2)],
-          ['USCS Classification:', 'CL']
+          ['Plastic Limit (PL or wP) (%):', this.atterbergLimits.plasticLimit],
+          ['Plasticity Index (PI) (%):', Number((this.atterbergLimits.liquidLimit - this.atterbergLimits.plasticLimit).toFixed(2))],
+          ['USCS Classification:', this.atterbergLimits.uscs]
         ],
         theme: 'grid',
         styles: {
@@ -235,6 +321,19 @@ export class AtterbergReportComponent implements OnInit {
       doc.text(`Test by: ${this.atterbergLimits.testBy || 'N/A'}`, 80, 261);
       doc.text(`Checked by: ${this.atterbergLimits.activist || 'N/A'}`, 150, 261);
       doc.addImage(tail, 'PNG', 0, 265, 210, 33);
+
+      doc.setFontSize(5);
+      const formatDateTime = (date: Date) => {
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+        const hours = String(date.getHours()).padStart(2, '0');
+        const minutes = String(date.getMinutes()).padStart(2, '0');
+
+        return `${year}-${month}-${day} ${hours}:${minutes}`;
+      };
+      const currentDateTime = formatDateTime(new Date());
+      doc.text(`Report Date: ${currentDateTime}`, 1, 290);
 
       doc.save(`AtterbergLimitsReport_${this.atterbergLimits.testName}.pdf`);
     }

@@ -1,200 +1,203 @@
 <div class="container mt-4">
   <h2 class="mb-3 text-center">Atterberg Limits</h2>
 
-  <div class="row mb-2">
-    <div class="col-md-12">
-      <table class="excel-style">
-        <tr>
-          <td><strong>PROJECT</strong></td>
-          <td colspan="7">{{ atterbergLimits.projectName }}</td>
-        </tr>
-        <tr>
-          <td><strong>CLIENT</strong></td>
-          <td colspan="7">{{ atterbergLimits.clientName }}</td>
-        </tr>
-        <tr>
-          <td><strong>Consultant</strong></td>
-          <td colspan="7">{{ atterbergLimits.owner }}</td>
-        </tr>
-        <tr>
-          <td><strong>LOCATION</strong></td>
-          <td colspan="7">{{ atterbergLimits.location }}</td>
-        </tr>
-        <tr>
-          <td colspan="8"></td>
-        </tr>
-      </table>
+<!--  <div class="row mb-2">-->
+<!--    <div class="col-md-12">-->
+<!--      <table class="excel-style">-->
+<!--        <tr>-->
+<!--          <td><strong>PROJECT</strong></td>-->
+<!--          <td colspan="7">{{ atterbergLimits.projectName }}</td>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--          <td><strong>CLIENT</strong></td>-->
+<!--          <td colspan="7">{{ atterbergLimits.clientName }}</td>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--          <td><strong>Consultant</strong></td>-->
+<!--          <td colspan="7">{{ atterbergLimits.owner }}</td>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--          <td><strong>LOCATION</strong></td>-->
+<!--          <td colspan="7">{{ atterbergLimits.location }}</td>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--          <td colspan="8"></td>-->
+<!--        </tr>-->
+<!--      </table>-->
 
-      <table class="excel-style data-table">
-        <tr>
-          <th rowspan="2">TEST</th>
-          <th colspan="2"></th>
-          <th colspan="4">PLASTIC LIMIT</th>
-          <th colspan="4">LIQUID LIMIT</th>
-        </tr>
-        <tr>
-          <th>NO</th>
-          <th></th>
-          <th>1</th>
-          <th>2</th>
-          <th>3</th>
-          <th>4</th>
-          <th>1</th>
-          <th>2</th>
-          <th>3</th>
-          <th>4</th>
-        </tr>
-        <tr>
-          <td>Variable</td>
-          <td>Var.</td>
-          <td>Units</td>
-          <td colspan="6"></td>
-          <td></td>
-        </tr>
-        <tr>
-          <td>Number of Blows</td>
-          <td>N</td>
-          <td>blows</td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td>{{ atterbergLimits.numberOfBlows5 }}</td>
-          <td>{{ atterbergLimits.numberOfBlows6 }}</td>
-          <td>{{ atterbergLimits.numberOfBlows7 }}</td>
-          <td>{{ atterbergLimits.numberOfBlows8 }}</td>
-        </tr>
-        <tr>
-          <td>Can Number</td>
-          <td>---</td>
-          <td>---</td>
-          <td>{{ atterbergLimits.canNumber1 }}</td>
-          <td>{{ atterbergLimits.canNumber2 }}</td>
-          <td>{{ atterbergLimits.canNumber3 }}</td>
-          <td>{{ atterbergLimits.canNumber4 }}</td>
-          <td>{{ atterbergLimits.canNumber5 }}</td>
-          <td>{{ atterbergLimits.canNumber6 }}</td>
-          <td>{{ atterbergLimits.canNumber7 }}</td>
-          <td>{{ atterbergLimits.canNumber8 }}</td>
-        </tr>
-        <tr>
-          <td>Mass of Empty Can</td>
-          <td>MC</td>
-          <td>(g)</td>
-          <td>{{ atterbergLimits.massOfEmptyCan1 }}</td>
-          <td>{{ atterbergLimits.massOfEmptyCan2 }}</td>
-          <td>{{ atterbergLimits.massOfEmptyCan3 }}</td>
-          <td>{{ atterbergLimits.massOfEmptyCan4 }}</td>
-          <td>{{ atterbergLimits.massOfEmptyCan5 }}</td>
-          <td>{{ atterbergLimits.massOfEmptyCan6 }}</td>
-          <td>{{ atterbergLimits.massOfEmptyCan7 }}</td>
-          <td>{{ atterbergLimits.massOfEmptyCan8 }}</td>
-        </tr>
-        <tr>
-          <td>Mass Can & Soil (Wet)</td>
-          <td>MCMS</td>
-          <td>(g)</td>
-          <td>{{ atterbergLimits.massCanAndSoilWet1 }}</td>
-          <td>{{ atterbergLimits.massCanAndSoilWet2 }}</td>
-          <td>{{ atterbergLimits.massCanAndSoilWet3 }}</td>
-          <td>{{ atterbergLimits.massCanAndSoilWet4 }}</td>
-          <td>{{ atterbergLimits.massCanAndSoilWet5 }}</td>
-          <td>{{ atterbergLimits.massCanAndSoilWet6 }}</td>
-          <td>{{ atterbergLimits.massCanAndSoilWet7 }}</td>
-          <td>{{ atterbergLimits.massCanAndSoilWet8 }}</td>
-        </tr>
-        <tr>
-          <td>Mass Can & Soil (Dry)</td>
-          <td>MCDS</td>
-          <td>(g)</td>
-          <td>{{ atterbergLimits.massCanAndSoilDry1 }}</td>
-          <td>{{ atterbergLimits.massCanAndSoilDry2 }}</td>
-          <td>{{ atterbergLimits.massCanAndSoilDry3 }}</td>
-          <td>{{ atterbergLimits.massCanAndSoilDry4 }}</td>
-          <td>{{ atterbergLimits.massCanAndSoilDry5 }}</td>
-          <td>{{ atterbergLimits.massCanAndSoilDry6 }}</td>
-          <td>{{ atterbergLimits.massCanAndSoilDry7 }}</td>
-          <td>{{ atterbergLimits.massCanAndSoilDry8 }}</td>
-        </tr>
-        <tr>
-          <td>Mass of Soil</td>
-          <td>MS</td>
-          <td>(g)</td>
-          <td>{{ massOfSoil1 | number : '1.2-2' }}</td>
-          <td>{{ massOfSoil2 | number : '1.2-2' }}</td>
-          <td>{{ massOfSoil3 | number : '1.2-2' }}</td>
-          <td>{{ massOfSoil4 | number : '1.2-2' }}</td>
-          <td>{{ massOfSoil5 | number : '1.2-2' }}</td>
-          <td>{{ massOfSoil6 | number : '1.2-2' }}</td>
-          <td>{{ massOfSoil7 | number : '1.2-2' }}</td>
-          <td>{{ massOfSoil8 | number : '1.2-2' }}</td>
+<!--      <table class="excel-style data-table">-->
+<!--        <tr>-->
+<!--          <th rowspan="2">TEST</th>-->
+<!--          <th colspan="2"></th>-->
+<!--          <th colspan="4">PLASTIC LIMIT</th>-->
+<!--          <th colspan="4">LIQUID LIMIT</th>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--          <th>NO</th>-->
+<!--          <th></th>-->
+<!--          <th>1</th>-->
+<!--          <th>2</th>-->
+<!--          <th>3</th>-->
+<!--          <th>4</th>-->
+<!--          <th>1</th>-->
+<!--          <th>2</th>-->
+<!--          <th>3</th>-->
+<!--          <th>4</th>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--          <td>Variable</td>-->
+<!--          <td>Var.</td>-->
+<!--          <td>Units</td>-->
+<!--          <td colspan="6"></td>-->
+<!--          <td></td>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--          <td>Number of Blows</td>-->
+<!--          <td>N</td>-->
+<!--          <td>blows</td>-->
+<!--          <td></td>-->
+<!--          <td></td>-->
+<!--          <td></td>-->
+<!--          <td></td>-->
+<!--          <td>{{ atterbergLimits.numberOfBlows5 }}</td>-->
+<!--          <td>{{ atterbergLimits.numberOfBlows6 }}</td>-->
+<!--          <td>{{ atterbergLimits.numberOfBlows7 }}</td>-->
+<!--          <td>{{ atterbergLimits.numberOfBlows8 }}</td>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--          <td>Can Number</td>-->
+<!--          <td>-&#45;&#45;</td>-->
+<!--          <td>-&#45;&#45;</td>-->
+<!--          <td>{{ atterbergLimits.canNumber1 }}</td>-->
+<!--          <td>{{ atterbergLimits.canNumber2 }}</td>-->
+<!--          <td>{{ atterbergLimits.canNumber3 }}</td>-->
+<!--          <td>{{ atterbergLimits.canNumber4 }}</td>-->
+<!--          <td>{{ atterbergLimits.canNumber5 }}</td>-->
+<!--          <td>{{ atterbergLimits.canNumber6 }}</td>-->
+<!--          <td>{{ atterbergLimits.canNumber7 }}</td>-->
+<!--          <td>{{ atterbergLimits.canNumber8 }}</td>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--          <td>Mass of Empty Can</td>-->
+<!--          <td>MC</td>-->
+<!--          <td>(g)</td>-->
+<!--          <td>{{ atterbergLimits.massOfEmptyCan1 }}</td>-->
+<!--          <td>{{ atterbergLimits.massOfEmptyCan2 }}</td>-->
+<!--          <td>{{ atterbergLimits.massOfEmptyCan3 }}</td>-->
+<!--          <td>{{ atterbergLimits.massOfEmptyCan4 }}</td>-->
+<!--          <td>{{ atterbergLimits.massOfEmptyCan5 }}</td>-->
+<!--          <td>{{ atterbergLimits.massOfEmptyCan6 }}</td>-->
+<!--          <td>{{ atterbergLimits.massOfEmptyCan7 }}</td>-->
+<!--          <td>{{ atterbergLimits.massOfEmptyCan8 }}</td>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--          <td>Mass Can & Soil (Wet)</td>-->
+<!--          <td>MCMS</td>-->
+<!--          <td>(g)</td>-->
+<!--          <td>{{ atterbergLimits.massCanAndSoilWet1 }}</td>-->
+<!--          <td>{{ atterbergLimits.massCanAndSoilWet2 }}</td>-->
+<!--          <td>{{ atterbergLimits.massCanAndSoilWet3 }}</td>-->
+<!--          <td>{{ atterbergLimits.massCanAndSoilWet4 }}</td>-->
+<!--          <td>{{ atterbergLimits.massCanAndSoilWet5 }}</td>-->
+<!--          <td>{{ atterbergLimits.massCanAndSoilWet6 }}</td>-->
+<!--          <td>{{ atterbergLimits.massCanAndSoilWet7 }}</td>-->
+<!--          <td>{{ atterbergLimits.massCanAndSoilWet8 }}</td>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--          <td>Mass Can & Soil (Dry)</td>-->
+<!--          <td>MCDS</td>-->
+<!--          <td>(g)</td>-->
+<!--          <td>{{ atterbergLimits.massCanAndSoilDry1 }}</td>-->
+<!--          <td>{{ atterbergLimits.massCanAndSoilDry2 }}</td>-->
+<!--          <td>{{ atterbergLimits.massCanAndSoilDry3 }}</td>-->
+<!--          <td>{{ atterbergLimits.massCanAndSoilDry4 }}</td>-->
+<!--          <td>{{ atterbergLimits.massCanAndSoilDry5 }}</td>-->
+<!--          <td>{{ atterbergLimits.massCanAndSoilDry6 }}</td>-->
+<!--          <td>{{ atterbergLimits.massCanAndSoilDry7 }}</td>-->
+<!--          <td>{{ atterbergLimits.massCanAndSoilDry8 }}</td>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--          <td>Mass of Soil</td>-->
+<!--          <td>MS</td>-->
+<!--          <td>(g)</td>-->
+<!--          <td>{{ massOfSoil1 | number : '1.2-2' }}</td>-->
+<!--          <td>{{ massOfSoil2 | number : '1.2-2' }}</td>-->
+<!--          <td>{{ massOfSoil3 | number : '1.2-2' }}</td>-->
+<!--          <td>{{ massOfSoil4 | number : '1.2-2' }}</td>-->
+<!--          <td>{{ massOfSoil5 | number : '1.2-2' }}</td>-->
+<!--          <td>{{ massOfSoil6 | number : '1.2-2' }}</td>-->
+<!--          <td>{{ massOfSoil7 | number : '1.2-2' }}</td>-->
+<!--          <td>{{ massOfSoil8 | number : '1.2-2' }}</td>-->
 
-        </tr>
-        <tr>
-          <td>Mass of Water</td>
-          <td>MW</td>
-          <td>(g)</td>
-          <td>{{ massOfWater1 | number : '1.2-2' }}</td>
-          <td>{{ massOfWater2 | number : '1.2-2' }}</td>
-          <td>{{ massOfWater3 | number : '1.2-2' }}</td>
-          <td>{{ massOfWater4 | number : '1.2-2' }}</td>
-          <td>{{ massOfWater5 | number : '1.2-2' }}</td>
-          <td>{{ massOfWater6 | number : '1.2-2' }}</td>
-          <td>{{ massOfWater7 | number : '1.2-2' }}</td>
-          <td>{{ massOfWater8 | number : '1.2-2' }}</td>
+<!--        </tr>-->
+<!--        <tr>-->
+<!--          <td>Mass of Water</td>-->
+<!--          <td>MW</td>-->
+<!--          <td>(g)</td>-->
+<!--          <td>{{ massOfWater1 | number : '1.2-2' }}</td>-->
+<!--          <td>{{ massOfWater2 | number : '1.2-2' }}</td>-->
+<!--          <td>{{ massOfWater3 | number : '1.2-2' }}</td>-->
+<!--          <td>{{ massOfWater4 | number : '1.2-2' }}</td>-->
+<!--          <td>{{ massOfWater5 | number : '1.2-2' }}</td>-->
+<!--          <td>{{ massOfWater6 | number : '1.2-2' }}</td>-->
+<!--          <td>{{ massOfWater7 | number : '1.2-2' }}</td>-->
+<!--          <td>{{ massOfWater8 | number : '1.2-2' }}</td>-->
 
-        </tr>
-        <tr>
-          <td>Water Content</td>
-          <td>w</td>
-          <td>(%)</td>
-          <td>{{ massOfWater1 / massOfSoil1 * 100 | number : '1.2-2' }}</td>
-          <td>{{ massOfWater2 / massOfSoil2 * 100 | number : '1.2-2' }}</td>
-          <td>{{ massOfWater3 / massOfSoil3 * 100 | number : '1.2-2' }}</td>
-          <td>{{ massOfWater4 / massOfSoil4 * 100 | number : '1.2-2' }}</td>
-          <td>{{ massOfWater5 / massOfSoil5 * 100 | number : '1.2-2' }}</td>
-          <td>{{ massOfWater6 / massOfSoil6 * 100 | number : '1.2-2' }}</td>
-          <td>{{ massOfWater7 / massOfSoil7 * 100 | number : '1.2-2' }}</td>
-          <td>{{ massOfWater8 / massOfSoil8 * 100 | number : '1.2-2' }}</td>
+<!--        </tr>-->
+<!--        <tr>-->
+<!--          <td>Water Content</td>-->
+<!--          <td>w</td>-->
+<!--          <td>(%)</td>-->
+<!--          <td>{{ massOfWater1 / massOfSoil1 * 100 | number : '1.2-2' }}</td>-->
+<!--          <td>{{ massOfWater2 / massOfSoil2 * 100 | number : '1.2-2' }}</td>-->
+<!--          <td>{{ massOfWater3 / massOfSoil3 * 100 | number : '1.2-2' }}</td>-->
+<!--          <td>{{ massOfWater4 / massOfSoil4 * 100 | number : '1.2-2' }}</td>-->
+<!--          <td>{{ massOfWater5 / massOfSoil5 * 100 | number : '1.2-2' }}</td>-->
+<!--          <td>{{ massOfWater6 / massOfSoil6 * 100 | number : '1.2-2' }}</td>-->
+<!--          <td>{{ massOfWater7 / massOfSoil7 * 100 | number : '1.2-2' }}</td>-->
+<!--          <td>{{ massOfWater8 / massOfSoil8 * 100 | number : '1.2-2' }}</td>-->
 
-        </tr>
-      </table>
+<!--        </tr>-->
+<!--      </table>-->
 
-      <table class="excel-style results-table">
-        <tr>
-          <td>Liquid Limit (LL or wL) (%):</td>
+<!--      <table class="excel-style results-table">-->
+<!--        <tr>-->
+<!--          <td>Liquid Limit (LL or wL) (%):</td>-->
 
-          <td>{{ atterbergLimits.liquidLimit }}</td>
-          <td></td>
-          <td colspan="2"></td>
+<!--          <td>{{ atterbergLimits.liquidLimit }}</td>-->
+<!--          <td></td>-->
+<!--          <td colspan="2"></td>-->
 
-        </tr>
-        <tr>
-          <td>Plastic Limit (PL or wP) (%):</td>
+<!--        </tr>-->
+<!--        <tr>-->
+<!--          <td>Plastic Limit (PL or wP) (%):</td>-->
 
-          <td>{{ ((massOfWater1 / massOfSoil1) + (massOfWater2 / massOfSoil2) + (massOfWater3 / massOfSoil3) + (massOfWater4 / massOfSoil4)) / 4 * 100 | number : '1.2-2' }}</td>
-          <td></td>
-          <td colspan="2"></td>
+<!--          <td>{{ atterbergLimits.plasticLimit}}</td>-->
+<!--          <td></td>-->
+<!--          <td colspan="2"></td>-->
 
-        </tr>
-        <tr>
-          <td>Plasticity Index (PI) (%):</td>
-          <td>{{(atterbergLimits.liquidLimit) - ((massOfWater1 / massOfSoil1) + (massOfWater2 / massOfSoil2) + (massOfWater3 / massOfSoil3) + (massOfWater4 / massOfSoil4)) / 4 * 100 | number :'1.2-2' }}</td>
-          <td></td>
-          <td colspan="2"></td>
+<!--        </tr>-->
+<!--        <tr>-->
+<!--          <td>Plasticity Index (PI) (%):</td>-->
+<!--          <td>{{ atterbergLimits.liquidLimit - atterbergLimits.plasticLimit | number :'1.2-2' }}</td>-->
+<!--          <td></td>-->
+<!--          <td colspan="2"></td>-->
 
-        </tr>
-        <tr>
-          <td>USCS Classification:</td>
-          <td>CL</td>
-          <td></td>
-          <td colspan="2"></td>
+<!--        </tr>-->
+<!--        <tr>-->
+<!--          <td>USCS Classification:</td>-->
+<!--          <td>{{ atterbergLimits.uscs }}</td>-->
+<!--          <td></td>-->
+<!--          <td colspan="2"></td>-->
 
 
-        </tr>
-      </table>
-    </div>
-  </div>
+<!--        </tr>-->
+<!--      </table>-->
+<!--    </div>-->
+<!--  </div>-->
+  <canvas #chartCanvas></canvas>
+
+
 
   <div class="text-center mt-3">
     <button class="btn btn-success" (click)="generatePDF()">Download Pdf</button>
