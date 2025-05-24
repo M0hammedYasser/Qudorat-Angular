@@ -447,7 +447,7 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
           doc.text(`Checked by: ${this.asphalt.activist || 'N/A'}`, 150, 261);
           doc.addImage(tail, 'PNG', 0, 265, 210, 33);
           doc.setFontSize(5);
-          doc.text(`Report Date: ${currentDateTime}`, 1, finalY + 41);
+          doc.text(`Report Date: ${currentDateTime}`, 1, 290);
 
           // Save the PDF
           doc.save(`Asphalt_Report_${new Date().toISOString().slice(0, 10)}.pdf`);
