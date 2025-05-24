@@ -116,26 +116,25 @@ export class SandReportComponent implements AfterViewInit, OnInit {
     tail.src = 'assets/tail.png';
     qr.src = 'assets/barcode.jpg';
 
-
     head.onload = () => {
+      // Header content
       doc.addImage(head, 'PNG', 0, 0, 210, 33);
       doc.setFontSize(14);
       doc.text('Sieve Analysis Test', 80, 36)
       doc.setFontSize(10);
       doc.text(`Project                 ${this.sieveAnalysis.projectName || 'N/A'}`, 13, 42);
       doc.text(`Client                   ${this.sieveAnalysis.clientName || 'N/A'}`, 13, 47);
-      doc.addImage(qr, 'PNG', 165, 37, 35, 30);
       doc.text(`Sample No          ${this.sieveAnalysis.sampleNo || 'N/A'}`, 13, 52);
       doc.text(`Sample By          ${this.sieveAnalysis.sampleBy || 'N/A'}`, 13, 57);
       doc.text(`Sampling Date   ${this.sieveAnalysis.samplingDate || 'N/A'}`, 13, 62);
-      doc.text(`Test Name          ${this.sieveAnalysis.nameOfTest || 'N/A'}`, 90, 42);
-      doc.text(`Testing Date       ${this.sieveAnalysis.testingDate || 'N/A'}`, 90, 47);
-      doc.text(`Standard             ${this.sieveAnalysis.materialType || 'N/A'}`, 90, 52);
-      doc.text(`Consultant          ${this.sieveAnalysis.consultant || 'N/A'}`, 90, 57);
-      doc.text(`Owner                 ${this.sieveAnalysis.owner || 'N/A'}`, 90, 62);
+      doc.text(`Test Name          ${this.sieveAnalysis.nameOfTest || 'N/A'}`, 100, 42);
+      doc.text(`Testing Date       ${this.sieveAnalysis.testingDate || 'N/A'}`, 100, 47);
+      doc.text(`Standard             ${this.sieveAnalysis.materialType || 'N/A'}`, 100, 52);
+      doc.text(`Consultant          ${this.sieveAnalysis.consultant || 'N/A'}`, 100, 57);
+      doc.text(`Owner                 ${this.sieveAnalysis.owner || 'N/A'}`, 100, 62);
       doc.line(10, 65, 200, 65);
 
-
+      // Table content
       const tableColumn = ["Sieve sizes(Inch)", "Sieve sizes(mm)", "Retained Weight (gm)", "Retained%", "Passing%"];
       const tableRows: any[] = [];
 
@@ -163,16 +162,57 @@ export class SandReportComponent implements AfterViewInit, OnInit {
         head: [tableColumn],
         body: tableRows,
         theme: 'grid',
-        styles: {fontSize: 8, cellPadding: 1.7},
+        styles: {fontSize: 7, cellPadding: 1.7},
       });
 
       const finalY = (doc as any).lastAutoTable?.finalY ?? 80;
 
+      // Add chart image
       setTimeout(() => {
         const chartCanvas = document.querySelector('canvas') as HTMLCanvasElement;
         if (chartCanvas) {
           const chartImage = chartCanvas.toDataURL('image/png');
           doc.addImage(chartImage, 'PNG', 10, finalY + 3, 180, 80);
+
+          // Calculate position for footer based on chart position
+          let footerY = finalY + 80 + 5; // chart height is 80
+
+          // Add notes if they exist
+          doc.setFontSize(8);
+          if (this.sieveAnalysis.notes) {
+            doc.line(10, footerY - 1 , 200, footerY - 1 );
+            const splitNotes = doc.splitTextToSize(
+              `Remarks: ${this.sieveAnalysis.notes || ""}`,
+              180
+            );
+            doc.text(splitNotes, 13, footerY + 2);
+            footerY += (splitNotes.length * 7); // Adjust footerY based on notes height
+          }
+
+          // Add footer content
+          doc.line(10, 258, 200, 257);
+          doc.setFontSize(10);
+          doc.text(`Approved by: ${this.sieveAnalysis.approveBy || 'N/A'}`, 13, 261);
+          doc.text(`Test by: ${this.sieveAnalysis.testBy || 'N/A'}`, 80, 261);
+          doc.text(`Checked by: ${this.sieveAnalysis.activist || 'N/A'}`, 150, 261);
+
+          // Add footer image
+          doc.addImage(tail, 'PNG', 0, 265, 210, 33);
+
+          doc.setFontSize(5);
+          const formatDateTime = (date: Date) => {
+            const year = date.getFullYear();
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            const day = String(date.getDate()).padStart(2, '0');
+            const hours = String(date.getHours()).padStart(2, '0');
+            const minutes = String(date.getMinutes()).padStart(2, '0');
+
+            return `${year}-${month}-${day} ${hours}:${minutes}`;
+          };
+          const currentDateTime = formatDateTime(new Date());
+          doc.text(`Report Date: ${currentDateTime}`, 1, 290);
+
+          // Save the PDF after all content is added
           doc.save('Sieve_Analysis_Report.pdf');
         } else {
           console.error("Chart canvas not found! Ensure it is fully loaded before generating the PDF.");
@@ -183,27 +223,6 @@ export class SandReportComponent implements AfterViewInit, OnInit {
     head.onerror = () => {
       console.error("Error loading image from assets.");
     };
-    let finalY = (doc as any).lastAutoTable.finalY || 100;
-
-    doc.setFontSize(9);
-    if (this.sieveAnalysis.notes) {
-      doc.line(10, finalY, 200, finalY);
-      const splitNotes = doc.splitTextToSize(
-        `Remarks: ${this.sieveAnalysis.notes || ""}`,
-        180
-      );
-      doc.text(splitNotes, 13, finalY + 5);
-      finalY += (splitNotes.length * 7); // 7 is approximate line height
-    }
-    doc.line(10, 257, 200, 257);
-
-    doc.setFontSize(10);
-
-    doc.text(`Approved by: ${this.sieveAnalysis.approveBy || 'N/A'}`, 13, 261);
-    doc.text(`Test by: ${this.sieveAnalysis.testBy || 'N/A'}`, 80, 261);
-    doc.text(`Checked by: ${this.sieveAnalysis.activist || 'N/A'}`, 150, 261);
-
-    doc.addImage(tail, 'PNG', 0, 265, 210, 33);
   }
 
 

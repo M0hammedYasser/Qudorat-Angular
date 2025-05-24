@@ -53,15 +53,14 @@ export class CompressiveStrengthReportComponent implements OnInit {
       doc.setFontSize(10);
       doc.text(`Project                 ${this.compressiveStrength.projectName || 'N/A'}`, 13, 42);
       doc.text(`Client                   ${this.compressiveStrength.clientName || 'N/A'}`, 13, 47);
-      doc.addImage(qr, 'PNG', 165, 37, 35, 30);
       doc.text(`Sample No          ${this.compressiveStrength.sampleNo || 'N/A'}`, 13, 52);
       doc.text(`Sample By          ${this.compressiveStrength.sampleBy || 'N/A'}`, 13, 57);
       doc.text(`Sampling Date   ${this.compressiveStrength.sampleDate || 'N/A'}`, 13, 62);
-      doc.text(`Test Name          ${this.compressiveStrength.nameOfTest || 'N/A'}`, 90, 42);
-      doc.text(`Testing Date       ${this.compressiveStrength.testingDate || 'N/A'}`, 90, 47);
-      doc.text(`Standard             ${this.compressiveStrength.classification || 'N/A'}`, 90, 52);
-      doc.text(`Consultant          ${this.compressiveStrength.consultant || 'N/A'}`, 90, 57);
-      doc.text(`Owner                 ${this.compressiveStrength.owner || 'N/A'}`, 90, 62);
+      doc.text(`Test Name          ${this.compressiveStrength.nameOfTest || 'N/A'}`, 100, 42);
+      doc.text(`Testing Date       ${this.compressiveStrength.testingDate || 'N/A'}`, 100, 47);
+      doc.text(`Standard             ${this.compressiveStrength.classification || 'N/A'}`, 100, 52);
+      doc.text(`Consultant          ${this.compressiveStrength.consultant || 'N/A'}`, 100, 57);
+      doc.text(`Owner                 ${this.compressiveStrength.owner || 'N/A'}`, 100, 62);
       doc.line(10, 65, 200, 65);
 
       autoTable(doc, {
@@ -156,23 +155,37 @@ export class CompressiveStrengthReportComponent implements OnInit {
       finalY = (doc as any).lastAutoTable.finalY + 3;
 
 
+      doc.setFontSize(8);
       if (this.compressiveStrength.notes) {
         doc.line(10, finalY, 200, finalY);
         const splitNotes = doc.splitTextToSize(
           `Remarks: ${this.compressiveStrength.notes || ""}`,
-          180 
+          180
         );
         doc.text(splitNotes, 13, finalY + 5);
         finalY += (splitNotes.length * 7); // 7 is approximate line height
       }
 
-      doc.line(10, finalY + 7, 200, finalY + 7);
+      doc.line(10, finalY + 1, 200, finalY + 1);
       doc.setFontSize(10);
-      doc.text(`Approved by: ${this.compressiveStrength.approveBy || 'N/A'}`, 13, finalY + 12);
-      doc.text(`Test by: ${this.compressiveStrength.testBy || 'N/A'}`, 80, finalY + 12);
-      doc.text(`Checked by: ${this.compressiveStrength.activist || 'N/A'}`, 150, finalY + 12);
+      doc.text(`Approved by: ${this.compressiveStrength.approveBy || 'N/A'}`, 13, finalY + 5);
+      doc.text(`Test by: ${this.compressiveStrength.testBy || 'N/A'}`, 80, finalY + 5);
+      doc.text(`Checked by: ${this.compressiveStrength.activist || 'N/A'}`, 150, finalY + 5);
 
       doc.addImage(tail, 'PNG', 0, 265, 210, 33);
+
+      doc.setFontSize(5);
+      const formatDateTime = (date: Date) => {
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+        const hours = String(date.getHours()).padStart(2, '0');
+        const minutes = String(date.getMinutes()).padStart(2, '0');
+
+        return `${year}-${month}-${day} ${hours}:${minutes}`;
+      };
+      const currentDateTime = formatDateTime(new Date());
+      doc.text(`Report Date: ${currentDateTime}`, 1, 290);
 
       doc.save(`CompressiveStrengthReport_${this.compressiveStrength.testName}.pdf`);
     };
