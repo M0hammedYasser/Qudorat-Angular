@@ -10,8 +10,7 @@ import Chart from "chart.js/auto";
 @Component({
   selector: 'app-atterberg-report',
   standalone: true,
-  imports: [
-  ],
+  imports: [],
   templateUrl: './atterberg-report.component.html',
   styleUrl: './atterberg-report.component.css'
 })
@@ -76,11 +75,11 @@ export class AtterbergReportComponent implements OnInit {
 
     // Extract values with fallback to 0 if null
     const liquidLimit = this.atterbergLimits.liquidLimit;
-    const plasticLimit = this.atterbergLimits.plasticLimit ;
+    const plasticLimit = this.atterbergLimits.plasticLimit;
     const plasticityIndex = liquidLimit - plasticLimit;
 
     // Define the A-line and U-line
-    const xValues = Array.from({ length: 101 }, (_, i) => i); // 0 to 100
+    const xValues = Array.from({length: 101}, (_, i) => i); // 0 to 100
     const aLine = xValues.map(x => 0.73 * (x - 20));
     const uLine = xValues.map(x => 0.9 * (x - 8));
 
@@ -90,7 +89,7 @@ export class AtterbergReportComponent implements OnInit {
         datasets: [
           {
             label: 'Plasticity Point',
-            data: [{ x: liquidLimit, y: plasticLimit }],
+            data: [{x: liquidLimit, y: plasticLimit}],
             backgroundColor: 'orange',
             pointRadius: 6,
             pointHoverRadius: 8,
@@ -98,7 +97,7 @@ export class AtterbergReportComponent implements OnInit {
           },
           {
             label: 'A-Line',
-            data: xValues.map((x, i) => ({ x, y: aLine[i] })),
+            data: xValues.map((x, i) => ({x, y: aLine[i]})),
             borderColor: 'blue',
             borderWidth: 2,
             fill: false,
@@ -107,7 +106,7 @@ export class AtterbergReportComponent implements OnInit {
           },
           {
             label: 'U-Line',
-            data: xValues.map((x, i) => ({ x, y: uLine[i] })),
+            data: xValues.map((x, i) => ({x, y: uLine[i]})),
             borderColor: 'purple',
             borderWidth: 2,
             borderDash: [5, 5],
@@ -151,8 +150,6 @@ export class AtterbergReportComponent implements OnInit {
   }
 
 
-
-
   generatePDF() {
     const doc = new jsPDF();
     const head = new Image();
@@ -170,15 +167,14 @@ export class AtterbergReportComponent implements OnInit {
       doc.setFontSize(10);
       doc.text(`Project                 ${this.atterbergLimits.projectName || 'N/A'}`, 13, 42);
       doc.text(`Client                   ${this.atterbergLimits.clientName || 'N/A'}`, 13, 47);
-      doc.addImage(qr, 'PNG', 165, 37, 35, 30);
       doc.text(`Sample No          ${this.atterbergLimits.sampleNo || 'N/A'}`, 13, 52);
       doc.text(`Sample By          ${this.atterbergLimits.sampleBy || 'N/A'}`, 13, 57);
       doc.text(`Sampling Date   ${this.atterbergLimits.sampleDate || 'N/A'}`, 13, 62);
-      doc.text(`Test Name          ${this.atterbergLimits.nameOfTest || 'N/A'}`, 90, 42);
-      doc.text(`Testing Date       ${this.atterbergLimits.testingDate || 'N/A'}`, 90, 47);
-      doc.text(`Standard             ${this.atterbergLimits.classification || 'N/A'}`, 90, 52);
-      doc.text(`Consultant          ${this.atterbergLimits.consultant || 'N/A'}`, 90, 57);
-      doc.text(`Owner                 ${this.atterbergLimits.owner || 'N/A'}`, 90, 62);
+      doc.text(`Test Name          ${this.atterbergLimits.nameOfTest || 'N/A'}`, 110, 42);
+      doc.text(`Testing Date       ${this.atterbergLimits.testingDate || 'N/A'}`, 110, 47);
+      doc.text(`Standard             ${this.atterbergLimits.classification || 'N/A'}`, 110, 52);
+      doc.text(`Consultant          ${this.atterbergLimits.consultant || 'N/A'}`, 110, 57);
+      doc.text(`Owner                 ${this.atterbergLimits.owner || 'N/A'}`, 110, 62);
       doc.line(10, 65, 200, 65);
 
       autoTable(doc, {
@@ -249,7 +245,7 @@ export class AtterbergReportComponent implements OnInit {
         ],
         theme: 'grid',
         styles: {
-          fontSize: 8,
+          fontSize: 6,
           cellPadding: 2,
           halign: 'center',
           valign: 'middle',
@@ -276,11 +272,11 @@ export class AtterbergReportComponent implements OnInit {
           9: {cellWidth: 15},
           10: {cellWidth: 15}
         },
-        margin: {left: 15}
+        margin: {left: 14}
       });
 
       autoTable(doc, {
-        startY: (doc as any).lastAutoTable.finalY + 10,
+        startY: (doc as any).lastAutoTable.finalY + 5,
         body: [
           ['Liquid Limit (LL or wL) (%):', this.atterbergLimits.liquidLimit],
           ['Plastic Limit (PL or wP) (%):', this.atterbergLimits.plasticLimit],
@@ -289,7 +285,7 @@ export class AtterbergReportComponent implements OnInit {
         ],
         theme: 'grid',
         styles: {
-          fontSize: 8,
+          fontSize: 6,
           cellPadding: 2,
           lineWidth: 0.5,
           lineColor: [0, 0, 0]
@@ -305,37 +301,45 @@ export class AtterbergReportComponent implements OnInit {
 
       let finalY = (doc as any).lastAutoTable.finalY + 3;
 
-      doc.setFontSize(9);
-      if (this.atterbergLimits.notes) {
-        doc.line(10, finalY, 200, finalY);
-        const splitNotes = doc.splitTextToSize(
-          `Remarks: ${this.atterbergLimits.notes || ""}`,
-          180
-        );
-        doc.text(splitNotes, 13, finalY + 5);
-        finalY += (splitNotes.length * 7); // 7 is approximate line height
-      }
-      doc.line(10, 257, 200, 257);
-      doc.setFontSize(10);
-      doc.text(`Approved by: ${this.atterbergLimits.approveBy || 'N/A'}`, 13, 261);
-      doc.text(`Test by: ${this.atterbergLimits.testBy || 'N/A'}`, 80, 261);
-      doc.text(`Checked by: ${this.atterbergLimits.activist || 'N/A'}`, 150, 261);
-      doc.addImage(tail, 'PNG', 0, 265, 210, 33);
+      setTimeout(() => {
+          const chartCanvas = document.querySelector('canvas') as HTMLCanvasElement;
+          if (chartCanvas) {
+            const chartImage = chartCanvas.toDataURL('image/png');
+            doc.addImage(chartImage, 'PNG', 72, finalY - 30 , 123, 60);
+            doc.setFontSize(9);
 
-      doc.setFontSize(5);
-      const formatDateTime = (date: Date) => {
-        const year = date.getFullYear();
-        const month = String(date.getMonth() + 1).padStart(2, '0');
-        const day = String(date.getDate()).padStart(2, '0');
-        const hours = String(date.getHours()).padStart(2, '0');
-        const minutes = String(date.getMinutes()).padStart(2, '0');
+            if (this.atterbergLimits.notes) {
+              doc.line(10, finalY + 75, 200, finalY + 75);
+              const splitNotes = doc.splitTextToSize(
+                `Remarks: ${this.atterbergLimits.notes || ""}`,
+                180
+              );
+              doc.text(splitNotes, 13, finalY + 78);
+              finalY += (splitNotes.length * 7);
+            }
+            doc.line(10, 257, 200, 257);
+            doc.setFontSize(10);
+            doc.text(`Approved by: ${this.atterbergLimits.approveBy || 'N/A'}`, 13, 261);
+            doc.text(`Test by: ${this.atterbergLimits.testBy || 'N/A'}`, 80, 261);
+            doc.text(`Checked by: ${this.atterbergLimits.activist || 'N/A'}`, 150, 261);
+            doc.addImage(tail, 'PNG', 0, 265, 210, 33);
 
-        return `${year}-${month}-${day} ${hours}:${minutes}`;
-      };
-      const currentDateTime = formatDateTime(new Date());
-      doc.text(`Report Date: ${currentDateTime}`, 1, 290);
+            doc.setFontSize(5);
+            const formatDateTime = (date: Date) => {
+              const year = date.getFullYear();
+              const month = String(date.getMonth() + 1).padStart(2, '0');
+              const day = String(date.getDate()).padStart(2, '0');
+              const hours = String(date.getHours()).padStart(2, '0');
+              const minutes = String(date.getMinutes()).padStart(2, '0');
 
-      doc.save(`AtterbergLimitsReport_${this.atterbergLimits.testName}.pdf`);
-    }
+              return `${year}-${month}-${day} ${hours}:${minutes}`;
+            };
+            const currentDateTime = formatDateTime(new Date());
+            doc.text(`Report Date: ${currentDateTime}`, 1, 290);
+
+            doc.save(`AtterbergLimitsReport_${this.atterbergLimits.testName}.pdf`);
+          }
+        }, 1000);
+    };
   }
 }

@@ -173,11 +173,7 @@ export class SandReportComponent implements AfterViewInit, OnInit {
         if (chartCanvas) {
           const chartImage = chartCanvas.toDataURL('image/png');
           doc.addImage(chartImage, 'PNG', 10, finalY + 3, 180, 80);
-
-          // Calculate position for footer based on chart position
-          let footerY = finalY + 80 + 5; // chart height is 80
-
-          // Add notes if they exist
+          let footerY = finalY + 80 + 5;
           doc.setFontSize(8);
           if (this.sieveAnalysis.notes) {
             doc.line(10, footerY - 1 , 200, footerY - 1 );
