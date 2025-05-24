@@ -9,6 +9,4 @@ export interface Client {
   commercialRegistrationNumber : string;
   taxIdentificationNumber : string;
   companyRepresentative : string;
-
-
 }

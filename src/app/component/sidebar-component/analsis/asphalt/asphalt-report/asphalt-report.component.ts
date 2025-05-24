@@ -3,7 +3,7 @@ import {AsphaltService} from "../../../../../service/asphalt/asphalt.service";
 import {ActivatedRoute} from "@angular/router";
 import {Asphalt} from "../../../../../model/asphalt";
 import jsPDF from "jspdf";
-import autoTable from "jspdf-autotable";
+import autoTable, {RowInput} from "jspdf-autotable";
 import Chart from "chart.js/auto";
 
 @Component({
@@ -134,25 +134,24 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
       doc.addImage(head, 'PNG', 0, 0, 210, 33);
 
       // Add title and basic info
-      doc.setFontSize(14);
+      doc.setFontSize(12);
       doc.text("Asphalt Marshall", 80, 36);
-      doc.setFontSize(10);
+      doc.setFontSize(9);
       doc.text(`Project                 ${this.asphalt.projectName || 'N/A'}`, 13, 42);
-      doc.text(`Client                   ${this.asphalt.clientName || 'N/A'}`, 13, 47);
-      doc.addImage(qr, 'PNG', 165, 37, 35, 30);
-      doc.text(`Sample No          ${this.asphalt.sampleNo || 'N/A'}`, 13, 52);
-      doc.text(`Sample By          ${this.asphalt.sampleBy || 'N/A'}`, 13, 57);
-      doc.text(`Sampling Date   ${this.asphalt.sampleDate || 'N/A'}`, 13, 62);
-      doc.text(`Asphalt Type      ${this.asphalt.asphaltType || 'N/A'}`, 13, 67);
-      doc.text(`Test Name          ${this.asphalt.nameOfTest || 'N/A'}`, 90, 42);
-      doc.text(`Testing Date       ${this.asphalt.testingDate || 'N/A'}`, 90, 47);
-      doc.text(`Standard             ${this.asphalt.classification || 'N/A'}`, 90, 52);
-      doc.text(`Consultant          ${this.asphalt.consultant || 'N/A'}`, 90, 57);
-      doc.text(`Owner                 ${this.asphalt.owner || 'N/A'}`, 90, 62);
-      doc.text(`Asphalt Applier   ${this.asphalt.asphaltApplier || 'N/A'}`, 90, 67);
-      doc.line(10, 70, 200, 70);
-      doc.setFontSize(14);
-      doc.text(`BITUMEN Content Test` , 75 , 75)
+      doc.text(`Client                   ${this.asphalt.clientName || 'N/A'}`, 13, 46);
+      doc.text(`Sample No          ${this.asphalt.sampleNo || 'N/A'}`, 13, 50);
+      doc.text(`Sample By          ${this.asphalt.sampleBy || 'N/A'}`, 13, 54);
+      doc.text(`Sampling Date   ${this.asphalt.sampleDate || 'N/A'}`, 13, 58);
+      doc.text(`Asphalt Type       ${this.asphalt.asphaltType || 'N/A'}`, 13, 62);
+      doc.text(`Test Name          ${this.asphalt.nameOfTest || 'N/A'}`, 110, 42);
+      doc.text(`Testing Date        ${this.asphalt.testingDate || 'N/A'}`, 110, 46);
+      doc.text(`Standard             ${this.asphalt.classification || 'N/A'}`, 110, 50);
+      doc.text(`Consultant          ${this.asphalt.consultant || 'N/A'}`, 110, 54);
+      doc.text(`Owner                 ${this.asphalt.owner || 'N/A'}`, 110, 58);
+      doc.text(`Asphalt Applier   ${this.asphalt.asphaltApplier || 'N/A'}`, 110, 62);
+      doc.line(10, 65, 200, 65);
+      doc.setFontSize(10);
+      doc.text(`BITUMEN CONTENT TEST` , 75 , 70)
 
       // First table - Bitumen data
       const bitumenColumn = ['Parameter', 'Value'];
@@ -170,33 +169,51 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
       autoTable(doc, {
         head: [bitumenColumn],
         body: bitumenRows,
-        startY: 77,  // Positioned below the header
-        styles: {fontSize: 8 , cellPadding : 1.5},
-        headStyles: {fillColor: [41, 128, 185]},
-        alternateRowStyles: {fillColor: [240, 240, 240]},
+        startY: 72,  // Positioned below the header
+        styles: {
+          fontSize: 6,
+          cellPadding: 1.5,
+          lineColor: [0, 0, 0], // Black grid lines
+          lineWidth: 0.1,       // Thin grid lines
+        },
+        headStyles: {
+          fillColor: [41, 128, 185],
+          textColor: [255, 255, 255], // White text for header
+          fontStyle: 'bold',
+          lineWidth: 0.1,
+        },
+        bodyStyles: {
+          lineWidth: 0.1,
+        },
+        alternateRowStyles: {
+          fillColor: [240, 240, 240],
+        },
+        showHead: 'everyPage', // Show header on every page if table spans multiple pages
+        tableLineColor: [0, 0, 0], // Outer table border
+        tableLineWidth: 0.3,       // Slightly thicker outer border
       });
 
       let finalY = (doc as any).lastAutoTable.finalY + 5;
 
-      doc.text(`Sieve Analysis` , 85 , finalY - 2 )
-      const sieveColumn = [
+      doc.text(`SIEVE ANALYSIS` , 85 , finalY  )
+      const sieveColumn: RowInput[] = [
         [
-          { content: 'mm', rowSpan: 2 },
-          { content: 'inch', rowSpan: 2 },
-          { content: 'Ret(gm)', rowSpan: 2 },
-          { content: 'Ret%', rowSpan: 2 },
-          { content: 'Passing%', rowSpan: 2 },
-          { content: 'Gmf limits', colSpan: 2 },
-          { content: 'General specifications', colSpan: 2 },
-          // Empty cells for the remaining columns (these will be filled by the colSpan)
-          '', ''
+          { content: 'mm', rowSpan: 2, styles: { halign: 'center', valign: 'middle' } },
+          { content: 'inch', rowSpan: 2, styles: { halign: 'center', valign: 'middle' } },
+          { content: 'Ret(gm)', rowSpan: 2, styles: { halign: 'center', valign: 'middle' } },
+          { content: 'Ret%', rowSpan: 2, styles: { halign: 'center', valign: 'middle' } },
+          { content: 'Passing%', rowSpan: 2, styles: { halign: 'center', valign: 'middle' } },
+          { content: 'Gmf limits', colSpan: 2, styles: { halign: 'center' } },
+          { content: 'General specifications', colSpan: 2, styles: { halign: 'center' } },
         ],
         [
-          // First row is already defined, this is the second row of headers
-          // These will go under the colSpan headers
-          'Min%', 'Max%', 'Min%', 'Max%'
+          { content: 'Min%', styles: { halign: 'center' } },
+          { content: 'Max%', styles: { halign: 'center' } },
+          { content: 'Min%', styles: { halign: 'center' } },
+          { content: 'Max%', styles: { halign: 'center' } },
         ]
       ];
+
 
       const sieveRows = [
         ['37.5', '1.5', this.asphalt.gradationTest.massRetainedA, Number(this.asphalt.gradationTest.retainedA).toFixed(1),
@@ -234,22 +251,30 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
       autoTable(doc, {
         head: sieveColumn,
         body: sieveRows,
-        startY: finalY,
-        styles: {fontSize: 8, cellPadding: 1.5},
-        headStyles: {fillColor: [41, 128, 185]},
-        alternateRowStyles: {fillColor: [240, 240, 240]},
-        // Add this to properly render the multi-row header
-        didParseCell: function(data) {
-          if (data.section === 'head') {
-            data.cell.styles.fillColor = [41, 128, 185]; // Maintain header color
-            if (data.row.index === 0) {
-              // First header row
-              if (data.column.dataKey === 5 || data.column.dataKey === 7) {
-                data.cell.styles.fontStyle = 'bold';
-              }
-            }
-          }
-        }
+        tableWidth: 'auto',
+        startY: finalY +2 ,
+        styles: {
+          fontSize: 6,
+          cellPadding: 1.5,
+          lineColor: [0, 0, 0], // Black grid lines
+          lineWidth: 0.1,       // Thin grid lines
+        },
+        headStyles: {
+          fillColor: [41, 128, 185],
+          textColor: [255, 255, 255], // White text for header
+          fontStyle: 'bold',
+          lineWidth: 0.1,
+        },
+        bodyStyles: {
+          lineWidth: 0.1,
+        },
+        alternateRowStyles: {
+          fillColor: [240, 240, 240],
+        },
+
+        tableLineColor: [220, 220, 220],
+        tableLineWidth: 0.3,
+        margin: { left: 14 }
       });
 
       finalY = (doc as any).lastAutoTable.finalY + 3;
@@ -260,10 +285,47 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
         const chartCanvas = document.querySelector('canvas') as HTMLCanvasElement;
         if (chartCanvas) {
           const chartImage = chartCanvas.toDataURL('image/png');
-          doc.addImage(chartImage, 'PNG', 10, finalY, 180, 80);
+          doc.addImage(chartImage, 'PNG', 15, finalY, 180, 60);
 
 
           finalY += 90;  // Chart height (80) + some margin
+          doc.line(10, finalY - 27, 200, finalY - 27);
+          doc.setFontSize(10);
+          doc.text(`Approved by: ${this.asphalt.approveBy || 'N/A'}`, 13, finalY - 23);
+          doc.text(`Test by: ${this.asphalt.testBy || 'N/A'}`, 80, finalY - 23 );
+          doc.text(`Checked by: ${this.asphalt.activist || 'N/A'}`, 150, finalY - 23);
+          doc.addImage(tail, 'PNG', 0, finalY - 20, 210, 33);
+
+          const headerHeight = 15; // Approximate height needed for header
+          const tableHeight = 200; // Estimate your table height (adjust based on rows)
+
+          if (finalY + headerHeight + tableHeight > doc.internal.pageSize.height - 20) {
+            doc.addPage();
+            finalY = 2; // Reset Y position after new page
+          }
+
+          doc.addImage(head, 'PNG', 0, 0, 210, 33);
+
+          // Add title and basic info
+          doc.setFontSize(12);
+          doc.text("Asphalt Marshall", 80, 36);
+          doc.setFontSize(9);
+          doc.text(`Project                 ${this.asphalt.projectName || 'N/A'}`, 13, 42);
+          doc.text(`Client                   ${this.asphalt.clientName || 'N/A'}`, 13, 46);
+          doc.text(`Sample No          ${this.asphalt.sampleNo || 'N/A'}`, 13, 50);
+          doc.text(`Sample By          ${this.asphalt.sampleBy || 'N/A'}`, 13, 54);
+          doc.text(`Sampling Date   ${this.asphalt.sampleDate || 'N/A'}`, 13, 58);
+          doc.text(`Asphalt Type      ${this.asphalt.asphaltType || 'N/A'}`, 13, 62);
+          doc.text(`Test Name          ${this.asphalt.nameOfTest || 'N/A'}`, 110, 42);
+          doc.text(`Testing Date       ${this.asphalt.testingDate || 'N/A'}`, 110, 46);
+          doc.text(`Standard             ${this.asphalt.classification || 'N/A'}`, 110, 50);
+          doc.text(`Consultant          ${this.asphalt.consultant || 'N/A'}`, 110, 54);
+          doc.text(`Owner                 ${this.asphalt.owner || 'N/A'}`, 110, 58);
+          doc.text(`Asphalt Applier   ${this.asphalt.asphaltApplier || 'N/A'}`, 110, 62);
+          doc.line(10, 65, 200, 65);
+          doc.setFontSize(10);
+          doc.text(`ASPHALT  MARSHALL & G.M.M TEST` , 75 , 70)
+
 
           const tableColumn = ['Parameter', '1', '2', '3', '4', '5', '6'];
           const tableRows = [
@@ -320,22 +382,47 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
           autoTable(doc, {
             head: [tableColumn],
             body: tableRows,
-            startY: finalY + 5,
-            styles: {fontSize: 9},
-            headStyles: {fillColor: [41, 128, 185]},
-            alternateRowStyles: {fillColor: [240, 240, 240]},
+            startY: 73,
+            styles: {
+              fontSize: 6,
+              cellPadding: 1.5,
+              lineColor: [0, 0, 0], // Black grid lines
+              lineWidth: 0.1,       // Thin grid lines
+            },
+            headStyles: {
+              fillColor: [41, 128, 185],
+              textColor: [255, 255, 255], // White text for header
+              fontStyle: 'bold',
+              lineWidth: 0.1,
+            },
+            alternateRowStyles: {
+              fillColor: [242, 242, 242], // Very light gray alternate rows
+            },
+            columnStyles: {
+              0: { cellWidth: 'auto', fontStyle: 'bold' }, // Bold parameter names
+              1: { halign: 'right' }, // Right-align values
+              2: { halign: 'right' },
+              3: { halign: 'right' },
+              4: { halign: 'right' },
+              5: { halign: 'right' },
+              6: { halign: 'right' }
+            },
+            tableLineColor: [220, 220, 220], // Table border color
+            tableLineWidth: 0.3,
+            margin: { left: 10 }, // Add some left margin like Excel
+            showHead: 'everyPage'
           });
 
           finalY = (doc as any).lastAutoTable.finalY || 100;
 
           doc.setFontSize(9);
           if (this.asphalt.notes) {
-            doc.line(10, finalY, 200, finalY);
+            doc.line(10, finalY+4, 200, finalY+4);
             const splitNotes = doc.splitTextToSize(
               `Remarks: ${this.asphalt.notes || ""}`,
               180
             );
-            doc.text(splitNotes, 13, finalY + 5);
+            doc.text(splitNotes, 13, finalY + 8);
             finalY += (splitNotes.length * 7); // 7 is approximate line height
           }
 
