@@ -73,13 +73,18 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
   }
 
   createChart() {
-    const ctx = document.getElementById('invoiceChart') as HTMLCanvasElement;
+    const canvas = document.getElementById('invoiceChart') as HTMLCanvasElement;
+    const ctx = canvas.getContext('2d');
 
     this.service.findById(this.id).subscribe(res => {
-      this.chart = new Chart(ctx, {
+      if (this.chart) {
+        this.chart.destroy(); // destroy previous chart instance if any
+      }
+
+      this.chart = new Chart(ctx!, {
         type: 'line',
         data: {
-          labels: ['1.5', '1', '3/4', '1/2', '3/8', '#4', '#10', '#40', '#80', "#200"],
+          labels: ['1.5', '1', '3/4', '1/2', '3/8', '#4', '#10', '#40', '#80', '#200'],
           datasets: [
             {
               label: 'Max',
@@ -87,9 +92,11 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
                 res.gradationTest.cvcMaxA, res.gradationTest.cvcMaxB, res.gradationTest.cvcMaxC,
                 res.gradationTest.cvcMaxD, res.gradationTest.cvcMaxE, res.gradationTest.cvcMaxF,
                 res.gradationTest.cvcMaxG, res.gradationTest.cvcMaxH, res.gradationTest.cvcMaxI,
-                res.gradationTest.cvcMaxJ],
+                res.gradationTest.cvcMaxJ
+              ],
               borderColor: 'grey',
-              fill: false
+              fill: false,
+              tension: 0.2,
             },
             {
               label: 'Gradation',
@@ -97,9 +104,11 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
                 100 - res.gradationTest.retainedA, 100 - res.gradationTest.retainedB,
                 100 - res.gradationTest.retainedC, 100 - res.gradationTest.retainedD, 100 - res.gradationTest.retainedE,
                 100 - res.gradationTest.retainedF, 100 - res.gradationTest.retainedG, 100 - res.gradationTest.retainedH,
-                100 - res.gradationTest.retainedI, 100 - res.gradationTest.retainedJ],
+                100 - res.gradationTest.retainedI, 100 - res.gradationTest.retainedJ
+              ],
               borderColor: 'red',
-              fill: false
+              fill: false,
+              tension: 0.2,
             },
             {
               label: 'Min',
@@ -107,16 +116,45 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
                 res.gradationTest.cvcMinA, res.gradationTest.cvcMinB,
                 res.gradationTest.cvcMinC, res.gradationTest.cvcMinD, res.gradationTest.cvcMinE,
                 res.gradationTest.cvcMinF, res.gradationTest.cvcMinG, res.gradationTest.cvcMinH,
-                res.gradationTest.cvcMinI, res.gradationTest.cvcMinJ],
+                res.gradationTest.cvcMinI, res.gradationTest.cvcMinJ
+              ],
               borderColor: 'grey',
-              fill: false
+              fill: false,
+              tension: 0.2,
             }
           ]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            legend: {
+              position: 'top',
+            },
+            tooltip: {
+              enabled: true,
+            }
+          },
+          scales: {
+            x: {
+              title: {
+                display: true,
+                text: 'Sieve ',
+              },
+            },
+            y: {
+              title: {
+                display: true,
+                text: 'Passing%',
+              },
+              beginAtZero: true,
+              max: 110,
+            }
+          }
         }
       });
-    })
-
+    });
   }
+
 
 
   generatePDF() {

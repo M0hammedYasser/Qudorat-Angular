@@ -11,6 +11,7 @@ import Chart from "chart.js/auto";
   selector: 'app-atterberg-report',
   standalone: true,
   imports: [
+    DecimalPipe
 
   ],
   templateUrl: './atterberg-report.component.html',
