@@ -10,7 +10,9 @@ import Chart from "chart.js/auto";
 @Component({
   selector: 'app-atterberg-report',
   standalone: true,
-  imports: [],
+  imports: [
+
+  ],
   templateUrl: './atterberg-report.component.html',
   styleUrl: './atterberg-report.component.css'
 })
@@ -21,6 +23,9 @@ export class AtterbergReportComponent implements OnInit {
 
   @ViewChild('chartCanvas', {static: true}) chartCanvas!: ElementRef;
   chart!: Chart;
+
+  @ViewChild('moistureChartCanvas', {static: true}) moistureChartCanvas!: ElementRef;
+  moistureChart!: Chart;
 
   massOfSoil1: number = 0;
   massOfSoil2: number = 0;
@@ -65,6 +70,7 @@ export class AtterbergReportComponent implements OnInit {
       this.massOfWater7 = Number(this.atterbergLimits.massCanAndSoilWet7 - this.atterbergLimits.massCanAndSoilDry7);
       this.massOfWater8 = Number(this.atterbergLimits.massCanAndSoilWet8 - this.atterbergLimits.massCanAndSoilDry8);
       this.createPlasticityChart();
+      this.createMoistureChart();
     })
   }
 
@@ -149,6 +155,100 @@ export class AtterbergReportComponent implements OnInit {
     });
   }
 
+  createMoistureChart(): void {
+    if (this.moistureChart) {
+      this.moistureChart.destroy();
+    }
+
+    const blows = [
+      this.atterbergLimits.numberOfBlows5,
+      this.atterbergLimits.numberOfBlows6,
+      this.atterbergLimits.numberOfBlows7,
+      this.atterbergLimits.numberOfBlows8
+    ];
+
+    const waterContents = [
+      Number((this.massOfWater5 / this.massOfSoil5) * 100),
+      Number((this.massOfWater6 / this.massOfSoil6) * 100),
+      Number((this.massOfWater7 / this.massOfSoil7) * 100),
+      Number((this.massOfWater8 / this.massOfSoil8) * 100)
+    ];
+
+    const dataPoints = blows.map((x, i) => ({ x, y: waterContents[i] }));
+
+    // Compute ln(x)
+    const lnX = blows.map(x => Math.log(x));
+    const y = waterContents;
+
+    const n = blows.length;
+    const sumLnX = lnX.reduce((a, b) => a + b, 0);
+    const sumY = y.reduce((a, b) => a + b, 0);
+    const sumLnX2 = lnX.reduce((a, b) => a + b * b, 0);
+    const sumLnXy = lnX.reduce((sum, lnxi, i) => sum + lnxi * y[i], 0);
+
+    const a = (n * sumLnXy - sumLnX * sumY) / (n * sumLnX2 - sumLnX * sumLnX);
+    const b = (sumY - a * sumLnX) / n;
+
+    const yMean = sumY / n;
+    const ssTot = y.reduce((sum, yi) => sum + (yi - yMean) ** 2, 0);
+    const ssRes = y.reduce((sum, yi, i) => sum + (yi - (a * lnX[i] + b)) ** 2, 0);
+    const r2 = 1 - ssRes / ssTot;
+
+    // Regression line from x = 10 to 100
+    const regressionLine = [];
+    for (let x = 10; x <= 100; x += 1) {
+      regressionLine.push({ x, y: a * Math.log(x) + b });
+    }
+
+    this.moistureChart = new Chart(this.moistureChartCanvas.nativeElement, {
+      type: 'scatter',
+      data: {
+        datasets: [
+          {
+            label: 'Water Content Data',
+            data: dataPoints,
+            backgroundColor: 'blue',
+            pointRadius: 6
+          },
+          {
+            label: 'Log Regression Fit',
+            data: regressionLine,
+            borderColor: 'red',
+            borderWidth: 2,
+            pointRadius: 0,
+            showLine: true
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { position: 'top' },
+          tooltip: { mode: 'nearest' },
+          title: {
+            display: true,
+            text: `y = ${a.toFixed(3)}ln(x) + ${b.toFixed(3)} | R² = ${r2.toFixed(4)}`
+          }
+        },
+        scales: {
+          x: {
+            type: 'logarithmic',
+            title: { display: true, text: 'Number of Blows (N)' },
+            min: 10,
+            max: 100
+          },
+          y: {
+            title: { display: true, text: 'Water Content (%)' },
+            min: 30,
+            max: 38
+          }
+        }
+      }
+    });
+  }
+
+
+
 
   generatePDF() {
     const doc = new jsPDF();
@@ -162,23 +262,23 @@ export class AtterbergReportComponent implements OnInit {
 
     head.onload = () => {
       doc.addImage(head, 'PNG', 0, 0, 210, 33);
-      doc.setFontSize(14);
+      doc.setFontSize(12);
       doc.text('Atterberg Limits Data Sheet', 70, 36)
       doc.setFontSize(10);
       doc.text(`Project                 ${this.atterbergLimits.projectName || 'N/A'}`, 13, 42);
-      doc.text(`Client                   ${this.atterbergLimits.clientName || 'N/A'}`, 13, 47);
-      doc.text(`Sample No          ${this.atterbergLimits.sampleNo || 'N/A'}`, 13, 52);
-      doc.text(`Sample By          ${this.atterbergLimits.sampleBy || 'N/A'}`, 13, 57);
-      doc.text(`Sampling Date   ${this.atterbergLimits.sampleDate || 'N/A'}`, 13, 62);
+      doc.text(`Client                   ${this.atterbergLimits.clientName || 'N/A'}`, 13, 46);
+      doc.text(`Sample No          ${this.atterbergLimits.sampleNo || 'N/A'}`, 13, 50);
+      doc.text(`Sample By          ${this.atterbergLimits.sampleBy || 'N/A'}`, 13, 54);
+      doc.text(`Sampling Date   ${this.atterbergLimits.sampleDate || 'N/A'}`, 13, 58);
       doc.text(`Test Name          ${this.atterbergLimits.nameOfTest || 'N/A'}`, 110, 42);
-      doc.text(`Testing Date       ${this.atterbergLimits.testingDate || 'N/A'}`, 110, 47);
-      doc.text(`Standard             ${this.atterbergLimits.classification || 'N/A'}`, 110, 52);
-      doc.text(`Consultant          ${this.atterbergLimits.consultant || 'N/A'}`, 110, 57);
-      doc.text(`Owner                 ${this.atterbergLimits.owner || 'N/A'}`, 110, 62);
-      doc.line(10, 65, 200, 65);
+      doc.text(`Testing Date       ${this.atterbergLimits.testingDate || 'N/A'}`, 110, 46);
+      doc.text(`Standard             ${this.atterbergLimits.classification || 'N/A'}`, 110, 50);
+      doc.text(`Consultant          ${this.atterbergLimits.consultant || 'N/A'}`, 110, 54);
+      doc.text(`Owner                 ${this.atterbergLimits.owner || 'N/A'}`, 110, 58);
+      doc.line(10, 60, 200, 60);
 
       autoTable(doc, {
-        startY: 67,
+        startY: 62,
         head: [
           [
             {content: 'TEST', colSpan: 3, styles: {lineWidth: 0.5}},
@@ -245,7 +345,7 @@ export class AtterbergReportComponent implements OnInit {
         ],
         theme: 'grid',
         styles: {
-          fontSize: 6,
+          fontSize: 5,
           cellPadding: 2,
           halign: 'center',
           valign: 'middle',
@@ -285,7 +385,7 @@ export class AtterbergReportComponent implements OnInit {
         ],
         theme: 'grid',
         styles: {
-          fontSize: 6,
+          fontSize: 5,
           cellPadding: 2,
           lineWidth: 0.5,
           lineColor: [0, 0, 0]
@@ -302,44 +402,54 @@ export class AtterbergReportComponent implements OnInit {
       let finalY = (doc as any).lastAutoTable.finalY + 3;
 
       setTimeout(() => {
-          const chartCanvas = document.querySelector('canvas') as HTMLCanvasElement;
-          if (chartCanvas) {
-            const chartImage = chartCanvas.toDataURL('image/png');
-            doc.addImage(chartImage, 'PNG', 72, finalY - 30 , 123, 60);
-            doc.setFontSize(9);
+        const chartCanvases = document.querySelectorAll('canvas') as NodeListOf<HTMLCanvasElement>;
 
-            if (this.atterbergLimits.notes) {
-              doc.line(10, finalY + 75, 200, finalY + 75);
-              const splitNotes = doc.splitTextToSize(
-                `Remarks: ${this.atterbergLimits.notes || ""}`,
-                180
-              );
-              doc.text(splitNotes, 13, finalY + 78);
-              finalY += (splitNotes.length * 7);
-            }
-            doc.line(10, 257, 200, 257);
-            doc.setFontSize(10);
-            doc.text(`Approved by: ${this.atterbergLimits.approveBy || 'N/A'}`, 13, 261);
-            doc.text(`Test by: ${this.atterbergLimits.testBy || 'N/A'}`, 80, 261);
-            doc.text(`Checked by: ${this.atterbergLimits.activist || 'N/A'}`, 150, 261);
-            doc.addImage(tail, 'PNG', 0, 265, 210, 33);
+        if (chartCanvases.length > 0) {
+          const chartImage1 = chartCanvases[0].toDataURL('image/png');
+          doc.addImage(chartImage1, 'PNG', 72, finalY - 30, 123, 55);
 
-            doc.setFontSize(5);
-            const formatDateTime = (date: Date) => {
-              const year = date.getFullYear();
-              const month = String(date.getMonth() + 1).padStart(2, '0');
-              const day = String(date.getDate()).padStart(2, '0');
-              const hours = String(date.getHours()).padStart(2, '0');
-              const minutes = String(date.getMinutes()).padStart(2, '0');
+          // Optional space or heading between charts
+          doc.setFontSize(10);
+          finalY += 30;
 
-              return `${year}-${month}-${day} ${hours}:${minutes}`;
-            };
-            const currentDateTime = formatDateTime(new Date());
-            doc.text(`Report Date: ${currentDateTime}`, 1, 290);
-
-            doc.save(`AtterbergLimitsReport_${this.atterbergLimits.testName}.pdf`);
+          // Second Chart (e.g., index 1)
+          if (chartCanvases.length > 1) {
+            const chartImage2 = chartCanvases[1].toDataURL('image/png');
+            doc.addImage(chartImage2, 'PNG', 10, finalY, 123, 55);
+            finalY += 40;
           }
-        }, 1000);
+        }
+
+        // Notes section (unchanged)
+        if (this.atterbergLimits.notes) {
+          doc.line(10, finalY + 18, 200, finalY + 18);
+          const splitNotes = doc.splitTextToSize(`Remarks: ${this.atterbergLimits.notes || ""}`, 180);
+          doc.text(splitNotes, 13, finalY + 21);
+          finalY += (splitNotes.length * 7);
+        }
+
+        // Signatures & Footer
+        doc.line(10, 257, 200, 257);
+        doc.setFontSize(10);
+        doc.text(`Approved by: ${this.atterbergLimits.approveBy || 'N/A'}`, 13, 261);
+        doc.text(`Test by: ${this.atterbergLimits.testBy || 'N/A'}`, 80, 261);
+        doc.text(`Checked by: ${this.atterbergLimits.activist || 'N/A'}`, 150, 261);
+        doc.addImage(tail, 'PNG', 0, 265, 210, 33);
+
+        doc.setFontSize(5);
+        const formatDateTime = (date: Date) => {
+          const year = date.getFullYear();
+          const month = String(date.getMonth() + 1).padStart(2, '0');
+          const day = String(date.getDate()).padStart(2, '0');
+          const hours = String(date.getHours()).padStart(2, '0');
+          const minutes = String(date.getMinutes()).padStart(2, '0');
+          return `${year}-${month}-${day} ${hours}:${minutes}`;
+        };
+        const currentDateTime = formatDateTime(new Date());
+        doc.text(`Report Date: ${currentDateTime}`, 1, 290);
+
+        doc.save(`AtterbergLimitsReport_${this.atterbergLimits.testName}.pdf`);
+      }, 1000);
     };
   }
 }
