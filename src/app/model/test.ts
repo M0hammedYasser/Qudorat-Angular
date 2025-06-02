@@ -4,6 +4,7 @@ import {SieveAnalysis} from "./sieve-analysis";
 import {Asphalt} from "./asphalt";
 import {CompressiveStrength} from "./compressive-strength";
 import {AtterbergLimits} from "./atterberg-limits";
+import {MoistureDensityRelationship} from "./moisture-density-relationship";
 
 export interface Test {
 
@@ -23,6 +24,7 @@ export interface Test {
   asphalts: Asphalt[];
   compressiveStrengths: CompressiveStrength[];
   atterbergLimits: AtterbergLimits[];
+  moistureDensityRelationships: MoistureDensityRelationship[];
 
   status: string;
   name: string;

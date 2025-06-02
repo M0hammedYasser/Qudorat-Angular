@@ -48,28 +48,37 @@ export class CompressiveStrengthReportComponent implements OnInit {
 
     head.onload = () => {
       doc.addImage(head, 'PNG', 0, 0, 210, 33);
-      doc.setFontSize(14);
-      doc.text('Portland Cement Concrete Cylinders Compressive Strength Test', 40, 36)
-      doc.setFontSize(10);
-      doc.text(`Project                 ${this.compressiveStrength.projectName || 'N/A'}`, 13, 42);
-      doc.text(`Client                   ${this.compressiveStrength.clientName || 'N/A'}`, 13, 47);
-      doc.text(`Sample No          ${this.compressiveStrength.sampleNo || 'N/A'}`, 13, 52);
-      doc.text(`Sample By          ${this.compressiveStrength.sampleBy || 'N/A'}`, 13, 57);
-      doc.text(`Sampling Date   ${this.compressiveStrength.sampleDate || 'N/A'}`, 13, 62);
-      doc.text(`Test Name          ${this.compressiveStrength.nameOfTest || 'N/A'}`, 100, 42);
-      doc.text(`Testing Date       ${this.compressiveStrength.testingDate || 'N/A'}`, 100, 47);
-      doc.text(`Standard             ${this.compressiveStrength.classification || 'N/A'}`, 100, 52);
-      doc.text(`Consultant          ${this.compressiveStrength.consultant || 'N/A'}`, 100, 57);
-      doc.text(`Owner                 ${this.compressiveStrength.owner || 'N/A'}`, 100, 62);
-      doc.line(10, 65, 200, 65);
+      doc.setFontSize(12);
+      doc.text(`Portland Cement Concrete Cylinders Compressive Strength Test` , 38 , 36)
+
+
+      autoTable(doc, {
+        startY: 38,
+        body: [
+          ['Project', this.compressiveStrength.projectName || 'N/A', 'Test Name', this.compressiveStrength.nameOfTest || 'N/A'],
+          ['Client', this.compressiveStrength.clientName || 'N/A', 'Testing Date', this.compressiveStrength.testingDate || 'N/A'],
+          ['Sample No', this.compressiveStrength.sampleNo || 'N/A', 'Standard', this.compressiveStrength.classification || 'N/A'],
+          ['Sample By', this.compressiveStrength.sampleBy || 'N/A', 'Consultant', this.compressiveStrength.consultant || 'N/A'],
+          ['Sampling Date', this.compressiveStrength.sampleDate || 'N/A', 'Owner', this.compressiveStrength.owner || 'N/A'],
+        ],
+        theme: 'grid',
+        styles: { fontSize: 6, cellPadding: 1.5 },
+        columnStyles: {
+          0: { cellWidth: 30 },
+          1: { cellWidth: 60 },
+          2: { cellWidth: 30 },
+          3: { cellWidth: 60 }
+        },
+      });
+
 
       autoTable(doc, {
         startY: 67,
         head: [['Parameter', 'Value', 'Unit', 'Spec', 'Value', 'Unit', 'Value', 'Unit']],
         body: [
           ['Cement Content', this.compressiveStrength.cementContent, this.compressiveStrength.cementContentType, 'Spec. 28 Days Strength', this.compressiveStrength.specTwintyEightDayStrength, 'kg/cm2', this.compressiveStrength.specTwintyEightDayStrength / 10, 'Mpa'],
-          ['Diameter', this.compressiveStrength.diameter, 'cm', 'Area', Number(this.area).toFixed(2), 'cm²'],
-          ['Height', this.compressiveStrength.height, 'cm', 'Volume', Number(this.volume).toFixed(2), 'cm³'],
+          ['Diameter', this.compressiveStrength.diameter * 10 , 'mm', 'Area', Number(this.area).toFixed(2), 'cm²'],
+          ['Height', this.compressiveStrength.height * 10, 'mm', 'Volume', Number(this.volume).toFixed(2), 'cm³'],
           ['Environmental Conditions:', '', '', '', '', ''],
           ['Date Cast', this.compressiveStrength.dateCast, '', 'Slump', this.compressiveStrength.slump, 'mm'],
           ['Date Received', this.compressiveStrength.dateReceived, '', 'Air Temperature', this.compressiveStrength.airTemperature, '°C'],
@@ -166,8 +175,8 @@ export class CompressiveStrengthReportComponent implements OnInit {
         finalY += (splitNotes.length * 7); // 7 is approximate line height
       }
 
-      doc.line(10, finalY + 1, 200, finalY + 1);
-      doc.setFontSize(10);
+      doc.line(10, finalY + 2, 200, finalY + 2);
+      doc.setFontSize(8);
       doc.text(`Approved by: ${this.compressiveStrength.approveBy || 'N/A'}`, 13, finalY + 5);
       doc.text(`Test by: ${this.compressiveStrength.testBy || 'N/A'}`, 80, finalY + 5);
       doc.text(`Checked by: ${this.compressiveStrength.activist || 'N/A'}`, 150, finalY + 5);

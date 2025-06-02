@@ -53,6 +53,7 @@ export class TestComponent implements OnInit {
     if (id == 2) this.router.navigate([`/asphalt/${testId}`]);
     if (id == 3) this.router.navigate([`/compressive-strength/${testId}`]);
     if (id == 4) this.router.navigate([`/atterberg/${testId}`]);
+    if (id == 5) this.router.navigate([`/moisture-density-relationship/${testId}`]);
   }
 
   changeActive(id: number) {

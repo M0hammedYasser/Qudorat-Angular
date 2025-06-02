@@ -139,18 +139,18 @@ export class SandReportComponent implements AfterViewInit, OnInit {
       const tableRows: any[] = [];
 
       const sieveData = [
-        ["3", 75.0, this.sieveAnalysis.massRetainedA, this.sieveAnalysis.retainedA, this.sieveAnalysis.passingA],
-        ["21/2", 62.5, this.sieveAnalysis.massRetainedB, this.sieveAnalysis.retainedB, this.sieveAnalysis.passingB],
-        ["2", 50.0, this.sieveAnalysis.massRetainedC, this.sieveAnalysis.retainedC, this.sieveAnalysis.passingC],
-        ["11/2", 37.5, this.sieveAnalysis.massRetainedD, this.sieveAnalysis.retainedD, this.sieveAnalysis.passingD],
-        ["1", 25.0, this.sieveAnalysis.massRetainedE, this.sieveAnalysis.retainedE, this.sieveAnalysis.passingE],
-        ["3/4", 19.0, this.sieveAnalysis.massRetainedF, this.sieveAnalysis.retainedF, this.sieveAnalysis.passingF],
-        ["1/2", 12.5, this.sieveAnalysis.massRetainedG, this.sieveAnalysis.retainedG, this.sieveAnalysis.passingG],
-        ["3/8", 9.5, this.sieveAnalysis.massRetainedH, this.sieveAnalysis.retainedH, this.sieveAnalysis.passingH],
-        ["#4", 4.75, this.sieveAnalysis.massRetainedI, this.sieveAnalysis.retainedI, this.sieveAnalysis.passingI],
-        ["#10", 2.00, this.sieveAnalysis.massRetainedJ, this.sieveAnalysis.retainedJ, this.sieveAnalysis.passingJ],
-        ["#40", 0.425, this.sieveAnalysis.massRetainedK, this.sieveAnalysis.retainedK, this.sieveAnalysis.passingK],
-        ["#100", 0.150, this.sieveAnalysis.massRetainedL, this.sieveAnalysis.retainedL, this.sieveAnalysis.passingL],
+        ["3", 75.0, this.sieveAnalysis.massRetainedA, this.sieveAnalysis.retainedA, Number(this.sieveAnalysis.passingA).toFixed(0)],
+        ["21/2", 62.5, this.sieveAnalysis.massRetainedB, this.sieveAnalysis.retainedB, Number(this.sieveAnalysis.passingB).toFixed(0)],
+        ["2", 50.0, this.sieveAnalysis.massRetainedC, this.sieveAnalysis.retainedC, Number(this.sieveAnalysis.passingC).toFixed(0)],
+        ["11/2", 37.5, this.sieveAnalysis.massRetainedD, this.sieveAnalysis.retainedD, Number(this.sieveAnalysis.passingD).toFixed(0)],
+        ["1", 25.0, this.sieveAnalysis.massRetainedE, this.sieveAnalysis.retainedE, Number(this.sieveAnalysis.passingE).toFixed(0)],
+        ["3/4", 19.0, this.sieveAnalysis.massRetainedF, this.sieveAnalysis.retainedF, Number(this.sieveAnalysis.passingF).toFixed(0)],
+        ["1/2", 12.5, this.sieveAnalysis.massRetainedG, this.sieveAnalysis.retainedG, Number(this.sieveAnalysis.passingG).toFixed(0)],
+        ["3/8", 9.5, this.sieveAnalysis.massRetainedH, this.sieveAnalysis.retainedH, Number(this.sieveAnalysis.passingH).toFixed(0)],
+        ["#4", 4.75, this.sieveAnalysis.massRetainedI, this.sieveAnalysis.retainedI, Number(this.sieveAnalysis.passingI).toFixed(0)],
+        ["#10", 2.00, this.sieveAnalysis.massRetainedJ, this.sieveAnalysis.retainedJ, Number(this.sieveAnalysis.passingJ).toFixed(0)],
+        ["#40", 0.425, this.sieveAnalysis.massRetainedK, this.sieveAnalysis.retainedK, Number(this.sieveAnalysis.passingK).toFixed(0)],
+        ["#100", 0.150, this.sieveAnalysis.massRetainedL, this.sieveAnalysis.retainedL, Number((this.sieveAnalysis.passingL).toFixed(2))],
         ["#200", 0.075, this.sieveAnalysis.massRetainedM, this.sieveAnalysis.retainedM, this.sieveAnalysis.passingM],
         ["Total Wt.", "", this.sieveAnalysis.totalWeigh, "", ""]
       ];

@@ -1,0 +1,154 @@
+.form-container {
+  margin-left: 260px; /* Reduced from 260px */
+  padding: 80px 15px 0 15px; /* Kept 90px top padding */
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+
+
+.header {
+  text-align: center;
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 12px;
+}
+.head{
+  text-align: center;
+  font-size: 15px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.form-row {
+  display: flex;
+  gap: 6px; /* Reduced from 8px */
+  justify-content: space-between;
+  margin-bottom: 4px; /* Reduced */
+}
+
+.form-group {
+  flex: 1;
+  min-width: 170px; /* Slightly smaller */
+  margin-bottom: 2px; /* Reduced */
+}
+
+.btn-primary {
+  background: #007bff;
+  color: white;
+  margin: 6px auto 4px auto; /* Reduced */
+  display: block;
+  padding: 5px 14px; /* Slightly smaller */
+  font-size: 13px; /* Smaller */
+}
+
+.bitumen-form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 4px; /* Reduced from 6px */
+  margin: 0 auto;
+}
+
+.compact-input {
+  height: 28px; /* Smaller */
+  padding: 3px 6px; /* Tighter */
+  margin-bottom: 2px; /* Reduced */
+  font-size: 12px; /* Smaller */
+}
+
+.col-form-label {
+  margin-bottom: 1px; /* Minimal */
+  display: block;
+  font-size: 12px; /* Smaller */
+  font-weight: 500;
+}
+
+.d-flex {
+  margin-bottom: 3px; /* Reduced */
+}
+
+.test-table-container {
+  margin: 20px 0;
+  overflow-x: auto;
+}
+
+.test-data-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.test-data-table th {
+  background-color: #f8f9fa;
+  border: 1px solid #dee2e6;
+  padding: 8px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.test-data-table td {
+  border: 1px solid #dee2e6;
+  padding: 8px;
+  text-align: center;
+}
+
+.variable-cell {
+  background-color: #f8f9fa;
+  text-align: left;
+  min-width: 180px;
+}
+
+.variable-cell label {
+  font-weight: bold;
+  margin-bottom: 0;
+}
+
+.variable-cell .units {
+  font-size: 0.8em;
+  color: #6c757d;
+}
+
+.table-input {
+  width: 100%;
+  height: 30px;
+  padding: 0 5px;
+  font-size: 0.9em;
+}
+
+.calculated-row td {
+  background-color: #f1f1f1;
+  font-weight: bold;
+}
+
+.empty-cell {
+  background-color: #f8f9fa;
+}
+
+.results-section {
+  margin-top: 20px;
+  padding: 15px;
+  background-color: #f8f9fa;
+  border-radius: 5px;
+}
+
+.result-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.result-label {
+  width: 180px;
+  font-weight: bold;
+}
+
+.result-input {
+  width: 100px;
+  display: inline-block;
+}
+
+.btn-primary {
+  margin-top: 20px;
+  padding: 8px 20px;
+}

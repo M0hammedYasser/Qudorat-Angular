@@ -58,6 +58,18 @@ import {
 import {
   AtterbergReportComponent
 } from "./component/sidebar-component/analsis/atterberg-limits/atterberg-report/atterberg-report.component";
+import {
+  ShowMoistureDensityRelationshipComponent
+} from "./component/sidebar-component/analsis/moistureDensity-relationship/show-moisture-density-relationship/show-moisture-density-relationship.component";
+import {
+  InsertMoistureDensityRelationshipComponent
+} from "./component/sidebar-component/analsis/moistureDensity-relationship/insert-moisture-density-relationship/insert-moisture-density-relationship.component";
+import {
+  UpdateMoistureDensityRelationshipComponent
+} from "./component/sidebar-component/analsis/moistureDensity-relationship/update-moisture-density-relationship/update-moisture-density-relationship.component";
+import {
+  MoistureDensityRelationshipReportComponent
+} from "./component/sidebar-component/analsis/moistureDensity-relationship/moisture-density-relationship-report/moisture-density-relationship-report.component";
 
 export const routes: Routes = [
 
@@ -98,6 +110,11 @@ export const routes: Routes = [
   { path: 'atterberg/insert/:id', component: InsertAtterbergComponent, canActivate: [authGuard] },
   { path: 'atterberg/update/:id', component: UpdateAtterbergComponent, canActivate: [authGuard] },
   { path: 'atterberg/report/:id', component: AtterbergReportComponent, canActivate: [authGuard] },
+
+  { path: 'moisture-density-relationship/:id', component: ShowMoistureDensityRelationshipComponent, canActivate: [authGuard] },
+  { path: 'moisture-density-relationship/insert/:id', component: InsertMoistureDensityRelationshipComponent, canActivate: [authGuard] },
+  { path: 'moisture-density-relationship/update/:id', component: UpdateMoistureDensityRelationshipComponent, canActivate: [authGuard] },
+  { path: 'moisture-density-relationship/report/:id', component: MoistureDensityRelationshipReportComponent, canActivate: [authGuard] },
 
   {path: 'report', component: TestReportComponent, canActivate: [authGuard]},
 
