@@ -152,7 +152,7 @@ export class SandReportComponent implements AfterViewInit, OnInit {
         ["#40", 0.425, this.sieveAnalysis.massRetainedK, this.sieveAnalysis.retainedK, Number(this.sieveAnalysis.passingK).toFixed(0)],
         ["#100", 0.150, this.sieveAnalysis.massRetainedL, this.sieveAnalysis.retainedL, Number((this.sieveAnalysis.passingL).toFixed(2))],
         ["#200", 0.075, this.sieveAnalysis.massRetainedM, this.sieveAnalysis.retainedM, this.sieveAnalysis.passingM],
-        ["Total Wt.", "", this.sieveAnalysis.totalWeigh, "", ""]
+        ["Total Wt.", this.sieveAnalysis.totalWeigh,"" , "", ""]
       ];
 
       sieveData.forEach(row => tableRows.push(row));
