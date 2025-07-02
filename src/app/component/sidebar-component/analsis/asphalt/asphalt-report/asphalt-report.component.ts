@@ -189,7 +189,7 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
       doc.text(`Asphalt Applier   ${this.asphalt.asphaltApplier || 'N/A'}`, 110, 62);
       doc.line(10, 65, 200, 65);
       doc.setFontSize(10);
-      doc.text(`BITUMEN CONTENT TEST` , 75 , 70)
+      doc.text(`BITUMEN CONTENT TEST (${this.asphalt.bitumenStandard})` , 75 , 70);
 
       // First table - Bitumen data
       const bitumenColumn = ['Parameter', 'Value'];
