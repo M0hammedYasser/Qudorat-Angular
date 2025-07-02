@@ -70,6 +70,7 @@ import {
 import {
   MoistureDensityRelationshipReportComponent
 } from "./component/sidebar-component/analsis/moistureDensity-relationship/moisture-density-relationship-report/moisture-density-relationship-report.component";
+import {NotificationComponent} from "./component/sidebar-component/notification/notification/notification.component";
 
 export const routes: Routes = [
 
@@ -77,6 +78,7 @@ export const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'dashboard', component: DashboardComponent, canActivate: [authGuard]},
   {path: 'profile', component: ProfileComponent, canActivate: [authGuard]},
+  {path: 'notification', component: NotificationComponent, canActivate: [authGuard]},
 
   { path: 'clients', component: ShowClientComponent, canActivate: [authGuard] },
   { path: 'clients/insert', component: InsertClientComponent, canActivate: [authGuard] },

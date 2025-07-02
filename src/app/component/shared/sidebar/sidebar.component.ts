@@ -17,6 +17,7 @@ import {NgIf} from "@angular/common";
 export class SidebarComponent implements OnInit {
 
   role : string = '';
+  notificationCount: number = 0;
 
   constructor(private authenticationService: AuthenticationService, private router: Router, private routerLink: Router) {
   }

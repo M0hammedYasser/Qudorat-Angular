@@ -28,3 +28,23 @@
   border-left: 4px solid #0055D8;
   background-color: rgba(0, 85, 216, 0.1);
 }
+.notification-badge {
+  position: absolute;
+  top: 13px;
+  right: 50px;
+  background-color: red;
+  color: white;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px;
+}
+
+.nav-link {
+  position: relative;
+  display: inline-block;
+}

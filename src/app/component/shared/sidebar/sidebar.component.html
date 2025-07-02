@@ -31,8 +31,11 @@
       </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" routerLink="/notifications" routerLinkActive="activate">
+      <a class="nav-link" routerLink="/notification" routerLinkActive="activate">
         <i class="fas fa-bell"></i> Notifications
+        <span *ngIf="notificationCount > 0" class="notification-badge">
+      {{notificationCount > 99 ? '99+' : notificationCount}}
+    </span>
       </a>
     </li>
     <li class="nav-item">

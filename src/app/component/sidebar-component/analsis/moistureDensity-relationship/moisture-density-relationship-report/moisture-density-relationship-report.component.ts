@@ -417,7 +417,7 @@ export class MoistureDensityRelationshipReportComponent implements OnInit {
         doc.rect(startX, y, col1Width, rowHeight); // O.M.C label cell
         doc.rect(startX + col1Width, y, col2Width, rowHeight); // O.M.C value cell
         doc.text("O.M.C %", startX + 2, y + 7);
-        doc.text(this.moistureContentC.toFixed(3), startX + col1Width + 2, y + 7);
+        doc.text(this.moistureContentC.toFixed(2), startX + col1Width + 2, y + 7);
 
         finalY += 60;
 
