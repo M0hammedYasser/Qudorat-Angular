@@ -200,11 +200,11 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
       margin: { left: 13, right: 13 },
       tableWidth: 'auto'
     });
-    
-    
+
+
       // doc.line(10, 68, 200, 68);
       doc.setFontSize(10);
-      doc.text(`BITUMEN CONTENT TEST (${this.asphalt.bitumenStandard})`, 75, 73);
+      doc.text(`BITUMEN CONTENT TEST (${this.asphalt.bitumen.standard})`, 75, 73);
 
       // First table - Bitumen data
       const bitumenColumn = ['Parameter', 'Value'];
@@ -222,16 +222,16 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
       autoTable(doc, {
         head: [bitumenColumn],
         body: bitumenRows,
-        startY: 74,  
+        startY: 74,
         styles: {
           fontSize: 6,
           cellPadding: 1.5,
-          lineColor: [0, 0, 0], 
-          lineWidth: 0.1,       
+          lineColor: [0, 0, 0],
+          lineWidth: 0.1,
         },
         headStyles: {
           fillColor: [41, 128, 185],
-          textColor: [255, 255, 255], 
+          textColor: [255, 255, 255],
           fontStyle: 'bold',
           lineWidth: 0.1,
         },
@@ -241,14 +241,14 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
         alternateRowStyles: {
           fillColor: [240, 240, 240],
         },
-        showHead: 'everyPage', 
-        tableLineColor: [0, 0, 0], 
-        tableLineWidth: 0.3,       
+        showHead: 'everyPage',
+        tableLineColor: [0, 0, 0],
+        tableLineWidth: 0.3,
       });
 
       let finalY = (doc as any).lastAutoTable.finalY + 5;
 
-      doc.text(`SIEVE ANALYSIS` , 85 , finalY  )
+      doc.text(`SIEVE ANALYSIS (${this.asphalt.gradationTest.standard})` , 85 , finalY  )
       const sieveColumn: RowInput[] = [
         [
           { content: 'mm', rowSpan: 2, styles: { halign: 'center', valign: 'middle' } },
@@ -401,9 +401,9 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
             margin: { left: 13, right: 13 },
             tableWidth: 'auto'
           });
-          // doc.line(10, 68, 200, 68); 
+          // doc.line(10, 68, 200, 68);
           doc.setFontSize(10);
-          doc.text(`ASPHALT  MARSHALL & G.M.M TEST` , 75 , 73)
+          doc.text(`ASPHALT  MARSHALL & G.M.M TEST (${this.asphalt.classification})` , 75 , 73)
 
 
           const tableColumn = ['Parameter', '1', '2', '3', '4', '5', '6'];

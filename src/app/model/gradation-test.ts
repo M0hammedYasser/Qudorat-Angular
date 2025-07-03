@@ -70,4 +70,6 @@ export interface GradationTest {
   gcvcMaxH: number;
   gcvcMaxI: number;
   gcvcMaxJ: number;
+
+  standard:string;
 }

@@ -77,7 +77,6 @@ export interface Asphalt {
 
   gradationTest: GradationTest;
   bitumen: Bitumen
-  bitumenStandard : string;
 
   test: Test;
 }

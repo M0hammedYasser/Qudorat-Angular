@@ -11,7 +11,12 @@ export interface Bitumen {
   weightSampleAfter: number;
 
   increaseOfFilterWeight:number ;
+
   totalWeightOfSample: number;
+
   weightOfBit: number;
+
   percOfBit: number;
+
+  standard:string;
 }
