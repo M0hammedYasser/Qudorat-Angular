@@ -185,272 +185,210 @@ export class MoistureDensityRelationshipReportComponent implements OnInit {
     });
   }
 
-  generatePDF() {
-    const doc = new jsPDF();
-    const head = new Image();
-    const tail = new Image();
-    const qr = new Image();
+generatePDF() {
+  const doc = new jsPDF();
+  const head = new Image();
+  const tail = new Image();
 
-    head.src = 'assets/head.png';
-    tail.src = 'assets/tail.png';
-    qr.src = 'assets/barcode.jpg';
+  head.src = 'assets/head.png';
+  tail.src = 'assets/tail.png';
 
-    head.onload = () => {
-      doc.addImage(head, 'PNG', 0, 0, 210, 33);
-      doc.setFontSize(12);
-      doc.text('Moisture Density Relationship', 70, 36)
+  head.onload = () => {
+    doc.addImage(head, 'PNG', 0, 0, 210, 33);
+    doc.setFontSize(12);
+    doc.text('Moisture Density Relationship', 70, 36);
+
+    autoTable(doc, {
+      startY: 38,
+      head: [['Label', 'Value', 'Label', 'Value']],
+      body: [
+        ['Project', this.moistureDensityRelationship.projectName || 'N/A',
+          'Client', this.moistureDensityRelationship.clientName || 'N/A'],
+        ['Sample No', this.moistureDensityRelationship.sampleNo || 'N/A',
+          'Sample By', this.moistureDensityRelationship.sampleBy || 'N/A'],
+        ['Sampling Date', this.moistureDensityRelationship.sampleDate || 'N/A',
+          'Test Name', this.moistureDensityRelationship.nameOfTest || 'N/A'],
+        ['Testing Date', this.moistureDensityRelationship.testingDate || 'N/A',
+          'Standard', this.moistureDensityRelationship.classification || 'N/A'],
+        ['Consultant', this.moistureDensityRelationship.consultant || 'N/A',
+          'Owner', this.moistureDensityRelationship.owner || 'N/A']
+      ],
+  styles: {
+    fontSize: 7,
+    halign: 'left',
+    valign: 'middle',
+    cellPadding: 1.5
+  },
+  headStyles: {
+    fillColor: [220, 220, 220],
+    fontStyle: 'bold'
+  },
+  columnStyles: {
+    0: { cellWidth: 32 },
+    1: { cellWidth: 60 },
+    2: { cellWidth: 32 },
+    3: { cellWidth: 60 }
+  },
+  margin: { left: 14, right: 14 }
+});
+
+    let finalY = (doc as any).lastAutoTable.finalY + 3;
+
+    // جدول Mould Data
+    autoTable(doc, {
+      startY: finalY,
+      head: [
+        [{ content: 'Mould Data', colSpan: 6 }],
+        [
+          { content: 'Trial Number #', styles: { halign: 'left', fontStyle: 'bold' } },
+          { content: '1' }, { content: '2' }, { content: '3' }, { content: '4' }, { content: '5' }
+        ]
+      ],
+      body: [
+        ['A. Wet Wt. Soil + Mould (gm)', this.moistureDensityRelationship.wetWtSoilMouldA,
+          this.moistureDensityRelationship.wetWtSoilMouldB,
+          this.moistureDensityRelationship.wetWtSoilMouldC,
+          this.moistureDensityRelationship.wetWtSoilMouldD,
+          this.moistureDensityRelationship.wetWtSoilMouldE],
+        ['B. Wt. of Mould (gm)', ...Array(5).fill(this.moistureDensityRelationship.wtOfMould)],
+        ['C. Wet Wt. Soil (gm)', this.wetWtSoilA, this.wetWtSoilB, this.wetWtSoilC, this.wetWtSoilD, this.wetWtSoilE],
+        ['D. Volume of Mould (cc)', ...Array(5).fill(this.moistureDensityRelationship.volOfMould)],
+        ['E. Wet Density (gm/cc)', this.wetDensityA.toFixed(1), this.wetDensityB.toFixed(1), this.wetDensityC.toFixed(1), this.wetDensityD.toFixed(1), this.wetDensityE.toFixed(1)],
+        ['F. Dry Density (gm/cc)', this.dryDensityA.toFixed(3), this.dryDensityB.toFixed(3), this.dryDensityC.toFixed(3), this.dryDensityD.toFixed(3), this.dryDensityE.toFixed(3)]
+      ],
+      theme: 'grid',
+      styles: {
+        fontSize: 7,
+        cellPadding: 2,
+        halign: 'center',
+        valign: 'middle',
+        lineWidth: 0.3,
+        lineColor: [0, 0, 0]
+      },
+      headStyles: {
+        fillColor: [220, 220, 220],
+        textColor: [0, 0, 0],
+        fontStyle: 'bold'
+      },
+      columnStyles: {
+        0: { cellWidth: 60, halign: 'left' },
+        1: { cellWidth: 25 }, 2: { cellWidth: 25 }, 3: { cellWidth: 25 },
+        4: { cellWidth: 25 }, 5: { cellWidth: 25 }
+      },
+      margin: { left: 14, right: 14 }
+    });
+
+    finalY = (doc as any).lastAutoTable.finalY + 3;
+
+    // جدول Moisture Content
+    autoTable(doc, {
+      startY: finalY,
+      head: [
+        [{ content: 'Moisture Content Determination %', colSpan: 6 }],
+        [
+          { content: 'Container #', styles: { halign: 'left', fontStyle: 'bold' } },
+          '1', '2', '3', '4', '5'
+        ]
+      ],
+      body: [
+        ['A. Wet Wt. Soil + Container (gm)', this.moistureDensityRelationship.wetWtSoilContA,
+          this.moistureDensityRelationship.wetWtSoilContB,
+          this.moistureDensityRelationship.wetWtSoilContC,
+          this.moistureDensityRelationship.wetWtSoilContD,
+          this.moistureDensityRelationship.wetWtSoilContE],
+        ['B. Dry Wt. Soil + Container (gm)', this.moistureDensityRelationship.dryWtSoilContA,
+          this.moistureDensityRelationship.dryWtSoilContB,
+          this.moistureDensityRelationship.dryWtSoilContC,
+          this.moistureDensityRelationship.dryWtSoilContD,
+          this.moistureDensityRelationship.dryWtSoilContE],
+        ['C. Wt. of Container (gm)', this.moistureDensityRelationship.wtOfContainerA,
+          this.moistureDensityRelationship.wtOfContainerB,
+          this.moistureDensityRelationship.wtOfContainerC,
+          this.moistureDensityRelationship.wtOfContainerD,
+          this.moistureDensityRelationship.wtOfContainerE],
+        ['D. Wt. of Dry Soil (gm)', this.wtOfDrySoilA.toFixed(1), this.wtOfDrySoilB.toFixed(1), this.wtOfDrySoilC.toFixed(1), this.wtOfDrySoilD.toFixed(1), this.wtOfDrySoilE.toFixed(1)],
+        ['E. Wt. of Water (gm)', this.wtOfWaterA.toFixed(1), this.wtOfWaterB.toFixed(1), this.wtOfWaterC.toFixed(1), this.wtOfWaterD.toFixed(1), this.wtOfWaterE.toFixed(1)],
+        ['F. Moisture Content %', this.moistureContentA.toFixed(2), this.moistureContentB.toFixed(2), this.moistureContentC.toFixed(2), this.moistureContentD.toFixed(2), this.moistureContentE.toFixed(2)]
+      ],
+      theme: 'grid',
+      styles: {
+        fontSize: 7,
+        cellPadding: 2,
+        halign: 'center',
+        valign: 'middle',
+        lineWidth: 0.3,
+        lineColor: [0, 0, 0]
+      },
+      headStyles: {
+        fillColor: [220, 220, 220],
+        textColor: [0, 0, 0],
+        fontStyle: 'bold'
+      },
+      columnStyles: {
+        0: { cellWidth: 60, halign: 'left' },
+        1: { cellWidth: 25 }, 2: { cellWidth: 25 }, 3: { cellWidth: 25 },
+        4: { cellWidth: 25 }, 5: { cellWidth: 25 }
+      },
+      margin: { left: 14, right: 14 }
+    });
+
+    finalY = (doc as any).lastAutoTable.finalY + 3;
+
+    setTimeout(() => {
+      const canvasElement = this.compactionChartCanvas.nativeElement;
+      const chartImage = canvasElement.toDataURL('image/png');
+      doc.addImage(chartImage, 'PNG', 12, finalY + 5, 130, 55);
+
+      const startX = 145;
+      let y = finalY + 20;
+      const rowHeight = 10;
+      const col1Width = 30;
+      const col2Width = 30;
+
       doc.setFontSize(10);
-      doc.text(`Project                 ${this.moistureDensityRelationship.projectName || 'N/A'}`, 13, 42);
-      doc.text(`Client                   ${this.moistureDensityRelationship.clientName || 'N/A'}`, 13, 46);
-      doc.text(`Sample No          ${this.moistureDensityRelationship.sampleNo || 'N/A'}`, 13, 50);
-      doc.text(`Sample By          ${this.moistureDensityRelationship.sampleBy || 'N/A'}`, 13, 54);
-      doc.text(`Sampling Date   ${this.moistureDensityRelationship.sampleDate || 'N/A'}`, 13, 58);
-      doc.text(`Test Name          ${this.moistureDensityRelationship.nameOfTest || 'N/A'}`, 110, 42);
-      doc.text(`Testing Date       ${this.moistureDensityRelationship.testingDate || 'N/A'}`, 110, 46);
-      doc.text(`Standard             ${this.moistureDensityRelationship.classification || 'N/A'}`, 110, 50);
-      doc.text(`Consultant          ${this.moistureDensityRelationship.consultant || 'N/A'}`, 110, 54);
-      doc.text(`Owner                 ${this.moistureDensityRelationship.owner || 'N/A'}`, 110, 58);
-      doc.line(10, 60, 200, 60);
+      doc.rect(startX, y, col1Width, rowHeight);
+      doc.rect(startX + col1Width, y, col2Width, rowHeight);
+      doc.text("M.D.D (gm/cc)", startX + 2, y + 7);
+      doc.text(this.dryDensityC.toFixed(3), startX + col1Width + 2, y + 7);
+      y += rowHeight + 2;
 
+      doc.rect(startX, y, col1Width, rowHeight);
+      doc.rect(startX + col1Width, y, col2Width, rowHeight);
+      doc.text("O.M.C %", startX + 2, y + 7);
+      doc.text(this.moistureContentC.toFixed(2), startX + col1Width + 2, y + 7);
 
-      autoTable(doc, {
-        startY: 62,
-        head: [
-          [{content: 'Mould Data ', colSpan: 6}],
-          [
-            {content: 'Trial Number #', styles: {halign: 'left', fontStyle: 'bold'}},
-            {content: '1'},
-            {content: '2'},
-            {content: '3'},
-            {content: '4'},
-            {content: '5'}
-          ]
-        ],
-        body: [
-          [
-            'A. Wet Wt. Soil + Mould (gm)',
-            this.moistureDensityRelationship.wetWtSoilMouldA,
-            this.moistureDensityRelationship.wetWtSoilMouldB,
-            this.moistureDensityRelationship.wetWtSoilMouldC,
-            this.moistureDensityRelationship.wetWtSoilMouldD,
-            this.moistureDensityRelationship.wetWtSoilMouldE
-          ],
-          [
-            'B. Wt. of Mould (gm)',
-            this.moistureDensityRelationship.wtOfMould,
-            this.moistureDensityRelationship.wtOfMould,
-            this.moistureDensityRelationship.wtOfMould,
-            this.moistureDensityRelationship.wtOfMould,
-            this.moistureDensityRelationship.wtOfMould
-          ],
-          [
-            'C. Wet Wt. Soil (gm)',
-            this.wetWtSoilA,
-            this.wetWtSoilB,
-            this.wetWtSoilC,
-            this.wetWtSoilD,
-            this.wetWtSoilE
-          ],
-          [
-            'D. Volume of Mould (cc)',
-            this.moistureDensityRelationship.volOfMould,
-            this.moistureDensityRelationship.volOfMould,
-            this.moistureDensityRelationship.volOfMould,
-            this.moistureDensityRelationship.volOfMould,
-            this.moistureDensityRelationship.volOfMould
-          ],
-          [
-            'E. Wet Density (gm/cc)',
-            this.wetDensityA.toFixed(1),
-            this.wetDensityB.toFixed(1),
-            this.wetDensityC.toFixed(1),
-            this.wetDensityD.toFixed(1),
-            this.wetDensityE.toFixed(1)
-          ],
-          [
-            'F. Dry Density (gm/cc)',
-            this.dryDensityA.toFixed(3),
-            this.dryDensityB.toFixed(3),
-            this.dryDensityC.toFixed(3),
-            this.dryDensityD.toFixed(3),
-            this.dryDensityE.toFixed(3)
-          ]
-        ],
-        theme: 'grid',
-        styles: {
-          fontSize: 7,
-          cellPadding: 2,
-          halign: 'center',
-          valign: 'middle',
-          lineWidth: 0.3,
-          lineColor: [0, 0, 0]
-        },
-        headStyles: {
-          fillColor: [220, 220, 220],
-          textColor: [0, 0, 0],
-          fontStyle: 'bold'
-        },
-        columnStyles: {
-          0: {cellWidth: 60, halign: 'left'}, // first column (labels)
-          1: {cellWidth: 25},
-          2: {cellWidth: 25},
-          3: {cellWidth: 25},
-          4: {cellWidth: 25},
-          5: {cellWidth: 25}
-        },
-        margin: {left: 14, right: 14}
-      });
+      finalY += 60;
 
+      if (this.moistureDensityRelationship.notes) {
+        doc.line(10, finalY + 8, 200, finalY + 8);
+        const splitNotes = doc.splitTextToSize(`Remarks: ${this.moistureDensityRelationship.notes || ""}`, 180);
+        doc.text(splitNotes, 13, finalY + 12);
+        finalY += (splitNotes.length * 7);
+      }
 
-      let finalY = (doc as any).lastAutoTable.finalY + 3;
+      doc.line(10, 258, 200, 258);
+      doc.setFontSize(7);
+      doc.text(`Approved by: ${this.moistureDensityRelationship.approveBy || 'N/A'}`, 12, 261);
+      doc.text(`Test by: ${this.moistureDensityRelationship.testBy || 'N/A'}`, 85, 261);
+      doc.text(`Checked by: ${this.moistureDensityRelationship.activist || 'N/A'}`, 160, 261);
 
-      autoTable(doc, {
-        startY: finalY,
-        head: [
-          [{content: 'Moisture Content Determination %', colSpan: 6}],
-          [
-            {content: 'Container #', styles: {halign: 'left', fontStyle: 'bold'}},
-            {content: '1'},
-            {content: '2'},
-            {content: '3'},
-            {content: '4'},
-            {content: '5'}
-          ]
-        ],
-        body: [
-          [
-            'A. Wet Wt. Soil + Container (gm)',
-            this.moistureDensityRelationship.wetWtSoilContA,
-            this.moistureDensityRelationship.wetWtSoilContB,
-            this.moistureDensityRelationship.wetWtSoilContC,
-            this.moistureDensityRelationship.wetWtSoilContD,
-            this.moistureDensityRelationship.wetWtSoilContE
-          ],
-          [
-            'B. Dry Wt. Soil + Container (gm)',
-            this.moistureDensityRelationship.dryWtSoilContA,
-            this.moistureDensityRelationship.dryWtSoilContB,
-            this.moistureDensityRelationship.dryWtSoilContC,
-            this.moistureDensityRelationship.dryWtSoilContD,
-            this.moistureDensityRelationship.dryWtSoilContE
-          ],
-          [
-            'C. Wt. of Container (gm)',
-            this.moistureDensityRelationship.wtOfContainerA,
-            this.moistureDensityRelationship.wtOfContainerB,
-            this.moistureDensityRelationship.wtOfContainerC,
-            this.moistureDensityRelationship.wtOfContainerD,
-            this.moistureDensityRelationship.wtOfContainerE
-          ],
-          [
-            'D. Wt. of Dry Soil (gm)',
-            this.wtOfDrySoilA.toFixed(1),
-            this.wtOfDrySoilB.toFixed(1),
-            this.wtOfDrySoilC.toFixed(1),
-            this.wtOfDrySoilD.toFixed(1),
-            this.wtOfDrySoilE.toFixed(1)
-          ],
-          [
-            'E. Wt. of Water (gm)',
-            this.wtOfWaterA.toFixed(1),
-            this.wtOfWaterB.toFixed(1),
-            this.wtOfWaterC.toFixed(1),
-            this.wtOfWaterD.toFixed(1),
-            this.wtOfWaterE.toFixed(1)
-          ],
-          [
-            'F. Moisture Content %',
-            this.moistureContentA.toFixed(2),
-            this.moistureContentB.toFixed(2),
-            this.moistureContentC.toFixed(2),
-            this.moistureContentD.toFixed(2),
-            this.moistureContentE.toFixed(2)
-          ]
-        ],
-        theme: 'grid',
-        styles: {
-          fontSize: 7,
-          cellPadding: 2,
-          halign: 'center',
-          valign: 'middle',
-          lineWidth: 0.3,
-          lineColor: [0, 0, 0]
-        },
-        headStyles: {
-          fillColor: [220, 220, 220],
-          textColor: [0, 0, 0],
-          fontStyle: 'bold'
-        },
-        columnStyles: {
-          0: {cellWidth: 60, halign: 'left'},
-          1: {cellWidth: 25},
-          2: {cellWidth: 25},
-          3: {cellWidth: 25},
-          4: {cellWidth: 25},
-          5: {cellWidth: 25}
-        },
-        margin: {left: 14, right: 14}
-      });
+      doc.addImage(tail, 'PNG', 0, 265, 210, 33);
 
-      finalY = (doc as any).lastAutoTable.finalY + 3;
+      doc.setFontSize(5);
+      const formatDateTime = (date: Date) => {
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+        const hours = String(date.getHours()).padStart(2, '0');
+        const minutes = String(date.getMinutes()).padStart(2, '0');
+        return `${year}-${month}-${day} ${hours}:${minutes}`;
+      };
+      const currentDateTime = formatDateTime(new Date());
+      doc.text(`Report Date: ${currentDateTime}`, 1, 290);
 
-      setTimeout(() => {
-
-        const canvasElement = this.compactionChartCanvas.nativeElement;
-        const chartImage = canvasElement.toDataURL('image/png');
-
-        doc.addImage(chartImage, 'PNG', 12, finalY + 5, 130, 55);
-        const startX = 145;
-        let y = finalY + 20;
-
-        const rowHeight = 10;
-        const col1Width = 30;
-        const col2Width = 30;
-
-        doc.setFontSize(10);
-        doc.rect(startX, y, col1Width, rowHeight); // M.D.D label cell
-        doc.rect(startX + col1Width, y, col2Width, rowHeight); // M.D.D value cell
-        doc.text("M.D.D (gm/cc)", startX + 2, y + 7);
-        doc.text(this.dryDensityC.toFixed(3), startX + col1Width + 2, y + 7);
-        y += rowHeight + 2; // Add space between rows
-
-        doc.rect(startX, y, col1Width, rowHeight); // O.M.C label cell
-        doc.rect(startX + col1Width, y, col2Width, rowHeight); // O.M.C value cell
-        doc.text("O.M.C %", startX + 2, y + 7);
-        doc.text(this.moistureContentC.toFixed(2), startX + col1Width + 2, y + 7);
-
-        finalY += 60;
-
-
-        if (this.moistureDensityRelationship.notes) {
-          doc.line(10, finalY + 8, 200, finalY + 8);
-          const splitNotes = doc.splitTextToSize(`Remarks: ${this.moistureDensityRelationship.notes || ""}`, 180);
-          doc.text(splitNotes, 13, finalY + 12);
-          finalY += (splitNotes.length * 7);
-        }
-
-        doc.line(10, 258, 200, 258);
-        doc.setFontSize(7);
-        doc.text(`Approved by: ${this.moistureDensityRelationship.approveBy || 'N/A'}`, 12, 261);
-        doc.text(`Test by: ${this.moistureDensityRelationship.testBy || 'N/A'}`, 85, 261);
-        doc.text(`Checked by: ${this.moistureDensityRelationship.activist || 'N/A'}`, 160, 261);
-        doc.addImage(tail, 'PNG', 0, 265, 210, 33);
-
-        doc.setFontSize(5);
-        const formatDateTime = (date: Date) => {
-          const year = date.getFullYear();
-          const month = String(date.getMonth() + 1).padStart(2, '0');
-          const day = String(date.getDate()).padStart(2, '0');
-          const hours = String(date.getHours()).padStart(2, '0');
-          const minutes = String(date.getMinutes()).padStart(2, '0');
-          return `${year}-${month}-${day} ${hours}:${minutes}`;
-        };
-        const currentDateTime = formatDateTime(new Date());
-        doc.text(`Report Date: ${currentDateTime}`, 1, 290);
-
-        doc.save(`MoistureDensityRelationshipReport_${this.moistureDensityRelationship.testName}.pdf`);
-      }, 1000);
-    };
-  }
+      doc.save(`MoistureDensityRelationshipReport_${this.moistureDensityRelationship.testName}.pdf`);
+    }, 1000);
+  };
+}
 
 }

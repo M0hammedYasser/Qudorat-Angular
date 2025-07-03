@@ -158,38 +158,55 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
 
 
   generatePDF() {
-    const doc = new jsPDF();
-    const head = new Image();
-    const tail = new Image();
-    const qr = new Image();
+  const doc = new jsPDF();
+  const head = new Image();
+  const tail = new Image();
+  const qr = new Image();
 
-    head.src = 'assets/head.png';
-    tail.src = 'assets/tail.png';
-    qr.src = 'assets/barcode.jpg';
+  head.src = 'assets/head.png';
+  tail.src = 'assets/tail.png';
+  qr.src = 'assets/barcode.jpg';
 
-    head.onload = () => {
-      // Add header
-      doc.addImage(head, 'PNG', 0, 0, 210, 33);
+  head.onload = () => {
+    doc.addImage(head, 'PNG', 0, 0, 210, 33);
+    doc.setFontSize(12);
+    doc.text("Asphalt Marshall", 80, 36);
+    doc.setFontSize(9);
 
-      // Add title and basic info
-      doc.setFontSize(12);
-      doc.text("Asphalt Marshall", 80, 36);
-      doc.setFontSize(9);
-      doc.text(`Project                 ${this.asphalt.projectName || 'N/A'}`, 13, 42);
-      doc.text(`Client                   ${this.asphalt.clientName || 'N/A'}`, 13, 46);
-      doc.text(`Sample No          ${this.asphalt.sampleNo || 'N/A'}`, 13, 50);
-      doc.text(`Sample By          ${this.asphalt.sampleBy || 'N/A'}`, 13, 54);
-      doc.text(`Sampling Date   ${this.asphalt.sampleDate || 'N/A'}`, 13, 58);
-      doc.text(`Asphalt Type       ${this.asphalt.asphaltType || 'N/A'}`, 13, 62);
-      doc.text(`Test Name          ${this.asphalt.nameOfTest || 'N/A'}`, 110, 42);
-      doc.text(`Testing Date        ${this.asphalt.testingDate || 'N/A'}`, 110, 46);
-      doc.text(`Standard             ${this.asphalt.classification || 'N/A'}`, 110, 50);
-      doc.text(`Consultant          ${this.asphalt.consultant || 'N/A'}`, 110, 54);
-      doc.text(`Owner                 ${this.asphalt.owner || 'N/A'}`, 110, 58);
-      doc.text(`Asphalt Applier   ${this.asphalt.asphaltApplier || 'N/A'}`, 110, 62);
-      doc.line(10, 65, 200, 65);
+    const infoRows = [
+      ["Project", this.asphalt.projectName || 'N/A', "Test Name", this.asphalt.nameOfTest || 'N/A'],
+      ["Client", this.asphalt.clientName || 'N/A', "Testing Date", this.asphalt.testingDate || 'N/A'],
+      ["Sample No", this.asphalt.sampleNo || 'N/A', "Standard", this.asphalt.classification || 'N/A'],
+      ["Sample By", this.asphalt.sampleBy || 'N/A', "Consultant", this.asphalt.consultant || 'N/A'],
+      ["Sampling Date", this.asphalt.sampleDate || 'N/A', "Owner", this.asphalt.owner || 'N/A'],
+      ["Asphalt Type", this.asphalt.asphaltType || 'N/A', "Asphalt Applier", this.asphalt.asphaltApplier || 'N/A']
+    ];
+
+    autoTable(doc, {
+      head: [["Field", "Value", "Field", "Value"]],
+      body: infoRows,
+      startY: 37,
+      styles: {
+        fontSize: 8,
+        cellPadding: .5
+      },
+      headStyles: {
+        fillColor: [41, 128, 185],
+        textColor: [255, 255, 255],
+        halign: 'left'
+      },
+      columnStyles: {
+        0: { fontStyle: 'bold' },
+        2: { fontStyle: 'bold' }
+      },
+      margin: { left: 13, right: 13 },
+      tableWidth: 'auto'
+    });
+    
+    
+      doc.line(10, 68, 200, 68);
       doc.setFontSize(10);
-      doc.text(`BITUMEN CONTENT TEST (${this.asphalt.bitumenStandard})` , 75 , 70);
+      doc.text(`BITUMEN CONTENT TEST (${this.asphalt.bitumenStandard})`, 75, 73);
 
       // First table - Bitumen data
       const bitumenColumn = ['Parameter', 'Value'];
@@ -207,16 +224,16 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
       autoTable(doc, {
         head: [bitumenColumn],
         body: bitumenRows,
-        startY: 72,  // Positioned below the header
+        startY: 74,  
         styles: {
           fontSize: 6,
           cellPadding: 1.5,
-          lineColor: [0, 0, 0], // Black grid lines
-          lineWidth: 0.1,       // Thin grid lines
+          lineColor: [0, 0, 0], 
+          lineWidth: 0.1,       
         },
         headStyles: {
           fillColor: [41, 128, 185],
-          textColor: [255, 255, 255], // White text for header
+          textColor: [255, 255, 255], 
           fontStyle: 'bold',
           lineWidth: 0.1,
         },
@@ -226,9 +243,9 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
         alternateRowStyles: {
           fillColor: [240, 240, 240],
         },
-        showHead: 'everyPage', // Show header on every page if table spans multiple pages
-        tableLineColor: [0, 0, 0], // Outer table border
-        tableLineWidth: 0.3,       // Slightly thicker outer border
+        showHead: 'everyPage', 
+        tableLineColor: [0, 0, 0], 
+        tableLineWidth: 0.3,       
       });
 
       let finalY = (doc as any).lastAutoTable.finalY + 5;
@@ -356,26 +373,42 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
           }
 
           doc.addImage(head, 'PNG', 0, 0, 210, 33);
-
-          // Add title and basic info
           doc.setFontSize(12);
           doc.text("Asphalt Marshall", 80, 36);
           doc.setFontSize(9);
-          doc.text(`Project                 ${this.asphalt.projectName || 'N/A'}`, 13, 42);
-          doc.text(`Client                   ${this.asphalt.clientName || 'N/A'}`, 13, 46);
-          doc.text(`Sample No          ${this.asphalt.sampleNo || 'N/A'}`, 13, 50);
-          doc.text(`Sample By          ${this.asphalt.sampleBy || 'N/A'}`, 13, 54);
-          doc.text(`Sampling Date   ${this.asphalt.sampleDate || 'N/A'}`, 13, 58);
-          doc.text(`Asphalt Type      ${this.asphalt.asphaltType || 'N/A'}`, 13, 62);
-          doc.text(`Test Name          ${this.asphalt.nameOfTest || 'N/A'}`, 110, 42);
-          doc.text(`Testing Date       ${this.asphalt.testingDate || 'N/A'}`, 110, 46);
-          doc.text(`Standard             ${this.asphalt.classification || 'N/A'}`, 110, 50);
-          doc.text(`Consultant          ${this.asphalt.consultant || 'N/A'}`, 110, 54);
-          doc.text(`Owner                 ${this.asphalt.owner || 'N/A'}`, 110, 58);
-          doc.text(`Asphalt Applier   ${this.asphalt.asphaltApplier || 'N/A'}`, 110, 62);
-          doc.line(10, 65, 200, 65);
+
+          const infoRows = [
+            ["Project", this.asphalt.projectName || 'N/A', "Test Name", this.asphalt.nameOfTest || 'N/A'],
+            ["Client", this.asphalt.clientName || 'N/A', "Testing Date", this.asphalt.testingDate || 'N/A'],
+            ["Sample No", this.asphalt.sampleNo || 'N/A', "Standard", this.asphalt.classification || 'N/A'],
+            ["Sample By", this.asphalt.sampleBy || 'N/A', "Consultant", this.asphalt.consultant || 'N/A'],
+            ["Sampling Date", this.asphalt.sampleDate || 'N/A', "Owner", this.asphalt.owner || 'N/A'],
+            ["Asphalt Type", this.asphalt.asphaltType || 'N/A', "Asphalt Applier", this.asphalt.asphaltApplier || 'N/A']
+          ];
+
+          autoTable(doc, {
+            head: [["Field", "Value", "Field", "Value"]],
+            body: infoRows,
+            startY: 37,
+            styles: {
+              fontSize: 8,
+              cellPadding: .5
+            },
+            headStyles: {
+              fillColor: [41, 128, 185],
+              textColor: [255, 255, 255],
+              halign: 'left'
+            },
+            columnStyles: {
+              0: { fontStyle: 'bold' },
+              2: { fontStyle: 'bold' }
+            },
+            margin: { left: 13, right: 13 },
+            tableWidth: 'auto'
+          });
+          doc.line(10, 68, 200, 68); 
           doc.setFontSize(10);
-          doc.text(`ASPHALT  MARSHALL & G.M.M TEST` , 75 , 70)
+          doc.text(`ASPHALT  MARSHALL & G.M.M TEST` , 75 , 73)
 
 
           const tableColumn = ['Parameter', '1', '2', '3', '4', '5', '6'];
@@ -433,7 +466,7 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
           autoTable(doc, {
             head: [tableColumn],
             body: tableRows,
-            startY: 73,
+            startY: 75,
             styles: {
               fontSize: 6,
               cellPadding: 1.5,

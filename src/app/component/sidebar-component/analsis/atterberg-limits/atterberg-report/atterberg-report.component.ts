@@ -12,7 +12,6 @@ import Chart from "chart.js/auto";
   standalone: true,
   imports: [
     DecimalPipe
-
   ],
   templateUrl: './atterberg-report.component.html',
   styleUrl: './atterberg-report.component.css'
@@ -264,22 +263,42 @@ export class AtterbergReportComponent implements OnInit {
     head.onload = () => {
       doc.addImage(head, 'PNG', 0, 0, 210, 33);
       doc.setFontSize(12);
-      doc.text('Atterberg Limits Data Sheet', 70, 36)
+      doc.text('Atterberg Limits Data Sheet', 70, 34)
       doc.setFontSize(10);
-      doc.text(`Project                 ${this.atterbergLimits.projectName || 'N/A'}`, 13, 42);
-      doc.text(`Client                   ${this.atterbergLimits.clientName || 'N/A'}`, 13, 46);
-      doc.text(`Sample No          ${this.atterbergLimits.sampleNo || 'N/A'}`, 13, 50);
-      doc.text(`Sample By          ${this.atterbergLimits.sampleBy || 'N/A'}`, 13, 54);
-      doc.text(`Sampling Date   ${this.atterbergLimits.sampleDate || 'N/A'}`, 13, 58);
-      doc.text(`Test Name          ${this.atterbergLimits.nameOfTest || 'N/A'}`, 110, 42);
-      doc.text(`Testing Date       ${this.atterbergLimits.testingDate || 'N/A'}`, 110, 46);
-      doc.text(`Standard             ${this.atterbergLimits.classification || 'N/A'}`, 110, 50);
-      doc.text(`Consultant          ${this.atterbergLimits.consultant || 'N/A'}`, 110, 54);
-      doc.text(`Owner                 ${this.atterbergLimits.owner || 'N/A'}`, 110, 58);
-      doc.line(10, 60, 200, 60);
+      const infoRows = [
+        ['Project', this.atterbergLimits.projectName || 'N/A', 'Test Name', this.atterbergLimits.nameOfTest || 'N/A'],
+        ['Client', this.atterbergLimits.clientName || 'N/A', 'Testing Date', this.atterbergLimits.testingDate || 'N/A'],
+        ['Sample No', this.atterbergLimits.sampleNo || 'N/A', 'Standard', this.atterbergLimits.classification || 'N/A'],
+        ['Sample By', this.atterbergLimits.sampleBy || 'N/A', 'Consultant', this.atterbergLimits.consultant || 'N/A'],
+        ['Sampling Date', this.atterbergLimits.sampleDate || 'N/A', 'Owner', this.atterbergLimits.owner || 'N/A']
+      ];
 
       autoTable(doc, {
-        startY: 62,
+        head: [['Field', 'Value', 'Field', 'Value']],
+        body: infoRows,
+        startY: 36, 
+        styles: {
+          fontSize: 8,
+          cellPadding: .5
+        },
+        headStyles: {
+          fillColor: [41, 128, 185],
+          textColor: [255, 255, 255],
+          halign: 'left'
+        },
+        columnStyles: {
+          0: { fontStyle: 'bold' },
+          2: { fontStyle: 'bold' }
+        },
+        margin: { left: 13, right: 13 },
+        tableWidth: 'auto'
+      });
+
+
+      doc.line(10, 64, 200, 64);
+
+      autoTable(doc, {
+        startY: 65 ,
         head: [
           [
             {content: 'TEST', colSpan: 3, styles: {lineWidth: 0.5}},
