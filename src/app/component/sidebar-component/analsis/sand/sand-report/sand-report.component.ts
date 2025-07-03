@@ -132,7 +132,6 @@ generatePDF() {
 
     autoTable(doc, {
       startY: 40,
-      head: [['Parameter', 'Value', 'Parameter', 'Value']],
       body: infoRows,
       theme: 'grid',
       styles: { fontSize: 8, cellPadding: 1.5 },

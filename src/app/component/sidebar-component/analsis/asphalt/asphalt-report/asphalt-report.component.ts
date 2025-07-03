@@ -170,7 +170,7 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
   head.onload = () => {
     doc.addImage(head, 'PNG', 0, 0, 210, 33);
     doc.setFontSize(12);
-    doc.text("Asphalt Marshall", 80, 36);
+    doc.text("Asphalt Marshall", 80, 35);
     doc.setFontSize(9);
 
     const infoRows = [
@@ -183,28 +183,26 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
     ];
 
     autoTable(doc, {
-      head: [["Field", "Value", "Field", "Value"]],
+      // head: [["Field", "Value", "Field", "Value"]],
       body: infoRows,
       startY: 37,
+      theme: 'grid',
       styles: {
         fontSize: 8,
-        cellPadding: .5
-      },
-      headStyles: {
-        fillColor: [41, 128, 185],
-        textColor: [255, 255, 255],
-        halign: 'left'
+        cellPadding: 1
       },
       columnStyles: {
-        0: { fontStyle: 'bold' },
-        2: { fontStyle: 'bold' }
+        0: { cellWidth: 32 },
+        1: { cellWidth: 60 },
+        2: { cellWidth: 32 },
+        3: { cellWidth: 60 }
       },
       margin: { left: 13, right: 13 },
       tableWidth: 'auto'
     });
     
     
-      doc.line(10, 68, 200, 68);
+      // doc.line(10, 68, 200, 68);
       doc.setFontSize(10);
       doc.text(`BITUMEN CONTENT TEST (${this.asphalt.bitumenStandard})`, 75, 73);
 
@@ -387,26 +385,23 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
           ];
 
           autoTable(doc, {
-            head: [["Field", "Value", "Field", "Value"]],
             body: infoRows,
-            startY: 37,
+            startY: 40,
+            theme: 'grid',
             styles: {
               fontSize: 8,
               cellPadding: .5
             },
-            headStyles: {
-              fillColor: [41, 128, 185],
-              textColor: [255, 255, 255],
-              halign: 'left'
-            },
             columnStyles: {
-              0: { fontStyle: 'bold' },
-              2: { fontStyle: 'bold' }
+              0: { cellWidth: 32 },
+              1: { cellWidth: 60 },
+              2: { cellWidth: 32 },
+              3: { cellWidth: 60 }
             },
             margin: { left: 13, right: 13 },
             tableWidth: 'auto'
           });
-          doc.line(10, 68, 200, 68); 
+          // doc.line(10, 68, 200, 68); 
           doc.setFontSize(10);
           doc.text(`ASPHALT  MARSHALL & G.M.M TEST` , 75 , 73)
 

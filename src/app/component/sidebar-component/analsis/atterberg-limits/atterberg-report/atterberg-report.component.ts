@@ -274,28 +274,23 @@ export class AtterbergReportComponent implements OnInit {
       ];
 
       autoTable(doc, {
-        head: [['Field', 'Value', 'Field', 'Value']],
         body: infoRows,
         startY: 36, 
+        theme: 'grid',
         styles: {
           fontSize: 8,
-          cellPadding: .5
-        },
-        headStyles: {
-          fillColor: [41, 128, 185],
-          textColor: [255, 255, 255],
-          halign: 'left'
+          cellPadding: 1
         },
         columnStyles: {
-          0: { fontStyle: 'bold' },
-          2: { fontStyle: 'bold' }
+          0: { cellWidth: 32 },
+          1: { cellWidth: 58 },
+          2: { cellWidth: 32 },
+          3: { cellWidth: 59 }
         },
         margin: { left: 13, right: 13 },
         tableWidth: 'auto'
       });
 
-
-      doc.line(10, 64, 200, 64);
 
       autoTable(doc, {
         startY: 65 ,

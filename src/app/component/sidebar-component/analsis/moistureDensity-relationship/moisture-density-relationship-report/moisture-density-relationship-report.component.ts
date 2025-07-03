@@ -200,7 +200,6 @@ generatePDF() {
 
     autoTable(doc, {
       startY: 38,
-      head: [['Label', 'Value', 'Label', 'Value']],
       body: [
         ['Project', this.moistureDensityRelationship.projectName || 'N/A',
           'Client', this.moistureDensityRelationship.clientName || 'N/A'],
@@ -213,24 +212,21 @@ generatePDF() {
         ['Consultant', this.moistureDensityRelationship.consultant || 'N/A',
           'Owner', this.moistureDensityRelationship.owner || 'N/A']
       ],
-  styles: {
-    fontSize: 7,
-    halign: 'left',
-    valign: 'middle',
-    cellPadding: 1.5
-  },
-  headStyles: {
-    fillColor: [220, 220, 220],
-    fontStyle: 'bold'
-  },
-  columnStyles: {
-    0: { cellWidth: 32 },
-    1: { cellWidth: 60 },
-    2: { cellWidth: 32 },
-    3: { cellWidth: 60 }
-  },
-  margin: { left: 14, right: 14 }
-});
+      theme: 'grid',
+      styles: {
+        fontSize: 7,
+        halign: 'left',
+        valign: 'middle',
+        cellPadding: 1.5
+      },
+      columnStyles: {
+        0: { cellWidth: 32 },
+        1: { cellWidth: 60 },
+        2: { cellWidth: 32 },
+        3: { cellWidth: 60 }
+      },
+      margin: { left: 14, right: 14 }
+    });
 
     let finalY = (doc as any).lastAutoTable.finalY + 3;
 
