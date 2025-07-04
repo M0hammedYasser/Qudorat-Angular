@@ -31,6 +31,12 @@
                  [(ngModel)]="asphalt.bitumen.weightSampleAfter"
                  name="weightSampleAfter" required>
         </div>
+        <div class="form-group">
+          <label class="col-form-label">Standard</label>
+          <input type="text" class="form-control"
+                 [(ngModel)]="asphalt.bitumen.standard"
+                 name="standard" required>
+        </div>
       </div>
     </div>
     <!-- STEP 1: Sieve Analysis -->
@@ -42,6 +48,16 @@
                  required>
         </div>
       </div>
+
+      <div class="form-group row" style="margin-bottom: 10px">
+        <label class="col-3 col-form-label">Standard</label>
+        <div class="col-3">
+          <input type="text" class="form-control" [(ngModel)]="asphalt.gradationTest.standard" name="totalWeigh"
+                 required>
+        </div>
+      </div>
+
+
 
       <div class="grid-container">
         <div class="form-group">
