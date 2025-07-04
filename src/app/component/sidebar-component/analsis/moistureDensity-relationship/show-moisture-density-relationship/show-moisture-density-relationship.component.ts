@@ -6,6 +6,9 @@ import {AuthenticationService} from "../../../../../service/authentication/authe
 import {TestService} from "../../../../../service/test/test.service";
 import {SieveAnalysisService} from "../../../../../service/sieve-analysis/sieve-analysis.service";
 import Swal from "sweetalert2";
+import {
+  MoistureDensityRelationshipService
+} from "../../../../../service/MoistureDensityRelationship/moisture-density-relationship.service";
 
 @Component({
   selector: 'app-show-moisture-density-relationship',
@@ -26,7 +29,7 @@ export class ShowMoistureDensityRelationshipComponent implements OnInit {
 
   constructor(private authenticationService: AuthenticationService,private router : Router ,
               private activatedRoute: ActivatedRoute, private testService: TestService ,
-              private service : SieveAnalysisService) {
+              private service : MoistureDensityRelationshipService) {
   }
 
   ngOnInit() {

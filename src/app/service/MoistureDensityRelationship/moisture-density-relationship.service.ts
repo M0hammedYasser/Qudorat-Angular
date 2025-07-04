@@ -28,7 +28,7 @@ export class MoistureDensityRelationshipService {
     return this.http.put<MoistureDensityRelationship>(`${environment.url}moisture-density-relationship/${id}`, moistureDensityRelationship)
   }
 
-  delete(id: string) {
+  delete(id: number) {
     return this.http.delete<MoistureDensityRelationship>(`${environment.url}moisture-density-relationship/${id}`)
   }
 }
