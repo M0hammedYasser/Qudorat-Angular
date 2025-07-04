@@ -1,4 +1,14 @@
 export interface GradationTest {
+expandJ: any;
+expandI: any;
+expandH: any;
+expandG: any;
+expandF: any;
+expandE: any;
+expandD: any;
+expandC: any;
+expandB: any;
+expandA: any;
 
 
 

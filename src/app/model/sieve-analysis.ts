@@ -65,6 +65,20 @@ export interface SieveAnalysis {
   retainedL: number;
   retainedM: number;
 
+  expandA: string;
+  expandB: string;
+  expandC: string;
+  expandD: string;
+  expandE: string;
+  expandF: string;
+  expandG: string;
+  expandH: string;
+  expandI: string;
+  expandJ: string;
+  expandK: string;
+  expandL: string;
+  expandM: string;
+
 
   test: Test;
 }

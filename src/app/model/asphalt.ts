@@ -75,7 +75,20 @@ export interface Asphalt {
   spGravityOfAspBit: number;
   bulkSpGrCombAgg: number;
 
+
   gradationTest: GradationTest;
+
+  expandA: string;
+  expandB: string;
+  expandC: string;
+  expandD: string;
+  expandE: string;
+  expandF: string;
+  expandG: string;
+  expandH: string;
+  expandI: string;
+  expandJ: string;
+
   bitumen: Bitumen
 
   test: Test;
