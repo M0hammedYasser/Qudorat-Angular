@@ -176,10 +176,10 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
     const infoRows = [
       ["Project", this.asphalt.projectName || 'N/A', "Test Name", this.asphalt.nameOfTest || 'N/A'],
       ["Client", this.asphalt.clientName || 'N/A', "Testing Date", this.asphalt.testingDate || 'N/A'],
-      ["Sample No", this.asphalt.sampleNo || 'N/A', "Standard", this.asphalt.classification || 'N/A'],
-      ["Sample By", this.asphalt.sampleBy || 'N/A', "Consultant", this.asphalt.consultant || 'N/A'],
-      ["Sampling Date", this.asphalt.sampleDate || 'N/A', "Owner", this.asphalt.owner || 'N/A'],
-      ["Asphalt Type", this.asphalt.asphaltType || 'N/A', "Asphalt Applier", this.asphalt.asphaltApplier || 'N/A']
+      ["Sample No", this.asphalt.sampleNo || 'N/A', "Consultant", this.asphalt.consultant || 'N/A'],
+      ["Sample By", this.asphalt.sampleBy || 'N/A', "Owner", this.asphalt.owner || 'N/A'],
+      ["Sampling Date", this.asphalt.sampleDate || 'N/A', "Asphalt Applier", this.asphalt.asphaltApplier || 'N/A'],
+      ["Asphalt Type", this.asphalt.asphaltType || 'N/A']
     ];
 
     autoTable(doc, {
@@ -204,7 +204,7 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
 
       // doc.line(10, 68, 200, 68);
       doc.setFontSize(10);
-      doc.text(`BITUMEN CONTENT TEST (${this.asphalt.bitumen.standard})`, 75, 73);
+      doc.text(`BITUMEN CONTENT TEST (${this.asphalt.bitumen.standard})`, 65, 73);
 
       // First table - Bitumen data
       const bitumenColumn = ['Parameter', 'Value'];
@@ -258,6 +258,7 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
           { content: 'Passing%', rowSpan: 2, styles: { halign: 'center', valign: 'middle' } },
           { content: 'Gmf limits', colSpan: 2, styles: { halign: 'center' } },
           { content: 'General specifications', colSpan: 2, styles: { halign: 'center' } },
+          { content: 'Expand', rowSpan: 2, styles: { halign: 'center' , valign: 'middle'} },
         ],
         [
           { content: 'Min%', styles: { halign: 'center' } },
@@ -271,34 +272,34 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
       const sieveRows = [
         ['37.5', '1.5', this.asphalt.gradationTest.massRetainedA, Number(this.asphalt.gradationTest.retainedA).toFixed(1),
           Number(100 - this.asphalt.gradationTest.retainedA).toFixed(2), this.asphalt.gradationTest.cvcMinA, this.asphalt.gradationTest.cvcMaxA
-          , this.asphalt.gradationTest.gcvcMinA, this.asphalt.gradationTest.gcvcMaxA],
+          , this.asphalt.gradationTest.gcvcMinA, this.asphalt.gradationTest.gcvcMaxA , this.asphalt.gradationTest.expandA],
         ['25', '1', this.asphalt.gradationTest.massRetainedB, Number(this.asphalt.gradationTest.retainedB).toFixed(1),
           Number(100 - this.asphalt.gradationTest.retainedB).toFixed(2), this.asphalt.gradationTest.cvcMinB, this.asphalt.gradationTest.cvcMaxB
-          , this.asphalt.gradationTest.gcvcMinB, this.asphalt.gradationTest.gcvcMaxB],
+          , this.asphalt.gradationTest.gcvcMinB, this.asphalt.gradationTest.gcvcMaxB , this.asphalt.gradationTest.expandB],
         ['19.0', '3/4', this.asphalt.gradationTest.massRetainedC, Number(this.asphalt.gradationTest.retainedC).toFixed(1),
           Number(100 - this.asphalt.gradationTest.retainedC).toFixed(2), this.asphalt.gradationTest.cvcMinC, this.asphalt.gradationTest.cvcMaxC
-          , this.asphalt.gradationTest.gcvcMinC, this.asphalt.gradationTest.gcvcMaxC],
+          , this.asphalt.gradationTest.gcvcMinC, this.asphalt.gradationTest.gcvcMaxC , this.asphalt.gradationTest.expandC],
         ['12.5', '1/2', this.asphalt.gradationTest.massRetainedD, Number(this.asphalt.gradationTest.retainedD).toFixed(1),
           Number(100 - this.asphalt.gradationTest.retainedD).toFixed(2), this.asphalt.gradationTest.cvcMinD, this.asphalt.gradationTest.cvcMaxD
-          , this.asphalt.gradationTest.gcvcMinD, this.asphalt.gradationTest.gcvcMaxD],
+          , this.asphalt.gradationTest.gcvcMinD, this.asphalt.gradationTest.gcvcMaxD , this.asphalt.gradationTest.expandD],
         ['9.5', '3/8', this.asphalt.gradationTest.massRetainedE, Number(this.asphalt.gradationTest.retainedE).toFixed(1),
           Number(100 - this.asphalt.gradationTest.retainedE).toFixed(2), this.asphalt.gradationTest.cvcMinE, this.asphalt.gradationTest.cvcMaxE
-          , this.asphalt.gradationTest.gcvcMinE, this.asphalt.gradationTest.gcvcMaxE],
+          , this.asphalt.gradationTest.gcvcMinE, this.asphalt.gradationTest.gcvcMaxE , this.asphalt.gradationTest.expandE],
         ['4.75', '#4', this.asphalt.gradationTest.massRetainedF, Number(this.asphalt.gradationTest.retainedF).toFixed(1),
           Number(100 - this.asphalt.gradationTest.retainedF).toFixed(2), this.asphalt.gradationTest.cvcMinF, this.asphalt.gradationTest.cvcMaxF
-          , this.asphalt.gradationTest.gcvcMinF, this.asphalt.gradationTest.gcvcMaxF],
+          , this.asphalt.gradationTest.gcvcMinF, this.asphalt.gradationTest.gcvcMaxF , this.asphalt.gradationTest.expandF],
         ['2.00', '#10', this.asphalt.gradationTest.massRetainedG, Number(this.asphalt.gradationTest.retainedG).toFixed(1),
           Number(100 - this.asphalt.gradationTest.retainedG).toFixed(2), this.asphalt.gradationTest.cvcMinG, this.asphalt.gradationTest.cvcMaxG
-          , this.asphalt.gradationTest.gcvcMinG, this.asphalt.gradationTest.gcvcMaxG],
+          , this.asphalt.gradationTest.gcvcMinG, this.asphalt.gradationTest.gcvcMaxG , this.asphalt.gradationTest.expandG],
         ['0.425', '#40', this.asphalt.gradationTest.massRetainedH, Number(this.asphalt.gradationTest.retainedH).toFixed(1),
           Number(100 - this.asphalt.gradationTest.retainedH).toFixed(2), this.asphalt.gradationTest.cvcMinH, this.asphalt.gradationTest.cvcMaxH
-          , this.asphalt.gradationTest.gcvcMinH, this.asphalt.gradationTest.gcvcMaxH],
+          , this.asphalt.gradationTest.gcvcMinH, this.asphalt.gradationTest.gcvcMaxH , this.asphalt.gradationTest.expandH],
         ['0.180', '#80', this.asphalt.gradationTest.massRetainedI, Number(this.asphalt.gradationTest.retainedI).toFixed(1),
           Number(100 - this.asphalt.gradationTest.retainedI).toFixed(2), this.asphalt.gradationTest.cvcMinI, this.asphalt.gradationTest.cvcMaxI
-          , this.asphalt.gradationTest.gcvcMinI, this.asphalt.gradationTest.gcvcMaxI],
+          , this.asphalt.gradationTest.gcvcMinI, this.asphalt.gradationTest.gcvcMaxI , this.asphalt.gradationTest.expandI],
         ['0.075', '#200', this.asphalt.gradationTest.massRetainedJ, Number(this.asphalt.gradationTest.retainedJ).toFixed(1),
           Number(100 - this.asphalt.gradationTest.retainedJ).toFixed(2), this.asphalt.gradationTest.cvcMinJ, this.asphalt.gradationTest.cvcMaxJ
-          , this.asphalt.gradationTest.gcvcMinJ, this.asphalt.gradationTest.gcvcMaxJ],
+          , this.asphalt.gradationTest.gcvcMinJ, this.asphalt.gradationTest.gcvcMaxJ , this.asphalt.gradationTest.expandJ],
       ];
 
       autoTable(doc, {
@@ -407,8 +408,11 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
 
 
           const tableColumn = ['Parameter', '1', '2', '3', '4', '5', '6'];
-          const tableRows = [
-            ['% A/C by tot. wt. of mix', '', '', Number(this.asphalt.bitumen.percOfBit).toFixed(2)],
+          const tableRows: RowInput[]  = [
+            [
+              { content: '% A/C by tot. wt. of mix', colSpan: 1, styles: { halign: 'left', fontStyle: 'bold' } },
+              { content: Number(this.asphalt.bitumen.percOfBit).toFixed(2), colSpan: 6, styles: { halign: 'center' } }
+            ],
             ['Wt. in air dry (gm)', this.asphalt.weightAirDryA, this.asphalt.weightAirDryB, this.asphalt.weightAirDryC, this.asphalt.weightAirDryD, this.asphalt.weightAirDryE, this.asphalt.weightAirDryF],
             ['Wt. in water (gm)', this.asphalt.weightWaterA, this.asphalt.weightWaterB, this.asphalt.weightWaterC, this.asphalt.weightWaterD, this.asphalt.weightWaterE, this.asphalt.weightWaterF],
             ['Wt. in air surf dry (gm)', this.asphalt.weightAirSurfDryA, this.asphalt.weightAirSurfDryB, this.asphalt.weightAirSurfDryC, this.asphalt.weightAirSurfDryD, this.asphalt.weightAirSurfDryE, this.asphalt.weightAirSurfDryF],
@@ -426,18 +430,54 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
               (this.asphalt.weightAirDryD / (this.asphalt.weightAirSurfDryD - this.asphalt.weightWaterD)).toFixed(3),
               (this.asphalt.weightAirDryE / (this.asphalt.weightAirSurfDryE - this.asphalt.weightWaterE)).toFixed(3),
               (this.asphalt.weightAirDryF / (this.asphalt.weightAirSurfDryF - this.asphalt.weightWaterF)).toFixed(3)],
-            ['Avg Bulk Sp.Gr.of Comp. mix Gmb gm/cm3', '', '', '', Number(this.bulkSpOfCompMix).toFixed(3)],
-            ['Net. Wt. Of loose mix (gm)', '', '', this.asphalt.netWeightOfLooseMix],
-            ['Net Wt. Of Flask+water (gm)', '', '', this.asphalt.netWeightOfFlaskWater],
-            ['Wt. Flask+water+sample (gm)', '', '', this.asphalt.weightFlaskWaterSample],
-            ['Max. Sp. Gr of Paving mix', '', '', Number(this.maxSpOfPAvgMix).toFixed(3)],
-            ['Avg. max Sp. Gr of mix gmm gm/cm3', '', '', '', Number(this.maxSpOfPAvgMix).toFixed(3)],
-            ['% Air Voids', '', '', '', Number(this.airVoid).toFixed(1)],
-            ['% Voids in mineral Agg.', '', '', '', Number(this.voidMineral).toFixed(2)],
-            ['% Voids filled with Asp.', '', '', '', Number(this.voidFilled).toFixed(1)],
-            ['Effect. Sp. Gravity of Agg.', '', '', '', Number(this.effectiveSpGravityOfAgg).toFixed(3)],
-            ['Absorbed Asp. %', '', '', '', Number(this.absorbedAps).toFixed(2)],
-            ['Effective Asp. Content %', '', '', '', Number(this.asphalt.bitumen.percOfBit - (this.absorbedAps / 100) * (100 - this.asphalt.bitumen.percOfBit)).toFixed(2)],
+            [
+              { content: 'Avg Bulk Sp.Gr.of Comp. mix Gmb gm/cm3', colSpan: 1, styles: { halign: 'left', fontStyle: 'bold' as 'bold' } },
+              { content: Number(this.bulkSpOfCompMix).toFixed(3), colSpan: 6, styles: { halign: 'center' } }
+            ],
+            [
+              { content: 'Net. Wt. Of loose mix (gm)', styles: { fontStyle: 'bold' } },
+              { content: this.asphalt.netWeightOfLooseMix.toString(), colSpan: 6, styles: { halign: 'center' } }
+            ],
+            [
+              { content: 'Net Wt. Of Flask+water (gm)', styles: { fontStyle: 'bold' } },
+              { content: this.asphalt.netWeightOfFlaskWater.toString(), colSpan: 6, styles: { halign: 'center' } }
+            ],
+            [
+              { content: 'Wt. Flask+water+sample (gm)', styles: { fontStyle: 'bold' } },
+              { content: this.asphalt.weightFlaskWaterSample.toString(), colSpan: 6, styles: { halign: 'center' } }
+            ],
+            [
+              { content: 'Max. Sp. Gr of Paving mix', styles: { fontStyle: 'bold' } },
+              { content: Number(this.maxSpOfPAvgMix).toFixed(3), colSpan: 6, styles: { halign: 'center' } }
+            ],
+            [
+              { content: 'Avg. max Sp. Gr of mix gmm gm/cm3', styles: { fontStyle: 'bold' } },
+              { content: Number(this.maxSpOfPAvgMix).toFixed(3), colSpan: 6, styles: { halign: 'center' } }
+            ],
+            [
+              { content: '% Air Voids', styles: { fontStyle: 'bold' } },
+              { content: Number(this.airVoid).toFixed(1), colSpan: 6, styles: { halign: 'center' } }
+            ],
+            [
+              { content: '% Voids in mineral Agg.', styles: { fontStyle: 'bold' } },
+              { content: Number(this.voidMineral).toFixed(2), colSpan: 6, styles: { halign: 'center' } }
+            ],
+            [
+              { content: '% Voids filled with Asp.', styles: { fontStyle: 'bold' } },
+              { content: Number(this.voidFilled).toFixed(1), colSpan: 6, styles: { halign: 'center' } }
+            ],
+            [
+              { content: 'Effect. Sp. Gravity of Agg.', styles: { fontStyle: 'bold' } },
+              { content: Number(this.effectiveSpGravityOfAgg).toFixed(3), colSpan: 6, styles: { halign: 'center' } }
+            ],
+            [
+              { content: 'Absorbed Asp. %', styles: { fontStyle: 'bold' } },
+              { content: Number(this.absorbedAps).toFixed(2), colSpan: 6, styles: { halign: 'center' } }
+            ],
+            [
+              { content: 'Effective Asp. Content %', styles: { fontStyle: 'bold' } },
+              { content: Number(this.asphalt.bitumen.percOfBit - (this.absorbedAps / 100) * (100 - this.asphalt.bitumen.percOfBit)).toFixed(2), colSpan: 6, styles: { halign: 'center' } }
+            ],
             ['Stability (kg)', this.asphalt.stabilityA, this.asphalt.stabilityB, this.asphalt.stabilityC, this.asphalt.stabilityD, this.asphalt.stabilityE, this.asphalt.stabilityF],
             ['Correction factor', this.asphalt.correctionFactorA, this.asphalt.correctionFactorB, this.asphalt.correctionFactorC, this.asphalt.correctionFactorD, this.asphalt.correctionFactorE, this.asphalt.correctionFactorF],
             ['Corrected Stability (kg)',
@@ -447,15 +487,39 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
               (this.asphalt.stabilityD * this.asphalt.correctionFactorD).toFixed(0),
               (this.asphalt.stabilityE * this.asphalt.correctionFactorE).toFixed(0),
               (this.asphalt.stabilityF * this.asphalt.correctionFactorF).toFixed(0)],
-            ['Stability (kg) for 30 min', '', Number(this.avgStabilityFor30Min).toFixed(0), '', '', '', ''],
+            [
+              { content: 'Stability (kg) for 30 min', styles: { fontStyle: 'bold' } },
+              { content: Number(this.avgStabilityFor30Min).toFixed(0), colSpan: 3, styles: { halign: 'center' } },
+              '', '', ''
+            ],
             ['Stability (kg) for 24 Hrs.', '', '', '', Number(this.asphalt.stabilityD * this.asphalt.correctionFactorD).toFixed(0), Number(this.asphalt.stabilityE * this.asphalt.correctionFactorE).toFixed(0), Number(this.asphalt.stabilityF * this.asphalt.correctionFactorF).toFixed(0)],
-            ['Stability (kg) for 24 Hrs.', '', '', '', '', Number(this.avgStabilityFor24Hrs).toFixed(0), ''],
-            ['% Loss of Stability', '', '', Number(((this.avgStabilityFor30Min - this.avgStabilityFor24Hrs) / this.avgStabilityFor30Min * 100).toFixed(1))],
+            [
+              { content: 'Stability (kg) for 24 Hrs.', styles: { fontStyle: 'bold' } },
+              '', '', '',
+              {content: `${Number(this.avgStabilityFor24Hrs).toFixed(0)}`, colSpan: 3, styles: { halign: 'center' }}
+            ],
+            [
+              { content: '% Loss of Stability', styles: { fontStyle: 'bold' } },
+              {content: `${((this.avgStabilityFor30Min - this.avgStabilityFor24Hrs) / this.avgStabilityFor30Min * 100).toFixed(1)}`, colSpan: 6, styles: { halign: 'center' }}
+            ],
             ['Flow (mm)', this.asphalt.flowA, this.asphalt.flowB, this.asphalt.flowC, '', '', ''],
-            ['Avg. Flow (mm)', '', Number((this.asphalt.flowA + this.asphalt.flowB + this.asphalt.flowC) / 3).toFixed(2), '', '', '', ''],
-            ['Sp. Gravity of Asp. Bit.', '', '', this.asphalt.spGravityOfAspBit],
-            ['Agg. % total wt. of mix', '', '', Number(100 - this.asphalt.bitumen.percOfBit).toFixed(2)],
-            ['Bulk Sp. Gr. Comb. Agg.', '', '', this.asphalt.bulkSpGrCombAgg]
+            [
+              { content: 'Avg. Flow (mm)', styles: { fontStyle: 'bold' } },
+              { content: Number((this.asphalt.flowA + this.asphalt.flowB + this.asphalt.flowC) / 3).toFixed(2), colSpan: 3, styles: { halign: 'center' } },
+              '', '', ''
+            ],
+            [
+              { content: 'Sp. Gravity of Asp. Bit', styles: { fontStyle: 'bold' } },
+              {content: `${this.asphalt.spGravityOfAspBit}`, colSpan: 6, styles: { halign: 'center' }}
+            ],
+            [
+              { content: 'Agg. % total wt. of mix', styles: { fontStyle: 'bold' } },
+              {content: `${Number(100 - this.asphalt.bitumen.percOfBit).toFixed(2)}`, colSpan: 6, styles: { halign: 'center' }}
+            ],
+            [
+              { content: 'Bulk Sp. Gr. Comb. Agg.', styles: { fontStyle: 'bold' } },
+              {content: `${this.asphalt.bulkSpGrCombAgg}`, colSpan: 6, styles: { halign: 'center' }}
+            ],
           ];
 
           autoTable(doc, {

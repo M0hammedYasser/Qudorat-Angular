@@ -137,3 +137,15 @@ input[type="number"] {
   border-radius: 4px;
   font-size: 14px;
 }
+
+
+.custom-inline-group {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.custom-inline-group .form-group {
+  flex: 1;
+  margin-bottom: 10px;
+}
