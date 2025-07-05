@@ -248,7 +248,7 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
 
       let finalY = (doc as any).lastAutoTable.finalY + 5;
 
-      doc.text(`SIEVE ANALYSIS (${this.asphalt.gradationTest.standard})` , 85 , finalY  )
+      doc.text(`SIEVE ANALYSIS (${this.asphalt.gradationTest.standard})` , 70 , finalY  )
       const sieveColumn: RowInput[] = [
         [
           { content: 'mm', rowSpan: 2, styles: { halign: 'center', valign: 'middle' } },
@@ -404,7 +404,7 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
           });
           // doc.line(10, 68, 200, 68);
           doc.setFontSize(10);
-          doc.text(`ASPHALT  MARSHALL & G.M.M TEST (${this.asphalt.classification})` , 75 , 73)
+          doc.text(`ASPHALT  MARSHALL & G.M.M TEST (${this.asphalt.classification})` , 60, 73)
 
 
           const tableColumn = ['Parameter', '1', '2', '3', '4', '5', '6'];
