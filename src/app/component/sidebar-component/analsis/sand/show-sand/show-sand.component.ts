@@ -60,6 +60,32 @@ export class ShowSandComponent implements OnInit {
     });
   }
 
+  approve(id: number) {
+  const name = this.authenticationService.getName();
+
+  Swal.fire({
+    title: 'Are you sure?',
+    text: `This test ${id} will be approved with user ${name}.`,
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonText: 'OK',
+    cancelButtonText: 'Cancel'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      this.testService.approve(id, name).subscribe(
+        res => {
+          Swal.fire('Approved!', 'The approval process was successful.', 'success');
+          this.router.navigate(['/tests']);
+        },
+        err => {
+          Swal.fire('Error!', 'Something went wrong.', 'error');
+        }
+      );
+    }
+  });
+}
+
+
   delete(id: number) {
     this.service.delete(id).subscribe(res => {
       this.testService.findById(this.id).subscribe(res => {

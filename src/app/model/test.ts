@@ -7,6 +7,7 @@ import {AtterbergLimits} from "./atterberg-limits";
 import {MoistureDensityRelationship} from "./moisture-density-relationship";
 
 export interface Test {
+approved: any;
 
 
   id: number;

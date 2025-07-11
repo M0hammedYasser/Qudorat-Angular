@@ -43,4 +43,9 @@ export class TestService {
   adopt(id: number, name: string) {
     return this.http.put(`${environment.url}test/adopt?id=${id}&name=${name}`, null);
   }
+
+  approve(id: number, name: string) {
+  return this.http.post(`${environment.url}/approve`, { id, name });
+  }
+
 }
