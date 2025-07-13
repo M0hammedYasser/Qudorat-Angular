@@ -45,7 +45,7 @@ export class TestService {
   }
 
   approve(id: number, name: string) {
-  return this.http.post(`${environment.url}/approve`, { id, name });
+  return this.http.put(`${environment.url}test/approve?id=${id}&name=${name}` , null);
   }
 
 }
