@@ -13,21 +13,6 @@
   align-items: center;
 }
 
-.left h1 {
-  font-size: 24px;
-  margin: 0;
-  color: #0055D8;
-}
-
-.right h2 {
-  font-size: 22px;
-  margin: 0;
-}
-
-.right p {
-  text-align: right;
-}
-
 .invoice-info {
   margin: 20px 0;
 }
