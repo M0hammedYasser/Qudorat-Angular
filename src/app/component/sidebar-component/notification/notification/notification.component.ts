@@ -1,5 +1,4 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { NotificationService } from '../../../../services/notification.service';
 // import { Notification } from '../../../../model/notification';
 import { DatePipe, NgClass, NgForOf, NgIf } from '@angular/common';
 
