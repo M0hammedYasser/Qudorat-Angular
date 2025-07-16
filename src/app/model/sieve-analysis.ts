@@ -1,6 +1,16 @@
 import {Test} from "./test";
 
 export interface SieveAnalysis {
+  clay: string;
+  silt: string;
+  sand: string;
+  gravel: string;
+  descriptionNo: string;
+  sourceofSample: string;
+  testLocation: string;
+  reportDate: string;
+  description: string;
+  reportno: string;
 
 
   id: number;

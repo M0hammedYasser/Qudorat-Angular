@@ -1,9 +1,26 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { NotificationService } from '../../../../services/notification.service';
-import { Notification } from '../../../../model/notification';
+// import { Notification } from '../../../../model/notification';
 import { DatePipe, NgClass, NgForOf, NgIf } from '@angular/common';
 
+export interface Notification {
+  id: number;
+  type: 'lead' | 'reply' | 'file';
+  user: string;
+  action: string;
+  target?: string;
+  message?: string;
+  fileName?: string;
+  fileSize?: string;
+  time: string;
+  isRead: boolean;
+}
 
+export interface Tab {
+  id: string;
+  label: string;
+  count?: number;
+}
 
 @Component({
     selector: 'app-notification',
@@ -14,127 +31,262 @@ import { DatePipe, NgClass, NgForOf, NgIf } from '@angular/common';
 })
 
 
-export class NotificationComponent implements OnInit { 
-  notifications: Notification[] = [];
-  unreadCount: number = 0;
-  dropdownOpen = false;
-
-  constructor(private notificationService: NotificationService) {}
-  
-  ngOnInit(): void {
-    this.fetchNotifications();
-
-    // نجيب IDs الإشعارات اللي كانت متقراة قبل كده
-    const readIds = JSON.parse(localStorage.getItem('readNotifications') || '[]');
-    this.notifications.forEach(n => {
-      if (readIds.includes(n.id)) {
-        n.read = true;
-      }
-    });
-
-    this.unreadCount = this.notifications.filter(n => !n.read).length;
-  }
-
-
-fetchNotifications(): void {
-  // بيانات وهمية مؤقتة (لحد ما الباك يشتغل)
-  this.notifications = [
+export class NotificationComponent implements OnInit, OnDestroy { 
+notifications: Notification[] = [
     {
       id: 1,
-      title: 'تم إضافة اختبار جديد',
-      message: 'قام موظف البيانات بإضافة اختبار جديد',
-      read: false,
-      createdAt: '2025-07-08T12:00:00Z'
+      type: 'lead',
+      user: 'Wade Warren',
+      action: 'added new lead',
+      target: 'Brooklyn Simmons',
+      time: '12 min ago',
+      isRead: false
     },
     {
       id: 2,
-      title: 'موافقة مطلوبة',
-      message: 'الاختبار بحاجة إلى مراجعة من المدير',
-      read: false,
-      createdAt: '2025-07-07T15:30:00Z'
+      type: 'lead',
+      user: 'Esther Howard',
+      action: 'added new lead',
+      target: 'Leslie Alexander',
+      time: '12 min ago',
+      isRead: false
     },
     {
       id: 3,
-      title: 'موافقة مطلوبة',
-      message: 'الاختبار بحاجة إلى مراجعة من المدير',
-      read: true,
-      createdAt: '2025-07-07T15:30:00Z'
+      type: 'reply',
+      user: 'Jenny Willson',
+      action: 'sent you reply',
+      message: 'We have scheduled a meeting for next week.',
+      time: '12 min ago',
+      isRead: true
     },
     {
       id: 4,
-      title: 'موافقة مطلوبة',
-      message: 'الاختبار بحاجة إلى مراجعة من المدير',
-      read: false,
-      createdAt: '2025-07-07T15:30:00Z'
+      type: 'file',
+      user: 'Emily',
+      action: 'sent Files',
+      fileName: 'Copies of Government.pdf',
+      fileSize: '2 MB',
+      time: '12 min ago',
+      isRead: true
     },
     {
       id: 5,
-      title: 'موافقة مطلوبة',
-      message: 'الاختبار بحاجة إلى مراجعة من المدير',
-      read: false,
-      createdAt: '2025-07-07T15:30:00Z'
-    },
-    {
-      id: 6,
-      title: 'موافقة مطلوبة',
-      message: 'الاختبار بحاجة إلى مراجعة من المدير',
-      read: false,
-      createdAt: '2025-07-07T15:30:00Z'
-    },
-    {
-      id: 7,
-      title: ' علي موافقة مطلوبة',
-      message: ' او الاختبار بحاجة إلى مراجعة من المدير',
-      read: true,
-      createdAt: '2025-07-07T15:31:00Z'
-    },
-    {
-      id: 8,
-      title: ' علي ghd موافقة مطلوبة',
-      message: ' dfgاو الاختبار بحاجة إلى مراجعة من المدير',
-      read: false,
-      createdAt: '2025-07-07T15:33:00Z'
-    },
-    {
-      id: 9,
-      title: ' علي ghdhf موافقة مطلوبة',
-      message: ' dfgsdfاو الاختبار بحاجة إلى مراجعة من المدير',
-      read: false,
-      createdAt: '2025-07-07T15:35:00Z'
+      type: 'reply',
+      user: 'Robert Fox',
+      action: 'sent you reply',
+      message: 'Please ensure the feedback is constructive and actionable. We need to finalize this by tomorrow.',
+      time: '12 min ago',
+      isRead: true
     }
   ];
 
-  this.unreadCount = this.notifications.filter(n => !n.read).length;
-}
+  tabs: Tab[] = [
+    { id: 'all', label: 'All', count: 7 },
+    { id: 'unread', label: 'Unread' },
+    { id: 'saved', label: 'Saved' }
+  ];
 
+  activeTab: string = 'all';
+  filteredNotifications: Notification[] = [];
+  savedNotifications: Set<number> = new Set();
+  
+  // Toast properties
+  showToast: boolean = false;
+  toastMessage: string = '';
+  private toastTimeout: any;
 
-    toggleDropdown(): void {
-    this.dropdownOpen = !this.dropdownOpen;
+  // Long press properties
+  private pressTimer: any;
+  private isLongPress: boolean = false;
 
-    if (this.dropdownOpen) {
-      const readIds = JSON.parse(localStorage.getItem('readNotifications') || '[]');
+  constructor() {}
 
-      // لو الإشعار مش موجود في الـ localStorage نعتبره unread ونظهره بلون أحمر
-      this.notifications.forEach(notif => {
-        notif.read = readIds.includes(notif.id);
-      });
+  ngOnInit(): void {
+    this.updateFilteredNotifications();
+    this.updateNotificationCount();
+  }
 
-      this.unreadCount = this.notifications.filter(n => !n.read).length;
-
-      // بعد الفتح لأول مرة، نخزن إنهم اتشافوا
-      const allIds = this.notifications.map(n => n.id);
-      localStorage.setItem('readNotifications', JSON.stringify(allIds));
+  ngOnDestroy(): void {
+    if (this.toastTimeout) {
+      clearTimeout(this.toastTimeout);
+    }
+    if (this.pressTimer) {
+      clearTimeout(this.pressTimer);
     }
   }
 
+  switchTab(tabId: string): void {
+    this.activeTab = tabId;
+    this.updateFilteredNotifications();
+  }
 
-  markAsRead(notification: Notification): void {
-    if (!notification.read) {
-      this.notificationService.markAsRead(notification.id).subscribe(() => {
-        notification.read = true;
-        this.unreadCount--;
-      });
+  private updateFilteredNotifications(): void {
+    switch (this.activeTab) {
+      case 'all':
+        this.filteredNotifications = [...this.notifications];
+        break;
+      case 'unread':
+        this.filteredNotifications = this.notifications.filter(n => !n.isRead);
+        break;
+      case 'saved':
+        this.filteredNotifications = this.notifications.filter(n => 
+          this.savedNotifications.has(n.id)
+        );
+        break;
+      default:
+        this.filteredNotifications = [...this.notifications];
     }
+  }
+
+  markAsRead(notificationId: number): void {
+    if (this.isLongPress) {
+      this.isLongPress = false;
+      return;
+    }
+
+    const notification = this.notifications.find(n => n.id === notificationId);
+    if (notification && !notification.isRead) {
+      notification.isRead = true;
+      this.updateNotificationCount();
+      this.updateFilteredNotifications();
+    }
+  }
+
+  private updateNotificationCount(): void {
+    const unreadCount = this.notifications.filter(n => !n.isRead).length;
+    
+    // Update All tab count
+    const allTab = this.tabs.find(t => t.id === 'all');
+    if (allTab) {
+      allTab.count = this.notifications.length;
+    }
+
+    // Update Unread tab count
+    const unreadTab = this.tabs.find(t => t.id === 'unread');
+    if (unreadTab) {
+      unreadTab.count = unreadCount > 0 ? unreadCount : undefined;
+    }
+
+    // Update Saved tab count
+    const savedTab = this.tabs.find(t => t.id === 'saved');
+    if (savedTab) {
+      savedTab.count = this.savedNotifications.size > 0 ? this.savedNotifications.size : undefined;
+    }
+  }
+
+  handleReply(event: Event, notificationId: number): void {
+    event.stopPropagation();
+    const notification = this.notifications.find(n => n.id === notificationId);
+    if (notification) {
+      // في التطبيق الحقيقي، هنا هتفتح modal للرد
+      const reply = prompt(`Reply to ${notification.user}:`);
+      if (reply && reply.trim()) {
+        this.sendReply(notificationId, reply.trim());
+      }
+    }
+  }
+
+  private sendReply(notificationId: number, message: string): void {
+    // هنا هتبعت الرد للسيرفر
+    console.log(`Sending reply to notification ${notificationId}: ${message}`);
+    this.showToastMessage('Reply sent successfully');
+  }
+
+  // Touch event handlers for long press
+  onTouchStart(event: TouchEvent, notificationId: number): void {
+    this.isLongPress = false;
+    this.pressTimer = setTimeout(() => {
+      this.isLongPress = true;
+      this.toggleSaveNotification(notificationId);
+      // Add haptic feedback if available
+      if ('vibrate' in navigator) {
+        navigator.vibrate(50);
+      }
+    }, 500);
+  }
+
+  onTouchEnd(): void {
+    if (this.pressTimer) {
+      clearTimeout(this.pressTimer);
+    }
+  }
+
+  onTouchMove(): void {
+    if (this.pressTimer) {
+      clearTimeout(this.pressTimer);
+    }
+  }
+
+  private toggleSaveNotification(notificationId: number): void {
+    if (this.savedNotifications.has(notificationId)) {
+      this.savedNotifications.delete(notificationId);
+      this.showToastMessage('Notification removed from saved');
+    } else {
+      this.savedNotifications.add(notificationId);
+      this.showToastMessage('Notification saved');
+    }
+
+    this.updateNotificationCount();
+    this.updateFilteredNotifications();
+  }
+
+  private showToastMessage(message: string): void {
+    this.toastMessage = message;
+    this.showToast = true;
+
+    // Clear existing timeout
+    if (this.toastTimeout) {
+      clearTimeout(this.toastTimeout);
+    }
+
+    // Hide toast after 3 seconds
+    this.toastTimeout = setTimeout(() => {
+      this.showToast = false;
+    }, 3000);
+  }
+
+  // Public methods for external usage
+  addNotification(notification: Omit<Notification, 'id'>): void {
+    const newNotification: Notification = {
+      ...notification,
+      id: Math.max(...this.notifications.map(n => n.id)) + 1
+    };
+    this.notifications.unshift(newNotification);
+    this.updateNotificationCount();
+    this.updateFilteredNotifications();
+  }
+
+  markAllAsRead(): void {
+    this.notifications.forEach(n => n.isRead = true);
+    this.updateNotificationCount();
+    this.updateFilteredNotifications();
+    this.showToastMessage('All notifications marked as read');
+  }
+
+  clearAllNotifications(): void {
+    this.notifications = [];
+    this.savedNotifications.clear();
+    this.updateNotificationCount();
+    this.updateFilteredNotifications();
+    this.showToastMessage('All notifications cleared');
+  }
+
+  getUnreadCount(): number {
+    return this.notifications.filter(n => !n.isRead).length;
+  }
+
+  getSavedCount(): number {
+    return this.savedNotifications.size;
+  }
+
+  // Utility methods
+  trackByNotificationId(index: number, notification: Notification): number {
+    return notification.id;
+  }
+
+  trackByTabId(index: number, tab: Tab): string {
+    return tab.id;
   }
 
 }
