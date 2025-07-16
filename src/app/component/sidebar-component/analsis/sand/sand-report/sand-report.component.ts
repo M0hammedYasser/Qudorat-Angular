@@ -100,247 +100,131 @@ export class SandReportComponent implements AfterViewInit, OnInit {
   }
 
 
-generatePDF() {
-  if (!this.sieveAnalysis || Object.keys(this.sieveAnalysis).length === 0) {
-    console.error("Sieve Analysis data is not available. Please try again later.");
-    alert("Data is not yet loaded. Please wait and try again.");
-    return;
-  }
+  generatePDF() {
+    if (!this.sieveAnalysis || Object.keys(this.sieveAnalysis).length === 0) {
+      console.error("Sieve Analysis data is not available. Please try again later.");
+      alert("Data is not yet loaded. Please wait and try again.");
+      return;
+    }
 
-  const doc = new jsPDF();
-  const head = new Image();
-  const tail = new Image();
-  const qr = new Image();
+    const doc = new jsPDF();
+    const head = new Image();
+    const tail = new Image();
+    const qr = new Image();
 
-  head.src = 'assets/head.png';
-  tail.src = 'assets/tail.png';
-  qr.src = 'assets/barcode.jpg';
+    head.src = 'assets/head.png';
+    tail.src = 'assets/tail.png';
+    qr.src = 'assets/barcode.jpg';
 
-  head.onload = () => {
-    doc.addImage(head, 'PNG', 0, 0, 210, 33);
-    doc.setFontSize(14);
-    doc.text('Sieve Analysis Test', 80, 36);
-    doc.setFontSize(9);
+    head.onload = () => {
+      doc.addImage(head, 'PNG', 0, 0, 210, 33);
+      doc.setFontSize(14);
+      doc.text('Sieve Analysis Test', 80, 36);
+      doc.setFontSize(9);
 
-    const body = [
-    [
-      { content: 'Project', styles: { halign: 'left' as const } }, 
-      { content: this.sieveAnalysis.projectName || 'N/A', colSpan: 4, styles: { halign: 'left' as const } },
-
-      { content: 'Sampling Date', styles: { halign: 'left' as const } },
-      this.sieveAnalysis.samplingDate || 'N/A',
-    ],
-    [
-      { content: 'Client', styles: { halign: 'left' as const } },
-      { content: this.sieveAnalysis.clientName || 'N/A', colSpan: 4, styles: { halign: 'left' as const } },
-
-      { content: 'Testing Date', styles: { halign: 'left' as const } },
-      this.sieveAnalysis.testingDate || 'N/A',
-    ],
-    [
-      { content: 'Location', styles: { halign: 'left' as const } },
-      { content: this.sieveAnalysis.location || 'N/A', colSpan: 4, styles: { halign: 'left' as const } },
-
-      { content: 'Sample By', styles: { halign: 'left' as const } },
-      this.sieveAnalysis.sampleBy || 'N/A',
-    ],
-    [
-      { content: 'Sample No', styles: { halign: 'left' as const } },
-      this.sieveAnalysis.sampleNo || 'N/A',
-
-      { content: 'Test Location', styles: { halign: 'left' as const } },
-      { content:  this.sieveAnalysis.testLocation || 'N/A',  colSpan: 2, styles: { halign: 'left' as const } },
-
-      { content: 'Report Date', styles: { halign: 'left' as const } },
-      this.sieveAnalysis.reportDate || 'N/A',
-    ],
-    [
-      { content: 'Report No', styles: { halign: 'left' as const } },
-      this.sieveAnalysis.reportno || 'N/A',
-
-      { content: 'Source of Sample', styles: { halign: 'left' as const } },
-      { content:  this.sieveAnalysis.sourceofSample || 'N/A',  colSpan: 2, styles: { halign: 'left' as const } },
-
-      { content: 'Material Type', styles: { halign: 'left' as const } },
-      this.sieveAnalysis.materialType || 'N/A',
-    ],
-    [
-      { content: 'Description', styles: { halign: 'left' as const } },
-      { content: this.sieveAnalysis.description || 'N/A', colSpan: 2, styles: { halign: 'left' as const } },
-      { content: this.sieveAnalysis.descriptionNo || 'N/A', colSpan: 2, styles: { halign: 'left' as const } }
-    ],
-  ];
-
-
-    autoTable(doc, {
-      startY: 40,
-      head: [],
-      body: body,
-      theme: 'grid',
-      styles: {
-        fontSize: 8,
-        cellPadding: 1.5,
-        textColor: [0, 0, 0], 
-        lineColor: [0, 0, 0],      
-        lineWidth: 0.1   
-      },
-      columnStyles: {
-        0: { cellWidth: 20 },
-        1: { cellWidth: 30 },
-        2: { cellWidth: 20 },
-        3: { cellWidth: 15 },
-        4: { cellWidth: 5 },
-        5: { cellWidth: 25 },
-        6: { cellWidth: 35 },
-      },
-    });
-
-    const tableStartY = (doc as any).lastAutoTable.finalY + 2;
-
-    setTimeout(() => {
-      const chartCanvas = document.querySelector('canvas') as HTMLCanvasElement;
-      if (!chartCanvas) {
-        console.error("Chart canvas not found! Ensure it is fully loaded before generating the PDF.");
-        return;
-      }
-
-      const chartImage = chartCanvas.toDataURL('image/png');
-
-      const chartY = tableStartY;
-      const chartHeight = 80;
-      doc.addImage(chartImage, 'PNG', 10, chartY, 180, chartHeight);
-
-      const newTableStartY = chartY + chartHeight + 18;
+      const infoRows = [
+        ['Project', this.sieveAnalysis.projectName || 'N/A', 'Test Name', this.sieveAnalysis.nameOfTest || 'N/A'],
+        ['Client', this.sieveAnalysis.clientName || 'N/A', 'Testing Date', this.sieveAnalysis.testingDate || 'N/A'],
+        ['Sample No', this.sieveAnalysis.sampleNo || 'N/A', 'Standard', this.sieveAnalysis.materialType || 'N/A'],
+        ['Sample By', this.sieveAnalysis.sampleBy || 'N/A', 'Consultant', this.sieveAnalysis.consultant || 'N/A'],
+        ['Sampling Date', this.sieveAnalysis.samplingDate || 'N/A', 'Owner', this.sieveAnalysis.owner || 'N/A'],
+      ];
 
       autoTable(doc, {
-        startY: 165,
-        head: [[
-          "%Gravel",
-          "%Sand",
-          "%Silt",
-          "%Clay"
-        ]],
-        body: [[
-          { content: this.sieveAnalysis.gravel || 'N/A', styles: { halign: 'center' as const } },
-          { content: this.sieveAnalysis.sand || 'N/A', styles: { halign: 'center' as const } },
-          { content: this.sieveAnalysis.silt || 'N/A',colSpan: 2, styles: { halign: 'center' as const } },
-          { content: this.sieveAnalysis.clay || 'N/A', styles: { halign: 'center' as const } },
-        ]],
+        startY: 40,
+        body: infoRows,
         theme: 'grid',
-        styles: {
-          fontSize: 9,
-          halign: 'center',
-          textColor: [0, 0, 0], 
-          lineColor: [0, 0, 0],      
-          lineWidth: 0.1             
-        },
-        headStyles: {
-          fillColor: [255, 255, 255], 
-          textColor: [0, 0, 0], 
-          lineColor: [0, 0, 0], 
-          lineWidth: 0.1
-        },
+        styles: { fontSize: 8, cellPadding: 1.5 },
         columnStyles: {
-          0: { cellWidth: 45.5 },
-          1: { cellWidth: 45.5 },
-          2: { cellWidth: 45.5 },
-          3: { cellWidth: 45.5 },
-        }
+          0: { cellWidth: 31 },
+          1: { cellWidth: 60 },
+          2: { cellWidth: 31 },
+          3: { cellWidth: 60 },
+        },
       });
 
+      const tableStartY = (doc as any).lastAutoTable.finalY + 2;
 
-
-      const tableColumn = [
-        "Sieve sizes(Inch)",
-        "Sieve sizes(mm)",
-        "Retained Weight (gm)",
-        "Retained%",
-        "Passing%",
-        "Expand"
-      ];
+      const tableColumn = ["Sieve sizes(Inch)", "Sieve sizes(mm)", "Retained Weight (gm)", "Retained%", "Passing%"];
       const tableRows: any[] = [];
 
       const sieveData = [
-        ["3", 75.0, this.sieveAnalysis.massRetainedA, this.sieveAnalysis.retainedA, Number(this.sieveAnalysis.passingA).toFixed(0), this.sieveAnalysis.expandA],
-        ["21/2", 62.5, this.sieveAnalysis.massRetainedB, this.sieveAnalysis.retainedB, Number(this.sieveAnalysis.passingB).toFixed(0), this.sieveAnalysis.expandB],
-        ["2", 50.0, this.sieveAnalysis.massRetainedC, this.sieveAnalysis.retainedC, Number(this.sieveAnalysis.passingC).toFixed(0), this.sieveAnalysis.expandC],
-        ["11/2", 37.5, this.sieveAnalysis.massRetainedD, this.sieveAnalysis.retainedD, Number(this.sieveAnalysis.passingD).toFixed(0), this.sieveAnalysis.expandD],
-        ["1", 25.0, this.sieveAnalysis.massRetainedE, this.sieveAnalysis.retainedE, Number(this.sieveAnalysis.passingE).toFixed(0), this.sieveAnalysis.expandE],
-        ["3/4", 19.0, this.sieveAnalysis.massRetainedF, this.sieveAnalysis.retainedF, Number(this.sieveAnalysis.passingF).toFixed(0), this.sieveAnalysis.expandF],
-        ["1/2", 12.5, this.sieveAnalysis.massRetainedG, this.sieveAnalysis.retainedG, Number(this.sieveAnalysis.passingG).toFixed(0), this.sieveAnalysis.expandG],
-        ["3/8", 9.5, this.sieveAnalysis.massRetainedH, this.sieveAnalysis.retainedH, Number(this.sieveAnalysis.passingH).toFixed(0), this.sieveAnalysis.expandH],
-        ["#4", 4.75, this.sieveAnalysis.massRetainedI, this.sieveAnalysis.retainedI, Number(this.sieveAnalysis.passingI).toFixed(0), this.sieveAnalysis.expandI],
-        ["#10", 2.00, this.sieveAnalysis.massRetainedJ, this.sieveAnalysis.retainedJ, Number(this.sieveAnalysis.passingJ).toFixed(0), this.sieveAnalysis.expandJ],
-        ["#40", 0.425, this.sieveAnalysis.massRetainedK, this.sieveAnalysis.retainedK, Number(this.sieveAnalysis.passingK).toFixed(0), this.sieveAnalysis.expandK],
-        ["#100", 0.150, this.sieveAnalysis.massRetainedL, this.sieveAnalysis.retainedL, Number(this.sieveAnalysis.passingL).toFixed(2), this.sieveAnalysis.expandL],
-        ["#200", 0.075, this.sieveAnalysis.massRetainedM, this.sieveAnalysis.retainedM, this.sieveAnalysis.passingM, this.sieveAnalysis.expandM],
-        ["Total Wt.", this.sieveAnalysis.totalWeigh, "", "", "", ""]
+        ["3", 75.0, this.sieveAnalysis.massRetainedA, this.sieveAnalysis.retainedA, Number(this.sieveAnalysis.passingA).toFixed(0)],
+        ["21/2", 62.5, this.sieveAnalysis.massRetainedB, this.sieveAnalysis.retainedB, Number(this.sieveAnalysis.passingB).toFixed(0)],
+        ["2", 50.0, this.sieveAnalysis.massRetainedC, this.sieveAnalysis.retainedC, Number(this.sieveAnalysis.passingC).toFixed(0)],
+        ["11/2", 37.5, this.sieveAnalysis.massRetainedD, this.sieveAnalysis.retainedD, Number(this.sieveAnalysis.passingD).toFixed(0)],
+        ["1", 25.0, this.sieveAnalysis.massRetainedE, this.sieveAnalysis.retainedE, Number(this.sieveAnalysis.passingE).toFixed(0)],
+        ["3/4", 19.0, this.sieveAnalysis.massRetainedF, this.sieveAnalysis.retainedF, Number(this.sieveAnalysis.passingF).toFixed(0)],
+        ["1/2", 12.5, this.sieveAnalysis.massRetainedG, this.sieveAnalysis.retainedG, Number(this.sieveAnalysis.passingG).toFixed(0)],
+        ["3/8", 9.5, this.sieveAnalysis.massRetainedH, this.sieveAnalysis.retainedH, Number(this.sieveAnalysis.passingH).toFixed(0)],
+        ["#4", 4.75, this.sieveAnalysis.massRetainedI, this.sieveAnalysis.retainedI, Number(this.sieveAnalysis.passingI).toFixed(0)],
+        ["#10", 2.00, this.sieveAnalysis.massRetainedJ, this.sieveAnalysis.retainedJ, Number(this.sieveAnalysis.passingJ).toFixed(0)],
+        ["#40", 0.425, this.sieveAnalysis.massRetainedK, this.sieveAnalysis.retainedK, Number(this.sieveAnalysis.passingK).toFixed(0)],
+        ["#100", 0.150, this.sieveAnalysis.massRetainedL, this.sieveAnalysis.retainedL, Number(this.sieveAnalysis.passingL).toFixed(2)],
+        ["#200", 0.075, this.sieveAnalysis.massRetainedM, this.sieveAnalysis.retainedM, this.sieveAnalysis.passingM],
+        ["Total Wt.", this.sieveAnalysis.totalWeigh, "", "", ""]
       ];
 
       sieveData.forEach(row => tableRows.push(row));
 
       autoTable(doc, {
-        startY: newTableStartY,
+        startY: tableStartY,
         head: [tableColumn],
         body: tableRows,
         theme: 'grid',
-        styles: {
-          fontSize: 7, 
-          cellPadding: 1.7,
-          textColor: [0, 0, 0], 
-          lineColor: [0, 0, 0],      
-          lineWidth: 0.1             
-        },
-        headStyles: {
-          fillColor: [255, 255, 255], 
-          textColor: [0, 0, 0], 
-          lineColor: [0, 0, 0], 
-          lineWidth: 0.1
-        }
+        styles: { fontSize: 7, cellPadding: 1.7 },
       });
 
-      const finalY = (doc as any).lastAutoTable.finalY ?? newTableStartY + 50;
-      let footerY = finalY + 5;
+      const finalY = (doc as any).lastAutoTable.finalY ?? 100;
 
-      doc.setFontSize(8);
-      if (this.sieveAnalysis.notes) {
-        doc.line(10, footerY - 1, 200, footerY - 1);
-        const splitNotes = doc.splitTextToSize(
-          `Remarks: ${this.sieveAnalysis.notes || ""}`,
-          180
-        );
-        doc.text(splitNotes, 13, footerY + 2);
-        footerY += (splitNotes.length * 7);
-      }
+      setTimeout(() => {
+        const chartCanvas = document.querySelector('canvas') as HTMLCanvasElement;
+        if (chartCanvas) {
+          const chartImage = chartCanvas.toDataURL('image/png');
+          doc.addImage(chartImage, 'PNG', 10, finalY + 3, 180, 80);
+          let footerY = finalY + 80 + 5;
+          doc.setFontSize(8);
 
-      doc.line(10, 258, 200, 257);
-      doc.setFontSize(10);
-      doc.text(`Approved by: ${this.sieveAnalysis.approveBy || 'N/A'}`, 13, 261);
-      doc.text(`Test by: ${this.sieveAnalysis.testBy || 'N/A'}`, 80, 261);
-      doc.text(`Checked by: ${this.sieveAnalysis.activist || 'N/A'}`, 150, 261);
+          if (this.sieveAnalysis.notes) {
+            doc.line(10, footerY - 1, 200, footerY - 1);
+            const splitNotes = doc.splitTextToSize(
+              `Remarks: ${this.sieveAnalysis.notes || ""}`,
+              180
+            );
+            doc.text(splitNotes, 13, footerY + 2);
+            footerY += (splitNotes.length * 7);
+          }
 
-      doc.addImage(tail, 'PNG', 0, 265, 210, 33);
+          doc.line(10, 258, 200, 257);
+          doc.setFontSize(10);
+          doc.text(`Approved by: ${this.sieveAnalysis.approveBy || 'N/A'}`, 13, 261);
+          doc.text(`Test by: ${this.sieveAnalysis.testBy || 'N/A'}`, 80, 261);
+          doc.text(`Checked by: ${this.sieveAnalysis.activist || 'N/A'}`, 150, 261);
 
-      doc.setFontSize(5);
-      const formatDateTime = (date: Date) => {
-        const year = date.getFullYear();
-        const month = String(date.getMonth() + 1).padStart(2, '0');
-        const day = String(date.getDate()).padStart(2, '0');
-        const hours = String(date.getHours()).padStart(2, '0');
-        const minutes = String(date.getMinutes()).padStart(2, '0');
-        return `${year}-${month}-${day} ${hours}:${minutes}`;
-      };
-      const currentDateTime = formatDateTime(new Date());
-      doc.text(`Report Date: ${currentDateTime}`, 1, 290);
+          doc.addImage(tail, 'PNG', 0, 265, 210, 33);
 
-      doc.save('Sieve_Analysis_Report.pdf');
-    }, 1000);
+          doc.setFontSize(5);
+          const formatDateTime = (date: Date) => {
+            const year = date.getFullYear();
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            const day = String(date.getDate()).padStart(2, '0');
+            const hours = String(date.getHours()).padStart(2, '0');
+            const minutes = String(date.getMinutes()).padStart(2, '0');
+            return `${year}-${month}-${day} ${hours}:${minutes}`;
+          };
+          const currentDateTime = formatDateTime(new Date());
+          doc.text(`Report Date: ${currentDateTime}`, 1, 290);
 
-  };
+          doc.save('Sieve_Analysis_Report.pdf');
+        } else {
+          console.error("Chart canvas not found! Ensure it is fully loaded before generating the PDF.");
+        }
+      }, 1000);
+    };
 
-  head.onerror = () => {
-    console.error("Error loading image from assets.");
-  };
-}
+    head.onerror = () => {
+      console.error("Error loading image from assets.");
+    };
+  }
 
 }
