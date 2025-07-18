@@ -41,21 +41,18 @@
     </div>
     <!-- STEP 1: Sieve Analysis -->
     <div *ngIf="currentStep === 2" class="form-step">
-      <div class="form-group row" style="margin-bottom: 10px">
-        <label class="col-3 col-form-label">Total Wt. of Test Sample (gm)</label>
-        <div class="col-3">
-          <input type="number" class="form-control" [(ngModel)]="asphalt.gradationTest.totalWeigh" name="totalWeigh"
-                 required>
+      <div class="custom-inline-group">
+        <div class="form-group">
+          <label>Total Wt. of Test Sample (gm)</label>
+          <input type="number" class="form-control" [(ngModel)]="asphalt.gradationTest.totalWeigh" name="totalWeigh" required>
+        </div>
+
+        <div class="form-group">
+          <label>Standard</label>
+          <input type="text" class="form-control" [(ngModel)]="asphalt.gradationTest.standard" name="standard" required>
         </div>
       </div>
 
-      <div class="form-group row" style="margin-bottom: 10px">
-        <label class="col-3 col-form-label">Standard</label>
-        <div class="col-3">
-          <input type="text" class="form-control" [(ngModel)]="asphalt.gradationTest.standard" name="totalWeigh"
-                 required>
-        </div>
-      </div>
 
 
 

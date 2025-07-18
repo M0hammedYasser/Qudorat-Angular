@@ -1,7 +1,7 @@
 <div class="body">
   <div class="register-container">
     <h4 class="text-center mb-4">Update  Test</h4>
-    <form (ngSubmit)="insert()" #form="ngForm">
+    <form (ngSubmit)="update()" #form="ngForm">
       <div class="row mb-3">
         <div class="col-6">
           <label for="project" class="form-label">Project Name</label>
@@ -20,11 +20,6 @@
                   [(ngModel)]="test.testManager.id" (change)="onSideChange(test.testManager.id)" required>
             <option *ngFor="let test of testManagers" [value]="test.id">{{ test.name }}</option>
           </select>
-        </div>
-        <div class="col-6">
-          <label for="price" class="form-label">Price</label>
-          <input type="number" class="form-control" id="price" [value]="price" [(ngModel)]="test.price" name="price" disabled
-                 required>
         </div>
       </div>
 

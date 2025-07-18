@@ -21,6 +21,9 @@ import {TestManagerService} from "../../../../service/test-manager/test-manager.
   styleUrl: './update-test.component.css'
 })
 export class UpdateTestComponent implements OnInit {
+update() {
+throw new Error('Method not implemented.');
+}
 
   test: Test = {project: {} as Project, testManager: {} as TestManager} as Test;
   projects: Project[] = [];

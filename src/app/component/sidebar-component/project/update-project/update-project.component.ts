@@ -19,6 +19,9 @@ import {ActivatedRoute, Router} from "@angular/router";
   styleUrl: './update-project.component.css'
 })
 export class UpdateProjectComponent implements OnInit {
+update() {
+throw new Error('Method not implemented.');
+}
 
   project: Project = {client: {} as Client} as Project;
   clients: Client[] = [];
