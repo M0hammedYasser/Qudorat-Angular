@@ -13,6 +13,9 @@
         <th>Client Code</th>
         <th>Client Name</th>
         <th>Number Of Tests</th>
+        <th>Consultant</th>
+        <th>Owner</th>
+        <th>Location</th>
         <th>Actions</th>
       </tr>
       </thead>
@@ -23,6 +26,9 @@
         <td>{{ project.client.id }}</td>
         <td>{{ project.client.name }}</td>
         <td>{{ project.numberOfTests }}</td>
+        <td>{{ project.consultant }}</td>
+        <td>{{ project.owner }}</td>
+        <td>{{ project.location }}</td>
         <td>
           <a>
             <svg routerLink="/projects/invoice/{{project.id}}" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye"

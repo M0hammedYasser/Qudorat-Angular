@@ -2,6 +2,7 @@ import {Test} from "./test";
 
 
 export interface CompressiveStrength {
+clientCode: any;
 
   id: number;
   projectName: string;

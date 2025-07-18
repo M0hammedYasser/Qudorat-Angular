@@ -1,6 +1,6 @@
 <div class="form-container">
   <h1 class="header">Atterberg Limits Data Sheet</h1>
-  <form #form="ngForm" (submit)="insert()">
+  <form #form="ngForm" (submit)="update()">
     <div class="form-step">
       <div class="bitumen-form-container">
 
@@ -25,26 +25,22 @@
             <input type="text" class="form-control compact-input"
                    [(ngModel)]="atterbergLimits.nameOfTest" name="nameOfTest" required>
           </div>
-          <div class="align-items-center">
-            <label class="col-form-label me-1">Test By</label>
-            <input type="text" class="form-control compact-input"
-                   [(ngModel)]="atterbergLimits.testBy" name="testBy" required>
-          </div>
-          <div class="align-items-center">
-            <label class="col-form-label me-1">Testing Date</label>
-            <input type="date" class="form-control compact-input"
-                   [(ngModel)]="atterbergLimits.testingDate" name="testingDate" required>
-          </div>
         </div>
 
         <!-- Second Line -->
         <div class="d-flex align-items-center gap-1 mb-1">
           <div class="align-items-center">
+            <label class="col-form-label me-1">Testing Date</label>
+            <input type="date" class="form-control compact-input"
+                   [(ngModel)]="atterbergLimits.testingDate" name="testingDate" required>
+          </div>
+
+          <div class="align-items-center">
             <label class="col-form-label me-1">Standard</label>
             <input type="text" class="form-control compact-input"
                    [(ngModel)]="atterbergLimits.classification" name="classification" required>
           </div>
-          <div class="align-items-center">
+          <!-- <div class="align-items-center">
             <label class="col-form-label me-1">Consultant</label>
             <input type="text" class="form-control compact-input"
                    [(ngModel)]="atterbergLimits.consultant" name="consultant" required>
@@ -58,14 +54,20 @@
             <label class="col-form-label me-1">Location</label>
             <input type="text" class="form-control compact-input"
                    [(ngModel)]="atterbergLimits.location" name="location" required>
+          </div> -->
+
+          <div class="align-items-center">
+            <label class="col-form-label me-1">Notes</label>
+            <input type="text" class="form-control compact-input"
+                  [(ngModel)]="atterbergLimits.notes" name="notes">
           </div>
 
         </div>
-        <div class="d-flex align-items-center mb-1 mt-2">
+        <!-- <div class="d-flex align-items-center mb-1 mt-2">
           <label class="col-form-label me-2">Notes</label>
           <input type="text" class="form-control"
                  [(ngModel)]="atterbergLimits.notes" name="notes" style="flex: 1;">
-        </div>
+        </div> -->
 
         <!-- Test Data Table -->
         <div class="test-table-container">
@@ -120,15 +122,15 @@
                 <label>Can Number</label>
               </td>
               <td>
-                <input type="text" class="form-control table-input" [(ngModel)]="atterbergLimits.canNumber1"
+                <input type="number" class="form-control table-input" [(ngModel)]="atterbergLimits.canNumber1"
                        name="canNumber1">
               </td>
               <td>
-                <input type="text" class="form-control table-input" [(ngModel)]="atterbergLimits.canNumber2"
+                <input type="number" class="form-control table-input" [(ngModel)]="atterbergLimits.canNumber2"
                        name="canNumber2">
               </td>
               <td>
-                <input type="text" class="form-control table-input" [(ngModel)]="atterbergLimits.canNumber3"
+                <input type="number" class="form-control table-input" [(ngModel)]="atterbergLimits.canNumber3"
                        name="canNumber3">
               </td>
               <td>
@@ -136,11 +138,11 @@
                        name="canNumber4">
               </td>
               <td>
-                <input type="text" class="form-control table-input" [(ngModel)]="atterbergLimits.canNumber5"
+                <input type="number" class="form-control table-input" [(ngModel)]="atterbergLimits.canNumber5"
                        name="canNumber5">
               </td>
               <td>
-                <input type="text" class="form-control table-input" [(ngModel)]="atterbergLimits.canNumber6"
+                <input type="number" class="form-control table-input" [(ngModel)]="atterbergLimits.canNumber6"
                        name="canNumber6">
               </td>
               <td>
@@ -148,7 +150,7 @@
                        name="canNumber7">
               </td>
               <td>
-                <input type="text" class="form-control table-input" [(ngModel)]="atterbergLimits.canNumber8"
+                <input type="number" class="form-control table-input" [(ngModel)]="atterbergLimits.canNumber8"
                        name="canNumber8">
               </td>
 

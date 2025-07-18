@@ -1,6 +1,6 @@
 <div class="form-container">
   <h1 class="header">Moisture Density Relationship Test (Proctor) </h1>
-  <form #form="ngForm" (submit)="insert()">
+  <form #form="ngForm" (submit)="update()">
     <div class="form-step">
       <div class="bitumen-form-container">
 
@@ -25,26 +25,26 @@
             <input type="text" class="form-control compact-input"
                    [(ngModel)]="moistureDensityRelationship.nameOfTest" name="nameOfTest" required>
           </div>
-          <div class="align-items-center">
-            <label class="col-form-label me-1">Test By</label>
-            <input type="text" class="form-control compact-input"
-                   [(ngModel)]="moistureDensityRelationship.testBy" name="testBy" required>
-          </div>
-          <div class="align-items-center">
+          <!-- <div class="align-items-center">
             <label class="col-form-label me-1">Testing Date</label>
             <input type="date" class="form-control compact-input"
                    [(ngModel)]="moistureDensityRelationship.testingDate" name="testingDate" required>
-          </div>
+          </div> -->
         </div>
 
         <!-- Second Line -->
         <div class="d-flex align-items-center gap-1 mb-1">
           <div class="align-items-center">
+            <label class="col-form-label me-1">Testing Date</label>
+            <input type="date" class="form-control compact-input"
+                   [(ngModel)]="moistureDensityRelationship.testingDate" name="testingDate" required>
+          </div>
+          <div class="align-items-center">
             <label class="col-form-label me-1">Standard</label>
             <input type="text" class="form-control compact-input"
                    [(ngModel)]="moistureDensityRelationship.classification" name="classification" required>
           </div>
-          <div class="align-items-center">
+          <!-- <div class="align-items-center">
             <label class="col-form-label me-1">Consultant</label>
             <input type="text" class="form-control compact-input"
                    [(ngModel)]="moistureDensityRelationship.consultant" name="consultant" required>
@@ -58,14 +58,20 @@
             <label class="col-form-label me-1">Location</label>
             <input type="text" class="form-control compact-input"
                    [(ngModel)]="moistureDensityRelationship.location" name="location" required>
+          </div> -->
+
+          <div class="align-items-center">
+            <label class="col-form-label me-1">Notes</label>
+            <input type="text" class="form-control compact-input"
+                  [(ngModel)]="moistureDensityRelationship.notes" name="notes">
           </div>
 
         </div>
-        <div class="d-flex align-items-center mb-1 mt-2">
+        <!-- <div class="d-flex align-items-center mb-1 mt-2">
           <label class="col-form-label me-2">Notes</label>
           <input type="text" class="form-control"
                  [(ngModel)]="moistureDensityRelationship.notes" name="notes" style="flex: 1;">
-        </div>
+        </div> -->
 
         <div class="row g-2 mb-2">
 

@@ -8,4 +8,7 @@ export interface Project {
   client : Client;
   tests : Test[];
   numberOfTests : number;
+  consultant : string;
+  owner : string;
+  location : string;
 }

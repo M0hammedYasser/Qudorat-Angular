@@ -1,6 +1,7 @@
 import {Test} from "./test";
 
 export interface MoistureDensityRelationship {
+clientCode: any;
 
   id: number;
   projectName: string;

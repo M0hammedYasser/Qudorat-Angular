@@ -4,6 +4,8 @@ import Chart from 'chart.js/auto';
 import {DashboardService} from "../../../service/dashboard/dashboard.service";
 import {forkJoin} from "rxjs";
 import {Test} from "../../../model/test";
+import { AuthenticationService } from '../../../service/authentication/authentication.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -25,9 +27,12 @@ export class DashboardComponent implements OnInit {
   notCompletedSamples = 0;
   processingSamples = 0;
   tests : Test[] = [];
+  role: string = '';
 
+  // constructor(private dashboardService: DashboardService) {
+  // }
 
-  constructor(private dashboardService: DashboardService) {
+  constructor(private dashboardService: DashboardService, private router: Router, private authService: AuthenticationService) {
   }
 
   ngOnInit() {
@@ -48,6 +53,7 @@ export class DashboardComponent implements OnInit {
       this.tests = res.tests;
       this.createBarChart();
     });
+    this.role = this.authService.getAuthority();
   }
 
   createBarChart() {

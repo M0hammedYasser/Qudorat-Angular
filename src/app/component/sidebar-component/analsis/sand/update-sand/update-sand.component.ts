@@ -16,6 +16,9 @@ import {ActivatedRoute, Router} from "@angular/router";
   styleUrl: './update-sand.component.css'
 })
 export class UpdateSandComponent implements OnInit {
+update() {
+throw new Error('Method not implemented.');
+}
 
   standard = ["75", "62.5", "50", "37.0", "25.0", "19.0", "12.5", "9.5", "4.75", "2", "0.425", "0.150", "0.075"];
   alertnative = ["3", "21/2", "2", "11/2", "1", "3/4", "1/2", "3/8", "#4", "#10", "#40", "#100", "#200"];

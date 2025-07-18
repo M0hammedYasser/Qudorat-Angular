@@ -25,11 +25,6 @@
                [(ngModel)]="sieveAnalysis.nameOfTest" name="nameOfTest" required>
       </div>
       <div class="align-items-center">
-        <label class="col-form-label me-1">Test By</label>
-        <input type="text" class="form-control compact-input"
-               [(ngModel)]="sieveAnalysis.testBy" name="testBy" required>
-      </div>
-      <div class="align-items-center">
         <label class="col-form-label me-1">Testing Date</label>
         <input type="date" class="form-control compact-input"
                [(ngModel)]="sieveAnalysis.testingDate" name="testingDate" required>
@@ -43,7 +38,7 @@
         <input type="text" class="form-control compact-input"
                [(ngModel)]="sieveAnalysis.materialType" name="materialType" required>
       </div>
-      <div class="align-items-center">
+      <!-- <div class="align-items-center">
         <label class="col-form-label me-1">Consultant</label>
         <input type="text" class="form-control compact-input"
                [(ngModel)]="sieveAnalysis.consultant" name="consultant" required>
@@ -57,26 +52,28 @@
         <label class="col-form-label me-1">Location</label>
         <input type="text" class="form-control compact-input"
                [(ngModel)]="sieveAnalysis.location" name="location" required>
-      </div>
+      </div> -->
 
       <div class="align-items-center">
         <label class="col-form-label me-1">Total Weigh </label>
         <input type="number" class="form-control compact-input"
-               [(ngModel)]="sieveAnalysis.totalWeigh" name="totalWeigh" required>
+              [(ngModel)]="sieveAnalysis.totalWeigh" name="totalWeigh" required>
       </div>
-
-
-
+      <div class="align-items-center">
+        <label class="col-form-label me-1">Notes</label>
+        <input type="text" class="form-control compact-input"
+              [(ngModel)]="sieveAnalysis.notes" name="notes">
+      </div>
     </div>
     <!-- Notes Line -->
-    <div class="d-flex align-items-center mb-1 mt-2">
+    <!-- <div class="d-flex align-items-center mb-1 mt-2">
       <label class="col-form-label me-2">Notes</label>
       <input type="text" class="form-control"
              [(ngModel)]="sieveAnalysis.notes" name="notes" style="flex: 1;">
-    </div>
+    </div> -->
 
 
-    <div class="grid-container">
+    <div class="grid-container mt-5">
       <div class="form-group">
         <label class="label">Standard(mm)</label>
         <input type="text" class="form-control" [value]="standard[0]">

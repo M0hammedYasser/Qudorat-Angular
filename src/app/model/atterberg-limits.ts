@@ -1,6 +1,7 @@
 import {Test} from "./test";
 
 export interface AtterbergLimits {
+clientCode: any;
 
 
 

@@ -1,6 +1,7 @@
 import {Test} from "./test";
 
 export interface SieveAnalysis {
+clientCode: any;
   clay: string;
   silt: string;
   sand: string;
