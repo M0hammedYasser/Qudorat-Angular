@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 // import { Notification } from '../../../../model/notification';
 import { DatePipe, NgClass, NgForOf, NgIf } from '@angular/common';
+import {NotificationService} from "../../../../service/notification/notification.service";
 
 export interface Notification {
   id: number;
@@ -30,55 +31,56 @@ export interface Tab {
 })
 
 
-export class NotificationComponent implements OnInit, OnDestroy { 
-notifications: Notification[] = [
-    {
-      id: 1,
-      type: 'lead',
-      user: 'Wade Warren',
-      action: 'added new lead',
-      target: 'Brooklyn Simmons',
-      time: '12 min ago',
-      isRead: false
-    },
-    {
-      id: 2,
-      type: 'lead',
-      user: 'Esther Howard',
-      action: 'added new lead',
-      target: 'Leslie Alexander',
-      time: '12 min ago',
-      isRead: false
-    },
-    {
-      id: 3,
-      type: 'reply',
-      user: 'Jenny Willson',
-      action: 'sent you reply',
-      message: 'We have scheduled a meeting for next week.',
-      time: '12 min ago',
-      isRead: true
-    },
-    {
-      id: 4,
-      type: 'file',
-      user: 'Emily',
-      action: 'sent Files',
-      fileName: 'Copies of Government.pdf',
-      fileSize: '2 MB',
-      time: '12 min ago',
-      isRead: true
-    },
-    {
-      id: 5,
-      type: 'reply',
-      user: 'Robert Fox',
-      action: 'sent you reply',
-      message: 'Please ensure the feedback is constructive and actionable. We need to finalize this by tomorrow.',
-      time: '12 min ago',
-      isRead: true
-    }
-  ];
+export class NotificationComponent implements OnInit, OnDestroy {
+
+notifications: Notification[] = [];
+/**
+ * {
+ *       id: 1,
+ *       type: 'lead',
+ *       user: 'Wade Warren',
+ *       action: 'added new lead',
+ *       target: 'Brooklyn Simmons',
+ *       time: '12 min ago',
+ *       isRead: false
+ *     },
+ *     {
+ *       id: 2,
+ *       type: 'lead',
+ *       user: 'Esther Howard',
+ *       action: 'added new lead',
+ *       target: 'Leslie Alexander',
+ *       time: '12 min ago',
+ *       isRead: false
+ *     },
+ *     {
+ *       id: 3,
+ *       type: 'reply',
+ *       user: 'Jenny Willson',
+ *       action: 'sent you reply',
+ *       message: 'We have scheduled a meeting for next week.',
+ *       time: '12 min ago',
+ *       isRead: true
+ *     },
+ *     {
+ *       id: 4,
+ *       type: 'file',
+ *       user: 'Emily',
+ *       action: 'sent Files',
+ *       fileName: 'Copies of Government.pdf',
+ *       fileSize: '2 MB',
+ *       time: '12 min ago',
+ *       isRead: true
+ *     },
+ *     {
+ *       id: 5,
+ *       type: 'reply',
+ *       user: 'Robert Fox',
+ *       action: 'sent you reply',
+ *       message: 'Please ensure the feedback is constructive and actionable. We need to finalize this by tomorrow.',
+ *       time: '12 min ago',
+ *       isRead: true
+ *     }*/
 
   tabs: Tab[] = [
     { id: 'all', label: 'All', count: 7 },
@@ -89,7 +91,7 @@ notifications: Notification[] = [
   activeTab: string = 'all';
   filteredNotifications: Notification[] = [];
   savedNotifications: Set<number> = new Set();
-  
+
   // Toast properties
   showToast: boolean = false;
   toastMessage: string = '';
@@ -99,11 +101,12 @@ notifications: Notification[] = [
   private pressTimer: any;
   private isLongPress: boolean = false;
 
-  constructor() {}
+  constructor(private service :NotificationService) {}
 
   ngOnInit(): void {
     this.updateFilteredNotifications();
     this.updateNotificationCount();
+    this.service.findAll().subscribe(response => {this.notifications = response})
   }
 
   ngOnDestroy(): void {
@@ -129,7 +132,7 @@ notifications: Notification[] = [
         this.filteredNotifications = this.notifications.filter(n => !n.isRead);
         break;
       case 'saved':
-        this.filteredNotifications = this.notifications.filter(n => 
+        this.filteredNotifications = this.notifications.filter(n =>
           this.savedNotifications.has(n.id)
         );
         break;
@@ -154,7 +157,7 @@ notifications: Notification[] = [
 
   private updateNotificationCount(): void {
     const unreadCount = this.notifications.filter(n => !n.isRead).length;
-    
+
     // Update All tab count
     const allTab = this.tabs.find(t => t.id === 'all');
     if (allTab) {
