@@ -5,11 +5,12 @@ import {Asphalt} from "../../../../../model/asphalt";
 import jsPDF from "jspdf";
 import autoTable, {RowInput} from "jspdf-autotable";
 import Chart from "chart.js/auto";
+import { DecimalPipe } from '@angular/common';
 
 @Component({
   selector: 'app-asphalt-report',
   standalone: true,
-  imports: [],
+  imports: [DecimalPipe],
   templateUrl: './asphalt-report.component.html',
   styleUrl: './asphalt-report.component.css'
 })

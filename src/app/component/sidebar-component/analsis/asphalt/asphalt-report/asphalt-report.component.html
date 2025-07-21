@@ -1,6 +1,432 @@
 <div class="invoice-container">
-  <h2>Qudorat Laboratory</h2>
-  <h5>Gradation</h5>
+  
+  <h4>BITUMEN CONTENT TEST ({{this.asphalt.bitumen.standard}})</h4>
+  <table class="bitumen_table">
+    <tr>
+      <th>Parameter</th>
+      <th>Value</th>
+    </tr>
+
+    <tr>
+      <td>Wt. sample before gm</td>
+      <td>{{this.asphalt.bitumen.weightSampleBefore}}</td>
+    </tr>
+
+    <tr>
+      <td>Wt. of filter before gm</td>
+      <td>{{this.asphalt.bitumen.weightFilterBefore}}</td>
+    </tr>
+
+    <tr>
+      <td>Wt. Of filter after gm</td>
+      <td>{{this.asphalt.bitumen.weightFilterAfter}}</td>
+    </tr>
+
+    <tr>
+      <td>Increase of filter wt. gm</td>
+      <td>{{asphalt.bitumen.increaseOfFilterWeight| number:'1.1-1'}}</td>
+    </tr>
+
+    <tr>
+      <td>Wt. of sample after gm</td>
+      <td>{{this.asphalt.bitumen.weightSampleAfter}}</td>
+    </tr>
+
+    <tr>
+      <td>Total wt. of sample gm</td>
+      <td>{{asphalt.bitumen.totalWeightOfSample| number:'1.1-1'}}</td>
+    </tr>
+
+    <tr>
+      <td>Wt. of bit. gm</td>
+      <td>{{asphalt.bitumen.weightOfBit| number:'1.1-1'}}</td>
+    </tr>
+
+    <tr>
+      <td>Perc of Bit %</td>
+      <td>{{(this.asphalt.bitumen.percOfBit)| number:'1.2-2'}}</td>
+    </tr>
+  </table>
+
+  <h4>SIEVE ANALYSIS ({{this.asphalt.gradationTest.standard}})</h4>
+  <table class="sieve-table">
+    <tr>
+      <th rowspan="2">mm</th>
+      <th rowspan="2">inch</th>
+      <th rowspan="2">Ret(gm)</th>
+      <th rowspan="2">Ret%</th>
+      <th rowspan="2">Passing%</th>
+      <th colspan="2">Gmf limits</th>
+      <th colspan="2">General specifications</th>
+      <th rowspan="2">Expand</th>
+    </tr>
+
+    <tr>
+      <th>Min%</th>
+      <th>Max%</th>
+      <th>Min%</th>
+      <th>Max%</th>
+    </tr>
+
+    <tr>
+      <td>37.5</td>
+      <td>1.5</td>
+      <td>{{this.asphalt.gradationTest.massRetainedA}}</td>
+      <td>{{asphalt.gradationTest.retainedA | number:'1.1-1'}}</td>
+      <td>{{(100 - this.asphalt.gradationTest.retainedA) | number:'1.2-2'}}</td>
+      <td>{{this.asphalt.gradationTest.cvcMinA}}</td>
+      <td>{{this.asphalt.gradationTest.cvcMaxA}}</td>
+      <td>{{this.asphalt.gradationTest.gcvcMinA}}</td>
+      <td>{{this.asphalt.gradationTest.gcvcMaxA}}</td>
+      <td>{{this.asphalt.gradationTest.expandA}}</td>
+    </tr>
+
+    <tr>
+      <td>25</td>
+      <td>1</td>
+      <td>{{this.asphalt.gradationTest.massRetainedB}}</td>
+      <td>{{asphalt.gradationTest.retainedB | number:'1.1-1'}}</td>
+      <td>{{(100 - this.asphalt.gradationTest.retainedB) | number:'1.2-2'}}</td>
+      <td>{{this.asphalt.gradationTest.cvcMinB}}</td>
+      <td>{{this.asphalt.gradationTest.cvcMaxB}}</td>
+      <td>{{this.asphalt.gradationTest.gcvcMinB}}</td>
+      <td>{{this.asphalt.gradationTest.gcvcMaxB}}</td>
+      <td>{{this.asphalt.gradationTest.expandB}}</td>
+    </tr>
+
+    <tr>
+      <td>19.0</td>
+      <td>3/4</td>
+      <td>{{this.asphalt.gradationTest.massRetainedC}}</td>
+      <td>{{asphalt.gradationTest.retainedC | number:'1.1-1'}}</td>
+      <td>{{(100 - this.asphalt.gradationTest.retainedC) | number:'1.2-2'}}</td>
+      <td>{{this.asphalt.gradationTest.cvcMinC}}</td>
+      <td>{{this.asphalt.gradationTest.cvcMaxC}}</td>
+      <td>{{this.asphalt.gradationTest.gcvcMinC}}</td>
+      <td>{{this.asphalt.gradationTest.gcvcMaxC}}</td>
+      <td>{{this.asphalt.gradationTest.expandC}}</td>
+    </tr>
+
+    <tr>
+      <td>12.5</td>
+      <td>1/2</td>
+      <td>{{this.asphalt.gradationTest.massRetainedD}}</td>
+      <td>{{asphalt.gradationTest.retainedD | number:'1.1-1'}}</td>
+      <td>{{(100 - this.asphalt.gradationTest.retainedD) | number:'1.2-2'}}</td>
+      <td>{{this.asphalt.gradationTest.cvcMinD}}</td>
+      <td>{{this.asphalt.gradationTest.cvcMaxD}}</td>
+      <td>{{this.asphalt.gradationTest.gcvcMinD}}</td>
+      <td>{{this.asphalt.gradationTest.gcvcMaxD}}</td>
+      <td>{{this.asphalt.gradationTest.expandD}}</td>
+    </tr>
+
+    <tr>
+      <td>9.5</td>
+      <td>3/8</td>
+      <td>{{this.asphalt.gradationTest.massRetainedE}}</td>
+      <td>{{asphalt.gradationTest.retainedE | number:'1.1-1'}}</td>
+      <td>{{(100 - this.asphalt.gradationTest.retainedE) | number:'1.2-2'}}</td>
+      <td>{{this.asphalt.gradationTest.cvcMinE}}</td>
+      <td>{{this.asphalt.gradationTest.cvcMaxE}}</td>
+      <td>{{this.asphalt.gradationTest.gcvcMinE}}</td>
+      <td>{{this.asphalt.gradationTest.gcvcMaxE}}</td>
+      <td>{{this.asphalt.gradationTest.expandE}}</td>
+    </tr>
+
+    <tr>
+      <td>4.75</td>
+      <td>#4</td>
+      <td>{{this.asphalt.gradationTest.massRetainedF}}</td>
+      <td>{{asphalt.gradationTest.retainedF | number:'1.1-1'}}</td>
+      <td>{{(100 - this.asphalt.gradationTest.retainedF) | number:'1.2-2'}}</td>
+      <td>{{this.asphalt.gradationTest.cvcMinF}}</td>
+      <td>{{this.asphalt.gradationTest.cvcMaxF}}</td>
+      <td>{{this.asphalt.gradationTest.gcvcMinF}}</td>
+      <td>{{this.asphalt.gradationTest.gcvcMaxF}}</td>
+      <td>{{this.asphalt.gradationTest.expandF}}</td>
+    </tr>
+
+    <tr>
+      <td>2.00</td>
+      <td>#10</td>
+      <td>{{this.asphalt.gradationTest.massRetainedG}}</td>
+      <td>{{asphalt.gradationTest.retainedG | number:'1.1-1'}}</td>
+      <td>{{(100 - this.asphalt.gradationTest.retainedG) | number:'1.2-2'}}</td>
+      <td>{{this.asphalt.gradationTest.cvcMinG}}</td>
+      <td>{{this.asphalt.gradationTest.cvcMaxG}}</td>
+      <td>{{this.asphalt.gradationTest.gcvcMinG}}</td>
+      <td>{{this.asphalt.gradationTest.gcvcMaxG}}</td>
+      <td>{{this.asphalt.gradationTest.expandG}}</td>
+    </tr>
+
+    <tr>
+      <td>0.425</td>
+      <td>#40</td>
+      <td>{{this.asphalt.gradationTest.massRetainedH}}</td>
+      <td>{{asphalt.gradationTest.retainedH | number:'1.1-1'}}</td>
+      <td>{{(100 - this.asphalt.gradationTest.retainedH) | number:'1.2-2'}}</td>
+      <td>{{this.asphalt.gradationTest.cvcMinH}}</td>
+      <td>{{this.asphalt.gradationTest.cvcMaxH}}</td>
+      <td>{{this.asphalt.gradationTest.gcvcMinH}}</td>
+      <td>{{this.asphalt.gradationTest.gcvcMaxH}}</td>
+      <td>{{this.asphalt.gradationTest.expandH}}</td>
+    </tr>
+
+    <tr>
+      <td>0.180</td>
+      <td>#80</td>
+      <td>{{this.asphalt.gradationTest.massRetainedI}}</td>
+      <td>{{asphalt.gradationTest.retainedI | number:'1.1-1'}}</td>
+      <td>{{(100 - asphalt.gradationTest.retainedI) | number:'1.2-2'}}</td>
+      <td>{{this.asphalt.gradationTest.cvcMinI}}</td>
+      <td>{{this.asphalt.gradationTest.cvcMaxI}}</td>
+      <td>{{this.asphalt.gradationTest.gcvcMinI}}</td>
+      <td>{{this.asphalt.gradationTest.gcvcMaxI}}</td>
+      <td>{{this.asphalt.gradationTest.expandI}}</td>
+    </tr>
+
+    <tr>
+      <td>0.075</td>
+      <td>#200</td>
+      <td>{{this.asphalt.gradationTest.massRetainedJ}}</td>
+      <td>{{asphalt.gradationTest.retainedJ | number:'1.1-1'}}</td>
+      <td>{{(100 - asphalt.gradationTest.retainedJ) | number:'1.2-2'}}</td>
+      <td>{{this.asphalt.gradationTest.cvcMinJ}}</td>
+      <td>{{this.asphalt.gradationTest.cvcMaxJ}}</td>
+      <td>{{this.asphalt.gradationTest.gcvcMinJ}}</td>
+      <td>{{this.asphalt.gradationTest.gcvcMaxJ}}</td>
+      <td>{{this.asphalt.gradationTest.expandJ}}</td>
+    </tr>
+  </table>
+
   <canvas id="invoiceChart"></canvas>
-  <button (click)="generatePDF()">Download PDF</button>
+
+  <h4>ASPHALT  MARSHALL & G.M.M TEST ({{this.asphalt.classification}})</h4>
+  <table class="asphalt-table">
+    <tr>
+      <th>Parameter</th>
+      <th>1</th>
+      <th>2</th>
+      <th>3</th>
+      <th>4</th>
+      <th>5</th>
+      <th>6</th>
+    </tr>
+
+    <tr>
+      <td>% A/C by tot. wt. of mix</td>
+      <td colspan="6" style="text-align: center;">{{(this.asphalt.bitumen.percOfBit) | number:'1.2-2'}}</td>
+    </tr>
+
+    <tr>
+      <td>Wt. in air dry (gm)</td>
+      <td>{{this.asphalt.weightAirDryA}}</td>
+      <td>{{this.asphalt.weightAirDryB}}</td>
+      <td>{{this.asphalt.weightAirDryC}}</td>
+      <td>{{this.asphalt.weightAirDryD}}</td>
+      <td>{{this.asphalt.weightAirDryE}}</td>
+      <td>{{this.asphalt.weightAirDryF}}</td>
+    </tr>
+
+    <tr>
+      <td>Wt. in water (gm)</td>
+      <td>{{this.asphalt.weightWaterA}}</td>
+      <td>{{this.asphalt.weightWaterB}}</td>
+      <td>{{this.asphalt.weightWaterC}}</td>
+      <td>{{this.asphalt.weightWaterD}}</td>
+      <td>{{this.asphalt.weightWaterE}}</td>
+      <td>{{this.asphalt.weightWaterF}}</td>
+    </tr>
+
+    <tr>
+      <td>Wt. in air surf dry (gm)</td>
+      <td>{{this.asphalt.weightAirSurfDryA}}</td>
+      <td>{{this.asphalt.weightAirSurfDryB}}</td>
+      <td>{{this.asphalt.weightAirSurfDryC}}</td>
+      <td>{{this.asphalt.weightAirSurfDryD}}</td>
+      <td>{{this.asphalt.weightAirSurfDryE}}</td>
+      <td>{{this.asphalt.weightAirSurfDryF}}</td>
+    </tr>
+
+    <tr>
+      <td>Volumes (c.c)</td>
+      <td>{{asphalt.weightAirSurfDryA - this.asphalt.weightWaterA | number:'1.1-1'}}</td>
+      <td>{{asphalt.weightAirSurfDryB - this.asphalt.weightWaterB | number:'1.1-1'}}</td>
+      <td>{{asphalt.weightAirSurfDryC - this.asphalt.weightWaterC | number:'1.1-1'}}</td>
+      <td>{{asphalt.weightAirSurfDryD - this.asphalt.weightWaterD | number:'1.1-1'}}</td>
+      <td>{{asphalt.weightAirSurfDryE - this.asphalt.weightWaterE | number:'1.1-1'}}</td>
+      <td>{{asphalt.weightAirSurfDryF - this.asphalt.weightWaterF | number:'1.1-1'}}</td>
+    </tr>
+
+    <tr>
+      <td>Bulk Sp.Gr.of Comp. mix</td>
+      <td>{{asphalt.weightAirDryA / (asphalt.weightAirSurfDryA - asphalt.weightWaterA) | number:'1.3-3'}}</td>
+      <td>{{asphalt.weightAirDryB / (asphalt.weightAirSurfDryB - asphalt.weightWaterB) | number:'1.3-3'}}</td>
+      <td>{{asphalt.weightAirDryC / (asphalt.weightAirSurfDryC - asphalt.weightWaterC) | number:'1.3-3'}}</td>
+      <td>{{asphalt.weightAirDryD / (asphalt.weightAirSurfDryD - asphalt.weightWaterD) | number:'1.3-3'}}</td>
+      <td>{{asphalt.weightAirDryE / (asphalt.weightAirSurfDryE - asphalt.weightWaterE) | number:'1.3-3'}}</td>
+      <td>{{asphalt.weightAirDryF / (asphalt.weightAirSurfDryF - asphalt.weightWaterF) | number:'1.3-3'}}</td>
+    </tr>
+
+    <tr>
+      <td>Avg Bulk Sp.Gr.of Comp. mix Gmb gm/cm3</td>
+      <td colspan="6" style="text-align: center;">{{bulkSpOfCompMix | number:'1.3-3'}}</td>
+    </tr>
+
+    <tr>
+      <td>Net. Wt. Of loose mix (gm)</td>
+      <td colspan="6" style="text-align: center;">{{this.asphalt.netWeightOfLooseMix.toString()}}</td>
+    </tr>
+
+    <tr>
+      <td>Net Wt. Of Flask+water (gm)</td>
+      <td colspan="6" style="text-align: center;">{{this.asphalt.netWeightOfFlaskWater.toString()}}</td>
+    </tr>
+
+    <tr>
+      <td>Wt. Flask+water+sample (gm)</td>
+      <td colspan="6" style="text-align: center;">{{this.asphalt.weightFlaskWaterSample.toString()}}</td>
+    </tr>
+
+    <tr>
+      <td>Max. Sp. Gr of Paving mix</td>
+      <td colspan="6" style="text-align: center;">{{ maxSpOfPAvgMix | number:'1.3-3'}}</td>
+    </tr>
+
+    <tr>
+      <td>Avg. max Sp. Gr of mix gmm gm/cm3</td>
+      <td colspan="6" style="text-align: center;">{{maxSpOfPAvgMix | number:'1.3-3'}}</td>
+    </tr>
+
+    <tr>
+      <td>% Air Voids</td>
+      <td colspan="6" style="text-align: center;">{{airVoid | number:'1.1-1'}}</td>
+    </tr>
+
+    <tr>
+      <td>% Voids in mineral Agg.</td>
+      <td colspan="6" style="text-align: center;">{{voidMineral | number:'1.2-2'}}</td>
+    </tr>
+
+    <tr>
+      <td>% Voids filled with Asp.</td>
+      <td colspan="6" style="text-align: center;">{{voidFilled | number:'1.1-1'}}</td>
+    </tr>
+
+    <tr>
+      <td>Effect. Sp. Gravity of Agg</td>
+      <td colspan="6" style="text-align: center;">{{effectiveSpGravityOfAgg | number:'1.3-3'}}</td>
+    </tr>
+
+    <tr>
+      <td>Absorbed Asp. %</td>
+      <td colspan="6" style="text-align: center;">{{absorbedAps | number:'1.2-2'}}</td>
+    </tr>
+
+    <tr>
+      <td>Effective Asp. Content % </td>
+      <td colspan="6" style="text-align: center;">{{this.asphalt.bitumen.percOfBit - (this.absorbedAps / 100) * (100 - this.asphalt.bitumen.percOfBit)| number:'1.2-2'}}</td>
+    </tr>
+
+    <tr>
+      <td>Stability (kg)</td>
+      <td>{{this.asphalt.stabilityA}}</td>
+      <td>{{this.asphalt.stabilityB}}</td>
+      <td>{{this.asphalt.stabilityC}}</td>
+      <td>{{this.asphalt.stabilityD}}</td>
+      <td>{{this.asphalt.stabilityE}}</td>
+      <td>{{this.asphalt.stabilityF}}</td>
+    </tr>
+
+    <tr>
+      <td>Correction factor</td>
+      <td>{{this.asphalt.correctionFactorA}}</td>
+      <td>{{this.asphalt.correctionFactorB}}</td>
+      <td>{{this.asphalt.correctionFactorC}}</td>
+      <td>{{this.asphalt.correctionFactorD}}</td>
+      <td>{{this.asphalt.correctionFactorE}}</td>
+      <td>{{this.asphalt.correctionFactorF}}</td>
+    </tr>
+
+    <tr>
+      <td>Corrected Stability (kg)</td>
+      <td>{{(this.asphalt.stabilityA * this.asphalt.correctionFactorA).toFixed(0)}}</td>
+      <td>{{(this.asphalt.stabilityB * this.asphalt.correctionFactorB).toFixed(0)}}</td>
+      <td>{{(this.asphalt.stabilityC * this.asphalt.correctionFactorC).toFixed(0)}}</td>
+      <td>{{(this.asphalt.stabilityD * this.asphalt.correctionFactorD).toFixed(0)}}</td>
+      <td>{{(this.asphalt.stabilityE * this.asphalt.correctionFactorE).toFixed(0)}}</td>
+      <td>{{(this.asphalt.stabilityF * this.asphalt.correctionFactorF).toFixed(0)}}</td>
+    </tr>
+
+    <tr>
+      <td>Stability (kg) for 30 min</td>
+      <td colspan="3" style="text-align: center;">{{(this.avgStabilityFor30Min).toFixed(0)}}</td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+
+    <tr>
+      <td>Stability (kg) for 24 Hrs.</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>{{(this.asphalt.stabilityD * this.asphalt.correctionFactorD).toFixed(0)}}</td>
+      <td>{{(this.asphalt.stabilityE * this.asphalt.correctionFactorE).toFixed(0)}}</td>
+      <td>{{(this.asphalt.stabilityF * this.asphalt.correctionFactorF).toFixed(0)}}</td>
+    </tr>
+
+    <tr>
+      <td>Stability (kg) for 24 Hrs</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td colspan="3" style="text-align: center;">{{(this.avgStabilityFor24Hrs).toFixed(0)}}</td>
+    </tr>
+
+    <tr>
+      <td>% Loss of Stability</td>
+      <td colspan="6" style="text-align: center;">{{((this.avgStabilityFor30Min - this.avgStabilityFor24Hrs) / this.avgStabilityFor30Min * 100).toFixed(1)}}</td>
+    </tr>
+
+    <tr>
+      <td>Flow (mm)</td>
+      <td>{{this.asphalt.flowA}}</td>
+      <td>{{this.asphalt.flowB}}</td>
+      <td>{{this.asphalt.flowC}}</td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+
+    <tr>
+      <td>Avg. Flow (mm)</td>
+      <td colspan="3" style="text-align: center;">{{((this.asphalt.flowA + this.asphalt.flowB + this.asphalt.flowC) / 3).toFixed(2)}}</td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+
+    <tr>
+      <td>Sp. Gravity of Asp. Bit</td>
+      <td colspan="6" style="text-align: center;">{{this.asphalt.spGravityOfAspBit}}</td>
+    </tr>
+
+    <tr>
+      <td>Agg. % total wt. of mix</td>
+      <td colspan="6" style="text-align: center;">{{(100 - this.asphalt.bitumen.percOfBit).toFixed(2)}}</td>
+    </tr>
+
+    <tr>
+      <td>Bulk Sp. Gr. Comb. Agg.</td>
+      <td colspan="6" style="text-align: center;">{{this.asphalt.bulkSpGrCombAgg}}</td>
+    </tr>
+  </table>
+
+  <div class="text-center" style="width: 70vw;">
+    <button (click)="generatePDF()">Download PDF</button>
+  </div>
 </div>
+
+
+

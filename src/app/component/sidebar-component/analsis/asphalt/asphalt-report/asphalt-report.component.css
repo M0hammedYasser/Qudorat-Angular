@@ -1,14 +1,49 @@
 .invoice-container {
   max-width: 800px;
   margin: auto;
-  padding: 100px 0 0  0;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  background: #f9f9f9;
+  padding: 70px 0 0  0;
+}
+
+h4{
+  width: 70vw;
   text-align: center;
 }
 
-.invoice-details {
+table{
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0 0 15px 0;
+}
+
+.head-table{
+  width: 70vw;
+}
+
+.bitumen_table{
+  width: 70vw;
+}
+
+.sieve-table{
+  width: 70vw;
+}
+
+.asphalt-table{
+  width: 70vw;
+}
+
+table , td , th {
+  border: 1px solid;
+}
+
+td , th{
+  padding: 5px;
+}
+
+canvas{
+  margin: 50px 0 50px 0;
+}
+
+/* .invoice-details {
   margin-top: 20px;
   text-align: left;
 }
@@ -34,7 +69,7 @@
   width: 100%;
   max-width: 600px;
   margin: 20px auto;
-}
+} */
 
 button {
   margin-top: 20px;
