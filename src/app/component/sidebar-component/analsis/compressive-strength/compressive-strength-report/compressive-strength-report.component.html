@@ -1,215 +1,247 @@
 <div class="container mt-4">
-  <h2 class="mb-3 text-center">Concrete Test Report</h2>
+  <h2 class="mb-3 text-center">Portland Cement Concrete Cylinders Compressive Strength Test</h2>
+  <table class="table1">
+    <tr>
+      <th>Parameter</th>
+      <th>Value</th>
+      <th>Unit</th>
+      <th>Spec</th>
+      <th>Value</th>
+      <th>Unit</th>
+      <th>Value</th>
+      <th>Unit</th>
+    </tr>
 
-  <!-- First Row -->
-  <div class="row mb-2">
-    <div class="col-md-6">
-      <strong>Project Name : </strong> <span>{{ compressiveStrength.projectName }}</span>
-    </div>
-    <div class="col-md-6 ">
-      <strong>Report No : </strong> <span>{{ compressiveStrength.sampleNo }}</span>
-    </div>
+    <tr>
+      <td>Cement Content</td>
+      <td>{{this.compressiveStrength.cementContent}}</td>
+      <td>{{this.compressiveStrength.cementContentType}}</td>
+      <td>Spec. 28 Days Strength</td>
+      <td>{{this.compressiveStrength.specTwintyEightDayStrength}}</td>
+      <td>kg/cm2</td>
+      <td>{{this.compressiveStrength.specTwintyEightDayStrength / 10}}</td>
+      <td>Mpa</td>
+    </tr>
+
+    <tr>
+      <td>Diameter</td>
+      <td>{{this.compressiveStrength.diameter * 10}}</td>
+      <td>mm</td>
+      <td>Area</td>
+      <td>{{(this.area).toFixed(2)}}</td>
+      <td>cm²</td>
+      <td></td>
+      <td></td>
+    </tr>
+
+    <tr>
+      <td>Height</td>
+      <td>{{this.compressiveStrength.height * 10}}</td>
+      <td>mm</td>
+      <td>Volume</td>
+      <td>{{(this.volume).toFixed(2)}}</td>
+      <td>cm³</td>
+      <td></td>
+      <td></td>
+    </tr>
+
+    <tr>
+      <td>Environmental Conditions</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+
+    <tr>
+      <td>Date Cast</td>
+      <td>{{this.compressiveStrength.dateCast}}</td>
+      <td></td>
+      <td>Slump</td>
+      <td>{{this.compressiveStrength.slump}}</td>
+      <td>mm</td>
+      <td></td>
+      <td></td>
+    </tr>
+
+    <tr>
+      <td>Date Received</td>
+      <td>{{this.compressiveStrength.dateReceived}}</td>
+      <td></td>
+      <td>Air Temperature</td>
+      <td>{{this.compressiveStrength.airTemperature}}</td>
+      <td>°C</td>
+      <td></td>
+      <td></td>
+    </tr>
+
+    <tr>
+      <td>Date Tested</td>
+      <td>{{this.compressiveStrength.dateTested}}</td>
+      <td></td>
+      <td>Concrete Temperature</td>
+      <td>{{this.compressiveStrength.concreteTemperature}}</td>
+      <td>°C</td>
+      <td></td>
+      <td></td>
+    </tr>
+  </table>
+
+  <table class="table2">
+    <tr>
+      <th>NO</th>
+      <th>Type of structure</th>
+      <th>Age (day)</th>
+      <th>Weight (gm)</th>
+      <th>Density (gm/cm³)</th>
+      <th>Load (kN)</th>
+      <th>trength (Kgf/cm²)</th>
+      <th>Strength (Mpa)</th>
+      <th>Fracture Type</th>
+    </tr>
+
+    <tr>
+      <td>1</td>
+      <td></td>
+      <td>{{this.compressiveStrength.sampleAAge}}</td>
+      <td>{{this.compressiveStrength.weightA}}</td>
+      <td>{{(this.compressiveStrength.weightA / this.volume).toFixed(3)}}</td>
+      <td>{{this.compressiveStrength.loadA}}</td>
+      <td>{{(this.compressiveStrength.loadA * 101.971 / this.area).toFixed(1)}}</td>
+      <td>{{(this.compressiveStrength.loadA * 10 / this.area).toFixed(2)}}</td>
+      <td>{{this.compressiveStrength.fractureA}}</td>
+    </tr>
+
+    <tr>
+      <td>2</td>
+      <td></td>
+      <td>{{this.compressiveStrength.sampleBAge}}</td>
+      <td>{{this.compressiveStrength.weightB}}</td>
+      <td>{{(this.compressiveStrength.weightB / this.volume).toFixed(3)}}</td>
+      <td>{{this.compressiveStrength.loadB}}</td>
+      <td>{{(this.compressiveStrength.loadB * 101.971 / this.area).toFixed(1)}}</td>
+      <td>{{(this.compressiveStrength.loadB * 10 / this.area).toFixed(2)}}</td>
+      <td>{{this.compressiveStrength.fractureB}}</td>
+    </tr>
+
+    <tr>
+      <td>3</td>
+      <td></td>
+      <td>{{this.compressiveStrength.sampleCAge}}</td>
+      <td>{{this.compressiveStrength.weightC}}</td>
+      <td>{{(this.compressiveStrength.weightC / this.volume).toFixed(3)}}</td>
+      <td>{{this.compressiveStrength.loadC}}</td>
+      <td>{{(this.compressiveStrength.loadC * 101.971 / this.area).toFixed(1)}}</td>
+      <td>{{(this.compressiveStrength.loadC * 10 / this.area).toFixed(2)}}</td>
+      <td>{{this.compressiveStrength.fractureC}}</td>
+    </tr>
+
+    <tr>
+      <td>Avg 1-3</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>{{((this.compressiveStrength.loadA + this.compressiveStrength.loadB + this.compressiveStrength.loadC) / 3 * 101.971 / this.area).toFixed(1)}}</td>
+      <td>{{((this.compressiveStrength.loadA + this.compressiveStrength.loadB + this.compressiveStrength.loadC) / 3 * 10 / this.area).toFixed(2)}}</td>
+      <td></td>
+    </tr>
+
+    <tr>
+      <td>4</td>
+      <td></td>
+      <td>{{this.compressiveStrength.sampleDAge}}</td>
+      <td>{{this.compressiveStrength.weightD}}</td>
+      <td>{{(this.compressiveStrength.weightD / this.volume).toFixed(3)}}</td>
+      <td>{{this.compressiveStrength.loadD}}</td>
+      <td>{{(this.compressiveStrength.loadD * 101.971 / this.area).toFixed(1)}}</td>
+      <td>{{(this.compressiveStrength.loadD * 10 / this.area).toFixed(2)}}</td>
+      <td>{{this.compressiveStrength.fractureD}}</td>
+    </tr>
+
+    <tr>
+      <td>5</td>
+      <td></td>
+      <td>{{this.compressiveStrength.sampleEAge}}</td>
+      <td>{{this.compressiveStrength.weightE}}</td>
+      <td>{{(this.compressiveStrength.weightE / this.volume).toFixed(3)}}</td>
+      <td>{{this.compressiveStrength.loadE}}</td>
+      <td>{{(this.compressiveStrength.loadE * 101.971 / this.area).toFixed(1)}}</td>
+      <td>{{(this.compressiveStrength.loadE * 10 / this.area).toFixed(2)}}</td>
+      <td>{{this.compressiveStrength.fractureE}}</td>
+    </tr>
+
+    <tr>
+      <td>6</td>
+      <td></td>
+      <td>{{this.compressiveStrength.sampleFAge}}</td>
+      <td>{{this.compressiveStrength.weightF}}</td>
+      <td>{{(this.compressiveStrength.weightF / this.volume).toFixed(3)}}</td>
+      <td>{{this.compressiveStrength.loadF}}</td>
+      <td>{{(this.compressiveStrength.loadF * 101.971 / this.area).toFixed(1)}}</td>
+      <td>{{(this.compressiveStrength.loadF * 10 / this.area).toFixed(2)}}</td>
+      <td>{{this.compressiveStrength.fractureF}}</td>
+    </tr>
+
+    <tr>
+      <td>Avg 4-6</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>{{((this.compressiveStrength.loadD + this.compressiveStrength.loadE + this.compressiveStrength.loadF) / 3 * 101.971 / this.area).toFixed(1)}}</td>
+      <td>{{((this.compressiveStrength.loadD + this.compressiveStrength.loadE + this.compressiveStrength.loadF) / 3 * 10 / this.area).toFixed(2)}}</td>
+      <td></td>
+    </tr>
+  </table>
+
+  <table class="table3">
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+
+    <tr>
+      <td>TYPE 1</td>
+      <td>Less than 1 inch of cracking through caps</td>
+    </tr>
+
+    <tr>
+      <td>TYPE 2</td>
+      <td>Vertical cracks running through caps</td>
+    </tr>
+
+    <tr>
+      <td>TYPE 3</td>
+      <td>Columnar Vertical Cracking through both ends</td>
+    </tr>
+
+    <tr>
+      <td>TYPE 4</td>
+      <td>Diagonal fracture with no cracking through ends</td>
+    </tr>
+
+    <tr>
+      <td>TYPE 5</td>
+      <td>Side fractures at top or bottom</td>
+    </tr>
+
+    <tr>
+      <td>TYPE 6</td>
+      <td>Similar to type 5 but end of cylinder is pointed</td>
+    </tr>
+  </table>
+
+  <div class="text-center" style="width: 70vw;">
+    <img src="assets/compressiveStrength.png" alt="">
   </div>
 
-  <!-- Second Row -->
-  <div class="row mb-2">
-    <div class="col-md-6">
-      <strong>Client : </strong> <span>{{ compressiveStrength.clientName }}</span>
-    </div>
-
-  </div>
-
-  <!-- Third Row -->
-  <div class="row mb-2">
-    <div class="col-md-6">
-      <strong>Location : </strong> <span>{{ compressiveStrength.location }}</span>
-    </div>
-  </div>
-
-  <!-- Fourth Row -->
-  <div class="row mb-3">
-    <div class="col-md-6">
-      <strong>Supplier:</strong> <span>{{ compressiveStrength.owner }}</span>
-    </div>
-  </div>
-
-  <!-- Cement Content & Strength Section -->
-  <div class="row mt-3">
-    <div class="col-md-4">
-      <strong>Cement Content : </strong> <span>{{ compressiveStrength.cementContent }}</span>
-    </div>
-    <div class="col-md-4">
-      <strong>Spec. 28 Days Strength : </strong> <span>{{ compressiveStrength.specTwintyEightDayStrength }} km</span>
-    </div>
-    <div class="col-md-4">
-      <strong>Spec. 07 Days Strength : </strong>
-      <span>{{ compressiveStrength.specTwintyEightDayStrength * 0.75 }} km</span>
-    </div>
-  </div>
-
-  <!-- Dimension Section -->
-  <div class="row mt-3">
-    <div class="col-md-6">
-      <strong>Diameter : </strong> <span>{{ compressiveStrength.diameter }} mm</span>
-    </div>
-    <div class="col-md-6">
-      <strong>Area : </strong>
-      <span>{{ area | number : '1.2-2' }}
-        mm²</span>
-    </div>
-  </div>
-
-  <div class="row mt-2">
-    <div class="col-md-6">
-      <strong>Height : </strong> <span>{{ compressiveStrength.height }} mm</span>
-    </div>
-    <div class="col-md-6">
-      <strong>Volume : </strong>
-      <span>{{ volume | number : '1.2-2' }}
-        mm³</span>
-    </div>
-  </div>
-
-  <!-- Environmental Conditions Section -->
-  <div class="row mt-3">
-    <div class="col-md-6">
-      <strong>Date Cast : </strong> <span>{{ compressiveStrength.dateCast }}</span>
-    </div>
-    <div class="col-md-6">
-      <strong>Slump : </strong> <span>{{ compressiveStrength.slump }}</span>
-    </div>
-  </div>
-
-  <div class="row mt-2">
-    <div class="col-md-6">
-      <strong>Date Received : </strong> <span>{{ compressiveStrength.dateReceived }}</span>
-    </div>
-    <div class="col-md-6">
-      <strong>Air Temperature : </strong> <span>{{ compressiveStrength.airTemperature }}°C</span>
-    </div>
-  </div>
-
-  <div class="row mt-2">
-    <div class="col-md-6">
-      <strong>Date Tested : </strong> <span>{{ compressiveStrength.dateTested }}</span>
-    </div>
-    <div class="col-md-6">
-      <strong>Concrete Temperature : </strong> <span>{{ compressiveStrength.concreteTemperature }} °C</span>
-    </div>
-  </div>
-
-  <!-- Sample Test Results Section -->
-  <div class="mt-4">
-    <h4 class="mb-3">Sample Test Results</h4>
-    <div class="table-responsive">
-      <table class="table text-center">
-        <thead class="table">
-        <tr>
-          <th>Sample No.</th>
-          <th>Type of Structure</th>
-          <th>Age (days)</th>
-          <th>Weight (gm)</th>
-          <th>Density (gm/cm³)</th>
-          <th>Load (kN)</th>
-          <th>Strength (MPa)</th>
-          <th>Fracture Type</th>
-        </tr>
-        </thead>
-        <tbody>
-        <!-- First 3 samples -->
-        <tr>
-          <td>1</td>
-          <td>---</td>
-          <td>{{ compressiveStrength.sampleAAge }}</td>
-          <td>{{ compressiveStrength.weightA }}</td>
-          <td>{{ compressiveStrength.weightA / volume | number : '1.3-3' }}</td>
-          <td>{{ compressiveStrength.loadA }}</td>
-          <td>{{ compressiveStrength.loadA * 101.971 / area | number : '1.1-1' }}</td>
-          <td>{{ compressiveStrength.fractureA }}</td>
-        </tr>
-        <tr>
-          <td>2</td>
-          <td>---</td>
-          <td>{{ compressiveStrength.sampleBAge }}</td>
-          <td>{{ compressiveStrength.weightB }}</td>
-          <td>{{ compressiveStrength.weightB / volume | number : '1.3-3' }}</td>
-          <td>{{ compressiveStrength.loadB }}</td>
-          <td>{{ compressiveStrength.loadB * 101.971 / area | number : '1.1-1' }}</td>
-          <td>{{ compressiveStrength.fractureB }}</td>
-        </tr>
-        <tr>
-          <td>3</td>
-          <td>---</td>
-          <td>{{ compressiveStrength.sampleCAge }}</td>
-          <td>{{ compressiveStrength.weightC }}</td>
-          <td>{{ compressiveStrength.weightC / volume | number : '1.3-3' }}</td>
-          <td>{{ compressiveStrength.loadC }}</td>
-          <td>{{ compressiveStrength.loadC * 101.971 / area | number : '1.1-1' }}</td>
-          <td>{{ compressiveStrength.fractureC }}</td>
-        </tr>
-
-        <!-- Average of first 3 samples -->
-        <tr class="average-row">
-          <td>Avg 1-3</td>
-          <td>---</td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td>{{ (compressiveStrength.loadA + compressiveStrength.loadB + compressiveStrength.loadC) / 3 | number : '1.2-2' }}</td>
-          <td>{{ (compressiveStrength.loadA + compressiveStrength.loadB + compressiveStrength.loadC) / 3 * 101.971 / area | number : '1.1-1' }}</td>
-          <td></td>
-        </tr>
-
-        <!-- Next 3 samples -->
-        <tr>
-          <td>4</td>
-          <td>---</td>
-          <td>{{ compressiveStrength.sampleDAge }}</td>
-          <td>{{ compressiveStrength.weightD }}</td>
-          <td>{{ compressiveStrength.weightD / volume | number : '1.3-3' }}</td>
-          <td>{{ compressiveStrength.loadD }}</td>
-          <td>{{ compressiveStrength.loadD * 101.971 / area | number : '1.1-1' }}</td>
-          <td>{{ compressiveStrength.fractureD }}</td>
-        </tr>
-        <tr>
-          <td>5</td>
-          <td>---</td>
-          <td>{{ compressiveStrength.sampleEAge }}</td>
-          <td>{{ compressiveStrength.weightE }}</td>
-          <td>{{ compressiveStrength.weightE / volume | number : '1.3-3' }}</td>
-          <td>{{ compressiveStrength.loadE }}</td>
-          <td>{{ compressiveStrength.loadE * 101.971 / area | number : '1.1-1' }}</td>
-          <td>{{ compressiveStrength.fractureE }}</td>
-        </tr>
-        <tr>
-          <td>6</td>
-          <td>---</td>
-          <td>{{ compressiveStrength.sampleFAge }}</td>
-          <td>{{ compressiveStrength.weightF }}</td>
-          <td>{{ compressiveStrength.weightF / volume | number : '1.3-3' }}</td>
-          <td>{{ compressiveStrength.loadF }}</td>
-          <td>{{ compressiveStrength.loadF * 101.971 / area | number : '1.1-1' }}</td>
-          <td>{{ compressiveStrength.fractureF }}</td>
-        </tr>
-
-        <!-- Average of next 3 samples -->
-        <tr class="average-row">
-          <td>Avg 4-6</td>
-          <td>---</td>
-          <td>{{ (compressiveStrength.sampleDAge + compressiveStrength.sampleEAge + compressiveStrength.sampleFAge) / 3 | number : '1.0-0' }}</td>
-          <td>{{ (compressiveStrength.weightD + compressiveStrength.weightE + compressiveStrength.weightF) / 3 | number : '1.2-2' }}</td>
-          <td>{{ (compressiveStrength.weightD + compressiveStrength.weightE + compressiveStrength.weightF) / 3 / volume | number : '1.2-2' }}</td>
-          <td>{{ (compressiveStrength.loadD + compressiveStrength.loadE + compressiveStrength.loadF) / 3 | number : '1.2-2' }}</td>
-          <td>{{ (compressiveStrength.loadD + compressiveStrength.loadE + compressiveStrength.loadF) / 3 * 101.971 / area | number : '1.1-1' }}</td>
-          <td>{{ compressiveStrength.fractureD + compressiveStrength.fractureE + compressiveStrength.fractureF / 3 | number : '1.1-1'}}
-          </td>
-        </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-
-  <div>
+  <div class="text-center" style="width: 70vw; margin: 20px;"> 
     <button class="btn btn-success" (click)="generatePDF()">Download Pdf</button>
   </div>
 

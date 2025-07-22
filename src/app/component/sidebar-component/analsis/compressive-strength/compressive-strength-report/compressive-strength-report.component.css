@@ -1,12 +1,7 @@
-
-
 .container {
   max-width: 1200px;
   padding:40px 0 0 150px;
-  background: #ffffff;
-  /*padding: 20px;*/
   border-radius: 10px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 }
 
 h2 {
@@ -14,23 +9,39 @@ h2 {
   font-weight: bold;
   text-align: center;
   margin-bottom: 20px;
+  width: 70vw;
+
 }
 
+table{
+  margin: 10px;
+  width: 100%;
+}
 
+.table1{
+  width: 70vw;
+}
 
-tr:nth-child(even) {
-  background: #e9ecef;
+.table2{
+  width: 70vw;
+}
+
+.table3{
+  width: 70vw;
 }
 
 th, td {
   padding: 8px;
-  border: 1px solid #ddd;
-  font-size: 16px;
+  border: 1px solid ;
+}
+
+img{
+  margin: 10px;
 }
 
 
-.table th:first-child,
+/* .table th:first-child,
 .table td:first-child {
   font-weight: bold;
-}
+} */
 

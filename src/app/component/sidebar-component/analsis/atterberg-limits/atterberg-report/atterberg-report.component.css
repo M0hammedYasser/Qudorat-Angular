@@ -1,12 +1,7 @@
-
-
 .container {
   max-width: 1200px;
   padding:40px 0 0 150px;
-  background: #ffffff;
-  /*padding: 20px;*/
   border-radius: 10px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 }
 
 h2 {
@@ -14,12 +9,19 @@ h2 {
   font-weight: bold;
   text-align: center;
   margin-bottom: 20px;
+  width: 70vw;
+  text-align: center;
+}
+
+table{
+  width: 100%;
 }
 
 .excel-style {
-  width: 100%;
+  width: 70vw;
   border-collapse: collapse;
   margin-bottom: 10px;
+
 }
 
 .excel-style td, .excel-style th {
@@ -29,16 +31,11 @@ h2 {
 }
 
 .excel-style th {
-  background-color: #f2f2f2;
   font-weight: bold;
 }
 
 .data-table td, .results-table td {
   text-align: center;
-}
-
-.data-table tr:nth-child(even), .results-table tr:nth-child(even) {
-  background-color: #f9f9f9;
 }
 
 .btn-success {
@@ -54,13 +51,4 @@ h2 {
 
 .mt-3 {
   margin-top: 1rem;
-}
-
-/* Specific styling for the header rows */
-.data-table tr:first-child th {
-  background-color: #e6e6e6;
-}
-
-.data-table tr:nth-child(2) th {
-  background-color: #f2f2f2;
 }

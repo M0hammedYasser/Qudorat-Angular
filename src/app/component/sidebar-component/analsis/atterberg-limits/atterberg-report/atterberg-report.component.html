@@ -3,54 +3,40 @@
 
   <div class="row mb-2">
     <div class="col-md-12">
-      <table class="excel-style">
-        <tr>
-          <td><strong>PROJECT</strong></td>
-          <td colspan="7">{{ atterbergLimits.projectName }}</td>
-        </tr>
-        <tr>
-          <td><strong>CLIENT</strong></td>
-          <td colspan="7">{{ atterbergLimits.clientName }}</td>
-        </tr>
-        <tr>
-          <td><strong>Consultant</strong></td>
-          <td colspan="7">{{ atterbergLimits.owner }}</td>
-        </tr>
-        <tr>
-          <td><strong>LOCATION</strong></td>
-          <td colspan="7">{{ atterbergLimits.location }}</td>
-        </tr>
-        <tr>
-          <td colspan="8"></td>
-        </tr>
-      </table>
-
       <table class="excel-style data-table">
         <tr>
-          <th rowspan="2">TEST</th>
-          <th colspan="2"></th>
+          <th colspan="3">TEST</th>
           <th colspan="4">PLASTIC LIMIT</th>
           <th colspan="4">LIQUID LIMIT</th>
         </tr>
+
         <tr>
-          <th>NO</th>
+          <th>Variable</th>
+          <th colspan="2">NO</th>
+          <th>1</th>
+          <th>2</th>
+          <th>3</th>
+          <th>4</th>
+          <th>1</th>
+          <th>2</th>
+          <th>3</th>
+          <th>4</th>
+        </tr>
+
+        <tr>
           <th></th>
-          <th>1</th>
-          <th>2</th>
-          <th>3</th>
-          <th>4</th>
-          <th>1</th>
-          <th>2</th>
-          <th>3</th>
-          <th>4</th>
+          <th>Var.</th>
+          <th>Units</th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
         </tr>
-        <tr>
-          <td>Variable</td>
-          <td>Var.</td>
-          <td>Units</td>
-          <td colspan="6"></td>
-          <td></td>
-        </tr>
+
         <tr>
           <td>Number of Blows</td>
           <td>N</td>
@@ -165,43 +151,35 @@
           <td>Liquid Limit (LL or wL) (%):</td>
 
           <td>{{ atterbergLimits.liquidLimit }}</td>
-          <td></td>
-          <td colspan="2"></td>
 
         </tr>
+
         <tr>
           <td>Plastic Limit (PL or wP) (%):</td>
 
           <td>{{ atterbergLimits.plasticLimit}}</td>
-          <td></td>
-          <td colspan="2"></td>
-
         </tr>
+
         <tr>
           <td>Plasticity Index (PI) (%):</td>
           <td>{{ atterbergLimits.liquidLimit - atterbergLimits.plasticLimit | number :'1.2-2' }}</td>
-          <td></td>
-          <td colspan="2"></td>
 
         </tr>
+
         <tr>
           <td>USCS Classification:</td>
           <td>{{ atterbergLimits.uscs }}</td>
-          <td></td>
-          <td colspan="2"></td>
-
-
         </tr>
       </table>
     </div>
   </div>
-  <canvas #chartCanvas></canvas>
-  <canvas #moistureChartCanvas></canvas>
 
+  <div class="text-center" style="width: 70vw;">
+    <canvas #chartCanvas></canvas>
+    <canvas #moistureChartCanvas></canvas>
+  </div>
 
-
-
-  <div class="text-center mt-3">
+  <div class="text-center mt-3" style="width: 70vw;">
     <button class="btn btn-success" (click)="generatePDF()">Download Pdf</button>
   </div>
 </div>
