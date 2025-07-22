@@ -1,9 +1,161 @@
-
 <div class="invoice-container">
-  <h2>Qudorat Laboratory</h2>
-  <h5>Particle Size Analysis of Soil Test</h5>
+  <h2>Moisture Density Relationship</h2>
+  <table class="table1">
+    <tr>
+      <th colspan="6" class="text-center">Mould Data</th>
+    </tr>
 
-  <canvas #compactionChartCanvas></canvas>
+    <tr>
+      <th>Trial Number #</th>
+      <th>1</th>
+      <th>2</th>
+      <th>3</th>
+      <th>4</th>
+      <th>5</th>
+    </tr>
 
-  <button (click)="generatePDF()">Download PDF</button>
+    <tr>
+      <td>A. Wet Wt. Soil + Mould (gm)</td>
+      <td>{{this.moistureDensityRelationship.wetWtSoilMouldA}}</td>
+      <td>{{this.moistureDensityRelationship.wetWtSoilMouldB}}</td>
+      <td>{{this.moistureDensityRelationship.wetWtSoilMouldC}}</td>
+      <td>{{this.moistureDensityRelationship.wetWtSoilMouldD}}</td>
+      <td>{{this.moistureDensityRelationship.wetWtSoilMouldE}}</td>
+    </tr>
+
+    <tr>
+      <td>B. Wt. of Mould (gm)</td>
+      <td *ngFor="let value of [].constructor(5); let i = index">{{ moistureDensityRelationship?.wtOfMould }}</td>
+    </tr>
+
+    <tr>
+      <td>C. Wet Wt. Soil (gm)</td>
+      <td>{{this.wetWtSoilA}}</td>
+      <td>{{this.wetWtSoilB}}</td>
+      <td>{{this.wetWtSoilC}}</td>
+      <td>{{this.wetWtSoilD}}</td>
+      <td>{{this.wetWtSoilE}}</td>
+    </tr>
+
+    <tr>
+      <td>D. Volume of Mould (cc)</td>
+      <td *ngFor="let value of [].constructor(5); let i = index">{{ moistureDensityRelationship?.volOfMould }}</td>
+    </tr>
+
+    <tr>
+      <td>E. Wet Density (gm/cc)</td>
+      <td>{{this.wetDensityA.toFixed(1)}}</td>
+      <td>{{this.wetDensityB.toFixed(1)}}</td>
+      <td>{{this.wetDensityC.toFixed(1)}}</td>
+      <td>{{this.wetDensityD.toFixed(1)}}</td>
+      <td>{{this.wetDensityE.toFixed(1)}}</td>
+    </tr>
+
+    <tr>
+      <td>F. Dry Density (gm/cc)</td>
+      <td>{{this.dryDensityA.toFixed(3)}}</td>
+      <td>{{this.dryDensityB.toFixed(3)}}</td>
+      <td>{{this.dryDensityC.toFixed(3)}}</td>
+      <td>{{this.dryDensityD.toFixed(3)}}</td>
+      <td>{{this.dryDensityE.toFixed(3)}}</td>
+    </tr>
+  </table>
+
+  <table class="table2">
+    <tr>
+      <th colspan="6" class="text-center">Moisture Content Determination %</th>
+    </tr>
+
+    <tr>
+      <th>Container #</th>
+      <th>1</th>
+      <th>2</th>
+      <th>3</th>
+      <th>4</th>
+      <th>5</th>
+    </tr>
+
+    <tr>
+      <td>A. Wet Wt. Soil + Container (gm)</td>
+      <td>{{this.moistureDensityRelationship.wetWtSoilContA}}</td>
+      <td>{{this.moistureDensityRelationship.wetWtSoilContB}}</td>
+      <td>{{this.moistureDensityRelationship.wetWtSoilContC}}</td>
+      <td>{{this.moistureDensityRelationship.wetWtSoilContD}}</td>
+      <td>{{this.moistureDensityRelationship.wetWtSoilContE}}</td>
+    </tr>
+
+    <tr>
+      <td>B. Dry Wt. Soil + Container (gm)</td>
+      <td>{{this.moistureDensityRelationship.dryWtSoilContA}}</td>
+      <td>{{this.moistureDensityRelationship.dryWtSoilContB}}</td>
+      <td>{{this.moistureDensityRelationship.dryWtSoilContC}}</td>
+      <td>{{this.moistureDensityRelationship.dryWtSoilContD}}</td>
+      <td>{{this.moistureDensityRelationship.dryWtSoilContE}}</td>
+    </tr>
+
+    <tr>
+      <td>C. Wt. of Container (gm)</td>
+      <td>{{this.moistureDensityRelationship.wtOfContainerA}}</td>
+      <td>{{this.moistureDensityRelationship.wtOfContainerB}}</td>
+      <td>{{this.moistureDensityRelationship.wtOfContainerC}}</td>
+      <td>{{this.moistureDensityRelationship.wtOfContainerD}}</td>
+      <td>{{this.moistureDensityRelationship.wtOfContainerE}}</td>
+    </tr>
+
+    <tr>
+      <td>D. Wt. of Dry Soil (gm)</td>
+      <td>{{this.wtOfDrySoilA.toFixed(1)}}</td>
+      <td>{{this.wtOfDrySoilB.toFixed(1)}}</td>
+      <td>{{this.wtOfDrySoilC.toFixed(1)}}</td>
+      <td>{{this.wtOfDrySoilD.toFixed(1)}}</td>
+      <td>{{this.wtOfDrySoilE.toFixed(1)}}</td>
+    </tr>
+
+    <tr>
+      <td>E. Wt. of Water (gm)</td>
+      <td>{{this.wtOfWaterA.toFixed(1)}}</td>
+      <td>{{this.wtOfWaterB.toFixed(1)}}</td>
+      <td>{{this.wtOfWaterC.toFixed(1)}}</td>
+      <td>{{this.wtOfWaterD.toFixed(1)}}</td>
+      <td>{{this.wtOfWaterE.toFixed(1)}}</td>
+    </tr>
+
+    <tr>
+      <td>F. Moisture Content %</td>
+      <td>{{this.moistureContentA.toFixed(2)}}</td>
+      <td>{{this.moistureContentB.toFixed(2)}}</td>
+      <td>{{this.moistureContentC.toFixed(2)}}</td>
+      <td>{{this.moistureContentD.toFixed(2)}}</td>
+      <td>{{this.moistureContentE.toFixed(2)}}</td>
+    </tr>
+  </table>
+  
+  <div class="text-center" style="width: 70vw;">
+    <canvas #compactionChartCanvas></canvas>
+  </div>
+
+  <div class="row text-center" style="width: 70vw;">
+    <div class="col-6">
+      <table>
+        <tr>
+          <td>M.D.D (gm/cc)</td>
+          <td>{{this.dryDensityC.toFixed(3)}}</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="col-6">
+      <table>
+        <tr>
+          <td>O.M.C %</td>
+          <td>{{this.moistureContentC.toFixed(2)}}</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+   
+
+  <div class="text-center" style="width: 70vw;">
+    <button (click)="generatePDF()">Download PDF</button>
+  </div>
 </div>

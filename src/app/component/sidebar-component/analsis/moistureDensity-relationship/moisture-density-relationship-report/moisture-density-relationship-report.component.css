@@ -2,39 +2,43 @@
   max-width: 800px;
   margin: auto;
   padding: 100px 0 0  0;
-  border: 1px solid #ddd;
   border-radius: 10px;
-  background: #f9f9f9;
+}
+
+h2 {
+  color: #0056b3;
+  font-weight: bold;
   text-align: center;
+  margin-bottom: 20px;
+  width: 70vw;
 }
 
-.invoice-details {
-  margin-top: 20px;
-  text-align: left;
-}
-
-.invoice-table {
+table{
   width: 100%;
-  margin-top: 20px;
-  border-collapse: collapse;
+  border: 1px solid;
+  margin: 10px;
 }
 
-.invoice-table th, .invoice-table td {
-  border: 1px solid #ddd;
-  padding: 10px;
-  text-align: center;
+th , td{
+  padding: 8px;
+  border: 1px solid;
 }
 
-.invoice-table th {
-  background: #0055D8;
-  color: white;
+.table1{
+  width: 70vw;
 }
 
-.chart-container {
+.table2{
+  width: 70vw;
+}
+
+
+
+/* .chart-container {
   width: 100%;
   max-width: 600px;
   margin: 20px auto;
-}
+} */
 
 button {
   margin-top: 20px;

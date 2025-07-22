@@ -6,7 +6,7 @@ import {MoistureDensityRelationship} from "../../../../../model/moisture-density
 import {
   MoistureDensityRelationshipService
 } from "../../../../../service/MoistureDensityRelationship/moisture-density-relationship.service";
-import {DecimalPipe} from "@angular/common";
+import {CommonModule, DecimalPipe} from "@angular/common";
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
 import Chart from "chart.js/auto";
@@ -14,8 +14,7 @@ import Chart from "chart.js/auto";
 @Component({
   selector: 'app-moisture-density-relationship-report',
   standalone: true,
-  imports: [
-  ],
+  imports: [CommonModule],
   templateUrl: './moisture-density-relationship-report.component.html',
   styleUrl: './moisture-density-relationship-report.component.css'
 })
@@ -63,7 +62,6 @@ export class MoistureDensityRelationshipReportComponent implements OnInit {
   moistureContentC: number = 0;
   moistureContentD: number = 0;
   moistureContentE: number = 0;
-
 
   constructor(private service: MoistureDensityRelationshipService, private activatedRoute: ActivatedRoute, private router: Router) {
   }
