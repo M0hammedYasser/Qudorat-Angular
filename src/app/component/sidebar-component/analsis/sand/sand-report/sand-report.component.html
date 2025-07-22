@@ -1,9 +1,133 @@
 <div class="invoice-container">
-  <h2>Qudorat Laboratory</h2>
-  <h5>Particle Size Analysis of Soil Test</h5>
+  <h2>Sieve Analysis Test</h2>
+  <table class="table1">
+    <tr>
+      <th>Sieve sizes(Inch)</th>
+      <th>Sieve sizes(mm)</th>
+      <th>Retained Weight (gm)</th>
+      <th>Retained%</th>
+      <th>Passing%</th>
+    </tr>
 
-  <canvas #chartCanvas></canvas>
+    <tr>
+      <td>3</td>
+      <td>75.0</td>
+      <td>{{this.sieveAnalysis.massRetainedA}}</td>
+      <td>{{this.sieveAnalysis.retainedA}}</td>
+      <td>{{(this.sieveAnalysis.passingA).toFixed(0)}}</td>
+    </tr>
 
+    <tr>
+      <td>21/2</td>
+      <td>62.5</td>
+      <td>{{this.sieveAnalysis.massRetainedB}}</td>
+      <td>{{this.sieveAnalysis.retainedB}}</td>
+      <td>{{(this.sieveAnalysis.passingB).toFixed(0)}}</td>
+    </tr>
+
+    <tr>
+      <td>2</td>
+      <td>50.0</td>
+      <td>{{this.sieveAnalysis.massRetainedC}}</td>
+      <td>{{this.sieveAnalysis.retainedC}}</td>
+      <td>{{(this.sieveAnalysis.passingC).toFixed(0)}}</td>
+    </tr>
+
+    <tr>
+      <td>11/2</td>
+      <td>37.5</td>
+      <td>{{this.sieveAnalysis.massRetainedD}}</td>
+      <td>{{this.sieveAnalysis.retainedD}}</td>
+      <td>{{(this.sieveAnalysis.passingD).toFixed(0)}}</td>
+    </tr>
+
+    <tr>
+      <td>1</td>
+      <td>25.0</td>
+      <td>{{this.sieveAnalysis.massRetainedE}}</td>
+      <td>{{this.sieveAnalysis.retainedE}}</td>
+      <td>{{(this.sieveAnalysis.passingE).toFixed(0)}}</td>
+    </tr>
+
+    <tr>
+      <td>3/4</td>
+      <td>19.0</td>
+      <td>{{this.sieveAnalysis.massRetainedF}}</td>
+      <td>{{this.sieveAnalysis.retainedF}}</td>
+      <td>{{(this.sieveAnalysis.passingF).toFixed(0)}}</td>
+    </tr>
+
+    <tr>
+      <td>1/2</td>
+      <td>12.5</td>
+      <td>{{this.sieveAnalysis.massRetainedG}}</td>
+      <td>{{this.sieveAnalysis.retainedG}}</td>
+      <td>{{(this.sieveAnalysis.passingG).toFixed(0)}}</td>
+    </tr>
+
+    <tr>
+      <td>3/8</td>
+      <td>9.5</td>
+      <td>{{this.sieveAnalysis.massRetainedH}}</td>
+      <td>{{this.sieveAnalysis.retainedH}}</td>
+      <td>{{(this.sieveAnalysis.passingH).toFixed(0)}}</td>
+    </tr>
+
+    <tr>
+      <td>#4</td>
+      <td>4.75</td>
+      <td>{{this.sieveAnalysis.massRetainedI}}</td>
+      <td>{{this.sieveAnalysis.retainedI}}</td>
+      <td>{{(this.sieveAnalysis.passingI).toFixed(0)}}</td>
+    </tr>
+
+    <tr>
+      <td>#10</td>
+      <td>2.00</td>
+      <td>{{this.sieveAnalysis.massRetainedJ}}</td>
+      <td>{{this.sieveAnalysis.retainedJ}}</td>
+      <td>{{(this.sieveAnalysis.passingJ).toFixed(0)}}</td>
+    </tr>
+
+    <tr>
+      <td>#40</td>
+      <td>0.425</td>
+      <td>{{this.sieveAnalysis.massRetainedK}}</td>
+      <td>{{this.sieveAnalysis.retainedK}}</td>
+      <td>{{(this.sieveAnalysis.passingK).toFixed(0)}}</td>
+    </tr>
+
+    <tr>
+      <td>#100</td>
+      <td>0.150</td>
+      <td>{{this.sieveAnalysis.massRetainedL}}</td>
+      <td>{{this.sieveAnalysis.retainedL}}</td>
+      <td>{{(this.sieveAnalysis.passingL).toFixed(2)}}</td>
+    </tr>
+
+    <tr>
+      <td>#200</td>
+      <td>0.075</td>
+      <td>{{this.sieveAnalysis.massRetainedM}}</td>
+      <td>{{this.sieveAnalysis.retainedM}}</td>
+      <td>{{this.sieveAnalysis.passingM}}</td>
+    </tr>
+
+    <tr>
+      <td>Total Wt.</td>
+      <td>{{this.sieveAnalysis.totalWeigh}}</td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+  </table>
+
+  <div class="text-center" style="width: 70vw;">
+    <canvas #chartCanvas></canvas>
+  </div>
+  
+  <div class="text-center" style="width: 70vw;">
     <button (click)="generatePDF()">Download PDF</button>
+  </div>
 </div>
 
