@@ -1,16 +1,32 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {User} from "../../model/user";
-import {environment} from "../../../environments/environment";
+import { HttpClient } from "@angular/common/http";
+import { environment } from "../../../environments/environment";
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class NotificationService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
-  findAll(){
+  // ✅ Get all notifications
+  findAll(): Observable<any> {
     return this.http.get<any>(`${environment.url}notification`);
+  }
+
+  // ✅ Mark specific notification as read
+  markAsRead(notificationId: number): Observable<void> {
+    return this.http.put<void>(`${environment.url}notification/${notificationId}/mark-as-read`, {});
+  }
+
+  // ✅ Mark all as read
+  markAllAsRead(): Observable<void> {
+    return this.http.put<void>(`${environment.url}notification/mark-all-as-read`, {});
+  }
+
+  // ✅ Clear all notifications
+  clearAllNotifications(): Observable<void> {
+    return this.http.delete<void>(`${environment.url}notification/clear-all`);
   }
 }
