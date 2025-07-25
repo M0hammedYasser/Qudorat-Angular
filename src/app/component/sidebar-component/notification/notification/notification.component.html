@@ -2,55 +2,77 @@
   <!-- Tabs -->
   <ul class="nav nav-tabs mb-3">
     <li class="nav-item" *ngFor="let tab of tabs; trackBy: trackByTabId">
-      <a class="nav-link" [ngClass]="{ active: activeTab === tab.id }"
-         (click)="switchTab(tab.id); $event.preventDefault()" href="#">
-        {{ tab.label }} <span *ngIf="tab.count">({{ tab.count }})</span>
+      <a
+        class="nav-link"
+        [ngClass]="{ active: activeTab === tab.id }"
+        (click)="switchTab(tab.id); $event.preventDefault()"
+        href="#"
+        role="button"
+      >
+        {{ tab.label }}
+        <span *ngIf="tab.count">({{ tab.count }})</span>
       </a>
     </li>
   </ul>
 
   <!-- Notifications List -->
   <div *ngIf="filteredNotifications.length > 0; else noNotifications">
-    <div class="card mb-3 shadow-sm"
-         *ngFor="let n of filteredNotifications; trackBy: trackByNotificationId"
-         (click)="markAsRead(n.id, n.action)"
-         (touchstart)="onTouchStart($event, n.id)"
-         (touchend)="onTouchEnd()"
-         (touchmove)="onTouchMove()">
+    <div
+      class="card mb-3 shadow-sm"
+      *ngFor="let n of filteredNotifications; trackBy: trackByNotificationId"
+      (click)="onNotificationClick(n)"
+      (touchstart)="onTouchStart($event, n.id)"
+      (touchend)="onTouchEnd()"
+      (touchmove)="onTouchMove()"
+    >
       <div class="card-body d-flex justify-content-between align-items-start">
         <div>
           <p class="card-text small text-muted mb-1">
-            {{ n.action }}
+            <!-- عرض الـ action فقط لو فيه -->
             <span *ngIf="n.message">{{ n.message }}</span>
           </p>
         </div>
 
         <div class="text-end">
-          <small class="text-muted">{{ n.time }}</small><br />
-          <span *ngIf="!n.isRead" class="badge bg-primary mt-1">New</span>
+          <span *ngIf="!n.isRead" class="badge bg-primary mt-1">New</span><br />
+          <small class=" badge text-muted mt-1">{{ n.time }}</small>
           <span *ngIf="savedNotifications.has(n.id)" class="badge bg-success mt-1">Saved</span>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- No Notifications -->
+  <!-- No Notifications Template -->
   <ng-template #noNotifications>
-    <div class="alert alert-secondary text-center">There are currently no notifications.</div>
+    <div class="alert alert-secondary text-center" role="alert">
+      There are currently no notifications.
+    </div>
   </ng-template>
 
   <!-- Actions -->
   <div class="mt-4 d-flex justify-content-end gap-2">
-    <button class="btn btn-outline-success" (click)="markAllAsRead()">Mark All as Read</button>
-    <button class="btn btn-outline-danger" (click)="clearAllNotifications()">Clear All</button>
+    <button class="btn btn-outline-success" (click)="markAllAsRead()">
+      Mark All as Read
+    </button>
+    <button class="btn btn-outline-danger" (click)="clearAllNotifications()">
+      Clear All
+    </button>
   </div>
 
-  <!-- Toast -->
-  <div class="toast-container position-fixed bottom-0 end-0 p-3" style="z-index: 1050" *ngIf="showToast">
+  <!-- Toast Message -->
+  <div
+    class="toast-container position-fixed bottom-0 end-0 p-3"
+    style="z-index: 1050"
+    *ngIf="showToast"
+  >
     <div class="toast show align-items-center text-white bg-dark border-0">
       <div class="d-flex">
         <div class="toast-body">{{ toastMessage }}</div>
-        <button type="button" class="btn-close btn-close-white me-2 m-auto" (click)="showToast = false"></button>
+        <button
+          type="button"
+          class="btn-close btn-close-white me-2 m-auto"
+          (click)="showToast = false"
+        ></button>
       </div>
     </div>
   </div>

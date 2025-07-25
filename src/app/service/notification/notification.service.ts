@@ -15,6 +15,11 @@ export class NotificationService {
     return this.http.get<any>(`${environment.url}notification`);
   }
 
+  // ✅ Get only unread notifications
+  findUnread(): Observable<any> {
+    return this.http.get<any>(`${environment.url}notification/unread`);
+  }
+
   // ✅ Mark specific notification as read
   markAsRead(notificationId: number): Observable<void> {
     return this.http.put<void>(`${environment.url}notification/${notificationId}/mark-as-read`, {});
