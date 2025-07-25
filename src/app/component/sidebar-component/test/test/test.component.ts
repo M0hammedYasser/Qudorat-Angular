@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {NgForOf, NgIf} from "@angular/common";
-import {Router, RouterLink} from "@angular/router";
+import {ActivatedRoute, Router, RouterLink} from "@angular/router";
 import {SearchComponent} from "../../../shared/search/search.component";
 import {SearchPipe} from "../../../../pipe/search.pipe";
 import {Test} from "../../../../model/test";
@@ -25,17 +25,37 @@ export class TestComponent implements OnInit {
   tests: Test[] = [];
   searchText: string = '';
   role: string = '';
+  id: string = '';
 
-  constructor(private service: TestService, private router: Router, private authService: AuthenticationService) {
+  constructor(private service: TestService, private router: Router, private authService: AuthenticationService, private activatedRoute: ActivatedRoute) {
   }
 
   ngOnInit() {
-    this.findAll();
+    this.id = this.activatedRoute.snapshot.params['id'];
+    if (this.id)
+      this.findById(this.id)
+    else
+      this.findAll();
     this.role = this.authService.getAuthority();
   }
 
   findAll() {
     this.service.findAll().subscribe(res => this.tests = res);
+  }
+
+  findById(id: string) {
+    this.service.findOne(id).subscribe({
+      next: (response) => {
+        if (response) {
+          this.tests = [response];
+        } else {
+          this.findAll();
+        }
+      },
+      error: (err) => {
+        this.findAll();
+      }
+    });
   }
 
   onSearchTextEntered(searchValue: any) {

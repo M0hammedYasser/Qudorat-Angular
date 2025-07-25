@@ -20,6 +20,10 @@ export class TestService {
     return this.http.get<Test>(`${environment.url}test/${id}`);
   }
 
+  findOne(id: string) {
+    return this.http.get<Test>(`${environment.url}test/${id}`);
+  }
+
   count() {
     return this.http.get<number>(`${environment.url}test/count`);
   }
