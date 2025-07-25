@@ -25,13 +25,13 @@ export class TestComponent implements OnInit {
   tests: Test[] = [];
   searchText: string = '';
   role: string = '';
-  id: string = '';
+  id: string | null = '';
 
   constructor(private service: TestService, private router: Router, private authService: AuthenticationService, private activatedRoute: ActivatedRoute) {
   }
 
   ngOnInit() {
-    this.id = this.activatedRoute.snapshot.params['id'];
+    this.id = this.activatedRoute.snapshot.queryParamMap.get('id');
     if (this.id)
       this.findById(this.id)
     else

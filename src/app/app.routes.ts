@@ -90,7 +90,6 @@ export const routes: Routes = [
   { path: 'projects/invoice/:id', component: ProjectInvoiceComponent, canActivate: [authGuard] },
 
   { path: 'tests', component: TestComponent, canActivate: [authGuard] },
-  { path: 'tests/:id', component: TestComponent, canActivate: [authGuard] },
   { path: 'tests/insert', component: InsertTestComponent, canActivate: [authGuard] },
   { path: 'tests/update/:id', component: UpdateTestComponent, canActivate: [authGuard] },
 
