@@ -227,8 +227,16 @@ export class NotificationComponent implements OnInit, OnDestroy {
   }
 
   onNotificationClick(notification: Notification): void {
-    this.markAsRead(notification.id); // Mark as read on click
+    // ✅ لو الإشعار لسه مقريش، ابعت ريكوست للباك
+    if (!notification.isRead) {
+      this.service.markAsRead(notification.id).subscribe(() => {
+        notification.isRead = true;
+        this.updateNotificationCount();
+        this.updateFilteredNotifications();
+      });
+    }
 
+    // ✅ بعد كده نروح للـ action
     if (notification.action.startsWith('/')) {
       this.router.navigateByUrl(notification.action);
     } else if (notification.action.startsWith('http')) {
@@ -237,5 +245,6 @@ export class NotificationComponent implements OnInit, OnDestroy {
       console.warn('Unknown action format:', notification.action);
     }
   }
+
 }
 
