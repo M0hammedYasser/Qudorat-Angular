@@ -3,6 +3,7 @@ import {Router, RouterLink, RouterLinkActive} from "@angular/router";
 import {AuthenticationService} from "../../../service/authentication/authentication.service";
 import {NgIf} from "@angular/common";
 import {NotificationService} from "../../../service/notification/notification.service";
+import {interval, Subscription, switchMap} from "rxjs";
 
 @Component({
   selector: 'app-sidebar',
@@ -17,16 +18,44 @@ import {NotificationService} from "../../../service/notification/notification.se
 })
 export class SidebarComponent implements OnInit {
 
-  role : string = '';
+  role: string = '';
   notificationCount: number = 0;
+  private notificationSubscription!: Subscription;
 
-  constructor(private authenticationService: AuthenticationService,private notificationService : NotificationService,
-              private router: Router, private routerLink: Router) {
-  }
+  constructor(
+    private authenticationService: AuthenticationService,
+    private notificationService: NotificationService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     this.role = this.authenticationService.getAuthority();
-    this.notificationService.count().subscribe(count => {this.notificationCount = count;});
+
+    // Set up interval to refresh notification count every 5 seconds
+    this.notificationSubscription = interval(5000) // 5000ms = 5 seconds
+      .pipe(
+        switchMap(() => this.notificationService.count())
+      )
+      .subscribe(
+        count => {
+          this.notificationCount = count;
+        },
+        error => {
+          console.error('Error fetching notification count:', error);
+        }
+      );
+
+    // Initial load
+    this.notificationService.count().subscribe(count => {
+      this.notificationCount = count;
+    });
+  }
+
+  ngOnDestroy() {
+    // Clean up the subscription when component is destroyed
+    if (this.notificationSubscription) {
+      this.notificationSubscription.unsubscribe();
+    }
   }
 
   logout() {
