@@ -37,7 +37,7 @@ export class NotificationComponent implements OnInit, OnDestroy {
     { id: 'saved', label: 'Saved' }
   ];
 
-  activeTab: string = 'all';
+  activeTab: string = 'unread';
   filteredNotifications: Notification[] = [];
   savedNotifications: Set<number> = new Set();
 
