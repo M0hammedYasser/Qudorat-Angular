@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Router, RouterLink, RouterLinkActive} from "@angular/router";
 import {AuthenticationService} from "../../../service/authentication/authentication.service";
 import {NgIf} from "@angular/common";
@@ -16,7 +16,7 @@ import {interval, Subscription, switchMap} from "rxjs";
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.css'
 })
-export class SidebarComponent implements OnInit {
+export class SidebarComponent implements OnInit , OnDestroy {
 
   role: string = '';
   notificationCount: number = 0;
