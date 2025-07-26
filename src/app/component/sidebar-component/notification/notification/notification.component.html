@@ -16,7 +16,7 @@
   </ul>
 
   <!-- Notifications List -->
-  <div *ngIf="filteredNotifications.length > 0; else noNotifications">
+  <div *ngIf="filteredNotifications.length > 0; else noNotifications" class="notifications-list">
     <div
       class="card mb-3 shadow-sm"
       *ngFor="let n of filteredNotifications; trackBy: trackByNotificationId"

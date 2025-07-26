@@ -402,3 +402,11 @@
 .empty-state p {
   font-size: 14px;
 }
+
+.notifications-list {
+  padding: 8px 24px;
+  padding-bottom: 80px;
+  
+  max-height: 60vh; /* أو أي ارتفاع مناسب */
+  overflow-y: auto;
+}
