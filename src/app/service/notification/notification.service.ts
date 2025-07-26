@@ -15,6 +15,10 @@ export class NotificationService {
     return this.http.get<any>(`${environment.url}notification`);
   }
 
+  count(){
+    return this.http.get<number>(`${environment.url}notification/count`);
+  }
+
   // ✅ Get only unread notifications
   findUnread(): Observable<any> {
     return this.http.get<any>(`${environment.url}notification/unread`);
