@@ -31,8 +31,8 @@ export class SidebarComponent implements OnInit , OnDestroy {
   ngOnInit() {
     this.role = this.authenticationService.getAuthority();
 
-    // Set up interval to refresh notification count every 5 seconds
-    this.notificationSubscription = interval(5000) // 5000ms = 5 seconds
+    // Set up interval to refresh notification count every 1 seconds
+    this.notificationSubscription = interval(1000) // 1000ms = 1 seconds
       .pipe(
         switchMap(() => this.notificationService.count())
       )

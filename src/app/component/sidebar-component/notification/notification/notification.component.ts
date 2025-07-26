@@ -227,7 +227,6 @@ export class NotificationComponent implements OnInit, OnDestroy {
   }
 
   onNotificationClick(notification: Notification): void {
-    // ✅ لو الإشعار لسه مقريش، ابعت ريكوست للباك
     if (!notification.isRead) {
       this.service.markAsRead(notification.id).subscribe(() => {
         notification.isRead = true;
@@ -236,7 +235,6 @@ export class NotificationComponent implements OnInit, OnDestroy {
       });
     }
 
-    // ✅ بعد كده نروح للـ action
     if (notification.action.startsWith('/')) {
       this.router.navigateByUrl(notification.action);
     } else if (notification.action.startsWith('http')) {

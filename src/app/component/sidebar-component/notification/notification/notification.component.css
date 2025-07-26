@@ -2,7 +2,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh; /* يخلي الصفحة كلها شاشة كاملة */
+  min-height: 100vh; 
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   color: #333;
   line-height: 1.4;
@@ -10,7 +10,7 @@
 
 
 .container {
-  margin: 70px 0 0 150px; /* يضيف مسافة من الأعلى */
+  margin: 70px 0 0 150px; 
   padding: 20px;
   background-color: rgba(207, 207, 207, 0.49);
   max-width: 800px;
@@ -18,7 +18,7 @@
   border-radius: 8px;
   display: flex;
   flex-direction: column;
-  align-items: center; /* توسيط أفقي للمحتوى داخل الكونتينر */
+  align-items: center; 
 }
 
 
@@ -89,20 +89,15 @@
   color: #1d4ed8;
 }
 
-.tab-count {
-  background-color: #2563eb;
-  color: white;
-  font-size: 12px;
-  padding: 2px 8px;
-  border-radius: 12px;
-  min-width: 20px;
-  text-align: center;
-}
 
 /* Notifications List */
 .notifications-list {
   padding: 8px 24px;
   padding-bottom: 80px;
+  max-height: 60vh; 
+  overflow-y: auto;
+  width: 100%; 
+  max-width: 700px; 
 }
 
 .notification {
@@ -114,22 +109,15 @@
   border-radius: 8px;
   transition: all 0.2s;
   cursor: pointer;
+  width: 100%; 
+  max-width: 700px; 
 }
 
-.notification:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+.nonotification{
+  width: 100%; 
+  max-width: 700px; 
 }
 
-.notification.unread {
-  background-color: #eff6ff;
-  border-left: 3px solid #3b82f6;
-}
-
-.notification.read {
-  background-color: #f9fafb;
-  border-left: 3px solid transparent;
-}
 
 .notification-avatar {
   position: relative;
@@ -160,9 +148,6 @@
   border: 2px solid white;
 }
 
-.notification[data-type="lead"] .notification-badge {
-  background-color: #3b82f6;
-}
 
 .notification-content {
   flex: 1;
@@ -175,11 +160,6 @@
   gap: 8px;
   margin-bottom: 4px;
   flex-wrap: wrap;
-}
-
-.user-name {
-  font-weight: 500;
-  color: #1f2937;
 }
 
 .action {
@@ -212,76 +192,6 @@
   border-radius: 12px;
 }
 
-/* Message Box */
-.message-box {
-  margin: 12px 0;
-  background-color: white;
-  padding: 12px;
-  border-radius: 8px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  border: 1px solid #e5e7eb;
-  position: relative;
-}
-
-.message-box p {
-  color: #374151;
-  font-size: 14px;
-  margin: 0 0 8px 0;
-  padding-right: 60px;
-}
-
-.reply-btn {
-  position: absolute;
-  top: 8px;
-  right: 8px;
-  background-color: #f3f4f6;
-  color: #374151;
-  border: none;
-  padding: 4px 12px;
-  border-radius: 4px;
-  font-size: 12px;
-  cursor: pointer;
-  transition: background-color 0.2s;
-}
-
-.reply-btn:hover {
-  background-color: #e5e7eb;
-}
-
-/* File Box */
-.file-box {
-  margin: 12px 0;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 12px;
-  background-color: white;
-  border-radius: 8px;
-  border: 1px solid #e5e7eb;
-  transition: background-color 0.2s;
-}
-
-.file-box:hover {
-  background-color: #f9fafb;
-}
-
-.file-icon {
-  width: 16px;
-  height: 16px;
-  color: #6b7280;
-  flex-shrink: 0;
-}
-
-.file-name {
-  font-size: 14px;
-  color: #374151;
-  flex: 1;
-}
-
-.file-size {
-  font-size: 12px;
-  color: #9ca3af;
-}
 
 /* Bottom Stats */
 .bottom-stats {
@@ -401,12 +311,4 @@
 
 .empty-state p {
   font-size: 14px;
-}
-
-.notifications-list {
-  padding: 8px 24px;
-  padding-bottom: 80px;
-  
-  max-height: 60vh; /* أو أي ارتفاع مناسب */
-  overflow-y: auto;
 }
