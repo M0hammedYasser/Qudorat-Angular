@@ -197,6 +197,7 @@ export class NotificationComponent implements OnInit, OnDestroy {
       this.updateNotificationCount();
       this.updateFilteredNotifications();
       this.showToastMessage('All notifications marked as read');
+      this.loadNotifications();
     });
   }
 

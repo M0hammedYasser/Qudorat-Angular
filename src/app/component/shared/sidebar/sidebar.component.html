@@ -31,7 +31,7 @@
       </a>
     </li> -->
     <li class="nav-item">
-      <a class="nav-link" routerLink="/notification" routerLinkActive="activate">
+      <a class="nav-link" routerLink="/notification" routerLinkActive="activate" *ngIf=" role!='ROLE_ADMIN' && role!='ROLE_QUALITY' ">
         <i class="fas fa-bell"></i> Notifications
         <span *ngIf="notificationCount > 0" class="notification-badge">
       {{notificationCount > 99 ? '99+' : notificationCount}}

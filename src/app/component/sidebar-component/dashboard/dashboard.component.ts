@@ -1,18 +1,17 @@
-import {AfterViewInit, Component, OnInit} from '@angular/core';
-import {CurrencyPipe, NgForOf, NgIf} from "@angular/common";
+import {Component, OnInit} from '@angular/core';
+import {NgForOf, NgIf} from "@angular/common";
 import Chart from 'chart.js/auto';
 import {DashboardService} from "../../../service/dashboard/dashboard.service";
-import {forkJoin} from "rxjs";
+import {forkJoin, interval} from "rxjs";
 import {Test} from "../../../model/test";
-import { AuthenticationService } from '../../../service/authentication/authentication.service';
-import { Router } from '@angular/router';
+import {AuthenticationService} from '../../../service/authentication/authentication.service';
+import {NotificationService} from "../../../service/notification/notification.service";
 
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
   imports: [
-    CurrencyPipe,
     NgForOf,
     NgIf
   ],
@@ -26,13 +25,12 @@ export class DashboardComponent implements OnInit {
   completedSamples = 0;
   notCompletedSamples = 0;
   processingSamples = 0;
-  tests : Test[] = [];
+  tests: Test[] = [];
+  notification: any = [];
   role: string = '';
 
-  // constructor(private dashboardService: DashboardService) {
-  // }
 
-  constructor(private dashboardService: DashboardService, private router: Router, private authService: AuthenticationService) {
+  constructor(private dashboardService: DashboardService, private notificationService: NotificationService, private authService: AuthenticationService) {
   }
 
   ngOnInit() {
@@ -41,9 +39,8 @@ export class DashboardComponent implements OnInit {
       totalSamples: this.dashboardService.totalSamples(),
       completedSamples: this.dashboardService.completeSample(),
       notCompletedSamples: this.dashboardService.notCompleteSample(),
-      processSample : this.dashboardService.processSample(),
-      tests : this.dashboardService.findTestDashboard()
-
+      processSample: this.dashboardService.processSample(),
+      tests: this.dashboardService.findTestDashboard()
     }).subscribe(res => {
       this.totalBalance = res.totalBalance;
       this.totalSamples = res.totalSamples;
@@ -53,7 +50,21 @@ export class DashboardComponent implements OnInit {
       this.tests = res.tests;
       this.createBarChart();
     });
+
     this.role = this.authService.getAuthority();
+
+    // 🔁 Call findAllNotification every 1 second
+    if (this.role === "ROLE_ADMIN") {
+      interval(1000).subscribe(() => {
+        this.findAllNotification();
+      });
+    }
+  }
+
+  findAllNotification() {
+    this.notificationService.findAll().subscribe(res => {
+      this.notification = res
+    })
   }
 
   createBarChart() {
