@@ -21,8 +21,30 @@
       <h3>Not Completed Samples</h3>
       <p>{{ notCompletedSamples }}</p>
     </div>
+  </div>
 
-
+  <div class="chart-table-container" *ngIf="role=='ROLE_ADMIN'">
+    <div class="table-container notification_table">
+      <table>
+        <thead>
+        <tr>
+          <th>Message</th>
+          <th>Time</th>
+          <th> Seen</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let test of notification">
+          <td>{{ test.message }}</td>
+          <td>{{ test.time }}</td>
+          <td>
+            <i *ngIf="!test.read" class="fas fa-times text-danger"></i>
+            <i *ngIf="test.read" class="fas fa-check text-success"></i>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 
   <div class="chart-table-container">
@@ -52,30 +74,6 @@
               [class.processing]="test.status === 'Processing'"
               [class.pending]="test.status === 'Pending'">
             {{ test.status }}
-          </td>
-        </tr>
-        </tbody>
-      </table>
-    </div>
-
-  </div>
-  <div class="chart-table-container" *ngIf="role=='ROLE_ADMIN'">
-    <div class="table-container">
-      <table>
-        <thead>
-        <tr>
-          <th>Message</th>
-          <th>Time</th>
-          <th> Seen</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr *ngFor="let test of notification">
-          <td>{{ test.message }}</td>
-          <td>{{ test.time }}</td>
-          <td>
-            <i *ngIf="!test.read" class="fas fa-times text-danger"></i>
-            <i *ngIf="test.read" class="fas fa-check text-success"></i>
           </td>
         </tr>
         </tbody>
