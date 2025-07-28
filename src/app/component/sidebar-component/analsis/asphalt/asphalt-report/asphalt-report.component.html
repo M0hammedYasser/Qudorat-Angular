@@ -425,7 +425,7 @@
     </tr>
   </table>
 
-  <div class="text-center" style="width: 70vw;" *ngIf="asphalt.lastApproveBy">
+  <div class="text-center" style="width: 70vw;" *ngIf="asphalt.lastApproveBy  && (role == 'ROLE_MANAGER' || role == 'ROLE_ADMIN')">
     <button (click)="generatePDF()">Download PDF</button>
   </div>
 </div>

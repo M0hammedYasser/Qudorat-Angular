@@ -6,6 +6,7 @@ import jsPDF from "jspdf";
 import autoTable, {RowInput} from "jspdf-autotable";
 import Chart from "chart.js/auto";
 import {DecimalPipe, NgIf} from '@angular/common';
+import {AuthenticationService} from "../../../../../service/authentication/authentication.service";
 
 @Component({
   selector: 'app-asphalt-report',
@@ -17,6 +18,7 @@ import {DecimalPipe, NgIf} from '@angular/common';
 export class AsphaltReportComponent implements OnInit, AfterViewInit {
 
   asphalt: Asphalt = {} as Asphalt;
+  role: string = '';
   chart: any;
   id: number = 0;
 
@@ -33,11 +35,12 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
 
   avgStabilityFor30Min: number = 0;
 
-  constructor(private service: AsphaltService, private activatedRoute: ActivatedRoute) {
+  constructor(private authenticationService: AuthenticationService,private service: AsphaltService, private activatedRoute: ActivatedRoute) {
   }
 
   ngOnInit() {
     this.id = this.activatedRoute.snapshot.params['id'];
+    this.role = this.authenticationService.getAuthority();
     this.service.findById(this.id).subscribe(res => {
       this.asphalt = res;
       this.bulkSpOfCompMix =
@@ -346,9 +349,9 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
           finalY += 90;  // Chart height (80) + some margin
           doc.line(10, finalY - 27, 200, finalY - 27);
           doc.setFontSize(10);
-          doc.text(`Approved by: ${this.asphalt.approveBy || 'N/A'}`, 13, finalY - 23);
+          doc.text(`Approved by: ${this.asphalt.activist || 'N/A'}`, 13, finalY - 23);
           doc.text(`Test by: ${this.asphalt.testBy || 'N/A'}`, 80, finalY - 23 );
-          doc.text(`Checked by: ${this.asphalt.activist || 'N/A'}`, 150, finalY - 23);
+          doc.text(`Checked by: ${this.asphalt.approveBy || 'N/A'}`, 150, finalY - 23);
           doc.addImage(tail, 'PNG', 0, finalY - 20, 210, 33);
 
           doc.setFontSize(5);

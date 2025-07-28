@@ -6,6 +6,7 @@ import {AtterbergLimitsService} from "../../../../../service/atterbergLimits/att
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
 import Chart from "chart.js/auto";
+import {AuthenticationService} from "../../../../../service/authentication/authentication.service";
 
 @Component({
   selector: 'app-atterberg-report',
@@ -20,6 +21,7 @@ import Chart from "chart.js/auto";
 export class AtterbergReportComponent implements OnInit {
 
   atterbergLimits: AtterbergLimits = {} as AtterbergLimits;
+  role: string = '';
   id: number = 0;
 
   @ViewChild('chartCanvas', {static: true}) chartCanvas!: ElementRef;
@@ -46,12 +48,13 @@ export class AtterbergReportComponent implements OnInit {
   massOfWater7: number = 0;
   massOfWater8: number = 0;
 
-  constructor(private service: AtterbergLimitsService, private activatedRoute: ActivatedRoute, private router: Router) {
+  constructor(private authenticationService: AuthenticationService,private service: AtterbergLimitsService, private activatedRoute: ActivatedRoute, private router: Router) {
   }
 
 
   ngOnInit() {
     this.id = this.activatedRoute.snapshot.params['id'];
+    this.role = this.authenticationService.getAuthority();
     this.service.findById(this.id).subscribe(res => {
       this.atterbergLimits = res;
       this.massOfSoil1 = Number(this.atterbergLimits.massCanAndSoilDry1 - this.atterbergLimits.massOfEmptyCan1);
@@ -447,9 +450,9 @@ export class AtterbergReportComponent implements OnInit {
         // Signatures & Footer
         doc.line(10, 257, 200, 257);
         doc.setFontSize(10);
-        doc.text(`Approved by: ${this.atterbergLimits.approveBy || 'N/A'}`, 13, 261);
+        doc.text(`Approved by: ${this.atterbergLimits.activist || 'N/A'}`, 13, 261);
         doc.text(`Test by: ${this.atterbergLimits.testBy || 'N/A'}`, 80, 261);
-        doc.text(`Checked by: ${this.atterbergLimits.activist || 'N/A'}`, 150, 261);
+        doc.text(`Checked by: ${this.atterbergLimits.approveBy || 'N/A'}`, 150, 261);
         doc.addImage(tail, 'PNG', 0, 265, 210, 33);
 
         doc.setFontSize(5);

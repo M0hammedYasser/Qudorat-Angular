@@ -10,6 +10,7 @@ import {CommonModule, DecimalPipe} from "@angular/common";
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
 import Chart from "chart.js/auto";
+import {AuthenticationService} from "../../../../../service/authentication/authentication.service";
 
 @Component({
   selector: 'app-moisture-density-relationship-report',
@@ -22,6 +23,7 @@ export class MoistureDensityRelationshipReportComponent implements OnInit {
 
   id: number = 0;
   moistureDensityRelationship: MoistureDensityRelationship = {} as MoistureDensityRelationship;
+  role: string = '';
 
 
   @ViewChild('compactionChartCanvas', {static: true}) compactionChartCanvas!: ElementRef;
@@ -63,11 +65,12 @@ export class MoistureDensityRelationshipReportComponent implements OnInit {
   moistureContentD: number = 0;
   moistureContentE: number = 0;
 
-  constructor(private service: MoistureDensityRelationshipService, private activatedRoute: ActivatedRoute, private router: Router) {
+  constructor(private authenticationService: AuthenticationService,private service: MoistureDensityRelationshipService, private activatedRoute: ActivatedRoute, private router: Router) {
   }
 
   ngOnInit() {
     this.id = this.activatedRoute.snapshot.params['id'];
+    this.role = this.authenticationService.getAuthority();
     this.service.findById(this.id).subscribe(res => {
       this.moistureDensityRelationship = res;
       this.wetWtSoilA = this.moistureDensityRelationship.wetWtSoilMouldA - this.moistureDensityRelationship.wtOfMould;
@@ -362,9 +365,9 @@ generatePDF() {
 
       doc.line(10, 258, 200, 258);
       doc.setFontSize(7);
-      doc.text(`Approved by: ${this.moistureDensityRelationship.approveBy || 'N/A'}`, 12, 261);
+      doc.text(`Approved by: ${this.moistureDensityRelationship.activist || 'N/A'}`, 12, 261);
       doc.text(`Test by: ${this.moistureDensityRelationship.testBy || 'N/A'}`, 85, 261);
-      doc.text(`Checked by: ${this.moistureDensityRelationship.activist || 'N/A'}`, 160, 261);
+      doc.text(`Checked by: ${this.moistureDensityRelationship.approveBy || 'N/A'}`, 160, 261);
 
       doc.addImage(tail, 'PNG', 0, 265, 210, 33);
 

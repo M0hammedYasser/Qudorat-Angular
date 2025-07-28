@@ -5,7 +5,8 @@ import Chart from "chart.js/auto";
 import {SieveAnalysis} from "../../../../../model/sieve-analysis";
 import {SieveAnalysisService} from "../../../../../service/sieve-analysis/sieve-analysis.service";
 import {ActivatedRoute} from "@angular/router";
-import {NgIf} from "@angular/common"; // ✅ Import autoTable separately
+import {NgIf} from "@angular/common";
+import {AuthenticationService} from "../../../../../service/authentication/authentication.service"; // ✅ Import autoTable separately
 
 @Component({
   selector: 'app-sand-report',
@@ -23,13 +24,15 @@ export class SandReportComponent implements AfterViewInit, OnInit {
   @ViewChild('chartCanvas', {static: true}) chartCanvas!: ElementRef;
   chart!: Chart;
   sieveAnalysis: SieveAnalysis = {} as SieveAnalysis;
+  role: string = '';
   id: number = 0;
 
-  constructor(private sieveAnalysisService: SieveAnalysisService, private activatedRoute: ActivatedRoute) {
+  constructor(private authenticationService: AuthenticationService,private sieveAnalysisService: SieveAnalysisService, private activatedRoute: ActivatedRoute) {
   }
 
   ngOnInit() {
     this.id = this.activatedRoute.snapshot.params['id'];
+    this.role = this.authenticationService.getAuthority();
     this.sieveAnalysisService.findById(this.id).subscribe(res => {
       this.sieveAnalysis = res;
       this.createChart();
@@ -200,9 +203,9 @@ export class SandReportComponent implements AfterViewInit, OnInit {
 
           doc.line(10, 258, 200, 257);
           doc.setFontSize(10);
-          doc.text(`Approved by: ${this.sieveAnalysis.approveBy || 'N/A'}`, 13, 261);
+          doc.text(`Approved by: ${this.sieveAnalysis.activist || 'N/A'}`, 13, 261);
           doc.text(`Test by: ${this.sieveAnalysis.testBy || 'N/A'}`, 80, 261);
-          doc.text(`Checked by: ${this.sieveAnalysis.activist || 'N/A'}`, 150, 261);
+          doc.text(`Checked by: ${this.sieveAnalysis.approveBy || 'N/A'}`, 150, 261);
 
           doc.addImage(tail, 'PNG', 0, 265, 210, 33);
 

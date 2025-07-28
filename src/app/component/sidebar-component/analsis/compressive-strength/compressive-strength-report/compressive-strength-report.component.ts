@@ -5,6 +5,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {DecimalPipe, NgIf} from "@angular/common";
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
+import {AuthenticationService} from "../../../../../service/authentication/authentication.service";
 
 @Component({
   selector: 'app-compressive-strength-report',
@@ -22,13 +23,15 @@ export class CompressiveStrengthReportComponent implements OnInit {
   protected readonly Math = Math;
   area: number = 0;
   volume: number = 0;
+  role: string = '';
 
-  constructor(private service: CompressiveStrengthService, private activatedRoute: ActivatedRoute, private router: Router) {
+  constructor(private authenticationService: AuthenticationService,private service: CompressiveStrengthService, private activatedRoute: ActivatedRoute, private router: Router) {
   }
 
 
   ngOnInit() {
     this.id = this.activatedRoute.snapshot.params['id'];
+    this.role = this.authenticationService.getAuthority();
     this.service.findById(this.id).subscribe(res => {
       this.compressiveStrength = res;
       this.area = Number(((this.compressiveStrength.diameter / 2) * (this.compressiveStrength.diameter / 2)) * Math.PI);
@@ -177,9 +180,9 @@ export class CompressiveStrengthReportComponent implements OnInit {
 
       doc.line(10, finalY + 2, 200, finalY + 2);
       doc.setFontSize(8);
-      doc.text(`Approved by: ${this.compressiveStrength.approveBy || 'N/A'}`, 13, finalY + 5);
+      doc.text(`Approved by: ${this.compressiveStrength.activist || 'N/A'}`, 13, finalY + 5);
       doc.text(`Test by: ${this.compressiveStrength.testBy || 'N/A'}`, 80, finalY + 5);
-      doc.text(`Checked by: ${this.compressiveStrength.activist || 'N/A'}`, 150, finalY + 5);
+      doc.text(`Checked by: ${this.compressiveStrength.approveBy || 'N/A'}`, 150, finalY + 5);
 
       doc.addImage(tail, 'PNG', 0, 265, 210, 33);
 
