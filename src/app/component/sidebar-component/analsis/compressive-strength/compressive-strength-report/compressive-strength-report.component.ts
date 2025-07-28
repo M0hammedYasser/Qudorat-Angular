@@ -9,9 +9,7 @@ import autoTable from "jspdf-autotable";
 @Component({
   selector: 'app-compressive-strength-report',
   standalone: true,
-  imports: [
-    DecimalPipe
-  ],
+  imports: [],
   templateUrl: './compressive-strength-report.component.html',
   styleUrl: './compressive-strength-report.component.css'
 })
