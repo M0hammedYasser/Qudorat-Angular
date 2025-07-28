@@ -179,7 +179,7 @@
     <canvas #moistureChartCanvas></canvas>
   </div>
 
-  <div class="text-center mt-3" style="width: 70vw;">
+  <div class="text-center mt-3" style="width: 70vw;" *ngIf="atterbergLimits.lastApproveBy">
     <button class="btn btn-success" (click)="generatePDF()">Download Pdf</button>
   </div>
 </div>

@@ -1,5 +1,5 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {DecimalPipe} from "@angular/common";
+import {DecimalPipe, NgIf} from "@angular/common";
 import {ActivatedRoute, Router} from "@angular/router";
 import {AtterbergLimits} from "../../../../../model/atterberg-limits";
 import {AtterbergLimitsService} from "../../../../../service/atterbergLimits/atterberg-limits.service";
@@ -11,7 +11,8 @@ import Chart from "chart.js/auto";
   selector: 'app-atterberg-report',
   standalone: true,
   imports: [
-    DecimalPipe
+    DecimalPipe,
+    NgIf
   ],
   templateUrl: './atterberg-report.component.html',
   styleUrl: './atterberg-report.component.css'
@@ -275,7 +276,7 @@ export class AtterbergReportComponent implements OnInit {
 
       autoTable(doc, {
         body: infoRows,
-        startY: 36, 
+        startY: 36,
         theme: 'grid',
         styles: {
           fontSize: 8,

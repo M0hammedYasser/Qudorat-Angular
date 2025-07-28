@@ -241,7 +241,7 @@
     <img src="assets/compressiveStrength.png" alt="">
   </div>
 
-  <div class="text-center" style="width: 70vw; margin: 20px;"> 
+  <div class="text-center" style="width: 70vw; margin: 20px;" *ngIf="compressiveStrength.lastApproveBy">
     <button class="btn btn-success" (click)="generatePDF()">Download Pdf</button>
   </div>
 

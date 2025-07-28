@@ -9,6 +9,7 @@ clientCode: any;
   projectName: string;
   activist: string;
   approveBy: string;
+  lastApproveBy: string;
   testName: string;
 
   id: number;

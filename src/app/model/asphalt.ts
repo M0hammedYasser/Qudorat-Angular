@@ -8,6 +8,7 @@ export interface Asphalt {
   projectName: string;
   activist: string;
   approveBy: string;
+  lastApproveBy: string;
 
   id: number;
   sampleBy: string;

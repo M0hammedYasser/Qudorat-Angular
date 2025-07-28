@@ -39,7 +39,7 @@
 
     <tr>
       <td>D. Volume of Mould (cc)</td>
-      <td *ngFor="let value of [].constructor(5); let i = index">{{ moistureDensityRelationship?.volOfMould }}</td>
+      <td *ngFor="let value of [].constructor(5); let i = index">{{ moistureDensityRelationship?. volOfMould }}</td>
     </tr>
 
     <tr>
@@ -129,7 +129,7 @@
       <td>{{this.moistureContentE.toFixed(2)}}</td>
     </tr>
   </table>
-  
+
   <div class="text-center" style="width: 70vw;">
     <canvas #compactionChartCanvas></canvas>
   </div>
@@ -153,9 +153,9 @@
       </table>
     </div>
   </div>
-   
 
-  <div class="text-center" style="width: 70vw;">
+
+  <div class="text-center" style="width: 70vw;" *ngIf="moistureDensityRelationship.lastApproveBy">
     <button (click)="generatePDF()">Download PDF</button>
   </div>
 </div>

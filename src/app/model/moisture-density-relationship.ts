@@ -16,6 +16,7 @@ clientCode: any;
   testBy: string;
   notes: string;
   approveBy: string;
+  lastApproveBy: string;
   activist: string;
 
   nameOfTest: number;

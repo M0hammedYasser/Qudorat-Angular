@@ -2,14 +2,16 @@ import {Component, OnInit} from '@angular/core';
 import {CompressiveStrength} from "../../../../../model/compressive-strength";
 import {CompressiveStrengthService} from "../../../../../service/CompressiveStrength/compressive-strength.service";
 import {ActivatedRoute, Router} from "@angular/router";
-import {DecimalPipe} from "@angular/common";
+import {DecimalPipe, NgIf} from "@angular/common";
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
 
 @Component({
   selector: 'app-compressive-strength-report',
   standalone: true,
-  imports: [],
+  imports: [
+    NgIf
+  ],
   templateUrl: './compressive-strength-report.component.html',
   styleUrl: './compressive-strength-report.component.css'
 })

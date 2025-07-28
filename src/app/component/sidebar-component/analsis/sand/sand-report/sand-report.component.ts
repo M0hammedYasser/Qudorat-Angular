@@ -4,12 +4,15 @@ import autoTable from 'jspdf-autotable';
 import Chart from "chart.js/auto";
 import {SieveAnalysis} from "../../../../../model/sieve-analysis";
 import {SieveAnalysisService} from "../../../../../service/sieve-analysis/sieve-analysis.service";
-import {ActivatedRoute} from "@angular/router"; // ✅ Import autoTable separately
+import {ActivatedRoute} from "@angular/router";
+import {NgIf} from "@angular/common"; // ✅ Import autoTable separately
 
 @Component({
   selector: 'app-sand-report',
   standalone: true,
-  imports: [],
+  imports: [
+    NgIf
+  ],
   templateUrl: './sand-report.component.html',
   styleUrl: './sand-report.component.css'
 })
