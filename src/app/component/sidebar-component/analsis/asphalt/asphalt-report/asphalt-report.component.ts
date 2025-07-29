@@ -578,7 +578,7 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
           doc.setFontSize(10);
           doc.text(`Approved by: ${this.asphalt.approveBy || 'N/A'}`, 13, 261);
           doc.text(`Test by: ${this.asphalt.testBy || 'N/A'}`, 80, 261);
-          doc.text(`Checked by: ${this.asphalt.activist || 'N/A'}`, 150, 261);
+          doc.text(`Checked by: ${this.asphalt.adopter || 'N/A'}`, 150, 261);
           doc.addImage(tail, 'PNG', 0, 265, 210, 33);
           doc.setFontSize(5);
           doc.text(`Report Date: ${currentDateTime}`, 1, 290);

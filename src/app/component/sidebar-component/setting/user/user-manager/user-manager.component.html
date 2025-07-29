@@ -6,16 +6,21 @@
     <thead>
     <tr>
       <th>Name</th>
+      <th>
+        Job Title
+      </th>
       <th>Username</th>
       <th>Role</th>
       <th>Status</th>
       <th>Action</th>
+      <th>Password</th>
 <!--      <th>Edit</th>-->
     </tr>
     </thead>
     <tbody>
     <tr *ngFor="let user of users">
       <td>{{ user.name }}</td>
+      <td>{{ user.jobTitle }}</td>
       <td>{{ user.username }}</td>
       <td>{{ user.authority.name }}</td>
       <td>
@@ -31,6 +36,14 @@
           {{ user.isActive ? "Deactivate" : "Activate" }}
         </button>
       </td>
+      <td>
+        <button *ngIf="user.authority.name !='ROLE_ADMIN'"
+          class="btn btn-success"
+          (click)="changePassword(user.id)">
+          Change
+        </button>
+      </td>
+
 <!--      <td>-->
 <!--        <a routerLink="update/{{user.id}}">-->
 <!--          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#0f0">-->

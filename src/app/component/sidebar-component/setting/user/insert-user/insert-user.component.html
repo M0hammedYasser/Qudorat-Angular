@@ -22,11 +22,18 @@
       </div>
 
       <div class="mb-3">
-        <label for="authority.id" class="form-label">Authority</label>
+        <div class="col-md-6">
+          <label for="jobTitle" class="form-label">Job Title</label>
+          <input type="text" class="form-control" id="jobTitle" [(ngModel)]="user.jobTitle" name="phone" required #phone="ngModel">
+        </div>
+        <label for="authority.id" class="form-label mt-3">Authority</label>
         <select class="form-select" aria-label="Default select example" name="authority.id" id="authority.id" [(ngModel)]="user.authority.id">
           <option value="{{auth.id}}" *ngFor="let auth of authorities">{{auth.name}}</option>
         </select>
+
+
       </div>
+
 
       <button type="submit" class="btn btn-primary save-btn" [disabled]="!form.valid">Save</button>
     </form>

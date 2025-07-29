@@ -180,7 +180,7 @@ export class CompressiveStrengthReportComponent implements OnInit {
 
       doc.line(10, finalY + 2, 200, finalY + 2);
       doc.setFontSize(8);
-      doc.text(`Approved by: ${this.compressiveStrength.activist || 'N/A'}`, 13, finalY + 5);
+      doc.text(`Approved by: ${this.compressiveStrength.adopter || 'N/A'}`, 13, finalY + 5);
       doc.text(`Test by: ${this.compressiveStrength.testBy || 'N/A'}`, 80, finalY + 5);
       doc.text(`Checked by: ${this.compressiveStrength.approveBy || 'N/A'}`, 150, finalY + 5);
 

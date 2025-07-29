@@ -40,9 +40,9 @@ export class ProfileComponent implements OnInit {
     this.isEditing = !this.isEditing;
   }
 
-  saveChanges(id: number, name: string, username: string) {
+  saveChanges(id: number, name: string, username: string , jobTitle : string) {
     this.isEditing = false;
-    this.userService.updateUsername(id, name, username).subscribe(()=> {
+    this.userService.updateUsername(id, name, username,jobTitle).subscribe(()=> {
       this.authService.logout();
       this.router.navigate(['login']);
     });

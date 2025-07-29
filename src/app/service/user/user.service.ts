@@ -35,8 +35,8 @@ export class UserService {
     return this.http.put<User>(`${environment.url}users/${id}`, user);
   }
 
-  updateUsername(id:number ,name: string , username: string) {
-    return this.http.put<User>(`${environment.url}users/update/${id}/${name}/${username}`, null);
+  updateUsername(id:number ,name: string , username: string , jobTitle : string) {
+    return this.http.put<User>(`${environment.url}users/update/${id}/${name}/${username}/${jobTitle}`, null);
   }
 
   updatePassword(id:number ,password: string) {

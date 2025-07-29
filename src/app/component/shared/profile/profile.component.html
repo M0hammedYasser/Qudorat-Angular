@@ -21,10 +21,14 @@
         <label for="name">Name</label>
         <input type="text" id="name" [(ngModel)]="user.name" name="name" [readonly]="!isEditing">
       </div>
+      <div class="form-group">
+        <label for="jobTitle">Job Title</label>
+        <input type="text" id="jobTitle" [(ngModel)]="user.jobTitle" name="jobTitle" [readonly]="!isEditing">
+      </div>
 
       <div class="button-group">
         <button type="button" class="btn btn-primary" *ngIf="!isEditing" (click)="toggleEdit()">✏️ Update</button>
-        <button type="button" class="btn btn-success" *ngIf="isEditing" (click)="saveChanges(user.id, user.name, user.username)">💾 Save</button>
+        <button type="button" class="btn btn-success" *ngIf="isEditing" (click)="saveChanges(user.id, user.name, user.username , user.jobTitle)">💾 Save</button>
       </div>
 
       <button type="button" class="btn btn-danger btn-full mt-3" (click)="changePassword(user.id)">🔑 Change Password</button>

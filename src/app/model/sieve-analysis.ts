@@ -25,6 +25,7 @@ clientCode: any;
   testName: string;
   testBy: string;
   approveBy: string;
+  adopter: string;
   lastApproveBy: string;
   activist: string;
   notes: string;
