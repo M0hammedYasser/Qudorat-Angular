@@ -7,6 +7,7 @@
       <th>Retained Weight (gm)</th>
       <th>Retained%</th>
       <th>Passing%</th>
+      <th>Expand</th>
     </tr>
 
     <tr>
@@ -15,6 +16,7 @@
       <td>{{this.sieveAnalysis.massRetainedA}}</td>
       <td>{{this.sieveAnalysis.retainedA}}</td>
       <td>{{(this.sieveAnalysis.passingA).toFixed(0)}}</td>
+      <td>{{this.sieveAnalysis.expandA}}</td>
     </tr>
 
     <tr>
@@ -23,6 +25,7 @@
       <td>{{this.sieveAnalysis.massRetainedB}}</td>
       <td>{{this.sieveAnalysis.retainedB}}</td>
       <td>{{(this.sieveAnalysis.passingB).toFixed(0)}}</td>
+      <td>{{this.sieveAnalysis.expandB}}</td>
     </tr>
 
     <tr>
@@ -31,6 +34,7 @@
       <td>{{this.sieveAnalysis.massRetainedC}}</td>
       <td>{{this.sieveAnalysis.retainedC}}</td>
       <td>{{(this.sieveAnalysis.passingC).toFixed(0)}}</td>
+      <td>{{this.sieveAnalysis.expandC}}</td>
     </tr>
 
     <tr>
@@ -39,6 +43,7 @@
       <td>{{this.sieveAnalysis.massRetainedD}}</td>
       <td>{{this.sieveAnalysis.retainedD}}</td>
       <td>{{(this.sieveAnalysis.passingD).toFixed(0)}}</td>
+      <td>{{this.sieveAnalysis.expandD}}</td>
     </tr>
 
     <tr>
@@ -47,6 +52,7 @@
       <td>{{this.sieveAnalysis.massRetainedE}}</td>
       <td>{{this.sieveAnalysis.retainedE}}</td>
       <td>{{(this.sieveAnalysis.passingE).toFixed(0)}}</td>
+      <td>{{this.sieveAnalysis.expandE}}</td>
     </tr>
 
     <tr>
@@ -55,6 +61,7 @@
       <td>{{this.sieveAnalysis.massRetainedF}}</td>
       <td>{{this.sieveAnalysis.retainedF}}</td>
       <td>{{(this.sieveAnalysis.passingF).toFixed(0)}}</td>
+      <td>{{this.sieveAnalysis.expandF}}</td>
     </tr>
 
     <tr>
@@ -63,6 +70,7 @@
       <td>{{this.sieveAnalysis.massRetainedG}}</td>
       <td>{{this.sieveAnalysis.retainedG}}</td>
       <td>{{(this.sieveAnalysis.passingG).toFixed(0)}}</td>
+      <td>{{this.sieveAnalysis.expandG}}</td>
     </tr>
 
     <tr>
@@ -71,6 +79,7 @@
       <td>{{this.sieveAnalysis.massRetainedH}}</td>
       <td>{{this.sieveAnalysis.retainedH}}</td>
       <td>{{(this.sieveAnalysis.passingH).toFixed(0)}}</td>
+      <td>{{this.sieveAnalysis.expandH}}</td>
     </tr>
 
     <tr>
@@ -79,6 +88,7 @@
       <td>{{this.sieveAnalysis.massRetainedI}}</td>
       <td>{{this.sieveAnalysis.retainedI}}</td>
       <td>{{(this.sieveAnalysis.passingI).toFixed(0)}}</td>
+      <td>{{this.sieveAnalysis.expandI}}</td>
     </tr>
 
     <tr>
@@ -87,6 +97,7 @@
       <td>{{this.sieveAnalysis.massRetainedJ}}</td>
       <td>{{this.sieveAnalysis.retainedJ}}</td>
       <td>{{(this.sieveAnalysis.passingJ).toFixed(0)}}</td>
+      <td>{{this.sieveAnalysis.expandJ}}</td>
     </tr>
 
     <tr>
@@ -95,6 +106,7 @@
       <td>{{this.sieveAnalysis.massRetainedK}}</td>
       <td>{{this.sieveAnalysis.retainedK}}</td>
       <td>{{(this.sieveAnalysis.passingK).toFixed(0)}}</td>
+      <td>{{this.sieveAnalysis.expandK}}</td>
     </tr>
 
     <tr>
@@ -103,6 +115,7 @@
       <td>{{this.sieveAnalysis.massRetainedL}}</td>
       <td>{{this.sieveAnalysis.retainedL}}</td>
       <td>{{(this.sieveAnalysis.passingL).toFixed(2)}}</td>
+      <td>{{this.sieveAnalysis.expandL}}</td>
     </tr>
 
     <tr>
@@ -111,6 +124,7 @@
       <td>{{this.sieveAnalysis.massRetainedM}}</td>
       <td>{{this.sieveAnalysis.retainedM}}</td>
       <td>{{this.sieveAnalysis.passingM}}</td>
+      <td>{{this.sieveAnalysis.expandM}}</td>
     </tr>
 
     <tr>
@@ -126,7 +140,7 @@
     <canvas #chartCanvas></canvas>
   </div>
 
-  <div class="text-center" style="width: 70vw;" *ngIf="sieveAnalysis.lastApproveBy && (role == 'ROLE_MANAGER' || role == 'ROLE_ADMIN')">
+  <div class="text-center" style="width: 70vw;" >
     <button (click)="generatePDF()">Download PDF</button>
   </div>
 </div>

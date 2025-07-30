@@ -151,23 +151,23 @@ export class SandReportComponent implements AfterViewInit, OnInit {
 
       const tableStartY = (doc as any).lastAutoTable.finalY + 2;
 
-      const tableColumn = ["Sieve sizes(Inch)", "Sieve sizes(mm)", "Retained Weight (gm)", "Retained%", "Passing%"];
+      const tableColumn = ["Sieve sizes(Inch)", "Sieve sizes(mm)", "Retained Weight (gm)", "Retained%", "Passing%" , "Expand"];
       const tableRows: any[] = [];
 
       const sieveData = [
-        ["3", 75.0, this.sieveAnalysis.massRetainedA, this.sieveAnalysis.retainedA, Number(this.sieveAnalysis.passingA).toFixed(0)],
-        ["21/2", 62.5, this.sieveAnalysis.massRetainedB, this.sieveAnalysis.retainedB, Number(this.sieveAnalysis.passingB).toFixed(0)],
-        ["2", 50.0, this.sieveAnalysis.massRetainedC, this.sieveAnalysis.retainedC, Number(this.sieveAnalysis.passingC).toFixed(0)],
-        ["11/2", 37.5, this.sieveAnalysis.massRetainedD, this.sieveAnalysis.retainedD, Number(this.sieveAnalysis.passingD).toFixed(0)],
-        ["1", 25.0, this.sieveAnalysis.massRetainedE, this.sieveAnalysis.retainedE, Number(this.sieveAnalysis.passingE).toFixed(0)],
-        ["3/4", 19.0, this.sieveAnalysis.massRetainedF, this.sieveAnalysis.retainedF, Number(this.sieveAnalysis.passingF).toFixed(0)],
-        ["1/2", 12.5, this.sieveAnalysis.massRetainedG, this.sieveAnalysis.retainedG, Number(this.sieveAnalysis.passingG).toFixed(0)],
-        ["3/8", 9.5, this.sieveAnalysis.massRetainedH, this.sieveAnalysis.retainedH, Number(this.sieveAnalysis.passingH).toFixed(0)],
-        ["#4", 4.75, this.sieveAnalysis.massRetainedI, this.sieveAnalysis.retainedI, Number(this.sieveAnalysis.passingI).toFixed(0)],
-        ["#10", 2.00, this.sieveAnalysis.massRetainedJ, this.sieveAnalysis.retainedJ, Number(this.sieveAnalysis.passingJ).toFixed(0)],
-        ["#40", 0.425, this.sieveAnalysis.massRetainedK, this.sieveAnalysis.retainedK, Number(this.sieveAnalysis.passingK).toFixed(0)],
-        ["#100", 0.150, this.sieveAnalysis.massRetainedL, this.sieveAnalysis.retainedL, Number(this.sieveAnalysis.passingL).toFixed(2)],
-        ["#200", 0.075, this.sieveAnalysis.massRetainedM, this.sieveAnalysis.retainedM, this.sieveAnalysis.passingM],
+        ["3", 75.0, this.sieveAnalysis.massRetainedA, this.sieveAnalysis.retainedA, Number(this.sieveAnalysis.passingA).toFixed(0), this.sieveAnalysis.expandA],
+        ["21/2", 62.5, this.sieveAnalysis.massRetainedB, this.sieveAnalysis.retainedB, Number(this.sieveAnalysis.passingB).toFixed(0), this.sieveAnalysis.expandB],
+        ["2", 50.0, this.sieveAnalysis.massRetainedC, this.sieveAnalysis.retainedC, Number(this.sieveAnalysis.passingC).toFixed(0), this.sieveAnalysis.expandC],
+        ["11/2", 37.5, this.sieveAnalysis.massRetainedD, this.sieveAnalysis.retainedD, Number(this.sieveAnalysis.passingD).toFixed(0), this.sieveAnalysis.expandD],
+        ["1", 25.0, this.sieveAnalysis.massRetainedE, this.sieveAnalysis.retainedE, Number(this.sieveAnalysis.passingE).toFixed(0), this.sieveAnalysis.expandE],
+        ["3/4", 19.0, this.sieveAnalysis.massRetainedF, this.sieveAnalysis.retainedF, Number(this.sieveAnalysis.passingF).toFixed(0), this.sieveAnalysis.expandF],
+        ["1/2", 12.5, this.sieveAnalysis.massRetainedG, this.sieveAnalysis.retainedG, Number(this.sieveAnalysis.passingG).toFixed(0), this.sieveAnalysis.expandG],
+        ["3/8", 9.5, this.sieveAnalysis.massRetainedH, this.sieveAnalysis.retainedH, Number(this.sieveAnalysis.passingH).toFixed(0), this.sieveAnalysis.expandH],
+        ["#4", 4.75, this.sieveAnalysis.massRetainedI, this.sieveAnalysis.retainedI, Number(this.sieveAnalysis.passingI).toFixed(0), this.sieveAnalysis.expandI],
+        ["#10", 2.00, this.sieveAnalysis.massRetainedJ, this.sieveAnalysis.retainedJ, Number(this.sieveAnalysis.passingJ).toFixed(0), this.sieveAnalysis.expandJ],
+        ["#40", 0.425, this.sieveAnalysis.massRetainedK, this.sieveAnalysis.retainedK, Number(this.sieveAnalysis.passingK).toFixed(0), this.sieveAnalysis.expandK],
+        ["#100", 0.150, this.sieveAnalysis.massRetainedL, this.sieveAnalysis.retainedL, Number(this.sieveAnalysis.passingL).toFixed(2), this.sieveAnalysis.expandL],
+        ["#200", 0.075, this.sieveAnalysis.massRetainedM, this.sieveAnalysis.retainedM, this.sieveAnalysis.passingM , this.sieveAnalysis.expandM],
         ["Total Wt.", this.sieveAnalysis.totalWeigh, "", "", ""]
       ];
 
