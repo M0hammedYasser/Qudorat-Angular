@@ -30,7 +30,8 @@
               "./node_modules/bootstrap/dist/css/bootstrap.min.css"
             ],
             "scripts": [
-              "./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
+              "./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
+              "src/assets/fonts/amiri-normal.js"
             ]
           },
           "configurations": {
@@ -96,7 +97,9 @@
             "styles": [
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+              "src/assets /fonts/amiri-normal.js"
+            ]
           }
         }
       }

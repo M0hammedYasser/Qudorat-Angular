@@ -2,10 +2,11 @@ import {Component, OnInit} from '@angular/core';
 import {CompressiveStrength} from "../../../../../model/compressive-strength";
 import {CompressiveStrengthService} from "../../../../../service/CompressiveStrength/compressive-strength.service";
 import {ActivatedRoute, Router} from "@angular/router";
-import {DecimalPipe, NgIf} from "@angular/common";
+import {NgIf} from "@angular/common";
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
 import {AuthenticationService} from "../../../../../service/authentication/authentication.service";
+declare let AmiriFont: any;
 
 @Component({
   selector: 'app-compressive-strength-report',
@@ -16,6 +17,7 @@ import {AuthenticationService} from "../../../../../service/authentication/authe
   templateUrl: './compressive-strength-report.component.html',
   styleUrl: './compressive-strength-report.component.css'
 })
+
 export class CompressiveStrengthReportComponent implements OnInit {
 
   compressiveStrength: CompressiveStrength = {} as CompressiveStrength;
@@ -41,10 +43,12 @@ export class CompressiveStrengthReportComponent implements OnInit {
 
   generatePDF() {
     const doc = new jsPDF();
+    doc.addFileToVFS('Amiri-Regular.ttf', AmiriFont); // هذا اسم المتغير في ملف الخط
+    doc.addFont('Amiri-Regular.ttf', 'Amiri', 'normal');
+    doc.setFont('Amiri');
     const head = new Image();
     const tail = new Image();
     const qr = new Image();
-
     head.src = 'assets/head.png';
     tail.src = 'assets/tail.png';
     qr.src = 'assets/barcode.jpg';
@@ -65,7 +69,7 @@ export class CompressiveStrengthReportComponent implements OnInit {
           ['Sampling Date', this.compressiveStrength.sampleDate || 'N/A', 'Owner', this.compressiveStrength.owner || 'N/A'],
         ],
         theme: 'grid',
-        styles: { fontSize: 6, cellPadding: 1.5 },
+        styles: { fontSize: 6, cellPadding: 1.5 , font: 'Amiri' },
         columnStyles: {
           0: { cellWidth: 30 },
           1: { cellWidth: 60 },
@@ -202,6 +206,4 @@ export class CompressiveStrengthReportComponent implements OnInit {
       doc.save(`CompressiveStrengthReport_${this.compressiveStrength.testName}.pdf`);
     };
   }
-
-
 }
