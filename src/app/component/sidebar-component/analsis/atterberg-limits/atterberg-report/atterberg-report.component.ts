@@ -7,6 +7,7 @@ import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
 import Chart from "chart.js/auto";
 import {AuthenticationService} from "../../../../../service/authentication/authentication.service";
+declare let AmiriFont: any;
 
 @Component({
   selector: 'app-atterberg-report',
@@ -256,6 +257,9 @@ export class AtterbergReportComponent implements OnInit {
 
   generatePDF() {
     const doc = new jsPDF();
+    doc.addFileToVFS('Amiri-Regular.ttf', AmiriFont); // هذا اسم المتغير في ملف الخط
+    doc.addFont('Amiri-Regular.ttf', 'Amiri', 'normal');
+    doc.setFont('Amiri');
     const head = new Image();
     const tail = new Image();
     const qr = new Image();
@@ -283,7 +287,7 @@ export class AtterbergReportComponent implements OnInit {
         theme: 'grid',
         styles: {
           fontSize: 8,
-          cellPadding: 1
+          cellPadding: 1,font: 'Amiri'
         },
         columnStyles: {
           0: { cellWidth: 32 },
