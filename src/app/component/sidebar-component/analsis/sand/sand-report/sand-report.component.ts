@@ -7,6 +7,7 @@ import {SieveAnalysisService} from "../../../../../service/sieve-analysis/sieve-
 import {ActivatedRoute} from "@angular/router";
 import {NgIf} from "@angular/common";
 import {AuthenticationService} from "../../../../../service/authentication/authentication.service"; // ✅ Import autoTable separately
+declare let AmiriFont: any;
 
 @Component({
   selector: 'app-sand-report',
@@ -114,6 +115,9 @@ export class SandReportComponent implements AfterViewInit, OnInit {
     }
 
     const doc = new jsPDF();
+    doc.addFileToVFS('Amiri-Regular.ttf', AmiriFont); // هذا اسم المتغير في ملف الخط
+    doc.addFont('Amiri-Regular.ttf', 'Amiri', 'normal');
+    doc.setFont('Amiri');
     const head = new Image();
     const tail = new Image();
     const qr = new Image();
@@ -140,7 +144,7 @@ export class SandReportComponent implements AfterViewInit, OnInit {
         startY: 40,
         body: infoRows,
         theme: 'grid',
-        styles: { fontSize: 8, cellPadding: 1.5 },
+        styles: { fontSize: 8, cellPadding: 1.5 ,font: 'Amiri' },
         columnStyles: {
           0: { cellWidth: 31 },
           1: { cellWidth: 60 },

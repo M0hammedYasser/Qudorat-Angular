@@ -11,6 +11,7 @@ import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
 import Chart from "chart.js/auto";
 import {AuthenticationService} from "../../../../../service/authentication/authentication.service";
+declare let AmiriFont: any;
 
 @Component({
   selector: 'app-moisture-density-relationship-report',
@@ -188,6 +189,9 @@ export class MoistureDensityRelationshipReportComponent implements OnInit {
 
 generatePDF() {
   const doc = new jsPDF();
+  doc.addFileToVFS('Amiri-Regular.ttf', AmiriFont); // هذا اسم المتغير في ملف الخط
+  doc.addFont('Amiri-Regular.ttf', 'Amiri', 'normal');
+  doc.setFont('Amiri');
   const head = new Image();
   const tail = new Image();
 
@@ -218,7 +222,7 @@ generatePDF() {
         fontSize: 7,
         halign: 'left',
         valign: 'middle',
-        cellPadding: 1.5
+        cellPadding: 1.5,font: 'Amiri'
       },
       columnStyles: {
         0: { cellWidth: 32 },

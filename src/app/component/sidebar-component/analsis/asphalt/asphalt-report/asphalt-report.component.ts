@@ -7,6 +7,7 @@ import autoTable, {RowInput} from "jspdf-autotable";
 import Chart from "chart.js/auto";
 import {DecimalPipe, NgIf} from '@angular/common';
 import {AuthenticationService} from "../../../../../service/authentication/authentication.service";
+declare let AmiriFont: any;
 
 @Component({
   selector: 'app-asphalt-report',
@@ -163,6 +164,9 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
 
   generatePDF() {
   const doc = new jsPDF();
+    doc.addFileToVFS('Amiri-Regular.ttf', AmiriFont); // هذا اسم المتغير في ملف الخط
+    doc.addFont('Amiri-Regular.ttf', 'Amiri', 'normal');
+    doc.setFont('Amiri');
   const head = new Image();
   const tail = new Image();
   const qr = new Image();
@@ -193,7 +197,7 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
       theme: 'grid',
       styles: {
         fontSize: 8,
-        cellPadding: 1
+        cellPadding: 1 ,font: 'Amiri'
       },
       columnStyles: {
         0: { cellWidth: 32 },
@@ -395,7 +399,7 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
             theme: 'grid',
             styles: {
               fontSize: 8,
-              cellPadding: .5
+              cellPadding: .5,font: 'Amiri'
             },
             columnStyles: {
               0: { cellWidth: 32 },
