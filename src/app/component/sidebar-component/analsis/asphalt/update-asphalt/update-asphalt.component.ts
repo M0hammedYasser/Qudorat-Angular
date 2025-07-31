@@ -43,8 +43,11 @@ export class UpdateAsphaltComponent implements OnInit {
   insert() {
     this.service.update(this.asphalt , this.id).subscribe(
       () => this.router.navigateByUrl(`/tests`));
+  }
 
-
+  update() {
+    this.service.update(this.asphalt , this.id).subscribe(
+      () => this.router.navigateByUrl(`/tests`));
   }
 
   nextStep() {

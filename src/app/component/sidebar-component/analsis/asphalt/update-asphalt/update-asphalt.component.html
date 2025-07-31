@@ -3,7 +3,7 @@
     {{ currentStep === 1 ? 'BITUMEN' : currentStep === 2 ? 'Sieve Analysis For Sand' : 'Asphalt Marshall' }}
   </h1>
 
-  <form #form="ngForm" (submit)="insert()">
+  <form #form="ngForm" (submit)="update()">
     <!-- STEP 1: BITUMEN -->
     <div *ngIf="currentStep === 1" class="form-step" >
       <div class="bitumen-form-container">
