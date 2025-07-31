@@ -35,6 +35,7 @@ clientCode: any;
   owner: string;
   location: string;
   sampleNo: string;
+  
 
   massRetainedA: number;
   massRetainedB: number;
@@ -94,4 +95,6 @@ clientCode: any;
 
 
   test: Test;
+
+  [key: string]: any;
 }
