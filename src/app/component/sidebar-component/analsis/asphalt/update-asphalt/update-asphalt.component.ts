@@ -36,7 +36,18 @@ export class UpdateAsphaltComponent implements OnInit {
 
   ngOnInit() {
     this.id = this.activatedRoute.snapshot.params['id'];
-    this.service.findById(this.id).subscribe(res => this.asphalt = res);
+    this.service.findById(this.id).subscribe(res => {
+      this.asphalt = res;
+
+      // تفريغ expandA إلى expandJ إذا كانت قيمتها \u0000
+      for (let i = 0; i < 10; i++) {
+        const char = String.fromCharCode(65 + i); // 'A' to 'J'
+        const key = `expand${char}`;
+        if (!this.asphalt.gradationTest[key] || this.asphalt.gradationTest[key] === '\u0000') {
+          this.asphalt.gradationTest[key] = '';
+        }
+      }
+    });
   }
 
 

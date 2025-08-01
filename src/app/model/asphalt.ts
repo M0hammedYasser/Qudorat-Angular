@@ -94,4 +94,5 @@ export interface Asphalt {
   bitumen: Bitumen
 
   test: Test;
+
 }

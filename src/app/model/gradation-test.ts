@@ -82,4 +82,5 @@ expandA: any;
   gcvcMaxJ: number;
 
   standard:string;
+  [key: string]: any;
 }

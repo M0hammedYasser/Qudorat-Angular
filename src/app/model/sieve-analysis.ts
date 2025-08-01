@@ -95,6 +95,5 @@ clientCode: any;
 
 
   test: Test;
-
   [key: string]: any;
 }
