@@ -16,9 +16,6 @@ import {ActivatedRoute, Router} from "@angular/router";
   styleUrl: './update-compressive-strength.component.css'
 })
 export class UpdateCompressiveStrengthComponent implements OnInit{
-update() {
-throw new Error('Method not implemented.');
-}
 
   compressiveStrength: CompressiveStrength = {test: {} as Test,} as CompressiveStrength;
   id: number = 0;
@@ -31,6 +28,12 @@ throw new Error('Method not implemented.');
   }
 
   insert() {
+    this.service.update(this.compressiveStrength , this.id).subscribe(
+      () => this.router.navigateByUrl(`/tests`)
+    );
+  }
+
+  update() {
     this.service.update(this.compressiveStrength , this.id).subscribe(
       () => this.router.navigateByUrl(`/tests`)
     );

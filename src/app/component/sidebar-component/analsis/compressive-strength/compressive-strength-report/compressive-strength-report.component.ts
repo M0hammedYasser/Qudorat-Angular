@@ -179,14 +179,14 @@ export class CompressiveStrengthReportComponent implements OnInit {
           180
         );
         doc.text(splitNotes, 13, finalY + 5);
-        finalY += (splitNotes.length * 7); // 7 is approximate line height
+        finalY += (splitNotes.length * 7);
       }
 
-      doc.line(10, finalY + 2, 200, finalY + 2);
+      doc.line(10, finalY - 4 , 200, finalY - 4);
       doc.setFontSize(8);
-      doc.text(`Approved by: ${this.compressiveStrength.adopter || 'N/A'}`, 13, finalY + 5);
-      doc.text(`Test by: ${this.compressiveStrength.testBy || 'N/A'}`, 80, finalY + 5);
-      doc.text(`Checked by: ${this.compressiveStrength.approveBy || 'N/A'}`, 150, finalY + 5);
+      doc.text(`Approved by: ${this.compressiveStrength.adopter || 'N/A'}`, 13, finalY);
+      doc.text(`Test by: ${this.compressiveStrength.testBy || 'N/A'}`, 80, finalY);
+      doc.text(`Checked by: ${this.compressiveStrength.approveBy || 'N/A'}`, 150, finalY);
 
       doc.addImage(tail, 'PNG', 0, 265, 210, 33);
 

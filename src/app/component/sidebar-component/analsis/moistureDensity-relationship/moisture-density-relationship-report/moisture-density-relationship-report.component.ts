@@ -133,7 +133,7 @@ export class MoistureDensityRelationshipReportComponent implements OnInit {
             pointHoverRadius: 7,
             showLine: true,
             fill: false,
-            tension: 0.4  // smooth curve
+            tension: 0.4
           }
         ]
       },
@@ -153,7 +153,8 @@ export class MoistureDensityRelationshipReportComponent implements OnInit {
               display: true,
               text: 'Moisture Content %',
               font: {
-                weight: 'bold'
+                weight: 'bold',
+                size: 20
               }
             },
             min: 2,
@@ -170,7 +171,8 @@ export class MoistureDensityRelationshipReportComponent implements OnInit {
               display: true,
               text: 'DRY DENSITY gm/cc',
               font: {
-                weight: 'bold'
+                weight: 'bold',
+                size: 20
               }
             },
             min: 2.0,
@@ -361,9 +363,9 @@ generatePDF() {
       finalY += 60;
 
       if (this.moistureDensityRelationship.notes) {
-        doc.line(10, finalY + 8, 200, finalY + 8);
+        doc.line(10, finalY + 4, 200, finalY + 4);
         const splitNotes = doc.splitTextToSize(`Remarks: ${this.moistureDensityRelationship.notes || ""}`, 180);
-        doc.text(splitNotes, 13, finalY + 12);
+        doc.text(splitNotes, 13, finalY + 7);
         finalY += (splitNotes.length * 7);
       }
 

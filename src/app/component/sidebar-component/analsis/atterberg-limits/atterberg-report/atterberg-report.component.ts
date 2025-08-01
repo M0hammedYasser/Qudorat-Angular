@@ -452,12 +452,12 @@ export class AtterbergReportComponent implements OnInit {
         }
 
         // Signatures & Footer
-        doc.line(10, 257, 200, 257);
+        doc.line(10, 262, 200, 262);
         doc.setFontSize(10);
-        doc.text(`Approved by: ${this.atterbergLimits.adopter || 'N/A'}`, 13, 261);
-        doc.text(`Test by: ${this.atterbergLimits.testBy || 'N/A'}`, 80, 261);
-        doc.text(`Checked by: ${this.atterbergLimits.approveBy || 'N/A'}`, 150, 261);
-        doc.addImage(tail, 'PNG', 0, 265, 210, 33);
+        doc.text(`Approved by: ${this.atterbergLimits.adopter || 'N/A'}`, 13, 266);
+        doc.text(`Test by: ${this.atterbergLimits.testBy || 'N/A'}`, 80, 266);
+        doc.text(`Checked by: ${this.atterbergLimits.approveBy || 'N/A'}`, 150, 266);
+        doc.addImage(tail, 'PNG', 0, 267, 210, 33);
 
         doc.setFontSize(5);
         const formatDateTime = (date: Date) => {

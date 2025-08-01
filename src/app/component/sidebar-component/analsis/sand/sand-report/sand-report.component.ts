@@ -201,15 +201,15 @@ export class SandReportComponent implements AfterViewInit, OnInit {
               `Remarks: ${this.sieveAnalysis.notes || ""}`,
               180
             );
-            doc.text(splitNotes, 13, footerY + 2);
+            doc.text(splitNotes, 13, footerY + 3);
             footerY += (splitNotes.length * 7);
           }
 
-          doc.line(10, 258, 200, 257);
+          doc.line(10, 261, 200, 261);
           doc.setFontSize(10);
-          doc.text(`Approved by: ${this.sieveAnalysis.adopter || 'N/A'}`, 13, 261);
-          doc.text(`Test by: ${this.sieveAnalysis.testBy || 'N/A'}`, 80, 261);
-          doc.text(`Checked by: ${this.sieveAnalysis.approveBy || 'N/A'}`, 150, 261);
+          doc.text(`Approved by: ${this.sieveAnalysis.adopter || 'N/A'}`, 13, 265);
+          doc.text(`Test by: ${this.sieveAnalysis.testBy || 'N/A'}`, 80, 265);
+          doc.text(`Checked by: ${this.sieveAnalysis.approveBy || 'N/A'}`, 150, 265);
 
           doc.addImage(tail, 'PNG', 0, 265, 210, 33);
 

@@ -22,9 +22,6 @@ import {JsonPipe} from "@angular/common";
   styleUrl: './update-moisture-density-relationship.component.css'
 })
 export class UpdateMoistureDensityRelationshipComponent implements OnInit {
-update() {
-throw new Error('Method not implemented.');
-}
 
   id: number = 0;
   moistureDensityRelationship: MoistureDensityRelationship = {test: {} as Test,} as MoistureDensityRelationship;
@@ -41,6 +38,11 @@ throw new Error('Method not implemented.');
   }
 
   insert() {
+    this.service.update(this.moistureDensityRelationship , this.id).subscribe(
+      () => this.router.navigateByUrl(`/tests`));
+  }
+
+  update() {
     this.service.update(this.moistureDensityRelationship , this.id).subscribe(
       () => this.router.navigateByUrl(`/tests`));
   }

@@ -15,9 +15,6 @@ import {AtterbergLimitsService} from "../../../../../service/atterbergLimits/att
   styleUrl: './update-atterberg.component.css'
 })
 export class UpdateAtterbergComponent implements OnInit{
-update() {
-throw new Error('Method not implemented.');
-}
 
   id: number = 0;
   atterbergLimits: AtterbergLimits = {test: {} as Test,} as AtterbergLimits;
@@ -37,5 +34,11 @@ throw new Error('Method not implemented.');
     this.service.update(this.atterbergLimits , this.id).subscribe(
       () => this.router.navigateByUrl(`/tests`));
   }
+
+  update() {
+    this.service.update(this.atterbergLimits , this.id).subscribe(
+      () => this.router.navigateByUrl(`/tests`));
+  }
+
 
 }
