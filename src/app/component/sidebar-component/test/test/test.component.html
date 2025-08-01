@@ -15,6 +15,7 @@
         <th *ngIf="role=='ROLE_MANAGER' || role =='ROLE_ADMIN' || role =='ROLE_QUALITY'">is Paid</th>
         <th *ngIf="role=='ROLE_MANAGER' || role =='ROLE_ADMIN'">is Active</th>
         <th>is Adopt</th>
+        <th>is Approved</th>
         <th>Date</th>
         <th>Number Of Trails</th>
         <th >Action</th>
@@ -38,6 +39,10 @@
         <td >
           <i *ngIf="!test.adopt" class="fas fa-times text-danger"></i>
           <span *ngIf="test.adopt">{{test.adopter}}</span>
+        </td>
+        <td >
+          <i *ngIf="!test.approver" class="fas fa-times text-danger"></i>
+          <span *ngIf="test.approver">{{test.approver}}</span>
         </td>
         <td>{{ test.date }}</td>
         <td>{{test.sieveAnalyses.length + test.asphalts.length + test.compressiveStrengths.length + test.atterbergLimits.length +test.moistureDensityRelationships.length}}</td>
