@@ -44,6 +44,14 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
     this.role = this.authenticationService.getAuthority();
     this.service.findById(this.id).subscribe(res => {
       this.asphalt = res;
+
+      const expandKeys = ['expandA', 'expandB', 'expandC', 'expandD', 'expandE', 'expandF', 'expandG', 'expandH', 'expandI', 'expandJ'];
+      for (const key of expandKeys) {
+        if (this.asphalt.gradationTest[key] === '\u0000') {
+          this.asphalt.gradationTest[key] = ''; 
+        }
+      }
+
       this.bulkSpOfCompMix =
         ((this.asphalt.weightAirDryA / (this.asphalt.weightAirSurfDryA - this.asphalt.weightWaterA)) +
           (this.asphalt.weightAirDryB / (this.asphalt.weightAirSurfDryB - this.asphalt.weightWaterB)) +
@@ -51,22 +59,39 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
           (this.asphalt.weightAirDryD / (this.asphalt.weightAirSurfDryD - this.asphalt.weightWaterD)) +
           (this.asphalt.weightAirDryE / (this.asphalt.weightAirSurfDryE - this.asphalt.weightWaterE)) +
           (this.asphalt.weightAirDryF / (this.asphalt.weightAirSurfDryF - this.asphalt.weightWaterF))) / 6;
+
       this.maxSpOfPAvgMix = this.asphalt.netWeightOfLooseMix
         / (this.asphalt.netWeightOfLooseMix + this.asphalt.netWeightOfFlaskWater - this.asphalt.weightFlaskWaterSample);
+
       this.airVoid = (this.maxSpOfPAvgMix - this.bulkSpOfCompMix) / this.maxSpOfPAvgMix * 100;
-      this.voidMineral = 100 - (this.bulkSpOfCompMix * (100 - this.asphalt.bitumen.percOfBit) / this.asphalt.bulkSpGrCombAgg)
+
+      this.voidMineral = 100 - (this.bulkSpOfCompMix * (100 - this.asphalt.bitumen.percOfBit) / this.asphalt.bulkSpGrCombAgg);
+
       this.voidFilled = (this.voidMineral - this.airVoid) / this.voidMineral * 100;
+
       this.z12 = (100 / this.maxSpOfPAvgMix) - (this.asphalt.bitumen.percOfBit / this.asphalt.spGravityOfAspBit);
+
       this.effectiveSpGravityOfAgg = (100 - this.asphalt.bitumen.percOfBit) / this.z12;
-      this.avgStabilityFor24Hrs = (this.asphalt.stabilityD * this.asphalt.correctionFactorD + this.asphalt.stabilityE * this.asphalt.correctionFactorE + this.asphalt.stabilityF * this.asphalt.correctionFactorF) / 3;
-      this.avgStabilityFor30Min = (this.asphalt.stabilityA * this.asphalt.correctionFactorA +
+
+      this.avgStabilityFor24Hrs = (
+        this.asphalt.stabilityD * this.asphalt.correctionFactorD +
+        this.asphalt.stabilityE * this.asphalt.correctionFactorE +
+        this.asphalt.stabilityF * this.asphalt.correctionFactorF
+      ) / 3;
+
+      this.avgStabilityFor30Min = (
+        this.asphalt.stabilityA * this.asphalt.correctionFactorA +
         this.asphalt.stabilityB * this.asphalt.correctionFactorB +
-        this.asphalt.stabilityC * this.asphalt.correctionFactorC) / 3;
-      this.absorbedAps = 100 * (this.effectiveSpGravityOfAgg - this.asphalt.bulkSpGrCombAgg) / (this.effectiveSpGravityOfAgg * this.asphalt.bulkSpGrCombAgg) * this.asphalt.spGravityOfAspBit
+        this.asphalt.stabilityC * this.asphalt.correctionFactorC
+      ) / 3;
+
+      this.absorbedAps = 100 *
+        (this.effectiveSpGravityOfAgg - this.asphalt.bulkSpGrCombAgg) /
+        (this.effectiveSpGravityOfAgg * this.asphalt.bulkSpGrCombAgg) *
+        this.asphalt.spGravityOfAspBit;
     });
-
-
   }
+
 
   @ViewChild('tableContainer') tableContainer!: ElementRef;
 

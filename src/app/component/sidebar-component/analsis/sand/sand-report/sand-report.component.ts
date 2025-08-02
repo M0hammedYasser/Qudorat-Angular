@@ -34,11 +34,22 @@ export class SandReportComponent implements AfterViewInit, OnInit {
   ngOnInit() {
     this.id = this.activatedRoute.snapshot.params['id'];
     this.role = this.authenticationService.getAuthority();
+
     this.sieveAnalysisService.findById(this.id).subscribe(res => {
       this.sieveAnalysis = res;
+
+      for (let i = 0; i < 13; i++) {
+        const char = String.fromCharCode(65 + i); 
+        const key = `expand${char}`;
+        if (!this.sieveAnalysis[key] || this.sieveAnalysis[key] === '\u0000') {
+          this.sieveAnalysis[key] = '';
+        }
+      }
+
       this.createChart();
     });
   }
+
 
   ngAfterViewInit() {
     this.createChart();
