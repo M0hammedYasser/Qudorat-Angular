@@ -217,7 +217,14 @@ generatePDF() {
         ['Testing Date', this.moistureDensityRelationship.testingDate || 'N/A',
           'Standard', this.moistureDensityRelationship.classification || 'N/A'],
         ['Consultant', this.moistureDensityRelationship.consultant || 'N/A',
-          'Owner', this.moistureDensityRelationship.owner || 'N/A']
+          'Owner', this.moistureDensityRelationship.owner || 'N/A'],
+        ['Location', this.moistureDensityRelationship.location || 'N/A' ,
+          'Wt. of Rammer', this.moistureDensityRelationship.wtOfRammer || 'N/A'],
+        ['Wt. of mould', this.moistureDensityRelationship.wtOfMould || 'N/A' ,
+          'No. Blows/Layers', this.moistureDensityRelationship.noBlows || 'N/A'],
+        ['Vol. of mould', this.moistureDensityRelationship.volOfMould || 'N/A' ,
+          'No. of Layers', this.moistureDensityRelationship.noOfLayers || 'N/A'],
+
       ],
       theme: 'grid',
       styles: {
