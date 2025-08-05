@@ -181,7 +181,7 @@
   </div>
 
 
-  <div class="text-center" style="width: 70vw;">
+  <div class="text-center" style="width: 70vw;" *ngIf="moistureDensityRelationship.lastApproveBy  && (role == 'ROLE_MANAGER' || role == 'ROLE_ADMIN')">
     <button (click)="generatePDF()">Download PDF</button>
   </div>
 </div>
