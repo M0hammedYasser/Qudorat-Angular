@@ -376,6 +376,8 @@ generatePDF() {
         finalY += (splitNotes.length * 7);
       }
 
+
+      
       doc.line(10, 258, 200, 258);
       doc.setFontSize(7);
       doc.text(`Approved by: ${this.moistureDensityRelationship.adopter || 'N/A'}`, 12, 261);
