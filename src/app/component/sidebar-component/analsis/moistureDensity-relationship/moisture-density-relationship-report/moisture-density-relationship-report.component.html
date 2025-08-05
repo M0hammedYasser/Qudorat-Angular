@@ -1,4 +1,30 @@
 <div class="invoice-container">
+  <table class="table1">
+    <tr>
+      <td>Location</td>
+      <td>{{this.moistureDensityRelationship.location}}</td>
+
+      <td>Wt. of Rammer</td>
+      <td>{{this.moistureDensityRelationship.wtOfRammer}}</td>
+    </tr>
+
+    <tr>
+      <td>Wt. of mould</td>
+      <td>{{this.moistureDensityRelationship.wtOfMould}}</td>
+
+      <td>No. Blows/Layers</td>
+      <td>{{this.moistureDensityRelationship.noBlows}}</td>
+    </tr>
+
+    <tr>
+      <td>Vol. of mould</td>
+      <td>{{this.moistureDensityRelationship.volOfMould}}</td>
+
+      <td>No. of Layers</td>
+      <td>{{this.moistureDensityRelationship.noOfLayers}}</td>
+    </tr>
+  </table>
+
   <h2>Moisture Density Relationship</h2>
   <table class="table1">
     <tr>
@@ -155,7 +181,7 @@
   </div>
 
 
-  <div class="text-center" style="width: 70vw;" *ngIf="moistureDensityRelationship.lastApproveBy  && (role == 'ROLE_MANAGER' || role == 'ROLE_ADMIN')">
+  <div class="text-center" style="width: 70vw;">
     <button (click)="generatePDF()">Download PDF</button>
   </div>
 </div>
