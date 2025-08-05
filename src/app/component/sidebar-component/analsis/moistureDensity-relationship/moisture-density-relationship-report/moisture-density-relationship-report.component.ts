@@ -231,7 +231,7 @@ generatePDF() {
         fontSize: 7,
         halign: 'left',
         valign: 'middle',
-        cellPadding: 1.5,font: 'Amiri'
+        cellPadding: 1,font: 'Amiri'
       },
       columnStyles: {
         0: { cellWidth: 32 },
@@ -242,7 +242,7 @@ generatePDF() {
       margin: { left: 14, right: 14 }
     });
 
-    let finalY = (doc as any).lastAutoTable.finalY + 3;
+    let finalY = (doc as any).lastAutoTable.finalY + 1;
 
     // جدول Mould Data
     autoTable(doc, {
@@ -288,7 +288,7 @@ generatePDF() {
       margin: { left: 14, right: 14 }
     });
 
-    finalY = (doc as any).lastAutoTable.finalY + 3;
+    finalY = (doc as any).lastAutoTable.finalY + 1;
 
     // جدول Moisture Content
     autoTable(doc, {
@@ -342,12 +342,12 @@ generatePDF() {
       margin: { left: 14, right: 14 }
     });
 
-    finalY = (doc as any).lastAutoTable.finalY + 3;
+    finalY = (doc as any).lastAutoTable.finalY ;
 
     setTimeout(() => {
       const canvasElement = this.compactionChartCanvas.nativeElement;
       const chartImage = canvasElement.toDataURL('image/png');
-      doc.addImage(chartImage, 'PNG', 12, finalY + 5, 130, 55);
+      doc.addImage(chartImage, 'PNG', 12, finalY + 3, 130, 55);
 
       const startX = 145;
       let y = finalY + 20;
@@ -370,9 +370,9 @@ generatePDF() {
       finalY += 60;
 
       if (this.moistureDensityRelationship.notes) {
-        doc.line(10, finalY + 4, 200, finalY + 4);
+        doc.line(10, finalY , 200, finalY );
         const splitNotes = doc.splitTextToSize(`Remarks: ${this.moistureDensityRelationship.notes || ""}`, 180);
-        doc.text(splitNotes, 13, finalY + 7);
+        doc.text(splitNotes, 13, finalY + 4);
         finalY += (splitNotes.length * 7);
       }
 
