@@ -220,7 +220,7 @@ export class SandReportComponent implements AfterViewInit, OnInit {
           doc.setFontSize(10);
           doc.text(`Approved by: ${this.sieveAnalysis.adopter || 'N/A'}`, 13, 265);
           doc.text(`Test by: ${this.sieveAnalysis.testBy || 'N/A'}`, 80, 265);
-          doc.text(`Checked by: ${this.sieveAnalysis.approveBy || 'N/A'}`, 150, 265);
+          doc.text(`Checked by: ${this.sieveAnalysis.lastApproveBy || 'N/A'}`, 150, 265);
 
           doc.addImage(tail, 'PNG', 0, 265, 210, 33);
 

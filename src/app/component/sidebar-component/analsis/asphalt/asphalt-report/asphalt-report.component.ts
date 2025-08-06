@@ -380,7 +380,7 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
           doc.setFontSize(10);
           doc.text(`Approved by: ${this.asphalt.activist || 'N/A'}`, 13, finalY - 23);
           doc.text(`Test by: ${this.asphalt.testBy || 'N/A'}`, 80, finalY - 23 );
-          doc.text(`Checked by: ${this.asphalt.approveBy || 'N/A'}`, 150, finalY - 23);
+          doc.text(`Checked by: ${this.asphalt.lastApproveBy || 'N/A'}`, 150, finalY - 23);
           doc.addImage(tail, 'PNG', 0, finalY - 20, 210, 33);
 
           doc.setFontSize(5);

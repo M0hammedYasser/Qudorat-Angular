@@ -456,7 +456,7 @@ export class AtterbergReportComponent implements OnInit {
         doc.setFontSize(10);
         doc.text(`Approved by: ${this.atterbergLimits.adopter || 'N/A'}`, 13, 266);
         doc.text(`Test by: ${this.atterbergLimits.testBy || 'N/A'}`, 80, 266);
-        doc.text(`Checked by: ${this.atterbergLimits.approveBy || 'N/A'}`, 150, 266);
+        doc.text(`Checked by: ${this.atterbergLimits.lastApproveBy || 'N/A'}`, 150, 266);
         doc.addImage(tail, 'PNG', 0, 267, 210, 33);
 
         doc.setFontSize(5);
