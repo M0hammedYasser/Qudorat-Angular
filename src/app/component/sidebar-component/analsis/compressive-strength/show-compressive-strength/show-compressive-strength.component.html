@@ -13,6 +13,7 @@
       <div class="trial-content">
         <h3>Project ID: {{ test.project.id }}</h3>
         <p><strong>Test ID:</strong> {{ test.id }}</p>
+        <p><strong>Trial No:</strong> {{ i+ 1}}</p>
 
       </div>
       <button class="btn btn-primary" routerLink = "/compressive-strength/update/{{temp.id}}" *ngIf="role=='ROLE_ADMIN'">Edit</button>
