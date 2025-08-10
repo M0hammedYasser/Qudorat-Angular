@@ -377,12 +377,12 @@ generatePDF() {
       }
 
 
-      
+
       doc.line(10, 258, 200, 258);
       doc.setFontSize(7);
-      doc.text(`Approved by: ${this.moistureDensityRelationship.adopter || 'N/A'}`, 12, 261);
+      doc.text(`Approved by: ${this.moistureDensityRelationship.lastApproveBy || 'N/A'}`, 12, 261);
       doc.text(`Test by: ${this.moistureDensityRelationship.testBy || 'N/A'}`, 85, 261);
-      doc.text(`Checked by: ${this.moistureDensityRelationship.lastApproveBy || 'N/A'}`, 150, 261);
+      doc.text(`Checked by: ${this.moistureDensityRelationship.adopter || 'N/A'}`, 150, 261);
 
       doc.addImage(tail, 'PNG', 0, 265, 210, 33);
 

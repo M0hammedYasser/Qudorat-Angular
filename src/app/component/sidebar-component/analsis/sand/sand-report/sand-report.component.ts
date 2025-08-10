@@ -39,7 +39,7 @@ export class SandReportComponent implements AfterViewInit, OnInit {
       this.sieveAnalysis = res;
 
       for (let i = 0; i < 13; i++) {
-        const char = String.fromCharCode(65 + i); 
+        const char = String.fromCharCode(65 + i);
         const key = `expand${char}`;
         if (!this.sieveAnalysis[key] || this.sieveAnalysis[key] === '\u0000') {
           this.sieveAnalysis[key] = '';
@@ -218,9 +218,9 @@ export class SandReportComponent implements AfterViewInit, OnInit {
 
           doc.line(10, 261, 200, 261);
           doc.setFontSize(10);
-          doc.text(`Approved by: ${this.sieveAnalysis.adopter || 'N/A'}`, 13, 265);
+          doc.text(`Approved by: ${this.sieveAnalysis.lastApproveBy || 'N/A'}`, 13, 265);
           doc.text(`Test by: ${this.sieveAnalysis.testBy || 'N/A'}`, 80, 265);
-          doc.text(`Checked by: ${this.sieveAnalysis.lastApproveBy || 'N/A'}`, 150, 265);
+          doc.text(`Checked by: ${this.sieveAnalysis.adopter || 'N/A'}`, 150, 265);
 
           doc.addImage(tail, 'PNG', 0, 265, 210, 33);
 
