@@ -181,10 +181,10 @@ export class SandReportComponent implements AfterViewInit, OnInit {
       autoTable(doc, {
         startY: afterChartY,
         body: [
-          [{content: "%Gravel", styles: {halign: 'center' as const, valign: 'middle' as const, fontStyle: 'bold' as const}},
-            {content: "%Sand", styles: {halign: 'center' as const, valign: 'middle' as const, fontStyle: 'bold' as const}},
-            {content: "%Slit", styles: {halign: 'center' as const, valign: 'middle' as const, fontStyle: 'bold' as const}},
-            {content: "%Clay", styles: {halign: 'center' as const, valign: 'middle' as const, fontStyle: 'bold' as const}}],
+          [{content: "%Gravel", styles: {halign: 'center' as const, valign: 'middle' as const}},
+            {content: "%Sand", styles: {halign: 'center' as const, valign: 'middle' as const}},
+            {content: "%Slit", styles: {halign: 'center' as const, valign: 'middle' as const}},
+            {content: "%Clay", styles: {halign: 'center' as const, valign: 'middle' as const}}],
           [{content: this.sieveAnalysis.gravel || 'N/A' , styles: { halign: 'center' }}, {content: this.sieveAnalysis.sand || 'N/A', styles: { halign: 'center' }}, {content: this.sieveAnalysis.silt || 'N/A' , colSpan : 2 , styles: { halign: 'center' }}],
         ],
         theme: 'grid',
