@@ -184,9 +184,9 @@ export class CompressiveStrengthReportComponent implements OnInit {
 
       doc.line(10, finalY - 4 , 200, finalY - 4);
       doc.setFontSize(8);
-      doc.text(`Approved by: ${this.compressiveStrength.adopter || 'N/A'}`, 13, finalY);
+      doc.text(`Approved by: ${this.compressiveStrength.lastApproveBy || 'N/A'}`, 13, finalY);
       doc.text(`Test by: ${this.compressiveStrength.testBy || 'N/A'}`, 80, finalY);
-      doc.text(`Checked by: ${this.compressiveStrength.approveBy || 'N/A'}`, 150, finalY);
+      doc.text(`Checked by: ${this.compressiveStrength.adopter || 'N/A'}`, 150, finalY);
 
       doc.addImage(tail, 'PNG', 0, 265, 210, 33);
 
