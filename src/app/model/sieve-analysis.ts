@@ -126,7 +126,7 @@ export interface SieveAnalysis {
   projectCode: string;
   testCode: string;
   reportDate: string;
-  sourceOfSample  : string;
-  description  : string;
+  sourceOfSample  : string; // in Form required
+  description  : string;// in Form required
 
 }
