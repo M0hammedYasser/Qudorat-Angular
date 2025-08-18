@@ -257,7 +257,6 @@ export class SandReportComponent implements AfterViewInit, OnInit {
           halign: 'center',
           valign: 'middle',
           lineWidth: 0.1,    
-          // lineColor: [0, 0, 0]
         },
         // tableLineColor: [0, 0, 0], 
         // tableLineWidth: 0.1
