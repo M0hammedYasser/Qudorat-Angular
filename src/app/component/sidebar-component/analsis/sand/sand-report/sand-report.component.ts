@@ -195,7 +195,6 @@ export class SandReportComponent implements AfterViewInit, OnInit {
           2: { cellWidth: 45 },
           3: { cellWidth: 45 },
         },
-        // tableLineColor: [0, 0, 0], 
       });
 
       const afterMiniTableY = (doc as any).lastAutoTable.finalY + 1;
