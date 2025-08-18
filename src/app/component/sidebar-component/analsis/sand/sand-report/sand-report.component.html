@@ -194,10 +194,6 @@
     </tr>
   </table>
 
-  <div class="text-center" style="width: 70vw;">
-    <canvas #chartCanvas></canvas>
-  </div>
-
   <div class="text-center" style="width: 70vw;" *ngIf="sieveAnalysis.lastApproveBy && (role == 'ROLE_MANAGER' || role == 'ROLE_ADMIN')">
     <button (click)="generatePDF()">Download PDF</button>
   </div>
