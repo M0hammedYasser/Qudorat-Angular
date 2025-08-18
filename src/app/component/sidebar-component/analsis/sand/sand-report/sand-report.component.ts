@@ -267,7 +267,6 @@ export class SandReportComponent implements AfterViewInit, OnInit {
         let footerY = finalY + 5;
         doc.setFontSize(8);
 
-<<<<<<< HEAD
         if (this.sieveAnalysis.notes) {
           doc.line(10, footerY - 4, 200, footerY - 4);
           const splitNotes = doc.splitTextToSize(
@@ -276,7 +275,6 @@ export class SandReportComponent implements AfterViewInit, OnInit {
           );
           doc.text(splitNotes, 13, footerY -1);
           footerY += (splitNotes.length * 7);
-=======
           if (this.sieveAnalysis.notes) {
             doc.line(10, footerY - 1, 200, footerY - 1);
             const splitNotes = doc.splitTextToSize(
@@ -310,7 +308,6 @@ export class SandReportComponent implements AfterViewInit, OnInit {
           doc.save('Sieve_Analysis_Report.pdf');
         } else {
           console.error("Chart canvas not found! Ensure it is fully loaded before generating the PDF.");
->>>>>>> 4aba0b91896638bcdef8675a6e874cdc834a5e1f
         }
 
         doc.line(10, 261, 200, 261);
