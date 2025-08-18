@@ -13,7 +13,6 @@ clientCode: any;
   description: string;
   reportno: string;
 
-
   id: number;
   totalWeigh: number;
   materialType: string;
@@ -35,21 +34,49 @@ clientCode: any;
   owner: string;
   location: string;
   sampleNo: string;
-  
 
-  massRetainedA: number;
-  massRetainedB: number;
-  massRetainedC: number;
-  massRetainedD: number;
-  massRetainedE: number;
-  massRetainedF: number;
-  massRetainedG: number;
-  massRetainedH: number;
-  massRetainedI: number;
-  massRetainedJ: number;
-  massRetainedK: number;
-  massRetainedL: number;
-  massRetainedM: number;
+  individualA: number;
+  individualB: number;
+  individualC: number;
+  individualD: number;
+  individualE: number;
+  individualF: number;
+  individualG: number;
+  individualH: number;
+  individualI: number;
+  individualJ: number;
+  individualK: number;
+  individualL: number;
+  individualM: number;
+
+
+  cumulativeA: number;
+  cumulativeB: number;
+  cumulativeC: number;
+  cumulativeD: number;
+  cumulativeE: number;
+  cumulativeF: number;
+  cumulativeG: number;
+  cumulativeH: number;
+  cumulativeI: number;
+  cumulativeJ: number;
+  cumulativeK: number;
+  cumulativeL: number;
+  cumulativeM: number;
+
+  specificationLimitsA : number;
+  specificationLimitsB : number;
+  specificationLimitsC : number;
+  specificationLimitsD : number;
+  specificationLimitsE : number;
+  specificationLimitsF : number;
+  specificationLimitsG : number;
+  specificationLimitsH : number;
+  specificationLimitsI : number;
+  specificationLimitsJ : number;
+  specificationLimitsK : number;
+  specificationLimitsL : number;
+  specificationLimitsM : number;
 
   passingA: number;
   passingB: number;
