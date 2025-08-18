@@ -1,17 +1,12 @@
 import {Test} from "./test";
 
 export interface SieveAnalysis {
-clientCode: any;
+
   clay: string;
   silt: string;
   sand: string;
   gravel: string;
-  descriptionNo: string;
-  sourceofSample: string;
-  testLocation: string;
-  reportDate: string;
-  description: string;
-  reportno: string;
+
 
   id: number;
   totalWeigh: number;
@@ -123,4 +118,15 @@ clientCode: any;
 
   test: Test;
   [key: string]: any;
+
+  /**
+   * @author mohamed yasser
+   */
+  clientCode: string;
+  projectCode: string;
+  testCode: string;
+  reportDate: string;
+  sourceOfSample  : string;
+  description  : string;
+
 }

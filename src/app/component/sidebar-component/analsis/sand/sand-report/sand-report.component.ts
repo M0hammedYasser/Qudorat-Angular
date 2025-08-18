@@ -6,7 +6,7 @@ import {SieveAnalysis} from "../../../../../model/sieve-analysis";
 import {SieveAnalysisService} from "../../../../../service/sieve-analysis/sieve-analysis.service";
 import {ActivatedRoute} from "@angular/router";
 import {NgIf} from "@angular/common";
-import {AuthenticationService} from "../../../../../service/authentication/authentication.service"; 
+import {AuthenticationService} from "../../../../../service/authentication/authentication.service";
 declare let AmiriFont: any;
 
 @Component({
@@ -39,7 +39,7 @@ export class SandReportComponent implements AfterViewInit, OnInit {
       this.sieveAnalysis = res;
 
       for (let i = 0; i < 13; i++) {
-        const char = String.fromCharCode(65 + i); 
+        const char = String.fromCharCode(65 + i);
         const key = `expand${char}`;
         if (!this.sieveAnalysis[key] || this.sieveAnalysis[key] === '\u0000') {
           this.sieveAnalysis[key] = '';
@@ -147,9 +147,9 @@ export class SandReportComponent implements AfterViewInit, OnInit {
         ['Project', {content: this.sieveAnalysis.projectName || 'N/A', colSpan: 4}, 'Sampling Date', this.sieveAnalysis.samplingDate || 'N/A'],
         ['Client', {content: this.sieveAnalysis.clientName || 'N/A', colSpan: 4}, 'Testing Date', this.sieveAnalysis.testingDate || 'N/A'],
         ['Location', {content: this.sieveAnalysis.location || 'N/A' , colSpan: 4}, 'Sample By', this.sieveAnalysis.sampleBy || 'N/A'],
-        ['Sample No', this.sieveAnalysis.sampleNo || 'N/A', 'Test Location', {content: this.sieveAnalysis.testLocation || 'N/A' , colSpan: 2}, 'Report Date', this.sieveAnalysis.reportDate || 'N/A' ],
-        ['Report No', this.sieveAnalysis.reportno || 'N/A', 'Source Of Sample', {content: this.sieveAnalysis.sourceofSample || 'N/A' , colSpan: 2}, 'Material Type', this.sieveAnalysis.materialType || 'N/A'],
-        ['Description',{content : 'Orginal WT From Source kg' , colSpan: 2} , {content: this.sieveAnalysis.description || 'N/A' , colSpan: 2} , '', '' , '' , ''],
+        ['Sample No', this.sieveAnalysis.sampleNo || 'N/A', 'Test Location', {content: this.sieveAnalysis.location || 'N/A' , colSpan: 2}, 'Report Date', this.sieveAnalysis.reportDate || 'N/A' ],
+        ['Report No', `${this.sieveAnalysis.clientCode}-${this.sieveAnalysis.projectCode}-${this.sieveAnalysis.testCode}` || 'N/A', 'Source Of Sample', {content: this.sieveAnalysis.sourceOfSample || 'N/A' , colSpan: 2}, 'Material Type', this.sieveAnalysis.materialType || 'N/A'],
+        ['Description',{content : 'Orginal WT From Source kg' , colSpan: 2} , {content: this.sieveAnalysis.totalWeigh || 'N/A' , colSpan: 2} , '', '' , '' , ''],
       ];
 
       autoTable(doc, {
@@ -195,26 +195,26 @@ export class SandReportComponent implements AfterViewInit, OnInit {
           2: { cellWidth: 45 },
           3: { cellWidth: 45 },
         },
-        // tableLineColor: [0, 0, 0], 
+        // tableLineColor: [0, 0, 0],
       });
 
       const afterMiniTableY = (doc as any).lastAutoTable.finalY + 1;
 
       const tableColumn = [
-        {content: "Sieve sizes" , colSpan : 2, styles: {halign: 'center' as const, valign: 'middle' as const}}, 
-        {content: "Retained Weight (gm)"  , colSpan : 2, styles: {halign: 'center' as const, valign: 'middle' as const}}, 
-        {content :"Percent" , colSpan : 2, styles: {halign: 'center' as const, valign: 'middle' as const}}, 
-        {content: "Expand", styles: {halign: 'center' as const, valign: 'middle' as const}}, 
+        {content: "Sieve sizes" , colSpan : 2, styles: {halign: 'center' as const, valign: 'middle' as const}},
+        {content: "Retained Weight (gm)"  , colSpan : 2, styles: {halign: 'center' as const, valign: 'middle' as const}},
+        {content :"Percent" , colSpan : 2, styles: {halign: 'center' as const, valign: 'middle' as const}},
+        {content: "Expand", styles: {halign: 'center' as const, valign: 'middle' as const}},
         {content: "Specification Limits" , rowSpan : 2, styles: {halign: 'center' as const, valign: 'middle' as const}}
       ];
 
       const tableColumn1 = [
-        {content: "Inch", styles: {halign: 'center' as const, valign: 'middle' as const}}, 
-        {content: "mm", styles: {halign: 'center' as const, valign: 'middle' as const}}, 
-        {content: "Individual", styles: {halign: 'center' as const, valign: 'middle' as const}}, 
-        {content: "Cumulative", styles: {halign: 'center' as const, valign: 'middle' as const}}, 
-        {content: "Retained%", styles: {halign: 'center' as const, valign: 'middle' as const}}, 
-        {content: "Passing%", styles: {halign: 'center' as const, valign: 'middle' as const}}, 
+        {content: "Inch", styles: {halign: 'center' as const, valign: 'middle' as const}},
+        {content: "mm", styles: {halign: 'center' as const, valign: 'middle' as const}},
+        {content: "Individual", styles: {halign: 'center' as const, valign: 'middle' as const}},
+        {content: "Cumulative", styles: {halign: 'center' as const, valign: 'middle' as const}},
+        {content: "Retained%", styles: {halign: 'center' as const, valign: 'middle' as const}},
+        {content: "Passing%", styles: {halign: 'center' as const, valign: 'middle' as const}},
         {content: "K.2", styles: {halign: 'center' as const, valign: 'middle' as const}}
       ];
       const tableRows: any[] = [];
@@ -243,23 +243,23 @@ export class SandReportComponent implements AfterViewInit, OnInit {
         head: [tableColumn, tableColumn1],
         body: tableRows,
         theme: 'grid',
-        styles: { 
-          fontSize: 7, 
+        styles: {
+          fontSize: 7,
           cellPadding: 1.7,
-          halign: 'center',   
+          halign: 'center',
           valign: 'middle',
-          // lineWidth: 0.1,    
+          // lineWidth: 0.1,
           // lineColor: [0, 0, 0]
         },
         headStyles: {
-          fillColor: [255, 255, 255], 
+          fillColor: [255, 255, 255],
           textColor: [0, 0, 0],
           halign: 'center',
           valign: 'middle',
-          lineWidth: 0.1,    
+          lineWidth: 0.1,
           // lineColor: [0, 0, 0]
         },
-        // tableLineColor: [0, 0, 0], 
+        // tableLineColor: [0, 0, 0],
         // tableLineWidth: 0.1
       });
 
