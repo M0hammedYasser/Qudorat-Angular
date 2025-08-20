@@ -93,14 +93,27 @@ export class SandReportComponent implements AfterViewInit, OnInit {
       options: {
         responsive: true,
         plugins: {
-          legend: {display: true}
+          legend: {
+            display: true,
+            labels: {
+              font: {
+                weight: 'bold',   
+                size: 16
+              }
+            }
+          }
         },
         scales: {
           x: {
             type: 'logarithmic',
-            reverse: true, // Reversed direction: 0.1 on the right, 1000 on the left
-            title: {display: true, text: 'Sieve Size (mm)'},
+            reverse: true,
+            title: {
+              display: true,
+              text: 'Sieve Size (mm)',
+              font: { weight: 'bold', size: 16 } 
+            },
             ticks: {
+              font: { weight: 'bold' },          
               callback: function (value) {
                 const staticLabels = [0.1, 1, 10, 100, 1000];
                 return staticLabels.includes(value as number) ? value.toString() : '';
@@ -108,13 +121,21 @@ export class SandReportComponent implements AfterViewInit, OnInit {
             }
           },
           y: {
-            title: {display: true, text: 'Cumulative Passing (%)'},
+            title: {
+              display: true,
+              text: 'Cumulative Passing (%)',
+              font: { weight: 'bold', size: 16 } 
+            },
+            ticks: {
+              font: { weight: 'bold' }           
+            },
             min: 0,
             max: 100
           }
         }
       }
     });
+
   }
 
 
@@ -156,7 +177,14 @@ export class SandReportComponent implements AfterViewInit, OnInit {
         startY: 35,
         body: infoRows,
         theme: 'grid',
-        styles: { fontSize: 7, cellPadding: 1, font: 'Amiri' },
+        styles: { 
+          fontSize: 7, 
+          cellPadding: 1, 
+          font: 'Amiri', 
+          textColor: [0, 0, 0],     
+          lineColor: [0, 0, 0],     
+          lineWidth: 0.4            
+        },
         columnStyles: {
           0: { cellWidth: 25 },
           1: { cellWidth: 25 },
@@ -166,37 +194,71 @@ export class SandReportComponent implements AfterViewInit, OnInit {
           5: { cellWidth: 25 },
           6: { cellWidth: 35 },
         },
+        tableLineColor: [0, 0, 0],  
+        tableLineWidth: 0.5         
       });
 
-      const tableStartY = (doc as any).lastAutoTable.finalY + 2;
+
+      const tableStartY = (doc as any).lastAutoTable.finalY -1;
 
       const chartCanvas = document.querySelector('canvas') as HTMLCanvasElement;
       if (chartCanvas) {
         const chartImage = chartCanvas.toDataURL('image/png');
-        doc.addImage(chartImage, 'PNG', 10, tableStartY + 1, 180, 70);
+
+        const borderX = 14;
+        const borderY = tableStartY + 1;
+        const borderW = 182;
+        const borderH = 70;
+
+        const chartW = 170; 
+        const chartH = 60;  
+
+        const chartX = borderX + (borderW - chartW) / 2;
+        const chartY = borderY + (borderH - chartH) / 2;
+
+        doc.addImage(chartImage, 'PNG', chartX, chartY, chartW, chartH);
+
+        doc.setDrawColor(0, 0, 0);
+        doc.setLineWidth(0.6);
+        doc.rect(borderX, borderY, borderW, borderH);
       }
 
-      const afterChartY = tableStartY + 75;
+      const afterChartY = tableStartY + 71;
 
       autoTable(doc, {
         startY: afterChartY,
         body: [
-          [{content: "%Gravel", styles: {halign: 'center' as const, valign: 'middle' as const}},
-            {content: "%Sand", styles: {halign: 'center' as const, valign: 'middle' as const}},
-            {content: "%Slit", styles: {halign: 'center' as const, valign: 'middle' as const}},
-            {content: "%Clay", styles: {halign: 'center' as const, valign: 'middle' as const}}],
-          [{content: this.sieveAnalysis.gravel || 'N/A' , styles: { halign: 'center' }}, {content: this.sieveAnalysis.sand || 'N/A', styles: { halign: 'center' }}, {content: this.sieveAnalysis.silt || 'N/A' , colSpan : 2 , styles: { halign: 'center' }}],
+          [
+            { content: "%Gravel", styles: { halign: 'center' as const, valign: 'middle' as const } },
+            { content: "%Sand", styles: { halign: 'center' as const, valign: 'middle' as const } },
+            { content: "%Silt", styles: { halign: 'center' as const, valign: 'middle' as const } },
+            { content: "%Clay", styles: { halign: 'center' as const, valign: 'middle' as const } }
+          ],
+          [
+            { content: this.sieveAnalysis.gravel || 'N/A', styles: { halign: 'center' } },
+            { content: this.sieveAnalysis.sand || 'N/A', styles: { halign: 'center' } },
+            { content: this.sieveAnalysis.silt || 'N/A', colSpan: 2, styles: { halign: 'center' } }
+          ],
         ],
         theme: 'grid',
-        styles: { fontSize: 7, cellPadding: 1, font: 'Amiri' },
+        styles: { 
+          fontSize: 7, 
+          cellPadding: 1, 
+          font: 'Amiri',
+          textColor: [0, 0, 0],   
+          lineColor: [0, 0, 0],   
+          lineWidth: 0.5          
+        },
         columnStyles: {
           0: { cellWidth: 45 },
           1: { cellWidth: 45 },
           2: { cellWidth: 45 },
-          3: { cellWidth: 45 },
+          3: { cellWidth: 47 },
         },
-        // tableLineColor: [0, 0, 0],
+        tableLineColor: [0, 0, 0], 
+        // tableLineWidth: 0.5
       });
+
 
       const afterMiniTableY = (doc as any).lastAutoTable.finalY + 1;
 
@@ -248,19 +310,20 @@ export class SandReportComponent implements AfterViewInit, OnInit {
           cellPadding: 1.7,
           halign: 'center',
           valign: 'middle',
-          // lineWidth: 0.1,
-          // lineColor: [0, 0, 0]
+          lineWidth: 0.5,
+          textColor: [0, 0, 0],
+          lineColor: [0, 0, 0]
         },
         headStyles: {
           fillColor: [255, 255, 255],
           textColor: [0, 0, 0],
           halign: 'center',
           valign: 'middle',
-          lineWidth: 0.1,
-          // lineColor: [0, 0, 0]
+          lineWidth: 0.5,
+          lineColor: [0, 0, 0]
         },
-        // tableLineColor: [0, 0, 0],
-        // tableLineWidth: 0.1
+        tableLineColor: [0, 0, 0],
+        tableLineWidth: 0.5
       });
 
       const finalY = (doc as any).lastAutoTable.finalY ?? 100;
@@ -275,6 +338,7 @@ export class SandReportComponent implements AfterViewInit, OnInit {
             `Remarks: ${this.sieveAnalysis.notes || ""}`,
             180
           );
+          doc.setFont("Amiri", "bold"); 
           doc.text(splitNotes, 13, footerY -1);
           footerY += (splitNotes.length * 7);
         }
@@ -308,4 +372,4 @@ export class SandReportComponent implements AfterViewInit, OnInit {
     };
   }
 
-}
+} 
