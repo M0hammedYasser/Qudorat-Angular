@@ -160,8 +160,8 @@ export class SandReportComponent implements AfterViewInit, OnInit {
 
     head.onload = () => {
       doc.addImage(head, 'PNG', 0, 0, 210, 33);
-      doc.setFontSize(14);
-      doc.text('Sieve Analysis Test', 80, 34);
+      doc.setFontSize(8);
+      doc.text('Standarded Test Method For Sieve Analysis Of Fine And Coarse Aggregates  AsTM C-136/ SAMPLING ASTM D75, ASTM D75M', 30, 34);
       doc.setFontSize(9);
 
       const infoRows = [
@@ -173,29 +173,36 @@ export class SandReportComponent implements AfterViewInit, OnInit {
         ['Description',{content : 'Orginal WT From Source kg' , colSpan: 2} , {content: this.sieveAnalysis.totalWeigh || 'N/A' , colSpan: 2} , '', '' , '' , ''],
       ];
 
+      const pageWidth = doc.internal.pageSize.getWidth();
+      const tableWidth = 160; 
+      const marginLeft = (pageWidth - tableWidth) / 2;
+
       autoTable(doc, {
         startY: 35,
         body: infoRows,
         theme: 'grid',
         styles: { 
           fontSize: 7, 
-          cellPadding: 1, 
+          cellPadding: 0.5, 
           font: 'Amiri', 
           textColor: [0, 0, 0],     
           lineColor: [0, 0, 0],     
           lineWidth: 0.4            
         },
         columnStyles: {
-          0: { cellWidth: 25 },
+          0: { cellWidth: 20 },
           1: { cellWidth: 25 },
-          2: { cellWidth: 25 },
-          3: { cellWidth: 25 },
-          4: { cellWidth: 15 },
-          5: { cellWidth: 25 },
-          6: { cellWidth: 35 },
+          2: { cellWidth: 20 },
+          3: { cellWidth: 20 },
+          4: { cellWidth: 10 },
+          5: { cellWidth: 20 },
+          6: { cellWidth: 28 },
         },
         tableLineColor: [0, 0, 0],  
-        tableLineWidth: 0.5         
+        tableLineWidth: 0.5,         
+
+        tableWidth: tableWidth,
+        margin: { left: marginLeft } 
       });
 
 
@@ -204,24 +211,27 @@ export class SandReportComponent implements AfterViewInit, OnInit {
       const chartCanvas = document.querySelector('canvas') as HTMLCanvasElement;
       if (chartCanvas) {
         const chartImage = chartCanvas.toDataURL('image/png');
-
-        const borderX = 14;
-        const borderY = tableStartY + 1;
-        const borderW = 182;
+        const pageWidth = doc.internal.pageSize.getWidth();
+        const borderW = 160;
         const borderH = 70;
-
-        const chartW = 170; 
-        const chartH = 60;  
-
-        const chartX = borderX + (borderW - chartW) / 2;
-        const chartY = borderY + (borderH - chartH) / 2;
+        const scale = 1; 
+        const scaledBorderW = borderW * scale;
+        const scaledBorderH = borderH * scale;
+        const borderX = (pageWidth - scaledBorderW) / 2;
+        const borderY = tableStartY + 1;
+        const chartW = scaledBorderW - 2; 
+        const chartH = scaledBorderH - 10;
+        const chartX = borderX + (scaledBorderW - chartW) / 2;
+        const chartY = borderY + (scaledBorderH - chartH) / 2;
 
         doc.addImage(chartImage, 'PNG', chartX, chartY, chartW, chartH);
 
         doc.setDrawColor(0, 0, 0);
         doc.setLineWidth(0.6);
-        doc.rect(borderX, borderY, borderW, borderH);
+        doc.rect(borderX, borderY, scaledBorderW, scaledBorderH);
       }
+
+
 
       const afterChartY = tableStartY + 71;
 
@@ -250,13 +260,14 @@ export class SandReportComponent implements AfterViewInit, OnInit {
           lineWidth: 0.5          
         },
         columnStyles: {
-          0: { cellWidth: 45 },
-          1: { cellWidth: 45 },
-          2: { cellWidth: 45 },
-          3: { cellWidth: 47 },
+          0: { cellWidth: 40 },
+          1: { cellWidth: 40 },
+          2: { cellWidth: 40 },
+          3: { cellWidth: 40 },
         },
         tableLineColor: [0, 0, 0], 
-        // tableLineWidth: 0.5
+        tableWidth: tableWidth,      
+        margin: { left: marginLeft } 
       });
 
 
@@ -323,7 +334,9 @@ export class SandReportComponent implements AfterViewInit, OnInit {
           lineColor: [0, 0, 0]
         },
         tableLineColor: [0, 0, 0],
-        tableLineWidth: 0.5
+        tableLineWidth: 0.5,
+        tableWidth: tableWidth,      
+        margin: { left: marginLeft } 
       });
 
       const finalY = (doc as any).lastAutoTable.finalY ?? 100;
@@ -333,21 +346,34 @@ export class SandReportComponent implements AfterViewInit, OnInit {
         doc.setFontSize(8);
 
         if (this.sieveAnalysis.notes) {
-          doc.line(10, footerY - 4, 200, footerY - 4);
+          doc.line(25, footerY - 4, 185, footerY - 4);
+
           const splitNotes = doc.splitTextToSize(
             `Remarks: ${this.sieveAnalysis.notes || ""}`,
-            180
+            160 
           );
+
           doc.setFont("Amiri", "bold"); 
-          doc.text(splitNotes, 13, footerY -1);
+          doc.text(
+            splitNotes,
+            25,            
+            footerY - 1     
+          );
+
           footerY += (splitNotes.length * 7);
         }
 
-        doc.line(10, 261, 200, 261);
+
+        const startX = 25;
+        const endX = 185;
+
+        doc.line(startX, 260, endX, 260);
+
         doc.setFontSize(10);
-        doc.text(`Approved by: ${this.sieveAnalysis.adopter || 'N/A'}`, 13, 265);
-        doc.text(`Test by: ${this.sieveAnalysis.testBy || 'N/A'}`, 80, 265);
-        doc.text(`Checked by: ${this.sieveAnalysis.approveBy || 'N/A'}`, 150, 265);
+        doc.text(`Approved by: ${this.sieveAnalysis.adopter || 'N/A'}`, startX, 264);
+        doc.text(`Test by: ${this.sieveAnalysis.testBy || 'N/A'}`, (startX + endX) / 2 - 25, 264);
+        doc.text(`Checked by: ${this.sieveAnalysis.approveBy || 'N/A'}`, endX - 45, 264);
+
 
         doc.addImage(tail, 'PNG', 0, 265, 210, 33);
 
