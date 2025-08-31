@@ -165,12 +165,12 @@ export class SandReportComponent implements AfterViewInit, OnInit {
       doc.setFontSize(9);
 
       const infoRows = [
-        ['Project', {content: this.sieveAnalysis.projectName || 'N/A', colSpan: 4}, 'Sampling Date', this.sieveAnalysis.samplingDate || 'N/A'],
-        ['Client', {content: this.sieveAnalysis.clientName || 'N/A', colSpan: 4}, 'Testing Date', this.sieveAnalysis.testingDate || 'N/A'],
-        ['Location', {content: this.sieveAnalysis.location || 'N/A' , colSpan: 4}, 'Sample By', this.sieveAnalysis.sampleBy || 'N/A'],
-        ['Sample No', this.sieveAnalysis.sampleNo || 'N/A', 'Test Location', {content: this.sieveAnalysis.location || 'N/A' , colSpan: 2}, 'Report Date', this.sieveAnalysis.reportDate || 'N/A' ],
-        ['Report No', `${this.sieveAnalysis.clientCode}-${this.sieveAnalysis.projectCode}-${this.sieveAnalysis.testCode}` || 'N/A', 'Source Of Sample', {content: this.sieveAnalysis.sourceOfSample || 'N/A' , colSpan: 2}, 'Material Type', this.sieveAnalysis.materialType || 'N/A'],
-        ['Description',{content : 'Orginal WT From Source kg' , colSpan: 2} , {content: this.sieveAnalysis.totalWeigh || 'N/A' , colSpan: 2} , '', '' , '' , ''],
+        ['Project', {content: this.sieveAnalysis.projectName , colSpan: 4}, 'Sampling Date', this.sieveAnalysis.samplingDate],
+        ['Client', {content: this.sieveAnalysis.clientName, colSpan: 4}, 'Testing Date', this.sieveAnalysis.testingDate],
+        ['Location', {content: this.sieveAnalysis.location, colSpan: 4}, 'Sample By', this.sieveAnalysis.sampleBy],
+        ['Sample No', this.sieveAnalysis.sampleNo, 'Test Location', {content: this.sieveAnalysis.location, colSpan: 2}, 'Report Date', this.sieveAnalysis.reportDate],
+        ['Report No', `${this.sieveAnalysis.clientCode}-${this.sieveAnalysis.projectCode}-${this.sieveAnalysis.testCode}`, 'Source Of Sample', {content: this.sieveAnalysis.sourceOfSample, colSpan: 2}, 'Material Type', this.sieveAnalysis.materialType],
+        ['Description',{content : 'Orginal WT From Source kg' , colSpan: 2} , {content: this.sieveAnalysis.totalWeigh, colSpan: 2} , '', '' , '' , ''],
       ];
 
       const pageWidth = doc.internal.pageSize.getWidth();
@@ -245,9 +245,9 @@ export class SandReportComponent implements AfterViewInit, OnInit {
             { content: "%Clay", styles: { halign: 'center' as const, valign: 'middle' as const } }
           ],
           [
-            { content: this.sieveAnalysis.gravel || 'N/A', styles: { halign: 'center' } },
-            { content: this.sieveAnalysis.sand || 'N/A', styles: { halign: 'center' } },
-            { content: this.sieveAnalysis.silt || 'N/A', colSpan: 2, styles: { halign: 'center' } }
+            { content: this.sieveAnalysis.gravel || " ", styles: { halign: 'center' } },
+            { content: this.sieveAnalysis.sand || " ", styles: { halign: 'center' } },
+            { content: this.sieveAnalysis.silt || " ", colSpan: 2, styles: { halign: 'center' } }
           ],
         ],
         theme: 'grid',
@@ -271,7 +271,7 @@ export class SandReportComponent implements AfterViewInit, OnInit {
       });
 
 
-      const afterMiniTableY = (doc as any).lastAutoTable.finalY + 1;
+      const afterMiniTableY = (doc as any).lastAutoTable.finalY;
 
       const tableColumn = [
         {content: "Sieve sizes" , colSpan : 2, styles: {halign: 'center' as const, valign: 'middle' as const}},
@@ -345,37 +345,42 @@ export class SandReportComponent implements AfterViewInit, OnInit {
         let footerY = finalY + 5;
         doc.setFontSize(8);
 
-        if (this.sieveAnalysis.notes) {
-          doc.line(25, footerY - 4, 185, footerY - 4);
+        const startX = 25;
+        const endX = 185;
+        const boxWidth = endX - startX;
 
+        // Remarks
+        let remarksHeight = 0;
+        if (this.sieveAnalysis.notes) {
           const splitNotes = doc.splitTextToSize(
             `Remarks: ${this.sieveAnalysis.notes || ""}`,
-            160 
+            boxWidth - 8
           );
 
           doc.setFont("Amiri", "bold"); 
-          doc.text(
-            splitNotes,
-            25,            
-            footerY - 1     
-          );
+          doc.text(splitNotes, startX + 1, footerY - 1);
 
-          footerY += (splitNotes.length * 7);
+          remarksHeight = splitNotes.length * 5;
+          footerY += remarksHeight + 5;
         }
 
-
-        const startX = 25;
-        const endX = 185;
 
         doc.line(startX, 260, endX, 260);
 
         doc.setFontSize(10);
-        doc.text(`Approved by: ${this.sieveAnalysis.adopter || 'N/A'}`, startX, 264);
-        doc.text(`Test by: ${this.sieveAnalysis.testBy || 'N/A'}`, (startX + endX) / 2 - 25, 264);
-        doc.text(`Checked by: ${this.sieveAnalysis.approveBy || 'N/A'}`, endX - 45, 264);
+        doc.text(`Approved by: ${this.sieveAnalysis.adopter || " "}`, startX + 1, 264);
+        doc.text(`Test by: ${this.sieveAnalysis.testBy || " "}`, (startX + endX) / 2 - 25, 264);
+        doc.text(`Checked by: ${this.sieveAnalysis.approveBy || " "}`, endX - 45, 264);
 
+        const blockTop = finalY;
+        const blockBottom = 266;            
+        const blockHeight = blockBottom - blockTop;
 
-        doc.addImage(tail, 'PNG', 0, 265, 210, 33);
+        doc.setDrawColor(0, 0, 0);
+        doc.setLineWidth(0.6);
+        doc.rect(startX, blockTop, endX - startX, blockHeight);
+
+        doc.addImage(tail, 'PNG', 0, 267, 210, 33);
 
         doc.setFontSize(5);
         const formatDateTime = (date: Date) => {
@@ -391,6 +396,9 @@ export class SandReportComponent implements AfterViewInit, OnInit {
 
         doc.save('Sieve_Analysis_Report.pdf');
       }, 1000);
+
+
+
     };
 
     head.onerror = () => {
