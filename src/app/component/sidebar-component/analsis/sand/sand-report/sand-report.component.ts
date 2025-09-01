@@ -7,6 +7,7 @@ import {SieveAnalysisService} from "../../../../../service/sieve-analysis/sieve-
 import {ActivatedRoute} from "@angular/router";
 import {NgIf} from "@angular/common";
 import {AuthenticationService} from "../../../../../service/authentication/authentication.service";
+
 declare let AmiriFont: any;
 
 @Component({
@@ -28,7 +29,7 @@ export class SandReportComponent implements AfterViewInit, OnInit {
   role: string = '';
   id: number = 0;
 
-  constructor(private authenticationService: AuthenticationService,private sieveAnalysisService: SieveAnalysisService, private activatedRoute: ActivatedRoute) {
+  constructor(private authenticationService: AuthenticationService, private sieveAnalysisService: SieveAnalysisService, private activatedRoute: ActivatedRoute) {
   }
 
   ngOnInit() {
@@ -110,10 +111,10 @@ export class SandReportComponent implements AfterViewInit, OnInit {
             title: {
               display: true,
               text: 'Sieve Size (mm)',
-              font: { weight: 'bold', size: 16 }
+              font: {weight: 'bold', size: 16}
             },
             ticks: {
-              font: { weight: 'bold' },
+              font: {weight: 'bold'},
               callback: function (value) {
                 const staticLabels = [0.1, 1, 10, 100, 1000];
                 return staticLabels.includes(value as number) ? value.toString() : '';
@@ -124,10 +125,10 @@ export class SandReportComponent implements AfterViewInit, OnInit {
             title: {
               display: true,
               text: 'Cumulative Passing (%)',
-              font: { weight: 'bold', size: 16 }
+              font: {weight: 'bold', size: 16}
             },
             ticks: {
-              font: { weight: 'bold' }
+              font: {weight: 'bold'}
             },
             min: 0,
             max: 100
@@ -160,17 +161,52 @@ export class SandReportComponent implements AfterViewInit, OnInit {
 
     head.onload = () => {
       doc.addImage(head, 'PNG', 0, 0, 210, 33);
-      doc.setFontSize(8);
-      doc.text('Standarded Test Method For Sieve Analysis Of Fine And Coarse Aggregates  AsTM C-136/ SAMPLING ASTM D75, ASTM D75M', 30, 34);
+
+// Make the text bigger and add underline
+      doc.setFontSize(9); // Increased from 8 to 12
+      doc.setFont('Amiri', 'bold'); // Make it bold for better visibility
+
+      const headerText = 'Standarded Test Method For Sieve Analysis Of Fine And Coarse Aggregates  AsTM C-136/ SAMPLING ASTM D75, ASTM D75M';
+      const textX = 12;
+      const textY = 34;
+
+// Add the text
+      doc.text(headerText, textX, textY);
+
+// Get text width to draw underline correctly
+      const textWidth = doc.getTextWidth(headerText);
+
+// Draw underline
+      doc.setDrawColor(0, 0, 0); // Black color
+      doc.setLineWidth(0.5);
+      doc.line(textX - 1, textY + .5 , textX + textWidth + 2, textY + .5 ); // Line 1 unit below text
+
+// Reset font for the rest of the document
+      doc.setFont('Amiri', 'normal');
       doc.setFontSize(9);
 
       const infoRows = [
-        ['Project', {content: this.sieveAnalysis.projectName , colSpan: 4}, 'Sampling Date', this.sieveAnalysis.samplingDate],
-        ['Client', {content: this.sieveAnalysis.clientName, colSpan: 4}, 'Testing Date', this.sieveAnalysis.testingDate],
+        ['Project', {
+          content: this.sieveAnalysis.projectName,
+          colSpan: 4
+        }, 'Sampling Date', this.sieveAnalysis.samplingDate],
+        ['Client', {
+          content: this.sieveAnalysis.clientName,
+          colSpan: 4
+        }, 'Testing Date', this.sieveAnalysis.testingDate],
         ['Location', {content: this.sieveAnalysis.location, colSpan: 4}, 'Sample By', this.sieveAnalysis.sampleBy],
-        ['Sample No', this.sieveAnalysis.sampleNo, 'Test Location', {content: this.sieveAnalysis.location, colSpan: 2}, 'Report Date', this.sieveAnalysis.reportDate],
-        ['Report No', `${this.sieveAnalysis.clientCode}-${this.sieveAnalysis.projectCode}-${this.sieveAnalysis.testCode}`, 'Source Of Sample', {content: this.sieveAnalysis.sourceOfSample, colSpan: 2}, 'Material Type', this.sieveAnalysis.materialType],
-        ['Description',{content : 'Orginal WT From Source kg' , colSpan: 2} , {content: this.sieveAnalysis.totalWeigh, colSpan: 2} , '', '' , '' , ''],
+        ['Sample No', this.sieveAnalysis.sampleNo, 'Test Location', {
+          content: this.sieveAnalysis.location,
+          colSpan: 2
+        }, 'Report Date', this.sieveAnalysis.reportDate],
+        ['Report No', `${this.sieveAnalysis.clientCode}-${this.sieveAnalysis.projectCode}-${this.sieveAnalysis.testCode}`, 'Source Of Sample', {
+          content: this.sieveAnalysis.sourceOfSample,
+          colSpan: 2
+        }, 'Material Type', this.sieveAnalysis.materialType],
+        ['Description', {content: 'Orginal WT From Source kg', colSpan: 2}, {
+          content: this.sieveAnalysis.totalWeigh,
+          colSpan: 2
+        }, '', '', '', ''],
       ];
 
       const pageWidth = doc.internal.pageSize.getWidth();
@@ -178,7 +214,7 @@ export class SandReportComponent implements AfterViewInit, OnInit {
       const marginLeft = (pageWidth - tableWidth) / 2;
 
       autoTable(doc, {
-        startY: 35,
+        startY: 37,
         body: infoRows,
         theme: 'grid',
         styles: {
@@ -191,22 +227,22 @@ export class SandReportComponent implements AfterViewInit, OnInit {
         },
         columnStyles: {
           // Increase these widths proportionally
-          0: { cellWidth: 25 },  // was 20
-          1: { cellWidth: 43 },  // was 25
-          2: { cellWidth: 25 },  // was 20
-          3: { cellWidth: 25 },  // was 20
-          4: { cellWidth: 12 },  // was 10
-          5: { cellWidth: 25 },  // was 20
-          6: { cellWidth: 35 },  // was 28
+          0: {cellWidth: 25},  // was 20
+          1: {cellWidth: 43},  // was 25
+          2: {cellWidth: 25},  // was 20
+          3: {cellWidth: 25},  // was 20
+          4: {cellWidth: 12},  // was 10
+          5: {cellWidth: 25},  // was 20
+          6: {cellWidth: 35},  // was 28
         },
         tableLineColor: [0, 0, 0],
         tableLineWidth: 0.5,
         tableWidth: tableWidth,
-        margin: { left: marginLeft }
+        margin: {left: marginLeft}
       });
 
 
-      const tableStartY = (doc as any).lastAutoTable.finalY -1;
+      const tableStartY = (doc as any).lastAutoTable.finalY - 1;
 
       const chartCanvas = document.querySelector('canvas') as HTMLCanvasElement;
       if (chartCanvas) {
@@ -232,22 +268,21 @@ export class SandReportComponent implements AfterViewInit, OnInit {
       }
 
 
-
       const afterChartY = tableStartY + 71;
 
       autoTable(doc, {
         startY: afterChartY,
         body: [
           [
-            { content: "%Gravel", styles: { halign: 'center' as const, valign: 'middle' as const } },
-            { content: "%Sand", styles: { halign: 'center' as const, valign: 'middle' as const } },
-            { content: "%Silt", styles: { halign: 'center' as const, valign: 'middle' as const } },
-            { content: "%Clay", styles: { halign: 'center' as const, valign: 'middle' as const } }
+            {content: "%Gravel", styles: {halign: 'center' as const, valign: 'middle' as const}},
+            {content: "%Sand", styles: {halign: 'center' as const, valign: 'middle' as const}},
+            {content: "%Silt", styles: {halign: 'center' as const, valign: 'middle' as const}},
+            {content: "%Clay", styles: {halign: 'center' as const, valign: 'middle' as const}}
           ],
           [
-            { content: this.sieveAnalysis.gravel || " ", styles: { halign: 'center' } },
-            { content: this.sieveAnalysis.sand || " ", styles: { halign: 'center' } },
-            { content: this.sieveAnalysis.silt || " ", colSpan: 2, styles: { halign: 'center' } }
+            {content: this.sieveAnalysis.gravel || " ", styles: {halign: 'center'}},
+            {content: this.sieveAnalysis.sand || " ", styles: {halign: 'center'}},
+            {content: this.sieveAnalysis.silt || " ", colSpan: 2, styles: {halign: 'center'}}
           ],
         ],
         theme: 'grid',
@@ -260,25 +295,25 @@ export class SandReportComponent implements AfterViewInit, OnInit {
           lineWidth: 0.5
         },
         columnStyles: {
-          0: { cellWidth: 48 },  // was 40
-          1: { cellWidth: 47 },  // was 40
-          2: { cellWidth: 48 },  // was 40
-          3: { cellWidth: 47 },  // was 40
+          0: {cellWidth: 48},  // was 40
+          1: {cellWidth: 47},  // was 40
+          2: {cellWidth: 48},  // was 40
+          3: {cellWidth: 47},  // was 40
         },
         tableLineColor: [0, 0, 0],
         tableWidth: tableWidth,
-        margin: { left: marginLeft }
+        margin: {left: marginLeft}
       });
 
 
       const afterMiniTableY = (doc as any).lastAutoTable.finalY;
 
       const tableColumn = [
-        {content: "Sieve sizes" , colSpan : 2, styles: {halign: 'center' as const, valign: 'middle' as const}},
-        {content: "Retained Weight (gm)"  , colSpan : 2, styles: {halign: 'center' as const, valign: 'middle' as const}},
-        {content :"Percent" , colSpan : 2, styles: {halign: 'center' as const, valign: 'middle' as const}},
+        {content: "Sieve sizes", colSpan: 2, styles: {halign: 'center' as const, valign: 'middle' as const}},
+        {content: "Retained Weight (gm)", colSpan: 2, styles: {halign: 'center' as const, valign: 'middle' as const}},
+        {content: "Percent", colSpan: 2, styles: {halign: 'center' as const, valign: 'middle' as const}},
         {content: "Expand", styles: {halign: 'center' as const, valign: 'middle' as const}},
-        {content: "Specification Limits" , rowSpan : 2, styles: {halign: 'center' as const, valign: 'middle' as const}}
+        {content: "Specification Limits", rowSpan: 2, styles: {halign: 'center' as const, valign: 'middle' as const}}
       ];
 
       const tableColumn1 = [
@@ -293,19 +328,19 @@ export class SandReportComponent implements AfterViewInit, OnInit {
       const tableRows: any[] = [];
 
       const sieveData = [
-        ["3", 75.0 ,this.sieveAnalysis.individualA, this.sieveAnalysis.cumulativeA, this.sieveAnalysis.retainedA, Number(this.sieveAnalysis.passingA).toFixed(0), this.sieveAnalysis.expandA , this.sieveAnalysis.specificationLimitsA],
-        ["21/2", 62.5 ,this.sieveAnalysis.individualB, this.sieveAnalysis.cumulativeB, this.sieveAnalysis.retainedB, Number(this.sieveAnalysis.passingB).toFixed(0), this.sieveAnalysis.expandB , this.sieveAnalysis.specificationLimitsB],
-        ["2", 50.0, this.sieveAnalysis.individualC, this.sieveAnalysis.cumulativeC, this.sieveAnalysis.retainedC, Number(this.sieveAnalysis.passingC).toFixed(0), this.sieveAnalysis.expandC , this.sieveAnalysis.specificationLimitsC],
-        ["11/2", 37.5, this.sieveAnalysis.individualD, this.sieveAnalysis.cumulativeD, this.sieveAnalysis.retainedD, Number(this.sieveAnalysis.passingD).toFixed(0), this.sieveAnalysis.expandD , this.sieveAnalysis.specificationLimitsD],
-        ["1", 25.0, this.sieveAnalysis.individualE, this.sieveAnalysis.cumulativeE, this.sieveAnalysis.retainedE, Number(this.sieveAnalysis.passingE).toFixed(0), this.sieveAnalysis.expandE , this.sieveAnalysis.specificationLimitsE],
-        ["3/4", 19.0, this.sieveAnalysis.individualF, this.sieveAnalysis.cumulativeF, this.sieveAnalysis.retainedF, Number(this.sieveAnalysis.passingF).toFixed(0), this.sieveAnalysis.expandF , this.sieveAnalysis.specificationLimitsF],
-        ["1/2", 12.5, this.sieveAnalysis.individualG, this.sieveAnalysis.cumulativeG, this.sieveAnalysis.retainedG, Number(this.sieveAnalysis.passingG).toFixed(0), this.sieveAnalysis.expandG , this.sieveAnalysis.specificationLimitsG],
-        ["3/8", 9.5, this.sieveAnalysis.individualH, this.sieveAnalysis.cumulativeH, this.sieveAnalysis.retainedH, Number(this.sieveAnalysis.passingH).toFixed(0), this.sieveAnalysis.expandH , this.sieveAnalysis.specificationLimitsH],
-        ["#4", 4.75, this.sieveAnalysis.individualI, this.sieveAnalysis.cumulativeI, this.sieveAnalysis.retainedI, Number(this.sieveAnalysis.passingI).toFixed(0), this.sieveAnalysis.expandI , this.sieveAnalysis.specificationLimitsI],
-        ["#10", 2.00, this.sieveAnalysis.individualJ, this.sieveAnalysis.cumulativeJ, this.sieveAnalysis.retainedJ, Number(this.sieveAnalysis.passingJ).toFixed(0), this.sieveAnalysis.expandJ , this.sieveAnalysis.specificationLimitsJ],
-        ["#40", 0.425, this.sieveAnalysis.individualK, this.sieveAnalysis.cumulativeK, this.sieveAnalysis.retainedK, Number(this.sieveAnalysis.passingK).toFixed(0), this.sieveAnalysis.expandK , this.sieveAnalysis.specificationLimitsK],
-        ["#100", 0.150, this.sieveAnalysis.individualL, this.sieveAnalysis.cumulativeL, this.sieveAnalysis.retainedL, Number(this.sieveAnalysis.passingL).toFixed(2), this.sieveAnalysis.expandL , this.sieveAnalysis.specificationLimitsL],
-        ["#200", 0.075, this.sieveAnalysis.individualM, this.sieveAnalysis.cumulativeM, this.sieveAnalysis.retainedM, Number(this.sieveAnalysis.passingM).toFixed(2), this.sieveAnalysis.expandM , this.sieveAnalysis.specificationLimitsM],
+        ["3", 75.0, this.sieveAnalysis.individualA, this.sieveAnalysis.cumulativeA, this.sieveAnalysis.retainedA, Number(this.sieveAnalysis.passingA).toFixed(0), this.sieveAnalysis.expandA, this.sieveAnalysis.specificationLimitsA],
+        ["21/2", 62.5, this.sieveAnalysis.individualB, this.sieveAnalysis.cumulativeB, this.sieveAnalysis.retainedB, Number(this.sieveAnalysis.passingB).toFixed(0), this.sieveAnalysis.expandB, this.sieveAnalysis.specificationLimitsB],
+        ["2", 50.0, this.sieveAnalysis.individualC, this.sieveAnalysis.cumulativeC, this.sieveAnalysis.retainedC, Number(this.sieveAnalysis.passingC).toFixed(0), this.sieveAnalysis.expandC, this.sieveAnalysis.specificationLimitsC],
+        ["11/2", 37.5, this.sieveAnalysis.individualD, this.sieveAnalysis.cumulativeD, this.sieveAnalysis.retainedD, Number(this.sieveAnalysis.passingD).toFixed(0), this.sieveAnalysis.expandD, this.sieveAnalysis.specificationLimitsD],
+        ["1", 25.0, this.sieveAnalysis.individualE, this.sieveAnalysis.cumulativeE, this.sieveAnalysis.retainedE, Number(this.sieveAnalysis.passingE).toFixed(0), this.sieveAnalysis.expandE, this.sieveAnalysis.specificationLimitsE],
+        ["3/4", 19.0, this.sieveAnalysis.individualF, this.sieveAnalysis.cumulativeF, this.sieveAnalysis.retainedF, Number(this.sieveAnalysis.passingF).toFixed(0), this.sieveAnalysis.expandF, this.sieveAnalysis.specificationLimitsF],
+        ["1/2", 12.5, this.sieveAnalysis.individualG, this.sieveAnalysis.cumulativeG, this.sieveAnalysis.retainedG, Number(this.sieveAnalysis.passingG).toFixed(0), this.sieveAnalysis.expandG, this.sieveAnalysis.specificationLimitsG],
+        ["3/8", 9.5, this.sieveAnalysis.individualH, this.sieveAnalysis.cumulativeH, this.sieveAnalysis.retainedH, Number(this.sieveAnalysis.passingH).toFixed(0), this.sieveAnalysis.expandH, this.sieveAnalysis.specificationLimitsH],
+        ["#4", 4.75, this.sieveAnalysis.individualI, this.sieveAnalysis.cumulativeI, this.sieveAnalysis.retainedI, Number(this.sieveAnalysis.passingI).toFixed(0), this.sieveAnalysis.expandI, this.sieveAnalysis.specificationLimitsI],
+        ["#10", 2.00, this.sieveAnalysis.individualJ, this.sieveAnalysis.cumulativeJ, this.sieveAnalysis.retainedJ, Number(this.sieveAnalysis.passingJ).toFixed(0), this.sieveAnalysis.expandJ, this.sieveAnalysis.specificationLimitsJ],
+        ["#40", 0.425, this.sieveAnalysis.individualK, this.sieveAnalysis.cumulativeK, this.sieveAnalysis.retainedK, Number(this.sieveAnalysis.passingK).toFixed(0), this.sieveAnalysis.expandK, this.sieveAnalysis.specificationLimitsK],
+        ["#100", 0.150, this.sieveAnalysis.individualL, this.sieveAnalysis.cumulativeL, this.sieveAnalysis.retainedL, Number(this.sieveAnalysis.passingL).toFixed(2), this.sieveAnalysis.expandL, this.sieveAnalysis.specificationLimitsL],
+        ["#200", 0.075, this.sieveAnalysis.individualM, this.sieveAnalysis.cumulativeM, this.sieveAnalysis.retainedM, Number(this.sieveAnalysis.passingM).toFixed(2), this.sieveAnalysis.expandM, this.sieveAnalysis.specificationLimitsM],
         ["Total Wt.", this.sieveAnalysis.totalWeigh, "", "", ""]
       ];
 
@@ -336,7 +371,7 @@ export class SandReportComponent implements AfterViewInit, OnInit {
         tableLineColor: [0, 0, 0],
         tableLineWidth: 0.5,
         tableWidth: tableWidth,
-        margin: { left: marginLeft }
+        margin: {left: marginLeft}
       });
 
       const finalY = (doc as any).lastAutoTable.finalY ?? 100;
@@ -406,12 +441,10 @@ export class SandReportComponent implements AfterViewInit, OnInit {
           return `${year}-${month}-${day} ${hours}:${minutes}`;
         };
         const currentDateTime = formatDateTime(new Date());
-        doc.text(`Report Date: ${currentDateTime}`, 1, 290);
+        doc.text(`Report Date: ${currentDateTime}`, 1, 293);
 
         doc.save('Sieve_Analysis_Report.pdf');
       }, 1000);
-
-
 
 
     };
