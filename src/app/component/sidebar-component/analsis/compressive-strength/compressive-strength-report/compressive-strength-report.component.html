@@ -241,7 +241,7 @@
     <img src="assets/compressiveStrength.png" alt="">
   </div>
 
-  <div class="text-center" style="width: 70vw; margin: 20px;" *ngIf="compressiveStrength.lastApproveBy  && (role == 'ROLE_MANAGER' || role == 'ROLE_ADMIN')">
+  <div class="text-center" style="width: 70vw; margin: 20px;" *ngIf="compressiveStrength.lastApproveBy  && (role == 'ROLE_MANAGER' || role == 'ROLE_ADMIN' || role == 'ROLE_DATAENTRY')">
     <button class="btn btn-success" (click)="generatePDF()">Download Pdf</button>
   </div>
 
