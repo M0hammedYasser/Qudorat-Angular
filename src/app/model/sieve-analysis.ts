@@ -59,19 +59,23 @@ export interface SieveAnalysis {
   cumulativeL: number;
   cumulativeM: number;
 
-  specificationLimitsA : number;
-  specificationLimitsB : number;
-  specificationLimitsC : number;
-  specificationLimitsD : number;
-  specificationLimitsE : number;
-  specificationLimitsF : number;
-  specificationLimitsG : number;
-  specificationLimitsH : number;
-  specificationLimitsI : number;
-  specificationLimitsJ : number;
-  specificationLimitsK : number;
-  specificationLimitsL : number;
-  specificationLimitsM : number;
+  /**
+   * @author mohamed yasser
+   * @date 9/1/2025
+   */
+  specificationLimitsA:string;
+  specificationLimitsB:string;
+  specificationLimitsC:string;
+  specificationLimitsD:string;
+  specificationLimitsE:string;
+  specificationLimitsF:string;
+  specificationLimitsG:string;
+  specificationLimitsH:string;
+  specificationLimitsI:string;
+  specificationLimitsJ:string;
+  specificationLimitsK:string;
+  specificationLimitsL:string;
+  specificationLimitsM:string;
 
   passingA: number;
   passingB: number;
@@ -128,5 +132,7 @@ export interface SieveAnalysis {
   reportDate: string;
   sourceOfSample  : string; // in Form required
   description  : string;// in Form required
+
+
 
 }
