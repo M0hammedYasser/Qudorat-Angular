@@ -192,12 +192,12 @@ export class SandReportComponent implements AfterViewInit, OnInit {
         columnStyles: {
           // Increase these widths proportionally
           0: { cellWidth: 25 },  // was 20
-          1: { cellWidth: 30 },  // was 25
+          1: { cellWidth: 43 },  // was 25
           2: { cellWidth: 25 },  // was 20
           3: { cellWidth: 25 },  // was 20
           4: { cellWidth: 12 },  // was 10
           5: { cellWidth: 25 },  // was 20
-          6: { cellWidth: 38 },  // was 28
+          6: { cellWidth: 35 },  // was 28
         },
         tableLineColor: [0, 0, 0],
         tableLineWidth: 0.5,
@@ -342,12 +342,12 @@ export class SandReportComponent implements AfterViewInit, OnInit {
       const finalY = (doc as any).lastAutoTable.finalY ?? 100;
 
       setTimeout(() => {
-        let footerY = finalY + 5;
+        let footerY = finalY;
         doc.setFontSize(8);
 
         // Use the same centering logic as your tables
         const pageWidth = doc.internal.pageSize.getWidth();
-        const tableWidth = 180; // Use your table width here
+        const tableWidth = 190; // Use your table width here
         const startX = (pageWidth - tableWidth) / 2;
         const endX = startX + tableWidth;
         const boxWidth = tableWidth;
@@ -361,7 +361,7 @@ export class SandReportComponent implements AfterViewInit, OnInit {
           );
 
           doc.setFont("Amiri", "bold");
-          doc.text(splitNotes, startX + 4, footerY + 3); // Added padding from left edge
+          doc.text(splitNotes, startX + 1, footerY + 3); // Added padding from left edge
 
           remarksHeight = splitNotes.length * 5;
           footerY += remarksHeight + 5;
@@ -375,7 +375,7 @@ export class SandReportComponent implements AfterViewInit, OnInit {
         const sectionWidth = tableWidth / 3; // Divide into 3 equal sections
 
         // Left section: Approved by
-        doc.text(`Approved by: ${this.sieveAnalysis.adopter || " "}`, startX + 4, 264);
+        doc.text(`Approved by: ${this.sieveAnalysis.adopter || " "}`, startX + 1, 264);
 
         // Middle section: Test by
         doc.text(`Test by: ${this.sieveAnalysis.testBy || " "}`, startX + sectionWidth + 4, 264);
