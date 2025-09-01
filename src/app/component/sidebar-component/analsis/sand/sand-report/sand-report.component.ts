@@ -367,7 +367,7 @@ export class SandReportComponent implements AfterViewInit, OnInit {
 
         doc.line(startX, 260, endX, 260);
 
-        doc.setFontSize(10);
+        doc.setFontSize(8);
         doc.text(`Approved by: ${this.sieveAnalysis.adopter || " "}`, startX + 1, 264);
         doc.text(`Test by: ${this.sieveAnalysis.testBy || " "}`, (startX + endX) / 2 - 25, 264);
         doc.text(`Checked by: ${this.sieveAnalysis.approveBy || " "}`, endX - 45, 264);
