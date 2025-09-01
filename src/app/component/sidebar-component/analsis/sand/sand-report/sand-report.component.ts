@@ -406,7 +406,7 @@ export class SandReportComponent implements AfterViewInit, OnInit {
         doc.line(startX, 260, endX, 260);
 
         // Approved by section - properly distributed within the centered box
-        doc.setFontSize(8);
+        doc.setFontSize(7);
         const sectionWidth = tableWidth / 3; // Divide into 3 equal sections
 
         // Left section: Approved by
