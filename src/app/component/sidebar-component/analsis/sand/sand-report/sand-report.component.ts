@@ -97,7 +97,7 @@ export class SandReportComponent implements AfterViewInit, OnInit {
             display: true,
             labels: {
               font: {
-                weight: 'bold',   
+                weight: 'bold',
                 size: 16
               }
             }
@@ -110,10 +110,10 @@ export class SandReportComponent implements AfterViewInit, OnInit {
             title: {
               display: true,
               text: 'Sieve Size (mm)',
-              font: { weight: 'bold', size: 16 } 
+              font: { weight: 'bold', size: 16 }
             },
             ticks: {
-              font: { weight: 'bold' },          
+              font: { weight: 'bold' },
               callback: function (value) {
                 const staticLabels = [0.1, 1, 10, 100, 1000];
                 return staticLabels.includes(value as number) ? value.toString() : '';
@@ -124,10 +124,10 @@ export class SandReportComponent implements AfterViewInit, OnInit {
             title: {
               display: true,
               text: 'Cumulative Passing (%)',
-              font: { weight: 'bold', size: 16 } 
+              font: { weight: 'bold', size: 16 }
             },
             ticks: {
-              font: { weight: 'bold' }           
+              font: { weight: 'bold' }
             },
             min: 0,
             max: 100
@@ -174,35 +174,35 @@ export class SandReportComponent implements AfterViewInit, OnInit {
       ];
 
       const pageWidth = doc.internal.pageSize.getWidth();
-      const tableWidth = 160; 
+      const tableWidth = 190;
       const marginLeft = (pageWidth - tableWidth) / 2;
 
       autoTable(doc, {
         startY: 35,
         body: infoRows,
         theme: 'grid',
-        styles: { 
-          fontSize: 7, 
-          cellPadding: 0.5, 
-          font: 'Amiri', 
-          textColor: [0, 0, 0],     
-          lineColor: [0, 0, 0],     
-          lineWidth: 0.4            
+        styles: {
+          fontSize: 7,
+          cellPadding: 0.5,
+          font: 'Amiri',
+          textColor: [0, 0, 0],
+          lineColor: [0, 0, 0],
+          lineWidth: 0.4
         },
         columnStyles: {
-          0: { cellWidth: 20 },
-          1: { cellWidth: 25 },
-          2: { cellWidth: 20 },
-          3: { cellWidth: 20 },
-          4: { cellWidth: 10 },
-          5: { cellWidth: 20 },
-          6: { cellWidth: 28 },
+          // Increase these widths proportionally
+          0: { cellWidth: 25 },  // was 20
+          1: { cellWidth: 30 },  // was 25
+          2: { cellWidth: 25 },  // was 20
+          3: { cellWidth: 25 },  // was 20
+          4: { cellWidth: 12 },  // was 10
+          5: { cellWidth: 25 },  // was 20
+          6: { cellWidth: 38 },  // was 28
         },
-        tableLineColor: [0, 0, 0],  
-        tableLineWidth: 0.5,         
-
+        tableLineColor: [0, 0, 0],
+        tableLineWidth: 0.5,
         tableWidth: tableWidth,
-        margin: { left: marginLeft } 
+        margin: { left: marginLeft }
       });
 
 
@@ -212,14 +212,14 @@ export class SandReportComponent implements AfterViewInit, OnInit {
       if (chartCanvas) {
         const chartImage = chartCanvas.toDataURL('image/png');
         const pageWidth = doc.internal.pageSize.getWidth();
-        const borderW = 160;
+        const borderW = 190;
         const borderH = 70;
-        const scale = 1; 
+        const scale = 1;
         const scaledBorderW = borderW * scale;
         const scaledBorderH = borderH * scale;
         const borderX = (pageWidth - scaledBorderW) / 2;
         const borderY = tableStartY + 1;
-        const chartW = scaledBorderW - 2; 
+        const chartW = scaledBorderW - 2;
         const chartH = scaledBorderH - 10;
         const chartX = borderX + (scaledBorderW - chartW) / 2;
         const chartY = borderY + (scaledBorderH - chartH) / 2;
@@ -251,23 +251,23 @@ export class SandReportComponent implements AfterViewInit, OnInit {
           ],
         ],
         theme: 'grid',
-        styles: { 
-          fontSize: 7, 
-          cellPadding: 1, 
+        styles: {
+          fontSize: 7,
+          cellPadding: 1,
           font: 'Amiri',
-          textColor: [0, 0, 0],   
-          lineColor: [0, 0, 0],   
-          lineWidth: 0.5          
+          textColor: [0, 0, 0],
+          lineColor: [0, 0, 0],
+          lineWidth: 0.5
         },
         columnStyles: {
-          0: { cellWidth: 40 },
-          1: { cellWidth: 40 },
-          2: { cellWidth: 40 },
-          3: { cellWidth: 40 },
+          0: { cellWidth: 48 },  // was 40
+          1: { cellWidth: 47 },  // was 40
+          2: { cellWidth: 48 },  // was 40
+          3: { cellWidth: 47 },  // was 40
         },
-        tableLineColor: [0, 0, 0], 
-        tableWidth: tableWidth,      
-        margin: { left: marginLeft } 
+        tableLineColor: [0, 0, 0],
+        tableWidth: tableWidth,
+        margin: { left: marginLeft }
       });
 
 
@@ -335,8 +335,8 @@ export class SandReportComponent implements AfterViewInit, OnInit {
         },
         tableLineColor: [0, 0, 0],
         tableLineWidth: 0.5,
-        tableWidth: tableWidth,      
-        margin: { left: marginLeft } 
+        tableWidth: tableWidth,
+        margin: { left: marginLeft }
       });
 
       const finalY = (doc as any).lastAutoTable.finalY ?? 100;
@@ -345,11 +345,14 @@ export class SandReportComponent implements AfterViewInit, OnInit {
         let footerY = finalY + 5;
         doc.setFontSize(8);
 
-        const startX = 25;
-        const endX = 185;
-        const boxWidth = endX - startX;
+        // Use the same centering logic as your tables
+        const pageWidth = doc.internal.pageSize.getWidth();
+        const tableWidth = 180; // Use your table width here
+        const startX = (pageWidth - tableWidth) / 2;
+        const endX = startX + tableWidth;
+        const boxWidth = tableWidth;
 
-        // Remarks
+        // Remarks - centered
         let remarksHeight = 0;
         if (this.sieveAnalysis.notes) {
           const splitNotes = doc.splitTextToSize(
@@ -357,31 +360,42 @@ export class SandReportComponent implements AfterViewInit, OnInit {
             boxWidth - 8
           );
 
-          doc.setFont("Amiri", "bold"); 
-          doc.text(splitNotes, startX + 1, footerY - 1);
+          doc.setFont("Amiri", "bold");
+          doc.text(splitNotes, startX + 4, footerY + 3); // Added padding from left edge
 
           remarksHeight = splitNotes.length * 5;
           footerY += remarksHeight + 5;
         }
 
-
+        // Horizontal line - centered to match table width
         doc.line(startX, 260, endX, 260);
 
+        // Approved by section - properly distributed within the centered box
         doc.setFontSize(8);
-        doc.text(`Approved by: ${this.sieveAnalysis.adopter || " "}`, startX + 1, 264);
-        doc.text(`Test by: ${this.sieveAnalysis.testBy || " "}`, (startX + endX) / 2 - 25, 264);
-        doc.text(`Checked by: ${this.sieveAnalysis.approveBy || " "}`, endX - 45, 264);
+        const sectionWidth = tableWidth / 3; // Divide into 3 equal sections
 
+        // Left section: Approved by
+        doc.text(`Approved by: ${this.sieveAnalysis.adopter || " "}`, startX + 4, 264);
+
+        // Middle section: Test by
+        doc.text(`Test by: ${this.sieveAnalysis.testBy || " "}`, startX + sectionWidth + 4, 264);
+
+        // Right section: Checked by
+        doc.text(`Checked by: ${this.sieveAnalysis.approveBy || " "}`, startX + (sectionWidth * 2) + 4, 264);
+
+        // Draw the centered border box
         const blockTop = finalY;
-        const blockBottom = 266;            
+        const blockBottom = 266;
         const blockHeight = blockBottom - blockTop;
 
         doc.setDrawColor(0, 0, 0);
         doc.setLineWidth(0.6);
-        doc.rect(startX, blockTop, endX - startX, blockHeight);
+        doc.rect(startX, blockTop, tableWidth, blockHeight);
 
+        // Add tail image (this spans full width)
         doc.addImage(tail, 'PNG', 0, 267, 210, 33);
 
+        // Report date (bottom left as before)
         doc.setFontSize(5);
         const formatDateTime = (date: Date) => {
           const year = date.getFullYear();
@@ -399,6 +413,7 @@ export class SandReportComponent implements AfterViewInit, OnInit {
 
 
 
+
     };
 
     head.onerror = () => {
@@ -406,4 +421,4 @@ export class SandReportComponent implements AfterViewInit, OnInit {
     };
   }
 
-} 
+}
