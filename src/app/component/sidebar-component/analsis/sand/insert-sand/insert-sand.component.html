@@ -45,9 +45,19 @@
               [(ngModel)]="sieveAnalysis.totalWeigh" name="totalWeigh" required>
       </div>
       <div class="align-items-center">
-        <label class="col-form-label me-1">Notes</label>
+        <label class="col-form-label me-1">Source Of Sample</label>
         <input type="text" class="form-control compact-input"
-              [(ngModel)]="sieveAnalysis.notes" name="notes" maxlength="233">
+              [(ngModel)]="sieveAnalysis.sourceOfSample" name="notes">
+      </div>
+      <div class="align-items-center">
+        <label class="col-form-label me-1">Description</label>
+        <input type="text" class="form-control compact-input"
+              [(ngModel)]="sieveAnalysis.description" name="description">
+      </div>
+      <div class="align-items-center">
+        <label class="col-form-label me-1">Remarks</label>
+        <input type="text" class="form-control compact-input"
+              [(ngModel)]="sieveAnalysis.notes" name="notes">
       </div>
     </div>
 
