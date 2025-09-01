@@ -45,19 +45,22 @@
               [(ngModel)]="sieveAnalysis.totalWeigh" name="totalWeigh" required>
       </div>
       <div class="align-items-center">
-        <label class="col-form-label me-1">Notes</label>
-        <input type="text" class="form-control compact-input"
-              [(ngModel)]="sieveAnalysis.notes" name="notes" maxlength="233">
-      </div>
-
-      <div class="align-items-center">
         <label class="col-form-label me-1">Source Of Sample</label>
         <input type="text" class="form-control compact-input"
-              [(ngModel)]="sieveAnalysis.sourceOfSample" name="notes" maxlength="233">
+              [(ngModel)]="sieveAnalysis.sourceOfSample" name="notes">
+      </div>
+      <div class="align-items-center">
+        <label class="col-form-label me-1">Description</label>
+        <input type="text" class="form-control compact-input"
+              [(ngModel)]="sieveAnalysis.description" name="description">
+      </div>
+      <div class="align-items-center">
+        <label class="col-form-label me-1">Remarks</label>
+        <input type="text" class="form-control compact-input"
+              [(ngModel)]="sieveAnalysis.notes" name="notes">
       </div>
     </div>
     
-    <!-- Notes Line -->
     <div class="grid-container mt-5">
       <div class="form-group">
         <label class="label">Standard(mm)</label>
@@ -74,8 +77,13 @@
       </div>
       <div class="form-group">
         <label class="label">Expand</label>
-        <input type="text" maxlength="1" pattern="[+-]" placeholder="" class="form-control" [(ngModel)]="sieveAnalysis.expandA" name="expandA"
+        <input type="text" placeholder="" class="form-control" [(ngModel)]="sieveAnalysis.expandA" name="expandA"
                id="expandA" required>
+      </div>
+      <div class="form-group">
+        <label class="label">Specification Limits</label>
+        <input type="text" placeholder="" class="form-control" [(ngModel)]="sieveAnalysis.specificationLimitsA" name="specificationLimitsA"
+               id="specificationLimitsA" required>
       </div>
 
       <!-- Repeat for all 49 inputs manually -->
@@ -90,8 +98,12 @@
                id="massRetainedB" required>
       </div>
       <div class="form-group">
-        <input type="text" maxlength="1" pattern="[+-]" class="form-control" [(ngModel)]="sieveAnalysis.expandB" name="expandB"
+        <input type="text" class="form-control" [(ngModel)]="sieveAnalysis.expandB" name="expandB"
                id="expandB" required>
+      </div>
+      <div class="form-group">
+        <input type="text" class="form-control" [(ngModel)]="sieveAnalysis.specificationLimitsB" name="specificationLimitsB"
+               id="specificationLimitsB" required>
       </div>
 
       <!-- Repeat for all 49 inputs manually -->
@@ -106,8 +118,12 @@
                id="massRetainedC" required>
       </div>
       <div class="form-group">
-        <input type="text" maxlength="1" pattern="[+-]" class="form-control" [(ngModel)]="sieveAnalysis.expandC" name="expandC"
+        <input type="text" class="form-control" [(ngModel)]="sieveAnalysis.expandC" name="expandC"
                id="expandC" required>
+      </div>
+      <div class="form-group">
+        <input type="text" class="form-control" [(ngModel)]="sieveAnalysis.specificationLimitsC" name="specificationLimitsC"
+               id="specificationLimitsC" required>
       </div>
 
       <!-- Repeat for all 49 inputs manually -->
@@ -122,9 +138,14 @@
                id="massRetainedD" required>
       </div>
       <div class="form-group">
-        <input type="text" maxlength="1" pattern="[+-]" class="form-control" [(ngModel)]="sieveAnalysis.expandD" name="expandD"
+        <input type="text" class="form-control" [(ngModel)]="sieveAnalysis.expandD" name="expandD"
                id="expandD" required>
       </div>
+      <div class="form-group">
+        <input type="text" class="form-control" [(ngModel)]="sieveAnalysis.specificationLimitsD" name="specificationLimitsD"
+               id="specificationLimitsD" required>
+      </div>
+
 
       <!-- Repeat for all 49 inputs manually -->
       <div class="form-group">
@@ -138,9 +159,14 @@
                id="massRetainedE" required>
       </div>
       <div class="form-group">
-        <input type="text" maxlength="1" pattern="[+-]" class="form-control" [(ngModel)]="sieveAnalysis.expandE" name="expandE"
+        <input type="text" class="form-control" [(ngModel)]="sieveAnalysis.expandE" name="expandE"
                id="expandE" required>
       </div>
+      <div class="form-group">
+        <input type="text" class="form-control" [(ngModel)]="sieveAnalysis.specificationLimitsE" name="specificationLimitsE"
+               id="specificationLimitsE" required>
+      </div>
+
 
       <!-- Repeat for all 49 inputs manually -->
       <div class="form-group">
@@ -154,8 +180,12 @@
                id="massRetainedF" required>
       </div>
       <div class="form-group">
-        <input type="text" maxlength="1" pattern="[+-]" class="form-control" [(ngModel)]="sieveAnalysis.expandF" name="expandF"
+        <input type="text" class="form-control" [(ngModel)]="sieveAnalysis.expandF" name="expandF"
                id="expandF" required>
+      </div>
+      <div class="form-group">
+        <input type="text" class="form-control" [(ngModel)]="sieveAnalysis.specificationLimitsF" name="specificationLimitsF"
+               id="specificationLimitsF" required>
       </div>
 
       <!-- Repeat for all 49 inputs manually -->
@@ -170,8 +200,12 @@
                id="massRetainedG" required>
       </div>
       <div class="form-group">
-        <input type="text" maxlength="1" pattern="[+-]" class="form-control" [(ngModel)]="sieveAnalysis.expandG" name="expandG"
+        <input type="text" class="form-control" [(ngModel)]="sieveAnalysis.expandG" name="expandG"
                id="expandG" required>
+      </div>
+      <div class="form-group">
+        <input type="text" class="form-control" [(ngModel)]="sieveAnalysis.specificationLimitsG" name="specificationLimitsG"
+               id="specificationLimitsG" required>
       </div>
 
 
@@ -188,8 +222,12 @@
                id="massRetainedH" required>
       </div>
       <div class="form-group">
-        <input type="text" maxlength="1" pattern="[+-]" class="form-control" [(ngModel)]="sieveAnalysis.expandH" name="expandH"
+        <input type="text" class="form-control" [(ngModel)]="sieveAnalysis.expandH" name="expandH"
                id="expandH" required>
+      </div>
+      <div class="form-group">
+        <input type="text" class="form-control" [(ngModel)]="sieveAnalysis.specificationLimitsH" name="specificationLimitsH"
+               id="specificationLimitsH" required>
       </div>
 
 
@@ -207,8 +245,12 @@
                id="massRetainedI" required>
       </div>
       <div class="form-group">
-        <input type="text" maxlength="1" pattern="[+-]" class="form-control" [(ngModel)]="sieveAnalysis.expandI" name="expandI"
+        <input type="text" class="form-control" [(ngModel)]="sieveAnalysis.expandI" name="expandI"
                id="expandI" required>
+      </div>
+      <div class="form-group">
+        <input type="text" class="form-control" [(ngModel)]="sieveAnalysis.specificationLimitsI" name="specificationLimitsI"
+               id="specificationLimitsI" required>
       </div>
 
 
@@ -225,8 +267,12 @@
                id="massRetainedJ" required>
       </div>
       <div class="form-group">
-        <input type="text" maxlength="1" pattern="[+-]" class="form-control" [(ngModel)]="sieveAnalysis.expandJ" name="expandJ"
+        <input type="text" class="form-control" [(ngModel)]="sieveAnalysis.expandJ" name="expandJ"
                id="expandJ" required>
+      </div>
+      <div class="form-group">
+        <input type="text" class="form-control" [(ngModel)]="sieveAnalysis.specificationLimitsJ" name="specificationLimitsJ"
+               id="specificationLimitsJ" required>
       </div>
 
       <!-- Repeat for all 49 inputs manually -->
@@ -242,8 +288,12 @@
                id="massRetainedK" required>
       </div>
       <div class="form-group">
-        <input type="text" maxlength="1" pattern="[+-]" class="form-control" [(ngModel)]="sieveAnalysis.expandK" name="expandK"
+        <input type="text" class="form-control" [(ngModel)]="sieveAnalysis.expandK" name="expandK"
                id="expandK" required>
+      </div>
+      <div class="form-group">
+        <input type="text" class="form-control" [(ngModel)]="sieveAnalysis.specificationLimitsK" name="specificationLimitsK"
+               id="specificationLimitsK" required>
       </div>
 
       <!-- Repeat for all 49 inputs manually -->
@@ -259,8 +309,12 @@
                id="massRetainedL" required>
       </div>
       <div class="form-group">
-        <input type="text" maxlength="1" pattern="[+-]" class="form-control" [(ngModel)]="sieveAnalysis.expandL" name="expandL"
+        <input type="text" class="form-control" [(ngModel)]="sieveAnalysis.expandL" name="expandL"
                id="expandL" required>
+      </div>
+      <div class="form-group">
+        <input type="text" class="form-control" [(ngModel)]="sieveAnalysis.specificationLimitsL" name="specificationLimitsL"
+               id="specificationLimitsL" required>
       </div>
 
       <!-- Repeat for all 49 inputs manually -->
@@ -276,8 +330,12 @@
                id="massRetainedM" required>
       </div>
       <div class="form-group">
-        <input type="text" maxlength="1" pattern="[+-]"class="form-control" [(ngModel)]="sieveAnalysis.expandM" name="expandM"
+        <input type="text" class="form-control" [(ngModel)]="sieveAnalysis.expandM" name="expandM"
                id="expandM" required>
+      </div>
+      <div class="form-group">
+        <input type="text" class="form-control" [(ngModel)]="sieveAnalysis.specificationLimitsM" name="specificationLimitsM"
+               id="specificationLimitsM" required>
       </div>
     </div>
     
