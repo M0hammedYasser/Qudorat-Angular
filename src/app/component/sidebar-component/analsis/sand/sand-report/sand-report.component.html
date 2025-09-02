@@ -15,7 +15,7 @@
 
     <tr>
       <td>{{this.sieveAnalysis.retainedI }}</td>
-      <td>{{this.sieveAnalysis.sand}}</td>
+      <td>{{ (100 - (this.sieveAnalysis.retainedI + this.sieveAnalysis.passingM)).toFixed(2) }}</td>
       <td colspan= "2">{{(this.sieveAnalysis.passingM).toFixed(2) }}</td>
     </tr>
   </table>
