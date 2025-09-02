@@ -270,6 +270,11 @@ export class SandReportComponent implements AfterViewInit, OnInit {
 
       const afterChartY = tableStartY + 71;
 
+      const gravel = Number(this.sieveAnalysis.retainedI) || 0;   
+      const silt = Number(this.sieveAnalysis.passingM) || 0;  
+      const sand = 100 - (gravel + silt);
+
+
       autoTable(doc, {
         startY: afterChartY,
         body: [
@@ -280,9 +285,9 @@ export class SandReportComponent implements AfterViewInit, OnInit {
             {content: "%Clay", styles: {halign: 'center' as const, valign: 'middle' as const}}
           ],
           [
-            {content: this.sieveAnalysis.retainedI || " ", styles: {halign: 'center'}},
-            {content: this.sieveAnalysis.sand || " ", styles: {halign: 'center'}},
-            {content: Number(this.sieveAnalysis.passingM).toFixed(2) || " ", colSpan: 2, styles: {halign: 'center'}}
+            {content: gravel.toFixed(2), styles: {halign: 'center'}},
+            {content: sand.toFixed(2), styles: {halign: 'center'}},  
+            {content: silt.toFixed(2), colSpan: 2, styles: {halign: 'center'}}
           ],
         ],
         theme: 'grid',
@@ -295,15 +300,16 @@ export class SandReportComponent implements AfterViewInit, OnInit {
           lineWidth: 0.5
         },
         columnStyles: {
-          0: {cellWidth: 48},  // was 40
-          1: {cellWidth: 47},  // was 40
-          2: {cellWidth: 48},  // was 40
-          3: {cellWidth: 47},  // was 40
+          0: {cellWidth: 48},
+          1: {cellWidth: 47},
+          2: {cellWidth: 48},
+          3: {cellWidth: 47},
         },
         tableLineColor: [0, 0, 0],
         tableWidth: tableWidth,
         margin: {left: marginLeft}
       });
+
 
 
       const afterMiniTableY = (doc as any).lastAutoTable.finalY;
