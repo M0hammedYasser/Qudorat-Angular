@@ -280,9 +280,9 @@ export class SandReportComponent implements AfterViewInit, OnInit {
             {content: "%Clay", styles: {halign: 'center' as const, valign: 'middle' as const}}
           ],
           [
-            {content: this.sieveAnalysis.gravel || " ", styles: {halign: 'center'}},
+            {content: this.sieveAnalysis.retainedI || " ", styles: {halign: 'center'}},
             {content: this.sieveAnalysis.sand || " ", styles: {halign: 'center'}},
-            {content: this.sieveAnalysis.silt || " ", colSpan: 2, styles: {halign: 'center'}}
+            {content: Number(this.sieveAnalysis.passingM).toFixed(2) || " ", colSpan: 2, styles: {halign: 'center'}}
           ],
         ],
         theme: 'grid',
@@ -312,7 +312,7 @@ export class SandReportComponent implements AfterViewInit, OnInit {
         {content: "Sieve sizes", colSpan: 2, styles: {halign: 'center' as const, valign: 'middle' as const}},
         {content: "Retained Weight (gm)", colSpan: 2, styles: {halign: 'center' as const, valign: 'middle' as const}},
         {content: "Percent", colSpan: 2, styles: {halign: 'center' as const, valign: 'middle' as const}},
-        {content: "Expand", styles: {halign: 'center' as const, valign: 'middle' as const}},
+        {content: "U.Expand", styles: {halign: 'center' as const, valign: 'middle' as const}},
         {content: "Specification Limits", rowSpan: 2, styles: {halign: 'center' as const, valign: 'middle' as const}}
       ];
 
