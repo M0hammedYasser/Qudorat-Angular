@@ -14,9 +14,9 @@
     </tr>
 
     <tr>
-      <td>{{this.sieveAnalysis.gravel }}</td>
+      <td>{{this.sieveAnalysis.retainedI }}</td>
       <td>{{this.sieveAnalysis.sand}}</td>
-      <td colspan= "2">{{this.sieveAnalysis.silt}}</td>
+      <td colspan= "2">{{(this.sieveAnalysis.passingM).toFixed(2) }}</td>
     </tr>
   </table>
 
@@ -25,7 +25,7 @@
       <th colspan = "2">Sieve sizes</th>
       <th colspan = "2">Retained Weight (gm)</th>
       <th colspan = "2">Percent</th>
-      <th>Expand</th>
+      <th>U.Expand</th>
       <th rowspan = "2">Specification Limits</th>
     </tr>
 
@@ -194,7 +194,7 @@
     </tr>
   </table>
 
-  <div class="text-center" style="width: 70vw;" *ngIf="sieveAnalysis.lastApproveBy  && (role == 'ROLE_MANAGER' || role == 'ROLE_ADMIN' || role == 'ROLE_DATAENTRY')">
+  <div class="text-center" style="width: 70vw;" >
     <button (click)="generatePDF()">Download PDF</button>
   </div>
 </div>
