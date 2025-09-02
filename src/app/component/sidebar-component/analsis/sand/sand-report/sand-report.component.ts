@@ -333,21 +333,123 @@ export class SandReportComponent implements AfterViewInit, OnInit {
       ];
       const tableRows: any[] = [];
 
+      const totalWeight = Number(this.sieveAnalysis.totalWeigh) || 0;
+
+      const calcRetainedPercent = (cumulative: number) => {
+        return totalWeight > 0 ? (cumulative / totalWeight) * 100 : 0;
+      };
+
+      const calcPassingPercent = (cumulative: number) => {
+        const retained = calcRetainedPercent(cumulative);
+        return 100 - retained;
+      };
+
       const sieveData = [
-        ["3", 75.0, this.sieveAnalysis.individualA, this.sieveAnalysis.cumulativeA, this.sieveAnalysis.retainedA, Number(this.sieveAnalysis.passingA).toFixed(0), this.sieveAnalysis.expandA, this.sieveAnalysis.specificationLimitsA],
-        ["21/2", 62.5, this.sieveAnalysis.individualB, this.sieveAnalysis.cumulativeB, this.sieveAnalysis.retainedB, Number(this.sieveAnalysis.passingB).toFixed(0), this.sieveAnalysis.expandB, this.sieveAnalysis.specificationLimitsB],
-        ["2", 50.0, this.sieveAnalysis.individualC, this.sieveAnalysis.cumulativeC, this.sieveAnalysis.retainedC, Number(this.sieveAnalysis.passingC).toFixed(0), this.sieveAnalysis.expandC, this.sieveAnalysis.specificationLimitsC],
-        ["11/2", 37.5, this.sieveAnalysis.individualD, this.sieveAnalysis.cumulativeD, this.sieveAnalysis.retainedD, Number(this.sieveAnalysis.passingD).toFixed(0), this.sieveAnalysis.expandD, this.sieveAnalysis.specificationLimitsD],
-        ["1", 25.0, this.sieveAnalysis.individualE, this.sieveAnalysis.cumulativeE, this.sieveAnalysis.retainedE, Number(this.sieveAnalysis.passingE).toFixed(0), this.sieveAnalysis.expandE, this.sieveAnalysis.specificationLimitsE],
-        ["3/4", 19.0, this.sieveAnalysis.individualF, this.sieveAnalysis.cumulativeF, this.sieveAnalysis.retainedF, Number(this.sieveAnalysis.passingF).toFixed(0), this.sieveAnalysis.expandF, this.sieveAnalysis.specificationLimitsF],
-        ["1/2", 12.5, this.sieveAnalysis.individualG, this.sieveAnalysis.cumulativeG, this.sieveAnalysis.retainedG, Number(this.sieveAnalysis.passingG).toFixed(0), this.sieveAnalysis.expandG, this.sieveAnalysis.specificationLimitsG],
-        ["3/8", 9.5, this.sieveAnalysis.individualH, this.sieveAnalysis.cumulativeH, this.sieveAnalysis.retainedH, Number(this.sieveAnalysis.passingH).toFixed(0), this.sieveAnalysis.expandH, this.sieveAnalysis.specificationLimitsH],
-        ["#4", 4.75, this.sieveAnalysis.individualI, this.sieveAnalysis.cumulativeI, this.sieveAnalysis.retainedI, Number(this.sieveAnalysis.passingI).toFixed(0), this.sieveAnalysis.expandI, this.sieveAnalysis.specificationLimitsI],
-        ["#10", 2.00, this.sieveAnalysis.individualJ, this.sieveAnalysis.cumulativeJ, this.sieveAnalysis.retainedJ, Number(this.sieveAnalysis.passingJ).toFixed(0), this.sieveAnalysis.expandJ, this.sieveAnalysis.specificationLimitsJ],
-        ["#40", 0.425, this.sieveAnalysis.individualK, this.sieveAnalysis.cumulativeK, this.sieveAnalysis.retainedK, Number(this.sieveAnalysis.passingK).toFixed(0), this.sieveAnalysis.expandK, this.sieveAnalysis.specificationLimitsK],
-        ["#100", 0.150, this.sieveAnalysis.individualL, this.sieveAnalysis.cumulativeL, this.sieveAnalysis.retainedL, Number(this.sieveAnalysis.passingL).toFixed(2), this.sieveAnalysis.expandL, this.sieveAnalysis.specificationLimitsL],
-        ["#200", 0.075, this.sieveAnalysis.individualM, this.sieveAnalysis.cumulativeM, this.sieveAnalysis.retainedM, Number(this.sieveAnalysis.passingM).toFixed(2), this.sieveAnalysis.expandM, this.sieveAnalysis.specificationLimitsM],
-        ["Total Wt.", this.sieveAnalysis.totalWeigh, "", "", ""]
+        ["3", 75.0,
+          this.sieveAnalysis.individualA,
+          this.sieveAnalysis.cumulativeA,
+          calcRetainedPercent(this.sieveAnalysis.cumulativeA).toFixed(2),
+          calcPassingPercent(this.sieveAnalysis.cumulativeA).toFixed(2),
+          this.sieveAnalysis.expandA,
+          this.sieveAnalysis.specificationLimitsA
+        ],
+        ["21/2", 62.5,
+          this.sieveAnalysis.individualB,
+          this.sieveAnalysis.cumulativeB,
+          calcRetainedPercent(this.sieveAnalysis.cumulativeB).toFixed(2),
+          calcPassingPercent(this.sieveAnalysis.cumulativeB).toFixed(2),
+          this.sieveAnalysis.expandB,
+          this.sieveAnalysis.specificationLimitsB
+        ],
+        ["2", 50.0,
+          this.sieveAnalysis.individualC,
+          this.sieveAnalysis.cumulativeC,
+          calcRetainedPercent(this.sieveAnalysis.cumulativeC).toFixed(2),
+          calcPassingPercent(this.sieveAnalysis.cumulativeC).toFixed(2),
+          this.sieveAnalysis.expandC,
+          this.sieveAnalysis.specificationLimitsC
+        ],
+        ["11/2", 37.5,
+          this.sieveAnalysis.individualD,
+          this.sieveAnalysis.cumulativeD,
+          calcRetainedPercent(this.sieveAnalysis.cumulativeD).toFixed(2),
+          calcPassingPercent(this.sieveAnalysis.cumulativeD).toFixed(2),
+          this.sieveAnalysis.expandD,
+          this.sieveAnalysis.specificationLimitsD
+        ],
+        ["1", 25.0,
+          this.sieveAnalysis.individualE,
+          this.sieveAnalysis.cumulativeE,
+          calcRetainedPercent(this.sieveAnalysis.cumulativeE).toFixed(2),
+          calcPassingPercent(this.sieveAnalysis.cumulativeE).toFixed(2),
+          this.sieveAnalysis.expandE,
+          this.sieveAnalysis.specificationLimitsE
+        ],
+        ["3/4", 19.0,
+          this.sieveAnalysis.individualF,
+          this.sieveAnalysis.cumulativeF,
+          calcRetainedPercent(this.sieveAnalysis.cumulativeF).toFixed(2),
+          calcPassingPercent(this.sieveAnalysis.cumulativeF).toFixed(2),
+          this.sieveAnalysis.expandF,
+          this.sieveAnalysis.specificationLimitsF
+        ],
+        ["1/2", 12.5,
+          this.sieveAnalysis.individualG,
+          this.sieveAnalysis.cumulativeG,
+          calcRetainedPercent(this.sieveAnalysis.cumulativeG).toFixed(2),
+          calcPassingPercent(this.sieveAnalysis.cumulativeG).toFixed(2),
+          this.sieveAnalysis.expandG,
+          this.sieveAnalysis.specificationLimitsG
+        ],
+        ["3/8", 9.5,
+          this.sieveAnalysis.individualH,
+          this.sieveAnalysis.cumulativeH,
+          calcRetainedPercent(this.sieveAnalysis.cumulativeH).toFixed(2),
+          calcPassingPercent(this.sieveAnalysis.cumulativeH).toFixed(2),
+          this.sieveAnalysis.expandH,
+          this.sieveAnalysis.specificationLimitsH
+        ],
+        ["#4", 4.75,
+          this.sieveAnalysis.individualI,
+          this.sieveAnalysis.cumulativeI,
+          calcRetainedPercent(this.sieveAnalysis.cumulativeI).toFixed(2),
+          calcPassingPercent(this.sieveAnalysis.cumulativeI).toFixed(2),
+          this.sieveAnalysis.expandI,
+          this.sieveAnalysis.specificationLimitsI
+        ],
+        ["#10", 2.00,
+          this.sieveAnalysis.individualJ,
+          this.sieveAnalysis.cumulativeJ,
+          calcRetainedPercent(this.sieveAnalysis.cumulativeJ).toFixed(2),
+          calcPassingPercent(this.sieveAnalysis.cumulativeJ).toFixed(2),
+          this.sieveAnalysis.expandJ,
+          this.sieveAnalysis.specificationLimitsJ
+        ],
+        ["#40", 0.425,
+          this.sieveAnalysis.individualK,
+          this.sieveAnalysis.cumulativeK,
+          calcRetainedPercent(this.sieveAnalysis.cumulativeK).toFixed(2),
+          calcPassingPercent(this.sieveAnalysis.cumulativeK).toFixed(2),
+          this.sieveAnalysis.expandK,
+          this.sieveAnalysis.specificationLimitsK
+        ],
+        ["#100", 0.150,
+          this.sieveAnalysis.individualL,
+          this.sieveAnalysis.cumulativeL,
+          calcRetainedPercent(this.sieveAnalysis.cumulativeL).toFixed(2),
+          calcPassingPercent(this.sieveAnalysis.cumulativeL).toFixed(2),
+          this.sieveAnalysis.expandL,
+          this.sieveAnalysis.specificationLimitsL
+        ],
+        ["#200", 0.075,
+          this.sieveAnalysis.individualM,
+          this.sieveAnalysis.cumulativeM,
+          calcRetainedPercent(this.sieveAnalysis.cumulativeM).toFixed(2),
+          calcPassingPercent(this.sieveAnalysis.cumulativeM).toFixed(2),
+          this.sieveAnalysis.expandM,
+          this.sieveAnalysis.specificationLimitsM
+        ],
+        ["Total Wt.", this.sieveAnalysis.totalWeigh, "", "", "", "", "", ""]
       ];
 
       sieveData.forEach(row => tableRows.push(row));
