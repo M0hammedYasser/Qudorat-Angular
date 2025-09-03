@@ -5,7 +5,7 @@ import Chart from "chart.js/auto";
 import {SieveAnalysis} from "../../../../../model/sieve-analysis";
 import {SieveAnalysisService} from "../../../../../service/sieve-analysis/sieve-analysis.service";
 import {ActivatedRoute} from "@angular/router";
-import {NgIf} from "@angular/common";
+import {CommonModule, NgFor, NgIf} from "@angular/common";
 import {AuthenticationService} from "../../../../../service/authentication/authentication.service";
 
 declare let AmiriFont: any;
@@ -14,12 +14,13 @@ declare let AmiriFont: any;
   selector: 'app-sand-report',
   standalone: true,
   imports: [
-    NgIf
+    NgIf  , CommonModule
   ],
   templateUrl: './sand-report.component.html',
   styleUrl: './sand-report.component.css'
 })
 export class SandReportComponent implements AfterViewInit, OnInit {
+[x: string]: any;
 
   currentDate = new Date().toLocaleDateString();
 
@@ -32,12 +33,30 @@ export class SandReportComponent implements AfterViewInit, OnInit {
   constructor(private authenticationService: AuthenticationService, private sieveAnalysisService: SieveAnalysisService, private activatedRoute: ActivatedRoute) {
   }
 
+  gravelRowResult: number = 0;
+  siltRowResult: number = 0;
+  sandRowResult: number = 0;
+
+  calcRetainedPercent(cumulative: number, totalWeight: number) {
+    return totalWeight > 0 ? (Number(cumulative) / Number(totalWeight)) * 100 : 0;
+  }
+
+  calcPassingPercent(cumulative: number, totalWeight: number) {
+    const retained = this.calcRetainedPercent(cumulative, totalWeight);
+    return 100 - retained;
+  }
+
   ngOnInit() {
     this.id = this.activatedRoute.snapshot.params['id'];
     this.role = this.authenticationService.getAuthority();
 
     this.sieveAnalysisService.findById(this.id).subscribe(res => {
       this.sieveAnalysis = res;
+
+      const total = Number(this.sieveAnalysis.totalWeigh) || 0;
+      this.gravelRowResult = this.calcRetainedPercent(this.sieveAnalysis.cumulativeI, total);
+      this.siltRowResult = this.calcPassingPercent(this.sieveAnalysis.cumulativeM, total);
+      this.sandRowResult = 100 - (this.gravelRowResult + this.siltRowResult);
 
       for (let i = 0; i < 13; i++) {
         const char = String.fromCharCode(65 + i);
@@ -56,87 +75,228 @@ export class SandReportComponent implements AfterViewInit, OnInit {
     this.createChart();
   }
 
-  createChart() {
-    if (this.chart) {
-      this.chart.destroy();
-    }
+  createChart() {   
+    if (this.chart) {     
+      this.chart.destroy();   
+    }    
 
-    // Sieve sizes (logarithmic scale)
-    const sieveSizes: number[] = [1000, 75, 63, 50, 37.5, 25, 19, 12.5, 9.5, 4.75, 2, 0.425, 0.25, 0.1];
-
-    // Cumulative passing percentages from backend
-    const passingPercentages: number[] = [
-      100, // 1000mm
-      this.sieveAnalysis.passingA, this.sieveAnalysis.passingB, this.sieveAnalysis.passingC,
-      this.sieveAnalysis.passingD, this.sieveAnalysis.passingE, this.sieveAnalysis.passingF,
-      this.sieveAnalysis.passingG, this.sieveAnalysis.passingH, this.sieveAnalysis.passingI,
-      this.sieveAnalysis.passingJ, this.sieveAnalysis.passingK, this.sieveAnalysis.passingL,
-      this.sieveAnalysis.passingM
+    // ASTM C-136 Standard Sieve Sizes (mm) - matching the image grid
+    const sieveSizes: number[] = [
+      1000,   // Starting point (left edge)
+      75,     // 3"
+      50,     // 2"
+      37.5,   // 1.5"
+      25,     // 1"
+      19,     // 3/4"
+      12.5,   // 1/2"
+      9.5,    // 3/8"
+      4.75,   // #4
+      2.0,    // #10
+      0.425,  // #40
+      0.15,   // #100
+      0.075,  // #200
+      0.01    // End point (right edge)
     ];
 
-    this.chart = new Chart(this.chartCanvas.nativeElement, {
-      type: 'line',
-      data: {
-        labels: sieveSizes,
-        datasets: [
-          {
-            label: 'Cumulative Passing (%)',
-            data: passingPercentages,
-            borderColor: 'red',
-            borderWidth: 2,
-            tension: 0.3,
-            fill: false,
-            pointRadius: 5,
-            pointBackgroundColor: 'red'
-          }
-        ]
-      },
-      options: {
-        responsive: true,
-        plugins: {
-          legend: {
-            display: true,
-            labels: {
-              font: {
-                weight: 'bold',
-                size: 16
-              }
-            }
-          }
-        },
-        scales: {
-          x: {
-            type: 'logarithmic',
-            reverse: true,
-            title: {
-              display: true,
-              text: 'Sieve Size (mm)',
-              font: {weight: 'bold', size: 16}
-            },
-            ticks: {
-              font: {weight: 'bold'},
-              callback: function (value) {
-                const staticLabels = [0.1, 1, 10, 100, 1000];
-                return staticLabels.includes(value as number) ? value.toString() : '';
-              }
-            }
-          },
-          y: {
-            title: {
-              display: true,
-              text: 'Cumulative Passing (%)',
-              font: {weight: 'bold', size: 16}
-            },
-            ticks: {
-              font: {weight: 'bold'}
-            },
-            min: 0,
-            max: 100
-          }
-        }
-      }
-    });
+    // Calculate passing percentages from your sieve analysis data
+    const totalWeight = Number(this.sieveAnalysis.totalWeigh) || 0;
+    
+    const calcPassingPercent = (cumulative: number) => {
+      if (totalWeight <= 0) return 100;
+      const retained = (cumulative / totalWeight) * 100;
+      return Math.max(0, 100 - retained);
+    };
 
+    // Cumulative % Passing from backend data
+    const passingPercentages: number[] = [
+      100, // Starting at 100% (left edge)
+      calcPassingPercent(this.sieveAnalysis.cumulativeA || 0),  // 3" (75mm)
+      calcPassingPercent(this.sieveAnalysis.cumulativeC || 0),  // 2" (50mm)
+      calcPassingPercent(this.sieveAnalysis.cumulativeD || 0),  // 1.5" (37.5mm)
+      calcPassingPercent(this.sieveAnalysis.cumulativeE || 0),  // 1" (25mm)
+      calcPassingPercent(this.sieveAnalysis.cumulativeF || 0),  // 3/4" (19mm)
+      calcPassingPercent(this.sieveAnalysis.cumulativeG || 0),  // 1/2" (12.5mm)
+      calcPassingPercent(this.sieveAnalysis.cumulativeH || 0),  // 3/8" (9.5mm)
+      calcPassingPercent(this.sieveAnalysis.cumulativeI || 0),  // #4 (4.75mm)
+      calcPassingPercent(this.sieveAnalysis.cumulativeJ || 0),  // #10 (2mm)
+      calcPassingPercent(this.sieveAnalysis.cumulativeK || 0),  // #40 (0.425mm)
+      calcPassingPercent(this.sieveAnalysis.cumulativeL || 0),  // #100 (0.15mm)
+      calcPassingPercent(this.sieveAnalysis.cumulativeM || 0),  // #200 (0.075mm)
+      0    // End at 0% (right edge)
+    ];
+
+    // Specification limits - matching the red dashed lines in the image
+    const specUpper: number[] = [
+      100, 100, 90, 85, 80, 78, 75, 70, 65, 50, 35, 18, 10, 0
+    ];
+
+    const specLower: number[] = [
+      100, 95, 80, 75, 70, 68, 65, 60, 50, 30, 15, 8, 2, 0
+    ];
+
+    this.chart = new Chart(this.chartCanvas.nativeElement, {     
+      type: 'line',     
+      data: {       
+        labels: sieveSizes,       
+        datasets: [         
+          {           
+            label: 'Sample Curve',           
+            data: passingPercentages,           
+            borderColor: 'black',           
+            backgroundColor: 'black',
+            borderWidth: 3,           
+            tension: 0.2, // Smooth curve like in image
+            fill: false,           
+            pointRadius: 0, // No visible points on the curve
+            pointHoverRadius: 6,
+            pointBackgroundColor: 'black',
+            pointBorderColor: 'black'
+          },         
+          {           
+            label: 'Specification Limits',           
+            data: specUpper,           
+            borderColor: 'red',   
+            backgroundColor: 'red',        
+            borderWidth: 2,           
+            borderDash: [6, 4],  // Dashed line
+            tension: 0.2,           
+            fill: false,           
+            pointRadius: 4, // Visible points like in image          
+            pointBackgroundColor: 'red',
+            pointBorderColor: 'red',
+            pointBorderWidth: 1,
+            pointStyle: 'circle'
+          },         
+          {           
+            data: specLower,           
+            borderColor: 'red',  
+            backgroundColor: 'red',         
+            borderWidth: 2,           
+            borderDash: [6, 4],           
+            tension: 0.2,           
+            fill: false,           
+            pointRadius: 4, // Visible points
+            pointBackgroundColor: 'red',
+            pointBorderColor: 'red',
+            pointBorderWidth: 1,
+            pointStyle: 'circle',
+            // Hide from legend
+            showLine: true
+          }       
+        ]     
+      },     
+      options: {       
+        responsive: true,       
+        maintainAspectRatio: false,
+        layout: {
+          padding: 0
+        },
+        plugins: {         
+          legend: {           
+            display: false // Hide legend to match image
+          },
+          tooltip: {
+            enabled: true,
+            mode: 'nearest',
+            intersect: false
+          }       
+        },       
+        scales: {         
+          x: {           
+            type: 'logarithmic',           
+            reverse: true, // 1000 on left, 0.01 on right
+            position: 'bottom',
+            title: {             
+              display: true,             
+              text: 'GRAIN DIAMETER IN MILLIMETERS',             
+              font: { 
+                weight: 'bold', 
+                size: 12,
+                family: 'Arial'
+              },
+              padding: { top: 10 }
+            },           
+            ticks: {             
+              callback: function (value) {               
+                const labels = [1000.0, 100.0, 10.0, 1.0, 0.1];               
+                return labels.includes(value as number) ? value.toString() : '';             
+              },             
+              font: { 
+                weight: 'bold', 
+                size: 11,
+                family: 'Arial'
+              },
+              color: 'black',
+              padding: 5
+            },
+            grid: {
+              display: true,
+              color: 'black',
+              lineWidth: 1,
+              drawTicks: true,
+              tickLength: 6
+            },
+            border: {
+              display: true,
+              color: 'black',
+              width: 2
+            },
+            min: 0.01,
+            max: 1000         
+          },         
+          y: {           
+            min: 0,           
+            max: 100,
+            position: 'left',           
+            title: {             
+              display: true,             
+              text: 'PERCENT PASSING',             
+              font: { 
+                weight: 'bold', 
+                size: 12,
+                family: 'Arial'
+              },
+              padding: { bottom: 10 }
+            },           
+            ticks: {             
+              stepSize: 10,             
+              font: { 
+                weight: 'bold', 
+                size: 11,
+                family: 'Arial'
+              },
+              color: 'black',
+              padding: 5,
+              callback: function(value) {
+                return value.toString();
+              }           
+            },
+            grid: {
+              display: true,
+              color: 'black',
+              lineWidth: 1,
+              drawTicks: true,
+              tickLength: 6
+            },
+            border: {
+              display: true,
+              color: 'black',
+              width: 2
+            }        
+          }       
+        },
+        interaction: {
+          mode: 'nearest',
+          axis: 'x',
+          intersect: false
+        },
+        elements: {
+          point: {
+            hoverRadius: 6
+          }
+        }     
+      }   
+    }); 
   }
 
 
@@ -270,8 +430,19 @@ export class SandReportComponent implements AfterViewInit, OnInit {
 
       const afterChartY = tableStartY + 71;
 
-      const gravel = Number(this.sieveAnalysis.retainedI) || 0;   
-      const silt = Number(this.sieveAnalysis.passingM) || 0;  
+      const totalWeight = Number(this.sieveAnalysis.totalWeigh) || 0;
+
+      const calcRetainedPercent = (cumulative: number) => {
+        return totalWeight > 0 ? (cumulative / totalWeight) * 100 : 0;
+      };
+
+      const calcPassingPercent = (cumulative: number) => {
+        const retained = calcRetainedPercent(cumulative);
+        return 100 - retained;
+      };
+
+      const gravel = calcRetainedPercent(this.sieveAnalysis.cumulativeI) || 0;   
+      const silt = calcPassingPercent(this.sieveAnalysis.cumulativeM) || 0;  
       const sand = 100 - (gravel + silt);
 
 
@@ -333,16 +504,15 @@ export class SandReportComponent implements AfterViewInit, OnInit {
       ];
       const tableRows: any[] = [];
 
-      const totalWeight = Number(this.sieveAnalysis.totalWeigh) || 0;
+      // const calcRetainedPercent = (cumulative: number) => {
+      //   return totalWeight > 0 ? (cumulative / totalWeight) * 100 : 0;
+      // };
 
-      const calcRetainedPercent = (cumulative: number) => {
-        return totalWeight > 0 ? (cumulative / totalWeight) * 100 : 0;
-      };
+      // const calcPassingPercent = (cumulative: number) => {
+      //   const retained = calcRetainedPercent(cumulative);
+      //   return 100 - retained;
+      // };
 
-      const calcPassingPercent = (cumulative: number) => {
-        const retained = calcRetainedPercent(cumulative);
-        return 100 - retained;
-      };
 
       const sieveData = [
         ["3", 75.0,
