@@ -2,7 +2,7 @@
   <h2>Sieve Analysis Test</h2>
 
   <div class="text-center" style="width: 70vw;">
-    <canvas #chartCanvas></canvas>
+    <canvas #chartCanvas style="width: 100%; height: 500px;"></canvas>
   </div>
 
   <table class ="table1">
@@ -14,10 +14,11 @@
     </tr>
 
     <tr>
-      <td>{{this.sieveAnalysis.retainedI }}</td>
-      <td>{{ (100 - (this.sieveAnalysis.retainedI + this.sieveAnalysis.passingM)).toFixed(2) }}</td>
-      <td colspan= "2">{{(this.sieveAnalysis.passingM).toFixed(2) }}</td>
+      <td>{{ gravelRowResult | number:'1.2-2' }}</td>
+      <td>{{ sandRowResult   | number:'1.2-2' }}</td>
+      <td colspan="2">{{ siltRowResult | number:'1.2-2' }}</td>
     </tr>
+
   </table>
 
   <table class="table1">
@@ -25,7 +26,7 @@
       <th colspan = "2">Sieve sizes</th>
       <th colspan = "2">Retained Weight (gm)</th>
       <th colspan = "2">Percent</th>
-      <th>U.Expand</th>
+      <th>Expand</th>
       <th rowspan = "2">Specification Limits</th>
     </tr>
 
@@ -44,8 +45,8 @@
       <td>75.0</td>
       <td>{{this.sieveAnalysis.individualA}}</td>
       <td>{{this.sieveAnalysis.cumulativeA}}</td>
-      <td>{{this.sieveAnalysis.retainedA}}</td>
-      <td>{{(this.sieveAnalysis.passingA).toFixed(0)}}</td>
+      <td>{{calcRetainedPercent(this.sieveAnalysis.cumulativeA, this.sieveAnalysis.totalWeigh).toFixed(2)}}</td>
+      <td>{{calcPassingPercent(this.sieveAnalysis.cumulativeA, this.sieveAnalysis.totalWeigh).toFixed(2)}}</td>
       <td>{{this.sieveAnalysis.expandA}}</td>
       <td>{{this.sieveAnalysis.specificationLimitsA}}</td>
     </tr>
@@ -55,8 +56,8 @@
       <td>62.5</td>
       <td>{{this.sieveAnalysis.individualB}}</td>
       <td>{{this.sieveAnalysis.cumulativeB}}</td>
-      <td>{{this.sieveAnalysis.retainedB}}</td>
-      <td>{{(this.sieveAnalysis.passingB).toFixed(0)}}</td>
+      <td>{{calcRetainedPercent(this.sieveAnalysis.cumulativeB, this.sieveAnalysis.totalWeigh).toFixed(2)}}</td>
+      <td>{{calcPassingPercent(this.sieveAnalysis.cumulativeB, this.sieveAnalysis.totalWeigh).toFixed(2)}}</td>
       <td>{{this.sieveAnalysis.expandB}}</td>
       <td>{{this.sieveAnalysis.specificationLimitsB}}</td>
     </tr>
@@ -66,8 +67,8 @@
       <td>50.0</td>
       <td>{{this.sieveAnalysis.individualC}}</td>
       <td>{{this.sieveAnalysis.cumulativeC}}</td>
-      <td>{{this.sieveAnalysis.retainedC}}</td>
-      <td>{{(this.sieveAnalysis.passingC).toFixed(0)}}</td>
+      <td>{{calcRetainedPercent(this.sieveAnalysis.cumulativeC, this.sieveAnalysis.totalWeigh).toFixed(2)}}</td>
+      <td>{{calcPassingPercent(this.sieveAnalysis.cumulativeC, this.sieveAnalysis.totalWeigh).toFixed(2)}}</td>
       <td>{{this.sieveAnalysis.expandC}}</td>
       <td>{{this.sieveAnalysis.specificationLimitsC}}</td>
     </tr>
@@ -77,8 +78,8 @@
       <td>37.5</td>
       <td>{{this.sieveAnalysis.individualD}}</td>
       <td>{{this.sieveAnalysis.cumulativeD}}</td>
-      <td>{{this.sieveAnalysis.retainedD}}</td>
-      <td>{{(this.sieveAnalysis.passingD).toFixed(0)}}</td>
+      <td>{{calcRetainedPercent(this.sieveAnalysis.cumulativeD, this.sieveAnalysis.totalWeigh).toFixed(2)}}</td>
+      <td>{{calcPassingPercent(this.sieveAnalysis.cumulativeD, this.sieveAnalysis.totalWeigh).toFixed(2)}}</td>
       <td>{{this.sieveAnalysis.expandD}}</td>
       <td>{{this.sieveAnalysis.specificationLimitsD}}</td>
     </tr>
@@ -88,8 +89,8 @@
       <td>25.0</td>
       <td>{{this.sieveAnalysis.individualE}}</td>
       <td>{{this.sieveAnalysis.cumulativeE}}</td>
-      <td>{{this.sieveAnalysis.retainedE}}</td>
-      <td>{{(this.sieveAnalysis.passingE).toFixed(0)}}</td>
+      <td>{{calcRetainedPercent(this.sieveAnalysis.cumulativeE, this.sieveAnalysis.totalWeigh).toFixed(2)}}</td>
+      <td>{{calcPassingPercent(this.sieveAnalysis.cumulativeE, this.sieveAnalysis.totalWeigh).toFixed(2)}}</td>
       <td>{{this.sieveAnalysis.expandE}}</td>
       <td>{{this.sieveAnalysis.specificationLimitsE}}</td>
     </tr>
@@ -99,8 +100,8 @@
       <td>19.0</td>
       <td>{{this.sieveAnalysis.individualF}}</td>
       <td>{{this.sieveAnalysis.cumulativeF}}</td>
-      <td>{{this.sieveAnalysis.retainedF}}</td>
-      <td>{{(this.sieveAnalysis.passingF).toFixed(0)}}</td>
+      <td>{{calcRetainedPercent(this.sieveAnalysis.cumulativeF, this.sieveAnalysis.totalWeigh).toFixed(2)}}</td>
+      <td>{{calcPassingPercent(this.sieveAnalysis.cumulativeF, this.sieveAnalysis.totalWeigh).toFixed(2)}}</td>
       <td>{{this.sieveAnalysis.expandF}}</td>
       <td>{{this.sieveAnalysis.specificationLimitsF}}</td>
     </tr>
@@ -110,8 +111,8 @@
       <td>12.5</td>
       <td>{{this.sieveAnalysis.individualG}}</td>
       <td>{{this.sieveAnalysis.cumulativeG}}</td>
-      <td>{{this.sieveAnalysis.retainedG}}</td>
-      <td>{{(this.sieveAnalysis.passingG).toFixed(0)}}</td>
+      <td>{{calcRetainedPercent(this.sieveAnalysis.cumulativeG, this.sieveAnalysis.totalWeigh).toFixed(2)}}</td>
+      <td>{{calcPassingPercent(this.sieveAnalysis.cumulativeG, this.sieveAnalysis.totalWeigh).toFixed(2)}}</td>
       <td>{{this.sieveAnalysis.expandG}}</td>
       <td>{{this.sieveAnalysis.specificationLimitsG}}</td>
     </tr>
@@ -121,8 +122,8 @@
       <td>9.5</td>
       <td>{{this.sieveAnalysis.individualH}}</td>
       <td>{{this.sieveAnalysis.cumulativeH}}</td>
-      <td>{{this.sieveAnalysis.retainedH}}</td>
-      <td>{{(this.sieveAnalysis.passingH).toFixed(0)}}</td>
+      <td>{{calcRetainedPercent(this.sieveAnalysis.cumulativeH, this.sieveAnalysis.totalWeigh).toFixed(2)}}</td>
+      <td>{{calcPassingPercent(this.sieveAnalysis.cumulativeH, this.sieveAnalysis.totalWeigh).toFixed(2)}}</td>
       <td>{{this.sieveAnalysis.expandH}}</td>
       <td>{{this.sieveAnalysis.specificationLimitsH}}</td>
     </tr>
@@ -132,8 +133,8 @@
       <td>4.75</td>
       <td>{{this.sieveAnalysis.individualI}}</td>
       <td>{{this.sieveAnalysis.cumulativeI}}</td>
-      <td>{{this.sieveAnalysis.retainedI}}</td>
-      <td>{{(this.sieveAnalysis.passingI).toFixed(0)}}</td>
+      <td>{{calcRetainedPercent(this.sieveAnalysis.cumulativeI, this.sieveAnalysis.totalWeigh).toFixed(2)}}</td>
+      <td>{{calcPassingPercent(this.sieveAnalysis.cumulativeI, this.sieveAnalysis.totalWeigh).toFixed(2)}}</td>
       <td>{{this.sieveAnalysis.expandI}}</td>
       <td>{{this.sieveAnalysis.specificationLimitsI}}</td>
     </tr>
@@ -143,8 +144,8 @@
       <td>2.00</td>
       <td>{{this.sieveAnalysis.individualJ}}</td>
       <td>{{this.sieveAnalysis.cumulativeJ}}</td>
-      <td>{{this.sieveAnalysis.retainedJ}}</td>
-      <td>{{(this.sieveAnalysis.passingJ).toFixed(0)}}</td>
+      <td>{{calcRetainedPercent(this.sieveAnalysis.cumulativeJ, this.sieveAnalysis.totalWeigh).toFixed(2)}}</td>
+      <td>{{calcPassingPercent(this.sieveAnalysis.cumulativeJ, this.sieveAnalysis.totalWeigh).toFixed(2)}}</td>
       <td>{{this.sieveAnalysis.expandJ}}</td>
       <td>{{this.sieveAnalysis.specificationLimitsJ}}</td>
     </tr>
@@ -154,8 +155,8 @@
       <td>0.425</td>
       <td>{{this.sieveAnalysis.individualK}}</td>
       <td>{{this.sieveAnalysis.cumulativeK}}</td>
-      <td>{{this.sieveAnalysis.retainedK}}</td>
-      <td>{{(this.sieveAnalysis.passingK).toFixed(0)}}</td>
+      <td>{{calcRetainedPercent(this.sieveAnalysis.cumulativeK, this.sieveAnalysis.totalWeigh).toFixed(2)}}</td>
+      <td>{{calcPassingPercent(this.sieveAnalysis.cumulativeK, this.sieveAnalysis.totalWeigh).toFixed(2)}}</td>
       <td>{{this.sieveAnalysis.expandK}}</td>
       <td>{{this.sieveAnalysis.specificationLimitsK}}</td>
     </tr>
@@ -165,8 +166,8 @@
       <td>0.150</td>
       <td>{{this.sieveAnalysis.individualL}}</td>
       <td>{{this.sieveAnalysis.cumulativeL}}</td>
-      <td>{{this.sieveAnalysis.retainedL}}</td>
-      <td>{{(this.sieveAnalysis.passingL).toFixed(2)}}</td>
+      <td>{{calcRetainedPercent(this.sieveAnalysis.cumulativeL, this.sieveAnalysis.totalWeigh).toFixed(2)}}</td>
+      <td>{{calcPassingPercent(this.sieveAnalysis.cumulativeL, this.sieveAnalysis.totalWeigh).toFixed(2)}}</td>
       <td>{{this.sieveAnalysis.expandL}}</td>
       <td>{{this.sieveAnalysis.specificationLimitsL}}</td>
     </tr>
@@ -176,8 +177,8 @@
       <td>0.075</td>
       <td>{{this.sieveAnalysis.individualM}}</td>
       <td>{{this.sieveAnalysis.cumulativeM}}</td>
-      <td>{{this.sieveAnalysis.retainedM}}</td>
-      <td>{{this.sieveAnalysis.passingM}}</td>
+      <td>{{calcRetainedPercent(this.sieveAnalysis.cumulativeM, this.sieveAnalysis.totalWeigh).toFixed(2)}}</td>
+      <td>{{calcPassingPercent(this.sieveAnalysis.cumulativeM, this.sieveAnalysis.totalWeigh).toFixed(2)}}</td>
       <td>{{this.sieveAnalysis.expandM}}</td>
       <td>{{this.sieveAnalysis.specificationLimitsM}}</td>
     </tr>
@@ -194,7 +195,7 @@
     </tr>
   </table>
 
-  <div class="text-center" style="width: 70vw;" >
+  <div class="text-center" style="width: 70vw;" *ngIf="sieveAnalysis.lastApproveBy  && (role == 'ROLE_MANAGER' || role == 'ROLE_ADMIN' || role == 'ROLE_DATAENTRY')">
     <button (click)="generatePDF()">Download PDF</button>
   </div>
 </div>
