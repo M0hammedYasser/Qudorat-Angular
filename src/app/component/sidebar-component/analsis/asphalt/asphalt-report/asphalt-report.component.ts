@@ -207,12 +207,12 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
     doc.setFontSize(9);
 
     const infoRows = [
-      ["Project", this.asphalt.projectName || 'N/A', "Test Name", this.asphalt.nameOfTest || 'N/A'],
-      ["Client", this.asphalt.clientName || 'N/A', "Testing Date", this.asphalt.testingDate || 'N/A'],
-      ["Sample No", this.asphalt.sampleNo || 'N/A', "Consultant", this.asphalt.consultant || 'N/A'],
-      ["Sample By", this.asphalt.sampleBy || 'N/A', "Owner", this.asphalt.owner || 'N/A'],
-      ["Sampling Date", this.asphalt.sampleDate || 'N/A', "Asphalt Applier", this.asphalt.asphaltApplier || 'N/A'],
-      ["Asphalt Type", this.asphalt.asphaltType || 'N/A']
+      ["Project", this.asphalt.projectName || 'N/A', "Sampling Date", this.asphalt.sampleDate || 'N/A'],
+      ["Contractor", this.asphalt.contractor || 'N/A', "Testing Date", this.asphalt.testingDate || 'N/A'],
+      ["Location", this.asphalt.location || 'N/A', "Samle Type", this.asphalt.sampleType || 'N/A'],
+      ["Job Order", this.asphalt.jobOrder || 'N/A', "Sample No", this.asphalt.sampleNo || 'N/A'],
+      ["Asphalt Applier", this.asphalt.asphaltApplier || 'N/A', "Sample By", this.asphalt.sampleBy || 'N/A'],
+      ["Request Description", this.asphalt.requestDescription || 'N/A', "Asphalt Layer", this.asphalt.asphaltLayer || 'N/A']
     ];
 
     autoTable(doc, {
@@ -221,8 +221,12 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
       startY: 37,
       theme: 'grid',
       styles: {
-        fontSize: 8,
-        cellPadding: 1 ,font: 'Amiri'
+        fontSize: 7,
+        font: 'Amiri',
+        cellPadding: 0.5,
+        textColor: [0, 0, 0],
+        lineColor: [0, 0, 0],
+        lineWidth: 0.4
       },
       columnStyles: {
         0: { cellWidth: 32 },
@@ -236,135 +240,126 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
 
 
       // doc.line(10, 68, 200, 68);
-      doc.setFontSize(10);
-      doc.text(`BITUMEN CONTENT TEST (${this.asphalt.bitumen.standard})`, 65, 73);
+      // Replace the existing BITUMEN CONTENT TEST and SIEVE ANALYSIS section with this code:
 
-      // First table - Bitumen data
-      const bitumenColumn = ['Parameter', 'Value'];
+      doc.setFontSize(7);
+      // Add titles for both tables
+      doc.text(`BITUMEN CONTENT TEST (${this.asphalt.bitumen.standard})`, 13, 65);
+      doc.text(`SIEVE ANALYSIS (${this.asphalt.gradationTest.standard})`, 115, 65);
+
+      // First table - Bitumen data (LEFT SIDE)
+      const bitumenColumn = ['Parameter', 'Value', 'U.Expand'];
       const bitumenRows = [
-        ['Wt. sample before gm', this.asphalt.bitumen.weightSampleBefore],
-        ['Wt. of filter before gm', this.asphalt.bitumen.weightFilterBefore],
-        ['Wt. Of filter after gm', this.asphalt.bitumen.weightFilterAfter],
-        ['Increase of filter wt. gm', Number(this.asphalt.bitumen.increaseOfFilterWeight).toFixed(1)],
-        ['Wt. of sample after gm', this.asphalt.bitumen.weightSampleAfter],
-        ['Total wt. of sample gm', Number(this.asphalt.bitumen.totalWeightOfSample).toFixed(1)],
-        ['Wt. of bit. gm', Number(this.asphalt.bitumen.weightOfBit).toFixed(1)],
-        ['Perc of Bit %', Number(this.asphalt.bitumen.percOfBit).toFixed(2)],
+        ['Wt. sample before gm', this.asphalt.bitumen.weightSampleBefore, this.asphalt.bitumen.expandA],
+        ['Wt. of filter before gm', this.asphalt.bitumen.weightFilterBefore, this.asphalt.bitumen.expandB],
+        ['Wt. Of filter after gm', this.asphalt.bitumen.weightFilterAfter, this.asphalt.bitumen.expandC],
+        ['Increase of filter wt. gm', Number(this.asphalt.bitumen.increaseOfFilterWeight).toFixed(1), this.asphalt.bitumen.expandD],
+        ['Wt. of sample after gm', this.asphalt.bitumen.weightSampleAfter, this.asphalt.bitumen.expandE],
+        ['Total wt. of sample gm', Number(this.asphalt.bitumen.totalWeightOfSample).toFixed(1), this.asphalt.bitumen.expandF],
+        ['Wt. of bit. gm', Number(this.asphalt.bitumen.weightOfBit).toFixed(1), this.asphalt.bitumen.expandG],
+        ['Perc of Bit %', Number(this.asphalt.bitumen.percOfBit).toFixed(2), this.asphalt.bitumen.expandH],
+        ['JMF', Number(this.asphalt.bitumen.jmf).toFixed(2) || 'N/A', this.asphalt.bitumen.expandI],
+        ['Result Bit', Number(this.asphalt.bitumen.resultBit) || 'N/A', this.asphalt.bitumen.expandJ],
+        ['Equipment Used', Number(this.asphalt.bitumen.equipmentUsed) || 'N/A', this.asphalt.bitumen.expandK],
       ];
 
+      // BITUMEN table on the LEFT
       autoTable(doc, {
         head: [bitumenColumn],
         body: bitumenRows,
-        startY: 74,
+        theme: 'grid',
+        startY: 67,
         styles: {
-          fontSize: 6,
-          cellPadding: 1.5,
-          lineColor: [0, 0, 0],
-          lineWidth: 0.1,
+          fontSize: 7,
+          cellPadding: 1.32,
+          lineWidth: 0.5,
+          textColor: [0, 0, 0],
+          lineColor: [0, 0, 0]
         },
         headStyles: {
-          fillColor: [41, 128, 185],
-          textColor: [255, 255, 255],
+          fillColor: [255, 255, 255],
+          textColor: [0, 0, 0],
           fontStyle: 'bold',
-          lineWidth: 0.1,
+          lineWidth: 0.5,
+          lineColor: [0, 0, 0]
         },
-        bodyStyles: {
-          lineWidth: 0.1,
-        },
-        alternateRowStyles: {
-          fillColor: [240, 240, 240],
-        },
-        showHead: 'everyPage',
         tableLineColor: [0, 0, 0],
-        tableLineWidth: 0.3,
+        // tableLineWidth: 0.5,
+        margin: { left: 13, right: 75 }, 
+        columnStyles: {
+          0: { cellWidth: 35 },
+          1: { cellWidth: 12 },
+          2: { cellWidth: 15 }
+
+        }
       });
 
-      let finalY = (doc as any).lastAutoTable.finalY + 5;
-
-      doc.text(`SIEVE ANALYSIS (${this.asphalt.gradationTest.standard})` , 70 , finalY  )
-      const sieveColumn: RowInput[] = [
-        [
-          { content: 'mm', rowSpan: 2, styles: { halign: 'center', valign: 'middle' } },
-          { content: 'inch', rowSpan: 2, styles: { halign: 'center', valign: 'middle' } },
-          { content: 'Ret(gm)', rowSpan: 2, styles: { halign: 'center', valign: 'middle' } },
-          { content: 'Ret%', rowSpan: 2, styles: { halign: 'center', valign: 'middle' } },
-          { content: 'Passing%', rowSpan: 2, styles: { halign: 'center', valign: 'middle' } },
-          { content: 'Gmf limits', colSpan: 2, styles: { halign: 'center' } },
-          { content: 'General specifications', colSpan: 2, styles: { halign: 'center' } },
-          { content: 'Expand', rowSpan: 2, styles: { halign: 'center' , valign: 'middle'} },
-        ],
-        [
-          { content: 'Min%', styles: { halign: 'center' } },
-          { content: 'Max%', styles: { halign: 'center' } },
-          { content: 'Min%', styles: { halign: 'center' } },
-          { content: 'Max%', styles: { halign: 'center' } },
-        ]
-      ];
-
+      const sieveColumn: RowInput[] =
+       [ [ { content: 'mm', rowSpan: 2, styles: { halign: 'center', valign: 'middle' } }, 
+        { content: 'inch', rowSpan: 2, styles: { halign: 'center', valign: 'middle' } }, 
+        { content: 'Ret(gm)', rowSpan: 2, styles: { halign: 'center', valign: 'middle' } }, 
+        { content: 'Ret%', rowSpan: 2, styles: { halign: 'center', valign: 'middle' } }, 
+        { content: 'Passing%', rowSpan: 2, styles: { halign: 'center', valign: 'middle' } }, 
+        { content: 'Gmf limits', colSpan: 2, styles: { halign: 'center' } }, 
+        { content: 'General specifications', colSpan: 2, styles: { halign: 'center' } }, 
+        { content: 'Expand', rowSpan: 2, styles: { halign: 'center' , valign: 'middle'} }, ], 
+        [ { content: 'Min%', styles: { halign: 'center' } }, 
+          { content: 'Max%', styles: { halign: 'center' } }, 
+          { content: 'Min%', styles: { halign: 'center' } }, 
+          { content: 'Max%', styles: { halign: 'center' } }, 
+        ] ];
 
       const sieveRows = [
-        ['37.5', '1.5', this.asphalt.gradationTest.massRetainedA, Number(this.asphalt.gradationTest.retainedA).toFixed(1),
-          Number(100 - this.asphalt.gradationTest.retainedA).toFixed(2), this.asphalt.gradationTest.cvcMinA, this.asphalt.gradationTest.cvcMaxA
-          , this.asphalt.gradationTest.gcvcMinA, this.asphalt.gradationTest.gcvcMaxA , this.asphalt.gradationTest.expandA],
-        ['25', '1', this.asphalt.gradationTest.massRetainedB, Number(this.asphalt.gradationTest.retainedB).toFixed(1),
-          Number(100 - this.asphalt.gradationTest.retainedB).toFixed(2), this.asphalt.gradationTest.cvcMinB, this.asphalt.gradationTest.cvcMaxB
-          , this.asphalt.gradationTest.gcvcMinB, this.asphalt.gradationTest.gcvcMaxB , this.asphalt.gradationTest.expandB],
-        ['19.0', '3/4', this.asphalt.gradationTest.massRetainedC, Number(this.asphalt.gradationTest.retainedC).toFixed(1),
-          Number(100 - this.asphalt.gradationTest.retainedC).toFixed(2), this.asphalt.gradationTest.cvcMinC, this.asphalt.gradationTest.cvcMaxC
-          , this.asphalt.gradationTest.gcvcMinC, this.asphalt.gradationTest.gcvcMaxC , this.asphalt.gradationTest.expandC],
-        ['12.5', '1/2', this.asphalt.gradationTest.massRetainedD, Number(this.asphalt.gradationTest.retainedD).toFixed(1),
-          Number(100 - this.asphalt.gradationTest.retainedD).toFixed(2), this.asphalt.gradationTest.cvcMinD, this.asphalt.gradationTest.cvcMaxD
-          , this.asphalt.gradationTest.gcvcMinD, this.asphalt.gradationTest.gcvcMaxD , this.asphalt.gradationTest.expandD],
-        ['9.5', '3/8', this.asphalt.gradationTest.massRetainedE, Number(this.asphalt.gradationTest.retainedE).toFixed(1),
-          Number(100 - this.asphalt.gradationTest.retainedE).toFixed(2), this.asphalt.gradationTest.cvcMinE, this.asphalt.gradationTest.cvcMaxE
-          , this.asphalt.gradationTest.gcvcMinE, this.asphalt.gradationTest.gcvcMaxE , this.asphalt.gradationTest.expandE],
-        ['4.75', '#4', this.asphalt.gradationTest.massRetainedF, Number(this.asphalt.gradationTest.retainedF).toFixed(1),
-          Number(100 - this.asphalt.gradationTest.retainedF).toFixed(2), this.asphalt.gradationTest.cvcMinF, this.asphalt.gradationTest.cvcMaxF
-          , this.asphalt.gradationTest.gcvcMinF, this.asphalt.gradationTest.gcvcMaxF , this.asphalt.gradationTest.expandF],
-        ['2.00', '#10', this.asphalt.gradationTest.massRetainedG, Number(this.asphalt.gradationTest.retainedG).toFixed(1),
-          Number(100 - this.asphalt.gradationTest.retainedG).toFixed(2), this.asphalt.gradationTest.cvcMinG, this.asphalt.gradationTest.cvcMaxG
-          , this.asphalt.gradationTest.gcvcMinG, this.asphalt.gradationTest.gcvcMaxG , this.asphalt.gradationTest.expandG],
-        ['0.425', '#40', this.asphalt.gradationTest.massRetainedH, Number(this.asphalt.gradationTest.retainedH).toFixed(1),
-          Number(100 - this.asphalt.gradationTest.retainedH).toFixed(2), this.asphalt.gradationTest.cvcMinH, this.asphalt.gradationTest.cvcMaxH
-          , this.asphalt.gradationTest.gcvcMinH, this.asphalt.gradationTest.gcvcMaxH , this.asphalt.gradationTest.expandH],
-        ['0.180', '#80', this.asphalt.gradationTest.massRetainedI, Number(this.asphalt.gradationTest.retainedI).toFixed(1),
-          Number(100 - this.asphalt.gradationTest.retainedI).toFixed(2), this.asphalt.gradationTest.cvcMinI, this.asphalt.gradationTest.cvcMaxI
-          , this.asphalt.gradationTest.gcvcMinI, this.asphalt.gradationTest.gcvcMaxI , this.asphalt.gradationTest.expandI],
-        ['0.075', '#200', this.asphalt.gradationTest.massRetainedJ, Number(this.asphalt.gradationTest.retainedJ).toFixed(1),
-          Number(100 - this.asphalt.gradationTest.retainedJ).toFixed(2), this.asphalt.gradationTest.cvcMinJ, this.asphalt.gradationTest.cvcMaxJ
-          , this.asphalt.gradationTest.gcvcMinJ, this.asphalt.gradationTest.gcvcMaxJ , this.asphalt.gradationTest.expandJ],
+       ['37.5', '1.5', this.asphalt.gradationTest.massRetainedA, Number(this.asphalt.gradationTest.retainedA).toFixed(1), Number(100 - this.asphalt.gradationTest.retainedA).toFixed(2), this.asphalt.gradationTest.cvcMinA, this.asphalt.gradationTest.cvcMaxA , this.asphalt.gradationTest.gcvcMinA, this.asphalt.gradationTest.gcvcMaxA , this.asphalt.gradationTest.expandA], 
+       ['25', '1', this.asphalt.gradationTest.massRetainedB, Number(this.asphalt.gradationTest.retainedB).toFixed(1), Number(100 - this.asphalt.gradationTest.retainedB).toFixed(2), this.asphalt.gradationTest.cvcMinB, this.asphalt.gradationTest.cvcMaxB , this.asphalt.gradationTest.gcvcMinB, this.asphalt.gradationTest.gcvcMaxB , this.asphalt.gradationTest.expandB], 
+       ['19.0', '3/4', this.asphalt.gradationTest.massRetainedC, Number(this.asphalt.gradationTest.retainedC).toFixed(1), Number(100 - this.asphalt.gradationTest.retainedC).toFixed(2), this.asphalt.gradationTest.cvcMinC, this.asphalt.gradationTest.cvcMaxC , this.asphalt.gradationTest.gcvcMinC, this.asphalt.gradationTest.gcvcMaxC , this.asphalt.gradationTest.expandC], 
+       ['12.5', '1/2', this.asphalt.gradationTest.massRetainedD, Number(this.asphalt.gradationTest.retainedD).toFixed(1), Number(100 - this.asphalt.gradationTest.retainedD).toFixed(2), this.asphalt.gradationTest.cvcMinD, this.asphalt.gradationTest.cvcMaxD , this.asphalt.gradationTest.gcvcMinD, this.asphalt.gradationTest.gcvcMaxD , this.asphalt.gradationTest.expandD], 
+       ['9.5', '3/8', this.asphalt.gradationTest.massRetainedE, Number(this.asphalt.gradationTest.retainedE).toFixed(1), Number(100 - this.asphalt.gradationTest.retainedE).toFixed(2), this.asphalt.gradationTest.cvcMinE, this.asphalt.gradationTest.cvcMaxE , this.asphalt.gradationTest.gcvcMinE, this.asphalt.gradationTest.gcvcMaxE , this.asphalt.gradationTest.expandE], 
+       ['4.75', '#4', this.asphalt.gradationTest.massRetainedF, Number(this.asphalt.gradationTest.retainedF).toFixed(1), Number(100 - this.asphalt.gradationTest.retainedF).toFixed(2), this.asphalt.gradationTest.cvcMinF, this.asphalt.gradationTest.cvcMaxF , this.asphalt.gradationTest.gcvcMinF, this.asphalt.gradationTest.gcvcMaxF , this.asphalt.gradationTest.expandF], 
+       ['2.00', '#10', this.asphalt.gradationTest.massRetainedG, Number(this.asphalt.gradationTest.retainedG).toFixed(1), Number(100 - this.asphalt.gradationTest.retainedG).toFixed(2), this.asphalt.gradationTest.cvcMinG, this.asphalt.gradationTest.cvcMaxG , this.asphalt.gradationTest.gcvcMinG, this.asphalt.gradationTest.gcvcMaxG , this.asphalt.gradationTest.expandG],
+       ['0.425', '#40', this.asphalt.gradationTest.massRetainedH, Number(this.asphalt.gradationTest.retainedH).toFixed(1), Number(100 - this.asphalt.gradationTest.retainedH).toFixed(2), this.asphalt.gradationTest.cvcMinH, this.asphalt.gradationTest.cvcMaxH , this.asphalt.gradationTest.gcvcMinH, this.asphalt.gradationTest.gcvcMaxH , this.asphalt.gradationTest.expandH], 
+       ['0.180', '#80', this.asphalt.gradationTest.massRetainedI, Number(this.asphalt.gradationTest.retainedI).toFixed(1), Number(100 - this.asphalt.gradationTest.retainedI).toFixed(2), this.asphalt.gradationTest.cvcMinI, this.asphalt.gradationTest.cvcMaxI , this.asphalt.gradationTest.gcvcMinI, this.asphalt.gradationTest.gcvcMaxI , this.asphalt.gradationTest.expandI], 
+       ['0.075', '#200', this.asphalt.gradationTest.massRetainedJ, Number(this.asphalt.gradationTest.retainedJ).toFixed(1), Number(100 - this.asphalt.gradationTest.retainedJ).toFixed(2), this.asphalt.gradationTest.cvcMinJ, this.asphalt.gradationTest.cvcMaxJ , this.asphalt.gradationTest.gcvcMinJ, this.asphalt.gradationTest.gcvcMaxJ , this.asphalt.gradationTest.expandJ], [{content : 'Total Weight' , colSpan: 2}, this.asphalt.gradationTest.totalWeigh],
       ];
 
+      // SIEVE ANALYSIS table on the RIGHT
       autoTable(doc, {
         head: sieveColumn,
         body: sieveRows,
-        tableWidth: 'auto',
-        startY: finalY +2 ,
+        theme: 'grid',
+        startY: 67,
         styles: {
-          fontSize: 6,
-          cellPadding: 1.5,
-          lineColor: [0, 0, 0], // Black grid lines
-          lineWidth: 0.1,       // Thin grid lines
+          fontSize: 7,
+          cellPadding: 1,
+          lineWidth: 0.5,
+          textColor: [0, 0, 0],
+          lineColor: [0, 0, 0]
         },
         headStyles: {
-          fillColor: [41, 128, 185],
-          textColor: [255, 255, 255], // White text for header
+          fillColor: [255, 255, 255],
+          textColor: [0, 0, 0],
           fontStyle: 'bold',
-          lineWidth: 0.1,
+          lineWidth: 0.5,
+          lineColor: [0, 0, 0]
         },
-        bodyStyles: {
-          lineWidth: 0.1,
-        },
-        alternateRowStyles: {
-          fillColor: [240, 240, 240],
-        },
-
-        tableLineColor: [220, 220, 220],
-        tableLineWidth: 0.3,
-        margin: { left: 14 }
+        tableLineColor: [0, 0, 0],
+        // tableLineWidth: 0.5,
+        margin: { left: 75, right: 13 }, 
+        columnStyles: {
+          0: { cellWidth: 12 },
+          1: { cellWidth: 12 },
+          2: { cellWidth: 12 },
+          3: { cellWidth: 12 },
+          4: { cellWidth: 13 },
+          5: { cellWidth: 12 },
+          6: { cellWidth: 12 },
+          7: { cellWidth: 12 },
+          8: { cellWidth: 12 },
+          9: { cellWidth: 12 }
+        }
       });
 
-      finalY = (doc as any).lastAutoTable.finalY + 3;
+      let finalY = (doc as any).lastAutoTable.finalY + 5;
 
 
       // Add chart after the second table
@@ -406,25 +401,29 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
 
           doc.addImage(head, 'PNG', 0, 0, 210, 33);
           doc.setFontSize(12);
-          doc.text("Asphalt Marshall", 80, 36);
+          doc.text("Asphalt Marshall", 80, 35);
           doc.setFontSize(9);
 
           const infoRows = [
-            ["Project", this.asphalt.projectName || 'N/A', "Test Name", this.asphalt.nameOfTest || 'N/A'],
-            ["Client", this.asphalt.clientName || 'N/A', "Testing Date", this.asphalt.testingDate || 'N/A'],
-            ["Sample No", this.asphalt.sampleNo || 'N/A', "Standard", this.asphalt.classification || 'N/A'],
-            ["Sample By", this.asphalt.sampleBy || 'N/A', "Consultant", this.asphalt.consultant || 'N/A'],
-            ["Sampling Date", this.asphalt.sampleDate || 'N/A', "Owner", this.asphalt.owner || 'N/A'],
-            ["Asphalt Type", this.asphalt.asphaltType || 'N/A', "Asphalt Applier", this.asphalt.asphaltApplier || 'N/A']
+            ["Project", this.asphalt.projectName || 'N/A', "Sampling Date", this.asphalt.sampleDate || 'N/A'],
+            ["Contractor", this.asphalt.contractor || 'N/A', "Testing Date", this.asphalt.testingDate || 'N/A'],
+            ["Location", this.asphalt.location || 'N/A', "Samle Type", this.asphalt.sampleType || 'N/A'],
+            ["Job Order", this.asphalt.jobOrder || 'N/A', "Sample No", this.asphalt.sampleNo || 'N/A'],
+            ["Asphalt Applier", this.asphalt.asphaltApplier || 'N/A', "Sample By", this.asphalt.sampleBy || 'N/A'],
+            ["Request Description", this.asphalt.requestDescription || 'N/A', "Asphalt Layer", this.asphalt.asphaltLayer || 'N/A']
           ];
 
           autoTable(doc, {
             body: infoRows,
-            startY: 40,
+            startY: 36,
             theme: 'grid',
             styles: {
-              fontSize: 8,
-              cellPadding: .5,font: 'Amiri'
+              fontSize: 7,
+              font: 'Amiri',
+              cellPadding: 0.5,
+              textColor: [0, 0, 0],
+              lineColor: [0, 0, 0],
+              lineWidth: 0.4
             },
             columnStyles: {
               0: { cellWidth: 32 },
@@ -437,7 +436,7 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
           });
           // doc.line(10, 68, 200, 68);
           doc.setFontSize(10);
-          doc.text(`ASPHALT  MARSHALL & G.M.M TEST (${this.asphalt.classification})` , 60, 73)
+          doc.text(`ASPHALT  MARSHALL & G.M.M TEST (${this.asphalt.classification})` , 60, 63)
 
 
           const tableColumn = ['Parameter', '1', '2', '3', '4', '5', '6'];
@@ -558,22 +557,25 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
           autoTable(doc, {
             head: [tableColumn],
             body: tableRows,
-            startY: 75,
+            theme: 'grid',
+            startY:64,
             styles: {
-              fontSize: 6,
-              cellPadding: 1.5,
-              lineColor: [0, 0, 0], // Black grid lines
-              lineWidth: 0.1,       // Thin grid lines
+              fontSize: 7,
+              cellPadding: 1.32,
+              lineWidth: 0.5,
+              textColor: [0, 0, 0],
+              lineColor: [0, 0, 0]
             },
             headStyles: {
-              fillColor: [41, 128, 185],
-              textColor: [255, 255, 255], // White text for header
+              fillColor: [255, 255, 255],
+              textColor: [0, 0, 0],
               fontStyle: 'bold',
-              lineWidth: 0.1,
+              lineWidth: 0.5,
+              lineColor: [0, 0, 0]
             },
-            alternateRowStyles: {
-              fillColor: [242, 242, 242], // Very light gray alternate rows
-            },
+            // alternateRowStyles: {
+            //   fillColor: [242, 242, 242], // Very light gray alternate rows
+            // },
             columnStyles: {
               0: { cellWidth: 'auto', fontStyle: 'bold' }, // Bold parameter names
               1: { halign: 'right' }, // Right-align values
@@ -583,9 +585,9 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
               5: { halign: 'right' },
               6: { halign: 'right' }
             },
-            tableLineColor: [220, 220, 220], // Table border color
-            tableLineWidth: 0.3,
-            margin: { left: 10 }, // Add some left margin like Excel
+            tableLineColor: [0, 0, 0],
+            tableLineWidth: 0.5,
+            margin: { left: 13 }, // Add some left margin like Excel
             showHead: 'everyPage'
           });
 
@@ -593,12 +595,12 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
 
           doc.setFontSize(9);
           if (this.asphalt.notes) {
-            doc.line(10, finalY+4, 200, finalY+4);
+            // doc.line(10, finalY, 190, finalY);
             const splitNotes = doc.splitTextToSize(
               `Remarks: ${this.asphalt.notes || ""}`,
               180
             );
-            doc.text(splitNotes, 13, finalY + 8);
+            doc.text(splitNotes, 13, finalY + 4);
             finalY += (splitNotes.length * 7); // 7 is approximate line height
           }
 
