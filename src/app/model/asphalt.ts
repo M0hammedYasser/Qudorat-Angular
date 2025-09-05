@@ -3,6 +3,14 @@ import {GradationTest} from "./gradation-test";
 import {Bitumen} from "./bitumen";
 
 export interface Asphalt {
+  contractor: string;
+  // reportNo: string;
+  sampleType: string;
+  // reportDate: string;
+  jobOrder: number;
+  requestDescription: string;
+  asphaltLayer: string;
+  // testLocation: string;
 
   clientName: string;
   projectName: string;
