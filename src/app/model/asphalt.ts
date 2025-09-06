@@ -4,13 +4,11 @@ import {Bitumen} from "./bitumen";
 
 export interface Asphalt {
   contractor: string;
-  // reportNo: string;
   sampleType: string;
-  // reportDate: string;
   jobOrder: number;
   requestDescription: string;
   asphaltLayer: string;
-  // testLocation: string;
+  equipmentUsed: string;
 
   clientName: string;
   projectName: string;
