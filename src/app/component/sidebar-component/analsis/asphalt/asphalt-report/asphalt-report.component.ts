@@ -3,7 +3,7 @@ import {AsphaltService} from "../../../../../service/asphalt/asphalt.service";
 import {ActivatedRoute} from "@angular/router";
 import {Asphalt} from "../../../../../model/asphalt";
 import jsPDF from "jspdf";
-import autoTable, {RowInput} from "jspdf-autotable";
+import autoTable, {ColumnInput, RowInput} from "jspdf-autotable";
 import Chart from "chart.js/auto";
 import {DecimalPipe, NgIf} from '@angular/common';
 import {AuthenticationService} from "../../../../../service/authentication/authentication.service";
@@ -202,7 +202,7 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
   const pageHeight = doc.internal.pageSize.getHeight();
 
   doc.setLineWidth(0.7); // سمك البوردر
-  doc.rect(10, 10, pageWidth - 20, pageHeight - 100); // (x, y, العرض, الطول)
+  doc.rect(10, 10, pageWidth - 20, pageHeight - 50); // (x, y, العرض, الطول)
 
   head.src = 'assets/head.png';
   tail.src = 'assets/tail.png';
@@ -237,12 +237,12 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
         lineWidth: 0.4
       },
       columnStyles: {
-        0: { cellWidth: 32 },
-        1: { cellWidth: 60 },
-        2: { cellWidth: 32 },
-        3: { cellWidth: 60 }
+        0: { cellWidth: 34 },
+        1: { cellWidth: 61 },
+        2: { cellWidth: 34 },
+        3: { cellWidth: 61 }
       },
-      margin: { left: 13, right: 13 },
+      margin: { left: 10, right: 10 },
       tableWidth: 'auto'
     });
 
@@ -253,10 +253,10 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
       doc.setFontSize(7);
       // Add titles for both tables
       doc.text(`BITUMEN CONTENT TEST (${this.asphalt.bitumen.standard})`, 13, 65);
-      doc.text(`SIEVE ANALYSIS (${this.asphalt.gradationTest.standard})`, 115, 65);
+      doc.text(`GRADATION TEST (${this.asphalt.gradationTest.standard})`, 115, 65);
 
       // First table - Bitumen data (LEFT SIDE)
-      const bitumenColumn = ['Parameter', 'Value', 'U.Expand'];
+      // const bitumenColumn = ['Parameter', 'Value', 'U.Expand'];
       const bitumenRows = [
         ['Wt. sample before gm', this.asphalt.bitumen.weightSampleBefore, this.asphalt.bitumen.expandA],
         ['Wt. of filter before gm', this.asphalt.bitumen.weightFilterBefore, this.asphalt.bitumen.expandB],
@@ -273,27 +273,27 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
 
       // BITUMEN table on the LEFT
       autoTable(doc, {
-        head: [bitumenColumn],
+        // head: [bitumenColumn],
         body: bitumenRows,
         theme: 'grid',
         startY: 67,
         styles: {
           fontSize: 7,
-          cellPadding: 1.32,
+          cellPadding: 1.57,
           lineWidth: 0.5,
           textColor: [0, 0, 0],
           lineColor: [0, 0, 0]
         },
-        headStyles: {
-          fillColor: [255, 255, 255],
-          textColor: [0, 0, 0],
-          fontStyle: 'bold',
-          lineWidth: 0.5,
-          lineColor: [0, 0, 0]
-        },
+        // headStyles: {
+        //   fillColor: [255, 255, 255],
+        //   textColor: [0, 0, 0],
+        //   fontStyle: 'bold',
+        //   lineWidth: 0.5,
+        //   lineColor: [0, 0, 0]
+        // },
         tableLineColor: [0, 0, 0],
         // tableLineWidth: 0.5,
-        margin: { left: 13, right: 75 }, 
+        margin: { left: 10, right: 72 }, 
         columnStyles: {
           0: { cellWidth: 35 },
           1: { cellWidth: 12 },
@@ -303,15 +303,16 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
       });
 
       const sieveColumn: RowInput[] =
-       [ [ { content: 'mm', rowSpan: 2, styles: { halign: 'center', valign: 'middle' } }, 
-        { content: 'inch', rowSpan: 2, styles: { halign: 'center', valign: 'middle' } }, 
+       [ [ { content: 'Sieves', colSpan: 2, styles: { halign: 'center', valign: 'middle' } }, 
         { content: 'Ret(gm)', rowSpan: 2, styles: { halign: 'center', valign: 'middle' } }, 
         { content: 'Ret%', rowSpan: 2, styles: { halign: 'center', valign: 'middle' } }, 
         { content: 'Passing%', rowSpan: 2, styles: { halign: 'center', valign: 'middle' } }, 
         { content: 'Gmf limits', colSpan: 2, styles: { halign: 'center' } }, 
         { content: 'General specifications', colSpan: 2, styles: { halign: 'center' } }, 
-        { content: 'Expand', rowSpan: 2, styles: { halign: 'center' , valign: 'middle'} }, ], 
-        [ { content: 'Min%', styles: { halign: 'center' } }, 
+        { content: 'U.Expand k.2/95%', rowSpan: 2, styles: { halign: 'center' , valign: 'middle'} }, ], 
+        [ { content: 'mm', styles: { halign: 'center' } },
+          { content: 'inch', styles: { halign: 'center' } },
+          { content: 'Min%', styles: { halign: 'center' } }, 
           { content: 'Max%', styles: { halign: 'center' } }, 
           { content: 'Min%', styles: { halign: 'center' } }, 
           { content: 'Max%', styles: { halign: 'center' } }, 
@@ -352,18 +353,18 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
         },
         tableLineColor: [0, 0, 0],
         // tableLineWidth: 0.5,
-        margin: { left: 75, right: 13 }, 
+        margin: { left: 72, right: 13 }, 
         columnStyles: {
-          0: { cellWidth: 12 },
-          1: { cellWidth: 12 },
+          0: { cellWidth: 13 },
+          1: { cellWidth: 13 },
           2: { cellWidth: 12 },
           3: { cellWidth: 12 },
-          4: { cellWidth: 13 },
+          4: { cellWidth: 15 },
           5: { cellWidth: 12 },
           6: { cellWidth: 12 },
           7: { cellWidth: 12 },
           8: { cellWidth: 12 },
-          9: { cellWidth: 12 }
+          9: { cellWidth: 15 }
         }
       });
 
@@ -376,9 +377,17 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
         if (chartCanvas) {
           const chartImage = chartCanvas.toDataURL('image/png');
           doc.addImage(chartImage, 'PNG', 15, finalY, 180, 60);
+          doc.line(10, finalY + 65, 200, finalY + 65);
 
+          finalY += 70; // Move down after the chart
+          doc.setFontSize(10);
+          doc.text('Remarks:', 13, finalY);
+          doc.setFontSize(9);
+          const remarks = this.asphalt.remarks || '';
+          const splitRemarks = doc.splitTextToSize(remarks, 180); // Wrap text within 180mm width
+          doc.text(splitRemarks, 13, finalY + 6);
+          finalY += 70; 
 
-          finalY += 90;  // Chart height (80) + some margin
           doc.line(10, finalY - 27, 200, finalY - 27);
           doc.setFontSize(10);
           doc.text(`Approved by: ${this.asphalt.lastApproveBy || 'N/A'}`, 13, finalY - 23);
@@ -442,11 +451,11 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
             },
             columnStyles: {
               0: { cellWidth: 42 },
-              1: { cellWidth: 50 },
+              1: { cellWidth: 53 },
               2: { cellWidth: 42 },
-              3: { cellWidth: 50 }
+              3: { cellWidth: 53 }
             },
-            margin: { left: 13, right: 13 },
+            margin: { left: 10, right: 10 },
             tableWidth: 'auto'
           });
           // doc.line(10, 68, 200, 68);
@@ -454,115 +463,122 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
           doc.text(`ASPHALT  MARSHALL & G.M.M TEST (${this.asphalt.classification})` , 60, 63)
 
 
-          const tableColumn = ['Parameter', '1', '2', '3', '4', '5', '6'];
+          const tableColumn = ['Symbol', 'Item', {content:'Test Results' , colSpan: 6}, 'الصنف'];
           const tableRows: RowInput[]  = [
-            ['%نسبة الاسفلت من كامل الخلطة  A/C by tot. wt. of mix %' ,
-              { content: Number(this.asphalt.bitumen.percOfBit).toFixed(2), colSpan: 6, styles: { halign: 'center' } }
+            ['Pb', '% A/C by tot. wt. of mix' ,
+              { content: Number(this.asphalt.bitumen.percOfBit).toFixed(2), colSpan: 6, styles: { halign: 'center' } } , {content: '%نسبة الاسفلت من كامل الخلطة' , styles: { halign: 'right' }}
             ],
-            ['الوزن الجاف في الهواء (جرام) Wt. in air dry (gm)', this.asphalt.weightAirDryA, this.asphalt.weightAirDryB, this.asphalt.weightAirDryC, this.asphalt.weightAirDryD, this.asphalt.weightAirDryE, this.asphalt.weightAirDryF],
-            ['الوزن في الماء (جرام) Wt. in water (gm)', this.asphalt.weightWaterA, this.asphalt.weightWaterB, this.asphalt.weightWaterC, this.asphalt.weightWaterD, this.asphalt.weightWaterE, this.asphalt.weightWaterF],
-            ['وزن العينة مشبعة في الهواء جافة السطح Wt. in air surf dry (gm)', this.asphalt.weightAirSurfDryA, this.asphalt.weightAirSurfDryB, this.asphalt.weightAirSurfDryC, this.asphalt.weightAirSurfDryD, this.asphalt.weightAirSurfDryE, this.asphalt.weightAirSurfDryF],
-            ['الحجم (سم3) Volumes (c.c)',
+            ['', 'Specimen No.' , '1' , '2' , '3' , '4' , '5' , '6' , {content: 'رقم العينة' , styles: { halign: 'right' }}],
+            ['', 'Wt. in air dry (gm)', this.asphalt.weightAirDryA, this.asphalt.weightAirDryB, this.asphalt.weightAirDryC, this.asphalt.weightAirDryD, this.asphalt.weightAirDryE, this.asphalt.weightAirDryF, {content: '(الوزن الجاف في الهواء) جرام' , styles: { halign: 'right' }}],
+            ['','Wt. in water (gm)', this.asphalt.weightWaterA, this.asphalt.weightWaterB, this.asphalt.weightWaterC, this.asphalt.weightWaterD, this.asphalt.weightWaterE, this.asphalt.weightWaterF, {content: '(الوزن في الماء) جرام' , styles: { halign: 'right' }}],
+            ['','Wt. in air surf dry (gm)', this.asphalt.weightAirSurfDryA, this.asphalt.weightAirSurfDryB, this.asphalt.weightAirSurfDryC, this.asphalt.weightAirSurfDryD, this.asphalt.weightAirSurfDryE, this.asphalt.weightAirSurfDryF, {content: 'وزن العينة مشبعة في الهواء جافة السطح' , styles: { halign: 'right' }}],
+            ['','Volumes (c.c)',
               (this.asphalt.weightAirSurfDryA - this.asphalt.weightWaterA).toFixed(1),
               (this.asphalt.weightAirSurfDryB - this.asphalt.weightWaterB).toFixed(1),
               (this.asphalt.weightAirSurfDryC - this.asphalt.weightWaterC).toFixed(1),
               (this.asphalt.weightAirSurfDryD - this.asphalt.weightWaterD).toFixed(1),
               (this.asphalt.weightAirSurfDryE - this.asphalt.weightWaterE).toFixed(1),
-              (this.asphalt.weightAirSurfDryF - this.asphalt.weightWaterF).toFixed(1)],
-            ['الكثافة الظاهرية للخلطة (جرام/سم3) Bulk Sp.Gr.of Comp. mix',
+              (this.asphalt.weightAirSurfDryF - this.asphalt.weightWaterF).toFixed(1),
+              {content: '(الحجم) سم3' , styles: { halign: 'right' }}],
+            ['Gmb','Bulk Sp.Gr.of Comp. mix',
               (this.asphalt.weightAirDryA / (this.asphalt.weightAirSurfDryA - this.asphalt.weightWaterA)).toFixed(3),
               (this.asphalt.weightAirDryB / (this.asphalt.weightAirSurfDryB - this.asphalt.weightWaterB)).toFixed(3),
               (this.asphalt.weightAirDryC / (this.asphalt.weightAirSurfDryC - this.asphalt.weightWaterC)).toFixed(3),
               (this.asphalt.weightAirDryD / (this.asphalt.weightAirSurfDryD - this.asphalt.weightWaterD)).toFixed(3),
               (this.asphalt.weightAirDryE / (this.asphalt.weightAirSurfDryE - this.asphalt.weightWaterE)).toFixed(3),
-              (this.asphalt.weightAirDryF / (this.asphalt.weightAirSurfDryF - this.asphalt.weightWaterF)).toFixed(3)],
+              (this.asphalt.weightAirDryF / (this.asphalt.weightAirSurfDryF - this.asphalt.weightWaterF)).toFixed(3),
+              {content: '(الكثافة الظاهرية للخلطة) جرام/سم3' , styles: { halign: 'right' }}],
             [
-              'متوسط الكثافة الظاهرية (جرام/سم3) Avg Bulk Sp.Gr.of Comp. mix Gmb gm/cm3',
-              { content: Number(this.bulkSpOfCompMix).toFixed(3), colSpan: 6, styles: { halign: 'center' } }
+              'Avg.', 'Avg Bulk Sp.Gr.of Comp. mix Gmb gm/cm3',
+              { content: Number(this.bulkSpOfCompMix).toFixed(3), colSpan: 6, styles: { halign: 'center' } }, {content: '(متوسط الكثافة الظاهرية) جرام/سم3' , styles: { halign: 'right' }}
             ],
             [
-              'وزن العينة سائبة(جرام) Net. Wt. Of loose mix (gm)',
-              { content: this.asphalt.netWeightOfLooseMix.toString(), colSpan: 6, styles: { halign: 'center' } }
+              'Gmm', 'Net. Wt. Of loose mix (gm)',
+              { content: this.asphalt.netWeightOfLooseMix.toString(), colSpan: 6, styles: { halign: 'center' } } , {content: '(وزن العينة سائبة) جرام' , styles: { halign: 'right' }}
             ],
             [
-              'وزن الماء + الدورق (جرام) Net Wt. Of Flask+water (gm)',
-              { content: this.asphalt.netWeightOfFlaskWater.toString(), colSpan: 6, styles: { halign: 'center' } }
+              'W1', 'Net Wt. Of Flask+water (gm)',
+              { content: this.asphalt.netWeightOfFlaskWater.toString(), colSpan: 6, styles: { halign: 'center' } } , {content: '(وزن الماء + الدورق) جرام' , styles: { halign: 'right' }}
             ],
             [
-              'وزن العينة + الماء + الدورق(جرام) Wt. Flask+water+sample (gm)',
-              { content: this.asphalt.weightFlaskWaterSample.toString(), colSpan: 6, styles: { halign: 'center' } }
+              'W2', 'Wt. Flask+water+sample (gm)',
+              { content: this.asphalt.weightFlaskWaterSample.toString(), colSpan: 6, styles: { halign: 'center' } } , {content: '(وزن العينة + الماء + الدورق) جرام' , styles: { halign: 'right' }}
             ],
             [
-              'الكثافة القصوي للخلطة مزيج الرصف Max. Sp. Gr of Paving mix',
-              { content: Number(this.maxSpOfPAvgMix).toFixed(3), colSpan: 6, styles: { halign: 'center' } }
+              'Gmm', 'Max. Sp. Gr of Paving mix',
+              { content: Number(this.maxSpOfPAvgMix).toFixed(3), colSpan: 6, styles: { halign: 'center' } } , {content: 'الكثافة القصوي للخلطة مزيج الرصف' , styles: { halign: 'right' }}
             ],
             [
-              'متوسط الكثافة القصوي(جرام/سم3) Avg. max Sp. Gr of mix gmm gm/cm3',
-              { content: Number(this.maxSpOfPAvgMix).toFixed(3), colSpan: 6, styles: { halign: 'center' } }
+              '', 'Avg. max Sp. Gr of mix gmm gm/cm3',
+              { content: Number(this.maxSpOfPAvgMix).toFixed(3), colSpan: 6, styles: { halign: 'center' } } , {content: '(متوسط الكثافة القصوي) جرام/سم3' , styles: { halign: 'right' }}
             ],
             [
-              ' %الفراغات الهوائية في الخلطة  Air Voids %',
-              { content: Number(this.airVoid).toFixed(1), colSpan: 6, styles: { halign: 'center' } }
+              'VA', '% Air Voids',
+              { content: Number(this.airVoid).toFixed(1), colSpan: 6, styles: { halign: 'center' } } , {content: '%الفراغات الهوائية في الخلطة' , styles: { halign: 'right' }}
             ],
             [
-              ' %الفراغات في الحمصة المتجانسة Voids in mineral Agg. %',
-              { content: Number(this.voidMineral).toFixed(2), colSpan: 6, styles: { halign: 'center' } }
+              'VMA', '% Voids in mineral Agg.',
+              { content: Number(this.voidMineral).toFixed(2), colSpan: 6, styles: { halign: 'center' } } , {content: '%الفراغات في الحمصة المتجانسة' , styles: { halign: 'right' }}
             ],
             [
-              ' %الفراغات المملؤة في الخلطة Voids filled with Asp. %',
-              { content: Number(this.voidFilled).toFixed(1), colSpan: 6, styles: { halign: 'center' } }
+              'VFA', '% Voids filled with Asp.',
+              { content: Number(this.voidFilled).toFixed(1), colSpan: 6, styles: { halign: 'center' } } , {content: '%الفراغات المملؤة في الخلطة' , styles: { halign: 'right' }}
             ],
             [
-              'الوزن النوعي الفعال للبحص (جم/سم3) Effect. Sp. Gravity of Agg.',
-              { content: Number(this.effectiveSpGravityOfAgg).toFixed(3), colSpan: 6, styles: { halign: 'center' } }
+              'Gse', 'Effect. Sp. Gravity of Agg.',
+              { content: Number(this.effectiveSpGravityOfAgg).toFixed(3), colSpan: 6, styles: { halign: 'center' } } , {content: '(الوزن النوعي الفعال للبحص) جم/سم3' , styles: { halign: 'right' }}
             ],
             [
-              ' %نسبة الاسفلت الممتص بالبحص Absorbed Asp. %',
-              { content: Number(this.absorbedAps).toFixed(2), colSpan: 6, styles: { halign: 'center' } }
+              'Pba', 'Absorbed Asp. %',
+              { content: Number(this.absorbedAps).toFixed(2), colSpan: 6, styles: { halign: 'center' } } , {content: '%نسبة الاسفلت الممتص بالبحص' , styles: { halign: 'right' }}
             ],
             [
-              ' %نسبة الاسفلت الفعالة بالخلطة Effective Asp. Content %',
-              { content: Number(this.asphalt.bitumen.percOfBit - (this.absorbedAps / 100) * (100 - this.asphalt.bitumen.percOfBit)).toFixed(2), colSpan: 6, styles: { halign: 'center' } }
+              'Pbe', 'Effective Asp. Content %',
+              { content: Number(this.asphalt.bitumen.percOfBit - (this.absorbedAps / 100) * (100 - this.asphalt.bitumen.percOfBit)).toFixed(2), colSpan: 6, styles: { halign: 'center' } } , {content: ' %نسبة الاسفلت الفعالة بالخلطة' , styles: { halign: 'right' }}
             ],
-            ['الثبات (كجم) Stability (kg)', this.asphalt.stabilityA, this.asphalt.stabilityB, this.asphalt.stabilityC, this.asphalt.stabilityD, this.asphalt.stabilityE, this.asphalt.stabilityF],
-            ['معامل التصحيح Correction factor', this.asphalt.correctionFactorA, this.asphalt.correctionFactorB, this.asphalt.correctionFactorC, this.asphalt.correctionFactorD, this.asphalt.correctionFactorE, this.asphalt.correctionFactorF],
-            ['الثبات بعد التصحيح (كجم) Corrected Stability (kg)',
+            ['', 'Stability (kg)', this.asphalt.stabilityA, this.asphalt.stabilityB, this.asphalt.stabilityC, this.asphalt.stabilityD, this.asphalt.stabilityE, this.asphalt.stabilityF , {content: '(الثبات) كجم' , styles: { halign: 'right' }}],
+            ['', 'Correction factor', this.asphalt.correctionFactorA, this.asphalt.correctionFactorB, this.asphalt.correctionFactorC, this.asphalt.correctionFactorD, this.asphalt.correctionFactorE, this.asphalt.correctionFactorF , {content: 'معامل التصحيح' , styles: { halign: 'right' }}],
+            ['', 'Corrected Stability (kg)',
               (this.asphalt.stabilityA * this.asphalt.correctionFactorA).toFixed(0),
               (this.asphalt.stabilityB * this.asphalt.correctionFactorB).toFixed(0),
               (this.asphalt.stabilityC * this.asphalt.correctionFactorC).toFixed(0),
               (this.asphalt.stabilityD * this.asphalt.correctionFactorD).toFixed(0),
               (this.asphalt.stabilityE * this.asphalt.correctionFactorE).toFixed(0),
-              (this.asphalt.stabilityF * this.asphalt.correctionFactorF).toFixed(0)],
+              (this.asphalt.stabilityF * this.asphalt.correctionFactorF).toFixed(0),
+             {content: '(الثبات بعد التصحيح) كجم' , styles: { halign: 'right' }}],
             [
-              'متوسط الثيات بعد 30د (كجم) Stability (kg) for 30 min',
+              'Avg.', 'Stability (kg) for 30 min',
               { content: Number(this.avgStabilityFor30Min).toFixed(0), colSpan: 3, styles: { halign: 'center' } },
-              '', '', ''
+              '', '', '' , {content: '(متوسط الثيات بعد 30د) كجم' , styles: { halign: 'right' }}
             ],
-            ['متوسط الثبات بعد 24 ساغة(كجم) Stability (kg) for 24 Hrs.', '', '', '', Number(this.asphalt.stabilityD * this.asphalt.correctionFactorD).toFixed(0), Number(this.asphalt.stabilityE * this.asphalt.correctionFactorE).toFixed(0), Number(this.asphalt.stabilityF * this.asphalt.correctionFactorF).toFixed(0)],
+            ['Avg.', 'Stability (kg) for 24 Hrs.', '', '', '', Number(this.asphalt.stabilityD * this.asphalt.correctionFactorD).toFixed(0), Number(this.asphalt.stabilityE * this.asphalt.correctionFactorE).toFixed(0), Number(this.asphalt.stabilityF * this.asphalt.correctionFactorF).toFixed(0) , {content: '(متوسط الثبات بعد 24 ساعة) كجم', styles: { halign: 'right' }}],
             [
-              'متوسط الثبات بعد 24 ساغة(كجم) Stability (kg) for 24 Hrs.', 
+              'Avg.', 'Stability (kg) for 24 Hrs.', 
               '', '', '',
-              {content: `${Number(this.avgStabilityFor24Hrs).toFixed(0)}`, colSpan: 3, styles: { halign: 'center' }}
+              {content: `${Number(this.avgStabilityFor24Hrs).toFixed(0)}`, colSpan: 3, styles: { halign: 'center' }} , {content: '(متوسط الثبات بعد 24 ساعة) كجم', styles: { halign: 'right' }}
             ],
             [
-              ' %قافد الثبات Loss of Stability %',
-              {content: `${((this.avgStabilityFor30Min - this.avgStabilityFor24Hrs) / this.avgStabilityFor30Min * 100).toFixed(1)}`, colSpan: 6, styles: { halign: 'center' }}
+              'Avg', '% Loss of Stability',
+              {content: `${((this.avgStabilityFor30Min - this.avgStabilityFor24Hrs) / this.avgStabilityFor30Min * 100).toFixed(1)}`, colSpan: 6, styles: { halign: 'center' }} , {content: '%قافد الثبات',  styles: { halign: 'right' }}
             ],
-            ['الانسياب (مم) Flow (mm)', this.asphalt.flowA, this.asphalt.flowB, this.asphalt.flowC, '', '', ''],
-            ['متوسط الاتسياب (مم) Avg. Flow (mm)',
+            ['', 'Flow (mm)', this.asphalt.flowA, this.asphalt.flowB, this.asphalt.flowC, '', '', '' , {content: '(الانسياب) مم',  styles: { halign: 'right' }}],
+            ['', 'Avg. Flow (mm)',
               { content: Number((this.asphalt.flowA + this.asphalt.flowB + this.asphalt.flowC) / 3).toFixed(2), colSpan: 3, styles: { halign: 'center' } },
-              '', '', ''
+              '', '', '' , {content: '(متوسط الاتسياب) مم' ,  styles: { halign: 'right' }}
             ],
-            ['الوزن النوعي للاسفلت (جم/سم3) Sp. Gravity of Asp. Bit',
-              {content: `${this.asphalt.spGravityOfAspBit}`, colSpan: 6, styles: { halign: 'center' }}
-            ],
-            [
-              ' %نسبة البحص في كامل الخلطة Agg. % total wt. of mix',
-              {content: `${Number(100 - this.asphalt.bitumen.percOfBit).toFixed(2)}`, colSpan: 6, styles: { halign: 'center' }}
+            ['Gb', 'Sp. Gravity of Asp. Bit',
+              {content: `${this.asphalt.spGravityOfAspBit}`, colSpan: 6, styles: { halign: 'center' }} , {content: '(الوزن النوعي للاسفلت) جم/سم3' , styles: { halign: 'right' }}
             ],
             [
-              'الوزن النوعي الكلي للبحص(جم/سم3) Bulk Sp. Gr. Comb. Agg.',
-              {content: `${this.asphalt.bulkSpGrCombAgg}`, colSpan: 6, styles: { halign: 'center' }}
+              'Ps', 'Agg. % total wt. of mix',
+              {content: `${Number(100 - this.asphalt.bitumen.percOfBit).toFixed(2)}`, colSpan: 6, styles: { halign: 'center' }} , {content: ' %نسبة البحص في كامل الخلطة' , styles: { halign: 'right' }}
+            ],
+            [
+              'Gsb', 'Bulk Sp. Gr. Comb. Agg.',
+              {content: `${this.asphalt.bulkSpGrCombAgg}`, colSpan: 6, styles: { halign: 'center' }} , {content : ' (الوزن النوعي الكلي للبحص) جم/سم3' , styles: { halign: 'right' }}
+            ],
+            [
+              'M.R.F', 'Machine Ring Factor', 'Mach. Reading x Factor' ,{content: 'ELE- Serial No- 11116' ,colSpan : 4 , styles: { halign: 'center' }}, '', {content : 'الجهاز المستخدم' , styles: { halign: 'right' }}
             ],
           ];
           
@@ -574,30 +590,33 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
             styles: {
               fontSize: 7,
               font: 'Amiri',
-              cellPadding: 1.32,
+              cellPadding: 1,
               lineWidth: 0.5,
               textColor: [0, 0, 0],
               lineColor: [0, 0, 0]
             },
             headStyles: {
+              font: 'Amiri',
+              fontStyle: 'bold',
               fillColor: [255, 255, 255],
               textColor: [0, 0, 0],
-              fontStyle: 'bold',
               lineWidth: 0.5,
-              lineColor: [0, 0, 0]
+              lineColor: [0, 0, 0],
             },
             columnStyles: {
-              0: { cellWidth: 93 }, 
-              1: { cellWidth: 15 }, 
-              2: { cellWidth: 15 },
-              3: { cellWidth: 15 },
-              4: { cellWidth: 15 },
-              5: { cellWidth: 15 },
-              6: { cellWidth: 15 }
+              0: { cellWidth: 13 }, 
+              1: { cellWidth: 48 }, 
+              2: { cellWidth: 13 },
+              3: { cellWidth: 13 },
+              4: { cellWidth: 13 },
+              5: { cellWidth: 13 },
+              6: { cellWidth: 13 },
+              7: { cellWidth: 13 },
+              8: { cellWidth: 51 }
+
             },
             tableLineColor: [0, 0, 0],
-            tableLineWidth: 0.5,
-            margin: { left: 13 }, // Add some left margin like Excel
+            margin: { left: 10 }, 
             showHead: 'everyPage'
           });
 
