@@ -190,7 +190,7 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
 
   generatePDF() {
   const doc = new jsPDF();
-  doc.addFileToVFS('Amiri-Regular.ttf', AmiriFont); 
+  doc.addFileToVFS('Amiri-Regular.ttf', AmiriFont);
   doc.addFont('Amiri-Regular.ttf', 'Amiri', 'normal');
   doc.setFont('Amiri');
   const head = new Image();
@@ -293,7 +293,7 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
         // },
         tableLineColor: [0, 0, 0],
         // tableLineWidth: 0.5,
-        margin: { left: 10, right: 72 }, 
+        margin: { left: 10, right: 72 },
         columnStyles: {
           0: { cellWidth: 35 },
           1: { cellWidth: 12 },
@@ -303,31 +303,31 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
       });
 
       const sieveColumn: RowInput[] =
-       [ [ { content: 'Sieves', colSpan: 2, styles: { halign: 'center', valign: 'middle' } }, 
-        { content: 'Ret(gm)', rowSpan: 2, styles: { halign: 'center', valign: 'middle' } }, 
-        { content: 'Ret%', rowSpan: 2, styles: { halign: 'center', valign: 'middle' } }, 
-        { content: 'Passing%', rowSpan: 2, styles: { halign: 'center', valign: 'middle' } }, 
-        { content: 'Gmf limits', colSpan: 2, styles: { halign: 'center' } }, 
-        { content: 'General specifications', colSpan: 2, styles: { halign: 'center' } }, 
-        { content: 'U.Expand k.2/95%', rowSpan: 2, styles: { halign: 'center' , valign: 'middle'} }, ], 
+       [ [ { content: 'Sieves', colSpan: 2, styles: { halign: 'center', valign: 'middle' } },
+        { content: 'Ret(gm)', rowSpan: 2, styles: { halign: 'center', valign: 'middle' } },
+        { content: 'Ret%', rowSpan: 2, styles: { halign: 'center', valign: 'middle' } },
+        { content: 'Passing%', rowSpan: 2, styles: { halign: 'center', valign: 'middle' } },
+        { content: 'Gmf limits', colSpan: 2, styles: { halign: 'center' } },
+        { content: 'General specifications', colSpan: 2, styles: { halign: 'center' } },
+        { content: 'U.Expand k.2/95%', rowSpan: 2, styles: { halign: 'center' , valign: 'middle'} }, ],
         [ { content: 'mm', styles: { halign: 'center' } },
           { content: 'inch', styles: { halign: 'center' } },
-          { content: 'Min%', styles: { halign: 'center' } }, 
-          { content: 'Max%', styles: { halign: 'center' } }, 
-          { content: 'Min%', styles: { halign: 'center' } }, 
-          { content: 'Max%', styles: { halign: 'center' } }, 
+          { content: 'Min%', styles: { halign: 'center' } },
+          { content: 'Max%', styles: { halign: 'center' } },
+          { content: 'Min%', styles: { halign: 'center' } },
+          { content: 'Max%', styles: { halign: 'center' } },
         ] ];
 
       const sieveRows = [
-       ['37.5', '1.5', this.asphalt.gradationTest.massRetainedA, Number(this.asphalt.gradationTest.retainedA).toFixed(1), Number(100 - this.asphalt.gradationTest.retainedA).toFixed(2), this.asphalt.gradationTest.cvcMinA, this.asphalt.gradationTest.cvcMaxA , this.asphalt.gradationTest.gcvcMinA, this.asphalt.gradationTest.gcvcMaxA , this.asphalt.gradationTest.expandA], 
-       ['25', '1', this.asphalt.gradationTest.massRetainedB, Number(this.asphalt.gradationTest.retainedB).toFixed(1), Number(100 - this.asphalt.gradationTest.retainedB).toFixed(2), this.asphalt.gradationTest.cvcMinB, this.asphalt.gradationTest.cvcMaxB , this.asphalt.gradationTest.gcvcMinB, this.asphalt.gradationTest.gcvcMaxB , this.asphalt.gradationTest.expandB], 
-       ['19.0', '3/4', this.asphalt.gradationTest.massRetainedC, Number(this.asphalt.gradationTest.retainedC).toFixed(1), Number(100 - this.asphalt.gradationTest.retainedC).toFixed(2), this.asphalt.gradationTest.cvcMinC, this.asphalt.gradationTest.cvcMaxC , this.asphalt.gradationTest.gcvcMinC, this.asphalt.gradationTest.gcvcMaxC , this.asphalt.gradationTest.expandC], 
-       ['12.5', '1/2', this.asphalt.gradationTest.massRetainedD, Number(this.asphalt.gradationTest.retainedD).toFixed(1), Number(100 - this.asphalt.gradationTest.retainedD).toFixed(2), this.asphalt.gradationTest.cvcMinD, this.asphalt.gradationTest.cvcMaxD , this.asphalt.gradationTest.gcvcMinD, this.asphalt.gradationTest.gcvcMaxD , this.asphalt.gradationTest.expandD], 
-       ['9.5', '3/8', this.asphalt.gradationTest.massRetainedE, Number(this.asphalt.gradationTest.retainedE).toFixed(1), Number(100 - this.asphalt.gradationTest.retainedE).toFixed(2), this.asphalt.gradationTest.cvcMinE, this.asphalt.gradationTest.cvcMaxE , this.asphalt.gradationTest.gcvcMinE, this.asphalt.gradationTest.gcvcMaxE , this.asphalt.gradationTest.expandE], 
-       ['4.75', '#4', this.asphalt.gradationTest.massRetainedF, Number(this.asphalt.gradationTest.retainedF).toFixed(1), Number(100 - this.asphalt.gradationTest.retainedF).toFixed(2), this.asphalt.gradationTest.cvcMinF, this.asphalt.gradationTest.cvcMaxF , this.asphalt.gradationTest.gcvcMinF, this.asphalt.gradationTest.gcvcMaxF , this.asphalt.gradationTest.expandF], 
+       ['37.5', '1.5', this.asphalt.gradationTest.massRetainedA, Number(this.asphalt.gradationTest.retainedA).toFixed(1), Number(100 - this.asphalt.gradationTest.retainedA).toFixed(2), this.asphalt.gradationTest.cvcMinA, this.asphalt.gradationTest.cvcMaxA , this.asphalt.gradationTest.gcvcMinA, this.asphalt.gradationTest.gcvcMaxA , this.asphalt.gradationTest.expandA],
+       ['25', '1', this.asphalt.gradationTest.massRetainedB, Number(this.asphalt.gradationTest.retainedB).toFixed(1), Number(100 - this.asphalt.gradationTest.retainedB).toFixed(2), this.asphalt.gradationTest.cvcMinB, this.asphalt.gradationTest.cvcMaxB , this.asphalt.gradationTest.gcvcMinB, this.asphalt.gradationTest.gcvcMaxB , this.asphalt.gradationTest.expandB],
+       ['19.0', '3/4', this.asphalt.gradationTest.massRetainedC, Number(this.asphalt.gradationTest.retainedC).toFixed(1), Number(100 - this.asphalt.gradationTest.retainedC).toFixed(2), this.asphalt.gradationTest.cvcMinC, this.asphalt.gradationTest.cvcMaxC , this.asphalt.gradationTest.gcvcMinC, this.asphalt.gradationTest.gcvcMaxC , this.asphalt.gradationTest.expandC],
+       ['12.5', '1/2', this.asphalt.gradationTest.massRetainedD, Number(this.asphalt.gradationTest.retainedD).toFixed(1), Number(100 - this.asphalt.gradationTest.retainedD).toFixed(2), this.asphalt.gradationTest.cvcMinD, this.asphalt.gradationTest.cvcMaxD , this.asphalt.gradationTest.gcvcMinD, this.asphalt.gradationTest.gcvcMaxD , this.asphalt.gradationTest.expandD],
+       ['9.5', '3/8', this.asphalt.gradationTest.massRetainedE, Number(this.asphalt.gradationTest.retainedE).toFixed(1), Number(100 - this.asphalt.gradationTest.retainedE).toFixed(2), this.asphalt.gradationTest.cvcMinE, this.asphalt.gradationTest.cvcMaxE , this.asphalt.gradationTest.gcvcMinE, this.asphalt.gradationTest.gcvcMaxE , this.asphalt.gradationTest.expandE],
+       ['4.75', '#4', this.asphalt.gradationTest.massRetainedF, Number(this.asphalt.gradationTest.retainedF).toFixed(1), Number(100 - this.asphalt.gradationTest.retainedF).toFixed(2), this.asphalt.gradationTest.cvcMinF, this.asphalt.gradationTest.cvcMaxF , this.asphalt.gradationTest.gcvcMinF, this.asphalt.gradationTest.gcvcMaxF , this.asphalt.gradationTest.expandF],
        ['2.00', '#10', this.asphalt.gradationTest.massRetainedG, Number(this.asphalt.gradationTest.retainedG).toFixed(1), Number(100 - this.asphalt.gradationTest.retainedG).toFixed(2), this.asphalt.gradationTest.cvcMinG, this.asphalt.gradationTest.cvcMaxG , this.asphalt.gradationTest.gcvcMinG, this.asphalt.gradationTest.gcvcMaxG , this.asphalt.gradationTest.expandG],
-       ['0.425', '#40', this.asphalt.gradationTest.massRetainedH, Number(this.asphalt.gradationTest.retainedH).toFixed(1), Number(100 - this.asphalt.gradationTest.retainedH).toFixed(2), this.asphalt.gradationTest.cvcMinH, this.asphalt.gradationTest.cvcMaxH , this.asphalt.gradationTest.gcvcMinH, this.asphalt.gradationTest.gcvcMaxH , this.asphalt.gradationTest.expandH], 
-       ['0.180', '#80', this.asphalt.gradationTest.massRetainedI, Number(this.asphalt.gradationTest.retainedI).toFixed(1), Number(100 - this.asphalt.gradationTest.retainedI).toFixed(2), this.asphalt.gradationTest.cvcMinI, this.asphalt.gradationTest.cvcMaxI , this.asphalt.gradationTest.gcvcMinI, this.asphalt.gradationTest.gcvcMaxI , this.asphalt.gradationTest.expandI], 
+       ['0.425', '#40', this.asphalt.gradationTest.massRetainedH, Number(this.asphalt.gradationTest.retainedH).toFixed(1), Number(100 - this.asphalt.gradationTest.retainedH).toFixed(2), this.asphalt.gradationTest.cvcMinH, this.asphalt.gradationTest.cvcMaxH , this.asphalt.gradationTest.gcvcMinH, this.asphalt.gradationTest.gcvcMaxH , this.asphalt.gradationTest.expandH],
+       ['0.180', '#80', this.asphalt.gradationTest.massRetainedI, Number(this.asphalt.gradationTest.retainedI).toFixed(1), Number(100 - this.asphalt.gradationTest.retainedI).toFixed(2), this.asphalt.gradationTest.cvcMinI, this.asphalt.gradationTest.cvcMaxI , this.asphalt.gradationTest.gcvcMinI, this.asphalt.gradationTest.gcvcMaxI , this.asphalt.gradationTest.expandI],
        ['0.075', '#200', this.asphalt.gradationTest.massRetainedJ, Number(this.asphalt.gradationTest.retainedJ).toFixed(1), Number(100 - this.asphalt.gradationTest.retainedJ).toFixed(2), this.asphalt.gradationTest.cvcMinJ, this.asphalt.gradationTest.cvcMaxJ , this.asphalt.gradationTest.gcvcMinJ, this.asphalt.gradationTest.gcvcMaxJ , this.asphalt.gradationTest.expandJ], [{content : 'Total Weight' , colSpan: 2}, this.asphalt.gradationTest.totalWeigh],
       ];
 
@@ -353,7 +353,7 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
         },
         tableLineColor: [0, 0, 0],
         // tableLineWidth: 0.5,
-        margin: { left: 72, right: 13 }, 
+        margin: { left: 72, right: 13 },
         columnStyles: {
           0: { cellWidth: 13 },
           1: { cellWidth: 13 },
@@ -383,10 +383,10 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
           doc.setFontSize(10);
           doc.text('Remarks:', 13, finalY);
           doc.setFontSize(9);
-          const remarks = this.asphalt.remarks || '';
+          const remarks = this.asphalt.notes || '';
           const splitRemarks = doc.splitTextToSize(remarks, 180); // Wrap text within 180mm width
           doc.text(splitRemarks, 13, finalY + 6);
-          finalY += 70; 
+          finalY += 70;
 
           doc.line(10, finalY - 27, 200, finalY - 27);
           doc.setFontSize(10);
@@ -553,7 +553,7 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
             ],
             ['Avg.', 'Stability (kg) for 24 Hrs.', '', '', '', Number(this.asphalt.stabilityD * this.asphalt.correctionFactorD).toFixed(0), Number(this.asphalt.stabilityE * this.asphalt.correctionFactorE).toFixed(0), Number(this.asphalt.stabilityF * this.asphalt.correctionFactorF).toFixed(0) , {content: '(متوسط الثبات بعد 24 ساعة) كجم', styles: { halign: 'right' }}],
             [
-              'Avg.', 'Stability (kg) for 24 Hrs.', 
+              'Avg.', 'Stability (kg) for 24 Hrs.',
               '', '', '',
               {content: `${Number(this.avgStabilityFor24Hrs).toFixed(0)}`, colSpan: 3, styles: { halign: 'center' }} , {content: '(متوسط الثبات بعد 24 ساعة) كجم', styles: { halign: 'right' }}
             ],
@@ -581,7 +581,7 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
               'M.R.F', 'Machine Ring Factor', 'Mach. Reading x Factor' ,{content: 'ELE- Serial No- 11116' ,colSpan : 4 , styles: { halign: 'center' }}, '', {content : 'الجهاز المستخدم' , styles: { halign: 'right' }}
             ],
           ];
-          
+
           autoTable(doc, {
             head: [tableColumn],
             body: tableRows,
@@ -604,8 +604,8 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
               lineColor: [0, 0, 0],
             },
             columnStyles: {
-              0: { cellWidth: 13 }, 
-              1: { cellWidth: 48 }, 
+              0: { cellWidth: 13 },
+              1: { cellWidth: 48 },
               2: { cellWidth: 13 },
               3: { cellWidth: 13 },
               4: { cellWidth: 13 },
@@ -616,7 +616,7 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
 
             },
             tableLineColor: [0, 0, 0],
-            margin: { left: 10 }, 
+            margin: { left: 10 },
             showHead: 'everyPage'
           });
 

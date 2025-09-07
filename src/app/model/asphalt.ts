@@ -9,7 +9,6 @@ export interface Asphalt {
   requestDescription: string;
   asphaltLayer: string;
   equipmentUsed: string;
-  remarks: string;
 
   clientName: string;
   projectName: string;
@@ -101,5 +100,6 @@ export interface Asphalt {
   bitumen: Bitumen
 
   test: Test;
+
 
 }
