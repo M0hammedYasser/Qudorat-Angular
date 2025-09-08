@@ -7,6 +7,7 @@ import autoTable, {ColumnInput, RowInput} from "jspdf-autotable";
 import Chart from "chart.js/auto";
 import {DecimalPipe, NgIf} from '@angular/common';
 import {AuthenticationService} from "../../../../../service/authentication/authentication.service";
+import { content } from 'html2canvas/dist/types/css/property-descriptors/content';
 declare let AmiriFont: any;
 
 
@@ -197,13 +198,6 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
   const tail = new Image();
   const qr = new Image();
 
-  // const doc = new jsPDF("p", "mm", "a4");
-  const pageWidth = doc.internal.pageSize.getWidth();
-  const pageHeight = doc.internal.pageSize.getHeight();
-
-  doc.setLineWidth(0.7); // سمك البوردر
-  doc.rect(10, 10, pageWidth - 20, pageHeight - 50); // (x, y, العرض, الطول)
-
   head.src = 'assets/head.png';
   tail.src = 'assets/tail.png';
   qr.src = 'assets/barcode.jpg';
@@ -211,7 +205,7 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
   head.onload = () => {
     doc.addImage(head, 'PNG', 0, 0, 210, 33);
     doc.setFontSize(12);
-    doc.text("Asphalt Marshall", 80, 35);
+    doc.text("Asphalt Marshall", 80, 33);
     doc.setFontSize(9);
 
     const infoRows = [
@@ -224,9 +218,8 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
     ];
 
     autoTable(doc, {
-      // head: [["Field", "Value", "Field", "Value"]],
       body: infoRows,
-      startY: 37,
+      startY: 35,
       theme: 'grid',
       styles: {
         fontSize: 7,
@@ -234,7 +227,7 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
         cellPadding: 0.5,
         textColor: [0, 0, 0],
         lineColor: [0, 0, 0],
-        lineWidth: 0.4
+        lineWidth: 0.6
       },
       columnStyles: {
         0: { cellWidth: 34 },
@@ -246,58 +239,59 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
       tableWidth: 'auto'
     });
 
-
-      // doc.line(10, 68, 200, 68);
-      // Replace the existing BITUMEN CONTENT TEST and SIEVE ANALYSIS section with this code:
-
       doc.setFontSize(7);
-      // Add titles for both tables
-      doc.text(`BITUMEN CONTENT TEST (${this.asphalt.bitumen.standard})`, 13, 65);
-      doc.text(`GRADATION TEST (${this.asphalt.gradationTest.standard})`, 115, 65);
+      const bitumenText = `BITUMEN CONTENT TEST (${this.asphalt.bitumen.standard})`;
+      const gradationText = `GRADATION TEST (${this.asphalt.gradationTest.standard})`;
 
-      // First table - Bitumen data (LEFT SIDE)
-      // const bitumenColumn = ['Parameter', 'Value', 'U.Expand'];
+
+      doc.text(bitumenText, 13, 61);
+      doc.text(gradationText, 115, 61);
+
+      const gradationWidth = doc.getTextWidth(gradationText);
+
+      const boxStartX = 10; 
+      const boxEndX = 153.3 + gradationWidth + 5; 
+
+      const boxY = 58;       
+      const boxHeight = 5;   
+      const boxWidth = boxEndX - boxStartX;
+
+      doc.setLineWidth(0.6);
+      doc.rect(boxStartX, boxY, boxWidth, boxHeight);
+
+
       const bitumenRows = [
-        ['Wt. sample before gm', this.asphalt.bitumen.weightSampleBefore, this.asphalt.bitumen.expandA],
-        ['Wt. of filter before gm', this.asphalt.bitumen.weightFilterBefore, this.asphalt.bitumen.expandB],
-        ['Wt. Of filter after gm', this.asphalt.bitumen.weightFilterAfter, this.asphalt.bitumen.expandC],
-        ['Increase of filter wt. gm', Number(this.asphalt.bitumen.increaseOfFilterWeight).toFixed(1), this.asphalt.bitumen.expandD],
-        ['Wt. of sample after gm', this.asphalt.bitumen.weightSampleAfter, this.asphalt.bitumen.expandE],
-        ['Total wt. of sample gm', Number(this.asphalt.bitumen.totalWeightOfSample).toFixed(1), this.asphalt.bitumen.expandF],
-        ['Wt. of bit. gm', Number(this.asphalt.bitumen.weightOfBit).toFixed(1), this.asphalt.bitumen.expandG],
-        ['Perc of Bit %', Number(this.asphalt.bitumen.percOfBit).toFixed(2), this.asphalt.bitumen.expandH],
-        ['JMF', Number(this.asphalt.bitumen.jmf).toFixed(2) || 'N/A', this.asphalt.bitumen.expandI],
-        ['Result Bit', Number(this.asphalt.bitumen.resultBit) || 'N/A', this.asphalt.bitumen.expandJ],
-        ['Equipment Used', Number(this.asphalt.bitumen.equipmentUsed) || 'N/A', this.asphalt.bitumen.expandK],
+        ['Wt. sample before gm', {content: this.asphalt.bitumen.weightSampleBefore , colSpan: 2}, {content: '' , rowSpan: 10}],
+        ['Wt. of filter before gm', {content: this.asphalt.bitumen.weightFilterBefore , colSpan: 2}],
+        ['Wt. Of filter after gm', {content: this.asphalt.bitumen.weightFilterAfter , colSpan: 2}],
+        ['Increase of filter wt. gm', {content: Number(this.asphalt.bitumen.increaseOfFilterWeight).toFixed(1) , colSpan: 2}],
+        ['Wt. of sample after gm', {content: this.asphalt.bitumen.weightSampleAfter , colSpan: 2}],
+        ['Total wt. of sample gm', {content: Number(this.asphalt.bitumen.totalWeightOfSample).toFixed(1) , colSpan: 2}],
+        ['Wt. of bit. gm', {content: Number(this.asphalt.bitumen.weightOfBit).toFixed(1) , colSpan: 2}],
+        ['Perc of Bit %', {content: Number(this.asphalt.bitumen.percOfBit).toFixed(2) , colSpan: 2}],
+        ['JMF', '4.80', '5.60'],
+        ['Result Bit', {content: '4.88±0.0.001' , colSpan: 2}],
+        ['Equipment Used', {content:'BE-0001 Balance 6kg' , colSpan: 3}],
       ];
 
-      // BITUMEN table on the LEFT
       autoTable(doc, {
-        // head: [bitumenColumn],
         body: bitumenRows,
         theme: 'grid',
-        startY: 67,
+        startY: 62,
         styles: {
           fontSize: 7,
           cellPadding: 1.57,
-          lineWidth: 0.5,
+          lineWidth: 0.6,
           textColor: [0, 0, 0],
           lineColor: [0, 0, 0]
         },
-        // headStyles: {
-        //   fillColor: [255, 255, 255],
-        //   textColor: [0, 0, 0],
-        //   fontStyle: 'bold',
-        //   lineWidth: 0.5,
-        //   lineColor: [0, 0, 0]
-        // },
         tableLineColor: [0, 0, 0],
-        // tableLineWidth: 0.5,
-        margin: { left: 10, right: 72 },
+        margin: { left: 10, right: 78 },
         columnStyles: {
-          0: { cellWidth: 35 },
+          0: { cellWidth: 33 },
           1: { cellWidth: 12 },
-          2: { cellWidth: 15 }
+          2: { cellWidth: 12 },
+          3: { cellWidth: 11 }
 
         }
       });
@@ -328,7 +322,8 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
        ['2.00', '#10', this.asphalt.gradationTest.massRetainedG, Number(this.asphalt.gradationTest.retainedG).toFixed(1), Number(100 - this.asphalt.gradationTest.retainedG).toFixed(2), this.asphalt.gradationTest.cvcMinG, this.asphalt.gradationTest.cvcMaxG , this.asphalt.gradationTest.gcvcMinG, this.asphalt.gradationTest.gcvcMaxG , this.asphalt.gradationTest.expandG],
        ['0.425', '#40', this.asphalt.gradationTest.massRetainedH, Number(this.asphalt.gradationTest.retainedH).toFixed(1), Number(100 - this.asphalt.gradationTest.retainedH).toFixed(2), this.asphalt.gradationTest.cvcMinH, this.asphalt.gradationTest.cvcMaxH , this.asphalt.gradationTest.gcvcMinH, this.asphalt.gradationTest.gcvcMaxH , this.asphalt.gradationTest.expandH],
        ['0.180', '#80', this.asphalt.gradationTest.massRetainedI, Number(this.asphalt.gradationTest.retainedI).toFixed(1), Number(100 - this.asphalt.gradationTest.retainedI).toFixed(2), this.asphalt.gradationTest.cvcMinI, this.asphalt.gradationTest.cvcMaxI , this.asphalt.gradationTest.gcvcMinI, this.asphalt.gradationTest.gcvcMaxI , this.asphalt.gradationTest.expandI],
-       ['0.075', '#200', this.asphalt.gradationTest.massRetainedJ, Number(this.asphalt.gradationTest.retainedJ).toFixed(1), Number(100 - this.asphalt.gradationTest.retainedJ).toFixed(2), this.asphalt.gradationTest.cvcMinJ, this.asphalt.gradationTest.cvcMaxJ , this.asphalt.gradationTest.gcvcMinJ, this.asphalt.gradationTest.gcvcMaxJ , this.asphalt.gradationTest.expandJ], [{content : 'Total Weight' , colSpan: 2}, this.asphalt.gradationTest.totalWeigh],
+       ['0.075', '#200', this.asphalt.gradationTest.massRetainedJ, Number(this.asphalt.gradationTest.retainedJ).toFixed(1), Number(100 - this.asphalt.gradationTest.retainedJ).toFixed(2), this.asphalt.gradationTest.cvcMinJ, this.asphalt.gradationTest.cvcMaxJ , this.asphalt.gradationTest.gcvcMinJ, this.asphalt.gradationTest.gcvcMaxJ , this.asphalt.gradationTest.expandJ], 
+       [{content : 'Total Weight' , colSpan: 2}, this.asphalt.gradationTest.totalWeigh],
       ];
 
       // SIEVE ANALYSIS table on the RIGHT
@@ -336,7 +331,7 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
         head: sieveColumn,
         body: sieveRows,
         theme: 'grid',
-        startY: 67,
+        startY: 62,
         styles: {
           fontSize: 7,
           cellPadding: 1,
@@ -348,54 +343,166 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
           fillColor: [255, 255, 255],
           textColor: [0, 0, 0],
           fontStyle: 'bold',
-          lineWidth: 0.5,
+          lineWidth: 0.6,
           lineColor: [0, 0, 0]
         },
         tableLineColor: [0, 0, 0],
         // tableLineWidth: 0.5,
-        margin: { left: 72, right: 13 },
+        margin: { left: 78, right: 13 },
         columnStyles: {
           0: { cellWidth: 13 },
           1: { cellWidth: 13 },
           2: { cellWidth: 12 },
           3: { cellWidth: 12 },
           4: { cellWidth: 15 },
-          5: { cellWidth: 12 },
-          6: { cellWidth: 12 },
-          7: { cellWidth: 12 },
-          8: { cellWidth: 12 },
-          9: { cellWidth: 15 }
+          5: { cellWidth: 11 },
+          6: { cellWidth: 11 },
+          7: { cellWidth: 11 },
+          8: { cellWidth: 11 },
+          9: { cellWidth: 13 }
         }
       });
-
       let finalY = (doc as any).lastAutoTable.finalY + 5;
 
-
-      // Add chart after the second table
       setTimeout(() => {
         const chartCanvas = document.querySelector('canvas') as HTMLCanvasElement;
         if (chartCanvas) {
           const chartImage = chartCanvas.toDataURL('image/png');
-          doc.addImage(chartImage, 'PNG', 15, finalY, 180, 60);
-          doc.line(10, finalY + 65, 200, finalY + 65);
+          const scale = 1; 
+          const originalWidth = 180;
+          const originalHeight = 50;
 
-          finalY += 70; // Move down after the chart
+          const chartWidth = originalWidth * scale;   
+          const chartHeight = originalHeight * scale; 
+
+          const pageWidth = doc.internal.pageSize.getWidth();
+          const centerX = (pageWidth - originalWidth) / 2; 
+          const borderPadding = 5;
+
+          doc.setLineWidth(0.7);
+          doc.rect(
+            centerX - borderPadding,
+            finalY - borderPadding,
+            originalWidth + borderPadding * 2,
+            originalHeight + borderPadding * 2
+          );
+
+          const chartX = centerX + (originalWidth - chartWidth) / 2;
+          const chartY = finalY + (originalHeight - chartHeight) / 2;
+          doc.addImage(chartImage, 'PNG', chartX, chartY, chartWidth, chartHeight);
+
+          finalY += originalHeight + borderPadding * 2 + 4;
+          doc.setLineWidth(0.2);
+        }
+
+
+          const sampleColumn = ['Item No', 'Limits', 'Result', 'Remarks'];
+          const sampleRows = [
+            ['Voids in mineral Agg. %', '14% Min', Number(this.voidMineral).toFixed(2) , { content: this.asphalt.remarks && this.asphalt.remarks.trim() !== '' ? this.asphalt.remarks : 'N/A', rowSpan: 8 }],
+            ['Air Voids %', '3.0 -- 5.0' , Number(this.airVoid).toFixed(1) ],
+            ['Bitumen Content %', '(5.2 ± 0.4)' , '4.88±0.0.001'],
+            ['Loss of Stability kgm', '1000 Min' , Number(this.avgStabilityFor30Min).toFixed(0)],
+            ['Voids filled with Asp. %', '65 -- 75' , Number(this.voidFilled).toFixed(1) ],
+            ['Max density as per design (gm/cm3)', '2.556' , Number(this.maxSpOfPAvgMix).toFixed(3) ],
+            ['Flow (mm)', '2 -- 4' , Number((this.asphalt.flowA + this.asphalt.flowB + this.asphalt.flowC) / 3).toFixed(2)],
+            ['Loss of Stability %', '25% Max' , `${((this.avgStabilityFor30Min - this.avgStabilityFor24Hrs) / this.avgStabilityFor30Min * 100).toFixed(1)}`],
+          ];
+
+          autoTable(doc, {
+            head: [sampleColumn],
+            body: sampleRows,
+            theme: 'grid',
+            startY:finalY - 9,
+            styles: {
+              fontSize: 7,
+              font: 'Amiri',
+              cellPadding: 1,
+              lineWidth: 0.5,
+              textColor: [0, 0, 0],
+              lineColor: [0, 0, 0]
+            },
+            headStyles: {
+              font: 'Amiri',
+              fontStyle: 'bold',
+              fillColor: [255, 255, 255],
+              textColor: [0, 0, 0],
+              lineWidth: 0.6,
+              lineColor: [0, 0, 0],
+            },
+            columnStyles: {
+              0: { cellWidth: 47.5 },
+              1: { cellWidth: 47.5 },
+              2: { cellWidth: 47.5 },
+              3: { cellWidth: 47.5 },
+            },
+            tableLineColor: [0, 0, 0],
+            margin: { left: 10 },
+            showHead: 'everyPage'
+          });
+
+          finalY += 34.5; 
           doc.setFontSize(10);
-          doc.text('Remarks:', 13, finalY);
-          doc.setFontSize(9);
-          const remarks = this.asphalt.notes || '';
-          const splitRemarks = doc.splitTextToSize(remarks, 180); // Wrap text within 180mm width
-          doc.text(splitRemarks, 13, finalY + 6);
-          finalY += 70;
 
-          doc.line(10, finalY - 27, 200, finalY - 27);
-          doc.setFontSize(10);
-          doc.text(`Approved by: ${this.asphalt.lastApproveBy || 'N/A'}`, 13, finalY - 23);
-          doc.text(`Test by: ${this.asphalt.testBy || 'N/A'}`, 80, finalY - 23 );
-          doc.text(`Checked by: ${this.asphalt.adopter || 'N/A'}`, 150, finalY - 23);
-          doc.addImage(tail, 'PNG', 0, finalY - 20, 210, 33);
+          const pageWidth1 = doc.internal.pageSize.getWidth();
+          const tableWidth1 = 190; 
+          const startX1 = (pageWidth1 - tableWidth1) / 2;
+          const endX1 = startX1 + tableWidth1;
+          const boxWidth1 = tableWidth1;
 
-          doc.setFontSize(5);
+          let blockTop1 = finalY; 
+          let footerY1 = blockTop1 + 5;
+
+          let remarksHeight1 = 0;
+          if (this.asphalt.notes) {
+            const splitNotes = doc.splitTextToSize(
+              `Remarks: ${this.asphalt.notes || ""}`,
+              boxWidth1 - 8
+            );
+
+            doc.setFont("Amiri", "bold");
+            doc.setFontSize(7);
+            doc.text(splitNotes, startX1 + 4, footerY1 -1);
+
+            remarksHeight1 = splitNotes.length * 5;
+            footerY1 += remarksHeight1 + 12;
+          }
+
+          doc.line(startX1, footerY1, endX1, footerY1);
+
+          doc.setFontSize(8);
+          const sectionWidth1 = tableWidth1 / 3; 
+
+          doc.text(
+            `Approved by: ${this.asphalt.lastApproveBy || "N/A"}`,
+            startX1 + 4,
+            footerY1 + 4
+          );
+
+          doc.text(
+            `Test by: ${this.asphalt.testBy || "N/A"}`,
+            startX1 + sectionWidth1 + 4,
+            footerY1 + 4
+          );
+
+          doc.text(
+            `Checked by: ${this.asphalt.adopter || "N/A"}`,
+            startX1 + sectionWidth1 * 2 + 4,
+            footerY1 + 4
+          );
+
+          const blockBottom1 = footerY1 + 8;
+          const blockHeight1 = blockBottom1 - blockTop1 - 1;
+
+          doc.setDrawColor(0, 0, 0);
+          doc.setLineWidth(0.6);
+          doc.rect(startX1, blockTop1, tableWidth1, blockHeight1);
+          doc.addImage(tail, 'PNG', 0, blockBottom1, 210, 33);
+          finalY = blockBottom1 + 47;
+
+
+
+
+          doc.setFontSize(7);
           const formatDateTime = (date: Date) => {
             const year = date.getFullYear();
             const month = String(date.getMonth() + 1).padStart(2, '0');
@@ -408,24 +515,19 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
           const currentDateTime = formatDateTime(new Date());
           doc.text(`Report Date: ${currentDateTime}`, 1, finalY + 5);
 
-          const headerHeight = 15; // Approximate height needed for header
-          const tableHeight = 200; // Estimate your table height (adjust based on rows)
+          const headerHeight = 15; 
+          const tableHeight = 200; 
 
           if (finalY + headerHeight + tableHeight > doc.internal.pageSize.height - 20) {
             doc.addPage();
-            finalY = 2; // Reset Y position after new page
+            finalY = 2;
           }
 
-          // const doc = new jsPDF("p", "mm", "a4");
-          const pageWidth = doc.internal.pageSize.getWidth();
-          const pageHeight = doc.internal.pageSize.getHeight();
-
-          doc.setLineWidth(0.7);
-          doc.rect(10, 10, pageWidth - 20, pageHeight - 43);
 
           doc.addImage(head, 'PNG', 0, 0, 210, 33);
           doc.setFontSize(12);
-          doc.text("Asphalt Marshall", 80, 35);
+          // doc.text("Asphalt Marshall", 80, 35);
+          doc.text(`ASPHALT  MARSHALL & G.M.M TEST (${this.asphalt.classification})` , 55 , 35)
           doc.setFontSize(9);
 
           const infoRows = [
@@ -460,7 +562,7 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
           });
           // doc.line(10, 68, 200, 68);
           doc.setFontSize(10);
-          doc.text(`ASPHALT  MARSHALL & G.M.M TEST (${this.asphalt.classification})` , 60, 63)
+          // doc.text(`ASPHALT  MARSHALL & G.M.M TEST (${this.asphalt.classification})` , 60, 63)
 
 
           const tableColumn = ['Symbol', 'Item', {content:'Test Results' , colSpan: 6}, 'الصنف'];
@@ -586,7 +688,7 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
             head: [tableColumn],
             body: tableRows,
             theme: 'grid',
-            startY:64,
+            startY:59,
             styles: {
               fontSize: 7,
               font: 'Amiri',
@@ -619,33 +721,68 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
             margin: { left: 10 },
             showHead: 'everyPage'
           });
-
           finalY = (doc as any).lastAutoTable.finalY || 100;
 
-          doc.setFontSize(9);
+          const pageWidth = doc.internal.pageSize.getWidth();
+          const tableWidth = 190; 
+          const startX = (pageWidth - tableWidth) / 2;
+          const endX = startX + tableWidth;
+          const boxWidth = tableWidth;
+
+          let blockTop = finalY; 
+          let footerY = blockTop + 5;
+
+          let remarksHeight = 0;
           if (this.asphalt.notes) {
-            // doc.line(10, finalY, 190, finalY);
             const splitNotes = doc.splitTextToSize(
               `Remarks: ${this.asphalt.notes || ""}`,
-              180
+              boxWidth - 8
             );
-            doc.text(splitNotes, 13, finalY + 4);
-            finalY += (splitNotes.length * 7); // 7 is approximate line height
+
+            doc.setFont("Amiri", "bold");
+            doc.setFontSize(9);
+            doc.text(splitNotes, startX + 4, footerY);
+
+            remarksHeight = splitNotes.length * 5;
+            footerY += remarksHeight + 20;
           }
+          doc.line(startX, footerY, endX, footerY);
+          doc.setFontSize(8);
+          const sectionWidth = tableWidth / 3; 
 
-          doc.line(10, 257, 200, 257);
+          doc.text(
+            `Approved by: ${this.asphalt.lastApproveBy || "N/A"}`,
+            startX + 4,
+            footerY + 6
+          );
 
-          doc.setFontSize(10);
-          doc.text(`Approved by: ${this.asphalt.lastApproveBy || 'N/A'}`, 13, 261);
-          doc.text(`Test by: ${this.asphalt.testBy || 'N/A'}`, 80, 261);
-          doc.text(`Checked by: ${this.asphalt.adopter || 'N/A'}`, 150, 261);
+          doc.text(
+            `Test by: ${this.asphalt.testBy || "N/A"}`,
+            startX + sectionWidth + 4,
+            footerY + 6
+          );
+
+          doc.text(
+            `Checked by: ${this.asphalt.adopter || "N/A"}`,
+            startX + sectionWidth * 2 + 4,
+            footerY + 6
+          );
+
+          const blockBottom = footerY + 10;
+          const blockHeight = blockBottom - blockTop;
+
+          doc.setDrawColor(0, 0, 0);
+          doc.setLineWidth(0.6);
+          doc.rect(startX, blockTop, tableWidth, blockHeight);
+
           doc.addImage(tail, 'PNG', 0, 265, 210, 33);
           doc.setFontSize(5);
           doc.text(`Report Date: ${currentDateTime}`, 1, 290);
 
           // Save the PDF
           doc.save(`Asphalt_Report_${new Date().toISOString().slice(0, 10)}.pdf`);
-        } else {
+        // If chartCanvas is not found, log an error
+        if (!chartCanvas) {
           console.error("Chart canvas not found! Ensure it is fully loaded before generating the PDF.");
         }
       }, 1000);
