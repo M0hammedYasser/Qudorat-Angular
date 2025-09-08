@@ -24,16 +24,7 @@ export interface Bitumen {
   resultBit: string;
   equipmentUsed: string;
 
-  expandA: string;
-  expandB: string;
-  expandC: string;
-  expandD: string;
-  expandE: string;
-  expandF: string;
-  expandG: string;
-  expandH: string;
-  expandI: string;
-  expandJ: string;
-  expandK: string;
+  expand: string;
+
 
 }
