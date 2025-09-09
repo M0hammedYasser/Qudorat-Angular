@@ -204,16 +204,30 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
 
   head.onload = () => {
     doc.addImage(head, 'PNG', 0, 0, 210, 33);
-    doc.setFontSize(12);
-    doc.text("Asphalt Marshall", 80, 33);
+    doc.setFontSize(10);
+    const headerText = 'Bituminous Content & Gradation Test';
+    const textX = 60;
+    const textY = 33;
+
+    doc.text(headerText, textX, textY);
+
+    const textWidth = doc.getTextWidth(headerText);
+
+    doc.setDrawColor(0, 0, 0); 
+    doc.setLineWidth(0.5);
+    doc.line(textX - 1, textY + .5 , textX + textWidth + 2, textY + .5 ); 
+    doc.setFontSize(7);
+    doc.text("ASTM D-2172, D-5444", 117, 33);
+        doc.setFontSize(7);
+    doc.text("Sampling ASTM D-979/979M", 143, 33);
     doc.setFontSize(9);
 
     const infoRows = [
       ["Project", this.asphalt.projectName || 'N/A', "Sampling Date", this.asphalt.sampleDate || 'N/A'],
       ["Contractor", this.asphalt.contractor || 'N/A', "Testing Date", this.asphalt.testingDate || 'N/A'],
-      ["Location", this.asphalt.location || 'N/A', "Samle Type", this.asphalt.sampleType || 'N/A'],
+      ["Location", this.asphalt.location || 'N/A', "Sample Type", this.asphalt.sampleType || 'N/A'],
       ["Job Order", this.asphalt.jobOrder || 'N/A', "Sample No", this.asphalt.sampleNo || 'N/A'],
-      ["Asphalt Applier", this.asphalt.asphaltApplier || 'N/A', "Sample By", this.asphalt.sampleBy || 'N/A'],
+      ["Asphalt Supplier", this.asphalt.asphaltApplier || 'N/A', "Sample By", this.asphalt.sampleBy || 'N/A'],
       ["Request Description", this.asphalt.requestDescription || 'N/A', "Asphalt Layer", this.asphalt.asphaltLayer || 'N/A']
     ];
 
@@ -240,17 +254,17 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
     });
 
       doc.setFontSize(7);
-      const bitumenText = `BITUMEN CONTENT TEST (${this.asphalt.bitumen.standard})`;
-      const gradationText = `GRADATION TEST (${this.asphalt.gradationTest.standard})`;
+      const bitumenText = 'BITUMEN'
+      const gradationText = 'GRADATION'
 
 
-      doc.text(bitumenText, 13, 61);
-      doc.text(gradationText, 115, 61);
+      doc.text(bitumenText, 33, 61);
+      doc.text(gradationText, 130, 61);
 
       const gradationWidth = doc.getTextWidth(gradationText);
 
       const boxStartX = 10; 
-      const boxEndX = 153.3 + gradationWidth + 5; 
+      const boxEndX = 181 + gradationWidth + 5; 
 
       const boxY = 58;       
       const boxHeight = 5;   
@@ -270,7 +284,7 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
         ['Wt. of bit. gm', {content: Number(this.asphalt.bitumen.weightOfBit).toFixed(1) , colSpan: 2}],
         ['Perc of Bit %', {content: Number(this.asphalt.bitumen.percOfBit).toFixed(2) , colSpan: 2}],
         ['JMF', '4.80', '5.60'],
-        ['Result Bit', {content: '4.88±0.0.001' , colSpan: 2}],
+        ['Result Bit', {content: `${Number(this.asphalt.bitumen.percOfBit).toFixed(2)} ${this.asphalt.bitumen.expand || ''}`, colSpan: 2 }],
         ['Equipment Used', {content:'BE-0001 Balance 6kg' , colSpan: 3}],
       ];
 
@@ -525,11 +539,24 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
 
 
           doc.addImage(head, 'PNG', 0, 0, 210, 33);
-          doc.setFontSize(12);
-          // doc.text("Asphalt Marshall", 80, 35);
-          doc.text(`ASPHALT  MARSHALL & G.M.M TEST (${this.asphalt.classification})` , 55 , 35)
-          doc.setFontSize(9);
+          doc.setFontSize(10);
+          const headerText = 'ASPHALT  MARSHALL & G.M.M TEST';
+          const textX = 60;
+          const textY = 34;
 
+          doc.text(headerText, textX, textY);
+
+          const textWidth = doc.getTextWidth(headerText);
+
+          doc.setDrawColor(0, 0, 0); 
+          doc.setLineWidth(0.5);
+          doc.line(textX - 1, textY + .5 , textX + textWidth + 2, textY + .5 ); 
+          doc.setFontSize(7);
+          doc.text("ASTM D-2172, D-5444", 127 , 34);
+          doc.setFontSize(7);
+          doc.text("Sampling ASTM D-979/979M", 153 , 34);
+
+          doc.setFontSize(9);
           const infoRows = [
             ["المشروع  Project ", this.asphalt.projectName || 'N/A', "تاريخ العينة Sampling Date", this.asphalt.sampleDate || 'N/A'],
             ["اسم المقاول Contractor", this.asphalt.contractor || 'N/A', "تاريخ الاختبار Testing Date", this.asphalt.testingDate || 'N/A'],
@@ -565,8 +592,9 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
           // doc.text(`ASPHALT  MARSHALL & G.M.M TEST (${this.asphalt.classification})` , 60, 63)
 
 
-          const tableColumn = ['Symbol', 'Item', {content:'Test Results' , colSpan: 6}, 'الصنف'];
+          // const tableColumn = ['Symbol', 'Item', {content:'Test Results' , colSpan: 6}, 'الصنف'];
           const tableRows: RowInput[]  = [
+            [{content: 'Symbol' , styles:{fontSize: 10}}, {content: 'Item' , styles:{fontSize: 10}}, {content:'Test Results' , colSpan: 6 , styles:{fontSize: 10}}, {content: 'الصنف' , styles:{fontSize: 10 , halign: 'right'}}],
             ['Pb', '% A/C by tot. wt. of mix' ,
               { content: Number(this.asphalt.bitumen.percOfBit).toFixed(2), colSpan: 6, styles: { halign: 'center' } } , {content: '%نسبة الاسفلت من كامل الخلطة' , styles: { halign: 'right' }}
             ],
@@ -685,7 +713,7 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
           ];
 
           autoTable(doc, {
-            head: [tableColumn],
+            // head: [tableColumn],
             body: tableRows,
             theme: 'grid',
             startY:59,
@@ -697,14 +725,14 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
               textColor: [0, 0, 0],
               lineColor: [0, 0, 0]
             },
-            headStyles: {
-              font: 'Amiri',
-              fontStyle: 'bold',
-              fillColor: [255, 255, 255],
-              textColor: [0, 0, 0],
-              lineWidth: 0.5,
-              lineColor: [0, 0, 0],
-            },
+            // headStyles: {
+            //   font: 'Amiri',
+            //   fontStyle: 'bold',
+            //   fillColor: [255, 255, 255],
+            //   textColor: [0, 0, 0],
+            //   lineWidth: 0.5,
+            //   lineColor: [0, 0, 0],
+            // },
             columnStyles: {
               0: { cellWidth: 13 },
               1: { cellWidth: 48 },
@@ -740,7 +768,7 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
             );
 
             doc.setFont("Amiri", "bold");
-            doc.setFontSize(9);
+            doc.setFontSize(7);
             doc.text(splitNotes, startX + 4, footerY);
 
             remarksHeight = splitNotes.length * 5;
@@ -775,7 +803,7 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
           doc.setLineWidth(0.6);
           doc.rect(startX, blockTop, tableWidth, blockHeight);
 
-          doc.addImage(tail, 'PNG', 0, 265, 210, 33);
+          doc.addImage(tail, 'PNG', 0, 267, 210, 33);
           doc.setFontSize(5);
           doc.text(`Report Date: ${currentDateTime}`, 1, 290);
 
@@ -791,3 +819,4 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
 
 
 }
+
