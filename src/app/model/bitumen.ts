@@ -17,14 +17,14 @@ export interface Bitumen {
   weightOfBit: number;
 
   percOfBit: number;
+  percOfBit1: number;
 
   standard:string;
 
-  jmf: number;
   resultBit: string;
   equipmentUsed: string;
 
   expand: string;
-
+  // expandA: string;
 
 }
