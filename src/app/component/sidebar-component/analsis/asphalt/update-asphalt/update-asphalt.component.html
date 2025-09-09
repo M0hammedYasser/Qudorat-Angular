@@ -32,6 +32,31 @@
                  name="weightSampleAfter" required>
         </div>
         <div class="form-group">
+          <label class="col-form-label">U.Expand</label>
+          <input type="text" class="form-control"
+                 [(ngModel)]="asphalt.bitumen.expand"
+                 name="expand" required>
+        </div>
+
+
+<!-- 
+        <div class="form-group">
+          <label class="col-form-label">Perc of Bit %</label>
+          <input type="number" class="form-control"
+                 [(ngModel)]="asphalt.bitumen.percOfBit1"
+                 name="percOfBit1" required>
+        </div>
+        <div class="form-group">
+          <label class="col-form-label">Equipment Used</label>
+          <input type="text" class="form-control"
+                 [(ngModel)]="asphalt.bitumen.equipmentUsed"
+                 name="equipmentUsed" required>
+        </div> -->
+
+
+
+
+        <div class="form-group">
           <label class="col-form-label">Standard</label>
           <input type="text" class="form-control"
                  [(ngModel)]="asphalt.bitumen.standard"
@@ -97,7 +122,7 @@
 
       <div class="form-group">
         <label class="label">Expand</label>
-        <input type="text"  class="form-control" [(ngModel)]="asphalt.gradationTest.expandA" name="expandA"
+        <input type="text"  class="form-control" [(ngModel)]="asphalt.gradationTest.expandA" name="expandA" maxlength="6"
                id="expandA" required>
       </div>
 
@@ -136,7 +161,7 @@
         </div>
 
         <div class="form-group">
-          <input type="text"  class="form-control" [(ngModel)]="asphalt.gradationTest.expandB" name="expandB"
+          <input type="text"  class="form-control" [(ngModel)]="asphalt.gradationTest.expandB" name="expandB" maxlength="6"
                id="expandB" required>
         </div>
 
@@ -174,7 +199,7 @@
         </div>
 
         <div class="form-group">
-          <input type="text"  class="form-control" [(ngModel)]="asphalt.gradationTest.expandC" name="expandC"
+          <input type="text"  class="form-control" [(ngModel)]="asphalt.gradationTest.expandC" name="expandC" maxlength="6"
                id="expandC" required>
         </div>
 
@@ -213,7 +238,7 @@
         </div>
 
         <div class="form-group">
-          <input type="text"  class="form-control" [(ngModel)]="asphalt.gradationTest.expandD" name="expandD"
+          <input type="text"  class="form-control" [(ngModel)]="asphalt.gradationTest.expandD" name="expandD" maxlength="6"
                id="expandD" required>
         </div>
 
@@ -252,7 +277,7 @@
         </div>
 
         <div class="form-group">
-          <input type="text"  class="form-control" [(ngModel)]="asphalt.gradationTest.expandE" name="expandE"
+          <input type="text"  class="form-control" [(ngModel)]="asphalt.gradationTest.expandE" name="expandE" maxlength="6"
                id="expandE" required>
         </div>
 
@@ -291,7 +316,7 @@
         </div>
 
         <div class="form-group">
-          <input type="text"  class="form-control" [(ngModel)]="asphalt.gradationTest.expandF" name="expandF"
+          <input type="text"  class="form-control" [(ngModel)]="asphalt.gradationTest.expandF" name="expandF" maxlength="6"
                id="expandF" required>
         </div>
 
@@ -331,7 +356,7 @@
         </div>
 
         <div class="form-group">
-          <input type="text"  class="form-control" [(ngModel)]="asphalt.gradationTest.expandG" name="expandG"
+          <input type="text"  class="form-control" [(ngModel)]="asphalt.gradationTest.expandG" name="expandG" maxlength="6"
                id="expandG" required>
         </div>
 
@@ -371,7 +396,7 @@
         </div>
 
         <div class="form-group">
-          <input type="text"  class="form-control" [(ngModel)]="asphalt.gradationTest.expandH" name="expandH"
+          <input type="text"  class="form-control" [(ngModel)]="asphalt.gradationTest.expandH" name="expandH" maxlength="6"
                id="expandH" required>
         </div>
 
@@ -410,7 +435,7 @@
         </div>
 
         <div class="form-group">
-          <input type="text"  class="form-control" [(ngModel)]="asphalt.gradationTest.expandI" name="expandI"
+          <input type="text"  class="form-control" [(ngModel)]="asphalt.gradationTest.expandI" name="expandI" maxlength="6"
                id="expandI" required>
         </div>
 
@@ -445,7 +470,7 @@
         </div>
 
           <div class="form-group">
-            <input type="text"  class="form-control" [(ngModel)]="asphalt.gradationTest.expandJ" name="expandJ"
+            <input type="text"  class="form-control" [(ngModel)]="asphalt.gradationTest.expandJ" name="expandJ" maxlength="6"
                id="expandJ" required>
         </div>
 
@@ -456,12 +481,27 @@
 
     <!-- STEP 2: Asphalt Marshall -->
     <div *ngIf="currentStep === 3" class="form-step">
-      <div class="d-flex align-items-center gap-3 flex-wrap mb-3">
+            <div class="d-flex align-items-center gap-3 flex-wrap mb-3">
         <!-- Existing inputs -->
         <div class="align-items-center">
-          <label class="col-form-label me-2">Sample By</label>
+          <label class="col-form-label me-2">Contractor</label>
           <input type="text" class="form-control"
-                 [(ngModel)]="asphalt.sampleBy" name="sampleBy" required>
+                 [(ngModel)]="asphalt.contractor" name="contractor" required>
+        </div>
+        <div class="align-items-center">
+          <label class="col-form-label me-2">Job Order</label>
+          <input type="number" class="form-control"
+                 [(ngModel)]="asphalt.jobOrder" name="jobOrder" required>
+        </div>
+        <div class="align-items-center">
+          <label class="col-form-label me-2">Asphalt Applier</label>
+          <input type="text" class="form-control"
+                 [(ngModel)]="asphalt.asphaltApplier" name="asphaltApplier" required>
+        </div>
+        <div class="align-items-center">
+          <label class="col-form-label me-2">Request Description</label>
+          <input type="text" class="form-control"
+                 [(ngModel)]="asphalt.requestDescription" name="requestDescription" required>
         </div>
         <div class="align-items-center">
           <label class="col-form-label me-2">Sample Date</label>
@@ -469,41 +509,14 @@
                  [(ngModel)]="asphalt.sampleDate" name="sampleDate" required>
         </div>
         <div class="align-items-center">
-          <label class="col-form-label me-2">Test By</label>
-          <input type="text" class="form-control"
-                 [(ngModel)]="asphalt.testBy" name="testBy" required>
-        </div>
-        <div class="align-items-center">
           <label class="col-form-label me-2">Testing Date</label>
           <input type="date" class="form-control"
                  [(ngModel)]="asphalt.testingDate" name="testingDate" required>
         </div>
         <div class="align-items-center">
-          <label class="col-form-label me-2">Standard</label>
-          <input type="text" class="form-control"
-                 [(ngModel)]="asphalt.classification" name="classification" required>
-        </div>
-
-        <!-- New inputs -->
-        <div class="align-items-center">
-          <label class="col-form-label me-2">Test Name</label>
-          <input type="text" class="form-control"
-                 [(ngModel)]="asphalt.nameOfTest" name="nameOfTest" required>
-        </div>
-        <div class="align-items-center">
-          <label class="col-form-label me-2">Consultant</label>
-          <input type="text" class="form-control"
-                 [(ngModel)]="asphalt.consultant" name="consultant" required>
-        </div>
-        <div class="align-items-center">
-          <label class="col-form-label me-2">Owner</label>
-          <input type="text" class="form-control"
-                 [(ngModel)]="asphalt.owner" name="owner" required>
-        </div>
-        <div class="align-items-center">
-          <label class="col-form-label me-2">Location</label>
-          <input type="text" class="form-control"
-                 [(ngModel)]="asphalt.location" name="location" required>
+          <label class="col-form-label me-2">Sample Type</label>
+          <input type="date" class="form-control"
+                 [(ngModel)]="asphalt.sampleType" name="sampleType" required>
         </div>
         <div class="align-items-center">
           <label class="col-form-label me-2">Sample No</label>
@@ -511,14 +524,19 @@
                  [(ngModel)]="asphalt.sampleNo" name="sampleNo" required>
         </div>
         <div class="align-items-center">
-          <label class="col-form-label me-2">Asphalt Type</label>
+          <label class="col-form-label me-2">Sample By</label>
           <input type="text" class="form-control"
-                 [(ngModel)]="asphalt.asphaltType" name="asphaltType" required>
+                 [(ngModel)]="asphalt.sampleBy" name="sampleBy" required>
         </div>
         <div class="align-items-center">
-          <label class="col-form-label me-2">Asphalt Applier</label>
+          <label class="col-form-label me-2">Asphalt Layer</label>
           <input type="text" class="form-control"
-                 [(ngModel)]="asphalt.asphaltApplier" name="asphaltApplier" required>
+                 [(ngModel)]="asphalt.asphaltLayer" name="asphaltLayer" required>
+        </div>
+        <div class="align-items-center">
+          <label class="col-form-label me-2">Equipment Used </label>
+          <input type="text" class="form-control"
+                 [(ngModel)]="asphalt.equipmentUsed" name="equipmentUsed" required>
         </div>
       </div>
 
