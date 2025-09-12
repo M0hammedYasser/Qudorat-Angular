@@ -74,46 +74,37 @@ export class CompressiveStrengthReportComponent implements OnInit {
       autoTable(doc, {
         startY: 36,
         body: [
-          ['Project', this.compressiveStrength.projectName || 'N/A', 'Structure', this.compressiveStrength.structure || 'N/A' , " "],
-          ['Company', this.compressiveStrength.company || 'N/A', 'Sample by', this.compressiveStrength.sampleBy || 'N/A' , " "],
+          ['Project', this.compressiveStrength.projectName || 'N/A', 'Structure', this.compressiveStrength.structure || 'N/A' , {content: "" , rowSpan: 2}],
+          ['Company', this.compressiveStrength.company || 'N/A', 'Sample by', this.compressiveStrength.sampleBy || 'N/A' ],
           ['Location', this.compressiveStrength.location || 'N/A', 'Slump (mm) ASTM', this.compressiveStrength.slump || 'N/A' , "ASTM C143/C143M"],
           ['Data Casting', this.compressiveStrength.dataCasting || 'N/A', 'Temperature(°C)', this.compressiveStrength.temperature || 'N/A' , "ASTM C1064/C1064M"],
-          ['Data Received', this.compressiveStrength.dataReceived || 'N/A', 'Req. Strength for 28 Days (kg/cm2)', this.compressiveStrength.reqstrengthKg || 'N/A'],
-          ['Date Tested', this.compressiveStrength.dateTested || 'N/A', 'Req. Strength for 28 Days (Mpa)', Number(this.compressiveStrength.reqstrengthKg / 10.2).toFixed(2)|| 'N/A' , " "],
-          ['Report Date', reportDate || 'N/A', 'Sample No.', this.compressiveStrength.sampleNo || 'N/A' , " "],
-          ['Lab. Report No.', this.compressiveStrength.labreportNo || 'N/A' , " "],
-          ['Type of Sample', this.compressiveStrength.typeofSample || 'N/A' , " "]
+          ['Data Received', this.compressiveStrength.dataReceived || 'N/A', 'Req. Strength for 28 Days (kg/cm2)', this.compressiveStrength.reqstrengthKg || 'N/A' , {content: "" , rowSpan: 5}],
+          ['Date Tested', this.compressiveStrength.dateTested || 'N/A', 'Req. Strength for 28 Days (Mpa)', Number(this.compressiveStrength.reqstrengthKg / 10.2).toFixed(2)|| 'N/A'],
+          ['Report Date', reportDate || 'N/A', 'Sample No.', this.compressiveStrength.sampleNo || 'N/A'],
+          ['Lab. Report No.', this.compressiveStrength.labreportNo || 'N/A' , 'Type of Sample', this.compressiveStrength.typeofSample || 'N/A'],
         ],
         theme: 'grid',
-        styles: { fontSize: 6, cellPadding: 0.5 , font: 'Amiri' },
-        columnStyles: {
-          0: { cellWidth: 15 },
-          1: { cellWidth: 55 },
-          2: { cellWidth: 35 },
-          3: { cellWidth: 55 },
-          4: { cellWidth: 20 }
+        styles: {
+          fontSize: 7,
+          cellPadding: 0.5,
+          font: 'Amiri',
+          textColor: [0, 0, 0],
+          lineColor: [0, 0, 0],
+          lineWidth: 0.5
         },
+        tableLineColor: [0, 0, 0],
+        columnStyles: {
+          0: { cellWidth: 25 },
+          1: { cellWidth: 50 },
+          2: { cellWidth: 40 },
+          3: { cellWidth: 50 },
+          4: { cellWidth: 25 }
+        },
+        
       });
 
 
-      // autoTable(doc, {
-      //   startY: 67,
-      //   head: [['Parameter', 'Value', 'Unit', 'Spec', 'Value', 'Unit', 'Value', 'Unit']],
-      //   body: [
-      //     ['Cement Content', this.compressiveStrength.cementContent, this.compressiveStrength.cementContentType, 'Spec. 28 Days Strength', this.compressiveStrength.specTwintyEightDayStrength, 'kg/cm2', this.compressiveStrength.specTwintyEightDayStrength / 10, 'Mpa'],
-      //     ['Diameter', this.compressiveStrength.diameter * 10 , 'mm', 'Area', Number(this.area).toFixed(2), 'cm²'],
-      //     ['Height', this.compressiveStrength.height * 10, 'mm', 'Volume', Number(this.volume).toFixed(2), 'cm³'],
-      //     ['Environmental Conditions:', '', '', '', '', ''],
-      //     ['Date Cast', this.compressiveStrength.dateCast, '', 'Slump', this.compressiveStrength.slump, 'mm'],
-      //     ['Date Received', this.compressiveStrength.dateReceived, '', 'Air Temperature', this.compressiveStrength.airTemperature, '°C'],
-      //     ['Date Tested', this.compressiveStrength.dateTested, '', 'Concrete Temperature', this.compressiveStrength.concreteTemperature, '°C'],
-      //   ],
-      //   theme: 'grid',
-      //   styles: {fontSize: 8, cellPadding: 1.8},
-      //   columnStyles: {0: {cellWidth: 50}, 3: {cellWidth: 50}},
-      // });
-
-      let finalY = (doc as any).lastAutoTable.finalY + 3;
+      let finalY = (doc as any).lastAutoTable.finalY;
 
       const compStrengthA = (this.compressiveStrength.testLoadkgA * 101.971 /
         (Number(this.compressiveStrength.diaA) * Number(this.compressiveStrength.diaA) * 3.143 / 4));
@@ -152,7 +143,23 @@ export class CompressiveStrengthReportComponent implements OnInit {
           [this.compressiveStrength.sampleNOF, Number(this.compressiveStrength.diaF).toFixed(1), Number(this.compressiveStrength.lengthF).toFixed(1), (Number(this.compressiveStrength.diaF) * Number(this.compressiveStrength.diaF) * 3.143 / 4).toFixed(2), this.compressiveStrength.dateTested, this.compressiveStrength.weightSampleF, (Number(this.compressiveStrength.weightSampleF) / ((Number(this.compressiveStrength.diaF) * Number(this.compressiveStrength.diaF) * 3.143 / 4) * Number(this.compressiveStrength.lengthF))).toFixed(3), this.compressiveStrength.testLoadknF, this.compressiveStrength.testLoadkgF * 101.971, (Number(this.compressiveStrength.testLoadkgF) * 101.971 / (Number(this.compressiveStrength.diaF) * Number(this.compressiveStrength.diaF) * 3.143 / 4)).toFixed(1), ((Number(this.compressiveStrength.testLoadkgF) * 101.971 /(Number(this.compressiveStrength.diaF) * Number(this.compressiveStrength.diaF) * 3.143 / 4)) / 10.2).toFixed(2), this.compressiveStrength.expAvgF],
         ],
         theme: 'grid',
-        styles: {fontSize: 8, cellPadding: 1.8},
+        styles: {
+          fontSize: 7,
+          cellPadding: 1,
+          font: 'Amiri',
+          textColor: [0, 0, 0],
+          lineColor: [0, 0, 0],
+          lineWidth: 0.5
+        },
+        headStyles: {
+          fillColor: [255, 255, 255],
+          textColor: [0, 0, 0],
+          halign: 'center',
+          valign: 'middle',
+          lineWidth: 0.5,
+          lineColor: [0, 0, 0]
+        },
+        tableLineColor: [0, 0, 0],
         columnStyles: {
           0: {cellWidth: 10},
           1: {cellWidth: 15},
@@ -171,14 +178,15 @@ export class CompressiveStrengthReportComponent implements OnInit {
       });
 
 
-      finalY = (doc as any).lastAutoTable.finalY + 3;
+      finalY = (doc as any).lastAutoTable.finalY;
 
-      // Create the table, restricted to the left side
       autoTable(doc, {
         startY: finalY,
-        margin: {right: 100}, // leave space for the image on the right
-        head: [['Type', 'Description']],
+        margin: {right: 100},
         body: [
+          [{content:'Remarks' , rowSpan: 2} , 'Qudorat Laboratory Sample.' ],
+          ['Results relate only to the item Tested'],
+          ['Type Of Equipment Used' , 'Control/ID CCM-001'],
           ['TYPE 1', 'Less than 1 inch of cracking through caps'],
           ['TYPE 2', 'Vertical cracks running through caps'],
           ['TYPE 3', 'Columnar Vertical Cracking through both ends'],
@@ -187,7 +195,15 @@ export class CompressiveStrengthReportComponent implements OnInit {
           ['TYPE 6', 'Similar to type 5 but end of cylinder is pointed'],
         ],
         theme: 'grid',
-        styles: {fontSize: 8, cellPadding: 1.8},
+        styles: {
+          fontSize: 7,
+          cellPadding: 1,
+          font: 'Amiri',
+          textColor: [0, 0, 0],
+          lineColor: [0, 0, 0],
+          lineWidth: 0.5
+        },
+        tableLineColor: [0, 0, 0],
         columnStyles: {
           0: {cellWidth: 30},
           1: {cellWidth: 70},
@@ -195,27 +211,62 @@ export class CompressiveStrengthReportComponent implements OnInit {
       });
 
       const tableY = (doc as any).lastAutoTable.finalY;
-      doc.addImage('assets/compressiveStrength.png', 'JPEG', 115, finalY, 82, 47);
 
-      finalY = (doc as any).lastAutoTable.finalY + 3;
+      const pageWidth1 = doc.internal.pageSize.getWidth() + 8;
+      const tableWidth1 = 190; 
+      const startX1 = (pageWidth1 - tableWidth1) / 2;
+      doc.addImage('assets/compressiveStrength.png', 'JPEG', 120.5, finalY + 0.5, 83.5, 43);
 
+      const blockTop1 = finalY;
+      const blockBottom1 = 264;
+      const blockHeight1 = blockBottom1 - blockTop1;
 
-      doc.setFontSize(8);
-      if (this.compressiveStrength.notes) {
-        doc.line(10, finalY, 200, finalY);
-        const splitNotes = doc.splitTextToSize(
-          `Remarks: ${this.compressiveStrength.notes || ""}`,
-          180
-        );
-        doc.text(splitNotes, 13, finalY + 5);
-        finalY += (splitNotes.length * 7);
-      }
+      doc.setDrawColor(0, 0, 0);
+      doc.setLineWidth(0.6);
+      doc.rect(startX1, blockTop1, tableWidth1, blockHeight1);
 
-      doc.line(10, finalY - 4 , 200, finalY - 4);
-      doc.setFontSize(8);
-      doc.text(`Approved by: ${this.compressiveStrength.lastApproveBy || 'N/A'}`, 13, finalY);
-      doc.text(`Test by: ${this.compressiveStrength.testBy || 'N/A'}`, 80, finalY);
-      doc.text(`Checked by: ${this.compressiveStrength.adopter || 'N/A'}`, 150, finalY);
+      finalY = (doc as any).lastAutoTable.finalY ;
+
+        let footerY = finalY;
+        doc.setFontSize(8);
+        const pageWidth = doc.internal.pageSize.getWidth() + 8;
+        const tableWidth = 190; 
+        const startX = (pageWidth - tableWidth) / 2;
+        const endX = startX + tableWidth;
+        const boxWidth = tableWidth;
+
+        let remarksHeight = 0;
+        if (this.compressiveStrength.notes) {
+          const splitNotes = doc.splitTextToSize(
+            `Remarks: ${this.compressiveStrength.notes || ""}`,
+            boxWidth - 8
+          );
+
+          doc.setFont("Amiri", "bold");
+          doc.text(splitNotes, startX + 1, footerY + 3); 
+
+          remarksHeight = splitNotes.length * 5;
+          footerY += remarksHeight + 5;
+        }
+
+        doc.line(startX, 255, endX, 255);
+
+        doc.setFontSize(8);
+        const sectionWidth = tableWidth / 3; 
+
+        doc.text(`Approved by: ${this.compressiveStrength.adopter || " "}`, startX + 1, 260);
+
+        doc.text(`Test by: ${this.compressiveStrength.testBy || " "}`, startX + sectionWidth + 4, 260);
+
+        doc.text(`Checked by: ${this.compressiveStrength.approveBy || " "}`, startX + (sectionWidth * 2) + 4, 260);
+
+        const blockTop = finalY;
+        const blockBottom = 264;
+        const blockHeight = blockBottom - blockTop;
+
+        doc.setDrawColor(0, 0, 0);
+        doc.setLineWidth(0.6);
+        doc.rect(startX, blockTop, tableWidth, blockHeight);
 
       doc.addImage(tail, 'PNG', 0, 265, 210, 33);
 
