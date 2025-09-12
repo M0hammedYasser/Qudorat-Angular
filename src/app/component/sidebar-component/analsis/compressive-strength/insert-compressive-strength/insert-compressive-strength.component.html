@@ -6,49 +6,89 @@
 
         <div class="d-flex align-items-center gap-1 mb-1">
           <div class="align-items-center">
+            <label class="col-form-label me-1">Company</label>
+            <input type="text" class="form-control compact-input"
+                   [(ngModel)]="compressiveStrength.company" name="company" required>
+          </div>
+
+          <div class="align-items-center">
+            <label class="col-form-label me-1">Data Casting </label>
+            <input type="date" class="form-control compact-input"
+                   [(ngModel)]="compressiveStrength.dataCasting" name="dataCasting" required>
+          </div>
+
+          <div class="align-items-center">
+            <label class="col-form-label me-1">Data Received</label>
+            <input type="date" class="form-control compact-input"
+                   [(ngModel)]="compressiveStrength.dataReceived" name="dataReceived" required>
+          </div>
+
+          <div class="align-items-center">
+            <label class="col-form-label me-1">Date Tested</label>
+            <input type="number" class="form-control compact-input"
+                   [(ngModel)]="compressiveStrength.dateTested" name="dateTested" required>
+          </div>
+
+          <div class="align-items-center">
+            <label class="col-form-label me-1">Lab. Report No.</label>
+            <input type="text" class="form-control compact-input"
+                   [(ngModel)]="compressiveStrength.labreportNo" name="labreportNo" required>
+          </div>
+
+          <div class="align-items-center">
+            <label class="col-form-label me-1">Type of Sample</label>
+            <input type="text" class="form-control compact-input"
+                   [(ngModel)]="compressiveStrength.typeofSample" name="typeofSample" required>
+          </div>
+        </div>
+
+        <div class="d-flex align-items-center gap-1 mb-1">
+          <div class="align-items-center">
+            <label class="col-form-label me-1">Structure</label>
+            <input type="text" class="form-control compact-input"
+                   [(ngModel)]="compressiveStrength.structure" name="structure" required>
+          </div>
+
+          <div class="align-items-center">
             <label class="col-form-label me-1">Sample By</label>
             <input type="text" class="form-control compact-input"
                    [(ngModel)]="compressiveStrength.sampleBy" name="sampleBy" required>
           </div>
+
           <div class="align-items-center">
-            <label class="col-form-label me-1">Sample Date</label>
-            <input type="date" class="form-control compact-input"
-                   [(ngModel)]="compressiveStrength.sampleDate" name="sampleDate" required>
+            <label class="col-form-label me-1">Slump (mm) ASTM</label>
+            <input type="number" class="form-control compact-input"
+                   [(ngModel)]="compressiveStrength.slump" name="slump" required>
           </div>
+
+          <div class="align-items-center">
+            <label class="col-form-label me-1">Temperature(°C)</label>
+            <input type="number" class="form-control compact-input"
+                   [(ngModel)]="compressiveStrength.temperature" name="temperature" required>
+          </div>
+
+          <div class="align-items-center">
+            <label class="col-form-label me-1">Req. Strength for 28 Days (kg/cm2)</label>
+            <input type="number" class="form-control compact-input"
+                   [(ngModel)]="compressiveStrength.reqstrengthKg" name="reqstrengthKg" required>
+          </div>
+          
           <div class="align-items-center">
             <label class="col-form-label me-1">Sample No</label>
-            <input type="number" class="form-control compact-input"
-                   [(ngModel)]="compressiveStrength.sampleNo" name="sampleNo" required>
-          </div>
-          <div class="align-items-center">
-            <label class="col-form-label me-1">Test Name</label>
             <input type="text" class="form-control compact-input"
-                   [(ngModel)]="compressiveStrength.nameOfTest" name="nameOfTest" required>
+                   [(ngModel)]="compressiveStrength.sampleNo" name="sampleNo" required>
           </div>
         </div>
 
-        <!-- Second Line -->
-        <div class="d-flex align-items-center gap-1 mb-1">
-          <div class="align-items-center">
-            <label class="col-form-label me-1">Testing Date</label>
-            <input type="date" class="form-control compact-input"
-                   [(ngModel)]="compressiveStrength.testingDate" name="testingDate" required>
-          </div>
-
-          <div class="align-items-center">
-            <label class="col-form-label me-1">Standard</label>
-            <input type="text" class="form-control compact-input"
-                   [(ngModel)]="compressiveStrength.classification" name="classification" required>
-          </div>
-
+        <div class="align-items-center gap-1 mb-5">
           <div class="align-items-center">
             <label class="col-form-label me-1">Notes</label>
             <input type="text" class="form-control compact-input"
                   [(ngModel)]="compressiveStrength.notes" name="notes" maxlength="233">
           </div>
-
         </div>
-        <!-- Notes Line -->
+
+
         <h3 class="head mt-3">Concrete Compressive Strength Test</h3>
         
         <div class="form-row">
