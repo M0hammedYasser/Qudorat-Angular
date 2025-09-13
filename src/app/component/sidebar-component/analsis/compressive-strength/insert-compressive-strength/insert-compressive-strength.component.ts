@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {NgIf} from "@angular/common";
+import {JsonPipe, NgIf} from "@angular/common";
 import {CompressiveStrength} from "../../../../../model/compressive-strength";
 import {CompressiveStrengthService} from "../../../../../service/CompressiveStrength/compressive-strength.service";
 import {ActivatedRoute, Router} from "@angular/router";
@@ -11,7 +11,8 @@ import {Test} from "../../../../../model/test";
   standalone: true,
   imports: [
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    JsonPipe
   ],
   templateUrl: './insert-compressive-strength.component.html',
   styleUrl: './insert-compressive-strength.component.css'

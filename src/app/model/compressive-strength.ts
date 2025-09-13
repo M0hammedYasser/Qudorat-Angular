@@ -11,7 +11,8 @@ clientCode: any;
   location: string; //from DB
   dataCasting: string; //input
   dataReceived: string; //input
-  dateTested: number; //input ----- Day only
+  /**date cannot be number*/
+  dateTested: string; //input ----- Day only
   labreportNo: string; //input
   typeofSample: string; //input
   structure: string; //input
