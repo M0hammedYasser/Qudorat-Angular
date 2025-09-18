@@ -78,16 +78,16 @@ export interface Asphalt {
   flowB: number;
   flowC: number;
 
-  expandA1: string;
-  expandB1: string;
-  expandC1: string;
-  expandD1: string;
-  expandE1: string;
-  expandF1: string;
-  expandG1: string;
-  expandH1: string;
-  expandI1: string;
-  expandJ1: string;
+  expandgmmA: string;
+  expandgmmB: string;
+  expandgmmC: string;
+  expandgmmD: string;
+  expandgmmE: string;
+  expandgmmF: string;
+  expandgmmG: string;
+  expandgmmH: string;
+  expandgmmI: string;
+  expandgmmJ: string;
 
   netWeightOfLooseMix: number;
   netWeightOfFlaskWater: number;
