@@ -78,16 +78,20 @@ export interface Asphalt {
   flowB: number;
   flowC: number;
 
-  expandgmmA: string;
-  expandgmmB: string;
-  expandgmmC: string;
-  expandgmmD: string;
-  expandgmmE: string;
-  expandgmmF: string;
-  expandgmmG: string;
-  expandgmmH: string;
-  expandgmmI: string;
-  expandgmmJ: string;
+
+  percofbitExpand: string;
+  bulkspofcompMixExpand: string;
+  maxspofpavgmixExpand: string;
+  airvoidExpand: string;
+  voidmineralExpand: string;
+  voidfilledExpand: string;
+  effectiveaspExpand: string;
+  avgstabilityfor30minExpand: string;
+  lossofstabilityExpand: string;
+  avgflowExpand: string;
+  
+  
+
 
   netWeightOfLooseMix: number;
   netWeightOfFlaskWater: number;
