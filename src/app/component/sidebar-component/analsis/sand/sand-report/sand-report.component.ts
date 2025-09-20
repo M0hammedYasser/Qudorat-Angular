@@ -520,7 +520,7 @@ export class SandReportComponent implements AfterViewInit, OnInit {
           this.sieveAnalysis.cumulativeA,
           calcRetainedPercent(this.sieveAnalysis.cumulativeA).toFixed(2),
           calcPassingPercent(this.sieveAnalysis.cumulativeA).toFixed(2),
-          this.sieveAnalysis.expandA,
+          `${'±'} ${this.sieveAnalysis.expandA}`,
           this.sieveAnalysis.specificationLimitsA
         ],
         ["21/2", 62.5,
@@ -528,7 +528,7 @@ export class SandReportComponent implements AfterViewInit, OnInit {
           this.sieveAnalysis.cumulativeB,
           calcRetainedPercent(this.sieveAnalysis.cumulativeB).toFixed(2),
           calcPassingPercent(this.sieveAnalysis.cumulativeB).toFixed(2),
-          this.sieveAnalysis.expandB,
+          `${'±'} ${this.sieveAnalysis.expandB}`,
           this.sieveAnalysis.specificationLimitsB
         ],
         ["2", 50.0,
@@ -536,7 +536,7 @@ export class SandReportComponent implements AfterViewInit, OnInit {
           this.sieveAnalysis.cumulativeC,
           calcRetainedPercent(this.sieveAnalysis.cumulativeC).toFixed(2),
           calcPassingPercent(this.sieveAnalysis.cumulativeC).toFixed(2),
-          this.sieveAnalysis.expandC,
+          `${'±'} ${this.sieveAnalysis.expandC}`,
           this.sieveAnalysis.specificationLimitsC
         ],
         ["11/2", 37.5,
@@ -544,7 +544,7 @@ export class SandReportComponent implements AfterViewInit, OnInit {
           this.sieveAnalysis.cumulativeD,
           calcRetainedPercent(this.sieveAnalysis.cumulativeD).toFixed(2),
           calcPassingPercent(this.sieveAnalysis.cumulativeD).toFixed(2),
-          this.sieveAnalysis.expandD,
+          `${'±'} ${this.sieveAnalysis.expandD}`,
           this.sieveAnalysis.specificationLimitsD
         ],
         ["1", 25.0,
@@ -552,7 +552,7 @@ export class SandReportComponent implements AfterViewInit, OnInit {
           this.sieveAnalysis.cumulativeE,
           calcRetainedPercent(this.sieveAnalysis.cumulativeE).toFixed(2),
           calcPassingPercent(this.sieveAnalysis.cumulativeE).toFixed(2),
-          this.sieveAnalysis.expandE,
+          `${'±'} ${this.sieveAnalysis.expandE}`,
           this.sieveAnalysis.specificationLimitsE
         ],
         ["3/4", 19.0,
@@ -560,7 +560,7 @@ export class SandReportComponent implements AfterViewInit, OnInit {
           this.sieveAnalysis.cumulativeF,
           calcRetainedPercent(this.sieveAnalysis.cumulativeF).toFixed(2),
           calcPassingPercent(this.sieveAnalysis.cumulativeF).toFixed(2),
-          this.sieveAnalysis.expandF,
+          `${'±'} ${this.sieveAnalysis.expandF}`,
           this.sieveAnalysis.specificationLimitsF
         ],
         ["1/2", 12.5,
@@ -568,7 +568,7 @@ export class SandReportComponent implements AfterViewInit, OnInit {
           this.sieveAnalysis.cumulativeG,
           calcRetainedPercent(this.sieveAnalysis.cumulativeG).toFixed(2),
           calcPassingPercent(this.sieveAnalysis.cumulativeG).toFixed(2),
-          this.sieveAnalysis.expandG,
+          `${'±'} ${this.sieveAnalysis.expandG}`,
           this.sieveAnalysis.specificationLimitsG
         ],
         ["3/8", 9.5,
@@ -576,7 +576,7 @@ export class SandReportComponent implements AfterViewInit, OnInit {
           this.sieveAnalysis.cumulativeH,
           calcRetainedPercent(this.sieveAnalysis.cumulativeH).toFixed(2),
           calcPassingPercent(this.sieveAnalysis.cumulativeH).toFixed(2),
-          this.sieveAnalysis.expandH,
+          `${'±'} ${this.sieveAnalysis.expandH}`,
           this.sieveAnalysis.specificationLimitsH
         ],
         ["#4", 4.75,
@@ -584,7 +584,7 @@ export class SandReportComponent implements AfterViewInit, OnInit {
           this.sieveAnalysis.cumulativeI,
           calcRetainedPercent(this.sieveAnalysis.cumulativeI).toFixed(2),
           calcPassingPercent(this.sieveAnalysis.cumulativeI).toFixed(2),
-          this.sieveAnalysis.expandI,
+          `${'±'} ${this.sieveAnalysis.expandI}`,
           this.sieveAnalysis.specificationLimitsI
         ],
         ["#10", 2.00,
@@ -592,7 +592,7 @@ export class SandReportComponent implements AfterViewInit, OnInit {
           this.sieveAnalysis.cumulativeJ,
           calcRetainedPercent(this.sieveAnalysis.cumulativeJ).toFixed(2),
           calcPassingPercent(this.sieveAnalysis.cumulativeJ).toFixed(2),
-          this.sieveAnalysis.expandJ,
+          `${'±'} ${this.sieveAnalysis.expandJ}`,
           this.sieveAnalysis.specificationLimitsJ
         ],
         ["#40", 0.425,
@@ -600,7 +600,7 @@ export class SandReportComponent implements AfterViewInit, OnInit {
           this.sieveAnalysis.cumulativeK,
           calcRetainedPercent(this.sieveAnalysis.cumulativeK).toFixed(2),
           calcPassingPercent(this.sieveAnalysis.cumulativeK).toFixed(2),
-          this.sieveAnalysis.expandK,
+          `${'±'} ${this.sieveAnalysis.expandK}`,
           this.sieveAnalysis.specificationLimitsK
         ],
         ["#100", 0.150,
@@ -608,7 +608,7 @@ export class SandReportComponent implements AfterViewInit, OnInit {
           this.sieveAnalysis.cumulativeL,
           calcRetainedPercent(this.sieveAnalysis.cumulativeL).toFixed(2),
           calcPassingPercent(this.sieveAnalysis.cumulativeL).toFixed(2),
-          this.sieveAnalysis.expandL,
+          `${'±'} ${this.sieveAnalysis.expandL}`,
           this.sieveAnalysis.specificationLimitsL
         ],
         ["#200", 0.075,
@@ -616,7 +616,7 @@ export class SandReportComponent implements AfterViewInit, OnInit {
           this.sieveAnalysis.cumulativeM,
           calcRetainedPercent(this.sieveAnalysis.cumulativeM).toFixed(2),
           calcPassingPercent(this.sieveAnalysis.cumulativeM).toFixed(2),
-          this.sieveAnalysis.expandM,
+          `${'±'} ${this.sieveAnalysis.expandM}`,
           this.sieveAnalysis.specificationLimitsM
         ],
         [{content: "Total Wt." , colSpan: 2}, "", this.sieveAnalysis.totalWeigh, "", "", "", ""]
