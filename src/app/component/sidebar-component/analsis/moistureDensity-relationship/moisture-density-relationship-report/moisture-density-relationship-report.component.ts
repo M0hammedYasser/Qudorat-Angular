@@ -234,21 +234,22 @@ export class MoistureDensityRelationshipReportComponent implements OnInit {
         theme: 'grid',
         styles: {
           fontSize: 7,
-          halign: 'left',
-          valign: 'middle',
           cellPadding: 1,
-          font: 'Amiri'
+          font: 'Amiri',
+          textColor: [0, 0, 0],
+          lineColor: [0, 0, 0],
+          lineWidth: 0.5
         },
         columnStyles: {
-          0: { cellWidth: 32 },
+          0: { cellWidth: 32.5 },
           1: { cellWidth: 60 },
-          2: { cellWidth: 32 },
+          2: { cellWidth: 32.5 },
           3: { cellWidth: 60 }
         },
         margin: { left: 14, right: 14 }
       });
 
-      let finalY = (doc as any).lastAutoTable.finalY + 1;
+      let finalY = (doc as any).lastAutoTable.finalY;
 
       // Prepare headers and column styles based on whether column E is hidden
       const trialHeaders = hideColumnE ?
@@ -316,22 +317,26 @@ export class MoistureDensityRelationshipReportComponent implements OnInit {
         theme: 'grid',
         styles: {
           fontSize: 7,
-          cellPadding: 2,
+          cellPadding: 1,
           halign: 'center',
           valign: 'middle',
-          lineWidth: 0.3,
+          lineWidth: 0.5,
+          textColor: [0, 0, 0],
           lineColor: [0, 0, 0]
         },
         headStyles: {
-          fillColor: [220, 220, 220],
+          fillColor: [255, 255, 255],
           textColor: [0, 0, 0],
-          fontStyle: 'bold'
+          halign: 'center',
+          valign: 'middle',
+          lineWidth: 0.5,
+          lineColor: [0, 0, 0]
         },
         columnStyles: mouldDataColumnStyles,
         margin: { left: 14, right: 14 }
       });
 
-      finalY = (doc as any).lastAutoTable.finalY + 1;
+      finalY = (doc as any).lastAutoTable.finalY;
 
       // Prepare data rows for Moisture Content table
       const moistureContentRows = [
@@ -381,16 +386,20 @@ export class MoistureDensityRelationshipReportComponent implements OnInit {
         theme: 'grid',
         styles: {
           fontSize: 7,
-          cellPadding: 2,
+          cellPadding: 1,
           halign: 'center',
           valign: 'middle',
-          lineWidth: 0.3,
+          lineWidth: 0.5,
+          textColor: [0, 0, 0],
           lineColor: [0, 0, 0]
         },
         headStyles: {
-          fillColor: [220, 220, 220],
+          fillColor: [255, 255, 255],
           textColor: [0, 0, 0],
-          fontStyle: 'bold'
+          halign: 'center',
+          valign: 'middle',
+          lineWidth: 0.5,
+          lineColor: [0, 0, 0]
         },
         columnStyles: mouldDataColumnStyles,
         margin: { left: 14, right: 14 }
@@ -401,7 +410,25 @@ export class MoistureDensityRelationshipReportComponent implements OnInit {
       setTimeout(() => {
         const canvasElement = this.compactionChartCanvas.nativeElement;
         const chartImage = canvasElement.toDataURL('image/png');
-        doc.addImage(chartImage, 'PNG', 12, finalY + 3, 130, 55);
+
+        const pageWidth = doc.internal.pageSize.getWidth();
+        const borderW = 231;
+        const borderH = 70;
+        const scale = 0.8;
+        const scaledBorderW = borderW * scale;
+        const scaledBorderH = borderH * scale;
+        const borderX = (pageWidth - scaledBorderW) / 1.8;
+        const borderY = finalY ;
+        const chartW = scaledBorderW - 60;
+        const chartH = scaledBorderH - 10;
+        const chartX = borderX + (scaledBorderW - chartW) / 6;
+        const chartY = borderY + (scaledBorderH - chartH) / 2;
+
+        doc.addImage(chartImage, 'PNG', chartX, chartY, chartW, chartH);
+
+        doc.setDrawColor(0, 0, 0);
+        doc.setLineWidth(0.6);
+        doc.rect(borderX, borderY, scaledBorderW, scaledBorderH);
 
         const startX = 145;
         let y = finalY + 20;
@@ -410,31 +437,63 @@ export class MoistureDensityRelationshipReportComponent implements OnInit {
         const col2Width = 30;
 
         doc.setFontSize(10);
-        doc.rect(startX, y, col1Width, rowHeight);
-        doc.rect(startX + col1Width, y, col2Width, rowHeight);
-        doc.text("M.D.D (gm/cc)", startX + 2, y + 7);
-        doc.text(this.dryDensityC.toFixed(3), startX + col1Width + 2, y + 7);
+        doc.rect(startX + 4.5, y, col1Width - 3, rowHeight);
+        doc.rect(startX + col1Width + 1.5 , y, col2Width - 10, rowHeight);
+        doc.text("M.D.D (gm/cc)", startX + 5.5, y + 7);
+        doc.text(this.dryDensityC.toFixed(3), startX + col1Width + 3, y + 7);
         y += rowHeight + 2;
 
-        doc.rect(startX, y, col1Width, rowHeight);
-        doc.rect(startX + col1Width, y, col2Width, rowHeight);
-        doc.text("O.M.C %", startX + 2, y + 7);
-        doc.text(this.moistureContentC.toFixed(2), startX + col1Width + 2, y + 7);
+        doc.rect(startX + 4.5, y, col1Width - 3, rowHeight);
+        doc.rect(startX + col1Width + 1.5, y, col2Width - 10, rowHeight);
+        doc.text("O.M.C %", startX + 5.5, y + 7);
+        doc.text(this.moistureContentC.toFixed(2), startX + col1Width + 3, y + 7);
 
-        finalY += 60;
+        finalY += 56;
 
+        let footerY = finalY;
+        doc.setFontSize(8);
+
+        const pageWidth1 = doc.internal.pageSize.getWidth();
+        const tableWidth1 = 184.7; 
+        const startX1 = (pageWidth1 - tableWidth1) / 1.8;
+        const endX1 = startX1 + tableWidth1;
+        const boxWidth = tableWidth1;
+
+        let remarksHeight = 0;
         if (this.moistureDensityRelationship.notes) {
-          doc.line(10, finalY, 200, finalY);
-          const splitNotes = doc.splitTextToSize(`Remarks: ${this.moistureDensityRelationship.notes || ""}`, 180);
-          doc.text(splitNotes, 13, finalY + 4);
-          finalY += (splitNotes.length * 7);
+          const splitNotes = doc.splitTextToSize(
+            `Remarks: ${this.moistureDensityRelationship.notes || ""}`,
+            boxWidth - 8
+          );
+
+          doc.setFont("Amiri", "bold");
+          doc.text(splitNotes, startX1 + 1, footerY + 3); 
+
+          remarksHeight = splitNotes.length * 5;
+          footerY += remarksHeight + 5;
         }
 
-        doc.line(10, 258, 200, 258);
+        doc.line(startX1, 258, endX1, 258);
+
         doc.setFontSize(7);
-        doc.text(`Approved by: ${this.moistureDensityRelationship.lastApproveBy || 'N/A'}`, 12, 261);
-        doc.text(`Test by: ${this.moistureDensityRelationship.testBy || 'N/A'}`, 85, 261);
-        doc.text(`Checked by: ${this.moistureDensityRelationship.adopter || 'N/A'}`, 150, 261);
+        const sectionWidth = tableWidth1 / 3; 
+
+        doc.text(`Approved by: ${this.moistureDensityRelationship.adopter || " "}`, startX1 + 1, 261);
+
+        doc.text(`Test by: ${this.moistureDensityRelationship.testBy || " "}`, startX1 + sectionWidth + 4, 261);
+
+        doc.text(`Checked by: ${this.moistureDensityRelationship.approveBy || " "}`, startX1 + (sectionWidth * 2) + 4, 261);
+
+        const blockTop = finalY;
+        const blockBottom = 264;
+        const blockHeight = blockBottom - blockTop;
+
+        doc.setDrawColor(0, 0, 0);
+        doc.setLineWidth(0.6);
+        doc.rect(startX1, blockTop, tableWidth1, blockHeight);
+
+
+
 
         doc.addImage(tail, 'PNG', 0, 265, 210, 33);
 
