@@ -8,6 +8,8 @@ import Chart from "chart.js/auto";
 import {DecimalPipe, NgIf} from '@angular/common';
 import {AuthenticationService} from "../../../../../service/authentication/authentication.service";
 import { content } from 'html2canvas/dist/types/css/property-descriptors/content';
+import { style } from '@angular/animations';
+import { fontWeight } from 'html2canvas/dist/types/css/property-descriptors/font-weight';
 declare let AmiriFont: any;
 
 
@@ -275,17 +277,17 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
 
 
       const bitumenRows = [
-        ['Wt. sample before gm', {content: this.asphalt.bitumen.weightSampleBefore , colSpan: 2}, {content: '' , rowSpan: 10}],
-        ['Wt. of filter before gm', {content: this.asphalt.bitumen.weightFilterBefore , colSpan: 2}],
-        ['Wt. Of filter after gm', {content: this.asphalt.bitumen.weightFilterAfter , colSpan: 2}],
-        ['Increase of filter wt. gm', {content: Number(this.asphalt.bitumen.increaseOfFilterWeight).toFixed(1) , colSpan: 2}],
-        ['Wt. of sample after gm', {content: this.asphalt.bitumen.weightSampleAfter , colSpan: 2}],
-        ['Total wt. of sample gm', {content: Number(this.asphalt.bitumen.totalWeightOfSample).toFixed(1) , colSpan: 2}],
-        ['Wt. of bit. gm', {content: Number(this.asphalt.bitumen.weightOfBit).toFixed(1) , colSpan: 2}],
-        ['Perc of Bit %', {content: Number(this.asphalt.bitumen.percOfBit).toFixed(2) , colSpan: 2}],
-        ['JMF', '4.80', '5.60'],
-        ['Result Bit', {content: `${Number(this.asphalt.bitumen.percOfBit).toFixed(2)} ${'±'} ${this.asphalt.bitumen.expand || ''}`, colSpan: 2 }],
-        ['Equipment Used', {content:'BE-0001 Balance 6kg' , colSpan: 3}],
+        ['Wt. sample before gm', {content: this.asphalt.bitumen.weightSampleBefore || ' ' , colSpan: 2}, {content: '' , rowSpan: 7}],
+        ['Wt. of filter before gm', {content: this.asphalt.bitumen.weightFilterBefore || ' ' , colSpan: 2}],
+        ['Wt. Of filter after gm', {content: this.asphalt.bitumen.weightFilterAfter || ' ' , colSpan: 2}],
+        ['Increase of filter wt. gm', {content: `${(this.asphalt.bitumen.weightFilterAfter - this.asphalt.bitumen.weightFilterBefore).toFixed(1) || ' ' }` , colSpan: 2}],
+        ['Wt. of sample after gm', {content: this.asphalt.bitumen.weightSampleAfter || ' '  , colSpan: 2}],
+        ['Total wt. of sample gm', {content: `${(this.asphalt.bitumen.weightSampleAfter + (this.asphalt.bitumen.weightFilterAfter - this.asphalt.bitumen.weightFilterBefore)).toFixed(1) || ' ' }`, colSpan: 2}],
+        ['Wt. of bit. gm', {content: `${(this.asphalt.bitumen.weightSampleBefore - (this.asphalt.bitumen.weightSampleAfter + (this.asphalt.bitumen.weightFilterAfter - this.asphalt.bitumen.weightFilterBefore))).toFixed(1)}` , colSpan: 2}],
+        ['Perc of Bit %', {content: `${(((this.asphalt.bitumen.weightSampleBefore - (this.asphalt.bitumen.weightSampleAfter + (this.asphalt.bitumen.weightFilterAfter - this.asphalt.bitumen.weightFilterBefore))) / this.asphalt.bitumen.weightSampleBefore) * 100 ).toFixed(1)}` , colSpan: 2} , this.asphalt.bitumen.percofBit || ' ' ],
+        ['JMF', `${(this.asphalt.bitumen.percofBit - 0.4).toFixed(2)}`, `${(this.asphalt.bitumen.percofBit + 0.4).toFixed(2)}` , `${'±'} ${this.asphalt.bitumen.jmf || ' ' }`],
+        ['Result Bit', {content: `${(((this.asphalt.bitumen.weightSampleBefore - (this.asphalt.bitumen.weightSampleAfter + (this.asphalt.bitumen.weightFilterAfter - this.asphalt.bitumen.weightFilterBefore))) / this.asphalt.bitumen.weightSampleBefore) * 100 ).toFixed(1)} ${'±'} ${this.asphalt.bitumen.expand || ''}`, colSpan: 2 }],
+        ['Equipment Used', {content:this.asphalt.bitumen.equipmentUsed || ' '  , colSpan: 3}],
       ];
 
       autoTable(doc, {
@@ -337,7 +339,7 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
        ['0.425', '#40', this.asphalt.gradationTest.massRetainedH, Number(this.asphalt.gradationTest.retainedH).toFixed(1), Number(100 - this.asphalt.gradationTest.retainedH).toFixed(2), this.asphalt.gradationTest.cvcMinH, this.asphalt.gradationTest.cvcMaxH , this.asphalt.gradationTest.gcvcMinH, this.asphalt.gradationTest.gcvcMaxH , `${'±'} ${this.asphalt.gradationTest.expandH}`],
        ['0.180', '#80', this.asphalt.gradationTest.massRetainedI, Number(this.asphalt.gradationTest.retainedI).toFixed(1), Number(100 - this.asphalt.gradationTest.retainedI).toFixed(2), this.asphalt.gradationTest.cvcMinI, this.asphalt.gradationTest.cvcMaxI , this.asphalt.gradationTest.gcvcMinI, this.asphalt.gradationTest.gcvcMaxI , `${'±'} ${this.asphalt.gradationTest.expandI}`],
        ['0.075', '#200', this.asphalt.gradationTest.massRetainedJ, Number(this.asphalt.gradationTest.retainedJ).toFixed(1), Number(100 - this.asphalt.gradationTest.retainedJ).toFixed(2), this.asphalt.gradationTest.cvcMinJ, this.asphalt.gradationTest.cvcMaxJ , this.asphalt.gradationTest.gcvcMinJ, this.asphalt.gradationTest.gcvcMaxJ , `${'±'} ${this.asphalt.gradationTest.expandJ}`], 
-       [{content : 'Total Weight' , colSpan: 2}, this.asphalt.gradationTest.totalWeigh],
+       [{content : 'Total Weight' , colSpan: 2}, `${(this.asphalt.bitumen.weightSampleAfter + (this.asphalt.bitumen.weightFilterAfter - this.asphalt.bitumen.weightFilterBefore)).toFixed(1)}`],
       ];
 
       // SIEVE ANALYSIS table on the RIGHT
@@ -412,14 +414,14 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
 
           const sampleColumn = ['Item No', 'Limits', 'Result', 'Remarks'];
           const sampleRows = [
-            ['Voids in mineral Agg. %', '14% Min', Number(this.voidMineral).toFixed(2) , { content: this.asphalt.remarks && this.asphalt.remarks.trim() !== '' ? this.asphalt.remarks : 'N/A', rowSpan: 8 }],
-            ['Air Voids %', '3.0 -- 5.0' , Number(this.airVoid).toFixed(1) ],
-            ['Bitumen Content %', '(5.2 ± 0.4)' , '4.88±0.0.001'],
-            ['Loss of Stability kgm', '1000 Min' , Number(this.avgStabilityFor30Min).toFixed(0)],
-            ['Voids filled with Asp. %', '65 -- 75' , Number(this.voidFilled).toFixed(1)],
-            ['Max density as per design (gm/cm3)', '2.556' , Number(this.maxSpOfPAvgMix).toFixed(3) ],
-            ['Flow (mm)', '2 -- 4' , Number((this.asphalt.flowA + this.asphalt.flowB + this.asphalt.flowC) / 3).toFixed(2)],
-            ['Loss of Stability %', '25% Max' , `${((this.avgStabilityFor30Min - this.avgStabilityFor24Hrs) / this.avgStabilityFor30Min * 100).toFixed(1)}`],
+            ['Voids in mineral Agg. %', this.asphalt.VoidsinmineralaggLimits || ' ' , Number(this.voidMineral).toFixed(2) , { content: this.asphalt.remarks && this.asphalt.remarks.trim() !== '' ? this.asphalt.remarks : ' ', rowSpan: 8 }],
+            ['Air Voids %', this.asphalt.AirvoidsLimits || ' ' , Number(this.airVoid).toFixed(1) ],
+            ['Bitumen Content %', this.asphalt.BitumencontentLimits || ' ' , '4.88±0.0.001'],
+            ['Loss of Stability kgm', this.asphalt.LossofstabilitykgmLimits || ' ' , Number(this.avgStabilityFor30Min).toFixed(0)],
+            ['Voids filled with Asp. %', this.asphalt.VoidsfilledwithaspLimits || ' ' , Number(this.voidFilled).toFixed(1)],
+            ['Max density as per design (gm/cm3)', this.asphalt.MaxdensityasperdesignLimits || ' ' , Number(this.maxSpOfPAvgMix).toFixed(3) ],
+            ['Flow (mm)', this.asphalt.FlowLimits || ' ' , Number((this.asphalt.flowA + this.asphalt.flowB + this.asphalt.flowC) / 3).toFixed(2)],
+            ['Loss of Stability %', this.asphalt.LossofstabilityLimits || ' ' , `${((this.avgStabilityFor30Min - this.avgStabilityFor24Hrs) / this.avgStabilityFor30Min * 100).toFixed(1)}`],
           ];
 
           autoTable(doc, {
