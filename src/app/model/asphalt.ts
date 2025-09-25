@@ -34,6 +34,15 @@ export interface Asphalt {
   asphaltType: string;
   asphaltApplier: string;
 
+  VoidsinmineralaggLimits: string;
+  AirvoidsLimits: string;
+  BitumencontentLimits: string;
+  LossofstabilitykgmLimits: string;
+  VoidsfilledwithaspLimits: string;
+  MaxdensityasperdesignLimits: string;
+  FlowLimits: string;
+  LossofstabilityLimits: string;
+
   weightAirDryA: number;
   weightAirDryB: number;
   weightAirDryC: number;
