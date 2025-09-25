@@ -257,7 +257,7 @@ export class AtterbergReportComponent implements OnInit {
 
   generatePDF() {
     const doc = new jsPDF();
-    doc.addFileToVFS('Amiri-Regular.ttf', AmiriFont); // هذا اسم المتغير في ملف الخط
+    doc.addFileToVFS('Amiri-Regular.ttf', AmiriFont); 
     doc.addFont('Amiri-Regular.ttf', 'Amiri', 'normal');
     doc.setFont('Amiri');
     const head = new Image();
@@ -286,22 +286,26 @@ export class AtterbergReportComponent implements OnInit {
         startY: 36,
         theme: 'grid',
         styles: {
-          fontSize: 8,
-          cellPadding: 1,font: 'Amiri'
+          fontSize: 7,
+          cellPadding: 0.5,
+          font: 'Amiri',
+          textColor: [0, 0, 0],
+          lineColor: [0, 0, 0],
+          lineWidth: 0.5
         },
         columnStyles: {
-          0: { cellWidth: 32 },
-          1: { cellWidth: 58 },
-          2: { cellWidth: 32 },
-          3: { cellWidth: 59 }
+          0: { cellWidth: 34.5 },
+          1: { cellWidth: 60.5 },
+          2: { cellWidth: 34.5 },
+          3: { cellWidth: 60.5 }
         },
-        margin: { left: 13, right: 13 },
+        margin: { left: 10, right: 13 },
         tableWidth: 'auto'
       });
 
 
       autoTable(doc, {
-        startY: 65 ,
+        startY: 55 ,
         head: [
           [
             {content: 'TEST', colSpan: 3, styles: {lineWidth: 0.5}},
@@ -368,38 +372,40 @@ export class AtterbergReportComponent implements OnInit {
         ],
         theme: 'grid',
         styles: {
-          fontSize: 5,
-          cellPadding: 2,
+          fontSize: 7,
+          cellPadding: 0.5,
+          halign: 'center',
+          valign: 'middle',
+          lineWidth: 0.5,
+          textColor: [0, 0, 0],
+          lineColor: [0, 0, 0]
+        },
+        headStyles: {
+          fillColor: [255, 255, 255],
+          textColor: [0, 0, 0],
           halign: 'center',
           valign: 'middle',
           lineWidth: 0.5,
           lineColor: [0, 0, 0]
         },
-        headStyles: {
-          fillColor: [220, 220, 220],
-          textColor: [0, 0, 0],
-          fontStyle: 'bold',
-          lineWidth: 0.5,
-          lineColor: [0, 0, 0]
-        },
         columnStyles: {
           0: {cellWidth: 30, halign: 'left'},
-          1: {cellWidth: 15},
-          2: {cellWidth: 15},
-          3: {cellWidth: 15},
-          4: {cellWidth: 15},
-          5: {cellWidth: 15},
-          6: {cellWidth: 15},
-          7: {cellWidth: 15},
-          8: {cellWidth: 15},
-          9: {cellWidth: 15},
-          10: {cellWidth: 15}
+          1: {cellWidth: 16},
+          2: {cellWidth: 16},
+          3: {cellWidth: 16},
+          4: {cellWidth: 16},
+          5: {cellWidth: 16},
+          6: {cellWidth: 16},
+          7: {cellWidth: 16},
+          8: {cellWidth: 16},
+          9: {cellWidth: 16},
+          10: {cellWidth: 16}
         },
-        margin: {left: 14}
+        margin: {left: 10}
       });
 
       autoTable(doc, {
-        startY: (doc as any).lastAutoTable.finalY + 5,
+        startY: (doc as any).lastAutoTable.finalY,
         body: [
           ['Liquid Limit (LL or wL) (%):', this.atterbergLimits.liquidLimit],
           ['Plastic Limit (PL or wP) (%):', this.atterbergLimits.plasticLimit],
@@ -408,55 +414,122 @@ export class AtterbergReportComponent implements OnInit {
         ],
         theme: 'grid',
         styles: {
-          fontSize: 5,
-          cellPadding: 2,
+          fontSize: 7,
+          cellPadding: 0.5,
+          halign: 'center',
+          valign: 'middle',
           lineWidth: 0.5,
+          textColor: [0, 0, 0],
           lineColor: [0, 0, 0]
         },
         columnStyles: {
-          0: {cellWidth: 40, halign: 'left'},
-          1: {cellWidth: 15},
-          2: {cellWidth: 15},
-          3: {cellWidth: 15},
-          7: {cellWidth: 20}
-        }
+          0: {cellWidth: 100, halign: 'left'},
+          1: {cellWidth: 90},
+        },
+        margin: {left: 10}
       });
 
-      let finalY = (doc as any).lastAutoTable.finalY + 3;
+      let finalY = (doc as any).lastAutoTable.finalY ;
 
       setTimeout(() => {
         const chartCanvases = document.querySelectorAll('canvas') as NodeListOf<HTMLCanvasElement>;
 
         if (chartCanvases.length > 0) {
           const chartImage1 = chartCanvases[0].toDataURL('image/png');
-          doc.addImage(chartImage1, 'PNG', 72, finalY - 30, 123, 55);
 
-          // Optional space or heading between charts
+          const pageWidth = doc.internal.pageSize.getWidth();
+          const borderW = 237.5;
+          const borderH = 70;
+          const scale = 0.8;
+          const scaledBorderW = borderW * scale;
+          const scaledBorderH = borderH * scale;
+          const borderX = (pageWidth - scaledBorderW) / 2;
+          const borderY = finalY ;
+          const chartW = scaledBorderW - 2;
+          const chartH = scaledBorderH - 10;
+          const chartX = borderX + (scaledBorderW - chartW) / 2;
+          const chartY = borderY + (scaledBorderH - chartH) / 2;
+
+          doc.addImage(chartImage1, 'PNG',  chartX, chartY, chartW, chartH);
+
+          doc.setDrawColor(0, 0, 0);
+          doc.setLineWidth(0.6);
+          doc.rect(borderX, borderY, scaledBorderW, scaledBorderH);
+
           doc.setFontSize(10);
-          finalY += 30;
+          finalY += 56;
 
-          // Second Chart (e.g., index 1)
           if (chartCanvases.length > 1) {
             const chartImage2 = chartCanvases[1].toDataURL('image/png');
-            doc.addImage(chartImage2, 'PNG', 10, finalY, 123, 55);
+
+            const pageWidth = doc.internal.pageSize.getWidth();
+            const borderW = 237.5;
+            const borderH = 70;
+            const scale = 0.8;
+            const scaledBorderW = borderW * scale;
+            const scaledBorderH = borderH * scale;
+            const borderX = (pageWidth - scaledBorderW) / 2;
+            const borderY = finalY ;
+            const chartW = scaledBorderW - 2;
+            const chartH = scaledBorderH - 10;
+            const chartX = borderX + (scaledBorderW - chartW) / 2;
+            const chartY = borderY + (scaledBorderH - chartH) / 2;
+
+
+            doc.addImage(chartImage2, 'PNG',  chartX, chartY, chartW, chartH);
+
+            doc.setDrawColor(0, 0, 0);
+            doc.setLineWidth(0.6);
+            doc.rect(borderX, borderY, scaledBorderW, scaledBorderH);
             finalY += 40;
           }
         }
 
-        // Notes section (unchanged)
+        finalY += 16;
+        let footerY = finalY ;
+        doc.setFontSize(8);
+
+        const pageWidth = doc.internal.pageSize.getWidth();
+        const tableWidth = 190; 
+        const startX = (pageWidth - tableWidth) / 2;
+        const endX = startX + tableWidth;
+        const boxWidth = tableWidth;
+
+        let remarksHeight = 0;
         if (this.atterbergLimits.notes) {
-          doc.line(10, finalY + 18, 200, finalY + 18);
-          const splitNotes = doc.splitTextToSize(`Remarks: ${this.atterbergLimits.notes || ""}`, 180);
-          doc.text(splitNotes, 13, finalY + 21);
-          finalY += (splitNotes.length * 7);
+          const splitNotes = doc.splitTextToSize(
+            `Remarks: ${this.atterbergLimits.notes || ""}`,
+            boxWidth - 9
+          );
+
+          doc.setFont("Amiri", "bold");
+          doc.text(splitNotes, startX + 1, footerY + 3);
+
+          remarksHeight = splitNotes.length * 5;
+          footerY += remarksHeight + 5;
         }
 
-        // Signatures & Footer
-        doc.line(10, 262, 200, 262);
-        doc.setFontSize(10);
-        doc.text(`Approved by: ${this.atterbergLimits.lastApproveBy || 'N/A'}`, 13, 266);
-        doc.text(`Test by: ${this.atterbergLimits.testBy || 'N/A'}`, 80, 266);
-        doc.text(`Checked by: ${this.atterbergLimits.adopter || 'N/A'}`, 150, 266);
+        doc.line(startX, 260, endX, 260);
+
+        doc.setFontSize(7);
+        const sectionWidth = tableWidth / 3; 
+
+        doc.text(`Approved by: ${this.atterbergLimits.adopter || " "}`, startX + 1, 264);
+
+        doc.text(`Test by: ${this.atterbergLimits.testBy || " "}`, startX + sectionWidth + 4, 264);
+
+        doc.text(`Checked by: ${this.atterbergLimits.approveBy || " "}`, startX + (sectionWidth * 2) + 4, 264);
+
+        const blockTop = finalY;
+        const blockBottom = 266;
+        const blockHeight = blockBottom - blockTop;
+
+        doc.setDrawColor(0, 0, 0);
+        doc.setLineWidth(0.6);
+        doc.rect(startX, blockTop, tableWidth, blockHeight);
+
+
+
         doc.addImage(tail, 'PNG', 0, 267, 210, 33);
 
         doc.setFontSize(5);
@@ -469,7 +542,7 @@ export class AtterbergReportComponent implements OnInit {
           return `${year}-${month}-${day} ${hours}:${minutes}`;
         };
         const currentDateTime = formatDateTime(new Date());
-        doc.text(`Report Date: ${currentDateTime}`, 1, 290);
+        doc.text(`Report Date: ${currentDateTime}`, 1, 300);
 
         doc.save(`AtterbergLimitsReport_${this.atterbergLimits.testName}.pdf`);
       }, 1000);
