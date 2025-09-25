@@ -275,20 +275,24 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
       doc.setLineWidth(0.6);
       doc.rect(boxStartX, boxY, boxWidth, boxHeight);
 
+      const safeFixed = (val: any, digits: number = 1) => {
+        return (typeof val === 'number' && !isNaN(val)) ? val.toFixed(digits) : ' ';
+      };
 
       const bitumenRows = [
-        ['Wt. sample before gm', {content: this.asphalt.bitumen.weightSampleBefore || ' ' , colSpan: 2}, {content: '' , rowSpan: 7}],
-        ['Wt. of filter before gm', {content: this.asphalt.bitumen.weightFilterBefore || ' ' , colSpan: 2}],
-        ['Wt. Of filter after gm', {content: this.asphalt.bitumen.weightFilterAfter || ' ' , colSpan: 2}],
-        ['Increase of filter wt. gm', {content: `${(this.asphalt.bitumen.weightFilterAfter - this.asphalt.bitumen.weightFilterBefore).toFixed(1) || ' ' }` , colSpan: 2}],
-        ['Wt. of sample after gm', {content: this.asphalt.bitumen.weightSampleAfter || ' '  , colSpan: 2}],
-        ['Total wt. of sample gm', {content: `${(this.asphalt.bitumen.weightSampleAfter + (this.asphalt.bitumen.weightFilterAfter - this.asphalt.bitumen.weightFilterBefore)).toFixed(1) || ' ' }`, colSpan: 2}],
-        ['Wt. of bit. gm', {content: `${(this.asphalt.bitumen.weightSampleBefore - (this.asphalt.bitumen.weightSampleAfter + (this.asphalt.bitumen.weightFilterAfter - this.asphalt.bitumen.weightFilterBefore))).toFixed(1)}` , colSpan: 2}],
-        ['Perc of Bit %', {content: `${(((this.asphalt.bitumen.weightSampleBefore - (this.asphalt.bitumen.weightSampleAfter + (this.asphalt.bitumen.weightFilterAfter - this.asphalt.bitumen.weightFilterBefore))) / this.asphalt.bitumen.weightSampleBefore) * 100 ).toFixed(1)}` , colSpan: 2} , this.asphalt.bitumen.percofBit || ' ' ],
-        ['JMF', `${(this.asphalt.bitumen.percofBit - 0.4).toFixed(2)}`, `${(this.asphalt.bitumen.percofBit + 0.4).toFixed(2)}` , `${'±'} ${this.asphalt.bitumen.jmf || ' ' }`],
-        ['Result Bit', {content: `${(((this.asphalt.bitumen.weightSampleBefore - (this.asphalt.bitumen.weightSampleAfter + (this.asphalt.bitumen.weightFilterAfter - this.asphalt.bitumen.weightFilterBefore))) / this.asphalt.bitumen.weightSampleBefore) * 100 ).toFixed(1)} ${'±'} ${this.asphalt.bitumen.expand || ''}`, colSpan: 2 }],
-        ['Equipment Used', {content:this.asphalt.bitumen.equipmentUsed || ' '  , colSpan: 3}],
+        ['Wt. sample before gm', { content: this.asphalt.bitumen.weightSampleBefore || ' ', colSpan: 2 }, { content: '', rowSpan: 7 }],
+        ['Wt. of filter before gm', { content: this.asphalt.bitumen.weightFilterBefore || ' ', colSpan: 2 }],
+        ['Wt. Of filter after gm', { content: this.asphalt.bitumen.weightFilterAfter || ' ', colSpan: 2 }],
+        ['Increase of filter wt. gm', { content: safeFixed(this.asphalt.bitumen.weightFilterAfter - this.asphalt.bitumen.weightFilterBefore), colSpan: 2 }],
+        ['Wt. of sample after gm', { content: this.asphalt.bitumen.weightSampleAfter || ' ', colSpan: 2 }],
+        ['Total wt. of sample gm', { content: safeFixed(this.asphalt.bitumen.weightSampleAfter + (this.asphalt.bitumen.weightFilterAfter - this.asphalt.bitumen.weightFilterBefore)), colSpan: 2 }],
+        ['Wt. of bit. gm', { content: safeFixed(this.asphalt.bitumen.weightSampleBefore - (this.asphalt.bitumen.weightSampleAfter + (this.asphalt.bitumen.weightFilterAfter - this.asphalt.bitumen.weightFilterBefore))), colSpan: 2 }],
+        ['Perc of Bit %', { content: safeFixed(((this.asphalt.bitumen.weightSampleBefore - (this.asphalt.bitumen.weightSampleAfter + (this.asphalt.bitumen.weightFilterAfter - this.asphalt.bitumen.weightFilterBefore))) / this.asphalt.bitumen.weightSampleBefore) * 100), colSpan: 2 }, this.asphalt.bitumen.percofBit || ' '],
+        ['JMF', `${safeFixed(this.asphalt.bitumen.percofBit - 0.4, 2)}`, `${safeFixed(this.asphalt.bitumen.percofBit + 0.4, 2)}`, `± ${this.asphalt.bitumen.jmf || ' '}`],
+        ['Result Bit', { content: `${safeFixed(((this.asphalt.bitumen.weightSampleBefore - (this.asphalt.bitumen.weightSampleAfter + (this.asphalt.bitumen.weightFilterAfter - this.asphalt.bitumen.weightFilterBefore))) / this.asphalt.bitumen.weightSampleBefore) * 100)} ± ${this.asphalt.bitumen.expand || ''}`, colSpan: 2 }],
+        ['Equipment Used', { content: this.asphalt.bitumen.equipmentUsed || ' ', colSpan: 3 }],
       ];
+
 
       autoTable(doc, {
         body: bitumenRows,
