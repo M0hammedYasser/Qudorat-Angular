@@ -41,7 +41,7 @@ export interface Asphalt {
   voidsfilledwithaspLimits: string;
   maxdensityasperdesignLimits: string;
   flowLimits: string;
-  lossofstabilityLimits: string;
+  lossOfStabilityLimits: string;
 
   voidsfilledwithasplimitsInput: string;
   maxdensityasperdesignlimitsInput: string;
