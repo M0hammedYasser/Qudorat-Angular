@@ -9,16 +9,13 @@ export interface Bitumen {
   increaseOfFilterWeight:number ;
   totalWeightOfSample: number;
   weightOfBit: number;
-  percOfBit: number;
   standard:string;
   resultBit: string;
   expand: string;
-
-
-
-
   percofBit: number;
   equipmentUsed: string;
   jmf: string;
+
+  percOfBit: number;
 
 }

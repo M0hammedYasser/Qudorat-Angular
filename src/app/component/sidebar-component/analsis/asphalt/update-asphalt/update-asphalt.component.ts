@@ -28,6 +28,7 @@ export class UpdateAsphaltComponent implements OnInit {
   currentStep = 1;
   standard = ['37.5', '25', '19.0', '12.5', '9.5', '4.75', '2.00', '0.425', '0.180', '0.075'];
   alternative = ['1.5', '1', '3/4', '1/2', '3/8', '#4', '#10', '#40', '#80', '#200',];
+Expand: any|unknown;
 
   constructor(private router: Router,
               private service : AsphaltService,
@@ -38,8 +39,6 @@ export class UpdateAsphaltComponent implements OnInit {
     this.id = this.activatedRoute.snapshot.params['id'];
     this.service.findById(this.id).subscribe(res => {
       this.asphalt = res;
-
-      // تفريغ expandA إلى expandJ إذا كانت قيمتها \u0000
       for (let i = 0; i < 10; i++) {
         const char = String.fromCharCode(65 + i); // 'A' to 'J'
         const key = `expand${char}`;

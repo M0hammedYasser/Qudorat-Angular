@@ -69,13 +69,16 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
 
       this.airVoid = (this.maxSpOfPAvgMix - this.bulkSpOfCompMix) / this.maxSpOfPAvgMix * 100;
 
-      this.voidMineral = 100 - (this.bulkSpOfCompMix * (100 - this.asphalt.bitumen.percOfBit) / this.asphalt.bulkSpGrCombAgg);
+      this.voidMineral = 100 - (this.bulkSpOfCompMix * (100 - this.asphalt.bitumen.percofBit) / this.asphalt.bulkSpGrCombAgg);
 
       this.voidFilled = (this.voidMineral - this.airVoid) / this.voidMineral * 100;
 
-      this.z12 = (100 / this.maxSpOfPAvgMix) - (this.asphalt.bitumen.percOfBit / this.asphalt.spGravityOfAspBit);
+      this.z12 = (100 / this.maxSpOfPAvgMix) - ((((this.asphalt.bitumen.weightSampleBefore - (this.asphalt.bitumen.weightSampleAfter + (this.asphalt.bitumen.weightFilterAfter - this.asphalt.bitumen.weightFilterBefore))) / this.asphalt.bitumen.weightSampleBefore) * 100) / this.asphalt.spGravityOfAspBit);
 
-      this.effectiveSpGravityOfAgg = (100 - this.asphalt.bitumen.percOfBit) / this.z12;
+      // this.effectiveSpGravityOfAgg = (100 - this.asphalt.bitumen.percOfBit) / this.z12;
+
+      this.effectiveSpGravityOfAgg = ((100 - ((this.asphalt.bitumen.weightSampleBefore -(this.asphalt.bitumen.weightSampleAfter +(this.asphalt.bitumen.weightFilterAfter - this.asphalt.bitumen.weightFilterBefore))) / this.asphalt.bitumen.weightSampleBefore) * 100)) / this.z12;
+
 
       this.avgStabilityFor24Hrs = (
         this.asphalt.stabilityD * this.asphalt.correctionFactorD +
@@ -332,19 +335,62 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
           { content: 'Max%', styles: { halign: 'center' } },
         ] ];
 
+      const totalWeight = this.asphalt.bitumen.weightSampleAfter + (this.asphalt.bitumen.weightFilterAfter - this.asphalt.bitumen.weightFilterBefore);
+
       const sieveRows = [
-       ['37.5', '1.5', this.asphalt.gradationTest.massRetainedA, Number(this.asphalt.gradationTest.retainedA).toFixed(1), Number(100 - this.asphalt.gradationTest.retainedA).toFixed(2), this.asphalt.gradationTest.cvcMinA, this.asphalt.gradationTest.cvcMaxA , this.asphalt.gradationTest.gcvcMinA, this.asphalt.gradationTest.gcvcMaxA , `${'±'} ${this.asphalt.gradationTest.expandA}`],
-       ['25', '1', this.asphalt.gradationTest.massRetainedB, Number(this.asphalt.gradationTest.retainedB).toFixed(1), Number(100 - this.asphalt.gradationTest.retainedB).toFixed(2), this.asphalt.gradationTest.cvcMinB, this.asphalt.gradationTest.cvcMaxB , this.asphalt.gradationTest.gcvcMinB, this.asphalt.gradationTest.gcvcMaxB , `${'±'} ${this.asphalt.gradationTest.expandB}`],
-       ['19.0', '3/4', this.asphalt.gradationTest.massRetainedC, Number(this.asphalt.gradationTest.retainedC).toFixed(1), Number(100 - this.asphalt.gradationTest.retainedC).toFixed(2), this.asphalt.gradationTest.cvcMinC, this.asphalt.gradationTest.cvcMaxC , this.asphalt.gradationTest.gcvcMinC, this.asphalt.gradationTest.gcvcMaxC , `${'±'} ${this.asphalt.gradationTest.expandC}`],
-       ['12.5', '1/2', this.asphalt.gradationTest.massRetainedD, Number(this.asphalt.gradationTest.retainedD).toFixed(1), Number(100 - this.asphalt.gradationTest.retainedD).toFixed(2), this.asphalt.gradationTest.cvcMinD, this.asphalt.gradationTest.cvcMaxD , this.asphalt.gradationTest.gcvcMinD, this.asphalt.gradationTest.gcvcMaxD , `${'±'} ${this.asphalt.gradationTest.expandD}`],
-       ['9.5', '3/8', this.asphalt.gradationTest.massRetainedE, Number(this.asphalt.gradationTest.retainedE).toFixed(1), Number(100 - this.asphalt.gradationTest.retainedE).toFixed(2), this.asphalt.gradationTest.cvcMinE, this.asphalt.gradationTest.cvcMaxE , this.asphalt.gradationTest.gcvcMinE, this.asphalt.gradationTest.gcvcMaxE , `${'±'} ${this.asphalt.gradationTest.expandE}`],
-       ['4.75', '#4', this.asphalt.gradationTest.massRetainedF, Number(this.asphalt.gradationTest.retainedF).toFixed(1), Number(100 - this.asphalt.gradationTest.retainedF).toFixed(2), this.asphalt.gradationTest.cvcMinF, this.asphalt.gradationTest.cvcMaxF , this.asphalt.gradationTest.gcvcMinF, this.asphalt.gradationTest.gcvcMaxF , `${'±'} ${this.asphalt.gradationTest.expandF}`],
-       ['2.00', '#10', this.asphalt.gradationTest.massRetainedG, Number(this.asphalt.gradationTest.retainedG).toFixed(1), Number(100 - this.asphalt.gradationTest.retainedG).toFixed(2), this.asphalt.gradationTest.cvcMinG, this.asphalt.gradationTest.cvcMaxG , this.asphalt.gradationTest.gcvcMinG, this.asphalt.gradationTest.gcvcMaxG , `${'±'} ${this.asphalt.gradationTest.expandG}`],
-       ['0.425', '#40', this.asphalt.gradationTest.massRetainedH, Number(this.asphalt.gradationTest.retainedH).toFixed(1), Number(100 - this.asphalt.gradationTest.retainedH).toFixed(2), this.asphalt.gradationTest.cvcMinH, this.asphalt.gradationTest.cvcMaxH , this.asphalt.gradationTest.gcvcMinH, this.asphalt.gradationTest.gcvcMaxH , `${'±'} ${this.asphalt.gradationTest.expandH}`],
-       ['0.180', '#80', this.asphalt.gradationTest.massRetainedI, Number(this.asphalt.gradationTest.retainedI).toFixed(1), Number(100 - this.asphalt.gradationTest.retainedI).toFixed(2), this.asphalt.gradationTest.cvcMinI, this.asphalt.gradationTest.cvcMaxI , this.asphalt.gradationTest.gcvcMinI, this.asphalt.gradationTest.gcvcMaxI , `${'±'} ${this.asphalt.gradationTest.expandI}`],
-       ['0.075', '#200', this.asphalt.gradationTest.massRetainedJ, Number(this.asphalt.gradationTest.retainedJ).toFixed(1), Number(100 - this.asphalt.gradationTest.retainedJ).toFixed(2), this.asphalt.gradationTest.cvcMinJ, this.asphalt.gradationTest.cvcMaxJ , this.asphalt.gradationTest.gcvcMinJ, this.asphalt.gradationTest.gcvcMaxJ , `${'±'} ${this.asphalt.gradationTest.expandJ}`], 
-       [{content : 'Total Weight' , colSpan: 2}, `${(this.asphalt.bitumen.weightSampleAfter + (this.asphalt.bitumen.weightFilterAfter - this.asphalt.bitumen.weightFilterBefore)).toFixed(1)}`],
+        ['37.5', '1.5', this.asphalt.gradationTest.massRetainedA, 
+          ((this.asphalt.gradationTest.massRetainedA / totalWeight) * 100).toFixed(1), 
+          (100 - ((this.asphalt.gradationTest.massRetainedA / totalWeight) * 100)).toFixed(2), 
+          this.asphalt.gradationTest.cvcMinA, this.asphalt.gradationTest.cvcMaxA , this.asphalt.gradationTest.gcvcMinA, this.asphalt.gradationTest.gcvcMaxA , `${'±'} ${this.asphalt.gradationTest.expandA}`],
+
+        ['25', '1', this.asphalt.gradationTest.massRetainedB, 
+          ((this.asphalt.gradationTest.massRetainedB / totalWeight) * 100).toFixed(1), 
+          (100 - ((this.asphalt.gradationTest.massRetainedB / totalWeight) * 100)).toFixed(2), 
+          this.asphalt.gradationTest.cvcMinB, this.asphalt.gradationTest.cvcMaxB , this.asphalt.gradationTest.gcvcMinB, this.asphalt.gradationTest.gcvcMaxB , `${'±'} ${this.asphalt.gradationTest.expandB}`],
+
+        ['19.0', '3/4', this.asphalt.gradationTest.massRetainedC, 
+          ((this.asphalt.gradationTest.massRetainedC / totalWeight) * 100).toFixed(1), 
+          (100 - ((this.asphalt.gradationTest.massRetainedC / totalWeight) * 100)).toFixed(2), 
+          this.asphalt.gradationTest.cvcMinC, this.asphalt.gradationTest.cvcMaxC , this.asphalt.gradationTest.gcvcMinC, this.asphalt.gradationTest.gcvcMaxC , `${'±'} ${this.asphalt.gradationTest.expandC}`],
+
+        ['12.5', '1/2', this.asphalt.gradationTest.massRetainedD, 
+          ((this.asphalt.gradationTest.massRetainedD / totalWeight) * 100).toFixed(1), 
+          (100 - ((this.asphalt.gradationTest.massRetainedD / totalWeight) * 100)).toFixed(2), 
+          this.asphalt.gradationTest.cvcMinD, this.asphalt.gradationTest.cvcMaxD , this.asphalt.gradationTest.gcvcMinD, this.asphalt.gradationTest.gcvcMaxD , `${'±'} ${this.asphalt.gradationTest.expandD}`],
+
+        ['9.5', '3/8', this.asphalt.gradationTest.massRetainedE, 
+          ((this.asphalt.gradationTest.massRetainedE / totalWeight) * 100).toFixed(1), 
+          (100 - ((this.asphalt.gradationTest.massRetainedE / totalWeight) * 100)).toFixed(2), 
+          this.asphalt.gradationTest.cvcMinE, this.asphalt.gradationTest.cvcMaxE , this.asphalt.gradationTest.gcvcMinE, this.asphalt.gradationTest.gcvcMaxE , `${'±'} ${this.asphalt.gradationTest.expandE}`],
+
+        ['4.75', '#4', this.asphalt.gradationTest.massRetainedF, 
+          ((this.asphalt.gradationTest.massRetainedF / totalWeight) * 100).toFixed(1), 
+          (100 - ((this.asphalt.gradationTest.massRetainedF / totalWeight) * 100)).toFixed(2), 
+          this.asphalt.gradationTest.cvcMinF, this.asphalt.gradationTest.cvcMaxF , this.asphalt.gradationTest.gcvcMinF, this.asphalt.gradationTest.gcvcMaxF , `${'±'} ${this.asphalt.gradationTest.expandF}`],
+
+        ['2.00', '#10', this.asphalt.gradationTest.massRetainedG, 
+          ((this.asphalt.gradationTest.massRetainedG / totalWeight) * 100).toFixed(1), 
+          (100 - ((this.asphalt.gradationTest.massRetainedG / totalWeight) * 100)).toFixed(2), 
+          this.asphalt.gradationTest.cvcMinG, this.asphalt.gradationTest.cvcMaxG , this.asphalt.gradationTest.gcvcMinG, this.asphalt.gradationTest.gcvcMaxG , `${'±'} ${this.asphalt.gradationTest.expandG}`],
+
+        ['0.425', '#40', this.asphalt.gradationTest.massRetainedH, 
+          ((this.asphalt.gradationTest.massRetainedH / totalWeight) * 100).toFixed(1), 
+          (100 - ((this.asphalt.gradationTest.massRetainedH / totalWeight) * 100)).toFixed(2), 
+          this.asphalt.gradationTest.cvcMinH, this.asphalt.gradationTest.cvcMaxH , this.asphalt.gradationTest.gcvcMinH, this.asphalt.gradationTest.gcvcMaxH , `${'±'} ${this.asphalt.gradationTest.expandH}`],
+
+        ['0.180', '#80', this.asphalt.gradationTest.massRetainedI, 
+          ((this.asphalt.gradationTest.massRetainedI / totalWeight) * 100).toFixed(1), 
+          (100 - ((this.asphalt.gradationTest.massRetainedI / totalWeight) * 100)).toFixed(2), 
+          this.asphalt.gradationTest.cvcMinI, this.asphalt.gradationTest.cvcMaxI , this.asphalt.gradationTest.gcvcMinI, this.asphalt.gradationTest.gcvcMaxI , `${'±'} ${this.asphalt.gradationTest.expandI}`],
+
+        ['0.075', '#200', this.asphalt.gradationTest.massRetainedJ, 
+          ((this.asphalt.gradationTest.massRetainedJ / totalWeight) * 100).toFixed(1), 
+          (100 - ((this.asphalt.gradationTest.massRetainedJ / totalWeight) * 100)).toFixed(2), 
+          this.asphalt.gradationTest.cvcMinJ, this.asphalt.gradationTest.cvcMaxJ , this.asphalt.gradationTest.gcvcMinJ, this.asphalt.gradationTest.gcvcMaxJ , `${'±'} ${this.asphalt.gradationTest.expandJ}`], 
+
+        [{content : 'Total Weight' , colSpan: 2}, totalWeight.toFixed(1)],
       ];
+
 
       // SIEVE ANALYSIS table on the RIGHT
       autoTable(doc, {
@@ -418,14 +464,14 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
 
           const sampleColumn = ['Item No', 'Limits', 'Result', 'Remarks'];
           const sampleRows = [
-            ['Voids in mineral Agg. %', this.asphalt.VoidsinmineralaggLimits || ' ' , Number(this.voidMineral).toFixed(2) , { content: this.asphalt.remarks && this.asphalt.remarks.trim() !== '' ? this.asphalt.remarks : ' ', rowSpan: 8 }],
-            ['Air Voids %', this.asphalt.AirvoidsLimits || ' ' , Number(this.airVoid).toFixed(1) ],
-            ['Bitumen Content %', this.asphalt.BitumencontentLimits || ' ' , '4.88±0.0.001'],
-            ['Loss of Stability kgm', this.asphalt.LossofstabilitykgmLimits || ' ' , Number(this.avgStabilityFor30Min).toFixed(0)],
-            ['Voids filled with Asp. %', this.asphalt.VoidsfilledwithaspLimits || ' ' , Number(this.voidFilled).toFixed(1)],
-            ['Max density as per design (gm/cm3)', this.asphalt.MaxdensityasperdesignLimits || ' ' , Number(this.maxSpOfPAvgMix).toFixed(3) ],
-            ['Flow (mm)', this.asphalt.FlowLimits || ' ' , Number((this.asphalt.flowA + this.asphalt.flowB + this.asphalt.flowC) / 3).toFixed(2)],
-            ['Loss of Stability %', this.asphalt.LossofstabilityLimits || ' ' , `${((this.avgStabilityFor30Min - this.avgStabilityFor24Hrs) / this.avgStabilityFor30Min * 100).toFixed(1)}`],
+            ['Voids in mineral Agg. %', this.asphalt.voidsinmineralaggLimits || ' ' , `${Number(this.voidMineral).toFixed(2)} ${'±'} ${this.asphalt.voidmineralExpand || ''}`, { content: this.asphalt.remarks && this.asphalt.remarks.trim() !== '' ? this.asphalt.remarks : ' ', rowSpan: 8 }],
+            ['Air Voids %', this.asphalt.airvoidsLimits || ' ' , Number(this.airVoid).toFixed(1) ],
+            ['Bitumen Content %', this.asphalt.bitumencontentLimits || ' ' , `${safeFixed(((this.asphalt.bitumen.weightSampleBefore - (this.asphalt.bitumen.weightSampleAfter + (this.asphalt.bitumen.weightFilterAfter - this.asphalt.bitumen.weightFilterBefore))) / this.asphalt.bitumen.weightSampleBefore) * 100)} ± ${this.asphalt.bitumen.expand || ''}`],
+            ['Loss of Stability kgm', this.asphalt.lossofstabilitykgmLimits || ' ' , `${Number(this.avgStabilityFor30Min).toFixed(0)} ${'±'} ${this.asphalt.avgstabilityfor30minExpand || ''}`],
+            ['Voids filled with Asp. %', this.asphalt.voidsfilledwithaspLimits || ' ' , Number(this.asphalt.voidsfilledwithasplimitsInput).toFixed(1)],
+            ['Max density as per design (gm/cm3)', this.asphalt.maxdensityasperdesignLimits || ' ' , Number(this.asphalt.maxdensityasperdesignlimitsInput).toFixed(3) ],
+            ['Flow (mm)', this.asphalt.flowLimits || ' ' , `${Number((this.asphalt.flowA + this.asphalt.flowB + this.asphalt.flowC) / 3).toFixed(2)} ${'±'} ${this.asphalt.avgflowExpand || ''}`],
+            ['Loss of Stability %', this.asphalt.lossofstabilityLimits || ' ' , `${((this.avgStabilityFor30Min - this.avgStabilityFor24Hrs) / this.avgStabilityFor30Min * 100).toFixed(1)} ${'±'} ${this.asphalt.lossofstabilityExpand  || ''}`],
           ];
 
           autoTable(doc, {
@@ -602,7 +648,7 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
           const tableRows: RowInput[]  = [
             [{content: 'Symbol' , styles:{fontSize: 10}}, {content: 'Item' , styles:{fontSize: 10}}, {content:'Test Results' , colSpan: 6 , styles:{fontSize: 10}}, {content: 'الصنف' , styles:{fontSize: 10 , halign: 'right'}}],
             ['Pb', '% A/C by tot. wt. of mix' ,
-              {content: `${Number(this.asphalt.bitumen.percOfBit).toFixed(2)} ${'±'} ${this.asphalt.percofbitExpand || ''}`, colSpan: 2, styles: { halign: 'center' }}, { content: Number(this.asphalt.bitumen.percOfBit).toFixed(2), colSpan: 2, styles: { halign: 'center' } }, {content: '' , colSpan:2} , {content: '%نسبة الاسفلت من كامل الخلطة' , styles: { halign: 'right' }}
+              { content: `${safeFixed(((this.asphalt.bitumen.weightSampleBefore - (this.asphalt.bitumen.weightSampleAfter + (this.asphalt.bitumen.weightFilterAfter - this.asphalt.bitumen.weightFilterBefore))) / this.asphalt.bitumen.weightSampleBefore) * 100)} ± ${this.asphalt.percofbitExpand || ''}`, colSpan: 2, styles: { halign: 'center' } }, { content: safeFixed(((this.asphalt.bitumen.weightSampleBefore - (this.asphalt.bitumen.weightSampleAfter + (this.asphalt.bitumen.weightFilterAfter - this.asphalt.bitumen.weightFilterBefore))) / this.asphalt.bitumen.weightSampleBefore) * 100), colSpan: 2 , styles: { halign: 'center' }} , {content: '' , colSpan: 2}, {content: '%نسبة الاسفلت من كامل الخلطة' , styles: { halign: 'right' }}
             ],
             ['', 'Specimen No.' , '1' , '2' , '3' , '4' , '5' , '6' , {content: 'رقم العينة' , styles: { halign: 'right' }}],
             ['', 'Wt. in air dry (gm)', this.asphalt.weightAirDryA, this.asphalt.weightAirDryB, this.asphalt.weightAirDryC, this.asphalt.weightAirDryD, this.asphalt.weightAirDryE, this.asphalt.weightAirDryF, {content: '(الوزن الجاف في الهواء) جرام' , styles: { halign: 'right' }}],
@@ -630,28 +676,29 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
             ],
             [
               'Gmm', 'Net. Wt. Of loose mix (gm)',
-              { content: this.asphalt.netWeightOfLooseMix.toString(), colSpan: 6, styles: { halign: 'center' } } , {content: '(وزن العينة سائبة) جرام' , styles: { halign: 'right' }}
+              { content: this.asphalt.netWeightOfLooseMix, colSpan: 6, styles: { halign: 'center' } } , {content: '(وزن العينة سائبة) جرام' , styles: { halign: 'right' }}
             ],
             [
               'W1', 'Net Wt. Of Flask+water (gm)',
-              { content: this.asphalt.netWeightOfFlaskWater.toString(), colSpan: 6, styles: { halign: 'center' } } , {content: '(وزن الماء + الدورق) جرام' , styles: { halign: 'right' }}
+              { content: this.asphalt.netWeightOfFlaskWater, colSpan: 6, styles: { halign: 'center' } } , {content: '(وزن الماء + الدورق) جرام' , styles: { halign: 'right' }}
             ],
             [
               'W2', 'Wt. Flask+water+sample (gm)',
-              { content: this.asphalt.weightFlaskWaterSample.toString(), colSpan: 6, styles: { halign: 'center' } } , {content: '(وزن العينة + الماء + الدورق) جرام' , styles: { halign: 'right' }}
+              { content: this.asphalt.weightFlaskWaterSample, colSpan: 6, styles: { halign: 'center' } } , {content: '(وزن العينة + الماء + الدورق) جرام' , styles: { halign: 'right' }}
             ],
             [
               'Gmm', 'Max. Sp. Gr of Paving mix',
-              { content: Number(this.maxSpOfPAvgMix).toFixed(3), colSpan: 6, styles: { halign: 'center' } } , {content: 'الكثافة القصوي للخلطة مزيج الرصف' , styles: { halign: 'right' }}
+              { content: this.maxSpOfPAvgMix.toFixed(3), colSpan: 6, styles: { halign: 'center' } }, { content: 'الكثافة القصوي للخلطة مزيج الرصف', styles: { halign: 'right' } }
             ],
             [
               '', 'Avg. max Sp. Gr of mix gmm gm/cm3',
-              {content: `${Number(this.maxSpOfPAvgMix).toFixed(3)} ${'±'} ${this.asphalt.maxspofpavgmixExpand || ''}`, colSpan: 2, styles: { halign: 'center' }}, { content: Number(this.maxSpOfPAvgMix).toFixed(3), colSpan: 2, styles: { halign: 'center' } } , {content: 'حدود التصميم 2.556' , colSpan:2 , styles: { halign: 'right' }} , {content: '(متوسط الكثافة القصوي) جرام/سم3' , styles: { halign: 'right' }}
+              {content: `${this.maxSpOfPAvgMix.toFixed(3)} ${'±'} ${this.asphalt.maxspofpavgmixExpand || ''}`, colSpan: 2, styles: { halign: 'center' }}, { content: this.maxSpOfPAvgMix.toFixed(3) , colSpan: 2, styles: { halign: 'center' } } , {content: 'حدود التصميم 2.556' , colSpan:2 , styles: { halign: 'right' }} , {content: '(متوسط الكثافة القصوي) جرام/سم3' , styles: { halign: 'right' }}
             ],
             [
               'VA', '% Air Voids',
-              {content: `${Number(this.airVoid).toFixed(1)} ${'±'} ${this.asphalt.airvoidExpand || ''}`, colSpan: 2, styles: { halign: 'center' }}, { content: Number(this.airVoid).toFixed(1), colSpan: 2, styles: { halign: 'center' } } , {content: 'حدود التصميم 3-5' ,colSpan: 2 , styles: {halign: 'right'}} , {content: '%الفراغات الهوائية في الخلطة' , styles: { halign: 'right' }}
+              { content: `${Number(this.airVoid).toFixed(1)} ± ${this.asphalt.airvoidExpand || ''}`, colSpan: 2, styles: { halign: 'center' } }, { content: this.airVoid.toFixed(1), colSpan: 2, styles: { halign: 'center' } }, { content: 'حدود التصميم 3-5', colSpan: 2, styles: {halign: 'right'} }, { content: '%الفراغات الهوائية في الخلطة', styles: { halign: 'right' } }
             ],
+
             [
               'VMA', '% Voids in mineral Agg.',
               {content: `${Number(this.voidMineral).toFixed(2)} ${'±'} ${this.asphalt.voidmineralExpand || ''}`, colSpan: 2, styles: { halign: 'center' }}, { content: Number(this.voidMineral).toFixed(2), colSpan: 2, styles: { halign: 'center' } } , {content: 'حدود التصميم 14-16' ,colSpan: 2 , styles: {halign: 'right'}} ,{content: '%الفراغات في الحمصة المتجانسة' , styles: { halign: 'right' }}
@@ -670,7 +717,9 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
             ],
             [
               'Pbe', 'Effective Asp. Content %',
-              {content: `${Number(this.asphalt.bitumen.percOfBit - (this.absorbedAps / 100) * (100 - this.asphalt.bitumen.percOfBit)).toFixed(2)} ${'±'} ${this.asphalt.effectiveaspExpand || ''}`, colSpan: 1, styles: { halign: 'center' }}, { content: Number(this.asphalt.bitumen.percOfBit - (this.absorbedAps / 100) * (100 - this.asphalt.bitumen.percOfBit)).toFixed(2), colSpan: 5, styles: { halign: 'center' } } , {content: ' %نسبة الاسفلت الفعالة بالخلطة' , styles: { halign: 'right' }}
+              {content: `${Number(((((this.asphalt.bitumen.weightSampleBefore -(this.asphalt.bitumen.weightSampleAfter +(this.asphalt.bitumen.weightFilterAfter - this.asphalt.bitumen.weightFilterBefore))) / this.asphalt.bitumen.weightSampleBefore) * 100)-((this.absorbedAps / 100) *(100 - (((this.asphalt.bitumen.weightSampleBefore -(this.asphalt.bitumen.weightSampleAfter +(this.asphalt.bitumen.weightFilterAfter - this.asphalt.bitumen.weightFilterBefore))) / this.asphalt.bitumen.weightSampleBefore) * 100))))).toFixed(2)} ± ${this.asphalt.effectiveaspExpand || ''}`,colSpan: 1,styles: { halign: 'center' }},
+              {content: ((((this.asphalt.bitumen.weightSampleBefore -(this.asphalt.bitumen.weightSampleAfter +(this.asphalt.bitumen.weightFilterAfter - this.asphalt.bitumen.weightFilterBefore))) / this.asphalt.bitumen.weightSampleBefore) * 100)-((this.absorbedAps / 100) *(100 -(((this.asphalt.bitumen.weightSampleBefore -(this.asphalt.bitumen.weightSampleAfter +(this.asphalt.bitumen.weightFilterAfter - this.asphalt.bitumen.weightFilterBefore))) / this.asphalt.bitumen.weightSampleBefore) * 100)))).toFixed(2),colSpan: 5,styles: { halign: 'center' }},{ content: ' %نسبة الاسفلت الفعالة بالخلطة', styles: { halign: 'right' } }
+
             ],
             ['', 'Stability (kg)', this.asphalt.stabilityA, this.asphalt.stabilityB, this.asphalt.stabilityC, this.asphalt.stabilityD, this.asphalt.stabilityE, this.asphalt.stabilityF , {content: '(الثبات) كجم' , styles: { halign: 'right' }}],
             ['', 'Correction factor', this.asphalt.correctionFactorA, this.asphalt.correctionFactorB, this.asphalt.correctionFactorC, this.asphalt.correctionFactorD, this.asphalt.correctionFactorE, this.asphalt.correctionFactorF , {content: 'معامل التصحيح' , styles: { halign: 'right' }}],
@@ -705,9 +754,9 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
               {content: `${this.asphalt.spGravityOfAspBit}`, colSpan: 6, styles: { halign: 'center' }} , {content: '(الوزن النوعي للاسفلت) جم/سم3' , styles: { halign: 'right' }}
             ],
             [
-              'Ps', 'Agg. % total wt. of mix',
-              {content: `${Number(100 - this.asphalt.bitumen.percOfBit).toFixed(2)}`, colSpan: 6, styles: { halign: 'center' }} , {content: ' %نسبة البحص في كامل الخلطة' , styles: { halign: 'right' }}
+              'Ps', 'Agg. % total wt. of mix',{ content: safeFixed(100 - (((this.asphalt.bitumen.weightSampleBefore - (this.asphalt.bitumen.weightSampleAfter + (this.asphalt.bitumen.weightFilterAfter - this.asphalt.bitumen.weightFilterBefore))) / this.asphalt.bitumen.weightSampleBefore) * 100)), colSpan: 6, styles: { halign: 'center' } }, { content: ' %نسبة البحص في كامل الخلطة', styles: { halign: 'right' } }
             ],
+
             [
               'Gsb', 'Bulk Sp. Gr. Comb. Agg.',
               {content: `${this.asphalt.bulkSpGrCombAgg}`, colSpan: 6, styles: { halign: 'center' }} , {content : ' (الوزن النوعي الكلي للبحص) جم/سم3' , styles: { halign: 'right' }}

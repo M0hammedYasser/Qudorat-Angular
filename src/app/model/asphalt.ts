@@ -34,14 +34,17 @@ export interface Asphalt {
   asphaltType: string;
   asphaltApplier: string;
 
-  VoidsinmineralaggLimits: string;
-  AirvoidsLimits: string;
-  BitumencontentLimits: string;
-  LossofstabilitykgmLimits: string;
-  VoidsfilledwithaspLimits: string;
-  MaxdensityasperdesignLimits: string;
-  FlowLimits: string;
-  LossofstabilityLimits: string;
+  voidsinmineralaggLimits: string;
+  airvoidsLimits: string;
+  bitumencontentLimits: string;
+  lossofstabilitykgmLimits: string;
+  voidsfilledwithaspLimits: string;
+  maxdensityasperdesignLimits: string;
+  flowLimits: string;
+  lossofstabilityLimits: string;
+
+  voidsfilledwithasplimitsInput: string;
+  maxdensityasperdesignlimitsInput: string;
 
   weightAirDryA: number;
   weightAirDryB: number;
@@ -98,6 +101,10 @@ export interface Asphalt {
   avgstabilityfor30minExpand: string;
   lossofstabilityExpand: string;
   avgflowExpand: string;
+
+
+  voidMineral: number;
+  voidFilled: number;
   
   
 

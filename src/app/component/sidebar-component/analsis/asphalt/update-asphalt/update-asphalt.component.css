@@ -124,6 +124,13 @@ input[type="number"] {
   margin: 0 auto;
 }
 
+.asphalt-marshall-grid-container{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3px;
+  margin-bottom: 20px;
+}
+
 
 
 .form-group label {

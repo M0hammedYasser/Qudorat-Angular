@@ -43,24 +43,6 @@
                  [(ngModel)]="asphalt.bitumen.equipmentUsed"
                  name="equipmentUsed" required>
         </div>
-
-
-
-        <!-- <div class="form-group">
-          <label class="col-form-label">Perc of Bit %</label>
-          <input type="number" class="form-control"
-                 [(ngModel)]="asphalt.bitumen.percOfBit1"
-                 name="percOfBit1" required>
-        </div>
-        <div class="form-group">
-          <label class="col-form-label">Equipment Used</label>
-          <input type="text" class="form-control"
-                 [(ngModel)]="asphalt.bitumen.equipmentUsed"
-                 name="equipmentUsed" required>
-        </div> -->
-
-
-
         <div class="form-group">
           <label class="col-form-label">Standard</label>
           <input type="text" class="form-control"
@@ -429,7 +411,98 @@
         </div>
       </div>
 
+      <div class="asphalt-marshall-grid-container">
+        <div class="form-group">
+          <label class="label">Voids in mineral Agg. % </label>
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" [(ngModel)]="this.asphalt.voidsinmineralaggLimits " name="voidsinmineralaggLimits" required>
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" disabled>
+        </div>
+
+        <div class="form-group">
+          <label class="label">Air Voids % </label>
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" [(ngModel)]="this.asphalt.airvoidsLimits" name="airvoidsLimits" required>
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" disabled>
+        </div>
+
+        <div class="form-group">
+          <label class="label">Bitumen Content % </label>
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" [(ngModel)]="this.asphalt.bitumencontentLimits" name="bitumencontentLimits" required>
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" disabled>
+        </div>
+
+        <div class="form-group">
+          <label class="label">Loss of Stability kgm </label>
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" [(ngModel)]="this.asphalt.lossofstabilitykgmLimits" name="lossofstabilitykgmLimits" required>
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" disabled>
+        </div>
+
+        <div class="form-group">
+          <label class="label">Voids filled with Asp. % </label>
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" [(ngModel)]="this.asphalt.voidsfilledwithaspLimits" name="voidsfilledwithaspLimits" required>
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" [(ngModel)]="this.asphalt.voidsfilledwithasplimitsInput" name="voidsfilledwithasplimitsInput" required>
+        </div>
+
+        <div class="form-group">
+          <label class="label">Max density as per design (gm/cm3) </label>
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" [(ngModel)]="this.asphalt.maxdensityasperdesignLimits" name="maxdensityasperdesignLimits" required>
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" [(ngModel)]="this.asphalt.maxdensityasperdesignlimitsInput" name="maxdensityasperdesignlimitsInput" required>
+        </div>
+
+        <div class="form-group">
+          <label class="label">Flow (mm) </label>
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" [(ngModel)]="this.asphalt.flowLimits" name="flowLimits" required>
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" disabled>
+        </div>
+
+        <div class="form-group">
+          <label class="label">Loss of Stability % </label>
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" [(ngModel)]="this.asphalt.lossofstabilityLimits" name="lossofstabilityLimits" required>
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" disabled>
+        </div>
+
+        <div class="form-group">
+          <label class="label">Remarks </label>
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" [(ngModel)]="this.asphalt.remarks" name="remarks" required >
+        </div>
+        
+      </div>
     </div>
+
+
 
     <!-- STEP 2: Asphalt Marshall -->
     <div *ngIf="currentStep === 3" class="form-step">
@@ -498,6 +571,12 @@
         <input type="text" class="form-control"
                [(ngModel)]="asphalt.notes" name="notes" style="width: 1160px">
       </div>
+      
+      <div class="d-flex align-items-center" style="margin: 10px 0px 5px 5px">
+        <label class="col-form-label me-2">% A/C by tot. wt. of mix</label>
+        <input type="number" class="form-control"
+               [(ngModel)]="asphalt.bitumen.percOfBit" name="percOfBit" style="width: 500px">
+      </div>
 
       <div class="grid-container-asphalt">
         <!-- Header Row -->
@@ -508,6 +587,7 @@
           <label class="label">{{ i }}</label>
         </div>
 
+        
         <!-- Wt. in air dry gm -->
         <div class="form-group">
           <label class="label">Wt. in air dry gm</label>
@@ -689,6 +769,53 @@
           <input type="number" class="form-control" disabled>
         </div>
 
+
+        
+        <div class="form-group">
+          <label class="label">% Voids in mineral Agg.</label>
+        </div>
+        <div class="form-group">
+          <input type="number" class="form-control" disabled>
+        </div>
+        <div class="form-group">
+          <input type="number" class="form-control" disabled>
+        </div>
+        <div class="form-group">
+          <input type="number" class="form-control" disabled>
+        </div>
+        <div class="form-group">
+          <input type="number" class="form-control" [(ngModel)]="asphalt.voidMineral" name="voidMineral" required>
+        </div>
+        <div class="form-group">
+          <input type="number" class="form-control" disabled>
+        </div>
+        <div class="form-group">
+          <input type="number" class="form-control" disabled>
+        </div>
+
+        <div class="form-group">
+          <label class="label">% Voids filled with Asp.</label>
+        </div>
+        <div class="form-group">
+          <input type="number" class="form-control" disabled>
+        </div>
+        <div class="form-group">
+          <input type="number" class="form-control" disabled>
+        </div>
+        <div class="form-group">
+          <input type="number" class="form-control" disabled>
+        </div>
+        <div class="form-group">
+          <input type="number" class="form-control" [(ngModel)]="asphalt.voidFilled" name="voidFilled" required>
+        </div>
+        <div class="form-group">
+          <input type="number" class="form-control" disabled>
+        </div>
+        <div class="form-group">
+          <input type="number" class="form-control" disabled>
+        </div>
+
+        
       </div>
 
       <!-- Additional fields -->

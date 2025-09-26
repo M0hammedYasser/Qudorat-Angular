@@ -322,26 +322,21 @@ export class SandReportComponent implements AfterViewInit, OnInit {
     head.onload = () => {
       doc.addImage(head, 'PNG', 0, 0, 210, 33);
 
-// Make the text bigger and add underline
-      doc.setFontSize(9); // Increased from 8 to 12
-      doc.setFont('Amiri', 'bold'); // Make it bold for better visibility
+      doc.setFontSize(9); 
+      doc.setFont('Amiri', 'bold'); 
 
       const headerText = 'Standarded Test Method For Sieve Analysis Of Fine And Coarse Aggregates  AsTM C-136/ SAMPLING ASTM D75, ASTM D75M';
       const textX = 12;
       const textY = 34;
 
-// Add the text
       doc.text(headerText, textX, textY);
 
-// Get text width to draw underline correctly
       const textWidth = doc.getTextWidth(headerText);
 
-// Draw underline
-      doc.setDrawColor(0, 0, 0); // Black color
+      doc.setDrawColor(0, 0, 0); 
       doc.setLineWidth(0.5);
       doc.line(textX - 1, textY + .5 , textX + textWidth + 2, textY + .5 ); // Line 1 unit below text
 
-// Reset font for the rest of the document
       doc.setFont('Amiri', 'normal');
       doc.setFontSize(9);
 
@@ -383,17 +378,16 @@ export class SandReportComponent implements AfterViewInit, OnInit {
           font: 'Amiri',
           textColor: [0, 0, 0],
           lineColor: [0, 0, 0],
-          lineWidth: 0.4
+          lineWidth: 0.5
         },
         columnStyles: {
-          // Increase these widths proportionally
-          0: {cellWidth: 25},  // was 20
-          1: {cellWidth: 43},  // was 25
-          2: {cellWidth: 25},  // was 20
-          3: {cellWidth: 25},  // was 20
-          4: {cellWidth: 12},  // was 10
-          5: {cellWidth: 25},  // was 20
-          6: {cellWidth: 35},  // was 28
+          0: {cellWidth: 25},  
+          1: {cellWidth: 43},  
+          2: {cellWidth: 25},  
+          3: {cellWidth: 25},  
+          4: {cellWidth: 12}, 
+          5: {cellWidth: 25},  
+          6: {cellWidth: 35},  
         },
         tableLineColor: [0, 0, 0],
         tableLineWidth: 0.5,
@@ -414,7 +408,7 @@ export class SandReportComponent implements AfterViewInit, OnInit {
         const scaledBorderW = borderW * scale;
         const scaledBorderH = borderH * scale;
         const borderX = (pageWidth - scaledBorderW) / 2;
-        const borderY = tableStartY + 1;
+        const borderY = tableStartY ;
         const chartW = scaledBorderW - 2;
         const chartH = scaledBorderH - 10;
         const chartX = borderX + (scaledBorderW - chartW) / 2;
@@ -503,16 +497,6 @@ export class SandReportComponent implements AfterViewInit, OnInit {
         {content: "K.2", styles: {halign: 'center' as const, valign: 'middle' as const}}
       ];
       const tableRows: any[] = [];
-
-      // const calcRetainedPercent = (cumulative: number) => {
-      //   return totalWeight > 0 ? (cumulative / totalWeight) * 100 : 0;
-      // };
-
-      // const calcPassingPercent = (cumulative: number) => {
-      //   const retained = calcRetainedPercent(cumulative);
-      //   return 100 - retained;
-      // };
-
 
       const sieveData = [
         ["3", 75.0,
