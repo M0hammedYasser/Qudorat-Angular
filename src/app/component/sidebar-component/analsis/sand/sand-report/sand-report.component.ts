@@ -396,7 +396,7 @@ export class SandReportComponent implements AfterViewInit, OnInit {
       });
 
 
-      const tableStartY = (doc as any).lastAutoTable.finalY - 1;
+      const tableStartY = (doc as any).lastAutoTable.finalY;
 
       const chartCanvas = document.querySelector('canvas') as HTMLCanvasElement;
       if (chartCanvas) {
@@ -422,7 +422,7 @@ export class SandReportComponent implements AfterViewInit, OnInit {
       }
 
 
-      const afterChartY = tableStartY + 71;
+      const afterChartY = tableStartY + 70;
 
       const totalWeight = Number(this.sieveAnalysis.totalWeigh) || 0;
 
