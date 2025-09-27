@@ -566,10 +566,13 @@
       </div>
 
 
-      <div class="d-flex align-items-center" style="margin: -10px 0 5px 5px">
-        <label class="col-form-label me-2">Notes</label>
-        <input type="text" class="form-control"
-               [(ngModel)]="asphalt.notes" name="notes" style="width: 1160px">
+      <!-- Notes Line -->
+      <div class="d-flex align-items-center mb-1">
+        <div class="align-items-center">
+          <label class="col-form-label me-1">Remarks</label>
+          <textarea type="text" class="form-control compact-input"
+                [(ngModel)]="asphalt.notes" name="notes" style="width: 1000px; height: 100px;"></textarea>
+        </div>
       </div>
       
       <div class="d-flex align-items-center" style="margin: 10px 0px 5px 5px">
