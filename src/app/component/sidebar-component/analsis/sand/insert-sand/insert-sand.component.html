@@ -47,7 +47,7 @@
       <div class="align-items-center">
         <label class="col-form-label me-1">Source Of Sample</label>
         <input type="text" class="form-control compact-input"
-              [(ngModel)]="sieveAnalysis.sourceOfSample" name="notes">
+              [(ngModel)]="sieveAnalysis.sourceOfSample" name="sourceOfSample">
       </div>
       <div class="align-items-center">
         <label class="col-form-label me-1">Description</label>
@@ -56,8 +56,8 @@
       </div>
       <div class="align-items-center">
         <label class="col-form-label me-1">Remarks</label>
-        <input type="text" class="form-control compact-input"
-              [(ngModel)]="sieveAnalysis.notes" name="notes">
+        <textarea type="text" class="form-control compact-input"
+              [(ngModel)]="sieveAnalysis.notes" name="notes"></textarea>
       </div>
     </div>
 
@@ -296,7 +296,7 @@
                id="cumulativeM" required>
       </div>
     </div>
-    
+
     <div class="text-center">
       <button type="submit" class="btn btn-primary" [disabled]="!form.valid">Submit</button>
     </div>
