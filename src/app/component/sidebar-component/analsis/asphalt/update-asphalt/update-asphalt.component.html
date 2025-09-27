@@ -34,7 +34,7 @@
         <div class="form-group">
           <label class="col-form-label">U.Expand</label>
           <input type="text" class="form-control"
-                 [(ngModel)]="asphalt.bitumen.expand"
+                 [(ngModel)]="asphalt.bitumen.expand" maxlength="6"
                  name="expand" required>
         </div>
         <div class="form-group">
@@ -53,13 +53,13 @@
         <div class="form-group">
           <label class="col-form-label">Expand JMF</label>
           <input type="text" class="form-control"
-                 [(ngModel)]="asphalt.bitumen.jmf"
+                 [(ngModel)]="asphalt.bitumen.jmf" maxlength="4"
                  name="jmf" required>
         </div>
         <div class="form-group">
           <label class="col-form-label">Equipment Used</label>
           <input type="text" class="form-control"
-                 [(ngModel)]="asphalt.bitumen.equipmentUsed"
+                 [(ngModel)]="asphalt.bitumen.equipmentUsed" maxlength="25"
                  name="equipmentUsed" required>
         </div>
       </div>
