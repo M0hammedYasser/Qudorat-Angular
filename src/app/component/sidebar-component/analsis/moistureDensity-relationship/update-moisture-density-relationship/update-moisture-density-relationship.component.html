@@ -25,10 +25,6 @@
             <input type="text" class="form-control compact-input"
                    [(ngModel)]="moistureDensityRelationship.nameOfTest" name="nameOfTest" required>
           </div>
-        </div>
-
-        <!-- Second Line -->
-        <div class="d-flex align-items-center gap-1 mb-1">
           <div class="align-items-center">
             <label class="col-form-label me-1">Testing Date</label>
             <input type="date" class="form-control compact-input"
@@ -39,10 +35,14 @@
             <input type="text" class="form-control compact-input"
                    [(ngModel)]="moistureDensityRelationship.classification" name="classification" required>
           </div>
+        </div>
+
+        <!-- Notes Line -->
+        <div class="d-flex align-items-center mb-1">
           <div class="align-items-center">
-            <label class="col-form-label me-1">Notes</label>
-            <input type="text" class="form-control compact-input"
-                  [(ngModel)]="moistureDensityRelationship.notes" name="notes">
+            <label class="col-form-label me-1">Remarks</label>
+            <textarea type="text" class="form-control compact-input"
+                  [(ngModel)]="moistureDensityRelationship.notes" name="notes" style="width: 890px; height: 100px;"></textarea>
           </div>
         </div>
 
