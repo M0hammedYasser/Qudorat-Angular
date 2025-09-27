@@ -54,10 +54,14 @@
         <input type="text" class="form-control compact-input"
               [(ngModel)]="sieveAnalysis.description" name="description">
       </div>
+    </div>
+
+    <!-- Notes Line -->
+    <div class="d-flex align-items-center mb-1">
       <div class="align-items-center">
         <label class="col-form-label me-1">Remarks</label>
-        <input type="text" class="form-control compact-input"
-              [(ngModel)]="sieveAnalysis.notes" name="notes">
+        <textarea type="text" class="form-control compact-input"
+              [(ngModel)]="sieveAnalysis.notes" name="notes" style="width: 880px"></textarea>
       </div>
     </div>
     
