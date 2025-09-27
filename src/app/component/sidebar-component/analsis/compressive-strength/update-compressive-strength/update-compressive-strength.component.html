@@ -80,11 +80,12 @@
           </div>
         </div>
 
-        <div class="align-items-center gap-1 mb-5">
+        <!-- Notes Line -->
+        <div class="d-flex align-items-center mb-1">
           <div class="align-items-center">
-            <label class="col-form-label me-1">Notes</label>
-            <input type="text" class="form-control compact-input"
-                  [(ngModel)]="compressiveStrength.notes" name="notes">
+            <label class="col-form-label me-1">Remarks</label>
+            <textarea type="text" class="form-control compact-input"
+                  [(ngModel)]="compressiveStrength.notes" name="notes" style="width: 1010px; height: 100px;"></textarea>
           </div>
         </div>
 
