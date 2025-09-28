@@ -92,7 +92,7 @@ export class CompressiveStrengthReportComponent implements OnInit {
         ],
         theme: 'grid',
         styles: {
-          fontSize: 7,
+          fontSize:7,
           cellPadding: 0.5,
           font: 'Amiri',
           textColor: [0, 0, 0],
@@ -159,7 +159,7 @@ export class CompressiveStrengthReportComponent implements OnInit {
         ],
         theme: 'grid',
         styles: {
-          fontSize: 7,
+          fontSize: 9,
           cellPadding: 1,
           font: 'Amiri',
           textColor: [0, 0, 0],
@@ -177,10 +177,10 @@ export class CompressiveStrengthReportComponent implements OnInit {
         tableLineColor: [0, 0, 0],
         columnStyles: {
           0: {cellWidth: 10},
-          1: {cellWidth: 15},
-          2: {cellWidth: 15},
-          3: {cellWidth: 15},
-          4: {cellWidth: 15},
+          1: {cellWidth: 14},
+          2: {cellWidth: 14},
+          3: {cellWidth: 14},
+          4: {cellWidth: 18},
           5: {cellWidth: 15},
           6: {cellWidth: 15},
           7: {cellWidth: 15},
@@ -211,7 +211,7 @@ export class CompressiveStrengthReportComponent implements OnInit {
         ],
         theme: 'grid',
         styles: {
-          fontSize: 7,
+          fontSize: 9,
           cellPadding: 1,
           font: 'Amiri',
           textColor: [0, 0, 0],
@@ -220,7 +220,7 @@ export class CompressiveStrengthReportComponent implements OnInit {
         },
         tableLineColor: [0, 0, 0],
         columnStyles: {
-          0: {cellWidth: 30},
+          0: {cellWidth: 35},
           1: {cellWidth: 70},
         },
       });
@@ -266,7 +266,7 @@ export class CompressiveStrengthReportComponent implements OnInit {
 
         doc.line(startX, 255, endX, 255);
 
-        doc.setFontSize(8);
+        doc.setFontSize(6);
         const sectionWidth = tableWidth / 3; 
 
         doc.text(`Approved by: ${this.compressiveStrength.adopter || " "}`, startX + 1, 260);
