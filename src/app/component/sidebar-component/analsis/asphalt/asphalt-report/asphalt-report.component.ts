@@ -468,7 +468,7 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
             ['Air Voids %', this.asphalt.airvoidsLimits || ' ' , Number(this.airVoid).toFixed(1) ],
             ['Bitumen Content %', this.asphalt.bitumencontentLimits || ' ' , `${safeFixed(((this.asphalt.bitumen.weightSampleBefore - (this.asphalt.bitumen.weightSampleAfter + (this.asphalt.bitumen.weightFilterAfter - this.asphalt.bitumen.weightFilterBefore))) / this.asphalt.bitumen.weightSampleBefore) * 100)} ± ${this.asphalt.bitumen.expand || ''}`],
             ['Loss of Stability kgm', this.asphalt.lossofstabilitykgmLimits || ' ' , `${Number(this.avgStabilityFor30Min).toFixed(0)} ${'±'} ${this.asphalt.avgstabilityfor30minExpand || ''}`],
-            ['Voids filled with Asp. %', this.asphalt.voidsfilledwithaspLimits || ' ' , this.asphalt.voidsfilledwithasplimitsInput || 'nan'],
+            ['Voids filled with Asp. %', this.asphalt.voidsfilledwithaspLimits || ' ' , this.asphalt.voidsfilledwithasplimitsInput || ''],
             ['Max density as per design (gm/cm3)', this.asphalt.maxdensityasperdesignLimits || ' ' , this.asphalt.maxdensityasperdesignlimitsInput || ' '],
             ['Flow (mm)', this.asphalt.flowLimits || ' ' , `${Number((this.asphalt.flowA + this.asphalt.flowB + this.asphalt.flowC) / 3).toFixed(2)} ${'±'} ${this.asphalt.avgflowExpand || ''}`],
             ['Loss of Stability %', this.asphalt.lossOfStabilityLimits || ' ' , `${((this.avgStabilityFor30Min - this.avgStabilityFor24Hrs) / this.avgStabilityFor30Min * 100).toFixed(1)} ${'±'} ${this.asphalt.lossofstabilityExpand  || ''}`],
@@ -820,7 +820,7 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
             footerY += remarksHeight + 20;
           }
           doc.line(startX, footerY, endX, footerY);
-          doc.setFontSize(8);
+          doc.setFontSize(6);
           const sectionWidth = tableWidth / 3; 
 
           doc.text(
