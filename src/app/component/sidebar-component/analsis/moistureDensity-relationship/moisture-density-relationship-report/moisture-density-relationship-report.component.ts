@@ -475,7 +475,7 @@ export class MoistureDensityRelationshipReportComponent implements OnInit {
 
         doc.line(startX1, 258, endX1, 258);
 
-        doc.setFontSize(7);
+        doc.setFontSize(6);
         const sectionWidth = tableWidth1 / 3; 
 
         doc.text(`Approved by: ${this.moistureDensityRelationship.adopter || " "}`, startX1 + 1, 261);
