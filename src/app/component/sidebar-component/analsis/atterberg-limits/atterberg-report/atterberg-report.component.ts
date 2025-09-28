@@ -511,7 +511,7 @@ export class AtterbergReportComponent implements OnInit {
 
         doc.line(startX, 260, endX, 260);
 
-        doc.setFontSize(7);
+        doc.setFontSize(6);
         const sectionWidth = tableWidth / 3; 
 
         doc.text(`Approved by: ${this.atterbergLimits.adopter || " "}`, startX + 1, 264);
