@@ -658,29 +658,23 @@ export class SandReportComponent implements AfterViewInit, OnInit {
           );
 
           doc.setFont("Amiri", "bold");
-          doc.text(splitNotes, startX + 1, footerY + 3); // Added padding from left edge
+          doc.text(splitNotes, startX + 1, footerY + 3); 
 
           remarksHeight = splitNotes.length * 5;
           footerY += remarksHeight + 5;
         }
 
-        // Horizontal line - centered to match table width
         doc.line(startX, 260, endX, 260);
 
-        // Approved by section - properly distributed within the centered box
-        doc.setFontSize(7);
-        const sectionWidth = tableWidth / 3; // Divide into 3 equal sections
+        doc.setFontSize(6);
+        const sectionWidth = tableWidth / 3; 
 
-        // Left section: Approved by
         doc.text(`Approved by: ${this.sieveAnalysis.adopter || " "}`, startX + 1, 264);
 
-        // Middle section: Test by
         doc.text(`Test by: ${this.sieveAnalysis.testBy || " "}`, startX + sectionWidth + 4, 264);
 
-        // Right section: Checked by
         doc.text(`Checked by: ${this.sieveAnalysis.approveBy || " "}`, startX + (sectionWidth * 2) + 4, 264);
 
-        // Draw the centered border box
         const blockTop = finalY;
         const blockBottom = 266;
         const blockHeight = blockBottom - blockTop;
@@ -689,10 +683,8 @@ export class SandReportComponent implements AfterViewInit, OnInit {
         doc.setLineWidth(0.6);
         doc.rect(startX, blockTop, tableWidth, blockHeight);
 
-        // Add tail image (this spans full width)
         doc.addImage(tail, 'PNG', 0, 267, 210, 33);
 
-        // Report date (bottom left as before)
         doc.setFontSize(5);
         const formatDateTime = (date: Date) => {
           const year = date.getFullYear();
