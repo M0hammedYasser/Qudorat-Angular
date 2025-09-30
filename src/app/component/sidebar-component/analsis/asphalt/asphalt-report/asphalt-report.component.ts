@@ -324,7 +324,7 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
         { content: 'Ret(gm)', rowSpan: 2, styles: { halign: 'center', valign: 'middle' } },
         { content: 'Ret%', rowSpan: 2, styles: { halign: 'center', valign: 'middle' } },
         { content: 'Passing%', rowSpan: 2, styles: { halign: 'center', valign: 'middle' } },
-        { content: 'Gmf limits', colSpan: 2, styles: { halign: 'center' } },
+        { content: 'Jmf limits', colSpan: 2, styles: { halign: 'center' } },
         { content: 'General specifications', colSpan: 2, styles: { halign: 'center' } },
         { content: 'U.Expand k.2/95%', rowSpan: 2, styles: { halign: 'center' , valign: 'middle'} }, ],
         [ { content: 'mm', styles: { halign: 'center' } },
@@ -465,7 +465,7 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
           const sampleColumn = ['Item No', 'Limits', 'Result', 'Remarks'];
           const sampleRows = [
             ['Voids in mineral Agg. %', this.asphalt.voidsinmineralaggLimits || ' ' , `${Number(this.voidMineral).toFixed(2)} ${'±'} ${this.asphalt.voidmineralExpand || ''}`, { content: this.asphalt.remarks && this.asphalt.remarks.trim() !== '' ? this.asphalt.remarks : ' ', rowSpan: 8 }],
-            ['Air Voids %', this.asphalt.airvoidsLimits || ' ' , Number(this.airVoid).toFixed(1) ],
+            ['Air Voids %', this.asphalt.airvoidsLimits || ' ' , `${Number(this.airVoid).toFixed(1)} ± ${this.asphalt.airvoidExpand || ''}` ],
             ['Bitumen Content %', this.asphalt.bitumencontentLimits || ' ' , `${safeFixed(((this.asphalt.bitumen.weightSampleBefore - (this.asphalt.bitumen.weightSampleAfter + (this.asphalt.bitumen.weightFilterAfter - this.asphalt.bitumen.weightFilterBefore))) / this.asphalt.bitumen.weightSampleBefore) * 100)} ± ${this.asphalt.bitumen.expand || ''}`],
             ['Loss of Stability kgm', this.asphalt.lossofstabilitykgmLimits || ' ' , `${Number(this.avgStabilityFor30Min).toFixed(0)} ${'±'} ${this.asphalt.avgstabilityfor30minExpand || ''}`],
             ['Voids filled with Asp. %', this.asphalt.voidsfilledwithaspLimits || ' ' , this.asphalt.voidsfilledwithasplimitsInput || ''],
