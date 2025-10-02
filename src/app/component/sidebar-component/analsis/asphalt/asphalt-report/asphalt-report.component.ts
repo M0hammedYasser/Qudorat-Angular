@@ -283,15 +283,15 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
       };
 
       const bitumenRows = [
-        ['Wt. sample before gm', { content: this.asphalt.bitumen.weightSampleBefore || ' ', colSpan: 2 }, { content: '', rowSpan: 7 }],
+        ['Wt. sample before gm', { content: this.asphalt.bitumen.weightSampleBefore || ' ', colSpan: 2 }, { content: '', rowSpan: 9 }],
         ['Wt. of filter before gm', { content: this.asphalt.bitumen.weightFilterBefore || ' ', colSpan: 2 }],
         ['Wt. Of filter after gm', { content: this.asphalt.bitumen.weightFilterAfter || ' ', colSpan: 2 }],
         ['Increase of filter wt. gm', { content: safeFixed(this.asphalt.bitumen.weightFilterAfter - this.asphalt.bitumen.weightFilterBefore), colSpan: 2 }],
         ['Wt. of sample after gm', { content: this.asphalt.bitumen.weightSampleAfter || ' ', colSpan: 2 }],
         ['Total wt. of sample gm', { content: safeFixed(this.asphalt.bitumen.weightSampleAfter + (this.asphalt.bitumen.weightFilterAfter - this.asphalt.bitumen.weightFilterBefore)), colSpan: 2 }],
         ['Wt. of bit. gm', { content: safeFixed(this.asphalt.bitumen.weightSampleBefore - (this.asphalt.bitumen.weightSampleAfter + (this.asphalt.bitumen.weightFilterAfter - this.asphalt.bitumen.weightFilterBefore))), colSpan: 2 }],
-        ['Perc of Bit %', { content: safeFixed(((this.asphalt.bitumen.weightSampleBefore - (this.asphalt.bitumen.weightSampleAfter + (this.asphalt.bitumen.weightFilterAfter - this.asphalt.bitumen.weightFilterBefore))) / this.asphalt.bitumen.weightSampleBefore) * 100), colSpan: 2 }, this.asphalt.bitumen.percofBit || ' '],
-        ['JMF', `${safeFixed(this.asphalt.bitumen.percofBit - 0.4, 2)}`, `${safeFixed(this.asphalt.bitumen.percofBit + 0.4, 2)}`, `± ${this.asphalt.bitumen.jmf || ' '}`],
+        ['Perc of Bit %', { content: safeFixed(((this.asphalt.bitumen.weightSampleBefore - (this.asphalt.bitumen.weightSampleAfter + (this.asphalt.bitumen.weightFilterAfter - this.asphalt.bitumen.weightFilterBefore))) / this.asphalt.bitumen.weightSampleBefore) * 100), colSpan: 2 }],
+        ['JMF', this.asphalt.bitumen.jmfA , this.asphalt.bitumen.jmfB , ''],
         ['Result Bit', { content: `${safeFixed(((this.asphalt.bitumen.weightSampleBefore - (this.asphalt.bitumen.weightSampleAfter + (this.asphalt.bitumen.weightFilterAfter - this.asphalt.bitumen.weightFilterBefore))) / this.asphalt.bitumen.weightSampleBefore) * 100)} ± ${this.asphalt.bitumen.expand || ''}`, colSpan: 2 }],
         ['Equipment Used', { content: this.asphalt.bitumen.equipmentUsed || ' ', colSpan: 3 }],
       ];
@@ -467,7 +467,7 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
             ['Voids in mineral Agg. %', this.asphalt.voidsinmineralaggLimits || ' ' , `${Number(this.voidMineral).toFixed(2)} ${'±'} ${this.asphalt.voidmineralExpand || ''}`, { content: this.asphalt.remarks && this.asphalt.remarks.trim() !== '' ? this.asphalt.remarks : ' ', rowSpan: 8 }],
             ['Air Voids %', this.asphalt.airvoidsLimits || ' ' , `${Number(this.airVoid).toFixed(1)} ± ${this.asphalt.airvoidExpand || ''}` ],
             ['Bitumen Content %', this.asphalt.bitumencontentLimits || ' ' , `${safeFixed(((this.asphalt.bitumen.weightSampleBefore - (this.asphalt.bitumen.weightSampleAfter + (this.asphalt.bitumen.weightFilterAfter - this.asphalt.bitumen.weightFilterBefore))) / this.asphalt.bitumen.weightSampleBefore) * 100)} ± ${this.asphalt.bitumen.expand || ''}`],
-            ['Loss of Stability kgm', this.asphalt.lossofstabilitykgmLimits || ' ' , `${Number(this.avgStabilityFor30Min).toFixed(0)} ${'±'} ${this.asphalt.avgstabilityfor30minExpand || ''}`],
+            ['Stability kgm', this.asphalt.lossofstabilitykgmLimits || ' ' , `${Number(this.avgStabilityFor30Min).toFixed(0)} ${'±'} ${this.asphalt.avgstabilityfor30minExpand || ''}`],
             ['Voids filled with Asp. %', this.asphalt.voidsfilledwithaspLimits || ' ' , this.asphalt.voidsfilledwithasplimitsInput || ''],
             ['Max density as per design (gm/cm3)', this.asphalt.maxdensityasperdesignLimits || ' ' , this.asphalt.maxdensityasperdesignlimitsInput || ' '],
             ['Flow (mm)', this.asphalt.flowLimits || ' ' , `${Number((this.asphalt.flowA + this.asphalt.flowB + this.asphalt.flowC) / 3).toFixed(2)} ${'±'} ${this.asphalt.avgflowExpand || ''}`],
@@ -692,20 +692,20 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
             ],
             [
               '', 'Avg. max Sp. Gr of mix gmm gm/cm3',
-              {content: `${this.maxSpOfPAvgMix.toFixed(3)} ${'±'} ${this.asphalt.maxspofpavgmixExpand || ''}`, colSpan: 2, styles: { halign: 'center' }}, { content: this.maxSpOfPAvgMix.toFixed(3) , colSpan: 2, styles: { halign: 'center' } } , {content: 'حدود التصميم 2.556' , colSpan:2 , styles: { halign: 'right' }} , {content: '(متوسط الكثافة القصوي) جرام/سم3' , styles: { halign: 'right' }}
+              {content: `${this.maxSpOfPAvgMix.toFixed(3)} ${'±'} ${this.asphalt.maxspofpavgmixExpand || ''}`, colSpan: 2, styles: { halign: 'center' }}, { content: this.maxSpOfPAvgMix.toFixed(3) , colSpan: 2, styles: { halign: 'center' } } , {content: this.asphalt.maxSpOfPAvgMixNote || ' ', colSpan:2 , styles: { halign: 'right' }} , {content: '(متوسط الكثافة القصوي) جرام/سم3' , styles: { halign: 'right' }}
             ],
             [
               'VA', '% Air Voids',
-              { content: `${Number(this.airVoid).toFixed(1)} ± ${this.asphalt.airvoidExpand || ''}`, colSpan: 2, styles: { halign: 'center' } }, { content: this.airVoid.toFixed(1), colSpan: 2, styles: { halign: 'center' } }, { content: 'حدود التصميم 3-5', colSpan: 2, styles: {halign: 'right'} }, { content: '%الفراغات الهوائية في الخلطة', styles: { halign: 'right' } }
+              { content: `${Number(this.airVoid).toFixed(1)} ± ${this.asphalt.airvoidExpand || ''}`, colSpan: 2, styles: { halign: 'center' } }, { content: this.airVoid.toFixed(1), colSpan: 2, styles: { halign: 'center' } }, { content: this.asphalt.airVoidNote || ' ', colSpan: 2, styles: {halign: 'right'} }, { content: '%الفراغات الهوائية في الخلطة', styles: { halign: 'right' } }
             ],
 
             [
               'VMA', '% Voids in mineral Agg.',
-              {content: `${Number(this.voidMineral).toFixed(2)} ${'±'} ${this.asphalt.voidmineralExpand || ''}`, colSpan: 2, styles: { halign: 'center' }}, { content: Number(this.voidMineral).toFixed(2), colSpan: 2, styles: { halign: 'center' } } , {content: 'حدود التصميم 14-16' ,colSpan: 2 , styles: {halign: 'right'}} ,{content: '%الفراغات في الحمصة المتجانسة' , styles: { halign: 'right' }}
+              {content: `${Number(this.voidMineral).toFixed(2)} ${'±'} ${this.asphalt.voidmineralExpand || ''}`, colSpan: 2, styles: { halign: 'center' }}, { content: Number(this.voidMineral).toFixed(2), colSpan: 2, styles: { halign: 'center' } } , {content: this.asphalt.voidMineralNote || ' ' ,colSpan: 2 , styles: {halign: 'right'}} ,{content: '%الفراغات في الحمصة المتجانسة' , styles: { halign: 'right' }}
             ],
             [
               'VFA', '% Voids filled with Asp.',
-              {content: `${Number(this.voidFilled).toFixed(1)} ${'±'} ${this.asphalt.voidfilledExpand || ''}`, colSpan: 2, styles: { halign: 'center' }}, { content: Number(this.voidFilled).toFixed(1), colSpan: 2, styles: { halign: 'center' } } , {content: 'حدود التصميم 65-75' ,colSpan: 2 , styles: {halign: 'right'}} ,{content: '%الفراغات المملؤة في الخلطة' , styles: { halign: 'right' }}
+              {content: `${Number(this.voidFilled).toFixed(1)} ${'±'} ${this.asphalt.voidfilledExpand || ''}`, colSpan: 2, styles: { halign: 'center' }}, { content: Number(this.voidFilled).toFixed(1), colSpan: 2, styles: { halign: 'center' } } , {content: this.asphalt.voidFilledNote || ' ' ,colSpan: 2 , styles: {halign: 'right'}} ,{content: '%الفراغات المملؤة في الخلطة' , styles: { halign: 'right' }}
             ],
             [
               'Gse', 'Effect. Sp. Gravity of Agg.',
@@ -733,7 +733,7 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
              {content: '(الثبات بعد التصحيح) كجم' , styles: { halign: 'right' }}],
             [
               'Avg.', 'Stability (kg) for 30 min',
-              {content: `${Number(this.avgStabilityFor30Min).toFixed(0)} ${'±'} ${this.asphalt.avgstabilityfor30minExpand || ''}`, colSpan: 1, styles: { halign: 'center' }}, { content: Number(this.avgStabilityFor30Min).toFixed(0), colSpan: 2, styles: { halign: 'center' } }, {content: 'المواصفات المطلوبه 1000 Min.' ,colSpan: 3 , styles: {halign: 'right'}} ,
+              {content: `${Number(this.avgStabilityFor30Min).toFixed(0)} ${'±'} ${this.asphalt.avgstabilityfor30minExpand || ''}`, colSpan: 1, styles: { halign: 'center' }}, { content: Number(this.avgStabilityFor30Min).toFixed(0), colSpan: 2, styles: { halign: 'center' } }, {content: this.asphalt.avgStabilityFor30MinNote || ' ' ,colSpan: 3 , styles: {halign: 'right'}} ,
               {content: '(متوسط الثيات بعد 30د) كجم' , styles: { halign: 'right' }}
             ],
             ['Avg.', 'Stability (kg) for 24 Hrs.', {content:'' , colSpan: 3}, Number(this.asphalt.stabilityD * this.asphalt.correctionFactorD).toFixed(0), Number(this.asphalt.stabilityE * this.asphalt.correctionFactorE).toFixed(0), Number(this.asphalt.stabilityF * this.asphalt.correctionFactorF).toFixed(0) , {content: '(متوسط الثبات بعد 24 ساعة) كجم', styles: { halign: 'right' }}],
@@ -743,12 +743,12 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
             ],
             [
               'Avg', '% Loss of Stability',
-              {content: `${((this.avgStabilityFor30Min - this.avgStabilityFor24Hrs) / this.avgStabilityFor30Min * 100).toFixed(1)} ${'±'} ${this.asphalt.lossofstabilityExpand  || ''}`, colSpan: 2, styles: { halign: 'center' }}, {content: `${((this.avgStabilityFor30Min - this.avgStabilityFor24Hrs) / this.avgStabilityFor30Min * 100).toFixed(1)}`, colSpan: 2, styles: { halign: 'center' }} , {content: '25% Max المطلوب' ,colSpan: 2 , styles: {halign: 'right'}} , {content: '%قافد الثبات',  styles: { halign: 'right' }}
+              {content: `${((this.avgStabilityFor30Min - this.avgStabilityFor24Hrs) / this.avgStabilityFor30Min * 100).toFixed(1)} ${'±'} ${this.asphalt.lossofstabilityExpand  || ''}`, colSpan: 2, styles: { halign: 'center' }}, {content: `${((this.avgStabilityFor30Min - this.avgStabilityFor24Hrs) / this.avgStabilityFor30Min * 100).toFixed(1)}`, colSpan: 2, styles: { halign: 'center' }} , {content: this.asphalt.lossOfStabilityNote || ' ' ,colSpan: 2 , styles: {halign: 'right'}} , {content: '%قافد الثبات',  styles: { halign: 'right' }}
             ],
             ['', 'Flow (mm)', this.asphalt.flowA, this.asphalt.flowB, this.asphalt.flowC, {content: '' , colSpan: 3} , {content: '(الانسياب) مم',  styles: { halign: 'right' }}],
             ['', 'Avg. Flow (mm)',
               {content: `${Number((this.asphalt.flowA + this.asphalt.flowB + this.asphalt.flowC) / 3).toFixed(2)} ${'±'} ${this.asphalt.avgflowExpand || ''}`, colSpan: 1, styles: { halign: 'center' }}, { content: Number((this.asphalt.flowA + this.asphalt.flowB + this.asphalt.flowC) / 3).toFixed(2), colSpan: 2, styles: { halign: 'center' } },
-              {content: 'المواصفات المطلوبه 2-4' ,colSpan: 3 , styles: {halign: 'right'}} , {content: '(متوسط الاتسياب) مم' ,  styles: { halign: 'right' }}
+              {content: this.asphalt.avgFlowNote || ' ' ,colSpan: 3 , styles: {halign: 'right'}} , {content: '(متوسط الاتسياب) مم' ,  styles: { halign: 'right' }}
             ],
             ['Gb', 'Sp. Gravity of Asp. Bit',
               {content: `${this.asphalt.spGravityOfAspBit}`, colSpan: 6, styles: { halign: 'center' }} , {content: '(الوزن النوعي للاسفلت) جم/سم3' , styles: { halign: 'right' }}
