@@ -283,7 +283,7 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
       };
 
       const bitumenRows = [
-        ['Wt. sample before gm', { content: this.asphalt.bitumen.weightSampleBefore || ' ', colSpan: 2 }, { content: '', rowSpan: 9 }],
+        ['Wt. sample before gm', { content: this.asphalt.bitumen.weightSampleBefore || ' ', colSpan: 2 }, { content: '', rowSpan: 10 }],
         ['Wt. of filter before gm', { content: this.asphalt.bitumen.weightFilterBefore || ' ', colSpan: 2 }],
         ['Wt. Of filter after gm', { content: this.asphalt.bitumen.weightFilterAfter || ' ', colSpan: 2 }],
         ['Increase of filter wt. gm', { content: safeFixed(this.asphalt.bitumen.weightFilterAfter - this.asphalt.bitumen.weightFilterBefore), colSpan: 2 }],
