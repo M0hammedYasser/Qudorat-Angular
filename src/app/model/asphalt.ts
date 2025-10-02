@@ -101,20 +101,26 @@ export interface Asphalt {
   avgstabilityfor30minExpand: string;
   lossofstabilityExpand: string;
   avgflowExpand: string;
-
-
   voidMineral: number;
   voidFilled: number;
-  
-  
-
-
   netWeightOfLooseMix: number;
   netWeightOfFlaskWater: number;
   weightFlaskWaterSample: number;
   spGravityOfAspBit: number;
   bulkSpGrCombAgg: number;
 
+
+
+  maxSpOfPAvgMixNote: string;
+  airVoidNote: string;
+  voidMineralNote: string;
+  voidFilledNote: string;
+  avgStabilityFor30MinNote: string;
+  lossOfStabilityNote: string;
+  avgFlowNote: string;
+
+
+  
 
   gradationTest: GradationTest;
 
