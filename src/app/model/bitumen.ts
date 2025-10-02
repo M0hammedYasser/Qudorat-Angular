@@ -14,7 +14,9 @@ export interface Bitumen {
   expand: string;
   percofBit: number;
   equipmentUsed: string;
-  jmf: string;
+  jmfA: string;
+  jmfB: string;
+
 
   percOfBit: number;
 
