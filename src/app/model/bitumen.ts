@@ -14,10 +14,16 @@ export interface Bitumen {
   expand: string;
   percofBit: number;
   equipmentUsed: string;
-  jmfA: string;
-  jmfB: string;
 
 
+
+
+  jmfA: number;
+  jmfB: number;
+
+
+
+  
   percOfBit: number;
 
 }
