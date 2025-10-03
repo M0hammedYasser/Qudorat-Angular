@@ -283,15 +283,15 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
       };
 
       const bitumenRows = [
-        ['Wt. sample before gm', { content: this.asphalt.bitumen.weightSampleBefore || ' ', colSpan: 2 }, { content: '', rowSpan: 10 }],
-        ['Wt. of filter before gm', { content: this.asphalt.bitumen.weightFilterBefore || ' ', colSpan: 2 }],
-        ['Wt. Of filter after gm', { content: this.asphalt.bitumen.weightFilterAfter || ' ', colSpan: 2 }],
+        ['Wt. sample before gm', { content: this.asphalt.bitumen.weightSampleBefore.toFixed(1) || ' ', colSpan: 2 }, { content: '', rowSpan: 10 }],
+        ['Wt. of filter before gm', { content: this.asphalt.bitumen.weightFilterBefore.toFixed(1) || ' ', colSpan: 2 }],
+        ['Wt. Of filter after gm', { content: this.asphalt.bitumen.weightFilterAfter.toFixed(1) || ' ', colSpan: 2 }],
         ['Increase of filter wt. gm', { content: safeFixed(this.asphalt.bitumen.weightFilterAfter - this.asphalt.bitumen.weightFilterBefore), colSpan: 2 }],
-        ['Wt. of sample after gm', { content: this.asphalt.bitumen.weightSampleAfter || ' ', colSpan: 2 }],
+        ['Wt. of sample after gm', { content: this.asphalt.bitumen.weightSampleAfter.toFixed(1) || ' ', colSpan: 2 }],
         ['Total wt. of sample gm', { content: safeFixed(this.asphalt.bitumen.weightSampleAfter + (this.asphalt.bitumen.weightFilterAfter - this.asphalt.bitumen.weightFilterBefore)), colSpan: 2 }],
         ['Wt. of bit. gm', { content: safeFixed(this.asphalt.bitumen.weightSampleBefore - (this.asphalt.bitumen.weightSampleAfter + (this.asphalt.bitumen.weightFilterAfter - this.asphalt.bitumen.weightFilterBefore))), colSpan: 2 }],
         ['Perc of Bit %', { content: safeFixed(((this.asphalt.bitumen.weightSampleBefore - (this.asphalt.bitumen.weightSampleAfter + (this.asphalt.bitumen.weightFilterAfter - this.asphalt.bitumen.weightFilterBefore))) / this.asphalt.bitumen.weightSampleBefore) * 100), colSpan: 2 }],
-        ['JMF', this.asphalt.bitumen.jmfA , this.asphalt.bitumen.jmfB , ''],
+        ['JMF', this.asphalt.bitumen.jmfA.toFixed(2) , this.asphalt.bitumen.jmfB.toFixed(2) , ''],
         ['Result Bit', { content: `${safeFixed(((this.asphalt.bitumen.weightSampleBefore - (this.asphalt.bitumen.weightSampleAfter + (this.asphalt.bitumen.weightFilterAfter - this.asphalt.bitumen.weightFilterBefore))) / this.asphalt.bitumen.weightSampleBefore) * 100)} ± ${this.asphalt.bitumen.expand || ''}`, colSpan: 2 }],
         ['Equipment Used', { content: this.asphalt.bitumen.equipmentUsed || ' ', colSpan: 3 }],
       ];
@@ -335,55 +335,55 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
       const totalWeight = this.asphalt.bitumen.weightSampleAfter + (this.asphalt.bitumen.weightFilterAfter - this.asphalt.bitumen.weightFilterBefore);
 
       const sieveRows = [
-        ['37.5', '1.5', this.asphalt.gradationTest.massRetainedA, 
+        ['37.5', '1.5', this.asphalt.gradationTest.massRetainedA.toFixed(1), 
           ((this.asphalt.gradationTest.massRetainedA / totalWeight) * 100).toFixed(1), 
           (100 - ((this.asphalt.gradationTest.massRetainedA / totalWeight) * 100)).toFixed(2), 
-          this.asphalt.gradationTest.cvcMinA, this.asphalt.gradationTest.cvcMaxA , `${'±'} ${this.asphalt.gradationTest.expandA}`],
+          this.asphalt.gradationTest.cvcMinA.toFixed(1), this.asphalt.gradationTest.cvcMaxA.toFixed(1) , `${'±'} ${this.asphalt.gradationTest.expandA.toFixed(2)}`],
 
-        ['25', '1', this.asphalt.gradationTest.massRetainedB, 
+        ['25', '1', this.asphalt.gradationTest.massRetainedB.toFixed(1), 
           ((this.asphalt.gradationTest.massRetainedB / totalWeight) * 100).toFixed(1), 
           (100 - ((this.asphalt.gradationTest.massRetainedB / totalWeight) * 100)).toFixed(2), 
-          this.asphalt.gradationTest.cvcMinB, this.asphalt.gradationTest.cvcMaxB , `${'±'} ${this.asphalt.gradationTest.expandB}`],
+          this.asphalt.gradationTest.cvcMinB.toFixed(1), this.asphalt.gradationTest.cvcMaxB.toFixed(1) , `${'±'} ${this.asphalt.gradationTest.expandB.toFixed(2)}`],
 
-        ['19.0', '3/4', this.asphalt.gradationTest.massRetainedC, 
+        ['19.0', '3/4', this.asphalt.gradationTest.massRetainedC.toFixed(1), 
           ((this.asphalt.gradationTest.massRetainedC / totalWeight) * 100).toFixed(1), 
           (100 - ((this.asphalt.gradationTest.massRetainedC / totalWeight) * 100)).toFixed(2), 
-          this.asphalt.gradationTest.cvcMinC, this.asphalt.gradationTest.cvcMaxC , `${'±'} ${this.asphalt.gradationTest.expandC}`],
+          this.asphalt.gradationTest.cvcMinC.toFixed(1), this.asphalt.gradationTest.cvcMaxC.toFixed(1) , `${'±'} ${this.asphalt.gradationTest.expandC.toFixed(2)}`],
 
-        ['12.5', '1/2', this.asphalt.gradationTest.massRetainedD, 
+        ['12.5', '1/2', this.asphalt.gradationTest.massRetainedD.toFixed(1), 
           ((this.asphalt.gradationTest.massRetainedD / totalWeight) * 100).toFixed(1), 
           (100 - ((this.asphalt.gradationTest.massRetainedD / totalWeight) * 100)).toFixed(2), 
-          this.asphalt.gradationTest.cvcMinD, this.asphalt.gradationTest.cvcMaxD , `${'±'} ${this.asphalt.gradationTest.expandD}`],
+          this.asphalt.gradationTest.cvcMinD.toFixed(1), this.asphalt.gradationTest.cvcMaxD.toFixed(1) , `${'±'} ${this.asphalt.gradationTest.expandD.toFixed(2)}`],
 
-        ['9.5', '3/8', this.asphalt.gradationTest.massRetainedE, 
+        ['9.5', '3/8', this.asphalt.gradationTest.massRetainedE.toFixed(1), 
           ((this.asphalt.gradationTest.massRetainedE / totalWeight) * 100).toFixed(1), 
           (100 - ((this.asphalt.gradationTest.massRetainedE / totalWeight) * 100)).toFixed(2), 
-          this.asphalt.gradationTest.cvcMinE, this.asphalt.gradationTest.cvcMaxE , `${'±'} ${this.asphalt.gradationTest.expandE}`],
+          this.asphalt.gradationTest.cvcMinE.toFixed(1), this.asphalt.gradationTest.cvcMaxE.toFixed(1) , `${'±'} ${this.asphalt.gradationTest.expandE.toFixed(2)}`],
 
-        ['4.75', '#4', this.asphalt.gradationTest.massRetainedF, 
+        ['4.75', '#4', this.asphalt.gradationTest.massRetainedF.toFixed(1), 
           ((this.asphalt.gradationTest.massRetainedF / totalWeight) * 100).toFixed(1), 
           (100 - ((this.asphalt.gradationTest.massRetainedF / totalWeight) * 100)).toFixed(2), 
-          this.asphalt.gradationTest.cvcMinF, this.asphalt.gradationTest.cvcMaxF , `${'±'} ${this.asphalt.gradationTest.expandF}`],
+          this.asphalt.gradationTest.cvcMinF.toFixed(1), this.asphalt.gradationTest.cvcMaxF.toFixed(1) , `${'±'} ${this.asphalt.gradationTest.expandF.toFixed(2)}`],
 
-        ['2.00', '#10', this.asphalt.gradationTest.massRetainedG, 
+        ['2.00', '#10', this.asphalt.gradationTest.massRetainedG.toFixed(1), 
           ((this.asphalt.gradationTest.massRetainedG / totalWeight) * 100).toFixed(1), 
           (100 - ((this.asphalt.gradationTest.massRetainedG / totalWeight) * 100)).toFixed(2), 
-          this.asphalt.gradationTest.cvcMinG, this.asphalt.gradationTest.cvcMaxG , `${'±'} ${this.asphalt.gradationTest.expandG}`],
+          this.asphalt.gradationTest.cvcMinG.toFixed(1), this.asphalt.gradationTest.cvcMaxG.toFixed(1) , `${'±'} ${this.asphalt.gradationTest.expandG.toFixed(2)}`],
 
-        ['0.425', '#40', this.asphalt.gradationTest.massRetainedH, 
+        ['0.425', '#40', this.asphalt.gradationTest.massRetainedH.toFixed(1), 
           ((this.asphalt.gradationTest.massRetainedH / totalWeight) * 100).toFixed(1), 
           (100 - ((this.asphalt.gradationTest.massRetainedH / totalWeight) * 100)).toFixed(2), 
-          this.asphalt.gradationTest.cvcMinH, this.asphalt.gradationTest.cvcMaxH , `${'±'} ${this.asphalt.gradationTest.expandH}`],
+          this.asphalt.gradationTest.cvcMinH.toFixed(1), this.asphalt.gradationTest.cvcMaxH.toFixed(1) , `${'±'} ${this.asphalt.gradationTest.expandH.toFixed(2)}`],
 
-        ['0.180', '#80', this.asphalt.gradationTest.massRetainedI, 
+        ['0.180', '#80', this.asphalt.gradationTest.massRetainedI.toFixed(1), 
           ((this.asphalt.gradationTest.massRetainedI / totalWeight) * 100).toFixed(1), 
           (100 - ((this.asphalt.gradationTest.massRetainedI / totalWeight) * 100)).toFixed(2), 
-          this.asphalt.gradationTest.cvcMinI, this.asphalt.gradationTest.cvcMaxI , `${'±'} ${this.asphalt.gradationTest.expandI}`],
+          this.asphalt.gradationTest.cvcMinI.toFixed(1), this.asphalt.gradationTest.cvcMaxI.toFixed(1) , `${'±'} ${this.asphalt.gradationTest.expandI.toFixed(2)}`],
 
-        ['0.075', '#200', this.asphalt.gradationTest.massRetainedJ, 
+        ['0.075', '#200', this.asphalt.gradationTest.massRetainedJ.toFixed(1), 
           ((this.asphalt.gradationTest.massRetainedJ / totalWeight) * 100).toFixed(1), 
           (100 - ((this.asphalt.gradationTest.massRetainedJ / totalWeight) * 100)).toFixed(2), 
-          this.asphalt.gradationTest.cvcMinJ, this.asphalt.gradationTest.cvcMaxJ , `${'±'} ${this.asphalt.gradationTest.expandJ}`], 
+          this.asphalt.gradationTest.cvcMinJ.toFixed(1), this.asphalt.gradationTest.cvcMaxJ.toFixed(1) , `${'±'} ${this.asphalt.gradationTest.expandJ.toFixed(2)}`], 
 
         [{content : 'Total Weight' , colSpan: 2}, totalWeight.toFixed(1)],
       ];
@@ -646,9 +646,9 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
               { content: `${safeFixed(((this.asphalt.bitumen.weightSampleBefore - (this.asphalt.bitumen.weightSampleAfter + (this.asphalt.bitumen.weightFilterAfter - this.asphalt.bitumen.weightFilterBefore))) / this.asphalt.bitumen.weightSampleBefore) * 100)} ± ${this.asphalt.percofbitExpand || ''}`, colSpan: 2, styles: { halign: 'center' } }, { content: safeFixed(((this.asphalt.bitumen.weightSampleBefore - (this.asphalt.bitumen.weightSampleAfter + (this.asphalt.bitumen.weightFilterAfter - this.asphalt.bitumen.weightFilterBefore))) / this.asphalt.bitumen.weightSampleBefore) * 100), colSpan: 2 , styles: { halign: 'center' }} , {content: '' , colSpan: 2}, {content: '%نسبة الاسفلت من كامل الخلطة' , styles: { halign: 'right' }}
             ],
             ['', 'Specimen No.' , '1' , '2' , '3' , '4' , '5' , '6' , {content: 'رقم العينة' , styles: { halign: 'right' }}],
-            ['', 'Wt. in air dry (gm)', this.asphalt.weightAirDryA, this.asphalt.weightAirDryB, this.asphalt.weightAirDryC, this.asphalt.weightAirDryD, this.asphalt.weightAirDryE, this.asphalt.weightAirDryF, {content: '(الوزن الجاف في الهواء) جرام' , styles: { halign: 'right' }}],
-            ['','Wt. in water (gm)', this.asphalt.weightWaterA, this.asphalt.weightWaterB, this.asphalt.weightWaterC, this.asphalt.weightWaterD, this.asphalt.weightWaterE, this.asphalt.weightWaterF, {content: '(الوزن في الماء) جرام' , styles: { halign: 'right' }}],
-            ['','Wt. in air surf dry (gm)', this.asphalt.weightAirSurfDryA, this.asphalt.weightAirSurfDryB, this.asphalt.weightAirSurfDryC, this.asphalt.weightAirSurfDryD, this.asphalt.weightAirSurfDryE, this.asphalt.weightAirSurfDryF, {content: 'وزن العينة مشبعة في الهواء جافة السطح' , styles: { halign: 'right' }}],
+            ['', 'Wt. in air dry (gm)', this.asphalt.weightAirDryA.toFixed(1), this.asphalt.weightAirDryB.toFixed(1), this.asphalt.weightAirDryC.toFixed(1), this.asphalt.weightAirDryD.toFixed(1), this.asphalt.weightAirDryE.toFixed(1), this.asphalt.weightAirDryF.toFixed(1), {content: '(الوزن الجاف في الهواء) جرام' , styles: { halign: 'right' }}],
+            ['','Wt. in water (gm)', this.asphalt.weightWaterA.toFixed(1), this.asphalt.weightWaterB.toFixed(1), this.asphalt.weightWaterC.toFixed(1), this.asphalt.weightWaterD.toFixed(1), this.asphalt.weightWaterE.toFixed(1), this.asphalt.weightWaterF.toFixed(1), {content: '(الوزن في الماء) جرام' , styles: { halign: 'right' }}],
+            ['','Wt. in air surf dry (gm)', this.asphalt.weightAirSurfDryA.toFixed(1), this.asphalt.weightAirSurfDryB.toFixed(1), this.asphalt.weightAirSurfDryC.toFixed(1), this.asphalt.weightAirSurfDryD.toFixed(1), this.asphalt.weightAirSurfDryE.toFixed(1), this.asphalt.weightAirSurfDryF.toFixed(1), {content: 'وزن العينة مشبعة في الهواء جافة السطح' , styles: { halign: 'right' }}],
             ['','Volumes (c.c)',
               (this.asphalt.weightAirSurfDryA - this.asphalt.weightWaterA).toFixed(1),
               (this.asphalt.weightAirSurfDryB - this.asphalt.weightWaterB).toFixed(1),
@@ -716,8 +716,8 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
               {content: ((((this.asphalt.bitumen.weightSampleBefore -(this.asphalt.bitumen.weightSampleAfter +(this.asphalt.bitumen.weightFilterAfter - this.asphalt.bitumen.weightFilterBefore))) / this.asphalt.bitumen.weightSampleBefore) * 100)-((this.absorbedAps / 100) *(100 -(((this.asphalt.bitumen.weightSampleBefore -(this.asphalt.bitumen.weightSampleAfter +(this.asphalt.bitumen.weightFilterAfter - this.asphalt.bitumen.weightFilterBefore))) / this.asphalt.bitumen.weightSampleBefore) * 100)))).toFixed(2),colSpan: 5,styles: { halign: 'center' }},{ content: ' %نسبة الاسفلت الفعالة بالخلطة', styles: { halign: 'right' } }
 
             ],
-            ['', 'Stability (kg)', this.asphalt.stabilityA, this.asphalt.stabilityB, this.asphalt.stabilityC, this.asphalt.stabilityD, this.asphalt.stabilityE, this.asphalt.stabilityF , {content: '(الثبات) كجم' , styles: { halign: 'right' }}],
-            ['', 'Correction factor', this.asphalt.correctionFactorA, this.asphalt.correctionFactorB, this.asphalt.correctionFactorC, this.asphalt.correctionFactorD, this.asphalt.correctionFactorE, this.asphalt.correctionFactorF , {content: 'معامل التصحيح' , styles: { halign: 'right' }}],
+            ['', 'Stability (kg)', this.asphalt.stabilityA.toFixed(1), this.asphalt.stabilityB.toFixed(1), this.asphalt.stabilityC.toFixed(1), this.asphalt.stabilityD.toFixed(1), this.asphalt.stabilityE.toFixed(1), this.asphalt.stabilityF.toFixed(1) , {content: '(الثبات) كجم' , styles: { halign: 'right' }}],
+            ['', 'Correction factor', this.asphalt.correctionFactorA.toFixed(2), this.asphalt.correctionFactorB.toFixed(2), this.asphalt.correctionFactorC.toFixed(2), this.asphalt.correctionFactorD.toFixed(2), this.asphalt.correctionFactorE.toFixed(2), this.asphalt.correctionFactorF.toFixed(2) , {content: 'معامل التصحيح' , styles: { halign: 'right' }}],
             ['', 'Corrected Stability (kg)',
               (this.asphalt.stabilityA * this.asphalt.correctionFactorA).toFixed(0),
               (this.asphalt.stabilityB * this.asphalt.correctionFactorB).toFixed(0),
@@ -740,13 +740,13 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
               'Avg', '% Loss of Stability',
               {content: `${((this.avgStabilityFor30Min - this.avgStabilityFor24Hrs) / this.avgStabilityFor30Min * 100).toFixed(1)} ${'±'} ${this.asphalt.lossofstabilityExpand  || ''}`, colSpan: 2, styles: { halign: 'center' }}, {content: `${((this.avgStabilityFor30Min - this.avgStabilityFor24Hrs) / this.avgStabilityFor30Min * 100).toFixed(1)}`, colSpan: 2, styles: { halign: 'center' }} , {content: this.asphalt.lossOfStabilityNote || ' ' ,colSpan: 2 , styles: {halign: 'right'}} , {content: '%قافد الثبات',  styles: { halign: 'right' }}
             ],
-            ['', 'Flow (mm)', this.asphalt.flowA, this.asphalt.flowB, this.asphalt.flowC, {content: '' , colSpan: 3} , {content: '(الانسياب) مم',  styles: { halign: 'right' }}],
+            ['', 'Flow (mm)', this.asphalt.flowA.toFixed(1), this.asphalt.flowB.toFixed(1), this.asphalt.flowC.toFixed(1), {content: '' , colSpan: 3} , {content: '(الانسياب) مم',  styles: { halign: 'right' }}],
             ['', 'Avg. Flow (mm)',
               {content: `${Number((this.asphalt.flowA + this.asphalt.flowB + this.asphalt.flowC) / 3).toFixed(2)} ${'±'} ${this.asphalt.avgflowExpand || ''}`, colSpan: 1, styles: { halign: 'center' }}, { content: Number((this.asphalt.flowA + this.asphalt.flowB + this.asphalt.flowC) / 3).toFixed(2), colSpan: 2, styles: { halign: 'center' } },
               {content: this.asphalt.avgFlowNote || ' ' ,colSpan: 3 , styles: {halign: 'right'}} , {content: '(متوسط الاتسياب) مم' ,  styles: { halign: 'right' }}
             ],
             ['Gb', 'Sp. Gravity of Asp. Bit',
-              {content: `${this.asphalt.spGravityOfAspBit}`, colSpan: 6, styles: { halign: 'center' }} , {content: '(الوزن النوعي للاسفلت) جم/سم3' , styles: { halign: 'right' }}
+              {content: `${this.asphalt.spGravityOfAspBit.toFixed(3)}`, colSpan: 6, styles: { halign: 'center' }} , {content: '(الوزن النوعي للاسفلت) جم/سم3' , styles: { halign: 'right' }}
             ],
             [
               'Ps', 'Agg. % total wt. of mix',{ content: safeFixed(100 - (((this.asphalt.bitumen.weightSampleBefore - (this.asphalt.bitumen.weightSampleAfter + (this.asphalt.bitumen.weightFilterAfter - this.asphalt.bitumen.weightFilterBefore))) / this.asphalt.bitumen.weightSampleBefore) * 100)), colSpan: 6, styles: { halign: 'center' } }, { content: ' %نسبة البحص في كامل الخلطة', styles: { halign: 'right' } }
@@ -754,7 +754,7 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
 
             [
               'Gsb', 'Bulk Sp. Gr. Comb. Agg.',
-              {content: `${this.asphalt.bulkSpGrCombAgg}`, colSpan: 6, styles: { halign: 'center' }} , {content : ' (الوزن النوعي الكلي للبحص) جم/سم3' , styles: { halign: 'right' }}
+              {content: `${this.asphalt.bulkSpGrCombAgg.toFixed(3)}`, colSpan: 6, styles: { halign: 'center' }} , {content : ' (الوزن النوعي الكلي للبحص) جم/سم3' , styles: { halign: 'right' }}
             ],
             [
               'M.R.F', 'Machine Ring Factor', {content: 'Mach. Reading x Factor' , colSpan: 2 },{content: 'ELE- Serial No- 11116' ,colSpan : 4 , styles: { halign: 'center' }}, {content : 'الجهاز المستخدم' , styles: { halign: 'right' }}
