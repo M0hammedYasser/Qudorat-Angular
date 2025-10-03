@@ -303,18 +303,18 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
         startY: 62,
         styles: {
           fontSize: 7,
-          cellPadding: 1.57,
+          cellPadding: 1.44,
           lineWidth: 0.6,
           textColor: [0, 0, 0],
           lineColor: [0, 0, 0]
         },
         tableLineColor: [0, 0, 0],
-        margin: { left: 10, right: 78 },
+        margin: { left: 10, right: 82 },
         columnStyles: {
           0: { cellWidth: 33 },
-          1: { cellWidth: 12 },
-          2: { cellWidth: 12 },
-          3: { cellWidth: 11 }
+          1: { cellWidth: 15 },
+          2: { cellWidth: 15 },
+          3: { cellWidth: 13 }
 
         }
       });
@@ -325,12 +325,9 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
         { content: 'Ret%', rowSpan: 2, styles: { halign: 'center', valign: 'middle' } },
         { content: 'Passing%', rowSpan: 2, styles: { halign: 'center', valign: 'middle' } },
         { content: 'Jmf limits', colSpan: 2, styles: { halign: 'center' } },
-        { content: 'General specifications', colSpan: 2, styles: { halign: 'center' } },
         { content: 'U.Expand k.2/95%', rowSpan: 2, styles: { halign: 'center' , valign: 'middle'} }, ],
         [ { content: 'mm', styles: { halign: 'center' } },
           { content: 'inch', styles: { halign: 'center' } },
-          { content: 'Min%', styles: { halign: 'center' } },
-          { content: 'Max%', styles: { halign: 'center' } },
           { content: 'Min%', styles: { halign: 'center' } },
           { content: 'Max%', styles: { halign: 'center' } },
         ] ];
@@ -341,52 +338,52 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
         ['37.5', '1.5', this.asphalt.gradationTest.massRetainedA, 
           ((this.asphalt.gradationTest.massRetainedA / totalWeight) * 100).toFixed(1), 
           (100 - ((this.asphalt.gradationTest.massRetainedA / totalWeight) * 100)).toFixed(2), 
-          this.asphalt.gradationTest.cvcMinA, this.asphalt.gradationTest.cvcMaxA , this.asphalt.gradationTest.gcvcMinA, this.asphalt.gradationTest.gcvcMaxA , `${'±'} ${this.asphalt.gradationTest.expandA}`],
+          this.asphalt.gradationTest.cvcMinA, this.asphalt.gradationTest.cvcMaxA , `${'±'} ${this.asphalt.gradationTest.expandA}`],
 
         ['25', '1', this.asphalt.gradationTest.massRetainedB, 
           ((this.asphalt.gradationTest.massRetainedB / totalWeight) * 100).toFixed(1), 
           (100 - ((this.asphalt.gradationTest.massRetainedB / totalWeight) * 100)).toFixed(2), 
-          this.asphalt.gradationTest.cvcMinB, this.asphalt.gradationTest.cvcMaxB , this.asphalt.gradationTest.gcvcMinB, this.asphalt.gradationTest.gcvcMaxB , `${'±'} ${this.asphalt.gradationTest.expandB}`],
+          this.asphalt.gradationTest.cvcMinB, this.asphalt.gradationTest.cvcMaxB , `${'±'} ${this.asphalt.gradationTest.expandB}`],
 
         ['19.0', '3/4', this.asphalt.gradationTest.massRetainedC, 
           ((this.asphalt.gradationTest.massRetainedC / totalWeight) * 100).toFixed(1), 
           (100 - ((this.asphalt.gradationTest.massRetainedC / totalWeight) * 100)).toFixed(2), 
-          this.asphalt.gradationTest.cvcMinC, this.asphalt.gradationTest.cvcMaxC , this.asphalt.gradationTest.gcvcMinC, this.asphalt.gradationTest.gcvcMaxC , `${'±'} ${this.asphalt.gradationTest.expandC}`],
+          this.asphalt.gradationTest.cvcMinC, this.asphalt.gradationTest.cvcMaxC , `${'±'} ${this.asphalt.gradationTest.expandC}`],
 
         ['12.5', '1/2', this.asphalt.gradationTest.massRetainedD, 
           ((this.asphalt.gradationTest.massRetainedD / totalWeight) * 100).toFixed(1), 
           (100 - ((this.asphalt.gradationTest.massRetainedD / totalWeight) * 100)).toFixed(2), 
-          this.asphalt.gradationTest.cvcMinD, this.asphalt.gradationTest.cvcMaxD , this.asphalt.gradationTest.gcvcMinD, this.asphalt.gradationTest.gcvcMaxD , `${'±'} ${this.asphalt.gradationTest.expandD}`],
+          this.asphalt.gradationTest.cvcMinD, this.asphalt.gradationTest.cvcMaxD , `${'±'} ${this.asphalt.gradationTest.expandD}`],
 
         ['9.5', '3/8', this.asphalt.gradationTest.massRetainedE, 
           ((this.asphalt.gradationTest.massRetainedE / totalWeight) * 100).toFixed(1), 
           (100 - ((this.asphalt.gradationTest.massRetainedE / totalWeight) * 100)).toFixed(2), 
-          this.asphalt.gradationTest.cvcMinE, this.asphalt.gradationTest.cvcMaxE , this.asphalt.gradationTest.gcvcMinE, this.asphalt.gradationTest.gcvcMaxE , `${'±'} ${this.asphalt.gradationTest.expandE}`],
+          this.asphalt.gradationTest.cvcMinE, this.asphalt.gradationTest.cvcMaxE , `${'±'} ${this.asphalt.gradationTest.expandE}`],
 
         ['4.75', '#4', this.asphalt.gradationTest.massRetainedF, 
           ((this.asphalt.gradationTest.massRetainedF / totalWeight) * 100).toFixed(1), 
           (100 - ((this.asphalt.gradationTest.massRetainedF / totalWeight) * 100)).toFixed(2), 
-          this.asphalt.gradationTest.cvcMinF, this.asphalt.gradationTest.cvcMaxF , this.asphalt.gradationTest.gcvcMinF, this.asphalt.gradationTest.gcvcMaxF , `${'±'} ${this.asphalt.gradationTest.expandF}`],
+          this.asphalt.gradationTest.cvcMinF, this.asphalt.gradationTest.cvcMaxF , `${'±'} ${this.asphalt.gradationTest.expandF}`],
 
         ['2.00', '#10', this.asphalt.gradationTest.massRetainedG, 
           ((this.asphalt.gradationTest.massRetainedG / totalWeight) * 100).toFixed(1), 
           (100 - ((this.asphalt.gradationTest.massRetainedG / totalWeight) * 100)).toFixed(2), 
-          this.asphalt.gradationTest.cvcMinG, this.asphalt.gradationTest.cvcMaxG , this.asphalt.gradationTest.gcvcMinG, this.asphalt.gradationTest.gcvcMaxG , `${'±'} ${this.asphalt.gradationTest.expandG}`],
+          this.asphalt.gradationTest.cvcMinG, this.asphalt.gradationTest.cvcMaxG , `${'±'} ${this.asphalt.gradationTest.expandG}`],
 
         ['0.425', '#40', this.asphalt.gradationTest.massRetainedH, 
           ((this.asphalt.gradationTest.massRetainedH / totalWeight) * 100).toFixed(1), 
           (100 - ((this.asphalt.gradationTest.massRetainedH / totalWeight) * 100)).toFixed(2), 
-          this.asphalt.gradationTest.cvcMinH, this.asphalt.gradationTest.cvcMaxH , this.asphalt.gradationTest.gcvcMinH, this.asphalt.gradationTest.gcvcMaxH , `${'±'} ${this.asphalt.gradationTest.expandH}`],
+          this.asphalt.gradationTest.cvcMinH, this.asphalt.gradationTest.cvcMaxH , `${'±'} ${this.asphalt.gradationTest.expandH}`],
 
         ['0.180', '#80', this.asphalt.gradationTest.massRetainedI, 
           ((this.asphalt.gradationTest.massRetainedI / totalWeight) * 100).toFixed(1), 
           (100 - ((this.asphalt.gradationTest.massRetainedI / totalWeight) * 100)).toFixed(2), 
-          this.asphalt.gradationTest.cvcMinI, this.asphalt.gradationTest.cvcMaxI , this.asphalt.gradationTest.gcvcMinI, this.asphalt.gradationTest.gcvcMaxI , `${'±'} ${this.asphalt.gradationTest.expandI}`],
+          this.asphalt.gradationTest.cvcMinI, this.asphalt.gradationTest.cvcMaxI , `${'±'} ${this.asphalt.gradationTest.expandI}`],
 
         ['0.075', '#200', this.asphalt.gradationTest.massRetainedJ, 
           ((this.asphalt.gradationTest.massRetainedJ / totalWeight) * 100).toFixed(1), 
           (100 - ((this.asphalt.gradationTest.massRetainedJ / totalWeight) * 100)).toFixed(2), 
-          this.asphalt.gradationTest.cvcMinJ, this.asphalt.gradationTest.cvcMaxJ , this.asphalt.gradationTest.gcvcMinJ, this.asphalt.gradationTest.gcvcMaxJ , `${'±'} ${this.asphalt.gradationTest.expandJ}`], 
+          this.asphalt.gradationTest.cvcMinJ, this.asphalt.gradationTest.cvcMaxJ , `${'±'} ${this.asphalt.gradationTest.expandJ}`], 
 
         [{content : 'Total Weight' , colSpan: 2}, totalWeight.toFixed(1)],
       ];
@@ -414,18 +411,16 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
         },
         tableLineColor: [0, 0, 0],
         // tableLineWidth: 0.5,
-        margin: { left: 78, right: 13 },
+        margin: { left: 82 , right: 13 },
         columnStyles: {
-          0: { cellWidth: 13 },
-          1: { cellWidth: 13 },
-          2: { cellWidth: 12 },
-          3: { cellWidth: 12 },
-          4: { cellWidth: 15 },
-          5: { cellWidth: 11 },
-          6: { cellWidth: 11 },
-          7: { cellWidth: 11 },
-          8: { cellWidth: 11 },
-          9: { cellWidth: 13 }
+          0: { cellWidth: 14 },
+          1: { cellWidth: 14 },
+          2: { cellWidth: 14 },
+          3: { cellWidth: 14 },
+          4: { cellWidth: 14 },
+          5: { cellWidth: 14 },
+          6: { cellWidth: 14 },
+          7: { cellWidth: 20 }
         }
       });
       let finalY = (doc as any).lastAutoTable.finalY + 5;
