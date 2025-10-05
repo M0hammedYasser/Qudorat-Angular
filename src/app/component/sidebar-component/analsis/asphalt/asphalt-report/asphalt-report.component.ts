@@ -338,52 +338,52 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
         ['37.5', '1.5', this.asphalt.gradationTest.massRetainedA.toFixed(1), 
           ((this.asphalt.gradationTest.massRetainedA / totalWeight) * 100).toFixed(1), 
           (100 - ((this.asphalt.gradationTest.massRetainedA / totalWeight) * 100)).toFixed(2), 
-          this.asphalt.gradationTest.cvcMinA.toFixed(1), this.asphalt.gradationTest.cvcMaxA.toFixed(1) , `${'±'} ${this.asphalt.gradationTest.expandA.toFixed(2)}`],
+          this.asphalt.gradationTest.cvcMinA.toFixed(1), this.asphalt.gradationTest.cvcMaxA.toFixed(1) , `${'±'} ${this.asphalt.gradationTest.expandA}`],
 
         ['25', '1', this.asphalt.gradationTest.massRetainedB.toFixed(1), 
           ((this.asphalt.gradationTest.massRetainedB / totalWeight) * 100).toFixed(1), 
           (100 - ((this.asphalt.gradationTest.massRetainedB / totalWeight) * 100)).toFixed(2), 
-          this.asphalt.gradationTest.cvcMinB.toFixed(1), this.asphalt.gradationTest.cvcMaxB.toFixed(1) , `${'±'} ${this.asphalt.gradationTest.expandB.toFixed(2)}`],
+          this.asphalt.gradationTest.cvcMinB.toFixed(1), this.asphalt.gradationTest.cvcMaxB.toFixed(1) , `${'±'} ${this.asphalt.gradationTest.expandB}`],
 
         ['19.0', '3/4', this.asphalt.gradationTest.massRetainedC.toFixed(1), 
           ((this.asphalt.gradationTest.massRetainedC / totalWeight) * 100).toFixed(1), 
           (100 - ((this.asphalt.gradationTest.massRetainedC / totalWeight) * 100)).toFixed(2), 
-          this.asphalt.gradationTest.cvcMinC.toFixed(1), this.asphalt.gradationTest.cvcMaxC.toFixed(1) , `${'±'} ${this.asphalt.gradationTest.expandC.toFixed(2)}`],
+          this.asphalt.gradationTest.cvcMinC.toFixed(1), this.asphalt.gradationTest.cvcMaxC.toFixed(1) , `${'±'} ${this.asphalt.gradationTest.expandC}`],
 
         ['12.5', '1/2', this.asphalt.gradationTest.massRetainedD.toFixed(1), 
           ((this.asphalt.gradationTest.massRetainedD / totalWeight) * 100).toFixed(1), 
           (100 - ((this.asphalt.gradationTest.massRetainedD / totalWeight) * 100)).toFixed(2), 
-          this.asphalt.gradationTest.cvcMinD.toFixed(1), this.asphalt.gradationTest.cvcMaxD.toFixed(1) , `${'±'} ${this.asphalt.gradationTest.expandD.toFixed(2)}`],
+          this.asphalt.gradationTest.cvcMinD.toFixed(1), this.asphalt.gradationTest.cvcMaxD.toFixed(1) , `${'±'} ${this.asphalt.gradationTest.expandD}`],
 
         ['9.5', '3/8', this.asphalt.gradationTest.massRetainedE.toFixed(1), 
           ((this.asphalt.gradationTest.massRetainedE / totalWeight) * 100).toFixed(1), 
           (100 - ((this.asphalt.gradationTest.massRetainedE / totalWeight) * 100)).toFixed(2), 
-          this.asphalt.gradationTest.cvcMinE.toFixed(1), this.asphalt.gradationTest.cvcMaxE.toFixed(1) , `${'±'} ${this.asphalt.gradationTest.expandE.toFixed(2)}`],
+          this.asphalt.gradationTest.cvcMinE.toFixed(1), this.asphalt.gradationTest.cvcMaxE.toFixed(1) , `${'±'} ${this.asphalt.gradationTest.expandE}`],
 
         ['4.75', '#4', this.asphalt.gradationTest.massRetainedF.toFixed(1), 
           ((this.asphalt.gradationTest.massRetainedF / totalWeight) * 100).toFixed(1), 
           (100 - ((this.asphalt.gradationTest.massRetainedF / totalWeight) * 100)).toFixed(2), 
-          this.asphalt.gradationTest.cvcMinF.toFixed(1), this.asphalt.gradationTest.cvcMaxF.toFixed(1) , `${'±'} ${this.asphalt.gradationTest.expandF.toFixed(2)}`],
+          this.asphalt.gradationTest.cvcMinF.toFixed(1), this.asphalt.gradationTest.cvcMaxF.toFixed(1) , `${'±'} ${this.asphalt.gradationTest.expandF}`],
 
         ['2.00', '#10', this.asphalt.gradationTest.massRetainedG.toFixed(1), 
           ((this.asphalt.gradationTest.massRetainedG / totalWeight) * 100).toFixed(1), 
           (100 - ((this.asphalt.gradationTest.massRetainedG / totalWeight) * 100)).toFixed(2), 
-          this.asphalt.gradationTest.cvcMinG.toFixed(1), this.asphalt.gradationTest.cvcMaxG.toFixed(1) , `${'±'} ${this.asphalt.gradationTest.expandG.toFixed(2)}`],
+          this.asphalt.gradationTest.cvcMinG.toFixed(1), this.asphalt.gradationTest.cvcMaxG.toFixed(1) , `${'±'} ${this.asphalt.gradationTest.expandG}`],
 
         ['0.425', '#40', this.asphalt.gradationTest.massRetainedH.toFixed(1), 
           ((this.asphalt.gradationTest.massRetainedH / totalWeight) * 100).toFixed(1), 
           (100 - ((this.asphalt.gradationTest.massRetainedH / totalWeight) * 100)).toFixed(2), 
-          this.asphalt.gradationTest.cvcMinH.toFixed(1), this.asphalt.gradationTest.cvcMaxH.toFixed(1) , `${'±'} ${this.asphalt.gradationTest.expandH.toFixed(2)}`],
+          this.asphalt.gradationTest.cvcMinH.toFixed(1), this.asphalt.gradationTest.cvcMaxH.toFixed(1) , `${'±'} ${this.asphalt.gradationTest.expandH}`],
 
         ['0.180', '#80', this.asphalt.gradationTest.massRetainedI.toFixed(1), 
           ((this.asphalt.gradationTest.massRetainedI / totalWeight) * 100).toFixed(1), 
           (100 - ((this.asphalt.gradationTest.massRetainedI / totalWeight) * 100)).toFixed(2), 
-          this.asphalt.gradationTest.cvcMinI.toFixed(1), this.asphalt.gradationTest.cvcMaxI.toFixed(1) , `${'±'} ${this.asphalt.gradationTest.expandI.toFixed(2)}`],
+          this.asphalt.gradationTest.cvcMinI.toFixed(1), this.asphalt.gradationTest.cvcMaxI.toFixed(1) , `${'±'} ${this.asphalt.gradationTest.expandI}`],
 
         ['0.075', '#200', this.asphalt.gradationTest.massRetainedJ.toFixed(1), 
           ((this.asphalt.gradationTest.massRetainedJ / totalWeight) * 100).toFixed(1), 
           (100 - ((this.asphalt.gradationTest.massRetainedJ / totalWeight) * 100)).toFixed(2), 
-          this.asphalt.gradationTest.cvcMinJ.toFixed(1), this.asphalt.gradationTest.cvcMaxJ.toFixed(1) , `${'±'} ${this.asphalt.gradationTest.expandJ.toFixed(2)}`], 
+          this.asphalt.gradationTest.cvcMinJ.toFixed(1), this.asphalt.gradationTest.cvcMaxJ.toFixed(1) , `${'±'} ${this.asphalt.gradationTest.expandJ}`], 
 
         [{content : 'Total Weight' , colSpan: 2}, totalWeight.toFixed(1)],
       ];
