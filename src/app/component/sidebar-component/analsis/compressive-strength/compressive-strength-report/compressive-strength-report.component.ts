@@ -69,7 +69,7 @@ export class CompressiveStrengthReportComponent implements OnInit {
     head.onload = () => {
       doc.addImage(head, 'PNG', 0, 0, 210, 33);
       doc.setFontSize(12);
-      doc.text(`Portland Cement Concrete Cylinders Compressive Strength Test ASTM C-39 / C-31` , 36 , 34)
+      doc.text(`Work Sheet for Compressive Strength of Concrete Cylinder ASTM C-39 ASTM C-31 C-31M ` , 36 , 34)
 
 
       autoTable(doc, {
