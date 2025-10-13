@@ -48,20 +48,14 @@ export class CompressiveStrengthReportComponent implements OnInit {
     doc.setFont('Amiri');
 
     const castingDate = new Date(this.compressiveStrength.dataCasting); 
-    const testedDays = new Date(this.compressiveStrength.dateTested); 
+    const testedDays = Number(this.compressiveStrength.dateTested); 
 
     let reportDate = 'N/A';
 
-    if (!isNaN(castingDate.getTime()) && !isNaN(testedDays.getTime())) {
+    if (!isNaN(castingDate.getTime()) && !isNaN(testedDays)) {
       const report = new Date(castingDate);
-      const report2 = new Date(testedDays);
-
-      report.setDate(report.getDate() + report2.getDate());
-
-      const year = report.getFullYear();
-      const month = String(report.getMonth() + 1).padStart(2, '0');
-      const day = String(report.getDate()).padStart(2, '0');
-      reportDate = `${year}-${month}-${day}`;
+      report.setDate(report.getDate() + testedDays);
+      reportDate = report.toLocaleDateString('en-GB'); 
     }
 
 
@@ -75,7 +69,7 @@ export class CompressiveStrengthReportComponent implements OnInit {
     head.onload = () => {
       doc.addImage(head, 'PNG', 0, 0, 210, 33);
       doc.setFontSize(12);
-      doc.text(`Portland Cement Concrete Cylinders Compressive Strength Test` , 44 , 34)
+      doc.text(`Portland Cement Concrete Cylinders Compressive Strength Test ASTM C-39 / C-31` , 36 , 34)
 
 
       autoTable(doc, {
@@ -83,7 +77,7 @@ export class CompressiveStrengthReportComponent implements OnInit {
         body: [
           ['Project', this.compressiveStrength.projectName || 'N/A', 'Structure', this.compressiveStrength.structure || 'N/A' , {content: "" , rowSpan: 2}],
           ['Company', this.compressiveStrength.company || 'N/A', 'Sample by', this.compressiveStrength.sampleBy || 'N/A' ],
-          ['Location', this.compressiveStrength.location || 'N/A', 'Slump (mm) ASTM', this.compressiveStrength.slump || 'N/A' , "ASTM C143/C143M"],
+          ['Location', this.compressiveStrength.location || 'N/A', 'Slump (mm)', this.compressiveStrength.slump || 'N/A' , "ASTM C143/C143M"],
           ['Date Casting', this.compressiveStrength.dataCasting || 'N/A', 'Temperature(°C)', this.compressiveStrength.temperature || 'N/A' , "ASTM C1064/C1064M"],
           ['Date Received', this.compressiveStrength.dataReceived || 'N/A', 'Req. Strength for 28 Days (kg/cm2)', this.compressiveStrength.reqstrengthKg || 'N/A' , {content: "" , rowSpan: 5}],
           ['Date Tested', this.compressiveStrength.dateTested || 'N/A', 'Req. Strength for 28 Days (Mpa)', Number(this.compressiveStrength.reqstrengthKg / 10.2).toFixed(2)|| 'N/A'],
@@ -148,7 +142,7 @@ export class CompressiveStrengthReportComponent implements OnInit {
 
       autoTable(doc, {
         startY: finalY,
-        head: [['Sample NO', 'Dia.(cm)', 'Length (cm)', 'Area (cm²)', 'Age in Days', 'Weight Sample (gm)', 'Unit Mass (gm/cc)', 'Test Load (KN)', 'Test Load (KG)', 'Compressive Strength (kg/cm²)', 'Avg. Comp. Strength (kg/cm²)', 'Compressive Strength (Mpa)', 'Avg. Comp. Strength (Mpa) with exp u k=2']],
+        head: [['Sample NO', 'Average Dia.(cm)', 'Average Length (cm)', 'Area (cm²)', 'Age in Days', 'Weight Sample (gm)', 'Unit Mass (gm/cc)', 'Test Load (KN)', 'Test Load (KG)', 'Compressive Strength (kg/cm²)', 'Avg. Comp. Strength (kg/cm²)', 'Compressive Strength (Mpa)', 'Avg. Comp. Strength (Mpa) with exp u k=2']],
         body: [
           [this.compressiveStrength.sampleNOA, Number(this.compressiveStrength.diaA).toFixed(1), Number(this.compressiveStrength.lengthA).toFixed(1), (Number(this.compressiveStrength.diaA) * Number(this.compressiveStrength.diaA) * 3.143 / 4).toFixed(1), this.compressiveStrength.dateTested, this.compressiveStrength.weightSampleA, (Number(this.compressiveStrength.weightSampleA) / ((Number(this.compressiveStrength.diaA) * Number(this.compressiveStrength.diaA) * 3.143 / 4) * Number(this.compressiveStrength.lengthA))).toFixed(3), this.compressiveStrength.testLoadknA, Number(this.compressiveStrength.testLoadknA * 101.971).toFixed(0), (Number(this.compressiveStrength.testLoadknA) * 101.971 / (Number(this.compressiveStrength.diaA) * Number(this.compressiveStrength.diaA) * 3.143 / 4)).toFixed(1), {content: avgCompStrength1 , rowSpan: 3}, ((Number(this.compressiveStrength.testLoadknA) * 101.971 /(Number(this.compressiveStrength.diaA) * Number(this.compressiveStrength.diaA) * 3.143 / 4)) / 10.2).toFixed(2), { content: `± ${this.compressiveStrength.expAvgA}`, rowSpan: 3 }],
           [this.compressiveStrength.sampleNOB, Number(this.compressiveStrength.diaA).toFixed(1), Number(this.compressiveStrength.lengthA).toFixed(1), (Number(this.compressiveStrength.diaA) * Number(this.compressiveStrength.diaA) * 3.143 / 4).toFixed(1), this.compressiveStrength.dateTested, this.compressiveStrength.weightSampleB, (Number(this.compressiveStrength.weightSampleB) / ((Number(this.compressiveStrength.diaA) * Number(this.compressiveStrength.diaA) * 3.143 / 4) * Number(this.compressiveStrength.lengthA))).toFixed(3), this.compressiveStrength.testLoadknB, Number(this.compressiveStrength.testLoadknB * 101.971).toFixed(0), (Number(this.compressiveStrength.testLoadknB) * 101.971 / (Number(this.compressiveStrength.diaA) * Number(this.compressiveStrength.diaA) * 3.143 / 4)).toFixed(1), ((Number(this.compressiveStrength.testLoadknB) * 101.971 /(Number(this.compressiveStrength.diaA) * Number(this.compressiveStrength.diaA) * 3.143 / 4)) / 10.2).toFixed(2)],
