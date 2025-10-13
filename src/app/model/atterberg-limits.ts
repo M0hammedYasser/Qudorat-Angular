@@ -25,6 +25,7 @@ clientCode: any;
   owner: string;
   location: string;
   sampleNo: string;
+  reportNo: string;
 
   numberOfBlows5 : number;
   numberOfBlows6 : number;
