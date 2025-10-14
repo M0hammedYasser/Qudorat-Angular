@@ -18,6 +18,7 @@ clientCode: any;
   approveBy: string;
   lastApproveBy: string;
   activist: string;
+  reportNo: string;
 
   nameOfTest: number;
   consultant: string;
