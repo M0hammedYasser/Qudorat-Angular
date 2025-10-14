@@ -84,13 +84,11 @@ export class AtterbergReportComponent implements OnInit {
       this.chart.destroy();
     }
 
-    // Extract values with fallback to 0 if null
     const liquidLimit = this.atterbergLimits.liquidLimit;
     const plasticLimit = this.atterbergLimits.plasticLimit;
     const plasticityIndex = liquidLimit - plasticLimit;
 
-    // Define the A-line and U-line
-    const xValues = Array.from({length: 101}, (_, i) => i); // 0 to 100
+    const xValues = Array.from({length: 101}, (_, i) => i); 
     const aLine = xValues.map(x => 0.73 * (x - 20));
     const uLine = xValues.map(x => 0.9 * (x - 8));
 
@@ -160,97 +158,111 @@ export class AtterbergReportComponent implements OnInit {
     });
   }
 
-  createMoistureChart(): void {
-    if (this.moistureChart) {
-      this.moistureChart.destroy();
-    }
+createMoistureChart(): void {
+  if (this.moistureChart) {
+    this.moistureChart.destroy();
+  }
 
-    const blows = [
-      this.atterbergLimits.numberOfBlows5,
-      this.atterbergLimits.numberOfBlows6,
-      this.atterbergLimits.numberOfBlows7,
-      this.atterbergLimits.numberOfBlows8
-    ];
+  const blowsRaw = [
+    this.atterbergLimits.numberOfBlows5,
+    this.atterbergLimits.numberOfBlows6,
+    this.atterbergLimits.numberOfBlows7,
+    this.atterbergLimits.numberOfBlows8
+  ];
 
-    const waterContents = [
-      Number((this.massOfWater5 / this.massOfSoil5) * 100),
-      Number((this.massOfWater6 / this.massOfSoil6) * 100),
-      Number((this.massOfWater7 / this.massOfSoil7) * 100),
-      Number((this.massOfWater8 / this.massOfSoil8) * 100)
-    ];
+  const waterRaw = [
+    Number((this.massOfWater5 / this.massOfSoil5) * 100),
+    Number((this.massOfWater6 / this.massOfSoil6) * 100),
+    Number((this.massOfWater7 / this.massOfSoil7) * 100),
+    Number((this.massOfWater8 / this.massOfSoil8) * 100)
+  ];
 
-    const dataPoints = blows.map((x, i) => ({ x, y: waterContents[i] }));
+  const dataPoints = blowsRaw.map((x, i) => ({
+    x: x,
+    y: waterRaw[i]
+  }));
 
-    // Compute ln(x)
-    const lnX = blows.map(x => Math.log(x));
-    const y = waterContents;
+  const validPairs = dataPoints.filter(p =>
+    p.x && p.x > 0 && !isNaN(p.x) && p.y && !isNaN(p.y)
+  );
 
-    const n = blows.length;
-    const sumLnX = lnX.reduce((a, b) => a + b, 0);
-    const sumY = y.reduce((a, b) => a + b, 0);
-    const sumLnX2 = lnX.reduce((a, b) => a + b * b, 0);
-    const sumLnXy = lnX.reduce((sum, lnxi, i) => sum + lnxi * y[i], 0);
+  if (validPairs.length < 2) {
+    validPairs.push({ x: 10, y: 20 });
+    validPairs.push({ x: 100, y: 10 });
+  }
 
-    const a = (n * sumLnXy - sumLnX * sumY) / (n * sumLnX2 - sumLnX * sumLnX);
-    const b = (sumY - a * sumLnX) / n;
+  const lnX = validPairs.map(p => Math.log(p.x));
+  const y = validPairs.map(p => p.y);
+  const n = validPairs.length;
 
-    const yMean = sumY / n;
-    const ssTot = y.reduce((sum, yi) => sum + (yi - yMean) ** 2, 0);
-    const ssRes = y.reduce((sum, yi, i) => sum + (yi - (a * lnX[i] + b)) ** 2, 0);
-    const r2 = 1 - ssRes / ssTot;
+  const sumLnX = lnX.reduce((a, b) => a + b, 0);
+  const sumY = y.reduce((a, b) => a + b, 0);
+  const sumLnX2 = lnX.reduce((a, b) => a + b * b, 0);
+  const sumLnXy = lnX.reduce((sum, lnxi, i) => sum + lnxi * y[i], 0);
 
-    // Regression line from x = 10 to 100
-    const regressionLine = [];
-    for (let x = 10; x <= 100; x += 1) {
-      regressionLine.push({ x, y: a * Math.log(x) + b });
-    }
+  const a = (n * sumLnXy - sumLnX * sumY) / (n * sumLnX2 - sumLnX * sumLnX);
+  const b = (sumY - a * sumLnX) / n;
 
-    this.moistureChart = new Chart(this.moistureChartCanvas.nativeElement, {
-      type: 'scatter',
-      data: {
-        datasets: [
-          {
-            label: 'Water Content Data',
-            data: dataPoints,
-            backgroundColor: 'blue',
-            pointRadius: 6
-          },
-          {
-            label: 'Log Regression Fit',
-            data: regressionLine,
-            borderColor: 'red',
-            borderWidth: 2,
-            pointRadius: 0,
-            showLine: true
-          }
-        ]
-      },
-      options: {
-        responsive: true,
-        plugins: {
-          legend: { position: 'top' },
-          tooltip: { mode: 'nearest' },
-          title: {
-            display: true,
-            text: `y = ${a.toFixed(3)}ln(x) + ${b.toFixed(3)} | R² = ${r2.toFixed(4)}`
-          }
+  const yMean = sumY / n;
+  const ssTot = y.reduce((sum, yi) => sum + (yi - yMean) ** 2, 0);
+  const ssRes = y.reduce((sum, yi, i) => sum + (yi - (a * lnX[i] + b)) ** 2, 0);
+  const r2 = 1 - ssRes / ssTot;
+
+  const regressionLine = [];
+  for (let x = 10; x <= 100; x += 1) {
+    regressionLine.push({ x, y: a * Math.log(x) + b });
+  }
+
+  this.moistureChart = new Chart(this.moistureChartCanvas.nativeElement, {
+    type: 'scatter',
+    data: {
+      datasets: [
+        {
+          label: 'Water Content Data',
+          data: dataPoints, 
+          backgroundColor: 'blue',
+          pointRadius: 6,
+          parsing: false
         },
-        scales: {
-          x: {
-            type: 'logarithmic',
-            title: { display: true, text: 'Number of Blows (N)' },
-            min: 10,
-            max: 100
-          },
-          y: {
-            title: { display: true, text: 'Water Content (%)' },
-            min: 30,
-            max: 38
-          }
+        {
+          type: 'line', 
+          label: 'Log Regression Fit',
+          data: regressionLine,
+          borderColor: 'red',
+          borderWidth: 2,
+          pointRadius: 0,
+          tension: 0,
+          parsing: false
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: { position: 'top' },
+        tooltip: { mode: 'nearest' },
+        title: {
+          display: true,
+          text: `y = ${a.toFixed(3)}ln(x) + ${b.toFixed(3)} | R² = ${r2.toFixed(4)}`
+        }
+      },
+      scales: {
+        x: {
+          type: 'logarithmic',
+          title: { display: true, text: 'Number of Blows (N)' },
+          min: 10,
+          max: 100
+        },
+        y: {
+          title: { display: true, text: 'Water Content (%)' },
+          min: 0,
+          max: 100
         }
       }
-    });
-  }
+    }
+  });
+}
+
 
 
 
@@ -274,11 +286,12 @@ export class AtterbergReportComponent implements OnInit {
       doc.text('Atterberg Limits Data Sheet', 70, 34)
       doc.setFontSize(10);
       const infoRows = [
-        ['Project', this.atterbergLimits.projectName || 'N/A', 'Test Name', this.atterbergLimits.nameOfTest || 'N/A'],
-        ['Client', this.atterbergLimits.clientName || 'N/A', 'Testing Date', this.atterbergLimits.testingDate || 'N/A'],
-        ['Sample No', this.atterbergLimits.sampleNo || 'N/A', 'Standard', this.atterbergLimits.classification || 'N/A'],
-        ['Sample By', this.atterbergLimits.sampleBy || 'N/A', 'Consultant', this.atterbergLimits.consultant || 'N/A'],
-        ['Sampling Date', this.atterbergLimits.sampleDate || 'N/A', 'Owner', this.atterbergLimits.owner || 'N/A']
+        ['Project', this.atterbergLimits.projectName || ' ', 'Test Name', this.atterbergLimits.nameOfTest || ' '],
+        ['Client', this.atterbergLimits.clientName || ' ', 'Testing Date', this.atterbergLimits.testingDate || ' '],
+        ['Sample No', this.atterbergLimits.sampleNo || ' ', 'Standard', this.atterbergLimits.classification || ' '],
+        ['Sample By', this.atterbergLimits.sampleBy || ' ', 'Consultant', this.atterbergLimits.consultant || ' '],
+        ['Sampling Date', this.atterbergLimits.sampleDate || ' ', 'Owner', this.atterbergLimits.owner || ' '],
+        ['Report No', { content: this.atterbergLimits.reportNo || ' ', colSpan: 3 }]
       ];
 
       autoTable(doc, {
@@ -305,7 +318,7 @@ export class AtterbergReportComponent implements OnInit {
 
 
       autoTable(doc, {
-        startY: 55 ,
+        startY: 59 ,
         head: [
           [
             {content: 'TEST', colSpan: 3, styles: {lineWidth: 0.5}},
