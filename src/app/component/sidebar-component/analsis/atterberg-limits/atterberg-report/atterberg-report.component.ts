@@ -255,8 +255,8 @@ createMoistureChart(): void {
         },
         y: {
           title: { display: true, text: 'Water Content (%)' },
-          min: 0,
-          max: 100
+          min: Number(this.massOfWater5 / this.massOfSoil5 * 100)+ 10 .toFixed(2),
+          max: Number(this.massOfWater8 / this.massOfSoil8 * 100) + 10 .toFixed(2) 
         }
       }
     }
