@@ -1,2 +1,6 @@
-1- Change Tested Date to number in CompressiveStrength
-2- Add Report No To moisture
+1- Change Tested Date to number in CompressiveStrength (done)
+  Apply this in db
+      ALTER TABLE `qudoratt`.`compressive_strength`
+      DROP COLUMN `date_tested`;
+
+2- Add Report No To moisture (done)
