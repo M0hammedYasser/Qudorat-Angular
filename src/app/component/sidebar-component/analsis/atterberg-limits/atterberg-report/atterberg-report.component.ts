@@ -527,7 +527,7 @@ createMoistureChart(): void {
         doc.setFontSize(6);
         const sectionWidth = tableWidth / 3; 
 
-        doc.text(`Approved by: ${this.atterbergLimits.adopter || " "}`, startX + 1, 264);
+        doc.text(`Approved by: ${this.atterbergLimits.lastApproveBy || " "}`, startX + 1, 264);
 
         doc.text(`Test by: ${this.atterbergLimits.testBy || " "}`, startX + sectionWidth + 4, 264);
 
