@@ -109,85 +109,94 @@ export class MoistureDensityRelationshipReportComponent implements OnInit {
     })
   }
 
-  createCompactionChart(): void {
-    if (this.compactionChart) {
-      this.compactionChart.destroy();
-    }
+createCompactionChart(hideColumnE: boolean = false): void {
+  if (this.compactionChart) {
+    this.compactionChart.destroy();
+  }
 
-    // Example: replace with your actual values (from calculations)
-    const moistureContent = [3, 4.5, 6, 7, 8.5, 9.5];
-    const dryDensity = [2.08, 2.15, 2.24, 2.26, 2.20, 2.16];
+  // X = Moisture Content %
+  const moistureContent = [
+    parseFloat(this.moistureContentA.toFixed(2)),
+    parseFloat(this.moistureContentB.toFixed(2)),
+    parseFloat(this.moistureContentC.toFixed(2)),
+    parseFloat(this.moistureContentD.toFixed(2)),
+    ...(hideColumnE ? [] : [parseFloat(this.moistureContentE.toFixed(2))])
+  ];
 
-    const dataPoints = moistureContent.map((mc, i) => ({x: mc, y: dryDensity[i]}));
+  // Y = Dry Density (gm/cc)
+  const dryDensity = [
+    parseFloat(this.dryDensityA.toFixed(3)),
+    parseFloat(this.dryDensityB.toFixed(3)),
+    parseFloat(this.dryDensityC.toFixed(3)),
+    parseFloat(this.dryDensityD.toFixed(3)),
+    ...(hideColumnE ? [] : [parseFloat(this.dryDensityE.toFixed(3))])
+  ];
 
-    this.compactionChart = new Chart(this.compactionChartCanvas.nativeElement, {
-      type: 'scatter',
-      data: {
-        datasets: [
-          {
-            label: 'Dry Density vs Moisture Content',
-            data: dataPoints,
-            backgroundColor: 'blue',
-            borderColor: 'blue',
-            pointRadius: 5,
-            pointHoverRadius: 7,
-            showLine: true,
-            fill: false,
-            tension: 0.4
-          }
-        ]
+  // Combine into data points for the chart
+  const dataPoints = moistureContent.map((mc, i) => ({
+    x: mc,
+    y: dryDensity[i]
+  }));
+
+  this.compactionChart = new Chart(this.compactionChartCanvas.nativeElement, {
+    type: 'scatter',
+    data: {
+      datasets: [
+        {
+          label: 'Dry Density vs Moisture Content',
+          data: dataPoints,
+          backgroundColor: 'blue',
+          borderColor: 'blue',
+          pointRadius: 5,
+          pointHoverRadius: 7,
+          showLine: true,
+          fill: false,
+          tension: 0.4
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: {
+          display: true
+        },
+        tooltip: {
+          mode: 'nearest'
+        }
       },
-      options: {
-        responsive: true,
-        plugins: {
-          legend: {
-            display: true
+      scales: {
+        x: {
+          title: {
+            display: true,
+            text: 'Moisture Content (%)',
+            font: {
+              weight: 'bold',
+              size: 20
+            }
           },
-          tooltip: {
-            mode: 'nearest'
+          grid: {
+            color: '#555'
           }
         },
-        scales: {
-          x: {
-            title: {
-              display: true,
-              text: 'Moisture Content %',
-              font: {
-                weight: 'bold',
-                size: 20
-              }
-            },
-            min: 2,
-            max: 10,
-            ticks: {
-              stepSize: 1
-            },
-            grid: {
-              color: '#555'
+        y: {
+          title: {
+            display: true,
+            text: 'Dry Density (gm/cc)',
+            font: {
+              weight: 'bold',
+              size: 20
             }
           },
-          y: {
-            title: {
-              display: true,
-              text: 'DRY DENSITY gm/cc',
-              font: {
-                weight: 'bold',
-                size: 20
-              }
-            },
-            min: 2.0,
-            max: 2.3,
-            ticks: {
-              stepSize: 0.02
-            },
-            grid: {
-              color: '#555'
-            }
+          grid: {
+            color: '#555'
           }
         }
       }
-    });
-  }
+    }
+  });
+}
+
 
   generatePDF() {
     const doc = new jsPDF();
@@ -478,7 +487,7 @@ export class MoistureDensityRelationshipReportComponent implements OnInit {
         doc.setFontSize(6);
         const sectionWidth = tableWidth1 / 3; 
 
-        doc.text(`Approved by: ${this.moistureDensityRelationship.adopter || " "}`, startX1 + 1, 261);
+        doc.text(`Approved by: ${this.moistureDensityRelationship.lastApproveBy || " "}`, startX1 + 1, 261);
 
         doc.text(`Test by: ${this.moistureDensityRelationship.testBy || " "}`, startX1 + sectionWidth + 4, 261);
 
