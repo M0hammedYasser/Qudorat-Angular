@@ -79,84 +79,149 @@ export class AtterbergReportComponent implements OnInit {
     })
   }
 
-  createPlasticityChart(): void {
-    if (this.chart) {
-      this.chart.destroy();
-    }
+createPlasticityChart(): void {
+  if (this.chart) {
+    this.chart.destroy();
+  }
 
-    const liquidLimit = this.atterbergLimits.liquidLimit;
-    const plasticLimit = this.atterbergLimits.plasticLimit;
-    const plasticityIndex = liquidLimit - plasticLimit;
+  const liquidLimit = this.atterbergLimits.liquidLimit;
+  const plasticLimit = this.atterbergLimits.plasticLimit;
+  const plasticityIndex = liquidLimit - plasticLimit;
 
-    const xValues = Array.from({length: 101}, (_, i) => i); 
-    const aLine = xValues.map(x => 0.73 * (x - 20));
-    const uLine = xValues.map(x => 0.9 * (x - 8));
+  const xValues = Array.from({ length: 101 }, (_, i) => i);
+  const aLine = xValues.map(x => 0.73 * (x - 20));
+  const uLine = xValues.map(x => 0.9 * (x - 8));
+  const upperLimit = xValues.map(x => 0.9 * x); // ✅ الخط الجديد من (0,0)
 
-    this.chart = new Chart(this.chartCanvas.nativeElement, {
-      type: 'scatter',
-      data: {
-        datasets: [
-          {
-            label: 'Plasticity Point',
-            data: [{x: liquidLimit, y: plasticLimit}],
-            backgroundColor: 'orange',
-            pointRadius: 6,
-            pointHoverRadius: 8,
-            showLine: false
-          },
-          {
-            label: 'A-Line',
-            data: xValues.map((x, i) => ({x, y: aLine[i]})),
-            borderColor: 'blue',
-            borderWidth: 2,
-            fill: false,
-            showLine: true,
-            pointRadius: 0
-          },
-          {
-            label: 'U-Line',
-            data: xValues.map((x, i) => ({x, y: uLine[i]})),
-            borderColor: 'purple',
-            borderWidth: 2,
-            borderDash: [5, 5],
-            fill: false,
-            showLine: true,
-            pointRadius: 0
-          }
-        ]
-      },
-      options: {
-        responsive: true,
-        plugins: {
-          legend: {
-            display: true,
-            position: 'top'
-          },
-          tooltip: {
-            mode: 'nearest'
-          }
+  this.chart = new Chart(this.chartCanvas.nativeElement, {
+    type: 'scatter',
+    data: {
+      datasets: [
+        // Sample Point
+        {
+          label: 'Sample Point',
+          data: [{ x: liquidLimit, y: plasticityIndex }],
+          backgroundColor: 'orange',
+          pointRadius: 8,
+          pointHoverRadius: 10,
+          showLine: false
         },
-        scales: {
-          x: {
-            title: {
-              display: true,
-              text: 'Liquid Limit (LL or wL)'
-            },
-            min: 0,
-            max: 100
+
+        // A-Line
+        {
+          label: 'A-Line (PI = 0.73(LL - 20))',
+          data: xValues.map((x, i) => ({ x, y: aLine[i] })),
+          borderColor: 'blue',
+          borderWidth: 2,
+          fill: false,
+          showLine: true,
+          pointRadius: 0
+        },
+
+        // U-Line
+        {
+          label: 'U-Line (PI = 0.9(LL - 8))',
+          data: xValues.map((x, i) => ({ x, y: uLine[i] })),
+          borderColor: 'purple',
+          borderWidth: 2,
+          borderDash: [6, 6],
+          fill: false,
+          showLine: true,
+          pointRadius: 0
+        },
+
+        // ✅ Upper Limit Line (الخط الأزرق الجديد المتصل)
+        {
+          label: 'Upper Limit Line (PI = 0.9 × LL)',
+          data: xValues.map((x, i) => ({ x, y: upperLimit[i] })),
+          borderColor: 'blue',
+          borderWidth: 2,
+          fill: false,
+          showLine: true,
+          pointRadius: 0
+        },
+
+        // Vertical line at LL = 50
+        {
+          label: 'Boundary (LL = 50)',
+          data: [
+            { x: 50, y: 0 },
+            { x: 50, y: 60 }
+          ],
+          borderColor: 'gray',
+          borderWidth: 2,
+          borderDash: [4, 4],
+          fill: false,
+          showLine: true,
+          pointRadius: 0
+        },
+
+        // Optional PI = 4 line
+        {
+          label: 'PI = 4',
+          data: [
+            { x: 0, y: 4 },
+            { x: 100, y: 4 }
+          ],
+          borderColor: 'green',
+          borderDash: [4, 4],
+          borderWidth: 1.5,
+          showLine: true,
+          pointRadius: 0
+        },
+
+        // Optional PI = 7 line
+        {
+          label: 'PI = 7',
+          data: [
+            { x: 0, y: 7 },
+            { x: 100, y: 7 }
+          ],
+          borderColor: 'darkgreen',
+          borderDash: [4, 4],
+          borderWidth: 1.5,
+          showLine: true,
+          pointRadius: 0
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: {
+          display: true,
+          position: 'top'
+        },
+        title: {
+          display: true,
+          text: 'Plasticity Chart (Casagrande Chart)',
+          font: { size: 16 }
+        }
+      },
+      scales: {
+        x: {
+          title: {
+            display: true,
+            text: 'Liquid Limit (LL or wL) (%)'
           },
-          y: {
-            title: {
-              display: true,
-              text: 'Plasticity Index (PI)'
-            },
-            min: 0,
-            max: 60
-          }
+          min: 0,
+          max: 100,
+          grid: { color: '#eee' }
+        },
+        y: {
+          title: {
+            display: true,
+            text: 'Plasticity Index (PI) (%)'
+          },
+          min: 0,
+          max: 60,
+          grid: { color: '#eee' }
         }
       }
-    });
-  }
+    }
+  });
+}
+
 
 createMoistureChart(): void {
   if (this.moistureChart) {
@@ -208,10 +273,19 @@ createMoistureChart(): void {
   const ssRes = y.reduce((sum, yi, i) => sum + (yi - (a * lnX[i] + b)) ** 2, 0);
   const r2 = 1 - ssRes / ssTot;
 
+  const minX = Math.min(...validPairs.map(p => p.x));
+  const maxX = Math.max(...validPairs.map(p => p.x));
+
+  const range = maxX - minX;
+  const extendedMinX = minX - range * 0.1;
+  const extendedMaxX = maxX + range * 0.1;
+
   const regressionLine = [];
-  for (let x = 10; x <= 100; x += 1) {
+  for (let x = extendedMinX; x <= extendedMaxX; x += 0.5) {
     regressionLine.push({ x, y: a * Math.log(x) + b });
   }
+
+
 
   this.moistureChart = new Chart(this.moistureChartCanvas.nativeElement, {
     type: 'scatter',
