@@ -12,7 +12,7 @@ clientCode: any;
   dataCasting: string; //input
   dataReceived: string; //input
   /**date cannot be number*/
-  dateTested: string; //input ----- Day only
+  dateTested: number; //input ----- Day only
   labreportNo: string; //input
   typeofSample: string; //input
   structure: string; //input
