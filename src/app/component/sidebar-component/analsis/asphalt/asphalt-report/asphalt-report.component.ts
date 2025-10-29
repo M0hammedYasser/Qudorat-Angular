@@ -481,8 +481,8 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
             ['Air Voids %', this.asphalt.airvoidsLimits || ' ' , `${Number(this.airVoid).toFixed(1)} ± ${this.asphalt.airvoidExpand || ''}` ],
             ['Bitumen Content %', this.asphalt.bitumencontentLimits || ' ' , `${safeFixed(((this.asphalt.bitumen.weightSampleBefore - (this.asphalt.bitumen.weightSampleAfter + (this.asphalt.bitumen.weightFilterAfter - this.asphalt.bitumen.weightFilterBefore))) / this.asphalt.bitumen.weightSampleBefore) * 100)} ± ${this.asphalt.bitumen.expand || ''}`],
             ['Stability kgm', this.asphalt.lossofstabilitykgmLimits || ' ' , `${Number(this.avgStabilityFor30Min).toFixed(0)} ${'±'} ${this.asphalt.avgstabilityfor30minExpand || ''}`],
-            ['Voids filled with Asp. %', this.asphalt.voidsfilledwithaspLimits || ' ' , this.asphalt.voidsfilledwithasplimitsInput || ''],
-            ['Max density as per design (gm/cm3)', this.asphalt.maxdensityasperdesignLimits || ' ' , this.asphalt.maxdensityasperdesignlimitsInput || ' '],
+            ['Voids filled with Asp. %', this.asphalt.voidsfilledwithaspLimits || ' ' , Number(this.voidFilled).toFixed(1) || ''],
+            ['Max density as per design (gm/cm3)', this.asphalt.maxdensityasperdesignLimits || ' ' , this.maxSpOfPAvgMix.toFixed(3) || ' '],
             ['Flow (mm)', this.asphalt.flowLimits || ' ' , `${Number((this.asphalt.flowA + this.asphalt.flowB + this.asphalt.flowC) / 3).toFixed(2)} ${'±'} ${this.asphalt.avgflowExpand || ''}`],
             ['Loss of Stability %', this.asphalt.lossOfStabilityLimits || ' ' , `${((this.avgStabilityFor30Min - this.avgStabilityFor24Hrs) / this.avgStabilityFor30Min * 100).toFixed(1)} ${'±'} ${this.asphalt.lossofstabilityExpand  || ''}`],
           ];
