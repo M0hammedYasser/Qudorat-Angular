@@ -669,11 +669,11 @@ export class SandReportComponent implements AfterViewInit, OnInit {
         doc.setFontSize(6);
         const sectionWidth = tableWidth / 3; 
 
-        doc.text(`Approved by: ${this.sieveAnalysis.adopter || " "}`, startX + 1, 264);
+        doc.text(`Approved by: ${this.sieveAnalysis.lastApproveBy || " "}`, startX + 1, 264);
 
         doc.text(`Test by: ${this.sieveAnalysis.testBy || " "}`, startX + sectionWidth + 4, 264);
 
-        doc.text(`Checked by: ${this.sieveAnalysis.approveBy || " "}`, startX + (sectionWidth * 2) + 4, 264);
+        doc.text(`Checked by: ${this.sieveAnalysis.adopter || " "}`, startX + (sectionWidth * 2) + 4, 264);
 
         const blockTop = finalY;
         const blockBottom = 266;
