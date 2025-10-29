@@ -91,7 +91,7 @@ createPlasticityChart(): void {
   const xValues = Array.from({ length: 101 }, (_, i) => i);
   const aLine = xValues.map(x => 0.73 * (x - 20));
   const uLine = xValues.map(x => 0.9 * (x - 8));
-  const upperLimit = xValues.map(x => 0.9 * x); // ✅ الخط الجديد من (0,0)
+  const upperLimit = xValues.map(x => 0.9 * x);
 
   this.chart = new Chart(this.chartCanvas.nativeElement, {
     type: 'scatter',
@@ -129,8 +129,7 @@ createPlasticityChart(): void {
           showLine: true,
           pointRadius: 0
         },
-
-        // ✅ Upper Limit Line (الخط الأزرق الجديد المتصل)
+        
         {
           label: 'Upper Limit Line (PI = 0.9 × LL)',
           data: xValues.map((x, i) => ({ x, y: upperLimit[i] })),
@@ -146,7 +145,7 @@ createPlasticityChart(): void {
           label: 'Boundary (LL = 50)',
           data: [
             { x: 50, y: 0 },
-            { x: 50, y: 60 }
+            { x: 50, y: 80 }
           ],
           borderColor: 'gray',
           borderWidth: 2,
@@ -202,7 +201,8 @@ createPlasticityChart(): void {
         x: {
           title: {
             display: true,
-            text: 'Liquid Limit (LL or wL) (%)'
+            text: 'Liquid Limit (LL or wL) (%)',
+            font: { size: 16, weight: 'bold' }
           },
           min: 0,
           max: 100,
@@ -214,13 +214,47 @@ createPlasticityChart(): void {
             text: 'Plasticity Index (PI) (%)'
           },
           min: 0,
-          max: 60,
+          max: 80,
           grid: { color: '#eee' }
         }
       }
-    }
+    },
+    plugins: [
+      {
+        id: 'regionLabels',
+        afterDraw: chart => {
+          const ctx = chart.ctx;
+          ctx.save();
+          ctx.font = '14px Arial';
+          ctx.fillStyle = 'black';
+          ctx.textAlign = 'center';
+
+          // CL-ML 
+          ctx.fillText('CL-ML', chart.scales['x'].getPixelForValue(20), chart.scales['y'].getPixelForValue(5));
+
+          // CL or OL 
+          ctx.fillText('CL or OL', chart.scales['x'].getPixelForValue(33), chart.scales['y'].getPixelForValue(15));
+
+          // CH or OH 
+          ctx.fillText('CH or OH', chart.scales['x'].getPixelForValue(60), chart.scales['y'].getPixelForValue(35));
+
+          // MH or OH 
+          ctx.fillText('MH or OH', chart.scales['x'].getPixelForValue(70), chart.scales['y'].getPixelForValue(17));
+
+          // "U" Line label 
+          ctx.fillText('"U" Line', chart.scales['x'].getPixelForValue(68), chart.scales['y'].getPixelForValue(53));
+
+          // "A" Line label 
+          ctx.fillText('"A" Line', chart.scales['x'].getPixelForValue(82), chart.scales['y'].getPixelForValue(45));
+
+          ctx.restore();
+        }
+      }
+    ]
   });
 }
+
+
 
 
 createMoistureChart(): void {
@@ -242,14 +276,8 @@ createMoistureChart(): void {
     Number((this.massOfWater8 / this.massOfSoil8) * 100)
   ];
 
-  const dataPoints = blowsRaw.map((x, i) => ({
-    x: x,
-    y: waterRaw[i]
-  }));
-
-  const validPairs = dataPoints.filter(p =>
-    p.x && p.x > 0 && !isNaN(p.x) && p.y && !isNaN(p.y)
-  );
+  const dataPoints = blowsRaw.map((x, i) => ({ x: x, y: waterRaw[i] }));
+  const validPairs = dataPoints.filter(p => p.x && p.x > 0 && !isNaN(p.x) && p.y && !isNaN(p.y));
 
   if (validPairs.length < 2) {
     validPairs.push({ x: 10, y: 20 });
@@ -275,7 +303,6 @@ createMoistureChart(): void {
 
   const minX = Math.min(...validPairs.map(p => p.x));
   const maxX = Math.max(...validPairs.map(p => p.x));
-
   const range = maxX - minX;
   const extendedMinX = minX - range * 0.1;
   const extendedMaxX = maxX + range * 0.1;
@@ -285,21 +312,19 @@ createMoistureChart(): void {
     regressionLine.push({ x, y: a * Math.log(x) + b });
   }
 
-
-
   this.moistureChart = new Chart(this.moistureChartCanvas.nativeElement, {
     type: 'scatter',
     data: {
       datasets: [
         {
           label: 'Water Content Data',
-          data: dataPoints, 
+          data: dataPoints,
           backgroundColor: 'blue',
           pointRadius: 6,
           parsing: false
         },
         {
-          type: 'line', 
+          type: 'line',
           label: 'Log Regression Fit',
           data: regressionLine,
           borderColor: 'red',
@@ -323,14 +348,33 @@ createMoistureChart(): void {
       scales: {
         x: {
           type: 'logarithmic',
-          title: { display: true, text: 'Number of Blows (N)' },
+          title: {
+            display: true,
+            text: 'Number of Blows (N)',
+            font: { size: 16, weight: 'bold' }
+          },
           min: 10,
-          max: 100
+          max: 100,
+          ticks: {
+            font: { size: 14 },
+            callback: function (value) {
+              const realValue = Number(value);
+              const shownTicks = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
+              return shownTicks.includes(Math.round(realValue))
+                ? Math.round(realValue).toString()
+                : '';
+            }
+          }
         },
         y: {
-          title: { display: true, text: 'Water Content (%)' },
-          min: Number(this.massOfWater5 / this.massOfSoil5 * 100)+ 10 .toFixed(2),
-          max: Number(this.massOfWater8 / this.massOfSoil8 * 100) + 10 .toFixed(2) 
+          title: {
+            display: true,
+            text: 'Water Content (%)',
+            font: { size: 16, weight: 'bold' }
+          },
+          ticks: { font: { size: 14 } },
+          min: Number((this.massOfWater5 / this.massOfSoil5) * 100) - 5,
+          max: Number((this.massOfWater8 / this.massOfSoil8) * 100) + 10
         }
       }
     }
