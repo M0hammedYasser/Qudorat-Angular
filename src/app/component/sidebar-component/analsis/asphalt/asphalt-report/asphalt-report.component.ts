@@ -115,7 +115,7 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
 
     this.service.findById(this.id).subscribe(res => {
       if (this.chart) {
-        this.chart.destroy(); // destroy previous chart instance if any
+        this.chart.destroy();
       }
 
       this.chart = new Chart(ctx!, {
@@ -175,13 +175,31 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
             x: {
               title: {
                 display: true,
-                text: 'Sieve ',
+                text: 'Sieve',
+                font: {
+                  size: 16,
+                  weight: 'bold'
+                }
               },
+              ticks: {
+                font: {
+                  size: 14 
+                }
+              }
             },
             y: {
               title: {
                 display: true,
                 text: 'Passing%',
+                font: {
+                  size: 16,
+                  weight: 'bold'
+                }
+              },
+              ticks: {
+                font: {
+                  size: 14 
+                }
               },
               beginAtZero: true,
               max: 110,
