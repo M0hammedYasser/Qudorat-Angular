@@ -359,7 +359,7 @@ export class SandReportComponent implements AfterViewInit, OnInit {
           colSpan: 2
         }, 'Material Type', this.sieveAnalysis.materialType],
         ['Description', {content: this.sieveAnalysis.description, colSpan: 2}, {
-          content: this.sieveAnalysis.totalWeigh,
+          content: this.sieveAnalysis.totalWeigh + ' gm',
           colSpan: 2
         }, '', '', '', ''],
       ];
