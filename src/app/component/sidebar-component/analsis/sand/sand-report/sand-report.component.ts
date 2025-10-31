@@ -299,6 +299,15 @@ export class SandReportComponent implements AfterViewInit, OnInit {
     }); 
   }
 
+  formatValue(value: number, sieveName: string): string {
+    if (sieveName === '#200') {
+      return Math.round(value).toString();
+    } else if (value < 10) {
+      return value.toFixed(1);
+    } else {
+      return Math.round(value).toString();
+    }
+  }
 
   generatePDF() {
     if (!this.sieveAnalysis || Object.keys(this.sieveAnalysis).length === 0) {
@@ -475,8 +484,7 @@ export class SandReportComponent implements AfterViewInit, OnInit {
         margin: {left: marginLeft}
       });
 
-
-
+      
       const afterMiniTableY = (doc as any).lastAutoTable.finalY;
 
       const tableColumn = [
@@ -595,14 +603,17 @@ export class SandReportComponent implements AfterViewInit, OnInit {
           `${'±'} ${this.sieveAnalysis.expandL}`,
           this.sieveAnalysis.specificationLimitsL
         ],
-        ["#200", 0.075,
+        [
+          "#200",
+          0.075,
           this.sieveAnalysis.individualM,
           this.sieveAnalysis.cumulativeM,
-          calcRetainedPercent(this.sieveAnalysis.cumulativeM).toFixed(2),
-          calcPassingPercent(this.sieveAnalysis.cumulativeM).toFixed(2),
+          this.formatValue(calcRetainedPercent(this.sieveAnalysis.cumulativeM), "#200"),
+          this.formatValue(calcPassingPercent(this.sieveAnalysis.cumulativeM), "#200"),
           `${'±'} ${this.sieveAnalysis.expandM}`,
           this.sieveAnalysis.specificationLimitsM
         ],
+
         [{content: "Total Wt." , colSpan: 2}, "", this.sieveAnalysis.totalWeigh, "", "", "", ""]
       ];
 
