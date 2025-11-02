@@ -535,15 +535,15 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
           if (this.asphalt.notes) {
             const splitNotes = doc.splitTextToSize(
               `Remarks: ${this.asphalt.notes || ""}`,
-              boxWidth1 - 8
+              boxWidth1 - 18
             );
 
-            doc.setFont("Amiri", "bold");
+            doc.setFont("Amiri" , "bold");
             doc.setFontSize(7);
             doc.text(splitNotes, startX1 + 4, footerY1 -1);
 
-            remarksHeight1 = splitNotes.length * 5;
-            footerY1 += remarksHeight1 + 22;
+            remarksHeight1 = splitNotes.length * 3;
+            footerY1 += remarksHeight1;
           }
 
           doc.line(startX1, footerY1, endX1, footerY1);
@@ -575,7 +575,7 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
           doc.setDrawColor(0, 0, 0);
           doc.setLineWidth(0.6);
           doc.rect(startX1, blockTop1, tableWidth1, blockHeight1);
-          doc.addImage(tail, 'PNG', 0, blockBottom1, 210, 33);
+          doc.addImage(tail, 'PNG', 0, 268, 210, 33);
           finalY = blockBottom1 + 47;
 
 
@@ -822,15 +822,15 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
           if (this.asphalt.notes) {
             const splitNotes = doc.splitTextToSize(
               `Remarks: ${this.asphalt.notes || ""}`,
-              boxWidth - 8
+              boxWidth + 75
             );
 
-            doc.setFont("Amiri", "bold");
+            doc.setFont("Amiri" , "bold");
             doc.setFontSize(7);
             doc.text(splitNotes, startX + 4, footerY);
 
-            remarksHeight = splitNotes.length * 5;
-            footerY += remarksHeight + 28.5;
+            remarksHeight = splitNotes.length * 3;
+            footerY += remarksHeight;
           }
           doc.line(startX, footerY, endX, footerY);
           doc.setFontSize(6);
