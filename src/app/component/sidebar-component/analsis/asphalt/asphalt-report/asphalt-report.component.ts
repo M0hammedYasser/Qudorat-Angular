@@ -520,7 +520,7 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
           });
 
           finalY += 34.5; 
-          doc.setFontSize(10);
+          doc.setFontSize(7);
 
           const pageWidth1 = doc.internal.pageSize.getWidth();
           const tableWidth1 = 190; 
@@ -543,7 +543,7 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
             doc.text(splitNotes, startX1 + 4, footerY1 -1);
 
             remarksHeight1 = splitNotes.length * 5;
-            footerY1 += remarksHeight1 + 12;
+            footerY1 += remarksHeight1 + 22;
           }
 
           doc.line(startX1, footerY1, endX1, footerY1);
@@ -830,7 +830,7 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
             doc.text(splitNotes, startX + 4, footerY);
 
             remarksHeight = splitNotes.length * 5;
-            footerY += remarksHeight + 20;
+            footerY += remarksHeight + 28.5;
           }
           doc.line(startX, footerY, endX, footerY);
           doc.setFontSize(6);
@@ -839,22 +839,22 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
           doc.text(
             `Approved by: ${this.asphalt.lastApproveBy || "N/A"}`,
             startX + 4,
-            footerY + 6
+            footerY + 4
           );
 
           doc.text(
             `Test by: ${this.asphalt.testBy || "N/A"}`,
             startX + sectionWidth + 4,
-            footerY + 6
+            footerY + 4
           );
 
           doc.text(
             `Checked by: ${this.asphalt.adopter || "N/A"}`,
             startX + sectionWidth * 2 + 4,
-            footerY + 6
+            footerY + 4
           );
 
-          const blockBottom = footerY + 10;
+          const blockBottom = footerY + 8;
           const blockHeight = blockBottom - blockTop;
 
           doc.setDrawColor(0, 0, 0);
