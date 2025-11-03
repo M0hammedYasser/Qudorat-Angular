@@ -251,7 +251,8 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
       ["Location", this.asphalt.location || 'N/A', "Sample Type", this.asphalt.sampleType || 'N/A'],
       ["Job Order", this.asphalt.jobOrder || 'N/A', "Sample No", this.asphalt.sampleNo || 'N/A'],
       ["Asphalt Supplier", this.asphalt.asphaltApplier || 'N/A', "Sample By", this.asphalt.sampleBy || 'N/A'],
-      ["Request Description", this.asphalt.requestDescription || 'N/A', "Asphalt Layer", this.asphalt.asphaltLayer || 'N/A']
+      ["Request Description", this.asphalt.requestDescription || 'N/A', "Asphalt Layer", this.asphalt.asphaltLayer || 'N/A'],
+      ["Report No", this.asphalt.reportNo || 'N/A']
     ];
 
     autoTable(doc, {
@@ -281,8 +282,8 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
       const gradationText = 'GRADATION'
 
 
-      doc.text(bitumenText, 33, 61);
-      doc.text(gradationText, 130, 61);
+      doc.text(bitumenText, 33, 65);
+      doc.text(gradationText, 130, 65);
 
       const gradationWidth = doc.getTextWidth(gradationText);
 
@@ -290,7 +291,7 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
       const boxEndX = 181 + gradationWidth + 5; 
 
       const boxY = 58;       
-      const boxHeight = 5;   
+      const boxHeight = 8;   
       const boxWidth = boxEndX - boxStartX;
 
       doc.setLineWidth(0.6);
@@ -318,7 +319,7 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
       autoTable(doc, {
         body: bitumenRows,
         theme: 'grid',
-        startY: 62,
+        startY: 66,
         styles: {
           fontSize: 7,
           cellPadding: 1.44,
@@ -412,7 +413,7 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
         head: sieveColumn,
         body: sieveRows,
         theme: 'grid',
-        startY: 62,
+        startY: 66,
         styles: {
           fontSize: 7,
           cellPadding: 1,
@@ -546,7 +547,7 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
             footerY1 += remarksHeight1;
           }
 
-          doc.line(startX1, footerY1, endX1, footerY1);
+          doc.line(startX1, footerY1 -3, endX1, footerY1 -3);
 
           doc.setFontSize(8);
           const sectionWidth1 = tableWidth1 / 3; 
@@ -554,22 +555,22 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
           doc.text(
             `Approved by: ${this.asphalt.lastApproveBy || "N/A"}`,
             startX1 + 4,
-            footerY1 + 4
+            footerY1 + 1
           );
 
           doc.text(
             `Test by: ${this.asphalt.testBy || "N/A"}`,
             startX1 + sectionWidth1 + 4,
-            footerY1 + 4
+            footerY1 + 1
           );
 
           doc.text(
             `Checked by: ${this.asphalt.adopter || "N/A"}`,
             startX1 + sectionWidth1 * 2 + 4,
-            footerY1 + 4
+            footerY1 + 1
           );
 
-          const blockBottom1 = footerY1 + 8;
+          const blockBottom1 = footerY1 + 4;
           const blockHeight1 = blockBottom1 - blockTop1 - 1;
 
           doc.setDrawColor(0, 0, 0);
@@ -592,7 +593,7 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
             return `${year}-${month}-${day} ${hours}:${minutes}`;
           };
           const currentDateTime = formatDateTime(new Date());
-          doc.text(`Report Date: ${currentDateTime}`, 1, finalY + 5);
+          doc.text(`Report Date: ${currentDateTime}`, 1, 290);
 
           const headerHeight = 15; 
           const tableHeight = 200; 
