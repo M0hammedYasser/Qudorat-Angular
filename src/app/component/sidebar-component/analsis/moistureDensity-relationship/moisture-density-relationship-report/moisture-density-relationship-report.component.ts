@@ -200,7 +200,7 @@ createCompactionChart(hideColumnE: boolean = false): void {
 
   generatePDF() {
     const doc = new jsPDF();
-    doc.addFileToVFS('Amiri-Regular.ttf', AmiriFont); // هذا اسم المتغير في ملف الخط
+    doc.addFileToVFS('Amiri-Regular.ttf', AmiriFont);
     doc.addFont('Amiri-Regular.ttf', 'Amiri', 'normal');
     doc.setFont('Amiri');
     const head = new Image();
@@ -427,7 +427,7 @@ createCompactionChart(hideColumnE: boolean = false): void {
         const scaledBorderW = borderW * scale;
         const scaledBorderH = borderH * scale;
         const borderX = (pageWidth - scaledBorderW) / 1.8;
-        const borderY = finalY ;
+        const borderY = finalY;
         const chartW = scaledBorderW - 60;
         const chartH = scaledBorderH - 10;
         const chartX = borderX + (scaledBorderW - chartW) / 6;
@@ -439,6 +439,24 @@ createCompactionChart(hideColumnE: boolean = false): void {
         doc.setLineWidth(0.6);
         doc.rect(borderX, borderY, scaledBorderW, scaledBorderH);
 
+        const dryDensities = [
+          this.dryDensityA,
+          this.dryDensityB,
+          this.dryDensityC,
+          this.dryDensityD,
+          ...(hideColumnE ? [] : [this.dryDensityE])
+        ];
+        const maxDryDensity = Math.max(...dryDensities);
+
+        const moistureContents = [
+          this.moistureContentA,
+          this.moistureContentB,
+          this.moistureContentC,
+          this.moistureContentD,
+          ...(hideColumnE ? [] : [this.moistureContentE])
+        ];
+        const maxMoistureContent = Math.max(...moistureContents);
+
         const startX = 145;
         let y = finalY + 20;
         const rowHeight = 10;
@@ -446,16 +464,17 @@ createCompactionChart(hideColumnE: boolean = false): void {
         const col2Width = 30;
 
         doc.setFontSize(10);
+
         doc.rect(startX + 4.5, y, col1Width - 3, rowHeight);
-        doc.rect(startX + col1Width + 1.5 , y, col2Width - 10, rowHeight);
+        doc.rect(startX + col1Width + 1.5, y, col2Width - 10, rowHeight);
         doc.text("M.D.D (gm/cc)", startX + 5.5, y + 7);
-        doc.text(this.dryDensityC.toFixed(3), startX + col1Width + 3, y + 7);
+        doc.text(maxDryDensity.toFixed(3), startX + col1Width + 3, y + 7);
         y += rowHeight + 2;
 
         doc.rect(startX + 4.5, y, col1Width - 3, rowHeight);
         doc.rect(startX + col1Width + 1.5, y, col2Width - 10, rowHeight);
         doc.text("O.M.C %", startX + 5.5, y + 7);
-        doc.text(this.moistureContentC.toFixed(2), startX + col1Width + 3, y + 7);
+        doc.text(maxMoistureContent.toFixed(2), startX + col1Width + 3, y + 7);
 
         finalY += 56;
 
@@ -488,9 +507,7 @@ createCompactionChart(hideColumnE: boolean = false): void {
         const sectionWidth = tableWidth1 / 3; 
 
         doc.text(`Approved by: ${this.moistureDensityRelationship.lastApproveBy || " "}`, startX1 + 1, 261);
-
         doc.text(`Test by: ${this.moistureDensityRelationship.testBy || " "}`, startX1 + sectionWidth + 4, 261);
-
         doc.text(`Checked by: ${this.moistureDensityRelationship.approveBy || " "}`, startX1 + (sectionWidth * 2) + 4, 261);
 
         const blockTop = finalY;
@@ -500,9 +517,6 @@ createCompactionChart(hideColumnE: boolean = false): void {
         doc.setDrawColor(0, 0, 0);
         doc.setLineWidth(0.6);
         doc.rect(startX1, blockTop, tableWidth1, blockHeight);
-
-
-
 
         doc.addImage(tail, 'PNG', 0, 265, 210, 33);
 
@@ -520,7 +534,7 @@ createCompactionChart(hideColumnE: boolean = false): void {
 
         doc.save(`MoistureDensityRelationshipReport_${this.moistureDensityRelationship.testName}.pdf`);
       }, 1000);
+
     };
   }
-
 }
