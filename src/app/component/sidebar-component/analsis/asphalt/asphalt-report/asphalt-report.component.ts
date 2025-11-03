@@ -627,7 +627,7 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
             ["اسم المقاول Contractor", this.asphalt.contractor || 'N/A', "تاريخ الاختبار Testing Date", this.asphalt.testingDate || 'N/A'],
             ["الموقع Location", this.asphalt.location || 'N/A', "نوع العينة Samle Type", this.asphalt.sampleType || 'N/A'],
             ["رقم الامر العمل Job Order", this.asphalt.jobOrder || 'N/A', "رقم العينة Sample No", this.asphalt.sampleNo || 'N/A'],
-            ["مورد الاسفلت  Asphalt Applier", this.asphalt.asphaltApplier || 'N/A', "سحب العينة Sample By", this.asphalt.sampleBy || 'N/A'],
+            ["مورد الاسفلت  Asphalt Supplier", this.asphalt.asphaltApplier || 'N/A', "سحب العينة Sample By", this.asphalt.sampleBy || 'N/A'],
             ["Equipment Used", this.asphalt.equipmentUsed || 'N/A', "صنف الاسفلت Asphalt Layer", this.asphalt.asphaltLayer || 'N/A']
           ];
 
