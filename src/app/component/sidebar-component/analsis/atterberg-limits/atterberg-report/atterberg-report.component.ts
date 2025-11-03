@@ -255,8 +255,6 @@ createPlasticityChart(): void {
 }
 
 
-
-
 createMoistureChart(): void {
   if (this.moistureChart) {
     this.moistureChart.destroy();
@@ -360,10 +358,12 @@ createMoistureChart(): void {
             callback: function (value) {
               const realValue = Number(value);
               const shownTicks = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
-              return shownTicks.includes(Math.round(realValue))
-                ? Math.round(realValue).toString()
-                : '';
+              if (shownTicks.includes(realValue)) {
+                return realValue.toString();
+              }
+              return null;
             }
+
           }
         },
         y: {
@@ -380,9 +380,6 @@ createMoistureChart(): void {
     }
   });
 }
-
-
-
 
 
   generatePDF() {
