@@ -125,14 +125,46 @@ export class SandReportComponent implements AfterViewInit, OnInit {
       0    // End at 0% (right edge)
     ];
 
-    // Specification limits - matching the red dashed lines in the image
-    const specUpper: number[] = [
-      100, 100, 90, 85, 80, 78, 75, 70, 65, 50, 35, 18, 10, 0
-    ];
+// Parse Specification Limits dynamically from input (e.g. "100-90")
+const parseSpec = (val: any) => {
+  if (!val) return { upper: null, lower: null };
+  const parts = val.toString().split('-').map((v: string) => parseFloat(v.trim()));
+  return {
+    upper: parts[0] ?? null,
+    lower: parts[1] ?? null
+  };
+};
 
-    const specLower: number[] = [
-      100, 95, 80, 75, 70, 68, 65, 60, 50, 30, 15, 8, 2, 0
-    ];
+// Read each sieve's Specification Limits (e.g. from your table inputs)
+const specs = [
+  this.sieveAnalysis.specificationLimitsA,
+  this.sieveAnalysis.specificationLimitsB,
+  this.sieveAnalysis.specificationLimitsC,
+  this.sieveAnalysis.specificationLimitsD,
+  this.sieveAnalysis.specificationLimitsE,
+  this.sieveAnalysis.specificationLimitsF,
+  this.sieveAnalysis.specificationLimitsG,
+  this.sieveAnalysis.specificationLimitsH,
+  this.sieveAnalysis.specificationLimitsI,
+  this.sieveAnalysis.specificationLimitsJ,
+  this.sieveAnalysis.specificationLimitsK,
+  this.sieveAnalysis.specificationLimitsL,
+  this.sieveAnalysis.specificationLimitsM
+];
+
+    // Convert them into upper & lower arrays
+    const specUpper: number[] = [100]; // start point (left)
+    const specLower: number[] = [100]; // start point (left)
+
+    specs.forEach(spec => {
+      const { upper, lower } = parseSpec(spec);
+      specUpper.push(upper ?? null);
+      specLower.push(lower ?? null);
+    });
+
+    specUpper.push(0); // end point
+    specLower.push(0);
+
 
     this.chart = new Chart(this.chartCanvas.nativeElement, {     
       type: 'line',     
