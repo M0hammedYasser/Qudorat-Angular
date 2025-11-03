@@ -10,6 +10,7 @@ export interface Asphalt {
   asphaltLayer: string;
   equipmentUsed: string;
   remarks: string;
+  reportNo: string;
 
   clientName: string;
   projectName: string;
