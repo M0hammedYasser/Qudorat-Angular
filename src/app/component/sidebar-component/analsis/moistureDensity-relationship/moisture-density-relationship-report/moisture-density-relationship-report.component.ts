@@ -446,8 +446,6 @@ createCompactionChart(hideColumnE: boolean = false): void {
           this.dryDensityD,
           ...(hideColumnE ? [] : [this.dryDensityE])
         ];
-        const maxDryDensity = Math.max(...dryDensities);
-
         const moistureContents = [
           this.moistureContentA,
           this.moistureContentB,
@@ -455,7 +453,19 @@ createCompactionChart(hideColumnE: boolean = false): void {
           this.moistureContentD,
           ...(hideColumnE ? [] : [this.moistureContentE])
         ];
-        const maxMoistureContent = Math.max(...moistureContents);
+
+        const targetIndex = hideColumnE ? 2 : 3;
+
+        const selectedDryDensity = (typeof dryDensities[targetIndex] === 'number' && !isNaN(dryDensities[targetIndex]))
+          ? dryDensities[targetIndex]
+          : Math.max(...dryDensities.filter(v => typeof v === 'number' && !isNaN(v)));
+
+        const selectedMoistureContent = (typeof moistureContents[targetIndex] === 'number' && !isNaN(moistureContents[targetIndex]))
+          ? moistureContents[targetIndex]
+          : Math.max(...moistureContents.filter(v => typeof v === 'number' && !isNaN(v)));
+
+        const mddDisplay = Number(selectedDryDensity ?? 0).toFixed(3);
+        const omcDisplay = Number(selectedMoistureContent ?? 0).toFixed(2);
 
         const startX = 145;
         let y = finalY + 20;
@@ -468,13 +478,14 @@ createCompactionChart(hideColumnE: boolean = false): void {
         doc.rect(startX + 4.5, y, col1Width - 3, rowHeight);
         doc.rect(startX + col1Width + 1.5, y, col2Width - 10, rowHeight);
         doc.text("M.D.D (gm/cc)", startX + 5.5, y + 7);
-        doc.text(maxDryDensity.toFixed(3), startX + col1Width + 3, y + 7);
+        doc.text(mddDisplay, startX + col1Width + 3, y + 7);
         y += rowHeight + 2;
 
         doc.rect(startX + 4.5, y, col1Width - 3, rowHeight);
         doc.rect(startX + col1Width + 1.5, y, col2Width - 10, rowHeight);
         doc.text("O.M.C %", startX + 5.5, y + 7);
-        doc.text(maxMoistureContent.toFixed(2), startX + col1Width + 3, y + 7);
+        doc.text(omcDisplay, startX + col1Width + 3, y + 7);
+
 
         finalY += 56;
 
