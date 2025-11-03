@@ -670,7 +670,7 @@ createMoistureChart(): void {
           return `${year}-${month}-${day} ${hours}:${minutes}`;
         };
         const currentDateTime = formatDateTime(new Date());
-        doc.text(`Report Date: ${currentDateTime}`, 1, 300);
+        doc.text(`Report Date: ${currentDateTime}`, 1, 293);
 
         doc.save(`AtterbergLimitsReport_${this.atterbergLimits.testName}.pdf`);
       }, 1000);
