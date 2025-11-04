@@ -246,13 +246,13 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
     doc.setFontSize(9);
 
     const infoRows = [
-      ["Project", this.asphalt.projectName || 'N/A', "Sampling Date", this.asphalt.sampleDate || 'N/A'],
-      ["Contractor", this.asphalt.contractor || 'N/A', "Testing Date", this.asphalt.testingDate || 'N/A'],
-      ["Location", this.asphalt.location || 'N/A', "Sample Type", this.asphalt.sampleType || 'N/A'],
-      ["Job Order", this.asphalt.jobOrder || 'N/A', "Sample No", this.asphalt.sampleNo || 'N/A'],
-      ["Asphalt Supplier", this.asphalt.asphaltApplier || 'N/A', "Sample By", this.asphalt.sampleBy || 'N/A'],
-      ["Request Description", this.asphalt.requestDescription || 'N/A', "Asphalt Layer", this.asphalt.asphaltLayer || 'N/A'],
-      ["Report No", this.asphalt.reportNo || 'N/A']
+      ["Project", this.asphalt.projectName || ' ', "Sampling Date", this.asphalt.sampleDate || ' '],
+      ["Contractor", this.asphalt.contractor || ' ', "Testing Date", this.asphalt.testingDate || ' '],
+      ["Location", this.asphalt.location || ' ', "Sample Type", this.asphalt.sampleType || ' '],
+      ["Job Order", this.asphalt.jobOrder || ' ', "Sample No", this.asphalt.sampleNo || ' '],
+      ["Asphalt Supplier", this.asphalt.asphaltApplier || ' ', "Sample By", this.asphalt.sampleBy || ' '],
+      ["Request Description", this.asphalt.requestDescription || ' ', "Asphalt Layer", this.asphalt.asphaltLayer || ' '],
+      ["Report No", {content: this.asphalt.reportNo || ' ' , colSpan: 3 }]
     ];
 
     autoTable(doc, {
@@ -624,12 +624,12 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
 
           doc.setFontSize(9);
           const infoRows = [
-            ["المشروع  Project ", this.asphalt.projectName || 'N/A', "تاريخ العينة Sampling Date", this.asphalt.sampleDate || 'N/A'],
-            ["اسم المقاول Contractor", this.asphalt.contractor || 'N/A', "تاريخ الاختبار Testing Date", this.asphalt.testingDate || 'N/A'],
-            ["الموقع Location", this.asphalt.location || 'N/A', "نوع العينة Samle Type", this.asphalt.sampleType || 'N/A'],
-            ["رقم الامر العمل Job Order", this.asphalt.jobOrder || 'N/A', "رقم العينة Sample No", this.asphalt.sampleNo || 'N/A'],
-            ["مورد الاسفلت  Asphalt Supplier", this.asphalt.asphaltApplier || 'N/A', "سحب العينة Sample By", this.asphalt.sampleBy || 'N/A'],
-            ["Equipment Used", this.asphalt.equipmentUsed || 'N/A', "صنف الاسفلت Asphalt Layer", this.asphalt.asphaltLayer || 'N/A']
+            ["المشروع Project ", this.asphalt.projectName || ' ', "تاريخ العينة Sampling Date", this.asphalt.sampleDate || ' '],
+            ["اسم المقاول Contractor", this.asphalt.contractor || ' ', "تاريخ الاختبار Testing Date", this.asphalt.testingDate || ' '],
+            ["الموقع Location", this.asphalt.location || ' ', "نوع العينة Samle Type", this.asphalt.sampleType || ' '],
+            ["رقم الامر العمل Job Order", this.asphalt.jobOrder || ' ', "رقم العينة Sample No", this.asphalt.sampleNo || ' '],
+            ["مورد الاسفلت  Asphalt Supplier", this.asphalt.asphaltApplier || ' ', "سحب العينة Sample By", this.asphalt.sampleBy || ' '],
+            ["Equipment Used", this.asphalt.equipmentUsed || ' ', "صنف الاسفلت Asphalt Layer", this.asphalt.asphaltLayer || ' ']
           ];
 
           autoTable(doc, {
