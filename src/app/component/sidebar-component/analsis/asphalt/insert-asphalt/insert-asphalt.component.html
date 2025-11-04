@@ -484,8 +484,15 @@
       <div class="d-flex align-items-center mb-1">
         <div class="align-items-center">
           <label class="col-form-label me-1">Remarks</label>
-          <textarea type="text" class="form-control compact-input"
-                [(ngModel)]="asphalt.notes" name="notes" style="width: 1000px; height: 100px;"></textarea>
+          <textarea
+            class="form-control compact-input"
+            [(ngModel)]="asphalt.notes"
+            name="notes"
+            rows="9"
+            maxlength="1477"
+            style="width: 1000px; resize: none; overflow-y: auto;"
+            (input)="limitLiness($event, 9)"
+          ></textarea>
         </div>
       </div>
       
