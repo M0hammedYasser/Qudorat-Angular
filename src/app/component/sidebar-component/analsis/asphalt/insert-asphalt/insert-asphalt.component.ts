@@ -23,6 +23,9 @@ import {Bitumen} from "../../../../../model/bitumen";
   styleUrl: './insert-asphalt.component.css'
 })
 export class InsertAsphaltComponent {
+limitLines($event: Event,arg1: number) {
+throw new Error('Method not implemented.');
+}
 
   id: number = 0;
   asphalt: Asphalt = {test: {} as Test, gradationTest: {} as GradationTest , bitumen : {} as Bitumen} as Asphalt;
@@ -34,6 +37,30 @@ export class InsertAsphaltComponent {
               private service: AsphaltService,
               private activatedRoute: ActivatedRoute) {
   }
+
+  limitLiness(event: Event, maxLines: number) {
+  const textarea = event.target as HTMLTextAreaElement;
+  const lines = textarea.value.split('\n');
+
+  // لو عدد السطور تجاوز الحد المسموح
+  if (lines.length > maxLines) {
+    // نحذف السطور الإضافية
+    textarea.value = lines.slice(0, maxLines).join('\n');
+    this.asphalt.notes = textarea.value;
+  }
+
+  // كمان نمنع الكتابة لما يوصل لآخر سطر آخره
+  const lineBreaks = textarea.value.split('\n').length;
+  if (lineBreaks >= maxLines) {
+    const lastLine = textarea.value.split('\n').pop() || '';
+    const maxCharsInLastLine = 150; // مثلاً تقدير عرض السطر
+    if (lastLine.length >= maxCharsInLastLine && event instanceof InputEvent && event.inputType === 'insertText') {
+      textarea.value = textarea.value.slice(0, -1);
+      this.asphalt.notes = textarea.value;
+    }
+  }
+}
+
 
 
   insert() {
