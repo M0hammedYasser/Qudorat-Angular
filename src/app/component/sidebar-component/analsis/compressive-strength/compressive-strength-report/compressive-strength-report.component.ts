@@ -26,20 +26,43 @@ export class CompressiveStrengthReportComponent implements OnInit {
   area: number = 0;
   volume: number = 0;
   role: string = '';
+  avgCompStrength1: string = '';
+  avgCompStrength2: string = '';
+
 
   constructor(private authenticationService: AuthenticationService,private service: CompressiveStrengthService, private activatedRoute: ActivatedRoute, private router: Router) {
   }
-
 
   ngOnInit() {
     this.id = this.activatedRoute.snapshot.params['id'];
     this.role = this.authenticationService.getAuthority();
     this.service.findById(this.id).subscribe(res => {
       this.compressiveStrength = res;
-      this.area = Number(((this.compressiveStrength.diameter / 2) * (this.compressiveStrength.diameter / 2)) * Math.PI);
-      this.volume = this.area * this.compressiveStrength.height;
-    })
+      this.area = Number(((res.diameter / 2) ** 2) * Math.PI);
+      this.volume = this.area * res.height;
+
+      const strengthsGroup1 = [
+        (res.testLoadknA * 101.971) / ((res.diaA ** 2) * 3.143 / 4),
+        (res.testLoadknB * 101.971) / ((res.diaB ** 2) * 3.143 / 4),
+        (res.testLoadknC * 101.971) / ((res.diaC ** 2) * 3.143 / 4)
+      ].filter(val => !isNaN(val) && val > 0);
+
+      this.avgCompStrength1 = strengthsGroup1.length
+        ? (strengthsGroup1.reduce((a, b) => a + b, 0) / strengthsGroup1.length).toFixed(1)
+        : '';
+
+      const strengthsGroup2 = [
+        (res.testLoadknD * 101.971) / ((res.diaD ** 2) * 3.143 / 4),
+        (res.testLoadknE * 101.971) / ((res.diaE ** 2) * 3.143 / 4),
+        (res.testLoadknF * 101.971) / ((res.diaF ** 2) * 3.143 / 4)
+      ].filter(val => !isNaN(val) && val > 0);
+
+      this.avgCompStrength2 = strengthsGroup2.length
+        ? (strengthsGroup2.reduce((a, b) => a + b, 0) / strengthsGroup2.length).toFixed(1)
+        : '';
+    });
   }
+
 
   generatePDF() {
     const doc = new jsPDF();
@@ -106,48 +129,14 @@ export class CompressiveStrengthReportComponent implements OnInit {
 
 
       let finalY = (doc as any).lastAutoTable.finalY;
-
-      const compStrengthA = (this.compressiveStrength.testLoadknA * 101.971 /
-        (Number(this.compressiveStrength.diaA) * Number(this.compressiveStrength.diaA) * 3.143 / 4));
-
-      const compStrengthB = (this.compressiveStrength.testLoadknB * 101.971 /
-        (Number(this.compressiveStrength.diaB) * Number(this.compressiveStrength.diaB) * 3.143 / 4));
-
-      const compStrengthC = (this.compressiveStrength.testLoadknC * 101.971 /
-        (Number(this.compressiveStrength.diaC) * Number(this.compressiveStrength.diaC) * 3.143 / 4));
-
-      const compStrengthD = (this.compressiveStrength.testLoadknD * 101.971 /
-        (Number(this.compressiveStrength.diaD) * Number(this.compressiveStrength.diaD) * 3.143 / 4));
-
-      const compStrengthE = (this.compressiveStrength.testLoadknE * 101.971 /
-        (Number(this.compressiveStrength.diaE) * Number(this.compressiveStrength.diaE) * 3.143 / 4));
-
-      const compStrengthF = (this.compressiveStrength.testLoadknF * 101.971 /
-        (Number(this.compressiveStrength.diaF) * Number(this.compressiveStrength.diaF) * 3.143 / 4));
-
-      const strengthsGroup1 = [compStrengthA, compStrengthB, compStrengthC]
-        .filter(val => !isNaN(val) && val > 0);
-
-      const avgCompStrength1 = strengthsGroup1.length > 0
-        ? (strengthsGroup1.reduce((a, b) => a + b, 0) / strengthsGroup1.length).toFixed(1)
-        : '';
-
-      const strengthsGroup2 = [compStrengthD, compStrengthE, compStrengthF]
-        .filter(val => !isNaN(val) && val > 0);
-
-      const avgCompStrength2 = strengthsGroup2.length > 0
-        ? (strengthsGroup2.reduce((a, b) => a + b, 0) / strengthsGroup2.length).toFixed(1)
-        : '';
-
-
       autoTable(doc, {
         startY: finalY,
         head: [['Sample NO', 'Average Dia.(cm)', 'Average Length (cm)', 'Area (cm²)', 'Age in Days', 'Weight Sample (gm)', 'Unit Mass (gm/cc)', 'Test Load (KN)', 'Test Load (KG)', 'Compressive Strength (kg/cm²)', 'Avg. Comp. Strength (kg/cm²)', 'Compressive Strength (Mpa)', 'Avg. Comp. Strength (Mpa) with exp u k=2']],
         body: [
-          [this.compressiveStrength.sampleNOA, Number(this.compressiveStrength.diaA).toFixed(1), Number(this.compressiveStrength.lengthA).toFixed(1), (Number(this.compressiveStrength.diaA) * Number(this.compressiveStrength.diaA) * 3.143 / 4).toFixed(1), this.compressiveStrength.dateTested, this.compressiveStrength.weightSampleA, (Number(this.compressiveStrength.weightSampleA) / ((Number(this.compressiveStrength.diaA) * Number(this.compressiveStrength.diaA) * 3.143 / 4) * Number(this.compressiveStrength.lengthA))).toFixed(3), this.compressiveStrength.testLoadknA, Number(this.compressiveStrength.testLoadknA * 101.971).toFixed(0), (Number(this.compressiveStrength.testLoadknA) * 101.971 / (Number(this.compressiveStrength.diaA) * Number(this.compressiveStrength.diaA) * 3.143 / 4)).toFixed(1), {content: avgCompStrength1 , rowSpan: 3}, ((Number(this.compressiveStrength.testLoadknA) * 101.971 /(Number(this.compressiveStrength.diaA) * Number(this.compressiveStrength.diaA) * 3.143 / 4)) / 10.2).toFixed(2), { content: `± ${this.compressiveStrength.expAvgA}`, rowSpan: 3 }],
+          [this.compressiveStrength.sampleNOA, Number(this.compressiveStrength.diaA).toFixed(1), Number(this.compressiveStrength.lengthA).toFixed(1), (Number(this.compressiveStrength.diaA) * Number(this.compressiveStrength.diaA) * 3.143 / 4).toFixed(1), this.compressiveStrength.dateTested, this.compressiveStrength.weightSampleA, (Number(this.compressiveStrength.weightSampleA) / ((Number(this.compressiveStrength.diaA) * Number(this.compressiveStrength.diaA) * 3.143 / 4) * Number(this.compressiveStrength.lengthA))).toFixed(3), this.compressiveStrength.testLoadknA, Number(this.compressiveStrength.testLoadknA * 101.971).toFixed(0), (Number(this.compressiveStrength.testLoadknA) * 101.971 / (Number(this.compressiveStrength.diaA) * Number(this.compressiveStrength.diaA) * 3.143 / 4)).toFixed(1), {content: this.avgCompStrength1  , rowSpan: 3}, ((Number(this.compressiveStrength.testLoadknA) * 101.971 /(Number(this.compressiveStrength.diaA) * Number(this.compressiveStrength.diaA) * 3.143 / 4)) / 10.2).toFixed(2), { content: `± ${this.compressiveStrength.expAvgA}`, rowSpan: 3 }],
           [this.compressiveStrength.sampleNOB, Number(this.compressiveStrength.diaB).toFixed(1), Number(this.compressiveStrength.lengthB).toFixed(1), (Number(this.compressiveStrength.diaB) * Number(this.compressiveStrength.diaB) * 3.143 / 4).toFixed(1), this.compressiveStrength.dateTested, this.compressiveStrength.weightSampleB, (Number(this.compressiveStrength.weightSampleB) / ((Number(this.compressiveStrength.diaB) * Number(this.compressiveStrength.diaB) * 3.143 / 4) * Number(this.compressiveStrength.lengthB))).toFixed(3), this.compressiveStrength.testLoadknB, Number(this.compressiveStrength.testLoadknB * 101.971).toFixed(0), (Number(this.compressiveStrength.testLoadknB) * 101.971 / (Number(this.compressiveStrength.diaB) * Number(this.compressiveStrength.diaB) * 3.143 / 4)).toFixed(1), ((Number(this.compressiveStrength.testLoadknB) * 101.971 /(Number(this.compressiveStrength.diaB) * Number(this.compressiveStrength.diaB) * 3.143 / 4)) / 10.2).toFixed(2)],
           [this.compressiveStrength.sampleNOC, Number(this.compressiveStrength.diaC).toFixed(1), Number(this.compressiveStrength.lengthC).toFixed(1), (Number(this.compressiveStrength.diaC) * Number(this.compressiveStrength.diaC) * 3.143 / 4).toFixed(1), this.compressiveStrength.dateTested, this.compressiveStrength.weightSampleC, (Number(this.compressiveStrength.weightSampleC) / ((Number(this.compressiveStrength.diaC) * Number(this.compressiveStrength.diaC) * 3.143 / 4) * Number(this.compressiveStrength.lengthC))).toFixed(3), this.compressiveStrength.testLoadknC, Number(this.compressiveStrength.testLoadknC * 101.971).toFixed(0), (Number(this.compressiveStrength.testLoadknC) * 101.971 / (Number(this.compressiveStrength.diaC) * Number(this.compressiveStrength.diaC) * 3.143 / 4)).toFixed(1), ((Number(this.compressiveStrength.testLoadknC) * 101.971 /(Number(this.compressiveStrength.diaC) * Number(this.compressiveStrength.diaC) * 3.143 / 4)) / 10.2).toFixed(2)],
-          [this.compressiveStrength.sampleNOD, Number(this.compressiveStrength.diaD).toFixed(1), Number(this.compressiveStrength.lengthD).toFixed(1), (Number(this.compressiveStrength.diaD) * Number(this.compressiveStrength.diaD) * 3.143 / 4).toFixed(1), this.compressiveStrength.dateTested, this.compressiveStrength.weightSampleD, (Number(this.compressiveStrength.weightSampleD) / ((Number(this.compressiveStrength.diaD) * Number(this.compressiveStrength.diaD) * 3.143 / 4) * Number(this.compressiveStrength.lengthD))).toFixed(3), this.compressiveStrength.testLoadknD, Number(this.compressiveStrength.testLoadknD * 101.971).toFixed(0), (Number(this.compressiveStrength.testLoadknD) * 101.971 / (Number(this.compressiveStrength.diaD) * Number(this.compressiveStrength.diaD) * 3.143 / 4)).toFixed(1), { content: avgCompStrength2, rowSpan: 3 }, ((Number(this.compressiveStrength.testLoadknD) * 101.971 /(Number(this.compressiveStrength.diaD) * Number(this.compressiveStrength.diaD) * 3.143 / 4)) / 10.2).toFixed(2), { content: `± ${this.compressiveStrength.expAvgB}`, rowSpan: 3 }],
+          [this.compressiveStrength.sampleNOD, Number(this.compressiveStrength.diaD).toFixed(1), Number(this.compressiveStrength.lengthD).toFixed(1), (Number(this.compressiveStrength.diaD) * Number(this.compressiveStrength.diaD) * 3.143 / 4).toFixed(1), this.compressiveStrength.dateTested, this.compressiveStrength.weightSampleD, (Number(this.compressiveStrength.weightSampleD) / ((Number(this.compressiveStrength.diaD) * Number(this.compressiveStrength.diaD) * 3.143 / 4) * Number(this.compressiveStrength.lengthD))).toFixed(3), this.compressiveStrength.testLoadknD, Number(this.compressiveStrength.testLoadknD * 101.971).toFixed(0), (Number(this.compressiveStrength.testLoadknD) * 101.971 / (Number(this.compressiveStrength.diaD) * Number(this.compressiveStrength.diaD) * 3.143 / 4)).toFixed(1), { content: this.avgCompStrength2, rowSpan: 3 }, ((Number(this.compressiveStrength.testLoadknD) * 101.971 /(Number(this.compressiveStrength.diaD) * Number(this.compressiveStrength.diaD) * 3.143 / 4)) / 10.2).toFixed(2), { content: `± ${this.compressiveStrength.expAvgB}`, rowSpan: 3 }],
           [this.compressiveStrength.sampleNOE, Number(this.compressiveStrength.diaE).toFixed(1), Number(this.compressiveStrength.lengthE).toFixed(1), (Number(this.compressiveStrength.diaE) * Number(this.compressiveStrength.diaE) * 3.143 / 4).toFixed(1), this.compressiveStrength.dateTested, this.compressiveStrength.weightSampleE, (Number(this.compressiveStrength.weightSampleE) / ((Number(this.compressiveStrength.diaE) * Number(this.compressiveStrength.diaE) * 3.143 / 4) * Number(this.compressiveStrength.lengthE))).toFixed(3), this.compressiveStrength.testLoadknE, Number(this.compressiveStrength.testLoadknE * 101.971).toFixed(0), (Number(this.compressiveStrength.testLoadknE) * 101.971 / (Number(this.compressiveStrength.diaE) * Number(this.compressiveStrength.diaE) * 3.143 / 4)).toFixed(1), ((Number(this.compressiveStrength.testLoadknE) * 101.971 /(Number(this.compressiveStrength.diaE) * Number(this.compressiveStrength.diaE) * 3.143 / 4)) / 10.2).toFixed(2)],
           [this.compressiveStrength.sampleNOF, Number(this.compressiveStrength.diaF).toFixed(1), Number(this.compressiveStrength.lengthF).toFixed(1), (Number(this.compressiveStrength.diaF) * Number(this.compressiveStrength.diaF) * 3.143 / 4).toFixed(1), this.compressiveStrength.dateTested, this.compressiveStrength.weightSampleF, (Number(this.compressiveStrength.weightSampleF) / ((Number(this.compressiveStrength.diaF) * Number(this.compressiveStrength.diaF) * 3.143 / 4) * Number(this.compressiveStrength.lengthF))).toFixed(3), this.compressiveStrength.testLoadknF, Number(this.compressiveStrength.testLoadknF * 101.971).toFixed(0), (Number(this.compressiveStrength.testLoadknF) * 101.971 / (Number(this.compressiveStrength.diaF) * Number(this.compressiveStrength.diaF) * 3.143 / 4)).toFixed(1), ((Number(this.compressiveStrength.testLoadknF) * 101.971 /(Number(this.compressiveStrength.diaF) * Number(this.compressiveStrength.diaF) * 3.143 / 4)) / 10.2).toFixed(2)],
         ],
