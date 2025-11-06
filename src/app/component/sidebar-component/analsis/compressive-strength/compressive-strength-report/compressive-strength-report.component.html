@@ -2,208 +2,123 @@
   <h2 class="mb-3 text-center">Portland Cement Concrete Cylinders Compressive Strength Test</h2>
   <table class="table1">
     <tr>
-      <th>Parameter</th>
-      <th>Value</th>
-      <th>Unit</th>
-      <th>Spec</th>
-      <th>Value</th>
-      <th>Unit</th>
-      <th>Value</th>
-      <th>Unit</th>
+      <th>Sample NO</th>
+      <th>Average Dia.(cm)</th>
+      <th>Average Length (cm)</th>
+      <th>Area (cm²)</th>
+      <th>Age in Days</th>
+      <th>Weight Sample (gm)</th>
+      <th>Unit Mass (gm/cc)</th>
+      <th>Test Load (KN)</th>
+      <th>Test Load (KG)</th>
+      <th>Compressive Strength (kg/cm²)</th>
+      <th>Avg.Comp.Strength (kg/cm²)</th>
+      <th>Compressive Strength (Mpa)</th>
+      <th>Avg.Comp.Strength (Mpa) with exp u k=2</th>
     </tr>
 
     <tr>
-      <td>Cement Content</td>
-      <td>{{this.compressiveStrength.cementContent}}</td>
-      <td>{{this.compressiveStrength.cementContentType}}</td>
-      <td>Spec. 28 Days Strength</td>
-      <td>{{this.compressiveStrength.specTwintyEightDayStrength}}</td>
-      <td>kg/cm2</td>
-      <td>{{this.compressiveStrength.specTwintyEightDayStrength / 10}}</td>
-      <td>Mpa</td>
-    </tr>
-
-    <tr>
-      <td>Diameter</td>
-      <td>{{this.compressiveStrength.diameter * 10}}</td>
-      <td>mm</td>
-      <td>Area</td>
-      <td>{{(this.area).toFixed(2)}}</td>
-      <td>cm²</td>
-      <td></td>
-      <td></td>
-    </tr>
-
-    <tr>
-      <td>Height</td>
-      <td>{{this.compressiveStrength.height * 10}}</td>
-      <td>mm</td>
-      <td>Volume</td>
-      <td>{{(this.volume).toFixed(2)}}</td>
-      <td>cm³</td>
-      <td></td>
-      <td></td>
-    </tr>
-
-    <tr>
-      <td>Environmental Conditions</td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-
-    <tr>
-      <td>Date Cast</td>
-      <td>{{this.compressiveStrength.dateCast}}</td>
-      <td></td>
-      <td>Slump</td>
-      <td>{{this.compressiveStrength.slump}}</td>
-      <td>mm</td>
-      <td></td>
-      <td></td>
-    </tr>
-
-    <tr>
-      <td>Date Received</td>
-      <td>{{this.compressiveStrength.dateReceived}}</td>
-      <td></td>
-      <td>Air Temperature</td>
-      <td>{{this.compressiveStrength.airTemperature}}</td>
-      <td>°C</td>
-      <td></td>
-      <td></td>
-    </tr>
-
-    <tr>
-      <td>Date Tested</td>
+      <td>{{this.compressiveStrength.sampleNOA}}</td>
+      <td>{{(this.compressiveStrength.diaA).toFixed(1)}}</td>
+      <td>{{(this.compressiveStrength.lengthA).toFixed(1)}}</td>
+      <td>{{((this.compressiveStrength.diaA) * (this.compressiveStrength.diaA) * 3.143 / 4).toFixed(1)}}</td>
       <td>{{this.compressiveStrength.dateTested}}</td>
-      <td></td>
-      <td>Concrete Temperature</td>
-      <td>{{this.compressiveStrength.concreteTemperature}}</td>
-      <td>°C</td>
-      <td></td>
-      <td></td>
+      <td>{{this.compressiveStrength.weightSampleA}}</td>
+      <td>{{((this.compressiveStrength.weightSampleA) / (((this.compressiveStrength.diaA) * (this.compressiveStrength.diaA) * 3.143 / 4) * (this.compressiveStrength.lengthA))).toFixed(3)}}</td>
+      <td>{{this.compressiveStrength.testLoadknA}}</td>
+      <td>{{(this.compressiveStrength.testLoadknA * 101.971).toFixed(0)}}</td>
+      <td>{{((this.compressiveStrength.testLoadknA) * 101.971 / ((this.compressiveStrength.diaA) * (this.compressiveStrength.diaA) * 3.143 / 4)).toFixed(1)}}</td>
+      <td rowspan="3">{{this.avgCompStrength1}}</td>
+      <td>{{(((this.compressiveStrength.testLoadknA) * 101.971 /((this.compressiveStrength.diaA) * (this.compressiveStrength.diaA) * 3.143 / 4)) / 10.2).toFixed(2)}}</td>
+      <td rowspan="3">± {{this.compressiveStrength.expAvgA}}</td>
+    </tr>
+
+    <tr>
+      <td>{{this.compressiveStrength.sampleNOB}}</td>
+      <td>{{(this.compressiveStrength.diaB).toFixed(1)}}</td>
+      <td>{{(this.compressiveStrength.lengthB).toFixed(1)}}</td>
+      <td>{{((this.compressiveStrength.diaB) * (this.compressiveStrength.diaB) * 3.143 / 4).toFixed(1)}}</td>
+      <td>{{this.compressiveStrength.dateTested}}</td>
+      <td>{{this.compressiveStrength.weightSampleB}}</td>
+      <td>{{((this.compressiveStrength.weightSampleB) / (((this.compressiveStrength.diaB) * (this.compressiveStrength.diaB) * 3.143 / 4) * (this.compressiveStrength.lengthB))).toFixed(3)}}</td>
+      <td>{{this.compressiveStrength.testLoadknB}}</td>
+      <td>{{(this.compressiveStrength.testLoadknB * 101.971).toFixed(0)}}</td>
+      <td>{{((this.compressiveStrength.testLoadknB) * 101.971 / ((this.compressiveStrength.diaB) * (this.compressiveStrength.diaB) * 3.143 / 4)).toFixed(1)}}</td>
+      <td>{{(((this.compressiveStrength.testLoadknB) * 101.971 /((this.compressiveStrength.diaB) * (this.compressiveStrength.diaB) * 3.143 / 4)) / 10.2).toFixed(2)}}</td>
+    </tr>
+
+    <tr>
+      <td>{{this.compressiveStrength.sampleNOC}}</td>
+      <td>{{(this.compressiveStrength.diaC).toFixed(1)}}</td>
+      <td>{{(this.compressiveStrength.lengthC).toFixed(1)}}</td>
+      <td>{{((this.compressiveStrength.diaC) * (this.compressiveStrength.diaC) * 3.143 / 4).toFixed(1)}}</td>
+      <td>{{this.compressiveStrength.dateTested}}</td>
+      <td>{{this.compressiveStrength.weightSampleC}}</td>
+      <td>{{((this.compressiveStrength.weightSampleC) / (((this.compressiveStrength.diaC) * (this.compressiveStrength.diaC) * 3.143 / 4) * (this.compressiveStrength.lengthC))).toFixed(3)}}</td>
+      <td>{{this.compressiveStrength.testLoadknC}}</td>
+      <td>{{(this.compressiveStrength.testLoadknC * 101.971).toFixed(0)}}</td>
+      <td>{{((this.compressiveStrength.testLoadknC) * 101.971 / ((this.compressiveStrength.diaC) * (this.compressiveStrength.diaC) * 3.143 / 4)).toFixed(1)}}</td>
+      <td>{{(((this.compressiveStrength.testLoadknC) * 101.971 /((this.compressiveStrength.diaC) * (this.compressiveStrength.diaC) * 3.143 / 4)) / 10.2).toFixed(2)}}</td>
+    </tr>
+
+    <tr>
+      <td>{{this.compressiveStrength.sampleNOD}}</td>
+      <td>{{(this.compressiveStrength.diaD).toFixed(1)}}</td>
+      <td>{{(this.compressiveStrength.lengthD).toFixed(1)}}</td>
+      <td>{{((this.compressiveStrength.diaD) * (this.compressiveStrength.diaD) * 3.143 / 4).toFixed(1)}}</td>
+      <td>{{this.compressiveStrength.dateTested}}</td>
+      <td>{{this.compressiveStrength.weightSampleD}}</td>
+      <td>{{((this.compressiveStrength.weightSampleD) / (((this.compressiveStrength.diaD) * (this.compressiveStrength.diaD) * 3.143 / 4) * (this.compressiveStrength.lengthD))).toFixed(3)}}</td>
+      <td>{{this.compressiveStrength.testLoadknD}}</td>
+      <td>{{(this.compressiveStrength.testLoadknD * 101.971).toFixed(0)}}</td>
+      <td>{{((this.compressiveStrength.testLoadknD) * 101.971 / ((this.compressiveStrength.diaD) * (this.compressiveStrength.diaD) * 3.143 / 4)).toFixed(1)}}</td>
+      <td rowspan="3">{{this.avgCompStrength2}}</td>
+      <td>{{(((this.compressiveStrength.testLoadknD) * 101.971 /((this.compressiveStrength.diaD) * (this.compressiveStrength.diaD) * 3.143 / 4)) / 10.2).toFixed(2)}}</td>
+      <td rowspan="3">± {{this.compressiveStrength.expAvgB}}</td>
+    </tr>
+
+    <tr>
+      <td>{{this.compressiveStrength.sampleNOE}}</td>
+      <td>{{(this.compressiveStrength.diaE).toFixed(1)}}</td>
+      <td>{{(this.compressiveStrength.lengthE).toFixed(1)}}</td>
+      <td>{{((this.compressiveStrength.diaE) * (this.compressiveStrength.diaE) * 3.143 / 4).toFixed(1)}}</td>
+      <td>{{this.compressiveStrength.dateTested}}</td>
+      <td>{{this.compressiveStrength.weightSampleE}}</td>
+      <td>{{((this.compressiveStrength.weightSampleE) / (((this.compressiveStrength.diaE) * (this.compressiveStrength.diaE) * 3.143 / 4) * (this.compressiveStrength.lengthE))).toFixed(3)}}</td>
+      <td>{{this.compressiveStrength.testLoadknE}}</td>
+      <td>{{(this.compressiveStrength.testLoadknE * 101.971).toFixed(0)}}</td>
+      <td>{{((this.compressiveStrength.testLoadknE) * 101.971 / ((this.compressiveStrength.diaE) * (this.compressiveStrength.diaE) * 3.143 / 4)).toFixed(1)}}</td>
+      <td>{{(((this.compressiveStrength.testLoadknE) * 101.971 /((this.compressiveStrength.diaE) * (this.compressiveStrength.diaE) * 3.143 / 4)) / 10.2).toFixed(2)}}</td>
+    </tr>
+
+    <tr>
+      <td>{{this.compressiveStrength.sampleNOF}}</td>
+      <td>{{(this.compressiveStrength.diaF).toFixed(1)}}</td>
+      <td>{{(this.compressiveStrength.lengthF).toFixed(1)}}</td>
+      <td>{{((this.compressiveStrength.diaF) * (this.compressiveStrength.diaF) * 3.143 / 4).toFixed(1)}}</td>
+      <td>{{this.compressiveStrength.dateTested}}</td>
+      <td>{{this.compressiveStrength.weightSampleF}}</td>
+      <td>{{((this.compressiveStrength.weightSampleF) / (((this.compressiveStrength.diaF) * (this.compressiveStrength.diaF) * 3.143 / 4) * (this.compressiveStrength.lengthF))).toFixed(3)}}</td>
+      <td>{{this.compressiveStrength.testLoadknF}}</td>
+      <td>{{(this.compressiveStrength.testLoadknF * 101.971).toFixed(0)}}</td>
+      <td>{{((this.compressiveStrength.testLoadknF) * 101.971 / ((this.compressiveStrength.diaF) * (this.compressiveStrength.diaF) * 3.143 / 4)).toFixed(1)}}</td>
+      <td>{{(((this.compressiveStrength.testLoadknF) * 101.971 /((this.compressiveStrength.diaF) * (this.compressiveStrength.diaF) * 3.143 / 4)) / 10.2).toFixed(2)}}</td>
     </tr>
   </table>
 
   <table class="table2">
     <tr>
-      <th>NO</th>
-      <th>Type of structure</th>
-      <th>Age (day)</th>
-      <th>Weight (gm)</th>
-      <th>Density (gm/cm³)</th>
-      <th>Load (kN)</th>
-      <th>trength (Kgf/cm²)</th>
-      <th>Strength (Mpa)</th>
-      <th>Fracture Type</th>
+      <th rowspan="2">Remarks</th>
+      <td>Qudorat Laboratory Sample.</td>
     </tr>
 
     <tr>
-      <td>1</td>
-      <td></td>
-      <td>{{this.compressiveStrength.sampleAAge}}</td>
-      <td>{{this.compressiveStrength.weightA}}</td>
-      <td>{{(this.compressiveStrength.weightA / this.volume).toFixed(3)}}</td>
-      <td>{{this.compressiveStrength.loadA}}</td>
-      <td>{{(this.compressiveStrength.loadA * 101.971 / this.area).toFixed(1)}}</td>
-      <td>{{(this.compressiveStrength.loadA * 10 / this.area).toFixed(2)}}</td>
-      <td>{{this.compressiveStrength.fractureA}}</td>
+      <td>Results relate only to the item Tested</td>
     </tr>
 
     <tr>
-      <td>2</td>
-      <td></td>
-      <td>{{this.compressiveStrength.sampleBAge}}</td>
-      <td>{{this.compressiveStrength.weightB}}</td>
-      <td>{{(this.compressiveStrength.weightB / this.volume).toFixed(3)}}</td>
-      <td>{{this.compressiveStrength.loadB}}</td>
-      <td>{{(this.compressiveStrength.loadB * 101.971 / this.area).toFixed(1)}}</td>
-      <td>{{(this.compressiveStrength.loadB * 10 / this.area).toFixed(2)}}</td>
-      <td>{{this.compressiveStrength.fractureB}}</td>
-    </tr>
-
-    <tr>
-      <td>3</td>
-      <td></td>
-      <td>{{this.compressiveStrength.sampleCAge}}</td>
-      <td>{{this.compressiveStrength.weightC}}</td>
-      <td>{{(this.compressiveStrength.weightC / this.volume).toFixed(3)}}</td>
-      <td>{{this.compressiveStrength.loadC}}</td>
-      <td>{{(this.compressiveStrength.loadC * 101.971 / this.area).toFixed(1)}}</td>
-      <td>{{(this.compressiveStrength.loadC * 10 / this.area).toFixed(2)}}</td>
-      <td>{{this.compressiveStrength.fractureC}}</td>
-    </tr>
-
-    <tr>
-      <td>Avg 1-3</td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td>{{((this.compressiveStrength.loadA + this.compressiveStrength.loadB + this.compressiveStrength.loadC) / 3 * 101.971 / this.area).toFixed(1)}}</td>
-      <td>{{((this.compressiveStrength.loadA + this.compressiveStrength.loadB + this.compressiveStrength.loadC) / 3 * 10 / this.area).toFixed(2)}}</td>
-      <td></td>
-    </tr>
-
-    <tr>
-      <td>4</td>
-      <td></td>
-      <td>{{this.compressiveStrength.sampleDAge}}</td>
-      <td>{{this.compressiveStrength.weightD}}</td>
-      <td>{{(this.compressiveStrength.weightD / this.volume).toFixed(3)}}</td>
-      <td>{{this.compressiveStrength.loadD}}</td>
-      <td>{{(this.compressiveStrength.loadD * 101.971 / this.area).toFixed(1)}}</td>
-      <td>{{(this.compressiveStrength.loadD * 10 / this.area).toFixed(2)}}</td>
-      <td>{{this.compressiveStrength.fractureD}}</td>
-    </tr>
-
-    <tr>
-      <td>5</td>
-      <td></td>
-      <td>{{this.compressiveStrength.sampleEAge}}</td>
-      <td>{{this.compressiveStrength.weightE}}</td>
-      <td>{{(this.compressiveStrength.weightE / this.volume).toFixed(3)}}</td>
-      <td>{{this.compressiveStrength.loadE}}</td>
-      <td>{{(this.compressiveStrength.loadE * 101.971 / this.area).toFixed(1)}}</td>
-      <td>{{(this.compressiveStrength.loadE * 10 / this.area).toFixed(2)}}</td>
-      <td>{{this.compressiveStrength.fractureE}}</td>
-    </tr>
-
-    <tr>
-      <td>6</td>
-      <td></td>
-      <td>{{this.compressiveStrength.sampleFAge}}</td>
-      <td>{{this.compressiveStrength.weightF}}</td>
-      <td>{{(this.compressiveStrength.weightF / this.volume).toFixed(3)}}</td>
-      <td>{{this.compressiveStrength.loadF}}</td>
-      <td>{{(this.compressiveStrength.loadF * 101.971 / this.area).toFixed(1)}}</td>
-      <td>{{(this.compressiveStrength.loadF * 10 / this.area).toFixed(2)}}</td>
-      <td>{{this.compressiveStrength.fractureF}}</td>
-    </tr>
-
-    <tr>
-      <td>Avg 4-6</td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td>{{((this.compressiveStrength.loadD + this.compressiveStrength.loadE + this.compressiveStrength.loadF) / 3 * 101.971 / this.area).toFixed(1)}}</td>
-      <td>{{((this.compressiveStrength.loadD + this.compressiveStrength.loadE + this.compressiveStrength.loadF) / 3 * 10 / this.area).toFixed(2)}}</td>
-      <td></td>
-    </tr>
-  </table>
-
-  <table class="table3">
-    <tr>
-      <th>Type</th>
-      <th>Description</th>
+      <td>Type Of Equipment Used</td>
+      <td>Control/ID CCM-001</td>
     </tr>
 
     <tr>
@@ -241,7 +156,7 @@
     <img src="assets/compressiveStrength.png" alt="">
   </div>
 
-  <div class="text-center" style="width: 70vw; margin: 20px;" *ngIf="compressiveStrength.lastApproveBy  && (role == 'ROLE_MANAGER' || role == 'ROLE_ADMIN' || role == 'ROLE_DATAENTRY')">
+  <div class="text-center" style="width: 70vw; margin: 20px;" >
     <button class="btn btn-success" (click)="generatePDF()">Download Pdf</button>
   </div>
 
