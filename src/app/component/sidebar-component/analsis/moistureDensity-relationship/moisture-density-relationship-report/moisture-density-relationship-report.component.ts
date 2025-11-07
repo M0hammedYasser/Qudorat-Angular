@@ -26,123 +26,130 @@ export class MoistureDensityRelationshipReportComponent implements OnInit {
   moistureDensityRelationship: MoistureDensityRelationship = {} as MoistureDensityRelationship;
   role: string = '';
 
-
   @ViewChild('compactionChartCanvas', {static: true}) compactionChartCanvas!: ElementRef;
   compactionChart!: Chart;
 
-  wetWtSoilA: number = 0;
-  wetWtSoilB: number = 0;
-  wetWtSoilC: number = 0;
-  wetWtSoilD: number = 0;
-  wetWtSoilE: number = 0;
+  wetWtSoilA = 0; wetWtSoilB = 0; wetWtSoilC = 0; wetWtSoilD = 0; wetWtSoilE = 0;
+  wetDensityA = 0; wetDensityB = 0; wetDensityC = 0; wetDensityD = 0; wetDensityE = 0;
+  dryDensityA = 0; dryDensityB = 0; dryDensityC = 0; dryDensityD = 0; dryDensityE = 0;
+  wtOfDrySoilA = 0; wtOfDrySoilB = 0; wtOfDrySoilC = 0; wtOfDrySoilD = 0; wtOfDrySoilE = 0;
+  wtOfWaterA = 0; wtOfWaterB = 0; wtOfWaterC = 0; wtOfWaterD = 0; wtOfWaterE = 0;
+  moistureContentA = 0; moistureContentB = 0; moistureContentC = 0; moistureContentD = 0; moistureContentE = 0;
 
-  wetDensityA: number = 0;
-  wetDensityB: number = 0;
-  wetDensityC: number = 0;
-  wetDensityD: number = 0;
-  wetDensityE: number = 0;
+  // 🟢 المتغيرات الجديدة للعرض في HTML
+  mddDisplay: string = '';
+  omcDisplay: string = '';
 
-  dryDensityA: number = 0;
-  dryDensityB: number = 0;
-  dryDensityC: number = 0;
-  dryDensityD: number = 0;
-  dryDensityE: number = 0;
-
-  wtOfDrySoilA: number = 0;
-  wtOfDrySoilB: number = 0;
-  wtOfDrySoilC: number = 0;
-  wtOfDrySoilD: number = 0;
-  wtOfDrySoilE: number = 0;
-
-  wtOfWaterA: number = 0;
-  wtOfWaterB: number = 0;
-  wtOfWaterC: number = 0;
-  wtOfWaterD: number = 0;
-  wtOfWaterE: number = 0;
-
-  moistureContentA: number = 0;
-  moistureContentB: number = 0;
-  moistureContentC: number = 0;
-  moistureContentD: number = 0;
-  moistureContentE: number = 0;
-
-  constructor(private authenticationService: AuthenticationService,private service: MoistureDensityRelationshipService, private activatedRoute: ActivatedRoute, private router: Router) {
-  }
+  constructor(
+    private authenticationService: AuthenticationService,
+    private service: MoistureDensityRelationshipService,
+    private activatedRoute: ActivatedRoute,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     this.id = this.activatedRoute.snapshot.params['id'];
     this.role = this.authenticationService.getAuthority();
+
     this.service.findById(this.id).subscribe(res => {
       this.moistureDensityRelationship = res;
-      this.wetWtSoilA = this.moistureDensityRelationship.wetWtSoilMouldA - this.moistureDensityRelationship.wtOfMould;
-      this.wetWtSoilB = this.moistureDensityRelationship.wetWtSoilMouldB - this.moistureDensityRelationship.wtOfMould;
-      this.wetWtSoilC = this.moistureDensityRelationship.wetWtSoilMouldC - this.moistureDensityRelationship.wtOfMould;
-      this.wetWtSoilD = this.moistureDensityRelationship.wetWtSoilMouldD - this.moistureDensityRelationship.wtOfMould;
-      this.wetWtSoilE = this.moistureDensityRelationship.wetWtSoilMouldE - this.moistureDensityRelationship.wtOfMould;
-      this.wetDensityA = this.wetWtSoilA / this.moistureDensityRelationship.volOfMould;
-      this.wetDensityB = this.wetWtSoilB / this.moistureDensityRelationship.volOfMould;
-      this.wetDensityC = this.wetWtSoilC / this.moistureDensityRelationship.volOfMould;
-      this.wetDensityD = this.wetWtSoilD / this.moistureDensityRelationship.volOfMould;
-      this.wetDensityE = this.wetWtSoilE / this.moistureDensityRelationship.volOfMould;
-      this.wtOfDrySoilA = this.moistureDensityRelationship.dryWtSoilContA - this.moistureDensityRelationship.wtOfContainerA;
-      this.wtOfDrySoilB = this.moistureDensityRelationship.dryWtSoilContB - this.moistureDensityRelationship.wtOfContainerB;
-      this.wtOfDrySoilC = this.moistureDensityRelationship.dryWtSoilContC - this.moistureDensityRelationship.wtOfContainerC;
-      this.wtOfDrySoilD = this.moistureDensityRelationship.dryWtSoilContD - this.moistureDensityRelationship.wtOfContainerD;
-      this.wtOfDrySoilE = this.moistureDensityRelationship.dryWtSoilContE - this.moistureDensityRelationship.wtOfContainerE;
-      this.wtOfWaterA = this.moistureDensityRelationship.wetWtSoilContA - this.moistureDensityRelationship.dryWtSoilContA;
-      this.wtOfWaterB = this.moistureDensityRelationship.wetWtSoilContB - this.moistureDensityRelationship.dryWtSoilContB;
-      this.wtOfWaterC = this.moistureDensityRelationship.wetWtSoilContC - this.moistureDensityRelationship.dryWtSoilContC;
-      this.wtOfWaterD = this.moistureDensityRelationship.wetWtSoilContD - this.moistureDensityRelationship.dryWtSoilContD;
-      this.wtOfWaterE = this.moistureDensityRelationship.wetWtSoilContE - this.moistureDensityRelationship.dryWtSoilContE;
+
+      // الحسابات الأساسية
+      this.wetWtSoilA = res.wetWtSoilMouldA - res.wtOfMould;
+      this.wetWtSoilB = res.wetWtSoilMouldB - res.wtOfMould;
+      this.wetWtSoilC = res.wetWtSoilMouldC - res.wtOfMould;
+      this.wetWtSoilD = res.wetWtSoilMouldD - res.wtOfMould;
+      this.wetWtSoilE = res.wetWtSoilMouldE - res.wtOfMould;
+
+      this.wetDensityA = this.wetWtSoilA / res.volOfMould;
+      this.wetDensityB = this.wetWtSoilB / res.volOfMould;
+      this.wetDensityC = this.wetWtSoilC / res.volOfMould;
+      this.wetDensityD = this.wetWtSoilD / res.volOfMould;
+      this.wetDensityE = this.wetWtSoilE / res.volOfMould;
+
+      this.wtOfDrySoilA = res.dryWtSoilContA - res.wtOfContainerA;
+      this.wtOfDrySoilB = res.dryWtSoilContB - res.wtOfContainerB;
+      this.wtOfDrySoilC = res.dryWtSoilContC - res.wtOfContainerC;
+      this.wtOfDrySoilD = res.dryWtSoilContD - res.wtOfContainerD;
+      this.wtOfDrySoilE = res.dryWtSoilContE - res.wtOfContainerE;
+
+      this.wtOfWaterA = res.wetWtSoilContA - res.dryWtSoilContA;
+      this.wtOfWaterB = res.wetWtSoilContB - res.dryWtSoilContB;
+      this.wtOfWaterC = res.wetWtSoilContC - res.dryWtSoilContC;
+      this.wtOfWaterD = res.wetWtSoilContD - res.dryWtSoilContD;
+      this.wtOfWaterE = res.wetWtSoilContE - res.dryWtSoilContE;
+
       this.moistureContentA = this.wtOfWaterA / this.wtOfDrySoilA * 100;
       this.moistureContentB = this.wtOfWaterB / this.wtOfDrySoilB * 100;
       this.moistureContentC = this.wtOfWaterC / this.wtOfDrySoilC * 100;
       this.moistureContentD = this.wtOfWaterD / this.wtOfDrySoilD * 100;
       this.moistureContentE = this.wtOfWaterE / this.wtOfDrySoilE * 100;
+
       this.dryDensityA = this.wetDensityA / (this.moistureContentA / 100 + 1);
       this.dryDensityB = this.wetDensityB / (this.moistureContentB / 100 + 1);
       this.dryDensityC = this.wetDensityC / (this.moistureContentC / 100 + 1);
       this.dryDensityD = this.wetDensityD / (this.moistureContentD / 100 + 1);
       this.dryDensityE = this.wetDensityE / (this.moistureContentE / 100 + 1);
+
       this.createCompactionChart();
 
-    })
+      // 🟢 حساب الـ MDD و OMC للعرض في الصفحة
+      const hideColumnE =
+        res.wetWtSoilMouldE == 0 &&
+        res.wtOfContainerE == 0 &&
+        res.dryWtSoilContE == 0 &&
+        res.wetWtSoilContE == 0;
+
+      const dryDensities = [
+        this.dryDensityA, this.dryDensityB, this.dryDensityC, this.dryDensityD,
+        ...(hideColumnE ? [] : [this.dryDensityE])
+      ];
+      const moistureContents = [
+        this.moistureContentA, this.moistureContentB, this.moistureContentC, this.moistureContentD,
+        ...(hideColumnE ? [] : [this.moistureContentE])
+      ];
+
+      const targetIndex = hideColumnE ? 2 : 3;
+
+      const selectedDryDensity =
+        typeof dryDensities[targetIndex] === 'number' && !isNaN(dryDensities[targetIndex])
+          ? dryDensities[targetIndex]
+          : Math.max(...dryDensities.filter(v => typeof v === 'number' && !isNaN(v)));
+
+      const selectedMoistureContent =
+        typeof moistureContents[targetIndex] === 'number' && !isNaN(moistureContents[targetIndex])
+          ? moistureContents[targetIndex]
+          : Math.max(...moistureContents.filter(v => typeof v === 'number' && !isNaN(v)));
+
+      this.mddDisplay = Number(selectedDryDensity ?? 0).toFixed(3);
+      this.omcDisplay = Number(selectedMoistureContent ?? 0).toFixed(2);
+    });
   }
 
-createCompactionChart(hideColumnE: boolean = false): void {
-  if (this.compactionChart) {
-    this.compactionChart.destroy();
-  }
+  createCompactionChart(hideColumnE: boolean = false): void {
+    if (this.compactionChart) this.compactionChart.destroy();
 
-  // X = Moisture Content %
-  const moistureContent = [
-    parseFloat(this.moistureContentA.toFixed(2)),
-    parseFloat(this.moistureContentB.toFixed(2)),
-    parseFloat(this.moistureContentC.toFixed(2)),
-    parseFloat(this.moistureContentD.toFixed(2)),
-    ...(hideColumnE ? [] : [parseFloat(this.moistureContentE.toFixed(2))])
-  ];
+    const moistureContent = [
+      parseFloat(this.moistureContentA.toFixed(2)),
+      parseFloat(this.moistureContentB.toFixed(2)),
+      parseFloat(this.moistureContentC.toFixed(2)),
+      parseFloat(this.moistureContentD.toFixed(2)),
+      ...(hideColumnE ? [] : [parseFloat(this.moistureContentE.toFixed(2))])
+    ];
+    const dryDensity = [
+      parseFloat(this.dryDensityA.toFixed(3)),
+      parseFloat(this.dryDensityB.toFixed(3)),
+      parseFloat(this.dryDensityC.toFixed(3)),
+      parseFloat(this.dryDensityD.toFixed(3)),
+      ...(hideColumnE ? [] : [parseFloat(this.dryDensityE.toFixed(3))])
+    ];
 
-  // Y = Dry Density (gm/cc)
-  const dryDensity = [
-    parseFloat(this.dryDensityA.toFixed(3)),
-    parseFloat(this.dryDensityB.toFixed(3)),
-    parseFloat(this.dryDensityC.toFixed(3)),
-    parseFloat(this.dryDensityD.toFixed(3)),
-    ...(hideColumnE ? [] : [parseFloat(this.dryDensityE.toFixed(3))])
-  ];
+    const dataPoints = moistureContent.map((mc, i) => ({ x: mc, y: dryDensity[i] }));
 
-  // Combine into data points for the chart
-  const dataPoints = moistureContent.map((mc, i) => ({
-    x: mc,
-    y: dryDensity[i]
-  }));
-
-  this.compactionChart = new Chart(this.compactionChartCanvas.nativeElement, {
-    type: 'scatter',
-    data: {
-      datasets: [
-        {
+    this.compactionChart = new Chart(this.compactionChartCanvas.nativeElement, {
+      type: 'scatter',
+      data: {
+        datasets: [{
           label: 'Dry Density vs Moisture Content',
           data: dataPoints,
           backgroundColor: 'blue',
@@ -152,50 +159,17 @@ createCompactionChart(hideColumnE: boolean = false): void {
           showLine: true,
           fill: false,
           tension: 0.4
-        }
-      ]
-    },
-    options: {
-      responsive: true,
-      plugins: {
-        legend: {
-          display: true
-        },
-        tooltip: {
-          mode: 'nearest'
-        }
+        }]
       },
-      scales: {
-        x: {
-          title: {
-            display: true,
-            text: 'Moisture Content (%)',
-            font: {
-              weight: 'bold',
-              size: 20
-            }
-          },
-          grid: {
-            color: '#555'
-          }
-        },
-        y: {
-          title: {
-            display: true,
-            text: 'Dry Density (gm/cc)',
-            font: {
-              weight: 'bold',
-              size: 20
-            }
-          },
-          grid: {
-            color: '#555'
-          }
+      options: {
+        responsive: true,
+        scales: {
+          x: { title: { display: true, text: 'Moisture Content (%)' } },
+          y: { title: { display: true, text: 'Dry Density (gm/cc)' } }
         }
       }
-    }
-  });
-}
+    });
+  }
 
 
   generatePDF() {
@@ -478,13 +452,13 @@ createCompactionChart(hideColumnE: boolean = false): void {
         doc.rect(startX + 4.5, y, col1Width - 3, rowHeight);
         doc.rect(startX + col1Width + 1.5, y, col2Width - 10, rowHeight);
         doc.text("M.D.D (gm/cc)", startX + 5.5, y + 7);
-        doc.text(mddDisplay, startX + col1Width + 3, y + 7);
+        doc.text(mddDisplay , startX + col1Width + 3, y + 7);
         y += rowHeight + 2;
 
         doc.rect(startX + 4.5, y, col1Width - 3, rowHeight);
         doc.rect(startX + col1Width + 1.5, y, col2Width - 10, rowHeight);
         doc.text("O.M.C %", startX + 5.5, y + 7);
-        doc.text(omcDisplay, startX + col1Width + 3, y + 7);
+        doc.text(omcDisplay , startX + col1Width + 3, y + 7);
 
 
         finalY += 56;
