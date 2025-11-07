@@ -39,6 +39,8 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
   avgStabilityFor24Hrs: number = 0;
 
   avgStabilityFor30Min: number = 0;
+  
+  totalWeight: number = 0;
 
   constructor(private authenticationService: AuthenticationService,private service: AsphaltService, private activatedRoute: ActivatedRoute) {
   }
@@ -49,12 +51,15 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
     this.service.findById(this.id).subscribe(res => {
       this.asphalt = res;
 
+      this.totalWeight = this.asphalt.bitumen.weightSampleAfter + (this.asphalt.bitumen.weightFilterAfter - this.asphalt.bitumen.weightFilterBefore);
+
       const expandKeys = ['expandA', 'expandB', 'expandC', 'expandD', 'expandE', 'expandF', 'expandG', 'expandH', 'expandI', 'expandJ'];
       for (const key of expandKeys) {
         if (this.asphalt.gradationTest[key] === '\u0000') {
           this.asphalt.gradationTest[key] = '';
         }
       }
+
 
       this.bulkSpOfCompMix =
         ((this.asphalt.weightAirDryA / (this.asphalt.weightAirSurfDryA - this.asphalt.weightWaterA)) +
@@ -762,7 +767,7 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
             ['', 'Flow (mm)', this.asphalt.flowA.toFixed(1), this.asphalt.flowB.toFixed(1), this.asphalt.flowC.toFixed(1), {content: '' , colSpan: 3} , {content: '(الانسياب) مم',  styles: { halign: 'right' }}],
             ['', 'Avg. Flow (mm)',
               {content: `${Number((this.asphalt.flowA + this.asphalt.flowB + this.asphalt.flowC) / 3).toFixed(2)} ${'±'} ${this.asphalt.avgflowExpand || ''}`, colSpan: 1, styles: { halign: 'center' }}, { content: Number((this.asphalt.flowA + this.asphalt.flowB + this.asphalt.flowC) / 3).toFixed(2), colSpan: 2, styles: { halign: 'center' } },
-              {content: this.asphalt.avgFlowNote || ' ' ,colSpan: 3 , styles: {halign: 'right'}} , {content: '(متوسط الاتسياب) مم' ,  styles: { halign: 'right' }}
+              {content: this.asphalt.avgFlowNote || ' ' ,colSpan: 3 , styles: {halign: 'right'}} , {content: '(متوسط الانسياب) مم' ,  styles: { halign: 'right' }}
             ],
             ['Gb', 'Sp. Gravity of Asp. Bit',
               {content: `${this.asphalt.spGravityOfAspBit.toFixed(3)}`, colSpan: 6, styles: { halign: 'center' }} , {content: '(الوزن النوعي للاسفلت) جم/سم3' , styles: { halign: 'right' }}
