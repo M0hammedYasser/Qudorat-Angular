@@ -75,10 +75,10 @@ export class SandReportComponent implements AfterViewInit, OnInit {
     this.createChart();
   }
 
-  createChart() {   
-    if (this.chart) {     
-      this.chart.destroy();   
-    }    
+  createChart() {
+    if (this.chart) {
+      this.chart.destroy();
+    }
 
     // ASTM C-136 Standard Sieve Sizes (mm) - matching the image grid
     const sieveSizes: number[] = [
@@ -100,7 +100,7 @@ export class SandReportComponent implements AfterViewInit, OnInit {
 
     // Calculate passing percentages from your sieve analysis data
     const totalWeight = Number(this.sieveAnalysis.totalWeigh) || 0;
-    
+
     const calcPassingPercent = (cumulative: number) => {
       if (totalWeight <= 0) return 100;
       const retained = (cumulative / totalWeight) * 100;
@@ -166,47 +166,47 @@ const specs = [
     specLower.push(0);
 
 
-    this.chart = new Chart(this.chartCanvas.nativeElement, {     
-      type: 'line',     
-      data: {       
-        labels: sieveSizes,       
-        datasets: [         
-          {           
-            label: 'Sample Curve',           
-            data: passingPercentages,           
-            borderColor: 'black',           
+    this.chart = new Chart(this.chartCanvas.nativeElement, {
+      type: 'line',
+      data: {
+        labels: sieveSizes,
+        datasets: [
+          {
+            label: 'Sample Curve',
+            data: passingPercentages,
+            borderColor: 'black',
             backgroundColor: 'black',
-            borderWidth: 3,           
+            borderWidth: 3,
             tension: 0.2, // Smooth curve like in image
-            fill: false,           
+            fill: false,
             pointRadius: 0, // No visible points on the curve
             pointHoverRadius: 6,
             pointBackgroundColor: 'black',
             pointBorderColor: 'black'
-          },         
-          {           
-            label: 'Specification Limits',           
-            data: specUpper,           
-            borderColor: 'red',   
-            backgroundColor: 'red',        
-            borderWidth: 2,           
+          },
+          {
+            label: 'Specification Limits',
+            data: specUpper,
+            borderColor: 'red',
+            backgroundColor: 'red',
+            borderWidth: 2,
             borderDash: [6, 4],  // Dashed line
-            tension: 0.2,           
-            fill: false,           
-            pointRadius: 4, // Visible points like in image          
+            tension: 0.2,
+            fill: false,
+            pointRadius: 4, // Visible points like in image
             pointBackgroundColor: 'red',
             pointBorderColor: 'red',
             pointBorderWidth: 1,
             pointStyle: 'circle'
-          },         
-          {           
-            data: specLower,           
-            borderColor: 'red',  
-            backgroundColor: 'red',         
-            borderWidth: 2,           
-            borderDash: [6, 4],           
-            tension: 0.2,           
-            fill: false,           
+          },
+          {
+            data: specLower,
+            borderColor: 'red',
+            backgroundColor: 'red',
+            borderWidth: 2,
+            borderDash: [6, 4],
+            tension: 0.2,
+            fill: false,
             pointRadius: 4, // Visible points
             pointBackgroundColor: 'red',
             pointBorderColor: 'red',
@@ -214,47 +214,47 @@ const specs = [
             pointStyle: 'circle',
             // Hide from legend
             showLine: true
-          }       
-        ]     
-      },     
-      options: {       
-        responsive: true,       
+          }
+        ]
+      },
+      options: {
+        responsive: true,
         maintainAspectRatio: false,
         layout: {
           padding: 0
         },
-        plugins: {         
-          legend: {           
+        plugins: {
+          legend: {
             display: false // Hide legend to match image
           },
           tooltip: {
             enabled: true,
             mode: 'nearest',
             intersect: false
-          }       
-        },       
-        scales: {         
-          x: {           
-            type: 'logarithmic',           
+          }
+        },
+        scales: {
+          x: {
+            type: 'logarithmic',
             reverse: true, // 1000 on left, 0.01 on right
             position: 'bottom',
-            title: {             
-              display: true,             
-              text: 'GRAIN DIAMETER IN MILLIMETERS',             
-              font: { 
-                weight: 'bold', 
+            title: {
+              display: true,
+              text: 'GRAIN DIAMETER IN MILLIMETERS',
+              font: {
+                weight: 'bold',
                 size: 12,
                 family: 'Arial'
               },
               padding: { top: 10 }
-            },           
-            ticks: {             
-              callback: function (value) {               
-                const labels = [1000.0, 100.0, 10.0, 1.0, 0.1];               
-                return labels.includes(value as number) ? value.toString() : '';             
-              },             
-              font: { 
-                weight: 'bold', 
+            },
+            ticks: {
+              callback: function (value) {
+                const labels = [1000.0, 100.0, 10.0, 1.0, 0.1];
+                return labels.includes(value as number) ? value.toString() : '';
+              },
+              font: {
+                weight: 'bold',
                 size: 11,
                 family: 'Arial'
               },
@@ -274,26 +274,26 @@ const specs = [
               width: 2
             },
             min: 0.01,
-            max: 1000         
-          },         
-          y: {           
-            min: 0,           
+            max: 1000
+          },
+          y: {
+            min: 0,
             max: 100,
-            position: 'left',           
-            title: {             
-              display: true,             
-              text: 'PERCENT PASSING',             
-              font: { 
-                weight: 'bold', 
+            position: 'left',
+            title: {
+              display: true,
+              text: 'PERCENT PASSING',
+              font: {
+                weight: 'bold',
                 size: 12,
                 family: 'Arial'
               },
               padding: { bottom: 10 }
-            },           
-            ticks: {             
-              stepSize: 10,             
-              font: { 
-                weight: 'bold', 
+            },
+            ticks: {
+              stepSize: 10,
+              font: {
+                weight: 'bold',
                 size: 11,
                 family: 'Arial'
               },
@@ -301,7 +301,7 @@ const specs = [
               padding: 5,
               callback: function(value) {
                 return value.toString();
-              }           
+              }
             },
             grid: {
               display: true,
@@ -314,8 +314,8 @@ const specs = [
               display: true,
               color: 'black',
               width: 2
-            }        
-          }       
+            }
+          }
         },
         interaction: {
           mode: 'nearest',
@@ -326,9 +326,9 @@ const specs = [
           point: {
             hoverRadius: 6
           }
-        }     
-      }   
-    }); 
+        }
+      }
+    });
   }
 
   formatValue(value: number, sieveName: string): string {
@@ -363,8 +363,8 @@ const specs = [
     head.onload = () => {
       doc.addImage(head, 'PNG', 0, 0, 210, 33);
 
-      doc.setFontSize(9); 
-      doc.setFont('Amiri', 'bold'); 
+      doc.setFontSize(9);
+      doc.setFont('Amiri', 'bold');
 
       const headerText = 'Standarded Test Method For Sieve Analysis Of Fine And Coarse Aggregates  AsTM C-136/ SAMPLING ASTM D75, ASTM D75M';
       const textX = 12;
@@ -374,7 +374,7 @@ const specs = [
 
       const textWidth = doc.getTextWidth(headerText);
 
-      doc.setDrawColor(0, 0, 0); 
+      doc.setDrawColor(0, 0, 0);
       doc.setLineWidth(0.5);
       doc.line(textX - 1, textY + .5 , textX + textWidth + 2, textY + .5 ); // Line 1 unit below text
 
@@ -395,7 +395,7 @@ const specs = [
           content: this.sieveAnalysis.location,
           colSpan: 2
         }, 'Report Date', this.sieveAnalysis.reportDate],
-        ['Report No', `${this.sieveAnalysis.clientCode}-${this.sieveAnalysis.projectCode}-${this.sieveAnalysis.testCode}`, 'Source Of Sample', {
+        ['Report No', `${this.sieveAnalysis.testCode}`, 'Source Of Sample', {
           content: this.sieveAnalysis.sourceOfSample,
           colSpan: 2
         }, 'Material Type', this.sieveAnalysis.materialType],
@@ -422,13 +422,13 @@ const specs = [
           lineWidth: 0.5
         },
         columnStyles: {
-          0: {cellWidth: 25},  
-          1: {cellWidth: 43},  
-          2: {cellWidth: 25},  
-          3: {cellWidth: 25},  
-          4: {cellWidth: 12}, 
-          5: {cellWidth: 25},  
-          6: {cellWidth: 35},  
+          0: {cellWidth: 25},
+          1: {cellWidth: 43},
+          2: {cellWidth: 25},
+          3: {cellWidth: 25},
+          4: {cellWidth: 12},
+          5: {cellWidth: 25},
+          6: {cellWidth: 35},
         },
         tableLineColor: [0, 0, 0],
         tableLineWidth: 0.5,
@@ -476,8 +476,8 @@ const specs = [
         return 100 - retained;
       };
 
-      const gravel = calcRetainedPercent(this.sieveAnalysis.cumulativeI) || 0;   
-      const silt = calcPassingPercent(this.sieveAnalysis.cumulativeM) || 0;  
+      const gravel = calcRetainedPercent(this.sieveAnalysis.cumulativeI) || 0;
+      const silt = calcPassingPercent(this.sieveAnalysis.cumulativeM) || 0;
       const sand = 100 - (gravel + silt);
 
 
@@ -492,7 +492,7 @@ const specs = [
           ],
           [
             {content: gravel.toFixed(2), styles: {halign: 'center'}},
-            {content: sand.toFixed(2), styles: {halign: 'center'}},  
+            {content: sand.toFixed(2), styles: {halign: 'center'}},
             {content: silt.toFixed(2), colSpan: 2, styles: {halign: 'center'}}
           ],
         ],
@@ -516,7 +516,7 @@ const specs = [
         margin: {left: marginLeft}
       });
 
-      
+
       const afterMiniTableY = (doc as any).lastAutoTable.finalY;
 
       const tableColumn = [
@@ -701,7 +701,7 @@ const specs = [
           );
 
           doc.setFont("Amiri", "bold");
-          doc.text(splitNotes, startX + 1, footerY + 3); 
+          doc.text(splitNotes, startX + 1, footerY + 3);
 
           remarksHeight = splitNotes.length * 5;
           footerY += remarksHeight + 5;
@@ -710,7 +710,7 @@ const specs = [
         doc.line(startX, 260, endX, 260);
 
         doc.setFontSize(6);
-        const sectionWidth = tableWidth / 3; 
+        const sectionWidth = tableWidth / 3;
 
         doc.text(`Approved by: ${this.sieveAnalysis.lastApproveBy || " "}`, startX + 1, 264);
 
