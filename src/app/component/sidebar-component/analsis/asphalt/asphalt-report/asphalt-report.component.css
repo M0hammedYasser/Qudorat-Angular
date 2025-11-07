@@ -40,6 +40,11 @@ table{
   width: 70vw;
 }
 
+.Limits{
+  width: 70vw;
+  margin-bottom: 30px;
+}
+
 table , td , th {
   border: 1px solid;
 }
