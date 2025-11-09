@@ -177,12 +177,14 @@ const specs = [
             borderColor: 'black',
             backgroundColor: 'black',
             borderWidth: 3,
-            tension: 0.2, // Smooth curve like in image
+            tension: 0.2,
             fill: false,
-            pointRadius: 0, // No visible points on the curve
+            pointRadius: 4, 
             pointHoverRadius: 6,
             pointBackgroundColor: 'black',
-            pointBorderColor: 'black'
+            pointBorderColor: 'black',
+            pointBorderWidth: 1,
+            pointStyle: 'circle'
           },
           {
             label: 'Specification Limits',
