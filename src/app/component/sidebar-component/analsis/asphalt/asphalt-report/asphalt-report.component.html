@@ -391,7 +391,7 @@
       <td>Avg. max Sp. Gr of mix gmm gm/cm3</td>
       <td colspan="2" style="text-align: center;">{{this.maxSpOfPAvgMix.toFixed(3)}} ± {{this.asphalt.maxspofpavgmixExpand}}</td>
       <td colspan="2" style="text-align: center;">{{this.maxSpOfPAvgMix.toFixed(3)}}</td>
-      <td colspan="2" style="text-align: center;">{{this.asphalt.maxSpOfPAvgMixNote}}</td>
+      <td colspan="2" style="text-align: end;">{{this.asphalt.maxSpOfPAvgMixNote}}</td>
       <td style="text-align: end;">متوسط الكثافة القصوى (جرام / سم3)</td>
     </tr>
 
@@ -400,7 +400,7 @@
       <td>% Air Voids</td>
       <td colspan="2" style="text-align: center;">{{(this.airVoid).toFixed(1)}} ± {{this.asphalt.airvoidExpand}}</td>
       <td colspan="2" style="text-align: center;">{{(this.airVoid).toFixed(1)}}</td>
-      <td colspan="2" style="text-align: center;">{{this.asphalt.airVoidNote}}</td>
+      <td colspan="2" style="text-align: end;">{{this.asphalt.airVoidNote}}</td>
       <td style="text-align: end;"> %الفراغات الهوائية في الخلطة</td>
     </tr>
 
@@ -409,7 +409,7 @@
       <td>% Voids in mineral Agg.</td>
       <td colspan="2" style="text-align: center;">{{(this.voidMineral).toFixed(2)}} ± {{this.asphalt.voidmineralExpand}}</td>
       <td colspan="2" style="text-align: center;">{{(this.voidMineral).toFixed(2)}}</td>
-      <td colspan="2" style="text-align: center;">{{this.asphalt.voidMineralNote}}</td>
+      <td colspan="2" style="text-align: end;">{{this.asphalt.voidMineralNote}}</td>
       <td style="text-align: end;">%الفراغات في الحمصة المتجانسة</td>
     </tr>
 
@@ -425,14 +425,14 @@
     <tr>
       <td>Gse</td>
       <td>Effect. Sp. Gravity of Agg.</td>
-      <td colspan="6" style="text-align: end;">{{effectiveSpGravityOfAgg.toFixed(3)}}</td>
+      <td colspan="6" style="text-align: center;">{{effectiveSpGravityOfAgg.toFixed(3)}}</td>
       <td style="text-align: end;"> (جرام / سم3) الوزن النوعي الفعال للبحص</td>
     </tr>
 
     <tr>
       <td>Pba</td>
       <td>Absorbed Asp. %</td>
-      <td colspan="6" style="text-align: end;">{{absorbedAps.toFixed(2)}}</td>
+      <td colspan="6" style="text-align: center;">{{absorbedAps.toFixed(2)}}</td>
       <td style="text-align: end;"> %نسبة الاسفلت الممتص بالبحص</td>
     </tr>
 
@@ -440,7 +440,7 @@
       <td>Pbe</td>
       <td>Effective Asp. Content % </td>
       <td>{{(((((this.asphalt.bitumen.weightSampleBefore -(this.asphalt.bitumen.weightSampleAfter +(this.asphalt.bitumen.weightFilterAfter - this.asphalt.bitumen.weightFilterBefore))) / this.asphalt.bitumen.weightSampleBefore) * 100)-((this.absorbedAps / 100) *(100 - (((this.asphalt.bitumen.weightSampleBefore -(this.asphalt.bitumen.weightSampleAfter +(this.asphalt.bitumen.weightFilterAfter - this.asphalt.bitumen.weightFilterBefore))) / this.asphalt.bitumen.weightSampleBefore) * 100))))).toFixed(2)}} ± {{this.asphalt.effectiveaspExpand}}</td>
-      <td colspan="5" style="text-align: end;">{{(((((this.asphalt.bitumen.weightSampleBefore -(this.asphalt.bitumen.weightSampleAfter +(this.asphalt.bitumen.weightFilterAfter - this.asphalt.bitumen.weightFilterBefore))) / this.asphalt.bitumen.weightSampleBefore) * 100)-((this.absorbedAps / 100) *(100 - (((this.asphalt.bitumen.weightSampleBefore -(this.asphalt.bitumen.weightSampleAfter +(this.asphalt.bitumen.weightFilterAfter - this.asphalt.bitumen.weightFilterBefore))) / this.asphalt.bitumen.weightSampleBefore) * 100))))).toFixed(2)}}</td>
+      <td colspan="5" style="text-align: center;">{{(((((this.asphalt.bitumen.weightSampleBefore -(this.asphalt.bitumen.weightSampleAfter +(this.asphalt.bitumen.weightFilterAfter - this.asphalt.bitumen.weightFilterBefore))) / this.asphalt.bitumen.weightSampleBefore) * 100)-((this.absorbedAps / 100) *(100 - (((this.asphalt.bitumen.weightSampleBefore -(this.asphalt.bitumen.weightSampleAfter +(this.asphalt.bitumen.weightFilterAfter - this.asphalt.bitumen.weightFilterBefore))) / this.asphalt.bitumen.weightSampleBefore) * 100))))).toFixed(2)}}</td>
       <td style="text-align: end;"> % نسبة الاسفلت الفعالةبالخلطة</td>
     </tr>
 
