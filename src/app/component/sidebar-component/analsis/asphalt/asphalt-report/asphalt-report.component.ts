@@ -207,7 +207,7 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
                 }
               },
               beginAtZero: true,
-              max: 110,
+              max: 100,
             }
           }
         }
