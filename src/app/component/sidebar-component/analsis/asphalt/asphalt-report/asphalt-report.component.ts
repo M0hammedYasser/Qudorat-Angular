@@ -74,7 +74,7 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
 
       this.airVoid = (this.maxSpOfPAvgMix - this.bulkSpOfCompMix) / this.maxSpOfPAvgMix * 100;
 
-      this.voidMineral = 100 - (this.bulkSpOfCompMix * (100 - this.asphalt.bitumen.percofBit) / this.asphalt.bulkSpGrCombAgg);
+      this.voidMineral = 100 - (this.bulkSpOfCompMix * (100 - (((this.asphalt.bitumen.weightSampleBefore - (this.asphalt.bitumen.weightSampleAfter + (this.asphalt.bitumen.weightFilterAfter - this.asphalt.bitumen.weightFilterBefore))) / this.asphalt.bitumen.weightSampleBefore) * 100)) / this.asphalt.bulkSpGrCombAgg);
 
       this.voidFilled = (this.voidMineral - this.airVoid) / this.voidMineral * 100;
 
