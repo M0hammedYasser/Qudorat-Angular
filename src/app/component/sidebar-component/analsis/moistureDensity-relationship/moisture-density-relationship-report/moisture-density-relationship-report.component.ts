@@ -180,7 +180,7 @@ export class MoistureDensityRelationshipReportComponent implements OnInit {
     const head = new Image();
     const tail = new Image();
 
-    head.src = 'assets/head.png';
+    head.src = 'assets/ApproveHead.png';
     tail.src = 'assets/tail.png';
 
     // Check if column E should be hidden
@@ -467,7 +467,7 @@ export class MoistureDensityRelationshipReportComponent implements OnInit {
         doc.setFontSize(8);
 
         const pageWidth1 = doc.internal.pageSize.getWidth();
-        const tableWidth1 = 184.7; 
+        const tableWidth1 = 184.7;
         const startX1 = (pageWidth1 - tableWidth1) / 1.8;
         const endX1 = startX1 + tableWidth1;
         const boxWidth = tableWidth1;
@@ -480,7 +480,7 @@ export class MoistureDensityRelationshipReportComponent implements OnInit {
           );
 
           doc.setFont("Amiri", "bold");
-          doc.text(splitNotes, startX1 + 1, footerY + 3); 
+          doc.text(splitNotes, startX1 + 1, footerY + 3);
 
           remarksHeight = splitNotes.length * 5;
           footerY += remarksHeight + 5;
@@ -489,7 +489,7 @@ export class MoistureDensityRelationshipReportComponent implements OnInit {
         doc.line(startX1, 258, endX1, 258);
 
         doc.setFontSize(6);
-        const sectionWidth = tableWidth1 / 3; 
+        const sectionWidth = tableWidth1 / 3;
 
         doc.text(`Approved by: ${this.moistureDensityRelationship.lastApproveBy || " "}`, startX1 + 1, 261);
         doc.text(`Test by: ${this.moistureDensityRelationship.testBy || " "}`, startX1 + sectionWidth + 4, 261);

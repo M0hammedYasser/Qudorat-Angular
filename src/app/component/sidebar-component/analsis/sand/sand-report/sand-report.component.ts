@@ -179,7 +179,7 @@ const specs = [
             borderWidth: 3,
             tension: 0.2,
             fill: false,
-            pointRadius: 4, 
+            pointRadius: 4,
             pointHoverRadius: 6,
             pointBackgroundColor: 'black',
             pointBorderColor: 'black',
@@ -358,7 +358,7 @@ const specs = [
     const tail = new Image();
     const qr = new Image();
 
-    head.src = 'assets/head.png';
+    head.src = 'assets/ApproveHead.png';
     tail.src = 'assets/tail.png';
     qr.src = 'assets/barcode.jpg';
 

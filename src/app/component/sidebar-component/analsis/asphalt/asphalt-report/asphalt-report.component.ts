@@ -39,7 +39,7 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
   avgStabilityFor24Hrs: number = 0;
 
   avgStabilityFor30Min: number = 0;
-  
+
   totalWeight: number = 0;
 
   constructor(private authenticationService: AuthenticationService,private service: AsphaltService, private activatedRoute: ActivatedRoute) {
@@ -188,7 +188,7 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
               },
               ticks: {
                 font: {
-                  size: 14 
+                  size: 14
                 }
               }
             },
@@ -203,7 +203,7 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
               },
               ticks: {
                 font: {
-                  size: 14 
+                  size: 14
                 }
               },
               beginAtZero: true,
@@ -226,7 +226,7 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
   const tail = new Image();
   const qr = new Image();
 
-  head.src = 'assets/head.png';
+  head.src = 'assets/ApproveHead.png';
   tail.src = 'assets/tail.png';
   qr.src = 'assets/barcode.jpg';
 
@@ -241,9 +241,9 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
 
     const textWidth = doc.getTextWidth(headerText);
 
-    doc.setDrawColor(0, 0, 0); 
+    doc.setDrawColor(0, 0, 0);
     doc.setLineWidth(0.5);
-    doc.line(textX - 1, textY + .5 , textX + textWidth + 2, textY + .5 ); 
+    doc.line(textX - 1, textY + .5 , textX + textWidth + 2, textY + .5 );
     doc.setFontSize(7);
     doc.text("ASTM D-2172, D-5444", 117, 33);
         doc.setFontSize(7);
@@ -292,11 +292,11 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
 
       const gradationWidth = doc.getTextWidth(gradationText);
 
-      const boxStartX = 10; 
-      const boxEndX = 181 + gradationWidth + 5; 
+      const boxStartX = 10;
+      const boxEndX = 181 + gradationWidth + 5;
 
-      const boxY = 58;       
-      const boxHeight = 8;   
+      const boxY = 58;
+      const boxHeight = 8;
       const boxWidth = boxEndX - boxStartX;
 
       doc.setLineWidth(0.6);
@@ -359,55 +359,55 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
       const totalWeight = this.asphalt.bitumen.weightSampleAfter + (this.asphalt.bitumen.weightFilterAfter - this.asphalt.bitumen.weightFilterBefore);
 
       const sieveRows = [
-        ['37.5', '1.5', this.asphalt.gradationTest.massRetainedA.toFixed(1), 
-          ((this.asphalt.gradationTest.massRetainedA / totalWeight) * 100).toFixed(1), 
-          (100 - ((this.asphalt.gradationTest.massRetainedA / totalWeight) * 100)).toFixed(2), 
+        ['37.5', '1.5', this.asphalt.gradationTest.massRetainedA.toFixed(1),
+          ((this.asphalt.gradationTest.massRetainedA / totalWeight) * 100).toFixed(1),
+          (100 - ((this.asphalt.gradationTest.massRetainedA / totalWeight) * 100)).toFixed(2),
           this.asphalt.gradationTest.cvcMinA.toFixed(1), this.asphalt.gradationTest.cvcMaxA.toFixed(1) , `${'±'} ${this.asphalt.gradationTest.expandA}`],
 
-        ['25', '1', this.asphalt.gradationTest.massRetainedB.toFixed(1), 
-          ((this.asphalt.gradationTest.massRetainedB / totalWeight) * 100).toFixed(1), 
-          (100 - ((this.asphalt.gradationTest.massRetainedB / totalWeight) * 100)).toFixed(2), 
+        ['25', '1', this.asphalt.gradationTest.massRetainedB.toFixed(1),
+          ((this.asphalt.gradationTest.massRetainedB / totalWeight) * 100).toFixed(1),
+          (100 - ((this.asphalt.gradationTest.massRetainedB / totalWeight) * 100)).toFixed(2),
           this.asphalt.gradationTest.cvcMinB.toFixed(1), this.asphalt.gradationTest.cvcMaxB.toFixed(1) , `${'±'} ${this.asphalt.gradationTest.expandB}`],
 
-        ['19.0', '3/4', this.asphalt.gradationTest.massRetainedC.toFixed(1), 
-          ((this.asphalt.gradationTest.massRetainedC / totalWeight) * 100).toFixed(1), 
-          (100 - ((this.asphalt.gradationTest.massRetainedC / totalWeight) * 100)).toFixed(2), 
+        ['19.0', '3/4', this.asphalt.gradationTest.massRetainedC.toFixed(1),
+          ((this.asphalt.gradationTest.massRetainedC / totalWeight) * 100).toFixed(1),
+          (100 - ((this.asphalt.gradationTest.massRetainedC / totalWeight) * 100)).toFixed(2),
           this.asphalt.gradationTest.cvcMinC.toFixed(1), this.asphalt.gradationTest.cvcMaxC.toFixed(1) , `${'±'} ${this.asphalt.gradationTest.expandC}`],
 
-        ['12.5', '1/2', this.asphalt.gradationTest.massRetainedD.toFixed(1), 
-          ((this.asphalt.gradationTest.massRetainedD / totalWeight) * 100).toFixed(1), 
-          (100 - ((this.asphalt.gradationTest.massRetainedD / totalWeight) * 100)).toFixed(2), 
+        ['12.5', '1/2', this.asphalt.gradationTest.massRetainedD.toFixed(1),
+          ((this.asphalt.gradationTest.massRetainedD / totalWeight) * 100).toFixed(1),
+          (100 - ((this.asphalt.gradationTest.massRetainedD / totalWeight) * 100)).toFixed(2),
           this.asphalt.gradationTest.cvcMinD.toFixed(1), this.asphalt.gradationTest.cvcMaxD.toFixed(1) , `${'±'} ${this.asphalt.gradationTest.expandD}`],
 
-        ['9.5', '3/8', this.asphalt.gradationTest.massRetainedE.toFixed(1), 
-          ((this.asphalt.gradationTest.massRetainedE / totalWeight) * 100).toFixed(1), 
-          (100 - ((this.asphalt.gradationTest.massRetainedE / totalWeight) * 100)).toFixed(2), 
+        ['9.5', '3/8', this.asphalt.gradationTest.massRetainedE.toFixed(1),
+          ((this.asphalt.gradationTest.massRetainedE / totalWeight) * 100).toFixed(1),
+          (100 - ((this.asphalt.gradationTest.massRetainedE / totalWeight) * 100)).toFixed(2),
           this.asphalt.gradationTest.cvcMinE.toFixed(1), this.asphalt.gradationTest.cvcMaxE.toFixed(1) , `${'±'} ${this.asphalt.gradationTest.expandE}`],
 
-        ['4.75', '#4', this.asphalt.gradationTest.massRetainedF.toFixed(1), 
-          ((this.asphalt.gradationTest.massRetainedF / totalWeight) * 100).toFixed(1), 
-          (100 - ((this.asphalt.gradationTest.massRetainedF / totalWeight) * 100)).toFixed(2), 
+        ['4.75', '#4', this.asphalt.gradationTest.massRetainedF.toFixed(1),
+          ((this.asphalt.gradationTest.massRetainedF / totalWeight) * 100).toFixed(1),
+          (100 - ((this.asphalt.gradationTest.massRetainedF / totalWeight) * 100)).toFixed(2),
           this.asphalt.gradationTest.cvcMinF.toFixed(1), this.asphalt.gradationTest.cvcMaxF.toFixed(1) , `${'±'} ${this.asphalt.gradationTest.expandF}`],
 
-        ['2.00', '#10', this.asphalt.gradationTest.massRetainedG.toFixed(1), 
-          ((this.asphalt.gradationTest.massRetainedG / totalWeight) * 100).toFixed(1), 
-          (100 - ((this.asphalt.gradationTest.massRetainedG / totalWeight) * 100)).toFixed(2), 
+        ['2.00', '#10', this.asphalt.gradationTest.massRetainedG.toFixed(1),
+          ((this.asphalt.gradationTest.massRetainedG / totalWeight) * 100).toFixed(1),
+          (100 - ((this.asphalt.gradationTest.massRetainedG / totalWeight) * 100)).toFixed(2),
           this.asphalt.gradationTest.cvcMinG.toFixed(1), this.asphalt.gradationTest.cvcMaxG.toFixed(1) , `${'±'} ${this.asphalt.gradationTest.expandG}`],
 
-        ['0.425', '#40', this.asphalt.gradationTest.massRetainedH.toFixed(1), 
-          ((this.asphalt.gradationTest.massRetainedH / totalWeight) * 100).toFixed(1), 
-          (100 - ((this.asphalt.gradationTest.massRetainedH / totalWeight) * 100)).toFixed(2), 
+        ['0.425', '#40', this.asphalt.gradationTest.massRetainedH.toFixed(1),
+          ((this.asphalt.gradationTest.massRetainedH / totalWeight) * 100).toFixed(1),
+          (100 - ((this.asphalt.gradationTest.massRetainedH / totalWeight) * 100)).toFixed(2),
           this.asphalt.gradationTest.cvcMinH.toFixed(1), this.asphalt.gradationTest.cvcMaxH.toFixed(1) , `${'±'} ${this.asphalt.gradationTest.expandH}`],
 
-        ['0.180', '#80', this.asphalt.gradationTest.massRetainedI.toFixed(1), 
-          ((this.asphalt.gradationTest.massRetainedI / totalWeight) * 100).toFixed(1), 
-          (100 - ((this.asphalt.gradationTest.massRetainedI / totalWeight) * 100)).toFixed(2), 
+        ['0.180', '#80', this.asphalt.gradationTest.massRetainedI.toFixed(1),
+          ((this.asphalt.gradationTest.massRetainedI / totalWeight) * 100).toFixed(1),
+          (100 - ((this.asphalt.gradationTest.massRetainedI / totalWeight) * 100)).toFixed(2),
           this.asphalt.gradationTest.cvcMinI.toFixed(1), this.asphalt.gradationTest.cvcMaxI.toFixed(1) , `${'±'} ${this.asphalt.gradationTest.expandI}`],
 
-        ['0.075', '#200', this.asphalt.gradationTest.massRetainedJ.toFixed(1), 
-          ((this.asphalt.gradationTest.massRetainedJ / totalWeight) * 100).toFixed(1), 
-          (100 - ((this.asphalt.gradationTest.massRetainedJ / totalWeight) * 100)).toFixed(2), 
-          this.asphalt.gradationTest.cvcMinJ.toFixed(1), this.asphalt.gradationTest.cvcMaxJ.toFixed(1) , `${'±'} ${this.asphalt.gradationTest.expandJ}`], 
+        ['0.075', '#200', this.asphalt.gradationTest.massRetainedJ.toFixed(1),
+          ((this.asphalt.gradationTest.massRetainedJ / totalWeight) * 100).toFixed(1),
+          (100 - ((this.asphalt.gradationTest.massRetainedJ / totalWeight) * 100)).toFixed(2),
+          this.asphalt.gradationTest.cvcMinJ.toFixed(1), this.asphalt.gradationTest.cvcMaxJ.toFixed(1) , `${'±'} ${this.asphalt.gradationTest.expandJ}`],
 
         [{content : 'Total Weight' , colSpan: 2}, totalWeight.toFixed(1)],
       ];
@@ -453,15 +453,15 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
         const chartCanvas = document.querySelector('canvas') as HTMLCanvasElement;
         if (chartCanvas) {
           const chartImage = chartCanvas.toDataURL('image/png');
-          const scale = 1; 
+          const scale = 1;
           const originalWidth = 180;
           const originalHeight = 50;
 
-          const chartWidth = originalWidth * scale;   
-          const chartHeight = originalHeight * scale; 
+          const chartWidth = originalWidth * scale;
+          const chartHeight = originalHeight * scale;
 
           const pageWidth = doc.internal.pageSize.getWidth();
-          const centerX = (pageWidth - originalWidth) / 2; 
+          const centerX = (pageWidth - originalWidth) / 2;
           const borderPadding = 5;
 
           doc.setLineWidth(0.7);
@@ -525,16 +525,16 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
             showHead: 'everyPage'
           });
 
-          finalY += 34.5; 
+          finalY += 34.5;
           doc.setFontSize(7);
 
           const pageWidth1 = doc.internal.pageSize.getWidth();
-          const tableWidth1 = 190; 
+          const tableWidth1 = 190;
           const startX1 = (pageWidth1 - tableWidth1) / 2;
           const endX1 = startX1 + tableWidth1;
           const boxWidth1 = tableWidth1;
 
-          let blockTop1 = finalY; 
+          let blockTop1 = finalY;
           let footerY1 = blockTop1 + 5;
 
           let remarksHeight1 = 0;
@@ -555,7 +555,7 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
           doc.line(startX1, footerY1 -3, endX1, footerY1 -3);
 
           doc.setFontSize(8);
-          const sectionWidth1 = tableWidth1 / 3; 
+          const sectionWidth1 = tableWidth1 / 3;
 
           doc.text(
             `Approved by: ${this.asphalt.lastApproveBy || "N/A"}`,
@@ -600,8 +600,8 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
           const currentDateTime = formatDateTime(new Date());
           doc.text(`Report Date: ${currentDateTime}`, 1, 290);
 
-          const headerHeight = 15; 
-          const tableHeight = 200; 
+          const headerHeight = 15;
+          const tableHeight = 200;
 
           if (finalY + headerHeight + tableHeight > doc.internal.pageSize.height - 20) {
             doc.addPage();
@@ -619,9 +619,9 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
 
           const textWidth = doc.getTextWidth(headerText);
 
-          doc.setDrawColor(0, 0, 0); 
+          doc.setDrawColor(0, 0, 0);
           doc.setLineWidth(0.5);
-          doc.line(textX - 1, textY + .5 , textX + textWidth + 2, textY + .5 ); 
+          doc.line(textX - 1, textY + .5 , textX + textWidth + 2, textY + .5 );
           doc.setFontSize(7);
           doc.text("ASTM D-2172, D-5444", 127 , 34);
           doc.setFontSize(7);
@@ -816,12 +816,12 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
           finalY = (doc as any).lastAutoTable.finalY || 100;
 
           const pageWidth = doc.internal.pageSize.getWidth();
-          const tableWidth = 190; 
+          const tableWidth = 190;
           const startX = (pageWidth - tableWidth) / 2;
           const endX = startX + tableWidth;
           const boxWidth = tableWidth;
 
-          let blockTop = finalY; 
+          let blockTop = finalY;
           let footerY = blockTop + 5;
 
           let remarksHeight = 0;
@@ -840,7 +840,7 @@ export class AsphaltReportComponent implements OnInit, AfterViewInit {
           }
           doc.line(startX, footerY, endX, footerY);
           doc.setFontSize(6);
-          const sectionWidth = tableWidth / 3; 
+          const sectionWidth = tableWidth / 3;
 
           doc.text(
             `Approved by: ${this.asphalt.lastApproveBy || "N/A"}`,

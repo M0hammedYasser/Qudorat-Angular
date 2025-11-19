@@ -66,26 +66,26 @@ export class CompressiveStrengthReportComponent implements OnInit {
 
   generatePDF() {
     const doc = new jsPDF();
-    doc.addFileToVFS('Amiri-Regular.ttf', AmiriFont); 
+    doc.addFileToVFS('Amiri-Regular.ttf', AmiriFont);
     doc.addFont('Amiri-Regular.ttf', 'Amiri', 'normal');
     doc.setFont('Amiri');
 
-    const castingDate = new Date(this.compressiveStrength.dataCasting); 
-    const testedDays = Number(this.compressiveStrength.dateTested); 
+    const castingDate = new Date(this.compressiveStrength.dataCasting);
+    const testedDays = Number(this.compressiveStrength.dateTested);
 
     let reportDate = 'N/A';
 
     if (!isNaN(castingDate.getTime()) && !isNaN(testedDays)) {
       const report = new Date(castingDate);
       report.setDate(report.getDate() + testedDays);
-      reportDate = report.toLocaleDateString('en-GB'); 
+      reportDate = report.toLocaleDateString('en-GB');
     }
 
 
     const head = new Image();
     const tail = new Image();
     const qr = new Image();
-    head.src = 'assets/head.png';
+    head.src = 'assets/ApproveHead.png';
     tail.src = 'assets/tail.png';
     qr.src = 'assets/barcode.jpg';
 
@@ -124,7 +124,7 @@ export class CompressiveStrengthReportComponent implements OnInit {
           3: { cellWidth: 50 },
           4: { cellWidth: 25 }
         },
-        
+
       });
 
 
@@ -211,7 +211,7 @@ export class CompressiveStrengthReportComponent implements OnInit {
       const tableY = (doc as any).lastAutoTable.finalY;
 
       const pageWidth1 = doc.internal.pageSize.getWidth() + 8;
-      const tableWidth1 = 190; 
+      const tableWidth1 = 190;
       const startX1 = (pageWidth1 - tableWidth1) / 2;
       doc.addImage('assets/compressiveStrength.png', 'JPEG', 120.5, finalY + 0.5, 83.5, 43);
 
@@ -228,7 +228,7 @@ export class CompressiveStrengthReportComponent implements OnInit {
         let footerY = finalY;
         doc.setFontSize(8);
         const pageWidth = doc.internal.pageSize.getWidth() + 8;
-        const tableWidth = 190; 
+        const tableWidth = 190;
         const startX = (pageWidth - tableWidth) / 2;
         const endX = startX + tableWidth;
         const boxWidth = tableWidth;
@@ -241,7 +241,7 @@ export class CompressiveStrengthReportComponent implements OnInit {
           );
 
           doc.setFont("Amiri", "bold");
-          doc.text(splitNotes, startX + 1, footerY + 3); 
+          doc.text(splitNotes, startX + 1, footerY + 3);
 
           remarksHeight = splitNotes.length * 5;
           footerY += remarksHeight + 5;
@@ -250,7 +250,7 @@ export class CompressiveStrengthReportComponent implements OnInit {
         doc.line(startX, 255, endX, 255);
 
         doc.setFontSize(6);
-        const sectionWidth = tableWidth / 3; 
+        const sectionWidth = tableWidth / 3;
 
         doc.text(`Approved by: ${this.compressiveStrength.lastApproveBy || " "}`, startX + 1, 260);
 
