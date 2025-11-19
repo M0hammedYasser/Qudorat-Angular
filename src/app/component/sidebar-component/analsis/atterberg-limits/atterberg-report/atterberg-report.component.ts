@@ -129,7 +129,7 @@ createPlasticityChart(): void {
           showLine: true,
           pointRadius: 0
         },
-        
+
         {
           label: 'Upper Limit Line (PI = 0.9 × LL)',
           data: xValues.map((x, i) => ({ x, y: upperLimit[i] })),
@@ -229,22 +229,22 @@ createPlasticityChart(): void {
           ctx.fillStyle = 'black';
           ctx.textAlign = 'center';
 
-          // CL-ML 
+          // CL-ML
           ctx.fillText('CL-ML', chart.scales['x'].getPixelForValue(20), chart.scales['y'].getPixelForValue(5));
 
-          // CL or OL 
+          // CL or OL
           ctx.fillText('CL or OL', chart.scales['x'].getPixelForValue(33), chart.scales['y'].getPixelForValue(15));
 
-          // CH or OH 
+          // CH or OH
           ctx.fillText('CH or OH', chart.scales['x'].getPixelForValue(60), chart.scales['y'].getPixelForValue(35));
 
-          // MH or OH 
+          // MH or OH
           ctx.fillText('MH or OH', chart.scales['x'].getPixelForValue(70), chart.scales['y'].getPixelForValue(17));
 
-          // "U" Line label 
+          // "U" Line label
           ctx.fillText('"U" Line', chart.scales['x'].getPixelForValue(68), chart.scales['y'].getPixelForValue(53));
 
-          // "A" Line label 
+          // "A" Line label
           ctx.fillText('"A" Line', chart.scales['x'].getPixelForValue(82), chart.scales['y'].getPixelForValue(45));
 
           ctx.restore();
@@ -384,14 +384,14 @@ createMoistureChart(): void {
 
   generatePDF() {
     const doc = new jsPDF();
-    doc.addFileToVFS('Amiri-Regular.ttf', AmiriFont); 
+    doc.addFileToVFS('Amiri-Regular.ttf', AmiriFont);
     doc.addFont('Amiri-Regular.ttf', 'Amiri', 'normal');
     doc.setFont('Amiri');
     const head = new Image();
     const tail = new Image();
     const qr = new Image();
 
-    head.src = 'assets/head.png';
+    head.src = 'assets/ApproveHead.png';
     tail.src = 'assets/tail.png';
     qr.src = 'assets/barcode.jpg';
 
@@ -618,7 +618,7 @@ createMoistureChart(): void {
         doc.setFontSize(8);
 
         const pageWidth = doc.internal.pageSize.getWidth();
-        const tableWidth = 190; 
+        const tableWidth = 190;
         const startX = (pageWidth - tableWidth) / 2;
         const endX = startX + tableWidth;
         const boxWidth = tableWidth;
@@ -640,7 +640,7 @@ createMoistureChart(): void {
         doc.line(startX, 260, endX, 260);
 
         doc.setFontSize(6);
-        const sectionWidth = tableWidth / 3; 
+        const sectionWidth = tableWidth / 3;
 
         doc.text(`Approved by: ${this.atterbergLimits.lastApproveBy || " "}`, startX + 1, 264);
 
