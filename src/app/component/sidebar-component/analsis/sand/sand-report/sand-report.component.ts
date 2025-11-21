@@ -334,14 +334,27 @@ const specs = [
   }
 
   formatValue(value: number, sieveName: string): string {
-    if (sieveName === '#200') {
-      return Math.round(value).toString();
-    } else if (value < 10) {
-      return value.toFixed(1);
-    } else {
-      return Math.round(value).toString();
+    if (value === null || value === undefined || isNaN(value)) {
+      return "-";
     }
+
+    const num = Number(value);
+
+    if (sieveName === '#200') {
+      if (num < 10) {
+        return num.toFixed(1);    
+      } else {
+        return Math.round(num).toString();  
+      }
+    }
+
+    if (num < 10) {
+      return num.toFixed(1);
+    }
+
+    return Math.round(num).toString();
   }
+
 
   generatePDF() {
     if (!this.sieveAnalysis || Object.keys(this.sieveAnalysis).length === 0) {
@@ -520,6 +533,7 @@ const specs = [
 
 
       const afterMiniTableY = (doc as any).lastAutoTable.finalY;
+
 
       const tableColumn = [
         {content: "Sieve sizes", colSpan: 2, styles: {halign: 'center' as const, valign: 'middle' as const}},
