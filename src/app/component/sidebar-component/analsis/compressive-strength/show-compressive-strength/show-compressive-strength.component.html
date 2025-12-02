@@ -1,6 +1,6 @@
 <div class="trial-container">
   <div class="header-container">
-    <h1 class="header">Trial List</h1>
+    <h1 class="header">Trial List <span> ({{ id }})</span></h1>
     <div class="button-container">
       <button class="btn-add btn btn-primary" routerLink="/compressive-strength/insert/{{id}}" *ngIf="role =='ROLE_TECH' || role == 'ROLE_ADMIN'">New Trial</button>
       <button class="btn-add btn btn-danger" (click)="adopt(id)" *ngIf="(role =='ROLE_SUPERVISOR') && !test.adopt">Adopt</button>
