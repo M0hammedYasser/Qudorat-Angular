@@ -71,6 +71,7 @@ import {
   MoistureDensityRelationshipReportComponent
 } from "./component/sidebar-component/analsis/moistureDensity-relationship/moisture-density-relationship-report/moisture-density-relationship-report.component";
 import {NotificationComponent} from "./component/sidebar-component/notification/notification/notification.component";
+import {DbBackupComponent} from "./component/sidebar-component/db-backup/db-backup.component";
 
 export const routes: Routes = [
 
@@ -119,6 +120,7 @@ export const routes: Routes = [
   { path: 'moisture-density-relationship/report/:id', component: MoistureDensityRelationshipReportComponent, canActivate: [authGuard] },
 
   {path: 'report', component: TestReportComponent, canActivate: [authGuard]},
+  {path: 'db-backup', component: DbBackupComponent, canActivate: [authGuard]},
 
 
   {path: 'setting', component: SettingComponent, canActivate: [authGuard]},
