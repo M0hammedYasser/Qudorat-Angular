@@ -180,7 +180,7 @@ export class MoistureDensityRelationshipReportComponent implements OnInit {
     const head = new Image();
     const tail = new Image();
 
-    head.src = 'assets/ApproveHead.png';
+    head.src = 'assets/head.png';
     tail.src = 'assets/tail.png';
 
     // Check if column E should be hidden

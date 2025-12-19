@@ -391,7 +391,7 @@ createMoistureChart(): void {
     const tail = new Image();
     const qr = new Image();
 
-    head.src = 'assets/ApproveHead.png';
+    head.src = 'assets/head.png';
     tail.src = 'assets/tail.png';
     qr.src = 'assets/barcode.jpg';
 
