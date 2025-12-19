@@ -60,6 +60,44 @@ export class ShowSandComponent implements OnInit {
     });
   }
 
+  reject(id: number) {
+    const name = this.authenticationService.getName();
+
+    Swal.fire({
+      title: 'Reject Test',
+      text: `Please provide a reason for rejecting test ${id}:`,
+      input: 'textarea',
+      inputPlaceholder: 'Enter rejection comment...',
+      inputAttributes: {
+        'aria-label': 'Rejection comment'
+      },
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Reject',
+      cancelButtonText: 'Cancel',
+      inputValidator: (value) => {
+        if (!value) {
+          return 'Rejection comment is required!';
+        }
+        return null;
+      }
+    }).then((result) => {
+      if (result.isConfirmed) {
+        const comment = result.value;
+
+        this.testService.reject(id, name, comment).subscribe(
+          () => {
+            Swal.fire('Rejected!', 'The test has been rejected successfully.', 'success');
+            this.router.navigate(['/tests']);
+          },
+          () => {
+            Swal.fire('Error!', 'Something went wrong.', 'error');
+          }
+        );
+      }
+    });
+  }
+
   approve(id: number) {
   const name = this.authenticationService.getName();
 

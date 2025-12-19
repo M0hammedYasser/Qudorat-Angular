@@ -48,6 +48,10 @@ export class TestService {
     return this.http.put(`${environment.url}test/adopt?id=${id}&name=${name}`, null);
   }
 
+  reject(id: number , name: string , comment : string) {
+    return this.http.put(`${environment.url}test/reject?id=${id}&name=${name}&comment=${comment}`, null);
+  }
+
   approve(id: number, name: string) {
   return this.http.put(`${environment.url}test/approve?id=${id}&name=${name}` , null);
   }

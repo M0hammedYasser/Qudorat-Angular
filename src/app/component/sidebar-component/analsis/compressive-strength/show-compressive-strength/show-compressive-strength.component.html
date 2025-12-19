@@ -3,7 +3,8 @@
     <h1 class="header">Trial List <span> ({{ id }})</span></h1>
     <div class="button-container">
       <button class="btn-add btn btn-primary" routerLink="/compressive-strength/insert/{{id}}" *ngIf="role =='ROLE_TECH' || role == 'ROLE_ADMIN'">New Trial</button>
-      <button class="btn-add btn btn-danger" (click)="adopt(id)" *ngIf="(role =='ROLE_SUPERVISOR') && !test.adopt">Adopt</button>
+      <button class="btn-add btn btn-success" (click)="adopt(id)" *ngIf="(role =='ROLE_SUPERVISOR') && !test.adopt">Adopt</button>
+      <button class="btn-add btn btn-danger" (click)="reject(id)"  *ngIf="(role =='ROLE_SUPERVISOR') && !test.adopt">Reject</button>
       <button class="btn-add btn btn-success" (click)="approve(id)" *ngIf="(role == 'ROLE_MANAGER' || role == 'ROLE_ADMIN') && test.adopt && !test.approved">Approve</button>
     </div>
   </div>
