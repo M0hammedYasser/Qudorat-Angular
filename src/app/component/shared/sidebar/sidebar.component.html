@@ -54,7 +54,7 @@
       </a>
     </li>
 
-    <li class="nav-item">
+    <li class="nav-item" *ngIf="role=='ROLE_ADMIN'">
       <a class="nav-link" routerLink="/db-backup" routerLinkActive="activate">
         <i class="fas fa-database"></i> Database Backup
       </a>
