@@ -14,11 +14,7 @@
         <input type="date" class="form-control compact-input"
                [(ngModel)]="sieveAnalysis.samplingDate" name="samplingDate" required>
       </div>
-      <div class="align-items-center">
-        <label class="col-form-label me-1">Sample No</label>
-        <input type="number" class="form-control compact-input"
-               [(ngModel)]="sieveAnalysis.sampleNo" name="sampleNo" required>
-      </div>
+
       <div class="align-items-center">
         <label class="col-form-label me-1">Test Name</label>
         <input type="text" class="form-control compact-input"
@@ -64,7 +60,7 @@
               [(ngModel)]="sieveAnalysis.notes" name="notes" style="width: 880px; height: 100px;"></textarea>
       </div>
     </div>
-    
+
     <div class="grid-container mt-5">
       <div class="form-group">
         <label class="label">Standard(mm)</label>
@@ -395,7 +391,7 @@
                id="specificationLimitsM">
       </div>
     </div>
-    
+
     <div class="text-center">
       <button type="submit" class="btn btn-primary" [disabled]="!form.valid">Submit</button>
     </div>
