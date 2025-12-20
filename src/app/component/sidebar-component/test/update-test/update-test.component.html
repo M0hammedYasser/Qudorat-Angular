@@ -14,27 +14,34 @@
 
       <div class="row mb-3">
         <div class="col-6">
-          <label for="price" class="form-label">Price</label>
-          <input type="number" class="form-control" id="price" [value]="price" [(ngModel)]="test.price" name="price"
-                 required>
-        </div>
-      </div>
-
-      <div class="row mb-3">
-        <div class="col-6">
-          <label for="date" class="form-label">Date</label>
-          <input type="date" class="form-control" id="date" [(ngModel)]="test.date" name="date" required>
-        </div>
-        <div class="col-6">
-          <label for="paid" class="form-label">is Paid</label>
-          <select class="form-select" aria-label="Default select example" type="text" id="paid"
-                  name="paid" [(ngModel)]="test.paid" required>
-            <option  [value]=true>True</option>
-            <option  [value]=false>False</option>
+          <label for="testManager" class="form-label">Test Name</label>
+          <select class="form-select" aria-label="Default select example" type="text" id="testManager"
+                  name="testManager" [(ngModel)]="test.testManager.id" (change)="onSideChange(test.testManager.id)" required>
+            <option *ngFor="let test of testManagers" [value]="test.id">{{ test.name }}</option>
           </select>
         </div>
       </div>
 
+      <!-- Conditional fields shown when Test Name (Test Manager) id is 2 -->
+      <div class="row mb-3" *ngIf="showExtraFields">
+        <div class="col-4">
+          <label for="contractor" class="form-label">Contractor</label>
+          <input type="text" id="contractor" name="contractor" class="form-control" [(ngModel)]="test.contractor">
+        </div>
+        <div class="col-4">
+          <label for="jobOrder" class="form-label">Job Order</label>
+          <input type="text" id="jobOrder" name="jobOrder" class="form-control" [(ngModel)]="test.jobOrder">
+        </div>
+        <div class="col-4">
+          <label for="asphaltApplier" class="form-label">Asphalt Applier</label>
+          <input type="text" id="asphaltApplier" name="asphaltApplier" class="form-control" [(ngModel)]="test.asphaltApplier">
+        </div>
+      </div>
+
+      <div class="col-6">
+        <label for="date" class="form-label">Date</label>
+        <input type="date" class="form-control" id="date" [(ngModel)]="test.date" name="date" required>
+      </div>
 
 
       <button type="submit" class="btn btn-primary w-25 mx-auto d-block mt-4" [disabled]="!form.valid">Save</button>

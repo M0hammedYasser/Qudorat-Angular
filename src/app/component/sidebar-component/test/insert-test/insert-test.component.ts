@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {JsonPipe, NgForOf} from "@angular/common";
+import {JsonPipe, NgForOf, NgIf} from "@angular/common";
 import {Project} from "../../../../model/project";
 import {Client} from "../../../../model/client";
 import {ProjectService} from "../../../../service/project/project.service";
@@ -18,6 +18,7 @@ import {TestManagerService} from "../../../../service/test-manager/test-manager.
     FormsModule,
     NgForOf,
     ReactiveFormsModule,
+    NgIf,
   ],
   templateUrl: './insert-test.component.html',
   styleUrl: './insert-test.component.css'
@@ -26,6 +27,7 @@ export class InsertTestComponent implements OnInit {
 
   test: Test = {project: {} as Project, testManager: {} as TestManager} as Test;
   price: number = 0;
+  showExtraFields: boolean = false;
   projects: Project[] = [];
   testManagers: TestManager[] = [];
 
@@ -42,6 +44,12 @@ export class InsertTestComponent implements OnInit {
     this.testManagerService.findById(id).subscribe(res => {
       this.price = res.price;
       this.test.price = res.price;
+      this.showExtraFields = id == 2;
+      if (!this.showExtraFields) {
+        this.test.contractor = '';
+        this.test.jobOrder = '';
+        this.test.asphaltApplier = '';
+      }
     });
   }
 

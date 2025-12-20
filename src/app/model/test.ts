@@ -29,5 +29,8 @@ approved: any;
 
   status: string;
   name: string;
-  
+  contractor: string;
+  jobOrder: string;
+  asphaltApplier: string;
+
 }
