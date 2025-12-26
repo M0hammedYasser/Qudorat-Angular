@@ -1,15 +1,14 @@
-import {Component, OnInit} from '@angular/core';
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {JsonPipe, NgForOf, NgIf} from "@angular/common";
-import {Project} from "../../../../model/project";
-import {Client} from "../../../../model/client";
-import {ProjectService} from "../../../../service/project/project.service";
-import {ClientService} from "../../../../service/client/client.service";
-import {Router} from "@angular/router";
-import {Test} from "../../../../model/test";
-import {TestService} from "../../../../service/test/test.service";
-import {TestManager} from "../../../../model/test-manager";
-import {TestManagerService} from "../../../../service/test-manager/test-manager.service";
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { JsonPipe, NgForOf, NgIf } from "@angular/common";
+import { Project } from "../../../../model/project";
+import { Client } from "../../../../model/client";
+import { ProjectService } from "../../../../service/project/project.service";
+import { ClientService } from "../../../../service/client/client.service";
+import { Test } from "../../../../model/test";
+import { TestService } from "../../../../service/test/test.service";
+import { TestManager } from "../../../../model/test-manager";
+import { TestManagerService } from "../../../../service/test-manager/test-manager.service";
 
 @Component({
   selector: 'app-insert-test',
@@ -25,14 +24,15 @@ import {TestManagerService} from "../../../../service/test-manager/test-manager.
 })
 export class InsertTestComponent implements OnInit {
 
-  test: Test = {project: {} as Project, testManager: {} as TestManager} as Test;
+  @Output() close = new EventEmitter<void>();
+
+  test: Test = { project: {} as Project, testManager: {} as TestManager } as Test;
   price: number = 0;
   showExtraFields: boolean = false;
   projects: Project[] = [];
   testManagers: TestManager[] = [];
 
-  constructor(private service: TestService, private projectService: ProjectService, private testManagerService: TestManagerService,
-              private router: Router) {
+  constructor(private service: TestService, private projectService: ProjectService, private testManagerService: TestManagerService) {
   }
 
   ngOnInit() {
@@ -56,10 +56,10 @@ export class InsertTestComponent implements OnInit {
   insert() {
     this.service.insert(this.test).subscribe({
       next: () => {
-        this.router.navigateByUrl('/tests');
+        this.close.emit();
       },
       error: (err) => {
-        this.router.navigateByUrl('/tests');
+        this.close.emit();
       }
     });
   }

@@ -1,11 +1,14 @@
-import {Component, OnInit} from '@angular/core';
-import {NgForOf, NgIf} from "@angular/common";
-import {ActivatedRoute, Router, RouterLink} from "@angular/router";
-import {SearchComponent} from "../../../shared/search/search.component";
-import {SearchPipe} from "../../../../pipe/search.pipe";
-import {Test} from "../../../../model/test";
-import {TestService} from "../../../../service/test/test.service";
-import {AuthenticationService} from "../../../../service/authentication/authentication.service";
+import { Component, OnInit } from '@angular/core';
+import { NgForOf, NgIf } from "@angular/common";
+import { ActivatedRoute, Router, RouterLink } from "@angular/router";
+import { SearchComponent } from "../../../shared/search/search.component";
+import { SearchPipe } from "../../../../pipe/search.pipe";
+import { Test } from "../../../../model/test";
+import { TestService } from "../../../../service/test/test.service";
+import { AuthenticationService } from "../../../../service/authentication/authentication.service";
+import Swal from 'sweetalert2';
+import { InsertTestComponent } from "../insert-test/insert-test.component";
+import { UpdateTestComponent } from "../update-test/update-test.component";
 
 @Component({
   selector: 'app-test',
@@ -15,7 +18,9 @@ import {AuthenticationService} from "../../../../service/authentication/authenti
     RouterLink,
     SearchComponent,
     SearchPipe,
-    NgIf
+    NgIf,
+    InsertTestComponent,
+    UpdateTestComponent
   ],
   templateUrl: './test.component.html',
   styleUrl: './test.component.css'
@@ -26,6 +31,9 @@ export class TestComponent implements OnInit {
   searchText: string = '';
   role: string = '';
   id: string | null = '';
+  showModal: boolean = false;
+  showUpdateModal: boolean = false;
+  selectedTestId: any;
 
   constructor(private service: TestService, private router: Router, private authService: AuthenticationService, private activatedRoute: ActivatedRoute) {
   }
@@ -63,9 +71,26 @@ export class TestComponent implements OnInit {
   }
 
   delete(id: number) {
-    this.service.delete(id).subscribe();
-    this.findAll();
-    window.location.reload();
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.service.delete(id).subscribe(() => {
+          Swal.fire(
+            'Deleted!',
+            'Test has been deleted.',
+            'success'
+          );
+          this.findAll();
+        });
+      }
+    });
   }
 
   goToTrail(testId: number, id: number) {
@@ -83,6 +108,26 @@ export class TestComponent implements OnInit {
         test.active = !test.active;
       }
     });
+  }
+
+  openNewTestModal() {
+    this.showModal = true;
+  }
+
+  closeNewTestModal() {
+    this.showModal = false;
+    this.findAll();
+  }
+
+  openUpdateTestModal(id: any) {
+    this.selectedTestId = id;
+    this.showUpdateModal = true;
+  }
+
+  closeUpdateTestModal() {
+    this.showUpdateModal = false;
+    this.selectedTestId = null;
+    this.findAll();
   }
 
   protected readonly TestService = TestService;
