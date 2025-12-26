@@ -1,8 +1,8 @@
-import {Component, OnInit} from '@angular/core';
-import {TestManager} from "../../../../../model/test-manager";
-import {TestManagerService} from "../../../../../service/test-manager/test-manager.service";
-import {NgForOf, NgIf} from "@angular/common";
-import {FormsModule} from "@angular/forms";
+import { Component, OnInit } from '@angular/core';
+import { TestManager } from "../../../../../model/test-manager";
+import { TestManagerService } from "../../../../../service/test-manager/test-manager.service";
+import { CurrencyPipe, NgForOf, NgIf } from "@angular/common";
+import { FormsModule } from "@angular/forms";
 
 @Component({
   selector: 'app-test-manger',
@@ -10,12 +10,13 @@ import {FormsModule} from "@angular/forms";
   imports: [
     NgForOf,
     FormsModule,
-    NgIf
+    NgIf,
+    CurrencyPipe
   ],
   templateUrl: './test-manger.component.html',
   styleUrl: './test-manger.component.css'
 })
-export class TestMangerComponent implements OnInit{
+export class TestMangerComponent implements OnInit {
 
   tests: TestManager[] = [];
   testName: string = '';
@@ -24,7 +25,7 @@ export class TestMangerComponent implements OnInit{
   editTestName: string = '';
   editTestPrice: number | null = null;
 
-  constructor(private service: TestManagerService) {}
+  constructor(private service: TestManagerService) { }
 
   ngOnInit(): void {
     this.findAll();

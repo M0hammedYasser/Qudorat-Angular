@@ -1,23 +1,74 @@
-<div class="d-flex justify-content-between">
-  <div class="container mt-4">
-    <h3 class="text-center mb-4">Test Manager</h3>
+<div class="test-manager-container">
+  <div class="text-center mb-5">
+    <h2><i class="fas fa-flask me-2"></i> Test Manager</h2>
+    <p class="text-muted">Configure available tests and their pricing.</p>
+  </div>
 
-    <div class="scroll-container">
-      <ul class="list-group">
-        <li *ngFor="let test of tests; let i = index" class="list-group-item d-flex justify-content-between align-items-center">
-          <div>
-            <span>{{ test.name }} - {{ test.price }}</span>
-            <input *ngIf="editIndex === i" type="number" class="form-control" [(ngModel)]="editTestPrice" />
-          </div>
+  <div class="row g-4">
+    <!-- Add New Test Card -->
+    <div class="col-lg-4">
+      <div class="add-test-card">
+        <h4>Add New Test</h4>
+        <div class="form-group mb-3">
+          <label class="form-label">Test Name</label>
+          <input type="text" class="form-control" [(ngModel)]="testName" placeholder="e.g. Soil Analysis">
+        </div>
+        <div class="form-group mb-4">
+          <label class="form-label">Price</label>
+          <input type="number" class="form-control" [(ngModel)]="testPrice" placeholder="0.00">
+        </div>
+        <button class="btn btn-primary w-100" (click)="insert()" [disabled]="!testName || testPrice == null">
+          <i class="fas fa-plus me-2"></i> Add Test
+        </button>
+      </div>
+    </div>
 
-          <div>
-            <button *ngIf="editIndex !== i" class="btn btn-primary btn-sm me-2" (click)="startEdit(i)">
-              Edit Price
-            </button>
-            <button *ngIf="editIndex === i" class="btn btn-primary btn-sm me-2" (click)="update(i)">Save</button>
-          </div>
-        </li>
-      </ul>
+    <!-- Test List -->
+    <div class="col-lg-8">
+      <div class="tests-list-card">
+        <table class="table table-hover align-middle mb-0">
+          <thead class="table-light">
+            <tr>
+              <th>Test Name</th>
+              <th>Price</th>
+              <th class="text-end">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let test of tests; let i = index">
+              <td>
+                <span *ngIf="editIndex !== i" class="fw-bold text-dark">{{ test.name }}</span>
+                <input *ngIf="editIndex === i" type="text" class="form-control" [(ngModel)]="editTestName">
+              </td>
+              <td>
+                <span *ngIf="editIndex !== i" class="badge bg-light text-dark border">{{ test.price | currency }}</span>
+                <input *ngIf="editIndex === i" type="number" class="form-control" [(ngModel)]="editTestPrice">
+              </td>
+              <td class="text-end">
+                <div *ngIf="editIndex !== i">
+                  <button class="btn btn-sm btn-outline-secondary me-2" (click)="startEdit(i)" title="Edit">
+                    <i class="fas fa-edit"></i>
+                  </button>
+                  <button class="btn btn-sm btn-outline-danger" (click)="remove(i)" title="Delete">
+                    <i class="fas fa-trash-alt"></i>
+                  </button>
+                </div>
+                <div *ngIf="editIndex === i">
+                  <button class="btn btn-sm btn-success me-2" (click)="update(i)" title="Save">
+                    <i class="fas fa-check"></i>
+                  </button>
+                  <button class="btn btn-sm btn-secondary" (click)="cancelEdit()" title="Cancel">
+                    <i class="fas fa-times"></i>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div *ngIf="tests.length === 0" class="text-center p-4 text-muted">
+          No tests found. Add one to get started.
+        </div>
+      </div>
     </div>
   </div>
 </div>

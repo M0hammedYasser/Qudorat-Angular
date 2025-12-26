@@ -1,10 +1,11 @@
-import {Component, OnInit} from '@angular/core';
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {NgForOf} from "@angular/common";
-import {User} from "../../../../../model/user";
-import {Authority} from "../../../../../model/authority";
-import {UserService} from "../../../../../service/user/user.service";
-import {ActivatedRoute, Router} from "@angular/router";
+import { Component, OnInit } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { NgForOf } from "@angular/common";
+import { User } from "../../../../../model/user";
+import { Authority } from "../../../../../model/authority";
+import { UserService } from "../../../../../service/user/user.service";
+import { ActivatedRoute, Router } from "@angular/router";
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-update-user',
@@ -19,7 +20,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 })
 export class UpdateUserComponent implements OnInit {
 
-  user: User = {authority: {}} as User;
+  user: User = { authority: {} } as User;
   authorities: Authority[] = [];
   id: number = 0;
 
@@ -33,7 +34,12 @@ export class UpdateUserComponent implements OnInit {
   }
 
   update(): void {
-    this.userService.update(this.user , this.id).subscribe(() => {
+    this.userService.update(this.user, this.id).subscribe(() => {
+      Swal.fire({
+        title: "Success",
+        text: "User updated successfully",
+        icon: "success"
+      });
       this.router.navigate(['/setting/user-manager']);
     })
   }

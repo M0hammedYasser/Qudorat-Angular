@@ -1,9 +1,10 @@
-import {Component, OnInit} from '@angular/core';
-import {NgClass, NgForOf, NgIf} from "@angular/common";
-import {RouterLink} from "@angular/router";
-import {UserService} from "../../../../../service/user/user.service";
-import {User} from "../../../../../model/user";
+import { Component, OnInit } from '@angular/core';
+import { NgClass, NgForOf, NgIf } from "@angular/common";
+import { RouterLink } from "@angular/router";
+import { UserService } from "../../../../../service/user/user.service";
+import { User } from "../../../../../model/user";
 import Swal from "sweetalert2";
+import { InsertUserComponent } from "../insert-user/insert-user.component";
 
 @Component({
   selector: 'app-user-manager',
@@ -12,7 +13,8 @@ import Swal from "sweetalert2";
     NgForOf,
     NgClass,
     RouterLink,
-    NgIf
+    NgIf,
+    InsertUserComponent
   ],
   templateUrl: './user-manager.component.html',
   styleUrl: './user-manager.component.css'
@@ -20,12 +22,17 @@ import Swal from "sweetalert2";
 export class UserManagerComponent implements OnInit {
 
   users: User[] = [];
+  showModal: boolean = false;
 
   constructor(private userService: UserService) {
   }
 
   ngOnInit(): void {
-    this.userService.findAll().subscribe(users => {this.users = users;});
+    this.findAll();
+  }
+
+  findAll() {
+    this.userService.findAll().subscribe(users => { this.users = users; });
   }
 
   toggleUserStatus(user: any): void {
@@ -34,7 +41,7 @@ export class UserManagerComponent implements OnInit {
     console.log(user.id);
   }
 
-  changePassword(userId : number): void {
+  changePassword(userId: number): void {
     Swal.fire({
       title: 'Enter New Password',
       input: 'password',
@@ -69,6 +76,15 @@ export class UserManagerComponent implements OnInit {
         });
       }
     });
+  }
+
+  openNewUserModal() {
+    this.showModal = true;
+  }
+
+  closeNewUserModal() {
+    this.showModal = false;
+    this.findAll();
   }
 
 }

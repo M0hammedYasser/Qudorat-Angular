@@ -1,34 +1,61 @@
 <div class="body">
   <div class="register-container">
-    <h4 class="text-center mb-4">Update Users</h4>
+    <div class="text-center mb-4">
+      <h4 class="fw-bold">Update User</h4>
+      <p class="text-muted">Modify user details and permissions.</p>
+    </div>
+
     <form (ngSubmit)="update()" #form="ngForm">
-      <div class="row mb-3">
-      </div>
 
       <div class="mb-3">
-        <label for="name" class="form-label">Name</label>
-        <input type="text" class="form-control" id="name" [(ngModel)]="user.name" name="name" required #name="ngModel">
+        <label for="name" class="form-label">Full Name</label>
+        <div class="input-group">
+          <span class="input-group-text"><i class="fas fa-user"></i></span>
+          <input type="text" class="form-control" id="name" [(ngModel)]="user.name" name="name" required
+            placeholder="e.g. John Doe">
+        </div>
       </div>
 
       <div class="row mb-3">
         <div class="col-md-6">
-          <label for="email" class="form-label">Username</label>
-          <input type="email" class="form-control" id="email" [(ngModel)]="user.username" name="email" required #email="ngModel">
+          <label for="username" class="form-label">Username</label>
+          <div class="input-group">
+            <span class="input-group-text"><i class="fas fa-at"></i></span>
+            <input type="text" class="form-control" id="username" [(ngModel)]="user.username" name="username" required>
+          </div>
         </div>
         <div class="col-md-6">
-          <label for="phone" class="form-label">Password</label>
-          <input type="text" class="form-control" id="phone" [(ngModel)]="user.password" name="phone" required #phone="ngModel">
+          <label for="password" class="form-label">Password</label>
+          <div class="input-group">
+            <span class="input-group-text"><i class="fas fa-lock"></i></span>
+            <input type="password" class="form-control" id="password" [(ngModel)]="user.password" name="password"
+              required>
+          </div>
         </div>
       </div>
 
-      <div class="mb-3">
-        <label for="authority.id" class="form-label">Authority</label>
-        <select class="form-select" aria-label="Default select example" name="authority.id" id="authority.id" [(ngModel)]="user.authority.id">
-          <option value="{{auth.id}}" *ngFor="let auth of authorities">{{auth.name}}</option>
-        </select>
+      <div class="row mb-4">
+        <div class="col-md-6">
+          <label for="jobTitle" class="form-label">Job Title</label>
+          <div class="input-group">
+            <span class="input-group-text"><i class="fas fa-briefcase"></i></span>
+            <input type="text" class="form-control" id="jobTitle" [(ngModel)]="user.jobTitle" name="jobTitle" required
+              placeholder="e.g. Manager">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <label for="authority.id" class="form-label">Role</label>
+          <select class="form-select" name="authority.id" id="authority.id" [(ngModel)]="user.authority.id" required>
+            <option selected disabled value="">Select Role...</option>
+            <option value="{{auth.id}}" *ngFor="let auth of authorities">{{auth.name}}</option>
+          </select>
+        </div>
       </div>
 
-      <button type="submit" class="btn btn-primary save-btn" [disabled]="!form.valid">Save</button>
+      <div class="d-flex justify-content-end gap-2">
+        <button type="button" class="btn btn-outline-secondary" routerLink="/setting/user-manager">Cancel</button>
+        <button type="submit" class="btn btn-primary px-4" [disabled]="!form.valid">Update User</button>
+      </div>
     </form>
   </div>
 </div>

@@ -1,27 +1,56 @@
-.container {
-  max-width: 600px;
-  padding-top: 70px;
+.test-manager-container {
+  max-width: 1000px;
+  margin: 2rem auto;
+  padding: 2rem;
+  padding-top: 80px;
 }
 
-.list-group-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+h2 {
+  color: #2c3e50;
+  font-weight: 700;
 }
 
-.input-group {
-  max-width: 500px;
-  margin: 0 auto;
+.add-test-card {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  border: 1px solid #eaeaea;
+  position: sticky;
+  top: 100px;
 }
 
-.btn-success {
-  margin-right: 10px;
+.add-test-card h4 {
+  margin-bottom: 1.5rem;
+  color: #495057;
 }
 
-.scroll-container {
-  max-height: 436px; /* Adjust height based on the size of each item */
-  overflow-y: auto;
-  border: 1px solid #ddd; /* Optional: Add border for better visibility */
-  padding: 10px; /* Optional: Add padding for better UI */
+.tests-list-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  border: 1px solid #eaeaea;
+  overflow: hidden;
+}
 
+.table th {
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 0.5px;
+  padding: 1rem;
+}
+
+.table td {
+  padding: 1rem;
+}
+
+.badge {
+  font-size: 0.9rem;
+  padding: 0.5em 0.8em;
+}
+
+.form-control:focus {
+  border-color: #3f8cff;
+  box-shadow: 0 0 0 3px rgba(63, 140, 255, 0.15);
 }

@@ -1,59 +1,83 @@
 <div class="admin-users-container">
-  <h2>Manage Users</h2>
-  <button class="btn btn-primary add-user-btn" routerLink = "insert"> Add New Users</button>
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+      <h2 class="mb-1">User Management</h2>
+      <p class="text-muted mb-0">Manage system access and roles.</p>
+    </div>
+    <button class="btn btn-primary" (click)="openNewUserModal()">
+      <i class="fas fa-user-plus me-2"></i> Add New User
+    </button>
+  </div>
 
-  <table class="users-table">
-    <thead>
-    <tr>
-      <th>Name</th>
-      <th>
-        Job Title
-      </th>
-      <th>Username</th>
-      <th>Role</th>
-      <th>Status</th>
-      <th>Action</th>
-      <th>Password</th>
-<!--      <th>Edit</th>-->
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let user of users">
-      <td>{{ user.name }}</td>
-      <td>{{ user.jobTitle }}</td>
-      <td>{{ user.username }}</td>
-      <td>{{ user.authority.name }}</td>
-      <td>
-          <span [class.active]="user.isActive" [class.inactive]="!user.isActive">
-            {{ user.isActive ? "Active" : "Inactive" }}
-          </span>
-      </td>
-      <td>
-        <button *ngIf="user.authority.name !='ROLE_ADMIN'"
-          class="btn status-btn"
-          [ngClass]="user.isActive ? 'deactivate' : 'activate'"
-          (click)="toggleUserStatus(user)">
-          {{ user.isActive ? "Deactivate" : "Activate" }}
-        </button>
-      </td>
-      <td>
-        <button *ngIf="user.authority.name !='ROLE_ADMIN'"
-          class="btn btn-success"
-          (click)="changePassword(user.id)">
-          Change
-        </button>
-      </td>
-
-<!--      <td>-->
-<!--        <a routerLink="update/{{user.id}}">-->
-<!--          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#0f0">-->
-<!--            <path-->
-<!--              d="M200-200h57l391-391-57-57-391 391v57Zm-80 80v-170l528-527q12-11 26.5-17t30.5-6q16 0 31 6t26 18l55 56q12 11 17.5 26t5.5 30q0 16-5.5 30.5T817-647L290-120H120Zm640-584-56-56 56 56Zm-141 85-28-29 57 57-29-28Z" />-->
-<!--          </svg>-->
-<!--        </a>-->
-<!--      </td>-->
-    </tr>
-    </tbody>
-  </table>
+  <div class="table-responsive shadow-sm rounded">
+    <table class="table table-hover align-middle mb-0 bg-white">
+      <thead class="bg-light">
+        <tr>
+          <th>User</th>
+          <th>Role</th>
+          <th>Status</th>
+          <th class="text-center">Authentication</th>
+          <th class="text-center">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of users">
+          <td>
+            <div class="d-flex align-items-center">
+              <div class="avatar-circle me-3">{{ user.name.charAt(0).toUpperCase() }}</div>
+              <div>
+                <p class="fw-bold mb-0">{{ user.name }}</p>
+                <p class="text-muted small mb-0">{{ user.username }}</p>
+                <small class="text-muted">{{ user.jobTitle }}</small>
+              </div>
+            </div>
+          </td>
+          <td>
+            <span class="badge rounded-pill bg-info text-dark">{{ user.authority.name }}</span>
+          </td>
+          <td>
+            <span class="badge rounded-pill" [ngClass]="user.isActive ? 'bg-success' : 'bg-danger'">
+              {{ user.isActive ? "Active" : "Inactive" }}
+            </span>
+          </td>
+          <td class="text-center">
+            <button *ngIf="user.authority.name !='ROLE_ADMIN'" class="btn btn-outline-warning btn-sm"
+              (click)="changePassword(user.id)" title="Change Password">
+              <i class="fas fa-key"></i> Reset Pass
+            </button>
+          </td>
+          <td class="text-center">
+            <div *ngIf="user.authority.name !='ROLE_ADMIN'">
+              <button class="btn btn-sm me-2" [ngClass]="user.isActive ? 'btn-outline-danger' : 'btn-outline-success'"
+                (click)="toggleUserStatus(user)" [title]="user.isActive ? 'Deactivate' : 'Activate'">
+                <i class="fas" [ngClass]="user.isActive ? 'fa-ban' : 'fa-check-circle'"></i>
+              </button>
+              <!--              <a class="btn btn-sm btn-outline-primary" routerLink="update/{{user.id}}" title="Edit">-->
+              <!--                <i class="fas fa-edit"></i>-->
+              <!--              </a>-->
+            </div>
+            <span *ngIf="user.authority.name =='ROLE_ADMIN'" class="text-muted small">
+              <i class="fas fa-shield-alt"></i> Protected
+            </span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
 
+<!-- Modal for New User -->
+<div class="modal fade show" tabindex="-1" *ngIf="showModal" style="display: block; background-color: rgba(0,0,0,0.5);"
+  aria-modal="true" role="dialog">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title fw-bold">Create New User</h5>
+        <button type="button" class="btn-close" (click)="closeNewUserModal()"></button>
+      </div>
+      <div class="modal-body">
+        <app-insert-user (close)="closeNewUserModal()"></app-insert-user>
+      </div>
+    </div>
+  </div>
+</div>

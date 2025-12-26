@@ -1,17 +1,30 @@
 <div class="settings-container">
-  <h2 class="settings-title">Settings</h2>
+  <div class="header-section text-center mb-5">
+    <h2><i class="fas fa-cogs me-2"></i> System Settings</h2>
+    <p class="text-muted">Manage system configurations and user access.</p>
+  </div>
 
   <div class="settings-grid">
     <div class="settings-card" routerLink="/setting/test-manager" *ngIf="role=='ROLE_ADMIN' || role=='ROLE_MANAGER'">
-      <i class="fas fa-flask settings-icon"></i>
-      <h3>Test Manager</h3>
-      <p>Manage test-related configurations.</p>
+      <div class="icon-wrapper">
+        <i class="fas fa-flask"></i>
+      </div>
+      <div class="card-content">
+        <h3>Test Manager</h3>
+        <p>Configure test types, prices, and default settings.</p>
+      </div>
+      <i class="fas fa-arrow-right card-arrow"></i>
     </div>
 
     <div class="settings-card" routerLink="/setting/user-manager" *ngIf="role=='ROLE_ADMIN'">
-      <i class="fas fa-user-cog settings-icon" ></i>
-      <h3>Users Manager</h3>
-      <p>Manage user roles and permissions.</p>
+      <div class="icon-wrapper">
+        <i class="fas fa-users-cog"></i>
+      </div>
+      <div class="card-content">
+        <h3>User Management</h3>
+        <p>Control user roles, permissions, and accounts.</p>
+      </div>
+      <i class="fas fa-arrow-right card-arrow"></i>
     </div>
   </div>
 </div>
