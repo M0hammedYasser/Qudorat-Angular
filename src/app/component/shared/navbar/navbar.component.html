@@ -9,12 +9,12 @@
     <!-- User Profile Section -->
     <div class="user-profile-section ms-auto d-flex align-items-center" *ngIf="isLogin" routerLink="/profile">
       <div class="user-info text-end me-3 d-none d-md-block">
-        <span class="user-name d-block fw-bold text-dark">{{ user.name }}</span>
-        <span class="user-role badge bg-light text-primary border" *ngIf="user.authority">{{ user.authority.name
-          }}</span>
+        <span class="user-name d-block fw-bold text-dark">{{ user?.name || 'User' }}</span>
+        <span class="user-role text-muted small" *ngIf="user?.authority">{{ user?.authority?.name }}</span>
       </div>
       <div class="user-avatar-wrapper">
-        <img [src]="environment.url + 'images/' + user.image.path" alt="{{user.name}}" class="user-avatar shadow-sm">
+        <img [src]="user?.image?.path ? (environment.url + 'images/' + user.image.path) : 'assets/default-avatar.png'"
+          alt="{{user?.name}}" class="user-avatar shadow-sm" onerror="this.src='assets/default-avatar.png'">
       </div>
     </div>
   </div>

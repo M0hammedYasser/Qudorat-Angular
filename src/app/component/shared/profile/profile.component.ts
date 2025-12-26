@@ -1,20 +1,21 @@
-import {Component, OnInit} from '@angular/core';
-import {FormsModule} from "@angular/forms";
-import {NgIf} from "@angular/common";
-import {UserService} from "../../../service/user/user.service";
-import {AuthenticationService} from "../../../service/authentication/authentication.service";
-import {User} from "../../../model/user";
-import {environment} from "../../../../environments/environment";
+import { Component, OnInit } from '@angular/core';
+import { FormsModule } from "@angular/forms";
+import { NgIf, NgClass } from "@angular/common";
+import { UserService } from "../../../service/user/user.service";
+import { AuthenticationService } from "../../../service/authentication/authentication.service";
+import { User } from "../../../model/user";
+import { environment } from "../../../../environments/environment";
 import Swal from 'sweetalert2'
-import {HttpClient} from "@angular/common/http";
-import {Router} from "@angular/router";
+import { HttpClient } from "@angular/common/http";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-profile',
   standalone: true,
   imports: [
     FormsModule,
-    NgIf
+    NgIf,
+    NgClass
   ],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.css'
@@ -27,7 +28,7 @@ export class ProfileComponent implements OnInit {
 
 
   constructor(private userService: UserService,
-              private authService: AuthenticationService , private http : HttpClient , private router : Router) {
+    private authService: AuthenticationService, private http: HttpClient, private router: Router) {
   }
 
   ngOnInit() {
@@ -40,9 +41,9 @@ export class ProfileComponent implements OnInit {
     this.isEditing = !this.isEditing;
   }
 
-  saveChanges(id: number, name: string, username: string , jobTitle : string) {
+  saveChanges(id: number, name: string, username: string, jobTitle: string) {
     this.isEditing = false;
-    this.userService.updateUsername(id, name, username,jobTitle).subscribe(()=> {
+    this.userService.updateUsername(id, name, username, jobTitle).subscribe(() => {
       this.authService.logout();
       this.router.navigate(['login']);
     });

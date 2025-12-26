@@ -1,37 +1,101 @@
-<div class="profile-body">
-  <div class="profile-container">
-    <h4 class="text-center mb-4">Profile</h4>
+<div class="main-container">
+  <div class="row g-4">
+    <!-- Identity Card -->
+    <div class="col-lg-4">
+      <div class="card border-0 shadow-sm profile-card text-center h-100">
+        <div class="card-body p-4 d-flex flex-column align-items-center justify-content-center">
+          <div class="position-relative mb-3">
+            <img
+              [src]="user?.image?.path ? (environment.url + 'images/' + user.image.path) : 'assets/default-avatar.png'"
+              alt="Profile" class="profile-img shadow-sm" onerror="this.src='assets/default-avatar.png'">
+            <button class="btn btn-sm btn-light position-absolute bottom-0 end-0 rounded-circle shadow-sm border"
+              (click)="triggerFileInput()" title="Change Photo" style="width: 32px; height: 32px;">
+              <i class="fas fa-camera text-muted"></i>
+            </button>
+          </div>
 
-    <!-- Profile Image & Change Photo -->
-    <div class="profile-img-container">
-      <img [src]="environment.url + 'images/' + user.image.path" alt="User Photo" class="profile-img">
+          <h4 class="fw-bold mb-1">{{ user?.name || 'User Name' }}</h4>
+          <p class="text-muted mb-3">{{ user?.jobTitle || 'Job Title' }}</p>
+          <span class="badge bg-light text-primary border px-3 py-2 rounded-pill">{{ user?.authority?.name || 'ROLE'
+            }}</span>
 
-      <input type="file" id="photoInput" (change)="onFileSelected($event)" hidden>
-      <button class="btn btn-secondary mt-2" (click)="triggerFileInput()">📸 Change Photo</button>
+          <input type="file" id="photoInput" (change)="onFileSelected($event)" hidden>
 
-      <button *ngIf="selectedFile" class="btn btn-success mt-2" (click)="uploadPhoto()">⬆️ Upload</button>
+          <div class="mt-4 w-100" *ngIf="selectedFile">
+            <div class="alert alert-info py-2 small mb-2">Image selected: {{selectedFile.name}}</div>
+            <button class="btn btn-primary w-100" (click)="uploadPhoto()">
+              <i class="fas fa-upload me-2"></i> Upload New Photo
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <form #profileForm="ngForm">
-      <div class="form-group">
-        <label for="username">Username</label>
-        <input type="text" id="username" [(ngModel)]="user.username" name="username" [readonly]="!isEditing">
-      </div>
-      <div class="form-group">
-        <label for="name">Name</label>
-        <input type="text" id="name" [(ngModel)]="user.name" name="name" [readonly]="!isEditing">
-      </div>
-      <div class="form-group">
-        <label for="jobTitle">Job Title</label>
-        <input type="text" id="jobTitle" [(ngModel)]="user.jobTitle" name="jobTitle" [readonly]="!isEditing">
-      </div>
+    <!-- Details Card -->
+    <div class="col-lg-8">
+      <div class="card border-0 shadow-sm h-100">
+        <div
+          class="card-header bg-white border-bottom-0 pt-4 px-4 pb-0 d-flex justify-content-between align-items-center">
+          <h5 class="fw-bold mb-0">Account Details</h5>
+          <button class="btn btn-sm btn-outline-primary" *ngIf="!isEditing" (click)="toggleEdit()">
+            <i class="fas fa-edit me-1"></i> Edit Profile
+          </button>
+        </div>
+        <div class="card-body p-4">
+          <form #profileForm="ngForm">
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="form-label text-muted small fw-bold text-uppercase">Username</label>
+                <div class="input-group">
+                  <span class="input-group-text bg-light border-end-0"><i class="fas fa-user text-muted"></i></span>
+                  <input type="text" class="form-control border-start-0 ps-0 bg-light" [(ngModel)]="user.username"
+                    name="username" readonly>
+                </div>
+                <div class="form-text text-muted small">Username cannot be changed.</div>
+              </div>
 
-      <div class="button-group">
-        <button type="button" class="btn btn-primary" *ngIf="!isEditing" (click)="toggleEdit()">✏️ Update</button>
-        <button type="button" class="btn btn-success" *ngIf="isEditing" (click)="saveChanges(user.id, user.name, user.username , user.jobTitle)">💾 Save</button>
-      </div>
+              <div class="col-md-6">
+                <label class="form-label text-muted small fw-bold text-uppercase">Job Title</label>
+                <div class="input-group">
+                  <span class="input-group-text border-end-0"
+                    [ngClass]="{'bg-light': !isEditing, 'bg-white': isEditing}">
+                    <i class="fas fa-briefcase text-muted"></i>
+                  </span>
+                  <input type="text" class="form-control border-start-0 ps-0" [(ngModel)]="user.jobTitle"
+                    name="jobTitle" [readonly]="!isEditing" [ngClass]="{'bg-light': !isEditing, 'bg-white': isEditing}">
+                </div>
+              </div>
 
-      <button type="button" class="btn btn-danger btn-full mt-3" (click)="changePassword(user.id)">🔑 Change Password</button>
-    </form>
+              <div class="col-12">
+                <label class="form-label text-muted small fw-bold text-uppercase">Full Name</label>
+                <div class="input-group">
+                  <span class="input-group-text border-end-0"
+                    [ngClass]="{'bg-light': !isEditing, 'bg-white': isEditing}">
+                    <i class="fas fa-id-card text-muted"></i>
+                  </span>
+                  <input type="text" class="form-control border-start-0 ps-0" [(ngModel)]="user.name" name="name"
+                    [readonly]="!isEditing" [ngClass]="{'bg-light': !isEditing, 'bg-white': isEditing}">
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-4 pt-3 border-top d-flex justify-content-end gap-2" *ngIf="isEditing">
+              <button type="button" class="btn btn-light" (click)="toggleEdit()">Cancel</button>
+              <button type="button" class="btn btn-success px-4"
+                (click)="saveChanges(user.id, user.name, user.username , user.jobTitle)">
+                <i class="fas fa-save me-2"></i> Save Changes
+              </button>
+            </div>
+
+            <div class="mt-5">
+              <h6 class="fw-bold mb-3 text-danger">Security Zone</h6>
+              <button type="button" class="btn btn-outline-danger" (click)="changePassword(user.id)">
+                <i class="fas fa-key me-2"></i> Change Password
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

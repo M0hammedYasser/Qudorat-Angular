@@ -7,32 +7,40 @@
   width: 260px;
   height: calc(100vh - 70px);
   padding-top: 20px;
-  z-index: 1030;
+  z-index: 1000;
+  /* Below Navbar (1040) */
   border-right: 1px solid #eaeaea;
-  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.02);
+  /* Match navbar border exactly */
   overflow-y: auto;
-  /* Scroll if content is too long */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
 /* Scrollbar styling */
 .sidebar::-webkit-scrollbar {
-  width: 6px;
+  width: 5px;
 }
 
 .sidebar::-webkit-scrollbar-thumb {
-  background-color: #e9ecef;
-  border-radius: 3px;
+  background-color: #ced4da;
+  border-radius: 4px;
 }
 
 .sidebar .nav-link {
-  color: #5e6e82;
-  font-weight: 500;
+  color: #343a40;
+  /* High contrast dark gray */
+  font-weight: 600;
+  /* Sharper weight */
   padding: 12px 25px;
   display: flex;
   align-items: center;
-  transition: all 0.2s ease-in-out;
+  transition: color 0.2s, background-color 0.2s;
+  /* Specific transition to avoid blur */
   margin-bottom: 5px;
   font-size: 0.95rem;
+  letter-spacing: 0.3px;
+  /* slight spacing for legibility */
 }
 
 .sidebar .nav-link i {
