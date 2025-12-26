@@ -25,11 +25,14 @@
       </thead>
       <tbody>
         <tr *ngFor="let client of clients | search: searchText">
-          <td><span class="badge bg-light text-dark border">{{ client.id }}</span></td>
+          <td><span class="badge bg-light text-dark border">{{ client.code || client.id }}</span></td>
           <td class="fw-bold text-dark">{{ client.name }}</td>
           <td>{{ client.phone }}</td>
           <td>{{ client.email }}</td>
           <td class="text-center" *ngIf="role === 'ROLE_ADMIN'">
+            <button class="btn btn-sm btn-outline-info me-2" (click)="openViewModal(client)" title="View Details">
+              <i class="fas fa-eye"></i>
+            </button>
             <button class="btn btn-sm btn-outline-primary me-2" (click)="openUpdateClientModal(client.id)" title="Edit">
               <i class="fas fa-edit"></i>
             </button>
@@ -65,6 +68,76 @@
     <div class="modal-content border-0 shadow-lg">
       <div class="modal-body p-0">
         <app-update-client [id]="selectedClientId" (close)="closeUpdateClientModal()"></app-update-client>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal for View Client Details -->
+<div class="modal fade show" tabindex="-1" *ngIf="showViewModal && selectedClient"
+  style="display: block; background-color: rgba(0,0,0,0.5);" aria-modal="true" role="dialog">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content border-0 shadow-lg">
+      <div class="modal-header border-0 bg-light">
+        <h5 class="modal-title fw-bold text-dark"><i class="fas fa-id-card me-2 text-primary"></i> Client Details</h5>
+        <button type="button" class="btn-close" (click)="closeViewModal()"></button>
+      </div>
+      <div class="modal-body p-4">
+        <div class="row g-3">
+          <!-- Main Info -->
+          <div class="col-md-6">
+            <label class="small text-muted text-uppercase fw-bold">Client Name</label>
+            <p class="fw-bold text-dark fs-5">{{ selectedClient.name }}</p>
+          </div>
+          <div class="col-md-6">
+            <label class="small text-muted text-uppercase fw-bold">Client Code</label>
+            <p class="text-dark">{{ selectedClient.code || selectedClient.id }}</p>
+          </div>
+
+          <div class="col-12">
+            <hr class="my-2 text-muted">
+          </div>
+
+          <!-- Contact Info -->
+          <div class="col-md-6">
+            <label class="small text-muted text-uppercase fw-bold"><i class="fas fa-phone me-1"></i> Phone</label>
+            <p class="text-dark">{{ selectedClient.phone }}</p>
+          </div>
+          <div class="col-md-6">
+            <label class="small text-muted text-uppercase fw-bold"><i class="fas fa-envelope me-1"></i> Email</label>
+            <p class="text-dark">{{ selectedClient.email }}</p>
+          </div>
+          <div class="col-md-12">
+            <label class="small text-muted text-uppercase fw-bold"><i class="fas fa-map-marker-alt me-1"></i>
+              Address</label>
+            <p class="text-dark">{{ selectedClient.address || '-' }}</p>
+          </div>
+
+          <div class="col-12">
+            <hr class="my-2 text-muted">
+          </div>
+
+          <!-- Company Details -->
+          <div class="col-md-6">
+            <label class="small text-muted text-uppercase fw-bold">Company Name</label>
+            <p class="text-dark font-monospace">{{ selectedClient.companyName || '-' }}</p>
+          </div>
+          <div class="col-md-6">
+            <label class="small text-muted text-uppercase fw-bold">Representative</label>
+            <p class="text-dark">{{ selectedClient.companyRepresentative || '-' }}</p>
+          </div>
+          <div class="col-md-6">
+            <label class="small text-muted text-uppercase fw-bold">Commercial Reg. No</label>
+            <p class="text-dark font-monospace">{{ selectedClient.commercialRegistrationNumber || '-' }}</p>
+          </div>
+          <div class="col-md-6">
+            <label class="small text-muted text-uppercase fw-bold">Tax ID</label>
+            <p class="text-dark font-monospace">{{ selectedClient.taxIdentificationNumber || '-' }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer border-0 bg-light">
+        <button type="button" class="btn btn-secondary px-4" (click)="closeViewModal()">Close</button>
       </div>
     </div>
   </div>

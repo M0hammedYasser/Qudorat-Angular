@@ -35,6 +35,8 @@ export class ShowClientComponent implements OnInit {
   showModal: boolean = false;
   showUpdateModal: boolean = false;
   selectedClientId: any;
+  selectedClient: Client | null = null;
+  showViewModal: boolean = false;
 
   constructor(private service: ClientService, private authService: AuthenticationService) {
   }
@@ -93,6 +95,16 @@ export class ShowClientComponent implements OnInit {
     this.showUpdateModal = false;
     this.selectedClientId = null;
     this.findAll();
+  }
+
+  openViewModal(client: Client) {
+    this.selectedClient = client;
+    this.showViewModal = true;
+  }
+
+  closeViewModal() {
+    this.showViewModal = false;
+    this.selectedClient = null;
   }
 
 }
