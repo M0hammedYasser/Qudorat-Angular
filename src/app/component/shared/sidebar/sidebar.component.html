@@ -28,10 +28,10 @@
       style="font-size: 0.75rem; letter-spacing: 0.5px;">ACCOUNT</div>
 
     <li class="nav-item">
-      <a class="nav-link" routerLink="/notification" routerLinkActive="activate"
-        *ngIf="role!='ROLE_ADMIN' && role!='ROLE_QUALITY'">
-        <i class="fas fa-bell"></i> Notifications
-        <span *ngIf="notificationCount > 0" class="notification-badge">
+      <a class="nav-link d-flex justify-content-between align-items-center" routerLink="/notification"
+        routerLinkActive="activate" *ngIf="role!='ROLE_ADMIN' && role!='ROLE_QUALITY'">
+        <span><i class="fas fa-bell"></i> Notifications</span>
+        <span *ngIf="notificationCount > 0" class="badge rounded-pill bg-danger" style="font-size: 0.7rem;">
           {{notificationCount > 99 ? '99+' : notificationCount}}
         </span>
       </a>

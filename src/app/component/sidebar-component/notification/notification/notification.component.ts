@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 // import { Notification } from '../../../../model/notification';
 import { DatePipe, NgClass, NgForOf, NgIf } from '@angular/common';
-import {NotificationService} from "../../../../service/notification/notification.service";
+import { NotificationService } from "../../../../service/notification/notification.service";
 import { Router } from '@angular/router';
 
 export interface Notification {
@@ -19,11 +19,11 @@ export interface Tab {
 }
 
 @Component({
-    selector: 'app-notification',
-    standalone: true,
-    imports: [NgIf, NgForOf, NgClass],
-    templateUrl: './notification.component.html',
-    styleUrls: ['./notification.component.css']
+  selector: 'app-notification',
+  standalone: true,
+  imports: [NgIf, NgForOf, NgClass],
+  templateUrl: './notification.component.html',
+  styleUrls: ['./notification.component.css']
 })
 
 
@@ -48,7 +48,7 @@ export class NotificationComponent implements OnInit, OnDestroy {
   private pressTimer: any;
   private isLongPress: boolean = false;
 
-  constructor(private service: NotificationService, private router: Router) {}
+  constructor(private service: NotificationService, private router: Router) { }
 
   ngOnInit(): void {
     this.loadNotifications();
@@ -65,19 +65,33 @@ export class NotificationComponent implements OnInit, OnDestroy {
   }
 
   private loadNotifications(): void {
+    // 1. Always fetch accurate Unread Count for the badge
+    this.service.count().subscribe(count => {
+      const unreadTab = this.tabs.find(t => t.id === 'unread');
+      if (unreadTab) unreadTab.count = count > 0 ? count : undefined;
+    });
+
+    // 2. Load list based on active tab
     if (this.activeTab === 'unread') {
       this.service.findUnread().subscribe(response => {
         this.notifications = response;
         this.updateFilteredNotifications();
-        this.updateNotificationCount();
+        // In 'unread' mode, we don't know 'all' count, so we leave it as is or don't update it to avoid invalid overwrites
       });
     } else {
       this.service.findAll().subscribe(response => {
         this.notifications = response;
         this.updateFilteredNotifications();
-        this.updateNotificationCount();
+
+        // In 'all' mode, we know the total count
+        const allTab = this.tabs.find(t => t.id === 'all');
+        if (allTab) allTab.count = response.length;
       });
     }
+
+    // 3. Update saved count locally (since it's a local Set)
+    const savedTab = this.tabs.find(t => t.id === 'saved');
+    if (savedTab) savedTab.count = this.savedNotifications.size > 0 ? this.savedNotifications.size : undefined;
   }
 
   private updateFilteredNotifications(): void {
@@ -113,13 +127,11 @@ export class NotificationComponent implements OnInit, OnDestroy {
   }
 
   private updateNotificationCount(): void {
-    const unreadCount = this.notifications.filter(n => !n.isRead).length;
-
-    const allTab = this.tabs.find(t => t.id === 'all');
-    if (allTab) allTab.count = this.notifications.length;
-
-    const unreadTab = this.tabs.find(t => t.id === 'unread');
-    if (unreadTab) unreadTab.count = unreadCount > 0 ? unreadCount : undefined;
+    // Re-trigger load to ensure consistency, or simply re-fetch count
+    this.service.count().subscribe(count => {
+      const unreadTab = this.tabs.find(t => t.id === 'unread');
+      if (unreadTab) unreadTab.count = count > 0 ? count : undefined;
+    });
 
     const savedTab = this.tabs.find(t => t.id === 'saved');
     if (savedTab) savedTab.count = this.savedNotifications.size > 0 ? this.savedNotifications.size : undefined;

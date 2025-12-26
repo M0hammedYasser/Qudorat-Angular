@@ -6,15 +6,28 @@
       <img src="assets/Qudorat.png" alt="Qudorat" class="brand-text">
     </a>
 
-    <!-- User Profile Section -->
-    <div class="user-profile-section ms-auto d-flex align-items-center" *ngIf="isLogin" routerLink="/profile">
-      <div class="user-info text-end me-3 d-none d-md-block">
-        <span class="user-name d-block fw-bold text-dark">{{ user?.name || 'User' }}</span>
-        <span class="user-role text-muted small" *ngIf="user?.authority">{{ user?.authority?.name }}</span>
-      </div>
-      <div class="user-avatar-wrapper">
-        <img [src]="user?.image?.path ? (environment.url + 'images/' + user.image.path) : 'assets/default-avatar.png'"
-          alt="{{user?.name}}" class="user-avatar shadow-sm" onerror="this.src='assets/default-avatar.png'">
+    <!-- Notifications -->
+    <div class="ms-auto d-flex align-items-center gap-3">
+
+      <button class="notification-btn" routerLink="/notification"
+        *ngIf="isLogin && user?.authority?.name !== 'ROLE_ADMIN' && user?.authority?.name !== 'ROLE_QUALITY'">
+        <i class="fas fa-bell fa-lg"></i>
+        <span *ngIf="notificationCount > 0" class="notification-badge">
+          {{notificationCount > 99 ? '99+' : notificationCount}}
+        </span>
+      </button>
+
+      <!-- User Profile Section -->
+      <div class="user-profile-section d-flex align-items-center" *ngIf="isLogin" routerLink="/profile">
+        <div class="user-info text-end me-3 d-none d-md-block">
+          <span class="user-name d-block fw-bold text-dark">{{ user?.name || 'User' }}</span>
+          <span class="user-role text-muted small" *ngIf="user?.authority">{{ user?.authority?.name }}</span>
+        </div>
+        <div class="user-avatar-wrapper">
+          <img [src]="user?.image?.path ? (environment.url + 'images/' + user.image.path) : 'assets/profile.jpg'"
+            alt="{{user?.name}}" class="user-avatar shadow-sm"
+            onerror="this.onerror=null;this.src='assets/profile.jpg'">
+        </div>
       </div>
     </div>
   </div>
