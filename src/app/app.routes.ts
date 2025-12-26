@@ -82,17 +82,12 @@ export const routes: Routes = [
   {path: 'notification', component: NotificationComponent, canActivate: [authGuard]},
 
   { path: 'clients', component: ShowClientComponent, canActivate: [authGuard] },
-  { path: 'clients/insert', component: InsertClientComponent, canActivate: [authGuard] },
-  { path: 'clients/update/:id', component: UpdateClientComponent, canActivate: [authGuard] },
 
   { path: 'projects', component: ShowProjectComponent, canActivate: [authGuard] },
-  { path: 'projects/insert', component: InsertProjectComponent, canActivate: [authGuard] },
-  { path: 'projects/update/:id', component: UpdateProjectComponent, canActivate: [authGuard] },
   { path: 'projects/invoice/:id', component: ProjectInvoiceComponent, canActivate: [authGuard] },
 
   { path: 'tests', component: TestComponent, canActivate: [authGuard] },
-  { path: 'tests/insert', component: InsertTestComponent, canActivate: [authGuard] },
-  { path: 'tests/update/:id', component: UpdateTestComponent, canActivate: [authGuard] },
+
 
   { path: 'sands/:id', component: ShowSandComponent, canActivate: [authGuard] },
   { path: 'sands/insert/:id', component: InsertSandComponent, canActivate: [authGuard] },

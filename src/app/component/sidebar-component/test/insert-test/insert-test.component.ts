@@ -9,6 +9,7 @@ import { Test } from "../../../../model/test";
 import { TestService } from "../../../../service/test/test.service";
 import { TestManager } from "../../../../model/test-manager";
 import { TestManagerService } from "../../../../service/test-manager/test-manager.service";
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-insert-test',
@@ -56,6 +57,11 @@ export class InsertTestComponent implements OnInit {
   insert() {
     this.service.insert(this.test).subscribe({
       next: () => {
+        Swal.fire({
+          title: "Success",
+          text: "Test added successfully",
+          icon: "success"
+        });
         this.close.emit();
       },
       error: (err) => {

@@ -5,6 +5,7 @@ import { Project } from "../../../../model/project";
 import { Client } from "../../../../model/client";
 import { ProjectService } from "../../../../service/project/project.service";
 import { ClientService } from "../../../../service/client/client.service";
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-update-project',
@@ -35,10 +36,15 @@ export class UpdateProjectComponent implements OnInit {
     this.clientService.findAll().subscribe(res => this.clients = res);
   }
 
-  insert() {
-    this.service.update(this.project, this.id).subscribe(() =>
-      this.close.emit()
-    )
+  update() {
+    this.service.update(this.project, this.id).subscribe(() => {
+      Swal.fire({
+        title: "Success",
+        text: "Project updated successfully",
+        icon: "success"
+      });
+      this.close.emit();
+    })
   }
 
 }

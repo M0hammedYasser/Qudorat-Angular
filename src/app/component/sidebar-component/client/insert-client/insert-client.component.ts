@@ -2,6 +2,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormsModule } from "@angular/forms";
 import { Client } from "../../../../model/client";
 import { ClientService } from "../../../../service/client/client.service";
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -31,6 +32,11 @@ export class InsertClientComponent implements OnInit {
   insert() {
     this.service.insert(this.client).subscribe(
       () => {
+        Swal.fire({
+          title: "Success",
+          text: "Client added successfully",
+          icon: "success"
+        });
         this.close.emit();
       });
   }

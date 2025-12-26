@@ -5,6 +5,7 @@ import { ClientService } from "../../../../service/client/client.service";
 import { Client } from "../../../../model/client";
 import { Project } from "../../../../model/project";
 import { ProjectService } from "../../../../service/project/project.service";
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-insert-project',
@@ -33,13 +34,14 @@ export class InsertProjectComponent implements OnInit {
   insert() {
     this.service.insert(this.project).subscribe({
       next: () => {
+        Swal.fire({
+          title: "Success",
+          text: "Project added successfully",
+          icon: "success"
+        });
         this.close.emit();
       },
       error: (err) => {
-        // Handle error if needed, for now just close or keep open? 
-        // Original code navigated away even on error? No, original had error: this.router.navigate...
-        // Let's assume we close on success. On error we probably shouldn't close but user UX might differ.
-        // For now, let's close to match previous behavior of leaving the page.
         this.close.emit();
       }
     });

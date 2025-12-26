@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { Client } from "../../../../model/client";
 import { ClientService } from "../../../../service/client/client.service";
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-update-client',
@@ -32,6 +33,11 @@ export class UpdateClientComponent implements OnInit {
   update() {
     this.service.update(this.client, this.id).subscribe(
       () => {
+        Swal.fire({
+          title: "Success",
+          text: "Client updated successfully",
+          icon: "success"
+        });
         this.close.emit();
       });
   }

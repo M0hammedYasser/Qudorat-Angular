@@ -7,6 +7,7 @@ import { TestService } from "../../../../service/test/test.service";
 import { ProjectService } from "../../../../service/project/project.service";
 import { TestManager } from "../../../../model/test-manager";
 import { TestManagerService } from "../../../../service/test-manager/test-manager.service";
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-update-test',
@@ -62,10 +63,15 @@ export class UpdateTestComponent implements OnInit {
     });
   }
 
-  insert() {
-    this.service.update(this.test, this.id).subscribe(() =>
-      this.close.emit()
-    )
+  update() {
+    this.service.update(this.test, this.id).subscribe(() => {
+      Swal.fire({
+        title: "Success",
+        text: "Test updated successfully",
+        icon: "success"
+      });
+      this.close.emit();
+    })
   }
 
 }
