@@ -1,51 +1,57 @@
-<div class="body">
-  <div class="register-container">
-    <h4 class="text-center mb-4">Update Client</h4>
-    <form (ngSubmit)="update()" #form="ngForm">
+<div class="register-container">
+  <form (ngSubmit)="update()" #form="ngForm">
 
-      <div class="mb-3">
-        <label for="name" class="form-label">Name</label>
-        <input type="text" class="form-control" id="name" [(ngModel)]="client.name" name="name" required #name="ngModel">
+    <div class="mb-3">
+      <label for="name" class="form-label">Name</label>
+      <input type="text" class="form-control" id="name" [(ngModel)]="client.name" name="name" required #name="ngModel">
+    </div>
+
+    <div class="row mb-3">
+      <div class="col-6">
+        <label for="email" class="form-label">Email</label>
+        <input type="email" class="form-control" id="email" [(ngModel)]="client.email" name="email" #email="ngModel">
       </div>
-
-      <div class="row mb-3">
-        <div class="col-6">
-          <label for="email" class="form-label">Email</label>
-          <input type="email" class="form-control" id="email" [(ngModel)]="client.email" name="email" #email="ngModel">
-        </div>
-        <div class="col-6">
-          <label for="phone" class="form-label">Phone</label>
-          <input type="text" class="form-control" id="phone" [(ngModel)]="client.phone" name="phone" required #phone="ngModel">
-        </div>
+      <div class="col-6">
+        <label for="phone" class="form-label">Phone</label>
+        <input type="text" class="form-control" id="phone" [(ngModel)]="client.phone" name="phone" required
+          #phone="ngModel">
       </div>
+    </div>
 
-      <div class="mb-3">
-        <label for="companyName" class="form-label">Company Name</label>
-        <input type="text" class="form-control" id="companyName" [(ngModel)]="client.companyName" name="companyName" #companyName="ngModel">
+    <div class="mb-3">
+      <label for="companyName" class="form-label">Company Name</label>
+      <input type="text" class="form-control" id="companyName" [(ngModel)]="client.companyName" name="companyName"
+        #companyName="ngModel">
+    </div>
+
+    <div class="row mb-3">
+      <div class="col-6">
+        <label for="commercialReg" class="form-label">Commercial Registration Number</label>
+        <input type="text" class="form-control" id="commercialReg" [(ngModel)]="client.commercialRegistrationNumber"
+          name="commercialReg" #commercialReg="ngModel">
       </div>
-
-      <div class="row mb-3">
-        <div class="col-6">
-          <label for="commercialReg" class="form-label">Commercial Registration Number</label>
-          <input type="text" class="form-control" id="commercialReg" [(ngModel)]="client.commercialRegistrationNumber" name="commercialReg" #commercialReg="ngModel">
-        </div>
-        <div class="col-6">
-          <label for="taxId" class="form-label">Tax Identification Number</label>
-          <input type="text" class="form-control" id="taxId" [(ngModel)]="client.taxIdentificationNumber" name="taxId" required #taxId="ngModel">
-        </div>
+      <div class="col-6">
+        <label for="taxId" class="form-label">Tax Identification Number</label>
+        <input type="text" class="form-control" id="taxId" [(ngModel)]="client.taxIdentificationNumber" name="taxId"
+          required #taxId="ngModel">
       </div>
+    </div>
 
-      <div class="mb-3">
-        <label for="companyRep" class="form-label">Company Representative</label>
-        <input type="text" class="form-control" id="companyRep" [(ngModel)]="client.companyRepresentative" name="companyRep" #companyRep="ngModel">
-      </div>
+    <div class="mb-3">
+      <label for="companyRep" class="form-label">Company Representative</label>
+      <input type="text" class="form-control" id="companyRep" [(ngModel)]="client.companyRepresentative"
+        name="companyRep" #companyRep="ngModel">
+    </div>
 
-      <div class="mb-3">
-        <label for="address" class="form-label">Address</label>
-        <input type="text" class="form-control" id="address" [(ngModel)]="client.address" name="address" #address="ngModel">
-      </div>
+    <div class="mb-3">
+      <label for="address" class="form-label">Address</label>
+      <input type="text" class="form-control" id="address" [(ngModel)]="client.address" name="address"
+        #address="ngModel">
+    </div>
 
-      <button type="submit" class="btn btn-primary w-25 mx-auto d-block mt-4" [disabled]="!form.valid">Save</button>
-    </form>
-  </div>
+    <div class="d-flex justify-content-center gap-2 mt-4">
+      <button type="button" class="btn btn-secondary w-25" (click)="close.emit()">Cancel</button>
+      <button type="submit" class="btn btn-primary w-25" [disabled]="!form.valid">Save</button>
+    </div>
+  </form>
 </div>

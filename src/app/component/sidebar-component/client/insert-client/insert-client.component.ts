@@ -1,8 +1,7 @@
-import {Component, OnInit} from '@angular/core';
-import {FormsModule} from "@angular/forms";
-import {Router} from "@angular/router";
-import {Client} from "../../../../model/client";
-import {ClientService} from "../../../../service/client/client.service";
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { FormsModule } from "@angular/forms";
+import { Client } from "../../../../model/client";
+import { ClientService } from "../../../../service/client/client.service";
 
 
 @Component({
@@ -14,23 +13,26 @@ import {ClientService} from "../../../../service/client/client.service";
   templateUrl: './insert-client.component.html',
   styleUrl: './insert-client.component.css'
 })
-export class InsertClientComponent implements OnInit{
+export class InsertClientComponent implements OnInit {
 
+  @Output() close = new EventEmitter<void>();
 
   client: Client = {} as Client;
   entry: number = 0;
 
-  constructor(private service: ClientService, private router: Router) {
+  constructor(private service: ClientService) {
   }
 
   ngOnInit() {
-    this.service.count().subscribe(res=> this.entry = res + 1);
+    this.service.count().subscribe(res => this.entry = res + 1);
   }
 
 
   insert() {
     this.service.insert(this.client).subscribe(
-      () => this.router.navigate(['/clients']));
+      () => {
+        this.close.emit();
+      });
   }
 
 }
