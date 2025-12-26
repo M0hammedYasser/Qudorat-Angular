@@ -4,6 +4,10 @@
       <a class="nav-link" routerLink="/dashboard" routerLinkActive="activate">
         <i class="fas fa-tachometer-alt"></i> Dashboard</a>
     </li>
+
+    <div class="nav-divider my-2 mt-4 text-muted small px-4 text-uppercase fw-bold"
+      style="font-size: 0.75rem; letter-spacing: 0.5px;" *ngIf="role!='ROLE_TECH'">MANAGEMENT</div>
+
     <li class="nav-item">
       <a class="nav-link" routerLink="/clients" routerLinkActive="activate" *ngIf="role!='ROLE_TECH'">
         <i class="fas fa-users"></i> Clients
@@ -11,63 +15,54 @@
     </li>
     <li class="nav-item">
       <a class="nav-link" routerLink="/projects" routerLinkActive="activate" *ngIf="role!='ROLE_TECH'">
-        <i class="fa-solid fa-diagram-project"></i> Project
+        <i class="fas fa-project-diagram"></i> Projects
       </a>
     </li>
     <li class="nav-item">
       <a class="nav-link" routerLink="/tests" routerLinkActive="activate">
-        <i class="fas fa-flask"></i> Test Management
-      </a>
-    </li>
-    <!-- <li class="nav-item">
-      <a class="nav-link" routerLink="/orders" routerLinkActive="activate">
-        <i class="fas fa-shopping-cart"></i> Orders
+        <i class="fas fa-flask"></i> Tests
       </a>
     </li>
 
+    <div class="nav-divider my-2 mt-4 text-muted small px-4 text-uppercase fw-bold"
+      style="font-size: 0.75rem; letter-spacing: 0.5px;">ACCOUNT</div>
+
     <li class="nav-item">
-      <a class="nav-link" routerLink="/bill" routerLinkActive="activate">
-        <i class="fas fa-file-invoice-dollar"></i> Bill & Tax
-      </a>
-    </li> -->
-    <li class="nav-item">
-      <a class="nav-link" routerLink="/notification" routerLinkActive="activate" *ngIf=" role!='ROLE_ADMIN' && role!='ROLE_QUALITY' ">
+      <a class="nav-link" routerLink="/notification" routerLinkActive="activate"
+        *ngIf="role!='ROLE_ADMIN' && role!='ROLE_QUALITY'">
         <i class="fas fa-bell"></i> Notifications
         <span *ngIf="notificationCount > 0" class="notification-badge">
-      {{notificationCount > 99 ? '99+' : notificationCount}}
-    </span>
+          {{notificationCount > 99 ? '99+' : notificationCount}}
+        </span>
       </a>
     </li>
     <li class="nav-item">
       <a class="nav-link" routerLink="/profile" routerLinkActive="activate">
-        <i class="fas fa-user"></i> Account
+        <i class="fas fa-user-circle"></i> Profile
       </a>
     </li>
-    <!-- <li class="nav-item">
-      <a class="nav-link" routerLink="/report" routerLinkActive="activate">
-        <i class="fas fa-file-alt"></i> Test Report
-      </a>
-    </li> -->
+
+    <div class="nav-divider my-2 mt-4 text-muted small px-4 text-uppercase fw-bold"
+      style="font-size: 0.75rem; letter-spacing: 0.5px;" *ngIf="role=='ROLE_ADMIN' || role=='ROLE_MANAGER'">SYSTEM</div>
+
     <li class="nav-item" *ngIf="role=='ROLE_ADMIN' || role=='ROLE_MANAGER'">
       <a class="nav-link" routerLink="/setting" routerLinkActive="activate">
-        <i class="fas fa-cogs"></i> Settings
+        <i class="fas fa-cog"></i> Settings
       </a>
     </li>
-
     <li class="nav-item" *ngIf="role=='ROLE_ADMIN' || role=='ROLE_MANAGER'">
       <a class="nav-link" routerLink="/db-backup" routerLinkActive="activate">
-        <i class="fas fa-database"></i> Database Backup
+        <i class="fas fa-database"></i> Backup
       </a>
     </li>
-
     <li class="nav-item">
       <a class="nav-link" routerLink="/help" routerLinkActive="activate">
         <i class="fas fa-question-circle"></i> Help
       </a>
     </li>
-    <li class="nav-item">
-      <a class="nav-link"  (click)="logout()" routerLinkActive="activate">
-        <i class="fas fa-sign-out-alt"></i> Logout
+    <li class="nav-item mt-3">
+      <a class="nav-link text-danger" (click)="logout()" style="cursor: pointer;">
+        <i class="fas fa-sign-out-alt text-danger"></i> Logout
       </a>
     </li>
   </ul>

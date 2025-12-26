@@ -1,15 +1,21 @@
-<nav class="navbar navbar-expand-lg navbar-light">
-  <a class="navbar-brand" routerLink="/dashboard">
-    <img src="assets/Q.jpeg" alt="Logo">
-    <img style="width: 100px; margin-left: 5px" src="assets/Qudorat.png" alt="Logo">
-  </a>
+<nav class="navbar navbar-expand-lg">
+  <div class="container-fluid">
+    <!-- Brand / Logo -->
+    <a class="navbar-brand d-flex align-items-center" routerLink="/dashboard">
+      <img src="assets/Q.jpeg" alt="Logo" class="brand-logo me-2">
+      <img src="assets/Qudorat.png" alt="Qudorat" class="brand-text">
+    </a>
 
-  <div *ngIf="isLogin" style="padding-left: 1050px ; font-size: 18px ; font-style: normal ;font-weight: bold;">
-    {{ user.name }}
-  </div>
-  <div class="user-profile" routerLink="/profile">
-    <img *ngIf="isLogin" [src]="environment.url + 'images/' + user.image.path" alt="Users" class="user-img">
+    <!-- User Profile Section -->
+    <div class="user-profile-section ms-auto d-flex align-items-center" *ngIf="isLogin" routerLink="/profile">
+      <div class="user-info text-end me-3 d-none d-md-block">
+        <span class="user-name d-block fw-bold text-dark">{{ user.name }}</span>
+        <span class="user-role badge bg-light text-primary border" *ngIf="user.authority">{{ user.authority.name
+          }}</span>
+      </div>
+      <div class="user-avatar-wrapper">
+        <img [src]="environment.url + 'images/' + user.image.path" alt="{{user.name}}" class="user-avatar shadow-sm">
+      </div>
+    </div>
   </div>
 </nav>
-
-

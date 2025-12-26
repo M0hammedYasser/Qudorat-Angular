@@ -1,54 +1,46 @@
-.container {
-  margin-top: 20px;
+.main-container {
+  padding: 110px 40px 40px;
+  margin-left: 260px;
+  max-width: calc(100% - 260px);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.table {
-  width: 100%;
-  text-align: center;
+h2 {
+  color: #2c3e50;
+  font-weight: 700;
+}
+
+.table th {
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 0.5px;
+  color: #6c757d;
+  padding: 1rem;
+  border-bottom: 2px solid #eaeaea;
+}
+
+.table td {
+  padding: 1rem;
+  color: #495057;
 }
 
 .badge {
-  padding: 5px 10px;
-  font-size: 14px;
+  font-size: 0.9rem;
+  padding: 0.5em 0.8em;
+  font-weight: 500;
 }
 
-:host {
-  display: block;
-  margin-left: 250px;
-  padding: 20px;
-  margin-top: 60px;
+.btn-sm {
+  padding: 0.4rem 0.6rem;
+  font-size: 0.9rem;
 }
 
-.btn {
-  margin: -66px 0 0 900px;
-}
-a{
-  margin: 0 4px;
+.shadow-lg {
+  box-shadow: 0 1rem 3rem rgba(0, 0, 0, .175) !important;
 }
 
-.table-responsive {
-  max-height: 500px;
-  overflow-y: auto;
-}
-
-.sticky-header {
-  position: sticky;
-  top: 0;
-  z-index: 10;
-  background-color: white;
-}
-
-.table-responsive::-webkit-scrollbar {
-  width: 8px;
-  background-color: #fff;
-  border-left: 2px solid #eee;
-}
-
-.table-responsive::-webkit-scrollbar-thumb {
-  background-color: rgba(207, 207, 207, 0.49);
-  border-radius: 50px;
-}
-
-.table-responsive::-webkit-scrollbar-thumb:hover {
-  background: rgba(238, 236, 236, 0.8);
+.modal-body {
+  border-radius: 0.5rem;
+  overflow: hidden;
 }

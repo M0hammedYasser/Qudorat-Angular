@@ -1,8 +1,7 @@
 .test-manager-container {
-  max-width: 1000px;
-  margin: 2rem auto;
-  padding: 2rem;
-  padding-top: 80px;
+  padding: 110px 30px 30px;
+  margin-left: 260px;
+  max-width: calc(100% - 260px);
 }
 
 h2 {

@@ -1,81 +1,46 @@
-.container {
-  margin-top: 20px;
+.main-container {
+  padding: 110px 40px 40px;
+  margin-left: 260px;
+  max-width: calc(100% - 260px);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.table {
-  width: 100%;
-  text-align: center;
-  font-size: 12px; /* Reduced font size */
+h2 {
+  color: #2c3e50;
+  font-weight: 700;
 }
 
-.table th, .table td {
-  padding: 4px 6px; /* Reduced padding */
-  white-space: nowrap; /* Prevents text wrapping */
+.table th {
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 0.5px;
+  color: #6c757d;
+  padding: 1rem;
+  border-bottom: 2px solid #eaeaea;
+}
+
+.table td {
+  padding: 1rem;
+  color: #495057;
 }
 
 .badge {
-  padding: 3px 8px;
-  font-size: 12px;
+  font-size: 0.9rem;
+  padding: 0.5em 0.8em;
+  font-weight: 500;
 }
 
-:host {
-  display: block;
-  margin-left: 250px;
-  padding: 15px;
-  margin-top: 50px;
+.btn-sm {
+  padding: 0.4rem 0.6rem;
+  font-size: 0.9rem;
 }
 
-.btn {
-  margin: -70px 0 0 900px;
-  font-size: 16px;
-  padding: 4px 8px; /* Smaller button */
+.shadow-lg {
+  box-shadow: 0 1rem 3rem rgba(0, 0, 0, .175) !important;
 }
 
-a {
-  margin: 0 2px;
-}
-
-.table-responsive {
-  max-height: 400px; /* Slightly smaller height */
-  overflow-y: auto;
-}
-
-.sticky-header {
-  position: sticky;
-  top: 0;
-  z-index: 10;
-  background-color: white;
-}
-
-.table-responsive::-webkit-scrollbar {
-  width: 6px; /* Smaller scrollbar */
-  background-color: #fff;
-  border-left: 1px solid #eee;
-}
-
-.table-responsive::-webkit-scrollbar-thumb {
-  background-color: rgba(207, 207, 207, 0.6);
-  border-radius: 50px;
-}
-
-.table-responsive::-webkit-scrollbar-thumb:hover {
-  background: rgba(238, 236, 236, 0.9);
-}
-
-/* Limit column width to keep table compact */
-th:nth-child(1), td:nth-child(1) { width: 80px; }  /* Code */
-th:nth-child(2), td:nth-child(2) { width: 120px; } /* Name */
-th:nth-child(3), td:nth-child(3) { width: 140px; } /* Company Name */
-th:nth-child(4), td:nth-child(4) { width: 110px; } /* Phone */
-th:nth-child(5), td:nth-child(5) { width: 150px; } /* Commercial Reg. No */
-th:nth-child(6), td:nth-child(6) { width: 150px; } /* Tax ID */
-th:nth-child(7), td:nth-child(7) { width: 130px; } /* Representative */
-th:nth-child(8), td:nth-child(8) { width: 160px; } /* Email */
-th:nth-child(9), td:nth-child(9) { width: 180px; } /* Address */
-th:nth-child(10), td:nth-child(10) { width: 100px; } /* Action (Admin only) */
-
-/* Reduce icon size */
-svg {
-  width: 14px;
-  height: 14px;
+.modal-body {
+  border-radius: 0.5rem;
+  overflow: hidden;
 }

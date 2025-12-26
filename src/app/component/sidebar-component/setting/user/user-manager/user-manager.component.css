@@ -1,7 +1,7 @@
 .admin-users-container {
-  padding: 80px 30px;
-  max-width: 1200px;
-  margin: auto;
+  padding: 110px 30px 30px;
+  margin-left: 260px;
+  max-width: calc(100% - 260px);
 }
 
 h2 {

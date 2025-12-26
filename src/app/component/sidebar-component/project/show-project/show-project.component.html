@@ -1,72 +1,60 @@
-<div class="container">
-  <div class="head">
-    <app-search (searchTextChange)="onSearchTextEntered($event)"></app-search>
-    <button class="btn btn-primary" (click)="openNewProjectModal()"
-      [disabled]="role!='ROLE_ADMIN' && role != 'ROLE_DATAENTRY'">New</button>
+<div class="main-container">
+  <div class="d-flex justify-content-between align-items-center mb-4 header-section">
+    <div>
+      <h2 class="mb-1"><i class="fas fa-project-diagram me-2"></i> Projects</h2>
+      <p class="text-muted mb-0">Track and manage client projects.</p>
+    </div>
+    <div class="d-flex gap-3 align-items-center">
+      <app-search (searchTextChange)="onSearchTextEntered($event)"></app-search>
+      <button class="btn btn-primary shadow-sm" (click)="openNewProjectModal()"
+        *ngIf="role === 'ROLE_ADMIN' || role === 'ROLE_MANAGER'">
+        <i class="fas fa-plus me-2"></i> New Project
+      </button>
+    </div>
   </div>
 
-  <div class="table-responsive">
-    <table class="table table-bordered table-hover">
-      <thead class="sticky-header">
+  <div class="table-responsive shadow-sm rounded bg-white">
+    <table class="table table-hover align-middle mb-0">
+      <thead class="bg-light">
         <tr>
-          <th>Code</th>
-          <th>Project Name</th>
+          <th>Project</th>
           <th>Client Code</th>
-          <th>Client Name</th>
-          <th>Number Of Tests</th>
           <th>Consultant</th>
           <th>Owner</th>
           <th>Location</th>
-          <th>Actions</th>
+          <th class="text-center" *ngIf="role === 'ROLE_ADMIN' || role === 'ROLE_MANAGER'">Actions</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let project of projects | search: searchText;">
-          <td>{{ project.id }}</td>
-          <td>{{ project.projectName }}</td>
-          <td>{{ project.client.id }}</td>
-          <td>{{ project.client.name }}</td>
-          <td>{{ project.numberOfTests }}</td>
+        <tr *ngFor="let project of projects | search: searchText">
+          <td class="fw-bold text-primary">{{ project.projectName }}</td>
+          <td><span class="badge bg-light text-dark border">{{ project.client.id }}</span></td>
           <td>{{ project.consultant }}</td>
           <td>{{ project.owner }}</td>
-          <td>{{ project.location }}</td>
-          <td>
-            <a>
-              <svg routerLink="/projects/invoice/{{project.id}}" xmlns="http://www.w3.org/2000/svg" width="16"
-                height="16" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
-                <path
-                  d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8M1.173 8a13 13 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5s3.879 1.168 5.168 2.457A13 13 0 0 1 14.828 8q-.086.13-.195.288c-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5s-3.879-1.168-5.168-2.457A13 13 0 0 1 1.172 8z" />
-                <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5M4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0" />
-              </svg>
-            </a>
-            <a *ngIf="role == 'ROLE_ADMIN' || role == 'ROLE_DATAENTRY'" (click)="openUpdateProjectModal(project.id)"
-              style="cursor: pointer;">
-              <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#0f0">
-                <path
-                  d="M200-200h57l391-391-57-57-391 391v57Zm-80 80v-170l528-527q12-11 26.5-17t30.5-6q16 0 31 6t26 18l55 56q12 11 17.5 26t5.5 30q0 16-5.5 30.5T817-647L290-120H120Zm640-584-56-56 56 56Zm-141 85-28-29 57 57-29-28Z" />
-              </svg>
-            </a>
-            <a *ngIf="role == 'ROLE_ADMIN'" (click)="delete(project.id)" style="cursor: pointer;">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="red" class="bi bi-trash"
-                viewBox="0 0 16 16">
-                <path
-                  d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z" />
-                <path
-                  d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z" />
-              </svg>
-            </a>
+          <td><i class="fas fa-map-marker-alt text-muted me-1"></i> {{ project.location }}</td>
+          <td class="text-center" *ngIf="role === 'ROLE_ADMIN' || role === 'ROLE_MANAGER'">
+            <button class="btn btn-sm btn-outline-primary me-2" (click)="openUpdateProjectModal(project.id)"
+              title="Edit">
+              <i class="fas fa-edit"></i>
+            </button>
+            <button class="btn btn-sm btn-outline-danger" (click)="delete(project.id)" title="Delete">
+              <i class="fas fa-trash-alt"></i>
+            </button>
           </td>
+        </tr>
+        <tr *ngIf="(projects | search: searchText).length === 0">
+          <td colspan="6" class="text-center p-4 text-muted">No projects found matching your search.</td>
         </tr>
       </tbody>
     </table>
   </div>
 </div>
 
-<!-- Modal -->
-<div class="modal fade show" tabindex="-1" role="dialog" style="display: block; background: rgba(0,0,0,0.5);"
-  *ngIf="showModal">
-  <div class="modal-dialog modal-lg" role="document">
-    <div class="modal-content">
+<!-- Modal for New Project -->
+<div class="modal fade show" tabindex="-1" *ngIf="showModal" style="display: block; background-color: rgba(0,0,0,0.5);"
+  aria-modal="true" role="dialog">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content border-0 shadow-lg">
       <div class="modal-body p-0">
         <app-insert-project (close)="closeNewProjectModal()"></app-insert-project>
       </div>
@@ -74,11 +62,11 @@
   </div>
 </div>
 
-<!-- Update Modal -->
-<div class="modal fade show" tabindex="-1" role="dialog" style="display: block; background: rgba(0,0,0,0.5);"
-  *ngIf="showUpdateModal">
-  <div class="modal-dialog modal-lg" role="document">
-    <div class="modal-content">
+<!-- Modal for Update Project -->
+<div class="modal fade show" tabindex="-1" *ngIf="showUpdateModal"
+  style="display: block; background-color: rgba(0,0,0,0.5);" aria-modal="true" role="dialog">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content border-0 shadow-lg">
       <div class="modal-body p-0">
         <app-update-project [id]="selectedProjectId" (close)="closeUpdateProjectModal()"></app-update-project>
       </div>

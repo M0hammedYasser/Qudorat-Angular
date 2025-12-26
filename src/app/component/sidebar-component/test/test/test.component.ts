@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NgForOf, NgIf } from "@angular/common";
+import { NgClass, NgForOf, NgIf } from "@angular/common";
 import { ActivatedRoute, Router, RouterLink } from "@angular/router";
 import { SearchComponent } from "../../../shared/search/search.component";
 import { SearchPipe } from "../../../../pipe/search.pipe";
@@ -20,7 +20,8 @@ import { UpdateTestComponent } from "../update-test/update-test.component";
     SearchPipe,
     NgIf,
     InsertTestComponent,
-    UpdateTestComponent
+    UpdateTestComponent,
+    NgClass
   ],
   templateUrl: './test.component.html',
   styleUrl: './test.component.css'
