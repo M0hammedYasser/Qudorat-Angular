@@ -1,73 +1,40 @@
-.trial-container {
-  margin-left: 260px; /* Space for sidebar */
-  padding: 80px 20px 0 20px ;
-  background: white;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+:host {
+  display: block;
 }
 
-.header-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
+.main-content {
+  margin-left: 260px;
+  padding-top: 110px;
+  padding-left: 40px;
+  padding-right: 40px;
+  padding-bottom: 40px;
+  background-color: #f8f9fa;
+  min-height: 100vh;
 }
 
-.header {
-  font-size: 24px;
-  font-weight: bold;
-}
-
-.btn-add {
-  padding: 10px 15px;
-  margin-left: 10px;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.card-container {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
+/* Card Styling */
 .trial-card {
-  background: white;
-  padding: 15px;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease-in-out;
-  width: 100%;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border-radius: 12px;
 }
 
 .trial-card:hover {
   transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05) !important;
 }
 
-.trial-content h3 {
-  font-size: 18px;
-  margin-bottom: 10px;
+.width-20 {
+  width: 20px;
+  text-align: center;
 }
 
-.trial-content p {
-  font-size: 16px;
-  margin: 5px 0;
+/* Dropdown styling adjustment */
+.dropdown-item {
+  font-size: 0.9rem;
+  padding: 8px 16px;
 }
 
-.status-success {
-  color: green;
-  font-weight: bold;
+.dropdown-item:active {
+  background-color: #f8f9fa;
+  color: #1e2125;
 }
-
-.status-pending {
-  color: red;
-  font-weight: bold;
-}
-
-.btn-success {
-  margin: 10px 5px;
-}
-
-

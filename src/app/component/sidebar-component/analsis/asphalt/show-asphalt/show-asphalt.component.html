@@ -1,25 +1,84 @@
-<div class="trial-container">
-  <div class="header-container">
-    <h1 class="header">Trial List <span> ({{ id }})</span></h1>
-    <div class="button-container">
-      <button class="btn-add btn btn-primary" routerLink="/asphalt/insert/{{id}}" *ngIf="role =='ROLE_TECH' || role == 'ROLE_ADMIN'">New Trial</button>
-      <button class="btn-add btn btn-success" (click)="adopt(id)" *ngIf="(role =='ROLE_SUPERVISOR') && !test.adopt">Adopt</button>
-      <button class="btn-add btn btn-danger" (click)="reject(id)"  *ngIf="(role =='ROLE_SUPERVISOR') && !test.adopt">Reject</button>
-      <button class="btn-add btn btn-success" (click)="approve(id)" *ngIf="(role == 'ROLE_MANAGER' || role == 'ROLE_ADMIN') && test.adopt && !test.approved">Approve</button>
+<div class="main-content">
+  <!-- Header Section -->
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+      <h4 class="fw-bold text-dark mb-1">
+        <i class="fas fa-road me-2 text-primary"></i>Asphalt Analysis
+        <span class="text-muted small fw-normal ms-2">#{{ id }}</span>
+      </h4>
+      <p class="text-muted small mb-0">Manage asphalt trials and test results.</p>
+    </div>
+    <div class="d-flex gap-2">
+      <button class="btn btn-primary shadow-sm" routerLink="/asphalt/insert/{{id}}"
+        *ngIf="role =='ROLE_TECH' || role == 'ROLE_ADMIN'">
+        <i class="fas fa-plus me-2"></i>New Trial
+      </button>
+
+      <!-- Supervisor Actions -->
+      <button class="btn btn-success shadow-sm" (click)="adopt(id)" *ngIf="(role =='ROLE_SUPERVISOR') && !test.adopt">
+        <i class="fas fa-check me-2"></i>Adopt
+      </button>
+      <button class="btn btn-danger shadow-sm" (click)="reject(id)" *ngIf="(role =='ROLE_SUPERVISOR') && !test.adopt">
+        <i class="fas fa-times me-2"></i>Reject
+      </button>
+
+      <!-- Manager/Admin Approve -->
+      <button class="btn btn-success shadow-sm" (click)="approve(id)"
+        *ngIf="(role == 'ROLE_MANAGER' || role == 'ROLE_ADMIN') && test.adopt && !test.approved">
+        <i class="fas fa-check-double me-2"></i>Approve
+      </button>
     </div>
   </div>
 
-  <div class="card-container">
-    <div class="trial-card" *ngFor="let temp of test.asphalts; index as i">
-      <div class="trial-content">
-        <h3>Project ID: {{ test.project.id }}</h3>
-        <p><strong>Test ID:</strong> {{ test.id }}</p>
-        <p><strong>Trial No:</strong> {{ i+ 1}}</p>
+  <!-- Trials Grid -->
+  <div class="row g-4">
+    <div class="col-md-6 col-lg-4" *ngFor="let temp of test.asphalts; index as i">
+      <div class="card border-0 shadow-sm h-100 trial-card">
+        <div class="card-header bg-white border-0 pt-4 pb-0 d-flex justify-content-between align-items-center">
+          <span class="badge bg-light text-primary border rounded-pill px-3">Trial #{{ i + 1 }}</span>
+          <div class="dropdown">
+            <button class="btn btn-link text-muted p-0" type="button" data-bs-toggle="dropdown">
+              <i class="fas fa-ellipsis-v"></i>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end border-0 shadow">
+              <li><a class="dropdown-item" routerLink="/asphalt/report/{{temp.id}}"><i
+                    class="fas fa-file-alt me-2 text-primary"></i> Report</a></li>
+              <li *ngIf="role=='ROLE_ADMIN' || role == 'ROLE_MANAGER'"><a class="dropdown-item"
+                  routerLink="/asphalt/update/{{temp.id}}"><i class="fas fa-edit me-2 text-warning"></i> Edit</a></li>
+              <li *ngIf="role=='ROLE_ADMIN'">
+                <hr class="dropdown-divider">
+              </li>
+              <li *ngIf="role=='ROLE_ADMIN'"><a class="dropdown-item text-danger" (click)="delete(temp.id)"><i
+                    class="fas fa-trash-alt me-2"></i> Delete</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="card-body">
+          <h5 class="fw-bold text-dark mb-3">Test ID: {{ test.id }}</h5>
+          <div class="d-flex align-items-center text-muted mb-2">
+            <i class="fas fa-project-diagram me-2 width-20"></i>
+            <span class="small">Project ID: {{ test.project.id }}</span>
+          </div>
+        </div>
+        <div class="card-footer bg-white border-0 pb-4 pt-0">
+          <div class="d-grid gap-2">
+            <button class="btn btn-outline-primary btn-sm" routerLink="/asphalt/report/{{temp.id}}">
+              View Report
+            </button>
+          </div>
+        </div>
       </div>
-      <button class="btn btn-primary" routerLink = "/asphalt/update/{{temp.id}}" *ngIf="role=='ROLE_ADMIN' || role == 'ROLE_MANAGER'">Edit</button>
-      <button class="btn btn-success" routerLink = "/asphalt/report/{{temp.id}}">Report</button>
-      <button class="btn btn-danger" *ngIf="role=='ROLE_ADMIN'" (click)="delete(temp.id)">Delete</button>
+    </div>
+
+    <!-- Empty State -->
+    <div class="col-12" *ngIf="test.asphalts?.length === 0">
+      <div class="text-center py-5">
+        <div class="mb-3">
+          <i class="fas fa-vial fa-3x text-muted opacity-50"></i>
+        </div>
+        <h6 class="text-muted">No trials found</h6>
+        <p class="text-muted small">Start a new trial to get results.</p>
+      </div>
     </div>
   </div>
 </div>
-
