@@ -1,7 +1,7 @@
 .test-manager-container {
   padding: 110px 30px 30px;
-  margin-left: 260px;
-  max-width: calc(100% - 260px);
+
+  max-width: 100%;
   background-color: var(--bg-color);
   min-height: 100vh;
 }

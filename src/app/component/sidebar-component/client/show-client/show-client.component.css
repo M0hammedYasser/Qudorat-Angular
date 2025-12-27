@@ -1,7 +1,7 @@
 .main-container {
   padding: 110px 40px 40px;
-  margin-left: 260px;
-  max-width: calc(100% - 260px);
+
+  max-width: 100%;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background-color: var(--bg-color);
   min-height: 100vh;

@@ -1,6 +1,7 @@
 .form-container {
-  margin-left: 260px; /* Reduced from 260px */
-  padding: 80px 15px 0 15px; /* Kept 90px top padding */
+
+  padding: 80px 15px 0 15px;
+  /* Kept 90px top padding */
   background: white;
   border-radius: 10px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -14,7 +15,8 @@
   font-weight: bold;
   margin-bottom: 12px;
 }
-.head{
+
+.head {
   text-align: center;
   font-size: 15px;
   font-weight: bold;
@@ -23,49 +25,64 @@
 
 .form-row {
   display: flex;
-  gap: 6px; /* Reduced from 8px */
+  gap: 6px;
+  /* Reduced from 8px */
   justify-content: space-between;
-  margin-bottom: 4px; /* Reduced */
+  margin-bottom: 4px;
+  /* Reduced */
 }
 
 .form-group {
   flex: 1;
-  min-width: 170px; /* Slightly smaller */
-  margin-bottom: 2px; /* Reduced */
+  min-width: 170px;
+  /* Slightly smaller */
+  margin-bottom: 2px;
+  /* Reduced */
 }
 
 .btn-primary {
   background: #007bff;
   color: white;
-  margin: 6px auto 4px auto; /* Reduced */
+  margin: 6px auto 4px auto;
+  /* Reduced */
   display: block;
-  padding: 5px 14px; /* Slightly smaller */
-  font-size: 13px; /* Smaller */
+  padding: 5px 14px;
+  /* Slightly smaller */
+  font-size: 13px;
+  /* Smaller */
 }
 
 .bitumen-form-container {
   display: flex;
   flex-direction: column;
-  gap: 4px; /* Reduced from 6px */
+  gap: 4px;
+  /* Reduced from 6px */
   margin: 0 auto;
 }
 
 .compact-input {
-  height: 28px; /* Smaller */
-  padding: 3px 6px; /* Tighter */
-  margin-bottom: 2px; /* Reduced */
-  font-size: 12px; /* Smaller */
+  height: 28px;
+  /* Smaller */
+  padding: 3px 6px;
+  /* Tighter */
+  margin-bottom: 2px;
+  /* Reduced */
+  font-size: 12px;
+  /* Smaller */
 }
 
 .col-form-label {
-  margin-bottom: 1px; /* Minimal */
+  margin-bottom: 1px;
+  /* Minimal */
   display: block;
-  font-size: 12px; /* Smaller */
+  font-size: 12px;
+  /* Smaller */
   font-weight: 500;
 }
 
 .d-flex {
-  margin-bottom: 3px; /* Reduced */
+  margin-bottom: 3px;
+  /* Reduced */
 }
 
 .test-table-container {

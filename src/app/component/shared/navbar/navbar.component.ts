@@ -25,7 +25,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   isLogin: boolean = false;
   id: number = 0;
-  user: User = {} as User;
+  user: Partial<User> | null = null;
   notificationCount: number = 0;
   private notificationSubscription!: Subscription;
 
@@ -72,6 +72,11 @@ export class NavbarComponent implements OnInit, OnDestroy {
     if (this.notificationSubscription) {
       this.notificationSubscription.unsubscribe();
     }
+  }
+
+  logout() {
+    this.authenticationService.logout();
+    window.location.reload();
   }
 
   protected readonly environment = environment;

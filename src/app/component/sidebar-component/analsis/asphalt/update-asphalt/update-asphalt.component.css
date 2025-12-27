@@ -1,6 +1,6 @@
 /* combined-form.component.css */
 .form-container {
-  margin-left: 260px;
+
   padding: 70px 20px 0 20px;
   background: white;
   border-radius: 10px;
@@ -110,7 +110,8 @@ input[type="number"] {
     padding: 20px;
   }
 
-  .grid-container, .grid-container-asphalt {
+  .grid-container,
+  .grid-container-asphalt {
     grid-template-columns: repeat(4, 1fr);
     overflow-x: auto;
   }
@@ -124,7 +125,7 @@ input[type="number"] {
   margin: 0 auto;
 }
 
-.asphalt-marshall-grid-container{
+.asphalt-marshall-grid-container {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 3px;

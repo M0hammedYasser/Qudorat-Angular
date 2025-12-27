@@ -1,18 +1,18 @@
 .sieve-analysis-container {
-  margin-left: 260px; /* Space for sidebar */
-  padding: 70px 20px 0 20px ;
+
+  padding: 70px 20px 0 20px;
   background: white;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.label{
+.label {
   margin-bottom: 10px;
   margin-left: 5px;
 }
 
-input{
-  height:25px;
+input {
+  height: 25px;
   margin: -4px 5px;
 }
 

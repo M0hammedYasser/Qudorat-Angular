@@ -4,9 +4,9 @@
 .main-content {
   padding: 110px 40px 40px;
   /* Top padding > Navbar, Left/Right padding */
-  margin-left: 260px;
+
   /* Left margin = Sidebar width */
-  max-width: calc(100% - 260px);
+  max-width: 100%;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background-color: var(--bg-color);
   /* Light background for the dashboard feel */

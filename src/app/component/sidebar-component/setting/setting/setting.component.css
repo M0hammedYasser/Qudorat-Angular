@@ -1,9 +1,9 @@
 .settings-container {
   padding: 110px 30px 30px;
   /* Top padding > 70px Navbar */
-  margin-left: 260px;
+
   /* Left margin = Sidebar width */
-  max-width: calc(100% - 260px);
+  max-width: 100%;
   /* Ensure it doesn't overflow horizontally */
   font-family: 'Segoe UI', serif;
   background-color: var(--bg-color);

@@ -14,13 +14,14 @@
 
 :host {
   display: block;
-  margin-left: 250px;
+
   padding: 20px;
   margin-top: 60px;
 }
 
 .btn {
-  margin: -66px 0 0 900px;
+  margin: -66px 0 0 auto;
+  float: right;
 }
 
 a {
