@@ -7,11 +7,11 @@
     </div>
 
     <div class="row mb-3">
-      <div class="col-6">
+      <div class="col-12 col-md-6">
         <label for="email" class="form-label">Email</label>
         <input type="email" class="form-control" id="email" [(ngModel)]="client.email" name="email" #email="ngModel">
       </div>
-      <div class="col-6">
+      <div class="col-12 col-md-6">
         <label for="phone" class="form-label">Phone</label>
         <input type="text" class="form-control" id="phone" [(ngModel)]="client.phone" name="phone" required
           #phone="ngModel">
@@ -25,12 +25,12 @@
     </div>
 
     <div class="row mb-3">
-      <div class="col-6">
+      <div class="col-12 col-md-6">
         <label for="commercialReg" class="form-label">Commercial Registration Number</label>
         <input type="text" class="form-control" id="commercialReg" [(ngModel)]="client.commercialRegistrationNumber"
           name="commercialReg" #commercialReg="ngModel">
       </div>
-      <div class="col-6">
+      <div class="col-12 col-md-6">
         <label for="taxId" class="form-label">Tax Identification Number</label>
         <input type="text" class="form-control" id="taxId" [(ngModel)]="client.taxIdentificationNumber" name="taxId"
           required #taxId="ngModel">

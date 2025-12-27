@@ -1,13 +1,13 @@
 <div class="register-container">
   <form (ngSubmit)="update()" #form="ngForm">
     <div class="row mb-3">
-      <div class="col-6">
+      <div class="col-12 col-md-6">
         <label for="projectName" class="form-label">Project Name</label>
         <input type="text" class="form-control" id="projectName" [(ngModel)]="project.projectName" name="projectName"
           required>
       </div>
 
-      <div class="col-6">
+      <div class="col-12 col-md-6">
         <label for="client" class="form-label">Client Code</label>
         <select class="form-select" aria-label="Default select example" type="text" id="client" name="client"
           [(ngModel)]="project.client.id" required>
@@ -17,19 +17,19 @@
     </div>
 
     <div class="row mb-3">
-      <div class="col-6">
+      <div class="col-12 col-md-6">
         <label for="consultant" class="form-label">Consultant</label>
         <input type="text" class="form-control" id="consultant" [(ngModel)]="project.consultant" name="consultant"
           required>
       </div>
-      <div class="col-6">
+      <div class="col-12 col-md-6">
         <label for="owner" class="form-label">Owner</label>
         <input type="text" class="form-control" id="owner" [(ngModel)]="project.owner" name="owner" required>
       </div>
     </div>
 
     <div class="row mb-3">
-      <div class="col-6">
+      <div class="col-12 col-md-6">
         <label for="location" class="form-label">Location</label>
         <input type="text" class="form-control" id="location" [(ngModel)]="project.location" name="location" required>
       </div>

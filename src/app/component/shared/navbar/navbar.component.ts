@@ -79,6 +79,14 @@ export class NavbarComponent implements OnInit, OnDestroy {
     window.location.reload();
   }
 
+  closeNavbar() {
+    // Close the navbar collapse on mobile when clicking a link
+    const navbarCollapse = document.getElementById('navbarContent');
+    if (navbarCollapse && navbarCollapse.classList.contains('show')) {
+      navbarCollapse.classList.remove('show');
+    }
+  }
+
   protected readonly environment = environment;
 
 }

@@ -200,3 +200,54 @@ body.dark-mode .swal2-validation-message {
     background: var(--bg-color) !important;
     color: var(--text-color) !important;
 }
+
+/* Global responsive header styles for all list pages */
+.header-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.header-section>div:first-child {
+    flex: 1 1 auto;
+    min-width: 200px;
+}
+
+.header-section>div:last-child {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+/* Mobile responsiveness for headers */
+@media (max-width: 768px) {
+    .header-section {
+        flex-direction: column;
+        align-items: flex-start !important;
+    }
+
+    .header-section>div:last-child {
+        width: 100%;
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .header-section>div:last-child app-search,
+    .header-section>div:last-child button {
+        width: 100%;
+    }
+
+    .header-section h2 {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .header-section h2 {
+        font-size: 1.25rem;
+    }
+}

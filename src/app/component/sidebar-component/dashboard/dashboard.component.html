@@ -27,21 +27,21 @@
     <div class="table-container notification_table">
       <table>
         <thead>
-        <tr>
-          <th>Message</th>
-          <th>Time</th>
-          <th> Seen</th>
-        </tr>
+          <tr>
+            <th>Message</th>
+            <th>Time</th>
+            <th> Seen</th>
+          </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let test of notification">
-          <td>{{ test.message }}</td>
-          <td>{{ test.time }}</td>
-          <td>
-            <i *ngIf="!test.read" class="fas fa-times text-danger"></i>
-            <i *ngIf="test.read" class="fas fa-check text-success"></i>
-          </td>
-        </tr>
+          <tr *ngFor="let test of notification">
+            <td>{{ test.message }}</td>
+            <td>{{ test.time }}</td>
+            <td>
+              <i *ngIf="!test.read" class="fas fa-times text-danger"></i>
+              <i *ngIf="test.read" class="fas fa-check text-success"></i>
+            </td>
+          </tr>
         </tbody>
       </table>
     </div>
@@ -52,32 +52,56 @@
       <canvas id="samplesChart"></canvas>
     </div>
 
-    <div class="table-container" *ngIf="role!='ROLE_TECH'">
+    <div class="table-container d-none d-md-block" *ngIf="role!='ROLE_TECH'">
       <table>
         <thead>
-        <tr>
-          <th>Test No</th>
-          <th>Test Name</th>
-          <th>Paid</th>
-          <th>Status</th>
-        </tr>
+          <tr>
+            <th>Test No</th>
+            <th>Test Name</th>
+            <th>Paid</th>
+            <th>Status</th>
+          </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let test of tests">
-          <td>{{ test.id }}</td>
-          <td>{{ test.name }}</td>
-          <td>
-            <i *ngIf="!test.paid" class="fas fa-times text-danger"></i>
-            <i *ngIf="test.paid" class="fas fa-check text-success"></i>
-          </td>
-          <td [class.completed]="test.status === 'Completed'"
-              [class.processing]="test.status === 'Processing'"
+          <tr *ngFor="let test of tests">
+            <td>{{ test.id }}</td>
+            <td>{{ test.name }}</td>
+            <td>
+              <i *ngIf="!test.paid" class="fas fa-times text-danger"></i>
+              <i *ngIf="test.paid" class="fas fa-check text-success"></i>
+            </td>
+            <td [class.completed]="test.status === 'Completed'" [class.processing]="test.status === 'Processing'"
               [class.pending]="test.status === 'Pending'">
-            {{ test.status }}
-          </td>
-        </tr>
+              {{ test.status }}
+            </td>
+          </tr>
         </tbody>
       </table>
+    </div>
+
+    <!-- Mobile Card View for Tests -->
+    <div class="mobile-test-cards d-block d-md-none w-100" *ngIf="role!='ROLE_TECH'">
+      <div class="card mb-3" *ngFor="let test of tests">
+        <!-- Using standard card-body but adhering to new container styles -->
+        <div class="w-100">
+          <div class="d-flex justify-content-between align-items-center mb-2">
+            <h5 class="card-title mb-0 fw-bold ml-0">Test #{{ test.id }}</h5>
+            <span [class.completed]="test.status === 'Completed'" [class.processing]="test.status === 'Processing'"
+              [class.pending]="test.status === 'Pending'" class="badge rounded-pill bg-light">
+              {{ test.status }}
+            </span>
+          </div>
+          <p class="card-text mb-3 text-muted" style="font-size: 1rem;">{{ test.name }}</p>
+          <div class="d-flex justify-content-between align-items-center border-top pt-2 mt-2">
+            <span class="small text-muted text-uppercase fw-bold">Payment Status</span>
+            <span class="fw-bold">
+              <i *ngIf="!test.paid" class="fas fa-times text-danger me-1"></i>
+              <i *ngIf="test.paid" class="fas fa-check text-success me-1"></i>
+              {{ test.paid ? 'Paid' : 'Unpaid' }}
+            </span>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

@@ -7,32 +7,33 @@
     </a>
 
     <!-- Navigation Links -->
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
+      aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
     <div class="collapse navbar-collapse" id="navbarContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0" *ngIf="isLogin">
         <li class="nav-item">
-          <a class="nav-link" routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
+          <a class="nav-link" routerLink="/dashboard" routerLinkActive="active" (click)="closeNavbar()">Dashboard</a>
         </li>
         <li class="nav-item" *ngIf="user?.authority?.name !== 'ROLE_TECH'">
-          <a class="nav-link" routerLink="/clients" routerLinkActive="active">Clients</a>
+          <a class="nav-link" routerLink="/clients" routerLinkActive="active" (click)="closeNavbar()">Clients</a>
         </li>
         <li class="nav-item" *ngIf="user?.authority?.name !== 'ROLE_TECH'">
-          <a class="nav-link" routerLink="/projects" routerLinkActive="active">Projects</a>
+          <a class="nav-link" routerLink="/projects" routerLinkActive="active" (click)="closeNavbar()">Projects</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/tests" routerLinkActive="active">Tests</a>
+          <a class="nav-link" routerLink="/tests" routerLinkActive="active" (click)="closeNavbar()">Tests</a>
         </li>
         <li class="nav-item" *ngIf="user?.authority?.name === 'ROLE_ADMIN' || user?.authority?.name === 'ROLE_MANAGER'">
-           <a class="nav-link" routerLink="/setting" routerLinkActive="active">Settings</a>
+          <a class="nav-link" routerLink="/setting" routerLinkActive="active" (click)="closeNavbar()">Settings</a>
         </li>
         <li class="nav-item" *ngIf="user?.authority?.name === 'ROLE_ADMIN' || user?.authority?.name === 'ROLE_MANAGER'">
-           <a class="nav-link" routerLink="/db-backup" routerLinkActive="active">Backup</a>
+          <a class="nav-link" routerLink="/db-backup" routerLinkActive="active" (click)="closeNavbar()">Backup</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/help" routerLinkActive="active">Help</a>
+          <a class="nav-link" routerLink="/help" routerLinkActive="active" (click)="closeNavbar()">Help</a>
         </li>
       </ul>
 
@@ -44,7 +45,7 @@
             [class.fa-moon]="!(themeService.isDarkMode$ | async)"></i>
         </button>
 
-        <button class="notification-btn" routerLink="/notification"
+        <button class="notification-btn" routerLink="/notification" (click)="closeNavbar()"
           *ngIf="isLogin && user?.authority?.name !== 'ROLE_ADMIN' && user?.authority?.name !== 'ROLE_QUALITY'">
           <i class="fas fa-bell fa-lg"></i>
           <span *ngIf="notificationCount > 0" class="notification-badge">
@@ -53,13 +54,24 @@
         </button>
 
         <!-- User Profile Section -->
-        <div class="user-profile-section d-flex align-items-center" *ngIf="isLogin" routerLink="/profile" style="cursor: pointer;">
-          <div class="user-info text-end me-3 d-none d-md-block">
+        <div class="user-profile-section d-flex align-items-center" *ngIf="isLogin" routerLink="/profile"
+          style="cursor: pointer;" (click)="closeNavbar()">
+          <div class="user-info text-end me-3 d-none d-lg-block">
             <span class="user-name d-block fw-bold text-dark">{{ user?.name || 'User' }}</span>
             <span class="user-role text-muted small" *ngIf="user?.authority">{{ user?.authority?.name }}</span>
           </div>
-          <div class="user-avatar-wrapper">
-            <img [src]="user?.image?.path ? (environment.url + 'images/' + user.image.path) : 'assets/profile.jpg'"
+          <!-- Show user name on mobile below avatar -->
+          <div class="d-lg-none d-flex flex-column align-items-center">
+            <div class="user-avatar-wrapper">
+              <img [src]="user?.image?.path ? (environment.url + 'images/' + user?.image?.path) : 'assets/profile.jpg'"
+                alt="{{user?.name}}" class="user-avatar shadow-sm"
+                onerror="this.onerror=null;this.src='assets/profile.jpg'">
+            </div>
+            <span class="user-name-mobile mt-1 small fw-bold text-center">{{ user?.name || 'User' }}</span>
+          </div>
+          <!-- Desktop avatar -->
+          <div class="user-avatar-wrapper d-none d-lg-block">
+            <img [src]="user?.image?.path ? (environment.url + 'images/' + user?.image?.path) : 'assets/profile.jpg'"
               alt="{{user?.name}}" class="user-avatar shadow-sm"
               onerror="this.onerror=null;this.src='assets/profile.jpg'">
           </div>
@@ -67,7 +79,7 @@
 
         <!-- Logout Button -->
         <button class="btn btn-link text-danger text-decoration-none" (click)="logout()" *ngIf="isLogin">
-            <i class="fas fa-sign-out-alt fa-lg"></i>
+          <i class="fas fa-sign-out-alt fa-lg"></i>
         </button>
 
       </div>

@@ -6,7 +6,7 @@
 
   <div class="row g-4">
     <!-- Add New Test Card -->
-    <div class="col-lg-4">
+    <div class="col-12 col-lg-4">
       <div class="add-test-card">
         <h4>Add New Test</h4>
         <div class="form-group mb-3">
@@ -24,47 +24,90 @@
     </div>
 
     <!-- Test List -->
-    <div class="col-lg-8">
+    <div class="col-12 col-lg-8">
       <div class="tests-list-card">
-        <table class="table table-hover align-middle mb-0">
-          <thead>
-            <tr>
-              <th>Test Name</th>
-              <th>Price</th>
-              <th class="text-end">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let test of tests; let i = index">
-              <td>
-                <span *ngIf="editIndex !== i" class="fw-bold text-dark">{{ test.name }}</span>
-                <input *ngIf="editIndex === i" type="text" class="form-control" [(ngModel)]="editTestName">
-              </td>
-              <td>
-                <span *ngIf="editIndex !== i" class="badge bg-light text-dark border">{{ test.price | currency }}</span>
-                <input *ngIf="editIndex === i" type="number" class="form-control" [(ngModel)]="editTestPrice">
-              </td>
-              <td class="text-end">
-                <div *ngIf="editIndex !== i">
-                  <button class="btn btn-sm btn-outline-secondary me-2" (click)="startEdit(i)" title="Edit">
-                    <i class="fas fa-edit"></i>
+        <!-- Desktop Table View -->
+        <div class="d-none d-md-block">
+          <table class="table table-hover align-middle mb-0">
+            <thead>
+              <tr>
+                <th>Test Name</th>
+                <th>Price</th>
+                <th class="text-end">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let test of tests; let i = index">
+                <td>
+                  <span *ngIf="editIndex !== i" class="fw-bold text-dark">{{ test.name }}</span>
+                  <input *ngIf="editIndex === i" type="text" class="form-control" [(ngModel)]="editTestName">
+                </td>
+                <td>
+                  <span *ngIf="editIndex !== i" class="badge bg-light text-dark border">{{ test.price | currency
+                    }}</span>
+                  <input *ngIf="editIndex === i" type="number" class="form-control" [(ngModel)]="editTestPrice">
+                </td>
+                <td class="text-end">
+                  <div *ngIf="editIndex !== i">
+                    <button class="btn btn-sm btn-outline-secondary me-2" (click)="startEdit(i)" title="Edit">
+                      <i class="fas fa-edit"></i>
+                    </button>
+                    <button class="btn btn-sm btn-outline-danger" (click)="remove(i)" title="Delete">
+                      <i class="fas fa-trash-alt"></i>
+                    </button>
+                  </div>
+                  <div *ngIf="editIndex === i">
+                    <button class="btn btn-sm btn-success me-2" (click)="update(i)" title="Save">
+                      <i class="fas fa-check"></i>
+                    </button>
+                    <button class="btn btn-sm btn-secondary" (click)="cancelEdit()" title="Cancel">
+                      <i class="fas fa-times"></i>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Mobile Card View -->
+        <div class="d-block d-md-none">
+          <div class="card mb-3" *ngFor="let test of tests; let i = index">
+            <div class="card-body">
+              <div *ngIf="editIndex !== i">
+                <h5 class="fw-bold mb-2">{{ test.name }}</h5>
+                <p class="mb-3"><span class="badge bg-light text-dark border">{{ test.price | currency }}</span></p>
+                <div class="d-flex gap-2">
+                  <button class="btn btn-sm btn-outline-secondary flex-fill" (click)="startEdit(i)">
+                    <i class="fas fa-edit me-1"></i> Edit
                   </button>
-                  <button class="btn btn-sm btn-outline-danger" (click)="remove(i)" title="Delete">
-                    <i class="fas fa-trash-alt"></i>
+                  <button class="btn btn-sm btn-outline-danger flex-fill" (click)="remove(i)">
+                    <i class="fas fa-trash-alt me-1"></i> Delete
                   </button>
                 </div>
-                <div *ngIf="editIndex === i">
-                  <button class="btn btn-sm btn-success me-2" (click)="update(i)" title="Save">
-                    <i class="fas fa-check"></i>
+              </div>
+              <div *ngIf="editIndex === i">
+                <div class="mb-3">
+                  <label class="form-label small">Test Name</label>
+                  <input type="text" class="form-control" [(ngModel)]="editTestName">
+                </div>
+                <div class="mb-3">
+                  <label class="form-label small">Price</label>
+                  <input type="number" class="form-control" [(ngModel)]="editTestPrice">
+                </div>
+                <div class="d-flex gap-2">
+                  <button class="btn btn-sm btn-success flex-fill" (click)="update(i)">
+                    <i class="fas fa-check me-1"></i> Save
                   </button>
-                  <button class="btn btn-sm btn-secondary" (click)="cancelEdit()" title="Cancel">
-                    <i class="fas fa-times"></i>
+                  <button class="btn btn-sm btn-secondary flex-fill" (click)="cancelEdit()">
+                    <i class="fas fa-times me-1"></i> Cancel
                   </button>
                 </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <div *ngIf="tests.length === 0" class="text-center p-4 text-muted">
           No tests found. Add one to get started.
         </div>
