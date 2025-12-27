@@ -53,7 +53,7 @@ export class DashboardComponent implements OnInit {
 
     this.role = this.authService.getAuthority();
 
-    // 🔁 Call findAllNotification every 1 second
+    this.findAllNotification();
     if (this.role === "ROLE_ADMIN") {
       interval(1000).subscribe(() => {
         this.findAllNotification();
