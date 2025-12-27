@@ -3,7 +3,7 @@
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background-color: #f8f9fa;
+  background-color: var(--bg-color);
   margin: 0;
 }
 
@@ -11,16 +11,17 @@
   position: relative;
   width: 100%;
   max-width: 400px;
-  background: #ffffff;
+  background: var(--card-bg);
   border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px var(--shadow-color);
   padding: 2rem;
   text-align: center;
 }
 
 .image-container {
   position: absolute;
-  top: -50px; /* Moves the image outside the form */
+  top: -50px;
+  /* Moves the image outside the form */
   left: 50%;
   transform: translateX(-50%);
   width: 100px;
@@ -30,11 +31,15 @@
 .image-container img {
   width: 100px;
   height: 100px;
-  border-radius: 50%; /* Keeps the image circular */
+  border-radius: 50%;
+  /* Keeps the image circular */
   object-fit: cover;
-  border: none; /* Remove border if not needed */
-  background: none; /* Ensure no background is applied */
-  box-shadow: none; /* Remove shadow if needed */
+  border: none;
+  /* Remove border if not needed */
+  background: none;
+  /* Ensure no background is applied */
+  box-shadow: none;
+  /* Remove shadow if needed */
 }
 
 .form-container {
@@ -51,7 +56,7 @@
 
 .text-center a {
   text-decoration: none;
-  color: #007bff;
+  color: var(--primary-color);
 }
 
 .text-center a:hover {

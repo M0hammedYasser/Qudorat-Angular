@@ -1,5 +1,5 @@
 .navbar {
-  background-color: #ffffff;
+  background-color: var(--navbar-bg);
   position: fixed;
   top: 0;
   width: 100%;
@@ -11,7 +11,7 @@
   /* Very subtle shadow */
   display: flex;
   align-items: center;
-  border-bottom: 1px solid #eaeaea;
+  border-bottom: 1px solid var(--border-color);
 }
 
 .brand-logo {
@@ -34,7 +34,7 @@
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  color: #6c757d;
+  color: var(--text-muted);
   transition: all 0.2s ease;
   background: transparent;
   border: none;
@@ -42,15 +42,15 @@
 }
 
 .notification-btn:hover {
-  background-color: #f1f3f5;
-  color: #0d6efd;
+  background-color: var(--bg-color);
+  color: var(--primary-color);
 }
 
 .notification-badge {
   position: absolute;
   top: 6px;
   right: 6px;
-  background-color: #dc3545;
+  background-color: var(--danger-color);
   /* Bootstrap Danger Red */
   color: white;
   font-size: 0.65rem;
@@ -61,7 +61,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 2px solid #fff;
+  border: 2px solid var(--navbar-bg);
   /* Creates a cutout effect against the icon */
   padding: 0 3px;
 }
@@ -77,20 +77,21 @@
 }
 
 .user-profile-section:hover {
-  background-color: #f8f9fa;
-  border-color: #eaeaea;
+  background-color: var(--bg-color);
+  border-color: var(--border-color);
 }
 
 .user-name {
   font-size: 0.95rem;
   line-height: 1.2;
-  color: #2c3e50;
+  font-weight: 600;
+  color: var(--text-color);
 }
 
 .user-role {
   font-size: 0.75rem;
   font-weight: 600;
-  color: #adb5bd;
+  color: var(--text-muted);
   /* Muted minimalist color */
   text-transform: uppercase;
   /* Professional uppercase */
@@ -103,9 +104,9 @@
   height: 42px;
   border-radius: 50%;
   object-fit: cover;
-  border: 2px solid #ffffff;
+  border: 2px solid var(--navbar-bg);
   /* inner border */
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 5px var(--shadow-color);
   transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 

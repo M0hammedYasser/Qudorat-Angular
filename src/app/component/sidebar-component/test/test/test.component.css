@@ -3,10 +3,12 @@
   margin-left: 260px;
   max-width: calc(100% - 260px);
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--bg-color);
+  min-height: 100vh;
 }
 
 h2 {
-  color: #2c3e50;
+  color: var(--text-color);
   font-weight: 700;
 }
 
@@ -15,14 +17,17 @@ h2 {
   text-transform: uppercase;
   font-size: 0.85rem;
   letter-spacing: 0.5px;
-  color: #6c757d;
+  color: var(--text-muted);
   padding: 1rem;
-  border-bottom: 2px solid #eaeaea;
+  border-bottom: 2px solid var(--border-color);
+  background-color: var(--bg-color);
 }
 
 .table td {
   padding: 1rem;
-  color: #495057;
+  color: var(--text-color);
+  background-color: var(--card-bg);
+  border-bottom: 1px solid var(--border-color);
 }
 
 .badge {
@@ -37,10 +42,12 @@ h2 {
 }
 
 .shadow-lg {
-  box-shadow: 0 1rem 3rem rgba(0, 0, 0, .175) !important;
+  box-shadow: 0 1rem 3rem var(--shadow-color) !important;
 }
 
 .modal-body {
   border-radius: 0.5rem;
   overflow: hidden;
+  background-color: var(--card-bg);
+  color: var(--text-color);
 }

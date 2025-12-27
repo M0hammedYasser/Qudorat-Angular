@@ -1,11 +1,13 @@
 .invoice-container {
   max-width: 800px;
   margin: auto;
-  padding: 70px 0 0  0;
+  padding: 70px 0 0 0;
+  background-color: var(--card-bg);
+  color: var(--text-color);
 }
 
 h2 {
-  color: #0056b3;
+  color: var(--primary-color);
   font-weight: bold;
   text-align: center;
   margin-bottom: 20px;
@@ -13,54 +15,58 @@ h2 {
   text-align: center;
 }
 
-h4{
+h4 {
   width: 70vw;
   text-align: center;
+  color: var(--text-color);
 }
 
-table{
+table {
   width: 100%;
   border-collapse: collapse;
   margin: 0 0 15px 0;
 }
 
-.head-table{
+.head-table {
   width: 70vw;
 }
 
-.bitumen_table{
+.bitumen_table {
   width: 70vw;
 }
 
-.sieve-table{
+.sieve-table {
   width: 70vw;
 }
 
-.asphalt-table{
+.asphalt-table {
   width: 70vw;
 }
 
-.Limits{
+.Limits {
   width: 70vw;
   margin-bottom: 30px;
 }
 
-table , td , th {
-  border: 1px solid;
+table,
+td,
+th {
+  border: 1px solid var(--border-color);
 }
 
-td , th{
+td,
+th {
   padding: 5px;
 }
 
-canvas{
+canvas {
   margin: 50px 0 50px 0;
 }
 
 button {
   margin-top: 20px;
   padding: 10px 15px;
-  background: #28a745;
+  background: var(--success-color);
   color: white;
   border: none;
   border-radius: 5px;

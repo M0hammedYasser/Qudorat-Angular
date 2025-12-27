@@ -2,33 +2,35 @@
   padding: 110px 30px 30px;
   margin-left: 260px;
   max-width: calc(100% - 260px);
+  background-color: var(--bg-color);
+  min-height: 100vh;
 }
 
 h2 {
-  color: #2c3e50;
+  color: var(--text-color);
   font-weight: 700;
 }
 
 .add-test-card {
-  background: #fff;
+  background: var(--card-bg);
   padding: 2rem;
   border-radius: 12px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-  border: 1px solid #eaeaea;
+  box-shadow: 0 4px 6px var(--shadow-color);
+  border: 1px solid var(--border-color);
   position: sticky;
   top: 100px;
 }
 
 .add-test-card h4 {
   margin-bottom: 1.5rem;
-  color: #495057;
+  color: var(--text-color);
 }
 
 .tests-list-card {
-  background: #fff;
+  background: var(--card-bg);
   border-radius: 12px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-  border: 1px solid #eaeaea;
+  box-shadow: 0 4px 6px var(--shadow-color);
+  border: 1px solid var(--border-color);
   overflow: hidden;
 }
 
@@ -38,10 +40,14 @@ h2 {
   font-size: 0.85rem;
   letter-spacing: 0.5px;
   padding: 1rem;
+  color: var(--text-muted);
+  border-bottom: 2px solid var(--border-color);
 }
 
 .table td {
   padding: 1rem;
+  color: var(--text-color);
+  border-bottom: 1px solid var(--border-color);
 }
 
 .badge {

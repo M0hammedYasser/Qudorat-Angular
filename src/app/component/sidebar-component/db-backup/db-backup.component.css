@@ -10,7 +10,7 @@
   padding-left: 40px;
   padding-right: 40px;
   padding-bottom: 40px;
-  background-color: #f8f9fa;
+  background-color: var(--bg-color);
   min-height: 100vh;
 }
 
@@ -18,12 +18,16 @@
 h4 {
   font-family: 'Segoe UI', sans-serif;
   letter-spacing: -0.5px;
+  color: var(--text-color);
 }
 
 /* Modern Card */
 .card {
   border-radius: 12px;
   overflow: hidden;
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  color: var(--text-color);
 }
 
 .bg-gradient-primary {
@@ -51,26 +55,35 @@ h4 {
 }
 
 /* Table Styling */
+.table {
+  color: var(--text-color);
+}
+
 .table thead th {
   font-weight: 600;
   letter-spacing: 0.5px;
   padding-top: 16px;
   padding-bottom: 16px;
+  color: var(--text-muted);
+  border-bottom: 2px solid var(--border-color);
 }
 
 .table tbody td {
   padding-top: 16px;
   padding-bottom: 16px;
+  border-bottom: 1px solid var(--border-color);
 }
 
 /* Stats Value */
 h2 {
   font-family: 'Segoe UI', sans-serif;
   letter-spacing: -1px;
+  color: var(--text-color);
 }
 
 /* Button Group Hover */
 .btn-light:hover {
-  background-color: #e2e6ea;
-  border-color: #dae0e5;
+  background-color: var(--input-bg);
+  border-color: var(--border-color);
+  color: var(--text-color);
 }

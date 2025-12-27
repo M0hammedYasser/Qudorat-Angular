@@ -1,15 +1,15 @@
 .register-container {
   width: 100%;
   padding: 2rem;
-  background: #ffffff;
-  border: 1px solid #e9ecef;
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
   border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 6px var(--shadow-color);
 }
 
 .form-label {
   font-weight: 600;
-  color: #495057;
+  color: var(--text-color);
   margin-bottom: 0.5rem;
 }
 
@@ -17,7 +17,9 @@
 .form-select {
   border-radius: 6px;
   padding: 0.75rem 1rem;
-  border: 1px solid #ced4da;
+  border: 1px solid var(--input-border);
+  background-color: var(--input-bg);
+  color: var(--input-text);
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
@@ -25,6 +27,8 @@
 .form-select:focus {
   border-color: #80bdff;
   box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+  background-color: var(--input-bg);
+  color: var(--input-text);
 }
 
 .btn {
@@ -35,21 +39,19 @@
 }
 
 .btn-primary {
-  background-color: #007bff;
-  border-color: #007bff;
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
 }
 
 .btn-primary:hover {
-  background-color: #0069d9;
-  border-color: #0062cc;
+  filter: brightness(0.9);
 }
 
 .btn-secondary {
-  background-color: #6c757d;
-  border-color: #6c757d;
+  background-color: var(--secondary-color);
+  border-color: var(--secondary-color);
 }
 
 .btn-secondary:hover {
-  background-color: #5a6268;
-  border-color: #545b62;
+  filter: brightness(0.9);
 }

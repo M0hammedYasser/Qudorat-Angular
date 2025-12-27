@@ -1,12 +1,13 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { RouterLink, RouterLinkActive } from "@angular/router";
-import { NgIf } from "@angular/common";
+import { NgIf, AsyncPipe } from "@angular/common";
 import { AuthenticationService } from "../../../service/authentication/authentication.service";
 import { environment } from "../../../../environments/environment";
 import { User } from "../../../model/user";
 import { UserService } from "../../../service/user/user.service";
 import { NotificationService } from "../../../service/notification/notification.service";
 import { interval, Subscription, switchMap } from "rxjs";
+import { ThemeService } from "../../../service/theme/theme.service";
 
 @Component({
   selector: 'app-navbar',
@@ -14,7 +15,8 @@ import { interval, Subscription, switchMap } from "rxjs";
   imports: [
     RouterLink,
     RouterLinkActive,
-    NgIf
+    NgIf,
+    AsyncPipe
   ],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css'
@@ -30,7 +32,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   constructor(private authenticationService: AuthenticationService,
     private userService: UserService,
-    private notificationService: NotificationService) {
+    private notificationService: NotificationService,
+    public themeService: ThemeService) {
   }
 
   ngOnInit() {

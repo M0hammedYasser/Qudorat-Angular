@@ -2,10 +2,12 @@
   padding: 110px 30px 30px;
   margin-left: 260px;
   max-width: calc(100% - 260px);
+  background-color: var(--bg-color);
+  min-height: 100vh;
 }
 
 h2 {
-  color: #2c3e50;
+  color: var(--text-color);
   font-weight: 700;
 }
 
@@ -14,18 +16,19 @@ h2 {
   text-transform: uppercase;
   font-size: 0.8rem;
   letter-spacing: 0.5px;
-  color: #6c757d;
+  color: var(--text-muted);
   padding: 1rem;
 }
 
 .table td {
   padding: 1rem;
+  color: var(--text-color);
 }
 
 .avatar-circle {
   width: 40px;
   height: 40px;
-  background-color: #0d6efd;
+  background-color: var(--primary-color);
   color: white;
   border-radius: 50%;
   display: flex;

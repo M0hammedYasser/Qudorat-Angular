@@ -1,5 +1,5 @@
 .sidebar {
-  background-color: #ffffff;
+  background-color: var(--sidebar-bg);
   position: fixed;
   top: 70px;
   /* Same as navbar height */
@@ -9,7 +9,7 @@
   padding-top: 20px;
   z-index: 1000;
   /* Below Navbar (1040) */
-  border-right: 1px solid #eaeaea;
+  border-right: 1px solid var(--border-color);
   /* Match navbar border exactly */
   overflow-y: auto;
   -webkit-font-smoothing: antialiased;
@@ -23,12 +23,12 @@
 }
 
 .sidebar::-webkit-scrollbar-thumb {
-  background-color: #ced4da;
+  background-color: var(--input-border);
   border-radius: 4px;
 }
 
 .sidebar .nav-link {
-  color: #343a40;
+  color: var(--text-color);
   /* High contrast dark gray */
   font-weight: 600;
   /* Sharper weight */
@@ -55,8 +55,8 @@
 }
 
 .sidebar .nav-link:hover {
-  color: #0d6efd;
-  background-color: #f8f9fa;
+  color: var(--primary-color);
+  background-color: var(--bg-color);
 }
 
 .sidebar .nav-link:hover i {

@@ -2,9 +2,10 @@
 .form-container {
   margin-left: 260px;
   padding: 70px 20px 0 20px;
-  background: white;
+  background: var(--card-bg);
   border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px var(--shadow-color);
+  color: var(--text-color);
 }
 
 .header {
@@ -12,6 +13,7 @@
   font-size: 28px;
   font-weight: bold;
   margin-bottom: 20px;
+  color: var(--text-color);
 }
 
 .step-indicator {
@@ -24,12 +26,12 @@
 .step-indicator span {
   padding: 10px 20px;
   border-radius: 20px;
-  background: #f0f0f0;
-  color: #666;
+  background: var(--bg-color);
+  color: var(--text-muted);
 }
 
 .step-indicator span.active {
-  background: #007bff;
+  background: var(--primary-color);
   color: white;
 }
 
@@ -49,17 +51,17 @@
 }
 
 .btn-primary {
-  background: #007bff;
+  background: var(--primary-color);
   color: white;
 }
 
 .btn-secondary {
-  background: #6c757d;
+  background: var(--secondary-color);
   color: white;
 }
 
 .btn-success {
-  background: #28a745;
+  background: var(--success-color);
   color: white;
 }
 
@@ -88,9 +90,11 @@
 
 .form-control {
   padding: 8px;
-  border: 1px solid #ccc;
+  border: 1px solid var(--input-border);
   border-radius: 5px;
   font-size: 14px;
+  background-color: var(--input-bg);
+  color: var(--input-text);
 }
 
 .label {
@@ -110,7 +114,8 @@ input[type="number"] {
     padding: 20px;
   }
 
-  .grid-container, .grid-container-asphalt {
+  .grid-container,
+  .grid-container-asphalt {
     grid-template-columns: repeat(4, 1fr);
     overflow-x: auto;
   }
@@ -124,7 +129,7 @@ input[type="number"] {
   margin: 0 auto;
 }
 
-.asphalt-marshall-grid-container{
+.asphalt-marshall-grid-container {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 3px;
@@ -137,14 +142,6 @@ input[type="number"] {
   margin-bottom: 3px;
   margin-left: 10px;
 }
-
-.form-control {
-  padding: 8px 12px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  font-size: 14px;
-}
-
 
 .custom-inline-group {
   display: flex;

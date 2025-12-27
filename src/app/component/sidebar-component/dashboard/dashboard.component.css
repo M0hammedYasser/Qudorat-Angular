@@ -2,8 +2,9 @@
   margin-top: 70px;
   margin-left: 260px;
   padding: 20px;
-  background-color: rgba(237, 237, 237, 0.49);
+  background-color: var(--bg-color);
 }
+
 .dashboard-cards {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -20,17 +21,17 @@
 
 .chart-container {
   width: 40%;
-  background: white;
+  background: var(--card-bg);
   padding: 20px;
   border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px var(--shadow-color);
 }
 
 .card {
-  background: white;
+  background: var(--card-bg);
   padding: 15px;
   border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px var(--shadow-color);
   text-align: center;
   transition: transform 0.3s ease-in-out;
   width: 100%;
@@ -41,17 +42,19 @@
 
 .card i {
   font-size: 28px;
-  color: #0055D8;
+  color: var(--primary-color);
   margin-bottom: 7px;
 }
 
 .card h3 {
   font-size: 16px;
+  color: var(--text-color);
 }
 
 .card p {
   font-size: 20px;
   font-weight: bold;
+  color: var(--text-color);
 }
 
 .card:hover {
@@ -61,43 +64,45 @@
 
 .table-container {
   width: 60%;
-  background: white;
+  background: var(--card-bg);
   padding: 20px;
   border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px var(--shadow-color);
   overflow-x: auto;
 }
 
 table {
   width: 100%;
   border-collapse: collapse;
+  color: var(--text-color);
 }
 
-th, td {
+th,
+td {
   padding: 10px;
   text-align: left;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid var(--border-color);
 }
 
 th {
-  background-color: #f4f4f4;
+  background-color: var(--bg-color);
 }
 
 td.completed {
-  color: green;
+  color: var(--success-color);
   font-weight: bold;
 }
 
 td.processing {
-  color: orange;
+  color: var(--warning-color);
   font-weight: bold;
 }
 
 td.pending {
-  color: red;
+  color: var(--danger-color);
   font-weight: bold;
 }
 
-.notification_table{
+.notification_table {
   width: 100%;
 }

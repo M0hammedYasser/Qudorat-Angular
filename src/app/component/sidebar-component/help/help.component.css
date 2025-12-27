@@ -8,7 +8,7 @@
   padding-left: 40px;
   padding-right: 40px;
   padding-bottom: 40px;
-  background-color: #f8f9fa;
+  background-color: var(--bg-color);
   min-height: 100vh;
 }
 
@@ -19,14 +19,14 @@
 
 /* Header */
 .header-section h2 {
-  color: #2c3e50;
+  color: var(--text-color);
   letter-spacing: -0.5px;
 }
 
 /* Card Styling */
 .help-card {
-  background: #fff;
-  border: 1px solid #eaeaea;
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
   border-radius: 12px;
   margin-bottom: 1.2rem;
   overflow: hidden;
@@ -35,19 +35,19 @@
 
 .help-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06) !important;
+  box-shadow: 0 8px 20px var(--shadow-color) !important;
   border-color: #d1d9e6;
 }
 
 .help-card.active {
-  border-color: #0d6efd;
+  border-color: var(--primary-color);
   box-shadow: 0 8px 20px rgba(13, 110, 253, 0.15) !important;
 }
 
 /* Card Header */
 .card-header {
   padding: 1.5rem;
-  background: #fff;
+  background: var(--card-bg);
   cursor: pointer;
   display: flex;
   justify-content: space-between;
@@ -57,12 +57,12 @@
 }
 
 .card-header:hover {
-  background-color: #f8f9fa;
+  background-color: var(--bg-color);
 }
 
 .help-card.active .card-header {
-  border-bottom-color: #f0f0f0;
-  background-color: #f8fbff;
+  border-bottom-color: var(--border-color);
+  background-color: var(--bg-color);
 }
 
 /* Icons */
@@ -72,30 +72,31 @@
   justify-content: center;
   width: 48px;
   height: 48px;
-  background-color: #fff;
-  color: #0d6efd;
+  background-color: var(--bg-color);
+  color: var(--primary-color);
   border-radius: 12px;
   font-size: 1.3rem;
-  border: 1px solid #eaeaea;
+  border: 1px solid var(--border-color);
   transition: all 0.3s ease;
 }
 
 .help-card.active .icon-wrapper {
-  background-color: #0d6efd;
+  background-color: var(--primary-color);
   color: #fff;
-  border-color: #0d6efd;
+  border-color: var(--primary-color);
 }
 
 /* Content Body */
 .card-body-content {
-  background-color: #fff;
+  background-color: var(--card-bg);
+  color: var(--text-color);
   /* animation: slideDown 0.3s ease-out; Removed native animation for potential Angular animation usage or clean transition */
 }
 
 .list-group-item {
   border: none;
   padding: 1rem 1.5rem;
-  border-bottom: 1px solid #f5f5f5;
+  border-bottom: 1px solid var(--border-color);
 }
 
 .list-group-item:last-child {
