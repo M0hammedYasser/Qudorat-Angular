@@ -1,305 +1,219 @@
-<div class="sieve-analysis-container">
-  <h1 class="header">Sieve Analysis </h1>
-  <form (ngSubmit)="insert()" #form="ngForm">
-
-    <!-- First Line -->
-    <div class="d-flex align-items-center gap-1 mb-1">
-      <div class="align-items-center">
-        <label class="col-form-label me-1">Sample By</label>
-        <input type="text" class="form-control compact-input"
-               [(ngModel)]="sieveAnalysis.sampleBy" name="sampleBy" required>
-      </div>
-      <div class="align-items-center">
-        <label class="col-form-label me-1">Sample Date</label>
-        <input type="date" class="form-control compact-input"
-               [(ngModel)]="sieveAnalysis.samplingDate" name="samplingDate" required>
-      </div>
-
-      <div class="align-items-center">
-        <label class="col-form-label me-1">Test Name</label>
-        <input type="text" class="form-control compact-input"
-               [(ngModel)]="sieveAnalysis.nameOfTest" name="nameOfTest" required>
-      </div>
-      <div class="align-items-center">
-        <label class="col-form-label me-1">Testing Date</label>
-        <input type="date" class="form-control compact-input"
-               [(ngModel)]="sieveAnalysis.testingDate" name="testingDate" required>
-      </div>
+<div class="container-fluid" style="margin-top: 90px; margin-left: 260px; width: calc(100% - 260px);">
+  <div class="card shadow-sm">
+    <div class="card-header bg-primary text-white">
+      <h3 class="mb-0">Sieve Analysis</h3>
     </div>
+    <div class="card-body">
+      <form (ngSubmit)="insert()" #form="ngForm">
+        <!-- Sample Information Section -->
+        <h5 class="text-secondary mb-3">Sample Information</h5>
+        <div class="row g-3 mb-4">
+          <div class="col-md-3">
+            <label class="form-label">Sample By</label>
+            <input type="text" class="form-control" [(ngModel)]="sieveAnalysis.sampleBy" name="sampleBy" required>
+          </div>
+          <div class="col-md-3">
+            <label class="form-label">Sample Date</label>
+            <input type="date" class="form-control" [(ngModel)]="sieveAnalysis.samplingDate" name="samplingDate"
+              required>
+          </div>
+          <div class="col-md-3">
+            <label class="form-label">Test Name</label>
+            <input type="text" class="form-control" [(ngModel)]="sieveAnalysis.nameOfTest" name="nameOfTest" required>
+          </div>
+          <div class="col-md-3">
+            <label class="form-label">Testing Date</label>
+            <input type="date" class="form-control" [(ngModel)]="sieveAnalysis.testingDate" name="testingDate" required>
+          </div>
+          <div class="col-md-3">
+            <label class="form-label">Standard</label>
+            <input type="text" class="form-control" [(ngModel)]="sieveAnalysis.materialType" name="materialType"
+              required>
+          </div>
+          <div class="col-md-3">
+            <label class="form-label">Total Weight</label>
+            <input type="number" class="form-control" [(ngModel)]="sieveAnalysis.totalWeigh" name="totalWeigh" required>
+          </div>
+          <div class="col-md-3">
+            <label class="form-label">Source Of Sample</label>
+            <input type="text" class="form-control" [(ngModel)]="sieveAnalysis.sourceOfSample" name="sourceOfSample">
+          </div>
+          <div class="col-md-3">
+            <label class="form-label">Description</label>
+            <input type="text" class="form-control" [(ngModel)]="sieveAnalysis.description" name="description">
+          </div>
+          <div class="col-12">
+            <label class="form-label">Remarks</label>
+            <textarea class="form-control" [(ngModel)]="sieveAnalysis.notes" name="notes" rows="3"></textarea>
+          </div>
+        </div>
 
-    <!-- Second Line -->
-    <div class="d-flex align-items-center gap-1 mb-1">
-      <div class="align-items-center">
-        <label class="col-form-label me-1">Standard</label>
-        <input type="text" class="form-control compact-input"
-               [(ngModel)]="sieveAnalysis.materialType" name="materialType" required>
-      </div>
+        <!-- Sieve Analysis Data Table -->
+        <h5 class="text-secondary mb-3">Sieve Analysis Data</h5>
+        <div class="table-responsive">
+          <table class="table table-bordered table-striped text-center align-middle">
+            <thead class="table-dark">
+              <tr>
+                <th>Standard (mm)</th>
+                <th>Alternative (Inch)</th>
+                <th>Individual</th>
+                <th>Cumulative</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Row A -->
+              <tr>
+                <td><input type="text" class="form-control text-center border-0 bg-transparent" [value]="standard[0]"
+                    readonly tabindex="-1"></td>
+                <td><input type="text" class="form-control text-center border-0 bg-transparent" [value]="alertnative[0]"
+                    readonly tabindex="-1"></td>
+                <td><input type="number" class="form-control" [(ngModel)]="sieveAnalysis.individualA" name="individualA"
+                    required></td>
+                <td><input type="number" class="form-control" [(ngModel)]="sieveAnalysis.cumulativeA" name="cumulativeA"
+                    required></td>
+              </tr>
+              <!-- Row B -->
+              <tr>
+                <td><input type="text" class="form-control text-center border-0 bg-transparent" [value]="standard[1]"
+                    readonly tabindex="-1"></td>
+                <td><input type="text" class="form-control text-center border-0 bg-transparent" [value]="alertnative[1]"
+                    readonly tabindex="-1"></td>
+                <td><input type="number" class="form-control" [(ngModel)]="sieveAnalysis.individualB" name="individualB"
+                    required></td>
+                <td><input type="number" class="form-control" [(ngModel)]="sieveAnalysis.cumulativeB" name="cumulativeB"
+                    required></td>
+              </tr>
+              <!-- Row C -->
+              <tr>
+                <td><input type="text" class="form-control text-center border-0 bg-transparent" [value]="standard[2]"
+                    readonly tabindex="-1"></td>
+                <td><input type="text" class="form-control text-center border-0 bg-transparent" [value]="alertnative[2]"
+                    readonly tabindex="-1"></td>
+                <td><input type="number" class="form-control" [(ngModel)]="sieveAnalysis.individualC" name="individualC"
+                    required></td>
+                <td><input type="number" class="form-control" [(ngModel)]="sieveAnalysis.cumulativeC" name="cumulativeC"
+                    required></td>
+              </tr>
+              <!-- Row D -->
+              <tr>
+                <td><input type="text" class="form-control text-center border-0 bg-transparent" [value]="standard[3]"
+                    readonly tabindex="-1"></td>
+                <td><input type="text" class="form-control text-center border-0 bg-transparent" [value]="alertnative[3]"
+                    readonly tabindex="-1"></td>
+                <td><input type="number" class="form-control" [(ngModel)]="sieveAnalysis.individualD" name="individualD"
+                    required></td>
+                <td><input type="number" class="form-control" [(ngModel)]="sieveAnalysis.cumulativeD" name="cumulativeD"
+                    required></td>
+              </tr>
+              <!-- Row E -->
+              <tr>
+                <td><input type="text" class="form-control text-center border-0 bg-transparent" [value]="standard[4]"
+                    readonly tabindex="-1"></td>
+                <td><input type="text" class="form-control text-center border-0 bg-transparent" [value]="alertnative[4]"
+                    readonly tabindex="-1"></td>
+                <td><input type="number" class="form-control" [(ngModel)]="sieveAnalysis.individualE" name="individualE"
+                    required></td>
+                <td><input type="number" class="form-control" [(ngModel)]="sieveAnalysis.cumulativeE" name="cumulativeE"
+                    required></td>
+              </tr>
+              <!-- Row F -->
+              <tr>
+                <td><input type="text" class="form-control text-center border-0 bg-transparent" [value]="standard[5]"
+                    readonly tabindex="-1"></td>
+                <td><input type="text" class="form-control text-center border-0 bg-transparent" [value]="alertnative[5]"
+                    readonly tabindex="-1"></td>
+                <td><input type="number" class="form-control" [(ngModel)]="sieveAnalysis.individualF" name="individualF"
+                    required></td>
+                <td><input type="number" class="form-control" [(ngModel)]="sieveAnalysis.cumulativeF" name="cumulativeF"
+                    required></td>
+              </tr>
+              <!-- Row G -->
+              <tr>
+                <td><input type="text" class="form-control text-center border-0 bg-transparent" [value]="standard[6]"
+                    readonly tabindex="-1"></td>
+                <td><input type="text" class="form-control text-center border-0 bg-transparent" [value]="alertnative[6]"
+                    readonly tabindex="-1"></td>
+                <td><input type="number" class="form-control" [(ngModel)]="sieveAnalysis.individualG" name="individualG"
+                    required></td>
+                <td><input type="number" class="form-control" [(ngModel)]="sieveAnalysis.cumulativeG" name="cumulativeG"
+                    required></td>
+              </tr>
+              <!-- Row H -->
+              <tr>
+                <td><input type="text" class="form-control text-center border-0 bg-transparent" [value]="standard[7]"
+                    readonly tabindex="-1"></td>
+                <td><input type="text" class="form-control text-center border-0 bg-transparent" [value]="alertnative[7]"
+                    readonly tabindex="-1"></td>
+                <td><input type="number" class="form-control" [(ngModel)]="sieveAnalysis.individualH" name="individualH"
+                    required></td>
+                <td><input type="number" class="form-control" [(ngModel)]="sieveAnalysis.cumulativeH" name="cumulativeH"
+                    required></td>
+              </tr>
+              <!-- Row I -->
+              <tr>
+                <td><input type="text" class="form-control text-center border-0 bg-transparent" [value]="standard[8]"
+                    readonly tabindex="-1"></td>
+                <td><input type="text" class="form-control text-center border-0 bg-transparent" [value]="alertnative[8]"
+                    readonly tabindex="-1"></td>
+                <td><input type="number" class="form-control" [(ngModel)]="sieveAnalysis.individualI" name="individualI"
+                    required></td>
+                <td><input type="number" class="form-control" [(ngModel)]="sieveAnalysis.cumulativeI" name="cumulativeI"
+                    required></td>
+              </tr>
+              <!-- Row J -->
+              <tr>
+                <td><input type="text" class="form-control text-center border-0 bg-transparent" [value]="standard[9]"
+                    readonly tabindex="-1"></td>
+                <td><input type="text" class="form-control text-center border-0 bg-transparent" [value]="alertnative[9]"
+                    readonly tabindex="-1"></td>
+                <td><input type="number" class="form-control" [(ngModel)]="sieveAnalysis.individualJ" name="individualJ"
+                    required></td>
+                <td><input type="number" class="form-control" [(ngModel)]="sieveAnalysis.cumulativeJ" name="cumulativeJ"
+                    required></td>
+              </tr>
+              <!-- Row K -->
+              <tr>
+                <td><input type="text" class="form-control text-center border-0 bg-transparent" [value]="standard[10]"
+                    readonly tabindex="-1"></td>
+                <td><input type="text" class="form-control text-center border-0 bg-transparent"
+                    [value]="alertnative[10]" readonly tabindex="-1"></td>
+                <td><input type="number" class="form-control" [(ngModel)]="sieveAnalysis.individualK" name="individualK"
+                    required></td>
+                <td><input type="number" class="form-control" [(ngModel)]="sieveAnalysis.cumulativeK" name="cumulativeK"
+                    required></td>
+              </tr>
+              <!-- Row L -->
+              <tr>
+                <td><input type="text" class="form-control text-center border-0 bg-transparent" [value]="standard[11]"
+                    readonly tabindex="-1"></td>
+                <td><input type="text" class="form-control text-center border-0 bg-transparent"
+                    [value]="alertnative[11]" readonly tabindex="-1"></td>
+                <td><input type="number" class="form-control" [(ngModel)]="sieveAnalysis.individualL" name="individualL"
+                    required></td>
+                <td><input type="number" class="form-control" [(ngModel)]="sieveAnalysis.cumulativeL" name="cumulativeL"
+                    required></td>
+              </tr>
+              <!-- Row M -->
+              <tr>
+                <td><input type="text" class="form-control text-center border-0 bg-transparent" [value]="standard[12]"
+                    readonly tabindex="-1"></td>
+                <td><input type="text" class="form-control text-center border-0 bg-transparent"
+                    [value]="alertnative[12]" readonly tabindex="-1"></td>
+                <td><input type="number" class="form-control" [(ngModel)]="sieveAnalysis.individualM" name="individualM"
+                    required></td>
+                <td><input type="number" class="form-control" [(ngModel)]="sieveAnalysis.cumulativeM" name="cumulativeM"
+                    required></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
 
-      <div class="align-items-center">
-        <label class="col-form-label me-1">Total Weigh </label>
-        <input type="number" class="form-control compact-input"
-              [(ngModel)]="sieveAnalysis.totalWeigh" name="totalWeigh" required>
-      </div>
-      <div class="align-items-center">
-        <label class="col-form-label me-1">Source Of Sample</label>
-        <input type="text" class="form-control compact-input"
-              [(ngModel)]="sieveAnalysis.sourceOfSample" name="sourceOfSample">
-      </div>
-      <div class="align-items-center">
-        <label class="col-form-label me-1">Description</label>
-        <input type="text" class="form-control compact-input"
-              [(ngModel)]="sieveAnalysis.description" name="description">
-      </div>
+        <div class="card-footer bg-transparent border-0 text-end mt-3">
+          <button type="submit" class="btn btn-primary px-4" [disabled]="!form.valid">
+            <i class="bi bi-save me-2"></i>Submit
+          </button>
+        </div>
+      </form>
     </div>
-
-    <!-- Notes Line -->
-    <div class="d-flex align-items-center mb-1">
-      <div class="align-items-center">
-        <label class="col-form-label me-1">Remarks</label>
-        <textarea type="text" class="form-control compact-input"
-              [(ngModel)]="sieveAnalysis.notes" name="notes" style="width: 880px; height: 100px;"></textarea>
-      </div>
-    </div>
-
-    <div class="grid-container mt-5">
-      <div class="form-group">
-        <label class="label">Standard(mm)</label>
-        <input type="text" class="form-control" [value]="standard[0]">
-      </div>
-      <div class="form-group">
-        <label class="label">Alternative(Inch)</label>
-        <input type="text" class="form-control" [value]="alertnative[0]">
-      </div>
-      <div class="form-group">
-        <label class="label">Individual</label>
-        <input type="number" class="form-control" [(ngModel)]="sieveAnalysis.individualA" name="individualA"
-               id="individualA" required>
-      </div>
-      <div class="form-group">
-        <label class="label">Cumulative</label>
-        <input type="number" class="form-control" [(ngModel)]="sieveAnalysis.cumulativeA" name="cumulativeA"
-               id="cumulativeA" required>
-      </div>
-
-
-      <!-- Repeat for all 49 inputs manually -->
-      <div class="form-group">
-        <input type="text" class="form-control" [value]="standard[1]">
-      </div>
-      <div class="form-group">
-        <input type="text" class="form-control" [value]="alertnative[1]">
-      </div>
-      <div class="form-group">
-        <input type="number" class="form-control" [(ngModel)]="sieveAnalysis.individualB" name="individualB"
-               id="individualB" required>
-      </div>
-      <div class="form-group">
-        <input type="number" class="form-control" [(ngModel)]="sieveAnalysis.cumulativeB" name="cumulativeB"
-               id="cumulativeB" required>
-      </div>
-
-
-      <!-- Repeat for all 49 inputs manually -->
-      <div class="form-group">
-        <input type="text" class="form-control" [value]="standard[2]">
-      </div>
-      <div class="form-group">
-        <input type="text" class="form-control" [value]="alertnative[2]">
-      </div>
-      <div class="form-group">
-        <input type="number" class="form-control" [(ngModel)]="sieveAnalysis.individualC" name="individualC"
-               id="individualC" required>
-      </div>
-      <div class="form-group">
-        <input type="number" class="form-control" [(ngModel)]="sieveAnalysis.cumulativeC" name="cumulativeC"
-               id="cumulativeC" required>
-      </div>
-
-
-      <!-- Repeat for all 49 inputs manually -->
-      <div class="form-group">
-        <input type="text" class="form-control" [value]="standard[3]">
-      </div>
-      <div class="form-group">
-        <input type="text" class="form-control" [value]="alertnative[3]">
-      </div>
-      <div class="form-group">
-        <input type="number" class="form-control" [(ngModel)]="sieveAnalysis.individualD" name="individualD"
-               id="individualD" required>
-      </div>
-      <div class="form-group">
-        <input type="number" class="form-control" [(ngModel)]="sieveAnalysis.cumulativeD" name="cumulativeD"
-               id="cumulativeD" required>
-      </div>
-
-
-      <!-- Repeat for all 49 inputs manually -->
-      <div class="form-group">
-        <input type="text" class="form-control" [value]="standard[4]">
-      </div>
-      <div class="form-group">
-        <input type="text" class="form-control" [value]="alertnative[4]">
-      </div>
-      <div class="form-group">
-        <input type="number" class="form-control" [(ngModel)]="sieveAnalysis.individualE" name="individualE"
-               id="individualE" required>
-      </div>
-      <div class="form-group">
-        <input type="number" class="form-control" [(ngModel)]="sieveAnalysis.cumulativeE" name="cumulativeE"
-               id="cumulativeE" required>
-      </div>
-
-
-      <!-- Repeat for all 49 inputs manually -->
-      <div class="form-group">
-        <input type="text" class="form-control" [value]="standard[5]">
-      </div>
-      <div class="form-group">
-        <input type="text" class="form-control" [value]="alertnative[5]">
-      </div>
-      <div class="form-group">
-        <input type="number" class="form-control" [(ngModel)]="sieveAnalysis.individualF" name="individualF"
-               id="individualF" required>
-      </div>
-      <div class="form-group">
-        <input type="number" class="form-control" [(ngModel)]="sieveAnalysis.cumulativeF" name="cumulativeF"
-               id="cumulativeF" required>
-      </div>
-
-
-      <!-- Repeat for all 49 inputs manually -->
-      <div class="form-group">
-        <input type="text" class="form-control" [value]="standard[6] ">
-      </div>
-      <div class="form-group">
-        <input type="text" class="form-control" [value]="alertnative[6]">
-      </div>
-      <div class="form-group">
-        <input type="number" class="form-control" [(ngModel)]="sieveAnalysis.individualG" name="individualG"
-               id="individualG" required>
-      </div>
-      <div class="form-group">
-        <input type="number" class="form-control" [(ngModel)]="sieveAnalysis.cumulativeG" name="cumulativeG"
-               id="cumulativeG" required>
-      </div>
-
-
-
-      <!-- Repeat for all 49 inputs manually -->
-
-      <div class="form-group">
-        <input type="text" class="form-control" [value]="standard[7] ">
-      </div>
-      <div class="form-group">
-        <input type="text" class="form-control" [value]="alertnative[7]">
-      </div>
-      <div class="form-group">
-        <input type="number" class="form-control" [(ngModel)]="sieveAnalysis.individualH" name="individualH"
-               id="individualH" required>
-      </div>
-      <div class="form-group">
-        <input type="number" class="form-control" [(ngModel)]="sieveAnalysis.cumulativeH" name="cumulativeH"
-               id="cumulativeH" required>
-      </div>
-
-
-
-
-      <!-- Repeat for all 49 inputs manually -->
-
-      <div class="form-group">
-        <input type="text" class="form-control" [value]="standard[8] ">
-      </div>
-      <div class="form-group">
-        <input type="text" class="form-control" [value]="alertnative[8]">
-      </div>
-      <div class="form-group">
-        <input type="number" class="form-control" [(ngModel)]="sieveAnalysis.individualI" name="individualI"
-               id="individualI" required>
-      </div>
-      <div class="form-group">
-        <input type="number" class="form-control" [(ngModel)]="sieveAnalysis.cumulativeI" name="cumulativeI"
-               id="cumulativeI" required>
-      </div>
-
-
-
-      <!-- Repeat for all 49 inputs manually -->
-
-      <div class="form-group">
-        <input type="text" class="form-control" [value]="standard[9] ">
-      </div>
-      <div class="form-group">
-        <input type="text" class="form-control" [value]="alertnative[9]">
-      </div>
-      <div class="form-group">
-        <input type="number" class="form-control" [(ngModel)]="sieveAnalysis.individualJ" name="individualJ"
-               id="individualJ" required>
-      </div>
-      <div class="form-group">
-        <input type="number" class="form-control" [(ngModel)]="sieveAnalysis.cumulativeJ" name="cumulativeJ"
-               id="cumulativeJ" required>
-      </div>
-
-
-      <!-- Repeat for all 49 inputs manually -->
-
-      <div class="form-group">
-        <input type="text" class="form-control" [value]="standard[10] ">
-      </div>
-      <div class="form-group">
-        <input type="text" class="form-control" [value]="alertnative[10]">
-      </div>
-      <div class="form-group">
-        <input type="number" class="form-control" [(ngModel)]="sieveAnalysis.individualK" name="individualK"
-               id="individualK" required>
-      </div>
-      <div class="form-group">
-        <input type="number" class="form-control" [(ngModel)]="sieveAnalysis.cumulativeK" name="cumulativeK"
-               id="cumulativeK" required>
-      </div>
-
-
-      <!-- Repeat for all 49 inputs manually -->
-
-      <div class="form-group">
-        <input type="text" class="form-control" [value]="standard[11] ">
-      </div>
-      <div class="form-group">
-        <input type="text" class="form-control" [value]="alertnative[11]">
-      </div>
-      <div class="form-group">
-        <input type="number" class="form-control" [(ngModel)]="sieveAnalysis.individualL" name="individualL"
-               id="individualL" required>
-      </div>
-      <div class="form-group">
-        <input type="number" class="form-control" [(ngModel)]="sieveAnalysis.cumulativeL" name="cumulativeL"
-               id="cumulativeL" required>
-      </div>
-
-
-      <!-- Repeat for all 49 inputs manually -->
-
-      <div class="form-group">
-        <input type="text" class="form-control" [value]="standard[12] ">
-      </div>
-      <div class="form-group">
-        <input type="text" class="form-control" [value]="alertnative[12]">
-      </div>
-      <div class="form-group">
-        <input type="number" class="form-control" [(ngModel)]="sieveAnalysis.individualM" name="individualM"
-               id="individualM" required>
-      </div>
-      <div class="form-group">
-        <input type="number" class="form-control" [(ngModel)]="sieveAnalysis.cumulativeM" name="cumulativeM"
-               id="cumulativeM" required>
-      </div>
-    </div>
-
-    <div class="text-center">
-      <button type="submit" class="btn btn-primary" [disabled]="!form.valid">Submit</button>
-    </div>
-  </form>
+  </div>
 </div>
-
-

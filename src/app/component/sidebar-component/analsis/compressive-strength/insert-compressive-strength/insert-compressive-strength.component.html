@@ -1,229 +1,178 @@
-<div class="form-container">
-  <h1 class="header">Portland Cement Concrete Cylinders Compressive Strength Test</h1>
-  <form #form="ngForm" (submit)="insert()">
-    <div class="form-step">
-      <div class="bitumen-form-container">
-
-        <div class="d-flex align-items-center gap-1 mb-1">
-
-          <div class="align-items-center">
-            <label class="col-form-label me-1">Data Casting </label>
-            <input type="date" class="form-control compact-input"
-                   [(ngModel)]="compressiveStrength.dataCasting" name="dataCasting" required>
-          </div>
-
-          <div class="align-items-center">
-            <label class="col-form-label me-1">Data Received</label>
-            <input type="date" class="form-control compact-input"
-                   [(ngModel)]="compressiveStrength.dataReceived" name="dataReceived" required>
-          </div>
-
-          <div class="align-items-center">
-            <label class="col-form-label me-1">Date Tested</label>
-            <input type="number" class="form-control compact-input"
-                   [(ngModel)]="compressiveStrength.dateTested" name="dateTested" required>
-          </div>
-
-          <div class="align-items-center">
-            <label class="col-form-label me-1">Lab. Report No.</label>
-            <input type="text" class="form-control compact-input"
-                   [(ngModel)]="compressiveStrength.labreportNo" name="labreportNo" required>
-          </div>
-
-          <div class="align-items-center">
-            <label class="col-form-label me-1">Type of Sample</label>
-            <input type="text" class="form-control compact-input"
-                   [(ngModel)]="compressiveStrength.typeofSample" name="typeofSample" required>
-          </div>
-        </div>
-
-        <div class="d-flex align-items-center gap-1 mb-1">
-          <div class="align-items-center">
-            <label class="col-form-label me-1">Structure</label>
-            <input type="text" class="form-control compact-input"
-                   [(ngModel)]="compressiveStrength.structure" name="structure" required>
-          </div>
-
-          <div class="align-items-center">
-            <label class="col-form-label me-1">Sample By</label>
-            <input type="text" class="form-control compact-input"
-                   [(ngModel)]="compressiveStrength.sampleBy" name="sampleBy" required>
-          </div>
-
-          <div class="align-items-center">
-            <label class="col-form-label me-1">Slump (mm) ASTM</label>
-            <input type="number" class="form-control compact-input"
-                   [(ngModel)]="compressiveStrength.slump" name="slump" required>
-          </div>
-
-          <div class="align-items-center">
-            <label class="col-form-label me-1">Temperature(°C)</label>
-            <input type="number" class="form-control compact-input"
-                   [(ngModel)]="compressiveStrength.temperature" name="temperature" required>
-          </div>
-
-          <div class="align-items-center">
-            <label class="col-form-label me-1">Req. Strength for 28 Days (kg/cm2)</label>
-            <input type="number" class="form-control compact-input"
-                   [(ngModel)]="compressiveStrength.reqstrengthKg" name="reqstrengthKg" required>
-          </div>
-
-        </div>
-
-        <!-- Notes Line -->
-        <div class="d-flex align-items-center mb-1">
-          <div class="align-items-center">
-            <label class="col-form-label me-1">Remarks</label>
-            <textarea type="text" class="form-control compact-input"
-                  [(ngModel)]="compressiveStrength.notes" name="notes" style="width: 1010px; height: 100px;"></textarea>
-          </div>
-        </div>
-
-
-        <h3 class="head">Concrete </h3>
-        <div class="form-row">
-          <div class="form-group">
-            <label class="col-form-label">Sample NO</label>
-            <input type="number" class="form-control compact-input" [(ngModel)]="compressiveStrength.sampleNOA" name="sampleNOA" required>
-          </div>
-          <div class="form-group">
-            <label class="col-form-label">Dia.(cm)</label>
-            <input type="number" class="form-control compact-input" [(ngModel)]="compressiveStrength.diaA" name="diaA" required>
-          </div>
-          <div class="form-group">
-            <label class="col-form-label">Length (cm)</label>
-            <input type="number" class="form-control compact-input" [(ngModel)]="compressiveStrength.lengthA" name="lengthA" required>
-          </div>
-          <div class="form-group">
-            <label class="col-form-label">Weight Sample (gm)</label>
-            <input type="number" class="form-control compact-input" [(ngModel)]="compressiveStrength.weightSampleA" name="weightSampleA" required>
-          </div>
-          <div class="form-group">
-            <label class="col-form-label">Test Load (KN)</label>
-            <input type="number" class="form-control compact-input" [(ngModel)]="compressiveStrength.testLoadknA" name="testLoadknA" required>
-          </div>
-        </div>
-
-        <div class="form-row">
-          <div class="form-group">
-            <label class="col-form-label">Sample NO</label>
-            <input type="number" class="form-control compact-input" [(ngModel)]="compressiveStrength.sampleNOB" name="sampleNOB" required>
-          </div>
-          <div class="form-group">
-            <label class="col-form-label">Dia.(cm)</label>
-            <input type="number" class="form-control compact-input" [(ngModel)]="compressiveStrength.diaB" name="diab" required>
-          </div>
-          <div class="form-group">
-            <label class="col-form-label">Length (cm)</label>
-            <input type="number" class="form-control compact-input" [(ngModel)]="compressiveStrength.lengthB" name="lengthb" required>
-          </div>
-          <div class="form-group">
-            <label class="col-form-label">Weight Sample (gm)</label>
-            <input type="number" class="form-control compact-input" [(ngModel)]="compressiveStrength.weightSampleB" name="weightSampleB" required>
-          </div>
-          <div class="form-group">
-            <label class="col-form-label">Test Load (KN)</label>
-            <input type="number" class="form-control compact-input" [(ngModel)]="compressiveStrength.testLoadknB" name="testLoadknB" required>
-          </div>
-        </div>
-
-        <div class="form-row">
-          <div class="form-group">
-            <label class="col-form-label">Sample NO</label>
-            <input type="number" class="form-control compact-input" [(ngModel)]="compressiveStrength.sampleNOC" name="sampleNOC" required>
-          </div>
-          <div class="form-group">
-            <label class="col-form-label">Dia.(cm)</label>
-            <input type="number" class="form-control compact-input" [(ngModel)]="compressiveStrength.diaC" name="diaC" required>
-          </div>
-          <div class="form-group">
-            <label class="col-form-label">Length (cm)</label>
-            <input type="number" class="form-control compact-input" [(ngModel)]="compressiveStrength.lengthC" name="lengthC" required>
-          </div>
-          <div class="form-group">
-            <label class="col-form-label">Weight Sample (gm)</label>
-            <input type="number" class="form-control compact-input" [(ngModel)]="compressiveStrength.weightSampleC" name="weightSampleC" required>
-          </div>
-          <div class="form-group">
-            <label class="col-form-label">Test Load (KN)</label>
-            <input type="number" class="form-control compact-input" [(ngModel)]="compressiveStrength.testLoadknC" name="testLoadknC" required>
-          </div>
-        </div>
-
-        <div class="form-row">
-          <div class="form-group">
-            <label class="col-form-label">Sample NO</label>
-            <input type="number" class="form-control compact-input" [(ngModel)]="compressiveStrength.sampleNOD" name="sampleNOD" required>
-          </div>
-          <div class="form-group">
-            <label class="col-form-label">Dia.(cm)</label>
-            <input type="number" class="form-control compact-input" [(ngModel)]="compressiveStrength.diaD" name="diaD" required>
-          </div>
-          <div class="form-group">
-            <label class="col-form-label">Length (cm)</label>
-            <input type="number" class="form-control compact-input" [(ngModel)]="compressiveStrength.lengthD" name="lengthD" required>
-          </div>
-          <div class="form-group">
-            <label class="col-form-label">Weight Sample (gm)</label>
-            <input type="number" class="form-control compact-input" [(ngModel)]="compressiveStrength.weightSampleD" name="weightSampleD" required>
-          </div>
-          <div class="form-group">
-            <label class="col-form-label">Test Load (KN)</label>
-            <input type="number" class="form-control compact-input" [(ngModel)]="compressiveStrength.testLoadknD" name="testLoadknD" required>
-          </div>
-        </div>
-
-        <div class="form-row">
-          <div class="form-group">
-            <label class="col-form-label">Sample NO</label>
-            <input type="number" class="form-control compact-input" [(ngModel)]="compressiveStrength.sampleNOE" name="sampleNOE" required>
-          </div>
-          <div class="form-group">
-            <label class="col-form-label">Dia.(cm)</label>
-            <input type="number" class="form-control compact-input" [(ngModel)]="compressiveStrength.diaE" name="diaE" required>
-          </div>
-          <div class="form-group">
-            <label class="col-form-label">Length (cm)</label>
-            <input type="number" class="form-control compact-input" [(ngModel)]="compressiveStrength.lengthE" name="lengthE" required>
-          </div>
-          <div class="form-group">
-            <label class="col-form-label">Weight Sample (gm)</label>
-            <input type="number" class="form-control compact-input" [(ngModel)]="compressiveStrength.weightSampleE" name="weightSampleE" required>
-          </div>
-          <div class="form-group">
-            <label class="col-form-label">Test Load (KN)</label>
-            <input type="number" class="form-control compact-input" [(ngModel)]="compressiveStrength.testLoadknE" name="testLoadknE" required>
-          </div>
-        </div>
-
-        <div class="form-row">
-          <div class="form-group">
-            <label class="col-form-label">Sample NO</label>
-            <input type="number" class="form-control compact-input" [(ngModel)]="compressiveStrength.sampleNOF" name="sampleNOF" required>
-          </div>
-          <div class="form-group">
-            <label class="col-form-label">Dia.(cm)</label>
-            <input type="number" class="form-control compact-input" [(ngModel)]="compressiveStrength.diaF" name="diaF" required>
-          </div>
-          <div class="form-group">
-            <label class="col-form-label">Length (cm)</label>
-            <input type="number" class="form-control compact-input" [(ngModel)]="compressiveStrength.lengthF" name="lengthF" required>
-          </div>
-          <div class="form-group">
-            <label class="col-form-label">Weight Sample (gm)</label>
-            <input type="number" class="form-control compact-input" [(ngModel)]="compressiveStrength.weightSampleF" name="weightSampleF" required>
-          </div>
-          <div class="form-group">
-            <label class="col-form-label">Test Load (KN)</label>
-            <input type="number" class="form-control compact-input" [(ngModel)]="compressiveStrength.testLoadknF" name="testLoadknF" required>
-          </div>
-        </div>
-
-
-        <div class="navigation-buttons">
-          <button type="submit" class="btn btn-primary" [disabled]="!form.valid">Submit</button>
-        </div>
-      </div>
+<div class="container-fluid" style="margin-top: 90px; margin-left: 260px; width: calc(100% - 260px);">
+  <div class="card shadow-sm">
+    <div class="card-header bg-primary text-white">
+      <h3 class="mb-0">Portland Cement Concrete Cylinders Compressive Strength Test</h3>
     </div>
-  </form>
+    <div class="card-body">
+      <form #form="ngForm" (submit)="insert()">
+
+        <!-- General Information -->
+        <h5 class="text-secondary mb-3">General Information</h5>
+        <div class="row g-3 mb-4">
+          <div class="col-md-3">
+            <label class="form-label">Date Casting</label>
+            <input type="date" class="form-control" [(ngModel)]="compressiveStrength.dataCasting" name="dataCasting"
+              required>
+          </div>
+          <div class="col-md-3">
+            <label class="form-label">Date Received</label>
+            <input type="date" class="form-control" [(ngModel)]="compressiveStrength.dataReceived" name="dataReceived"
+              required>
+          </div>
+          <div class="col-md-3">
+            <label class="form-label">Date Tested</label>
+            <input type="date" class="form-control" [(ngModel)]="compressiveStrength.dateTested" name="dateTested"
+              required>
+          </div>
+          <div class="col-md-3">
+            <label class="form-label">Lab. Report No.</label>
+            <input type="text" class="form-control" [(ngModel)]="compressiveStrength.labreportNo" name="labreportNo"
+              required>
+          </div>
+          <div class="col-md-3">
+            <label class="form-label">Type of Sample</label>
+            <input type="text" class="form-control" [(ngModel)]="compressiveStrength.typeofSample" name="typeofSample"
+              required>
+          </div>
+          <div class="col-md-3">
+            <label class="form-label">Structure</label>
+            <input type="text" class="form-control" [(ngModel)]="compressiveStrength.structure" name="structure"
+              required>
+          </div>
+          <div class="col-md-3">
+            <label class="form-label">Sample By</label>
+            <input type="text" class="form-control" [(ngModel)]="compressiveStrength.sampleBy" name="sampleBy" required>
+          </div>
+          <div class="col-md-3">
+            <label class="form-label">Slump (mm) ASTM</label>
+            <input type="number" class="form-control" [(ngModel)]="compressiveStrength.slump" name="slump" required>
+          </div>
+          <div class="col-md-3">
+            <label class="form-label">Temperature (°C)</label>
+            <input type="number" class="form-control" [(ngModel)]="compressiveStrength.temperature" name="temperature"
+              required>
+          </div>
+          <div class="col-md-3">
+            <label class="form-label">Req. Strength 28 Days (kg/cm²)</label>
+            <input type="number" class="form-control" [(ngModel)]="compressiveStrength.reqstrengthKg"
+              name="reqstrengthKg" required>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">Remarks</label>
+            <textarea class="form-control" [(ngModel)]="compressiveStrength.notes" name="notes" rows="1"></textarea>
+          </div>
+        </div>
+
+        <!-- Concrete Samples Table -->
+        <h5 class="text-secondary mb-3">Concrete Samples</h5>
+        <div class="table-responsive mb-4">
+          <table class="table table-bordered table-striped text-center align-middle">
+            <thead class="table-dark">
+              <tr>
+                <th style="width: 50px;">#</th>
+                <th>Sample NO</th>
+                <th>Dia. (cm)</th>
+                <th>Length (cm)</th>
+                <th>Weight Sample (gm)</th>
+                <th>Test Load (KN)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Row A -->
+              <tr>
+                <td class="fw-bold">1</td>
+                <td><input type="number" class="form-control" [(ngModel)]="compressiveStrength.sampleNOA"
+                    name="sampleNOA" required></td>
+                <td><input type="number" class="form-control" [(ngModel)]="compressiveStrength.diaA" name="diaA"
+                    required></td>
+                <td><input type="number" class="form-control" [(ngModel)]="compressiveStrength.lengthA" name="lengthA"
+                    required></td>
+                <td><input type="number" class="form-control" [(ngModel)]="compressiveStrength.weightSampleA"
+                    name="weightSampleA" required></td>
+                <td><input type="number" class="form-control" [(ngModel)]="compressiveStrength.testLoadknA"
+                    name="testLoadknA" required></td>
+              </tr>
+              <!-- Row B -->
+              <tr>
+                <td class="fw-bold">2</td>
+                <td><input type="number" class="form-control" [(ngModel)]="compressiveStrength.sampleNOB"
+                    name="sampleNOB" required></td>
+                <td><input type="number" class="form-control" [(ngModel)]="compressiveStrength.diaB" name="diaB"
+                    required></td>
+                <td><input type="number" class="form-control" [(ngModel)]="compressiveStrength.lengthB" name="lengthB"
+                    required></td>
+                <td><input type="number" class="form-control" [(ngModel)]="compressiveStrength.weightSampleB"
+                    name="weightSampleB" required></td>
+                <td><input type="number" class="form-control" [(ngModel)]="compressiveStrength.testLoadknB"
+                    name="testLoadknB" required></td>
+              </tr>
+              <!-- Row C -->
+              <tr>
+                <td class="fw-bold">3</td>
+                <td><input type="number" class="form-control" [(ngModel)]="compressiveStrength.sampleNOC"
+                    name="sampleNOC" required></td>
+                <td><input type="number" class="form-control" [(ngModel)]="compressiveStrength.diaC" name="diaC"
+                    required></td>
+                <td><input type="number" class="form-control" [(ngModel)]="compressiveStrength.lengthC" name="lengthC"
+                    required></td>
+                <td><input type="number" class="form-control" [(ngModel)]="compressiveStrength.weightSampleC"
+                    name="weightSampleC" required></td>
+                <td><input type="number" class="form-control" [(ngModel)]="compressiveStrength.testLoadknC"
+                    name="testLoadknC" required></td>
+              </tr>
+              <!-- Row D -->
+              <tr>
+                <td class="fw-bold">4</td>
+                <td><input type="number" class="form-control" [(ngModel)]="compressiveStrength.sampleNOD"
+                    name="sampleNOD" required></td>
+                <td><input type="number" class="form-control" [(ngModel)]="compressiveStrength.diaD" name="diaD"
+                    required></td>
+                <td><input type="number" class="form-control" [(ngModel)]="compressiveStrength.lengthD" name="lengthD"
+                    required></td>
+                <td><input type="number" class="form-control" [(ngModel)]="compressiveStrength.weightSampleD"
+                    name="weightSampleD" required></td>
+                <td><input type="number" class="form-control" [(ngModel)]="compressiveStrength.testLoadknD"
+                    name="testLoadknD" required></td>
+              </tr>
+              <!-- Row E -->
+              <tr>
+                <td class="fw-bold">5</td>
+                <td><input type="number" class="form-control" [(ngModel)]="compressiveStrength.sampleNOE"
+                    name="sampleNOE" required></td>
+                <td><input type="number" class="form-control" [(ngModel)]="compressiveStrength.diaE" name="diaE"
+                    required></td>
+                <td><input type="number" class="form-control" [(ngModel)]="compressiveStrength.lengthE" name="lengthE"
+                    required></td>
+                <td><input type="number" class="form-control" [(ngModel)]="compressiveStrength.weightSampleE"
+                    name="weightSampleE" required></td>
+                <td><input type="number" class="form-control" [(ngModel)]="compressiveStrength.testLoadknE"
+                    name="testLoadknE" required></td>
+              </tr>
+              <!-- Row F -->
+              <tr>
+                <td class="fw-bold">6</td>
+                <td><input type="number" class="form-control" [(ngModel)]="compressiveStrength.sampleNOF"
+                    name="sampleNOF" required></td>
+                <td><input type="number" class="form-control" [(ngModel)]="compressiveStrength.diaF" name="diaF"
+                    required></td>
+                <td><input type="number" class="form-control" [(ngModel)]="compressiveStrength.lengthF" name="lengthF"
+                    required></td>
+                <td><input type="number" class="form-control" [(ngModel)]="compressiveStrength.weightSampleF"
+                    name="weightSampleF" required></td>
+                <td><input type="number" class="form-control" [(ngModel)]="compressiveStrength.testLoadknF"
+                    name="testLoadknF" required></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="card-footer bg-transparent border-0 d-flex justify-content-end mt-4">
+          <button type="submit" class="btn btn-primary px-5" [disabled]="!form.valid">
+            <i class="bi bi-save me-2"></i>Submit
+          </button>
+        </div>
+
+      </form>
+    </div>
+  </div>
 </div>

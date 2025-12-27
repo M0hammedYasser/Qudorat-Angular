@@ -1,901 +1,606 @@
-<div class="form-container">
-  <h1 class="header">
-    {{ currentStep === 1 ? 'BITUMEN' : currentStep === 2 ? 'Sieve Analysis For Sand' : 'Asphalt Marshall' }}
-  </h1>
-
-  <form #form="ngForm" (submit)="update()">
-    <!-- STEP 1: BITUMEN -->
-    <div *ngIf="currentStep === 1" class="form-step" >
-      <div class="bitumen-form-container">
-        <div class="form-group">
-          <label class="col-form-label">Weight Sample Before (gm)</label>
-          <input type="number" class="form-control"
-                 [(ngModel)]="asphalt.bitumen.weightSampleBefore"
-                 name="weightSampleBefore" required>
-        </div>
-        <div class="form-group">
-          <label class="col-form-label">Weight Filter Before (gm)</label>
-          <input type="number" class="form-control"
-                 [(ngModel)]="asphalt.bitumen.weightFilterBefore"
-                 name="weightFilterBefore" required>
-        </div>
-        <div class="form-group">
-          <label class="col-form-label">Weight Filter After (gm)</label>
-          <input type="number" class="form-control"
-                 [(ngModel)]="asphalt.bitumen.weightFilterAfter"
-                 name="weightFilterAfter" required>
-        </div>
-        <div class="form-group">
-          <label class="col-form-label">Weight Sample After (gm)</label>
-          <input type="number" class="form-control"
-                 [(ngModel)]="asphalt.bitumen.weightSampleAfter"
-                 name="weightSampleAfter" required>
-        </div>
-        <div class="form-group">
-          <label class="col-form-label">U.Expand</label>
-          <input type="text" class="form-control"
-                 [(ngModel)]="asphalt.bitumen.expand"
-                 name="expand" required>
-        </div>
-        <div class="form-group">
-          <label class="col-form-label">Standard</label>
-          <input type="text" class="form-control"
-                 [(ngModel)]="asphalt.bitumen.standard"
-                 name="standard" required>
-        </div>
-        <!-- <div class="form-group">
-          <label class="col-form-label">Perc of Bit %</label>
-          <input type="number" class="form-control"
-                 [(ngModel)]="asphalt.bitumen.percofBit"
-                 name="percofBit" required>
-        </div> -->
-        <div class="form-group">
-          <label class="col-form-label">JMF</label>
-          <input type="number" class="form-control"
-                 [(ngModel)]="asphalt.bitumen.jmfA"
-                 name="jmfA" required>
-          <input type="number" class="form-control mt-1"
-                 [(ngModel)]="asphalt.bitumen.jmfB"
-                 name="jmfB" required>
-        </div>
-        <div class="form-group">
-          <label class="col-form-label">Equipment Used</label>
-          <input type="text" class="form-control"
-                 [(ngModel)]="asphalt.bitumen.equipmentUsed"
-                 name="equipmentUsed" required>
-        </div>
-      </div>
-    </div>
-    <!-- STEP 1: Sieve Analysis -->
-    <div *ngIf="currentStep === 2" class="form-step">
-      <div class="custom-inline-group">
-        <div class="form-group">
-          <label>Total Wt. of Test Sample (gm)</label>
-          <input type="number" class="form-control" [(ngModel)]="asphalt.gradationTest.totalWeigh" name="totalWeigh" required>
-        </div>
-
-        <div class="form-group">
-          <label>Standard</label>
-          <input type="text" class="form-control" [(ngModel)]="asphalt.gradationTest.standard" name="standard" required>
-        </div>
-      </div>
-
-
-
-
-      <div class="grid-container">
-        <div class="form-group">
-          <label class="label">Standard</label>
-          <input type="text" class="form-control" [value]="standard[0]" readonly>
-        </div>
-        <div class="form-group">
-          <label class="label">Alternative</label>
-          <input type="text" class="form-control" [value]="alternative[0]" readonly>
-        </div>
-        <div class="form-group">
-          <label class="label">Mass Retained(gm)</label>
-          <input type="number" class="form-control" [(ngModel)]="asphalt.gradationTest.massRetainedA"
-                 name="massRetainedA" id="massRetainedA" required>
-        </div>
-        <div class="form-group">
-          <label class="label">CVC.Min</label>
-          <input type="number" class="form-control" [(ngModel)]="asphalt.gradationTest.cvcMinA" name="cvcMinA"
-                 id="cvcMinA"
-                 required>
-        </div>
-        <div class="form-group">
-          <label class="label">CVC.Max</label>
-          <input type="number" class="form-control" [(ngModel)]="asphalt.gradationTest.cvcMaxA" name="cvcMaxA"
-                 id="cvcMaxA"
-                 required>
-        </div>
-
-      <div class="form-group">
-        <label class="label">Expand</label>
-        <input type="text"  class="form-control" [(ngModel)]="asphalt.gradationTest.expandA" name="expandA"
-               id="expandA">
-      </div>
-
-
-        <!-- Repeat for all 49 inputs manually -->
-        <div class="form-group">
-          <input type="text" class="form-control" [value]="standard[1]" readonly>
-        </div>
-        <div class="form-group">
-          <input type="text" class="form-control" [value]="alternative[1]" readonly>
-        </div>
-        <div class="form-group">
-          <input type="number" class="form-control" [(ngModel)]="asphalt.gradationTest.massRetainedB"
-                 name="massRetainedB"
-                 id="massRetainedB" required>
-        </div>
-        <div class="form-group">
-          <input type="number" class="form-control" [(ngModel)]="asphalt.gradationTest.cvcMinB" name="cvcMinB"
-                 id="cvcMinB"
-                 required>
-        </div>
-        <div class="form-group">
-          <input type="number" class="form-control" [(ngModel)]="asphalt.gradationTest.cvcMaxB" name="cvcMaxB"
-                 id="cvcMaxB"
-                 required>
-        </div>
-        <div class="form-group">
-          <input type="text"  class="form-control" [(ngModel)]="asphalt.gradationTest.expandB" name="expandB"
-               id="expandB">
-        </div>
-
-        <!-- Repeat for all 49 inputs manually -->
-        <div class="form-group">
-          <input type="text" class="form-control" [value]="standard[2]" readonly>
-        </div>
-        <div class="form-group">
-          <input type="text" class="form-control" [value]="alternative[2]" readonly>
-        </div>
-        <div class="form-group">
-          <input type="number" class="form-control" [(ngModel)]="asphalt.gradationTest.massRetainedC"
-                 name="massRetainedC"
-                 id="massRetainedC" required>
-        </div>
-        <div class="form-group">
-          <input type="number" class="form-control" [(ngModel)]="asphalt.gradationTest.cvcMinC" name="cvcMinC"
-                 id="cvcMinC"
-                 required>
-        </div>
-        <div class="form-group">
-          <input type="number" class="form-control" [(ngModel)]="asphalt.gradationTest.cvcMaxC" name="cvcMaxC"
-                 id="cvcMaxC"
-                 required>
-        </div>
-        <div class="form-group">
-          <input type="text"  class="form-control" [(ngModel)]="asphalt.gradationTest.expandC" name="expandC"
-               id="expandC">
-        </div>
-
-
-        <!-- Repeat for all 49 inputs manually -->
-        <div class="form-group">
-          <input type="text" class="form-control" [value]="standard[3]" readonly>
-        </div>
-        <div class="form-group">
-          <input type="text" class="form-control" [value]="alternative[3]" readonly>
-        </div>
-        <div class="form-group">
-          <input type="number" class="form-control" [(ngModel)]="asphalt.gradationTest.massRetainedD"
-                 name="massRetainedD"
-                 id="massRetainedD" required>
-        </div>
-        <div class="form-group">
-          <input type="number" class="form-control" [(ngModel)]="asphalt.gradationTest.cvcMinD" name="cvcMinD"
-                 id="cvcMinD"
-                 required>
-        </div>
-        <div class="form-group">
-          <input type="number" class="form-control" [(ngModel)]="asphalt.gradationTest.cvcMaxD" name="cvcMaxD"
-                 id="cvcMaxD"
-                 required>
-        </div>
-        <div class="form-group">
-          <input type="text"  class="form-control" [(ngModel)]="asphalt.gradationTest.expandD" name="expandD"
-               id="expandD">
-        </div>
-
-
-        <!-- Repeat for all 49 inputs manually -->
-        <div class="form-group">
-          <input type="text" class="form-control" [value]="standard[4]" readonly>
-        </div>
-        <div class="form-group">
-          <input type="text" class="form-control" [value]="alternative[4]" readonly>
-        </div>
-        <div class="form-group">
-          <input type="number" class="form-control" [(ngModel)]="asphalt.gradationTest.massRetainedE"
-                 name="massRetainedE"
-                 id="massRetainedE" required>
-        </div>
-        <div class="form-group">
-          <input type="number" class="form-control" [(ngModel)]="asphalt.gradationTest.cvcMinE" name="cvcMinE"
-                 id="cvcMinE"
-                 required>
-        </div>
-        <div class="form-group">
-          <input type="number" class="form-control" [(ngModel)]="asphalt.gradationTest.cvcMaxE" name="cvcMaxE"
-                 id="cvcMaxE"
-                 required>
-        </div>
-        <div class="form-group">
-          <input type="text"  class="form-control" [(ngModel)]="asphalt.gradationTest.expandE" name="expandE"
-               id="expandE">
-        </div>
-
-
-        <!-- Repeat for all 49 inputs manually -->
-        <div class="form-group">
-          <input type="text" class="form-control" [value]="standard[5]" readonly>
-        </div>
-        <div class="form-group">
-          <input type="text" class="form-control" [value]="alternative[5]" readonly>
-        </div>
-        <div class="form-group">
-          <input type="number" class="form-control" [(ngModel)]="asphalt.gradationTest.massRetainedF"
-                 name="massRetainedF"
-                 id="massRetainedF" required>
-        </div>
-        <div class="form-group">
-          <input type="number" class="form-control" [(ngModel)]="asphalt.gradationTest.cvcMinF" name="cvcMinF"
-                 id="cvcMinF"
-                 required>
-        </div>
-        <div class="form-group">
-          <input type="number" class="form-control" [(ngModel)]="asphalt.gradationTest.cvcMaxF" name="cvcMaxF"
-                 id="cvcMaxF"
-                 required>
-        </div>
-        <div class="form-group">
-          <input type="text"  class="form-control" [(ngModel)]="asphalt.gradationTest.expandF" name="expandF"
-               id="expandF">
-        </div>
-
-
-        <!-- Repeat for all 49 inputs manually -->
-        <div class="form-group">
-          <input type="text" class="form-control" [value]="standard[6] " readonly>
-        </div>
-
-        <div class="form-group">
-          <input type="text" class="form-control" [value]="alternative[6]" readonly>
-        </div>
-        <div class="form-group">
-          <input type="number" class="form-control" [(ngModel)]="asphalt.gradationTest.massRetainedG"
-                 name="massRetainedG"
-                 id="massRetainedG" required>
-        </div>
-        <div class="form-group">
-          <input type="number" class="form-control" [(ngModel)]="asphalt.gradationTest.cvcMinG" name="cvcMinG"
-                 id="cvcMinG"
-                 required>
-        </div>
-        <div class="form-group">
-          <input type="number" class="form-control" [(ngModel)]="asphalt.gradationTest.cvcMaxG" name="cvcMaxG"
-                 id="cvcMaxG"
-                 required>
-        </div>
-        <div class="form-group">
-          <input type="text"  class="form-control" [(ngModel)]="asphalt.gradationTest.expandG" name="expandG"
-               id="expandG">
-        </div>
-
-
-        <!-- Repeat for all 49 inputs manually -->
-
-        <div class="form-group">
-          <input type="text" class="form-control" [value]="standard[7] " readonly>
-        </div>
-        <div class="form-group">
-          <input type="text" class="form-control" [value]="alternative[7]" readonly>
-        </div>
-        <div class="form-group">
-          <input type="number" class="form-control" [(ngModel)]="asphalt.gradationTest.massRetainedH"
-                 name="massRetainedH"
-                 id="massRetainedH" required>
-        </div>
-        <div class="form-group">
-          <input type="number" class="form-control" [(ngModel)]="asphalt.gradationTest.cvcMinH" name="cvcMinH"
-                 id="cvcMinH"
-                 required>
-        </div>
-        <div class="form-group">
-          <input type="number" class="form-control" [(ngModel)]="asphalt.gradationTest.cvcMaxH" name="cvcMaxH"
-                 id="cvcMaxH"
-                 required>
-        </div>
-        <div class="form-group">
-          <input type="text"  class="form-control" [(ngModel)]="asphalt.gradationTest.expandH" name="expandH"
-               id="expandH">
-        </div>
-
-
-
-        <!-- Repeat for all 49 inputs manually -->
-
-        <div class="form-group">
-          <input type="text" class="form-control" [value]="standard[8]" readonly>
-        </div>
-        <div class="form-group">
-          <input type="text" class="form-control" [value]="alternative[8]" readonly>
-        </div>
-        <div class="form-group">
-          <input type="number" class="form-control" [(ngModel)]="asphalt.gradationTest.massRetainedI"
-                 name="massRetainedI"
-                 id="massRetainedI" required>
-        </div>
-        <div class="form-group">
-          <input type="number" class="form-control" [(ngModel)]="asphalt.gradationTest.cvcMinI" name="cvcMinI"
-                 id="cvcMinI"
-                 required>
-        </div>
-        <div class="form-group">
-          <input type="number" class="form-control" [(ngModel)]="asphalt.gradationTest.cvcMaxI" name="cvcMaxI"
-                 id="cvcMaxI" required>
-        </div>
-        <div class="form-group">
-          <input type="text"  class="form-control" [(ngModel)]="asphalt.gradationTest.expandI" name="expandI"
-               id="expandI">
-        </div>
-
-
-        <div class="form-group">
-          <input type="text" class="form-control" [value]="standard[9]" readonly>
-        </div>
-        <div class="form-group">
-          <input type="text" class="form-control" [value]="alternative[9]" readonly>
-        </div>
-        <div class="form-group">
-          <input type="number" class="form-control" [(ngModel)]="asphalt.gradationTest.massRetainedJ"
-                 name="massRetainedJ" id="massRetainedJ" required>
-        </div>
-        <div class="form-group">
-          <input type="number" class="form-control" [(ngModel)]="asphalt.gradationTest.cvcMinJ" name="cvcMinJ"
-                 id="cvcMinJ"
-                 required>
-        </div>
-        <div class="form-group">
-          <input type="number" class="form-control" [(ngModel)]="asphalt.gradationTest.cvcMaxJ" name="cvcMaxJ"
-                 id="cvcMaxJ" required>
-        </div>
-        <div class="form-group">
-            <input type="text"  class="form-control" [(ngModel)]="asphalt.gradationTest.expandJ" name="expandJ"
-               id="expandJ">
-        </div>
-      </div>
-
-      <div class="asphalt-marshall-grid-container">
-        <div class="form-group">
-          <label class="label">Voids in mineral Agg. % </label>
-        </div>
-        <div class="form-group">
-          <input type="text" class="form-control" [(ngModel)]="this.asphalt.voidsinmineralaggLimits " name="voidsinmineralaggLimits" required>
-        </div>
-        <!-- <div class="form-group">
-          <input type="text" class="form-control" disabled>
-        </div> -->
-
-        <div class="form-group">
-          <label class="label">Air Voids % </label>
-        </div>
-        <div class="form-group">
-          <input type="text" class="form-control" [(ngModel)]="this.asphalt.airvoidsLimits" name="airvoidsLimits" required>
-        </div>
-        <!-- <div class="form-group">
-          <input type="text" class="form-control" disabled>
-        </div> -->
-
-        <div class="form-group">
-          <label class="label">Bitumen Content % </label>
-        </div>
-        <div class="form-group">
-          <input type="text" class="form-control" [(ngModel)]="this.asphalt.bitumencontentLimits" name="bitumencontentLimits" required>
-        </div>
-        <!-- <div class="form-group">
-          <input type="text" class="form-control" disabled>
-        </div> -->
-
-        <div class="form-group">
-          <label class="label">Stability kgm </label>
-        </div>
-        <div class="form-group">
-          <input type="text" class="form-control" [(ngModel)]="this.asphalt.lossofstabilitykgmLimits" name="lossofstabilitykgmLimits" required>
-        </div>
-        <!-- <div class="form-group">
-          <input type="text" class="form-control" disabled>
-        </div> -->
-
-        <div class="form-group">
-          <label class="label">Voids filled with Asp. % </label>
-        </div>
-        <div class="form-group">
-          <input type="text" class="form-control" [(ngModel)]="this.asphalt.voidsfilledwithaspLimits" name="voidsfilledwithaspLimits" required>
-        </div>
-        <!-- <div class="form-group">
-          <input type="text" class="form-control" [(ngModel)]="this.asphalt.voidsfilledwithasplimitsInput" name="voidsfilledwithasplimitsInput" required>
-        </div> -->
-
-        <div class="form-group">
-          <label class="label">Max density as per design (gm/cm3) </label>
-        </div>
-        <div class="form-group">
-          <input type="text" class="form-control" [(ngModel)]="this.asphalt.maxdensityasperdesignLimits" name="maxdensityasperdesignLimits" required>
-        </div>
-        <!-- <div class="form-group">
-          <input type="text" class="form-control" [(ngModel)]="this.asphalt.maxdensityasperdesignlimitsInput" name="maxdensityasperdesignlimitsInput" required>
-        </div> -->
-
-        <div class="form-group">
-          <label class="label">Flow (mm) </label>
-        </div>
-        <div class="form-group">
-          <input type="text" class="form-control" [(ngModel)]="this.asphalt.flowLimits" name="flowLimits" required>
-        </div>
-        <!-- <div class="form-group">
-          <input type="text" class="form-control" disabled>
-        </div> -->
-
-        <div class="form-group">
-          <label class="label">Loss of Stability % </label>
-        </div>
-        <div class="form-group">
-          <input type="text" class="form-control" [(ngModel)]="this.asphalt.lossOfStabilityLimits" name="lossofstabilityLimits" required>
-        </div>
-        <!-- <div class="form-group">
-          <input type="text" class="form-control" disabled>
-        </div> -->
-
-        <div class="form-group">
-          <label class="label">Remarks </label>
-        </div>
-        <div class="form-group">
-          <input type="text" class="form-control" [(ngModel)]="this.asphalt.remarks" name="remarks" maxlength="598" rows="13" required >
-        </div>
-
-      </div>
-
+<div class="container-fluid" style="margin-top: 90px; margin-left: 260px; width: calc(100% - 260px);">
+  <div class="card shadow-sm">
+    <div class="card-header bg-primary text-white">
+      <h3 class="mb-0">
+        {{ currentStep === 1 ? 'BITUMEN (Update)' : currentStep === 2 ? 'Sieve Analysis For Sand (Update)' : 'Asphalt
+        Marshall (Update)' }}
+      </h3>
     </div>
 
-    <!-- STEP 2: Asphalt Marshall -->
-    <div *ngIf="currentStep === 3" class="form-step">
-            <div class="d-flex align-items-center gap-3 flex-wrap mb-3">
-        <!-- Existing inputs -->
+    <div class="card-body">
+      <form #form="ngForm" (submit)="update()">
 
-        <div class="align-items-center">
-          <label class="col-form-label me-2">Request Description</label>
-          <input type="text" class="form-control"
-                 [(ngModel)]="asphalt.requestDescription" name="requestDescription" required>
-        </div>
-        <div class="align-items-center">
-          <label class="col-form-label me-2">Sample Date</label>
-          <input type="date" class="form-control"
-                 [(ngModel)]="asphalt.sampleDate" name="sampleDate" required>
-        </div>
-        <div class="align-items-center">
-          <label class="col-form-label me-2">Testing Date</label>
-          <input type="date" class="form-control"
-                 [(ngModel)]="asphalt.testingDate" name="testingDate" required>
-        </div>
-        <div class="align-items-center">
-          <label class="col-form-label me-2">Sample Type</label>
-          <input type="text" class="form-control"
-                 [(ngModel)]="asphalt.sampleType" name="sampleType" required>
-        </div>
-
-        <div class="align-items-center">
-          <label class="col-form-label me-2">Sample By</label>
-          <input type="text" class="form-control"
-                 [(ngModel)]="asphalt.sampleBy" name="sampleBy" required>
-        </div>
-        <div class="align-items-center">
-          <label class="col-form-label me-2">Asphalt Layer</label>
-          <input type="text" class="form-control"
-                 [(ngModel)]="asphalt.asphaltLayer" name="asphaltLayer" required>
-        </div>
-        <div class="align-items-center">
-          <label class="col-form-label me-2">Equipment Used </label>
-          <input type="text" class="form-control"
-                 [(ngModel)]="asphalt.equipmentUsed" name="equipmentUsed" required>
-        </div>
-        <div class="align-items-center">
-          <label class="col-form-label me-2">Report No</label>
-          <input type="text" class="form-control"
-                 [(ngModel)]="asphalt.reportNo" name="reportNo" required>
-        </div>
-      </div>
-
-
-      <!-- Notes Line -->
-      <div class="d-flex align-items-center mb-1">
-        <div class="align-items-center">
-          <label class="col-form-label me-1">Remarks</label>
-          <textarea
-            class="form-control compact-input"
-            [(ngModel)]="asphalt.notes"
-            name="notes"
-            rows="9"
-            maxlength="1477"
-            style="width: 1000px; resize: none; overflow-y: auto;"
-            (input)="limitLiness($event, 9)"
-          ></textarea>
-        </div>
-      </div>
-
-      <div class="d-flex align-items-center" style="margin: 10px 0px 5px 5px">
-        <label class="col-form-label me-2">% A/C by tot. wt. of mix</label>
-        <input type="number" class="form-control"
-               [(ngModel)]="asphalt.bitumen.percOfBit" name="percOfBit" style="width: 500px">
-      </div>
-
-      <div class="grid-container-asphalt">
-        <!-- Header Row -->
-        <div class="form-group">
-          <label class="label">Specimen No.</label>
-        </div>
-        <div *ngFor="let i of [1,2,3,4,5,6]" class="form-group">
-          <label class="label">{{ i }}</label>
+        <!-- STEP 1: BITUMEN -->
+        <div *ngIf="currentStep === 1">
+          <h5 class="text-secondary mb-3">Bitumen Extraction</h5>
+          <div class="row g-3">
+            <div class="col-md-3">
+              <label class="form-label">Weight Sample Before (gm)</label>
+              <input type="number" class="form-control" [(ngModel)]="asphalt.bitumen.weightSampleBefore"
+                name="weightSampleBefore" required>
+            </div>
+            <div class="col-md-3">
+              <label class="form-label">Weight Filter Before (gm)</label>
+              <input type="number" class="form-control" [(ngModel)]="asphalt.bitumen.weightFilterBefore"
+                name="weightFilterBefore" required>
+            </div>
+            <div class="col-md-3">
+              <label class="form-label">Weight Filter After (gm)</label>
+              <input type="number" class="form-control" [(ngModel)]="asphalt.bitumen.weightFilterAfter"
+                name="weightFilterAfter" required>
+            </div>
+            <div class="col-md-3">
+              <label class="form-label">Weight Sample After (gm)</label>
+              <input type="number" class="form-control" [(ngModel)]="asphalt.bitumen.weightSampleAfter"
+                name="weightSampleAfter" required>
+            </div>
+            <div class="col-md-3">
+              <label class="form-label">U.Expand</label>
+              <input type="text" class="form-control" [(ngModel)]="asphalt.bitumen.expand" name="expand" required>
+            </div>
+            <div class="col-md-3">
+              <label class="form-label">JMF (A/B)</label>
+              <div class="input-group">
+                <input type="number" class="form-control" placeholder="A" [(ngModel)]="asphalt.bitumen.jmfA" name="jmfA"
+                  required>
+                <span class="input-group-text">/</span>
+                <input type="number" class="form-control" placeholder="B" [(ngModel)]="asphalt.bitumen.jmfB" name="jmfB"
+                  required>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <label class="form-label">Equipment Used</label>
+              <input type="text" class="form-control" [(ngModel)]="asphalt.bitumen.equipmentUsed" maxlength="25"
+                name="equipmentUsed" required>
+            </div>
+            <div class="col-md-3">
+              <label class="form-label">Standard</label>
+              <input type="text" class="form-control" [(ngModel)]="asphalt.bitumen.standard" name="standard" required>
+            </div>
+          </div>
         </div>
 
-        <!-- Wt. in air dry gm -->
-        <div class="form-group">
-          <label class="label">Wt. in air dry gm</label>
-        </div>
-        <div class="form-group">
-          <input type="number" class="form-control" [(ngModel)]="asphalt.weightAirDryA" name="weightAirDryA" required>
-        </div>
-        <div class="form-group">
-          <input type="number" class="form-control" [(ngModel)]="asphalt.weightAirDryB" name="weightAirDryB" required>
-        </div>
-        <div class="form-group">
-          <input type="number" class="form-control" [(ngModel)]="asphalt.weightAirDryC" name="weightAirDryC" required>
-        </div>
-        <div class="form-group">
-          <input type="number" class="form-control" [(ngModel)]="asphalt.weightAirDryD" name="weightAirDryD" required>
-        </div>
-        <div class="form-group">
-          <input type="number" class="form-control" [(ngModel)]="asphalt.weightAirDryE" name="weightAirDryE" required>
-        </div>
-        <div class="form-group">
-          <input type="number" class="form-control" [(ngModel)]="asphalt.weightAirDryF" name="weightAirDryF" required>
+        <!-- STEP 2: Sieve Analysis -->
+        <div *ngIf="currentStep === 2">
+          <h5 class="text-secondary mb-3">Gradation Test</h5>
+          <div class="row g-3 mb-4">
+            <div class="col-md-4">
+              <label class="form-label">Total Wt. of Test Sample (gm)</label>
+              <input type="number" class="form-control" [(ngModel)]="asphalt.gradationTest.totalWeigh" name="totalWeigh"
+                required>
+            </div>
+            <div class="col-md-4">
+              <label class="form-label">Standard</label>
+              <input type="text" class="form-control" [(ngModel)]="asphalt.gradationTest.standard" name="standard"
+                required>
+            </div>
+          </div>
+
+          <div class="table-responsive">
+            <table class="table table-bordered table-striped text-center align-middle">
+              <thead class="table-dark">
+                <tr>
+                  <th>Standard</th>
+                  <th>Alternative</th>
+                  <th>Mass Retained (gm)</th>
+                  <th>CVC Min</th>
+                  <th>CVC Max</th>
+                  <th>Expand</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Row A -->
+                <tr>
+                  <td><input type="text" class="form-control text-center border-0 bg-transparent" [value]="standard[0]"
+                      readonly tabindex="-1"></td>
+                  <td><input type="text" class="form-control text-center border-0 bg-transparent"
+                      [value]="alternative[0]" readonly tabindex="-1"></td>
+                  <td><input type="number" class="form-control" [(ngModel)]="asphalt.gradationTest.massRetainedA"
+                      name="massRetainedA" required></td>
+                  <td><input type="number" class="form-control" [(ngModel)]="asphalt.gradationTest.cvcMinA"
+                      name="cvcMinA" required></td>
+                  <td><input type="number" class="form-control" [(ngModel)]="asphalt.gradationTest.cvcMaxA"
+                      name="cvcMaxA" required></td>
+                  <td><input type="text" class="form-control" [(ngModel)]="asphalt.gradationTest.expandA"
+                      name="expandA"></td>
+                </tr>
+                <!-- Row B -->
+                <tr>
+                  <td><input type="text" class="form-control text-center border-0 bg-transparent" [value]="standard[1]"
+                      readonly tabindex="-1"></td>
+                  <td><input type="text" class="form-control text-center border-0 bg-transparent"
+                      [value]="alternative[1]" readonly tabindex="-1"></td>
+                  <td><input type="number" class="form-control" [(ngModel)]="asphalt.gradationTest.massRetainedB"
+                      name="massRetainedB" required></td>
+                  <td><input type="number" class="form-control" [(ngModel)]="asphalt.gradationTest.cvcMinB"
+                      name="cvcMinB" required></td>
+                  <td><input type="number" class="form-control" [(ngModel)]="asphalt.gradationTest.cvcMaxB"
+                      name="cvcMaxB" required></td>
+                  <td><input type="text" class="form-control" [(ngModel)]="asphalt.gradationTest.expandB"
+                      name="expandB"></td>
+                </tr>
+                <!-- Row C -->
+                <tr>
+                  <td><input type="text" class="form-control text-center border-0 bg-transparent" [value]="standard[2]"
+                      readonly tabindex="-1"></td>
+                  <td><input type="text" class="form-control text-center border-0 bg-transparent"
+                      [value]="alternative[2]" readonly tabindex="-1"></td>
+                  <td><input type="number" class="form-control" [(ngModel)]="asphalt.gradationTest.massRetainedC"
+                      name="massRetainedC" required></td>
+                  <td><input type="number" class="form-control" [(ngModel)]="asphalt.gradationTest.cvcMinC"
+                      name="cvcMinC" required></td>
+                  <td><input type="number" class="form-control" [(ngModel)]="asphalt.gradationTest.cvcMaxC"
+                      name="cvcMaxC" required></td>
+                  <td><input type="text" class="form-control" [(ngModel)]="asphalt.gradationTest.expandC"
+                      name="expandC"></td>
+                </tr>
+                <!-- Row D -->
+                <tr>
+                  <td><input type="text" class="form-control text-center border-0 bg-transparent" [value]="standard[3]"
+                      readonly tabindex="-1"></td>
+                  <td><input type="text" class="form-control text-center border-0 bg-transparent"
+                      [value]="alternative[3]" readonly tabindex="-1"></td>
+                  <td><input type="number" class="form-control" [(ngModel)]="asphalt.gradationTest.massRetainedD"
+                      name="massRetainedD" required></td>
+                  <td><input type="number" class="form-control" [(ngModel)]="asphalt.gradationTest.cvcMinD"
+                      name="cvcMinD" required></td>
+                  <td><input type="number" class="form-control" [(ngModel)]="asphalt.gradationTest.cvcMaxD"
+                      name="cvcMaxD" required></td>
+                  <td><input type="text" class="form-control" [(ngModel)]="asphalt.gradationTest.expandD"
+                      name="expandD"></td>
+                </tr>
+                <!-- Row E -->
+                <tr>
+                  <td><input type="text" class="form-control text-center border-0 bg-transparent" [value]="standard[4]"
+                      readonly tabindex="-1"></td>
+                  <td><input type="text" class="form-control text-center border-0 bg-transparent"
+                      [value]="alternative[4]" readonly tabindex="-1"></td>
+                  <td><input type="number" class="form-control" [(ngModel)]="asphalt.gradationTest.massRetainedE"
+                      name="massRetainedE" required></td>
+                  <td><input type="number" class="form-control" [(ngModel)]="asphalt.gradationTest.cvcMinE"
+                      name="cvcMinE" required></td>
+                  <td><input type="number" class="form-control" [(ngModel)]="asphalt.gradationTest.cvcMaxE"
+                      name="cvcMaxE" required></td>
+                  <td><input type="text" class="form-control" [(ngModel)]="asphalt.gradationTest.expandE"
+                      name="expandE"></td>
+                </tr>
+                <!-- Row F -->
+                <tr>
+                  <td><input type="text" class="form-control text-center border-0 bg-transparent" [value]="standard[5]"
+                      readonly tabindex="-1"></td>
+                  <td><input type="text" class="form-control text-center border-0 bg-transparent"
+                      [value]="alternative[5]" readonly tabindex="-1"></td>
+                  <td><input type="number" class="form-control" [(ngModel)]="asphalt.gradationTest.massRetainedF"
+                      name="massRetainedF" required></td>
+                  <td><input type="number" class="form-control" [(ngModel)]="asphalt.gradationTest.cvcMinF"
+                      name="cvcMinF" required></td>
+                  <td><input type="number" class="form-control" [(ngModel)]="asphalt.gradationTest.cvcMaxF"
+                      name="cvcMaxF" required></td>
+                  <td><input type="text" class="form-control" [(ngModel)]="asphalt.gradationTest.expandF"
+                      name="expandF"></td>
+                </tr>
+                <!-- Row G -->
+                <tr>
+                  <td><input type="text" class="form-control text-center border-0 bg-transparent" [value]="standard[6]"
+                      readonly tabindex="-1"></td>
+                  <td><input type="text" class="form-control text-center border-0 bg-transparent"
+                      [value]="alternative[6]" readonly tabindex="-1"></td>
+                  <td><input type="number" class="form-control" [(ngModel)]="asphalt.gradationTest.massRetainedG"
+                      name="massRetainedG" required></td>
+                  <td><input type="number" class="form-control" [(ngModel)]="asphalt.gradationTest.cvcMinG"
+                      name="cvcMinG" required></td>
+                  <td><input type="number" class="form-control" [(ngModel)]="asphalt.gradationTest.cvcMaxG"
+                      name="cvcMaxG" required></td>
+                  <td><input type="text" class="form-control" [(ngModel)]="asphalt.gradationTest.expandG"
+                      name="expandG"></td>
+                </tr>
+                <!-- Row H -->
+                <tr>
+                  <td><input type="text" class="form-control text-center border-0 bg-transparent" [value]="standard[7]"
+                      readonly tabindex="-1"></td>
+                  <td><input type="text" class="form-control text-center border-0 bg-transparent"
+                      [value]="alternative[7]" readonly tabindex="-1"></td>
+                  <td><input type="number" class="form-control" [(ngModel)]="asphalt.gradationTest.massRetainedH"
+                      name="massRetainedH" required></td>
+                  <td><input type="number" class="form-control" [(ngModel)]="asphalt.gradationTest.cvcMinH"
+                      name="cvcMinH" required></td>
+                  <td><input type="number" class="form-control" [(ngModel)]="asphalt.gradationTest.cvcMaxH"
+                      name="cvcMaxH" required></td>
+                  <td><input type="text" class="form-control" [(ngModel)]="asphalt.gradationTest.expandH"
+                      name="expandH"></td>
+                </tr>
+                <!-- Row I -->
+                <tr>
+                  <td><input type="text" class="form-control text-center border-0 bg-transparent" [value]="standard[8]"
+                      readonly tabindex="-1"></td>
+                  <td><input type="text" class="form-control text-center border-0 bg-transparent"
+                      [value]="alternative[8]" readonly tabindex="-1"></td>
+                  <td><input type="number" class="form-control" [(ngModel)]="asphalt.gradationTest.massRetainedI"
+                      name="massRetainedI" required></td>
+                  <td><input type="number" class="form-control" [(ngModel)]="asphalt.gradationTest.cvcMinI"
+                      name="cvcMinI" required></td>
+                  <td><input type="number" class="form-control" [(ngModel)]="asphalt.gradationTest.cvcMaxI"
+                      name="cvcMaxI" required></td>
+                  <td><input type="text" class="form-control" [(ngModel)]="asphalt.gradationTest.expandI"
+                      name="expandI"></td>
+                </tr>
+                <!-- Row J -->
+                <tr>
+                  <td><input type="text" class="form-control text-center border-0 bg-transparent" [value]="standard[9]"
+                      readonly tabindex="-1"></td>
+                  <td><input type="text" class="form-control text-center border-0 bg-transparent"
+                      [value]="alternative[9]" readonly tabindex="-1"></td>
+                  <td><input type="number" class="form-control" [(ngModel)]="asphalt.gradationTest.massRetainedJ"
+                      name="massRetainedJ" required></td>
+                  <td><input type="number" class="form-control" [(ngModel)]="asphalt.gradationTest.cvcMinJ"
+                      name="cvcMinJ" required></td>
+                  <td><input type="number" class="form-control" [(ngModel)]="asphalt.gradationTest.cvcMaxJ"
+                      name="cvcMaxJ" required></td>
+                  <td><input type="text" class="form-control" [(ngModel)]="asphalt.gradationTest.expandJ"
+                      name="expandJ"></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h6 class="text-secondary mt-4">Limits & Remarks</h6>
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label class="form-label">Voids in Mineral Agg. %</label>
+              <input type="text" class="form-control" [(ngModel)]="asphalt.voidsinmineralaggLimits"
+                name="voidsinmineralaggLimits" required>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Air Voids %</label>
+              <input type="text" class="form-control" [(ngModel)]="asphalt.airvoidsLimits" name="airvoidsLimits"
+                required>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Bitumen Content %</label>
+              <input type="text" class="form-control" [(ngModel)]="asphalt.bitumencontentLimits"
+                name="bitumencontentLimits" required>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Stability (kgm)</label>
+              <input type="text" class="form-control" [(ngModel)]="asphalt.lossofstabilitykgmLimits"
+                name="lossofstabilitykgmLimits" required>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Voids Filled with Asp. %</label>
+              <input type="text" class="form-control" [(ngModel)]="asphalt.voidsfilledwithaspLimits"
+                name="voidsfilledwithaspLimits" required>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Max Density (gm/cm3)</label>
+              <input type="text" class="form-control" [(ngModel)]="asphalt.maxdensityasperdesignLimits"
+                name="maxdensityasperdesignLimits" required>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Flow (mm)</label>
+              <input type="text" class="form-control" [(ngModel)]="asphalt.flowLimits" name="flowLimits" required>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Loss of Stability %</label>
+              <input type="text" class="form-control" [(ngModel)]="asphalt.lossOfStabilityLimits"
+                name="lossofstabilityLimits" required>
+            </div>
+            <div class="col-12">
+              <label class="form-label">Remarks</label>
+              <textarea class="form-control" [(ngModel)]="asphalt.remarks" name="remarks" rows="3" required></textarea>
+            </div>
+          </div>
         </div>
 
+        <!-- STEP 3: Asphalt Marshall -->
+        <div *ngIf="currentStep === 3">
+          <h5 class="text-secondary mb-3">Asphalt Marshall Test</h5>
+          <div class="row g-3 mb-4">
+            <div class="col-md-3">
+              <label class="form-label">Request Description</label>
+              <input type="text" class="form-control" [(ngModel)]="asphalt.requestDescription" name="requestDescription"
+                required>
+            </div>
+            <div class="col-md-3">
+              <label class="form-label">Sample Date</label>
+              <input type="date" class="form-control" [(ngModel)]="asphalt.sampleDate" name="sampleDate" required>
+            </div>
+            <div class="col-md-3">
+              <label class="form-label">Testing Date</label>
+              <input type="date" class="form-control" [(ngModel)]="asphalt.testingDate" name="testingDate" required>
+            </div>
+            <div class="col-md-3">
+              <label class="form-label">Sample Type</label>
+              <input type="text" class="form-control" [(ngModel)]="asphalt.sampleType" name="sampleType" required>
+            </div>
+            <div class="col-md-3">
+              <label class="form-label">Sample By</label>
+              <input type="text" class="form-control" [(ngModel)]="asphalt.sampleBy" name="sampleBy" required>
+            </div>
+            <div class="col-md-3">
+              <label class="form-label">Asphalt Layer</label>
+              <input type="text" class="form-control" [(ngModel)]="asphalt.asphaltLayer" name="asphaltLayer" required>
+            </div>
+            <div class="col-md-3">
+              <label class="form-label">Equipment Used</label>
+              <input type="text" class="form-control" [(ngModel)]="asphalt.equipmentUsed" name="equipmentUsed" required>
+            </div>
+            <div class="col-md-3">
+              <label class="form-label">Report No</label>
+              <input type="text" class="form-control" [(ngModel)]="asphalt.reportNo" name="reportNo" required>
+            </div>
+            <div class="col-md-4">
+              <label class="form-label">% A/C by tot. wt. of mix</label>
+              <input type="number" class="form-control" [(ngModel)]="asphalt.bitumen.percOfBit" name="percOfBit">
+            </div>
+            <div class="col-md-8">
+              <label class="form-label">Remarks</label>
+              <textarea class="form-control" [(ngModel)]="asphalt.notes" name="notes" rows="3"
+                (input)="limitLiness($event, 9)"></textarea>
+            </div>
+          </div>
 
-        <!-- Wt. in water gm -->
-        <div class="form-group">
-          <label class="label">Wt. in water gm</label>
-        </div>
-        <!--                <div *ngFor="let i of [0,1,2,3,4,5]" class="form-group">-->
-        <!--                  <input type="number" class="form-control"-->
-        <!--                         [(ngModel)]="formData.weightWater[i]"-->
-        <!--                         [name]="'weightWater' + i" required>-->
-        <!--                </div>-->
+          <div class="table-responsive">
+            <table class="table table-bordered table-striped text-center align-middle">
+              <thead class="table-dark">
+                <tr>
+                  <th>Property</th>
+                  <th>1</th>
+                  <th>2</th>
+                  <th>3</th>
+                  <th>4</th>
+                  <th>5</th>
+                  <th>6</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Wt. in air dry gm</td>
+                  <td><input type="number" class="form-control" [(ngModel)]="asphalt.weightAirDryA" name="weightAirDryA"
+                      required></td>
+                  <td><input type="number" class="form-control" [(ngModel)]="asphalt.weightAirDryB" name="weightAirDryB"
+                      required></td>
+                  <td><input type="number" class="form-control" [(ngModel)]="asphalt.weightAirDryC" name="weightAirDryC"
+                      required></td>
+                  <td><input type="number" class="form-control" [(ngModel)]="asphalt.weightAirDryD" name="weightAirDryD"
+                      required></td>
+                  <td><input type="number" class="form-control" [(ngModel)]="asphalt.weightAirDryE" name="weightAirDryE"
+                      required></td>
+                  <td><input type="number" class="form-control" [(ngModel)]="asphalt.weightAirDryF" name="weightAirDryF"
+                      required></td>
+                </tr>
+                <tr>
+                  <td>Wt. in water gm</td>
+                  <td><input type="number" class="form-control" [(ngModel)]="asphalt.weightWaterA" name="weightWaterA"
+                      required></td>
+                  <td><input type="number" class="form-control" [(ngModel)]="asphalt.weightWaterB" name="weightWaterB"
+                      required></td>
+                  <td><input type="number" class="form-control" [(ngModel)]="asphalt.weightWaterC" name="weightWaterC"
+                      required></td>
+                  <td><input type="number" class="form-control" [(ngModel)]="asphalt.weightWaterD" name="weightWaterD"
+                      required></td>
+                  <td><input type="number" class="form-control" [(ngModel)]="asphalt.weightWaterE" name="weightWaterE"
+                      required></td>
+                  <td><input type="number" class="form-control" [(ngModel)]="asphalt.weightWaterF" name="weightWaterF"
+                      required></td>
+                </tr>
+                <tr>
+                  <td>Wt. in air surf dry gm</td>
+                  <td><input type="number" class="form-control" [(ngModel)]="asphalt.weightAirSurfDryA"
+                      name="weightAirSurfDryA" required></td>
+                  <td><input type="number" class="form-control" [(ngModel)]="asphalt.weightAirSurfDryB"
+                      name="weightAirSurfDryB" required></td>
+                  <td><input type="number" class="form-control" [(ngModel)]="asphalt.weightAirSurfDryC"
+                      name="weightAirSurfDryC" required></td>
+                  <td><input type="number" class="form-control" [(ngModel)]="asphalt.weightAirSurfDryD"
+                      name="weightAirSurfDryD" required></td>
+                  <td><input type="number" class="form-control" [(ngModel)]="asphalt.weightAirSurfDryE"
+                      name="weightAirSurfDryE" required></td>
+                  <td><input type="number" class="form-control" [(ngModel)]="asphalt.weightAirSurfDryF"
+                      name="weightAirSurfDryF" required></td>
+                </tr>
+                <tr>
+                  <td>Stability (kg)</td>
+                  <td><input type="number" class="form-control" [(ngModel)]="asphalt.stabilityA" name="stabilityA"
+                      required></td>
+                  <td><input type="number" class="form-control" [(ngModel)]="asphalt.stabilityB" name="stabilityB"
+                      required></td>
+                  <td><input type="number" class="form-control" [(ngModel)]="asphalt.stabilityC" name="stabilityC"
+                      required></td>
+                  <td><input type="number" class="form-control" [(ngModel)]="asphalt.stabilityD" name="stabilityD"
+                      required></td>
+                  <td><input type="number" class="form-control" [(ngModel)]="asphalt.stabilityE" name="stabilityE"
+                      required></td>
+                  <td><input type="number" class="form-control" [(ngModel)]="asphalt.stabilityF" name="stabilityF"
+                      required></td>
+                </tr>
+                <tr>
+                  <td>Correction Factor</td>
+                  <td><input type="number" class="form-control" [(ngModel)]="asphalt.correctionFactorA"
+                      name="correctionFactorA" required></td>
+                  <td><input type="number" class="form-control" [(ngModel)]="asphalt.correctionFactorB"
+                      name="correctionFactorB" required></td>
+                  <td><input type="number" class="form-control" [(ngModel)]="asphalt.correctionFactorC"
+                      name="correctionFactorC" required></td>
+                  <td><input type="number" class="form-control" [(ngModel)]="asphalt.correctionFactorD"
+                      name="correctionFactorD" required></td>
+                  <td><input type="number" class="form-control" [(ngModel)]="asphalt.correctionFactorE"
+                      name="correctionFactorE" required></td>
+                  <td><input type="number" class="form-control" [(ngModel)]="asphalt.correctionFactorF"
+                      name="correctionFactorF" required></td>
+                </tr>
+                <tr>
+                  <td>Stability 24h (kg)</td>
+                  <td class="bg-light"></td>
+                  <td class="bg-light"></td>
+                  <td class="bg-light"></td>
+                  <td><input type="number" class="form-control" [(ngModel)]="asphalt.stability24HrsD"
+                      name="stability24Hrs" required></td>
+                  <td><input type="number" class="form-control" [(ngModel)]="asphalt.stability24HrsE"
+                      name="stability24HrsE" required></td>
+                  <td><input type="number" class="form-control" [(ngModel)]="asphalt.stability24HrsF"
+                      name="stability24HrsF" required></td>
+                </tr>
+                <tr>
+                  <td>Flow (mm)</td>
+                  <td><input type="number" class="form-control" [(ngModel)]="asphalt.flowA" name="flowA" required></td>
+                  <td><input type="number" class="form-control" [(ngModel)]="asphalt.flowB" name="flowB" required></td>
+                  <td><input type="number" class="form-control" [(ngModel)]="asphalt.flowC" name="flowC" required></td>
+                  <td class="bg-light"></td>
+                  <td class="bg-light"></td>
+                  <td class="bg-light"></td>
+                </tr>
+                <tr>
+                  <td>% Voids Mineral Agg.</td>
+                  <td colspan="3" class="bg-light"></td>
+                  <td><input type="number" class="form-control" [(ngModel)]="asphalt.voidMineral" name="voidMineral"
+                      required></td>
+                  <td colspan="2" class="bg-light"></td>
+                </tr>
+                <tr>
+                  <td>% Voids Filled Asp.</td>
+                  <td colspan="3" class="bg-light"></td>
+                  <td><input type="number" class="form-control" [(ngModel)]="asphalt.voidFilled" name="voidFilled"
+                      required></td>
+                  <td colspan="2" class="bg-light"></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
 
-        <div class="form-group">
-          <input type="number" class="form-control" [(ngModel)]="asphalt.weightWaterA" name="weightWaterA" required>
-        </div>
-        <div class="form-group">
-          <input type="number" class="form-control" [(ngModel)]="asphalt.weightWaterB" name="weightWaterB" required>
-        </div>
-        <div class="form-group">
-          <input type="number" class="form-control" [(ngModel)]="asphalt.weightWaterC" name="weightWaterC" required>
-        </div>
-        <div class="form-group">
-          <input type="number" class="form-control" [(ngModel)]="asphalt.weightWaterD" name="weightWaterD" required>
-        </div>
-        <div class="form-group">
-          <input type="number" class="form-control" [(ngModel)]="asphalt.weightWaterE" name="weightWaterE" required>
-        </div>
-        <div class="form-group">
-          <input type="number" class="form-control" [(ngModel)]="asphalt.weightWaterF" name="weightWaterF" required>
+          <!-- Calculations Section -->
+          <h6 class="text-secondary mt-4">Calculations</h6>
+          <div class="row g-3 mb-4">
+            <div class="col-md-2">
+              <label class="form-label">Net Wt. Loose Mix (gm)</label>
+              <input type="number" class="form-control" [(ngModel)]="asphalt.netWeightOfLooseMix"
+                name="netWeightOfLooseMix" required>
+            </div>
+            <div class="col-md-2">
+              <label class="form-label">Net Wt. Flask+Water (gm)</label>
+              <input type="number" class="form-control" [(ngModel)]="asphalt.netWeightOfFlaskWater"
+                name="netWeightOfFlaskWater" required>
+            </div>
+            <div class="col-md-2">
+              <label class="form-label">Wt. Flask+Water+Sample</label>
+              <input type="number" class="form-control" [(ngModel)]="asphalt.weightFlaskWaterSample"
+                name="weightFlaskWaterSample" required>
+            </div>
+            <div class="col-md-3">
+              <label class="form-label">Sp.Gravity Asp. Bit</label>
+              <input type="number" class="form-control" [(ngModel)]="asphalt.spGravityOfAspBit" name="spGravityOfAspBit"
+                required>
+            </div>
+            <div class="col-md-3">
+              <label class="form-label">Bulk Sp.Gr. Comb. Agg.</label>
+              <input type="number" class="form-control" [(ngModel)]="asphalt.bulkSpGrCombAgg" name="bulkSpGrCombAgg"
+                required>
+            </div>
+          </div>
+
+          <!-- Update / Expand Values Section -->
+          <h6 class="text-secondary mt-4">Update / Expand Values</h6>
+          <div class="row g-3 mb-4">
+            <div class="col-md-3">
+              <label class="form-label">U.Expand % A/C by tot. wt. of mix</label>
+              <input type="text" class="form-control" [(ngModel)]="asphalt.percofbitExpand" name="percofbitExpand">
+            </div>
+            <div class="col-md-3">
+              <label class="form-label">U.Expand Avg Bulk Sp.Gr Mix</label>
+              <input type="text" class="form-control" [(ngModel)]="asphalt.bulkspofcompMixExpand"
+                name="bulkspofcompMixExpand">
+            </div>
+            <div class="col-md-3">
+              <label class="form-label">Avg. max Sp. Gr of mix</label>
+              <input type="text" class="form-control" [(ngModel)]="asphalt.maxspofpavgmixExpand"
+                name="maxspofpavgmixExpand">
+            </div>
+            <div class="col-md-3">
+              <label class="form-label">% Air Voids</label>
+              <input type="text" class="form-control" [(ngModel)]="asphalt.airvoidExpand" name="airvoidExpand">
+            </div>
+            <div class="col-md-3">
+              <label class="form-label">% Voids in mineral Agg.</label>
+              <input type="text" class="form-control" [(ngModel)]="asphalt.voidmineralExpand" name="voidmineralExpand">
+            </div>
+            <div class="col-md-3">
+              <label class="form-label">% Voids filled with Asp.</label>
+              <input type="text" class="form-control" [(ngModel)]="asphalt.voidfilledExpand" name="voidfilledExpand">
+            </div>
+            <div class="col-md-3">
+              <label class="form-label">Effective Asp. Content %</label>
+              <input type="text" class="form-control" [(ngModel)]="asphalt.effectiveaspExpand"
+                name="effectiveaspExpand">
+            </div>
+            <div class="col-md-3">
+              <label class="form-label">Stability (kg) for 30 min</label>
+              <input type="text" class="form-control" [(ngModel)]="asphalt.avgstabilityfor30minExpand"
+                name="avgstabilityfor30minExpand">
+            </div>
+            <div class="col-md-3">
+              <label class="form-label">% Loss of Stability</label>
+              <input type="text" class="form-control" [(ngModel)]="asphalt.lossofstabilityExpand"
+                name="lossofstabilityExpand">
+            </div>
+            <div class="col-md-3">
+              <label class="form-label">Avg. Flow (mm)</label>
+              <input type="text" class="form-control" [(ngModel)]="asphalt.avgflowExpand" name="avgflowExpand">
+            </div>
+          </div>
+
+          <!-- Notes Section -->
+          <h6 class="text-secondary mt-4">Notes & Remarks</h6>
+          <div class="row g-3">
+            <div class="col-md-4">
+              <label class="form-label">Avg Max Sp.Gr Note</label>
+              <input type="text" class="form-control" [(ngModel)]="asphalt.maxSpOfPAvgMixNote" name="maxSpOfPAvgMixNote"
+                required>
+            </div>
+            <div class="col-md-4">
+              <label class="form-label">% Air Voids Note</label>
+              <input type="text" class="form-control" [(ngModel)]="asphalt.airVoidNote" name="airVoidNote" required>
+            </div>
+            <div class="col-md-4">
+              <label class="form-label">% Voids Min Agg Note</label>
+              <input type="text" class="form-control" [(ngModel)]="asphalt.voidMineralNote" name="voidMineralNote"
+                required>
+            </div>
+            <div class="col-md-4">
+              <label class="form-label">% Voids Filled Note</label>
+              <input type="text" class="form-control" [(ngModel)]="asphalt.voidFilledNote" name="voidFilledNote"
+                required>
+            </div>
+            <div class="col-md-4">
+              <label class="form-label">Stability 30min Note</label>
+              <input type="text" class="form-control" [(ngModel)]="asphalt.avgStabilityFor30MinNote"
+                name="avgStabilityFor30MinNote" required>
+            </div>
+            <div class="col-md-4">
+              <label class="form-label">Loss Stability Note</label>
+              <input type="text" class="form-control" [(ngModel)]="asphalt.lossOfStabilityNote"
+                name="lossOfStabilityNote" required>
+            </div>
+            <div class="col-md-4">
+              <label class="form-label">Avg Flow Note</label>
+              <input type="text" class="form-control" [(ngModel)]="asphalt.avgFlowNote" name="avgFlowNote" required>
+            </div>
+          </div>
         </div>
 
-        <!-- Wt. in air surf dry gm -->
-        <div class="form-group">
-          <label class="label">Wt. in air surf dry gm</label>
-        </div>
-        <div class="form-group">
-          <input type="number" class="form-control" [(ngModel)]="asphalt.weightAirSurfDryA" name="weightAirSurfDryA"
-                 required>
-        </div>
-        <div class="form-group">
-          <input type="number" class="form-control" [(ngModel)]="asphalt.weightAirSurfDryB" name="weightAirSurfDryB"
-                 required>
-        </div>
-        <div class="form-group">
-          <input type="number" class="form-control" [(ngModel)]="asphalt.weightAirSurfDryC" name="weightAirSurfDryC"
-                 required>
-        </div>
-        <div class="form-group">
-          <input type="number" class="form-control" [(ngModel)]="asphalt.weightAirSurfDryD" name="weightAirSurfDryD"
-                 required>
-        </div>
-        <div class="form-group">
-          <input type="number" class="form-control" [(ngModel)]="asphalt.weightAirSurfDryE" name="weightAirSurfDryE"
-                 required>
-        </div>
-        <div class="form-group">
-          <input type="number" class="form-control" [(ngModel)]="asphalt.weightAirSurfDryF" name="weightAirSurfDryF"
-                 required>
+        <div class="card-footer bg-transparent border-0 d-flex justify-content-between mt-3">
+          <button *ngIf="currentStep > 1" type="button" (click)="prevStep()" class="btn btn-secondary">
+            <i class="bi bi-arrow-left me-2"></i>Previous
+          </button>
+          <div class="ms-auto">
+            <button *ngIf="currentStep < 3" type="button" (click)="nextStep()" class="btn btn-primary">
+              Next<i class="bi bi-arrow-right ms-2"></i>
+            </button>
+            <button *ngIf="currentStep === 3" type="submit" class="btn btn-success px-4" [disabled]="!form.valid">
+              <i class="bi bi-save me-2"></i>Submit All
+            </button>
+          </div>
         </div>
 
-
-        <!-- Stability (kg) -->
-        <div class="form-group">
-          <label class="label">Stability (kg)</label>
-        </div>
-        <div class="form-group">
-          <input type="number" class="form-control" [(ngModel)]="asphalt.stabilityA" name="stabilityA" required>
-        </div>
-        <div class="form-group">
-          <input type="number" class="form-control" [(ngModel)]="asphalt.stabilityB" name="stabilityB" required>
-        </div>
-        <div class="form-group">
-          <input type="number" class="form-control" [(ngModel)]="asphalt.stabilityC" name="stabilityC" required>
-        </div>
-        <div class="form-group">
-          <input type="number" class="form-control" [(ngModel)]="asphalt.stabilityD" name="stabilityD" required>
-        </div>
-        <div class="form-group">
-          <input type="number" class="form-control" [(ngModel)]="asphalt.stabilityE" name="stabilityE" required>
-        </div>
-        <div class="form-group">
-          <input type="number" class="form-control" [(ngModel)]="asphalt.stabilityF" name="stabilityF" required>
-        </div>
-
-        <!-- Correction factor -->
-        <div class="form-group">
-          <label class="label">Correction factor</label>
-        </div>
-        <div class="form-group">
-          <input type="number" class="form-control" [(ngModel)]="asphalt.correctionFactorA" name="correctionFactorA"
-                 required>
-        </div>
-        <div class="form-group">
-          <input type="number" class="form-control" [(ngModel)]="asphalt.correctionFactorB" name="correctionFactorB"
-                 required>
-        </div>
-        <div class="form-group">
-          <input type="number" class="form-control" [(ngModel)]="asphalt.correctionFactorC" name="correctionFactorC"
-                 required>
-        </div>
-        <div class="form-group">
-          <input type="number" class="form-control" [(ngModel)]="asphalt.correctionFactorD" name="correctionFactorD"
-                 required>
-        </div>
-        <div class="form-group">
-          <input type="number" class="form-control" [(ngModel)]="asphalt.correctionFactorE" name="correctionFactorE"
-                 required>
-        </div>
-        <div class="form-group">
-          <input type="number" class="form-control" [(ngModel)]="asphalt.correctionFactorF" name="correctionFactorF"
-                 required>
-        </div>
-
-
-        <!-- Stability (kg) for 24 Hrs. -->
-        <div class="form-group">
-          <label class="label" style="font-size: 15px">Stability (kg) for 24 Hrs.</label>
-        </div>
-        <div class="form-group">
-          <input type="number" class="form-control" disabled>
-        </div>
-        <div class="form-group">
-          <input type="number" class="form-control" disabled>
-        </div>
-        <div class="form-group">
-          <input type="number" class="form-control" disabled>
-        </div>
-        <div class="form-group">
-          <input type="number" class="form-control" [(ngModel)]="asphalt.stability24HrsD" name="stability24Hrs"
-                 required>
-        </div>
-        <div class="form-group">
-          <input type="number" class="form-control" [(ngModel)]="asphalt.stability24HrsE" name="stability24HrsE"
-                 required>
-        </div>
-        <div class="form-group">
-          <input type="number" class="form-control" [(ngModel)]="asphalt.stability24HrsF" name="stability24HrsF"
-                 required>
-        </div>
-
-
-        <!-- Flow(mm) -->
-        <div class="form-group">
-          <label class="label">Flow(mm)</label>
-        </div>
-
-        <div class="form-group">
-          <input type="number" class="form-control" [(ngModel)]="asphalt.flowA" name="flowA" required>
-        </div>
-        <div class="form-group">
-          <input type="number" class="form-control" [(ngModel)]="asphalt.flowB" name="flowB" required>
-        </div>
-        <div class="form-group">
-          <input type="number" class="form-control" [(ngModel)]="asphalt.flowC" name="flowC" required>
-        </div>
-        <div *ngFor="let i of [3,4,5]" class="form-group">
-          <input type="number" class="form-control" disabled>
-        </div>
-
-
-
-        <div class="form-group">
-          <label class="label">% Voids in mineral Agg.</label>
-        </div>
-        <div class="form-group">
-          <input type="number" class="form-control" disabled>
-        </div>
-        <div class="form-group">
-          <input type="number" class="form-control" disabled>
-        </div>
-        <div class="form-group">
-          <input type="number" class="form-control" disabled>
-        </div>
-        <div class="form-group">
-          <input type="number" class="form-control" [(ngModel)]="asphalt.voidMineral" name="voidMineral" required>
-        </div>
-        <div class="form-group">
-          <input type="number" class="form-control" disabled>
-        </div>
-        <div class="form-group">
-          <input type="number" class="form-control" disabled>
-        </div>
-
-        <div class="form-group">
-          <label class="label">% Voids filled with Asp.</label>
-        </div>
-        <div class="form-group">
-          <input type="number" class="form-control" disabled>
-        </div>
-        <div class="form-group">
-          <input type="number" class="form-control" disabled>
-        </div>
-        <div class="form-group">
-          <input type="number" class="form-control" disabled>
-        </div>
-        <div class="form-group">
-          <input type="number" class="form-control" [(ngModel)]="asphalt.voidFilled" name="voidFilled" required>
-        </div>
-        <div class="form-group">
-          <input type="number" class="form-control" disabled>
-        </div>
-        <div class="form-group">
-          <input type="number" class="form-control" disabled>
-        </div>
-
-
-      </div>
-
-      <!-- Additional fields -->
-      <div class="d-flex align-items-center gap-3 flex-wrap mb-3" style="margin-top: 10px">
-        <div class="align-items-center">
-          <label class="col-form-label me-2">Net. Wt. Of loose mix gm</label>
-          <input type="number" class="form-control"
-                 [(ngModel)]="asphalt.netWeightOfLooseMix" name="netWeightOfLooseMix" required>
-        </div>
-        <div class="align-items-center">
-          <label class="col-form-label me-2">Net Wt. Of Flask+watergm</label>
-          <input type="number" class="form-control"
-                 [(ngModel)]="asphalt.netWeightOfFlaskWater" name="netWeightOfFlaskWater" required>
-        </div>
-        <div class="align-items-center">
-          <label class="col-form-label me-2">Wt. Flask+water+sample</label>
-          <input type="number" class="form-control"
-                 [(ngModel)]="asphalt.weightFlaskWaterSample" name="weightFlaskWaterSample" required>
-        </div>
-        <div class="align-items-center">
-          <label class="col-form-label me-2">Sp.Gravity of Asp. Bit</label>
-          <input type="number" class="form-control"
-                 [(ngModel)]="asphalt.spGravityOfAspBit" name="spGravityOfAspBit" required>
-        </div>
-        <div class="align-items-center">
-          <label class="col-form-label me-2">Bulk Sp.Gr. Comb. Agg.</label>
-          <input type="number" class="form-control"
-                 [(ngModel)]="asphalt.bulkSpGrCombAgg" name="bulkSpGrCombAgg" required>
-        </div>
-      </div>
-
-      <div class="d-flex align-items-center gap-3 flex-wrap mb-3" style="margin-top: 10px">
-        <div class="align-items-center">
-          <label class="col-form-label me-2">U.Expand % A/C by tot. wt. of mix</label>
-          <input type="text" class="form-control"
-                 [(ngModel)]="asphalt.percofbitExpand" name="percofbitExpand">
-        </div>
-        <div class="align-items-center">
-          <label class="col-form-label me-2">U.Expand Avg Bulk Sp.Gr.of Comp. mix Gmb gm/cm3</label>
-          <input type="text" class="form-control"
-                 [(ngModel)]="asphalt.bulkspofcompMixExpand" name="bulkspofcompMixExpand">
-        </div>
-        <div class="align-items-center">
-          <label class="col-form-label me-2">Avg. max Sp. Gr of mix gmm gm/cm3</label>
-          <input type="text" class="form-control"
-                 [(ngModel)]="asphalt.maxspofpavgmixExpand" name="maxspofpavgmixExpand">
-        </div>
-        <div class="align-items-center">
-          <label class="col-form-label me-2">% Air Voids</label>
-          <input type="text" class="form-control"
-                 [(ngModel)]="asphalt.airvoidExpand" name="airvoidExpand">
-        </div>
-        <div class="align-items-center">
-          <label class="col-form-label me-2">% Voids in mineral Agg.</label>
-          <input type="text" class="form-control"
-                 [(ngModel)]="asphalt.voidmineralExpand" name="voidmineralExpand">
-        </div>
-        <div class="align-items-center">
-          <label class="col-form-label me-2">% Voids filled with Asp.</label>
-          <input type="text" class="form-control"
-                 [(ngModel)]="asphalt.voidfilledExpand" name="voidfilledExpand">
-        </div>
-        <div class="align-items-center">
-          <label class="col-form-label me-2">Effective Asp. Content %</label>
-          <input type="text" class="form-control"
-                 [(ngModel)]="asphalt.effectiveaspExpand" name="effectiveaspExpand">
-        </div>
-        <div class="align-items-center">
-          <label class="col-form-label me-2">Stability (kg) for 30 min</label>
-          <input type="text" class="form-control"
-                 [(ngModel)]="asphalt.avgstabilityfor30minExpand" name="avgstabilityfor30minExpand">
-        </div>
-        <div class="align-items-center">
-          <label class="col-form-label me-2">% Loss of Stability</label>
-          <input type="text" class="form-control"
-                 [(ngModel)]="asphalt.lossofstabilityExpand" name="lossofstabilityExpand">
-        </div>
-        <div class="align-items-center">
-          <label class="col-form-label me-2">Avg. Flow (mm)</label>
-          <input type="text" class="form-control"
-                 [(ngModel)]="asphalt.avgflowExpand" name="avgflowExpand">
-        </div>
-      </div>
-
-      <div class="d-flex align-items-center gap-3 flex-wrap mb-3" style="margin-top: 10px">
-        <div class="align-items-center">
-          <label class="col-form-label me-2">Avg. max Sp. Gr of mix gmm gm/cm3 Note</label>
-          <input type="text" class="form-control"
-                 [(ngModel)]="asphalt.maxSpOfPAvgMixNote" name="maxSpOfPAvgMixNote" required>
-        </div>
-        <div class="align-items-center">
-          <label class="col-form-label me-2">% Air Voids Note</label>
-          <input type="text" class="form-control"
-                 [(ngModel)]="asphalt.airVoidNote" name="airVoidNote" required>
-        </div>
-        <div class="align-items-center">
-          <label class="col-form-label me-2"> % Voids in mineral Agg. Note</label>
-          <input type="text" class="form-control"
-                 [(ngModel)]="asphalt.voidMineralNote" name="voidMineralNote" required>
-        </div>
-        <div class="align-items-center">
-          <label class="col-form-label me-2">% Voids filled with Asp. Note</label>
-          <input type="text" class="form-control"
-                 [(ngModel)]="asphalt.voidFilledNote" name="voidFilledNote" required>
-        </div>
-        <div class="align-items-center">
-          <label class="col-form-label me-2">Stability (kg) for 30 min Note</label>
-          <input type="text" class="form-control"
-                 [(ngModel)]="asphalt.avgStabilityFor30MinNote" name="avgStabilityFor30MinNote" required>
-        </div>
-        <div class="align-items-center">
-          <label class="col-form-label me-2">% Loss of Stability Note</label>
-          <input type="text" class="form-control"
-                 [(ngModel)]="asphalt.lossOfStabilityNote" name="lossOfStabilityNote" required>
-        </div>
-        <div class="align-items-center">
-          <label class="col-form-label me-2">Avg. Flow (mm) Note</label>
-          <input type="text" class="form-control"
-                 [(ngModel)]="asphalt.avgFlowNote" name="avgFlowNote" required>
-        </div>
-      </div>
+      </form>
     </div>
-
-    <div class="navigation-buttons">
-      <button *ngIf="currentStep > 1" type="button" (click)="prevStep()" class="btn btn-secondary">Previous</button>
-      <button *ngIf="currentStep < 3" type="button" (click)="nextStep()" class="btn btn-primary">Next</button>
-      <button *ngIf="currentStep === 3" type="submit" class="btn btn-success" [disabled]="!form.valid">Submit All
-      </button>
-    </div>
-  </form>
+  </div>
 </div>

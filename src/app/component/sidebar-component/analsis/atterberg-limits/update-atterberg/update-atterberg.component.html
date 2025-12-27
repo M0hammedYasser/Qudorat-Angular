@@ -1,294 +1,199 @@
-<div class="form-container">
-  <h1 class="header">Atterberg Limits Data Sheet</h1>
-  <form #form="ngForm" (submit)="update()">
-    <div class="form-step">
-      <div class="bitumen-form-container">
+<div class="container-fluid" style="margin-top: 90px; margin-left: 260px; width: calc(100% - 260px);">
+  <div class="card shadow-sm">
+    <div class="card-header bg-primary text-white">
+      <h3 class="mb-0">Atterberg Limits Data Sheet (Update)</h3>
+    </div>
+    <div class="card-body">
+      <form #form="ngForm" (submit)="update()">
 
-        <div class="d-flex align-items-center gap-1 mb-1">
-          <div class="align-items-center">
-            <label class="col-form-label me-1">Sample By</label>
-            <input type="text" class="form-control compact-input"
-                   [(ngModel)]="atterbergLimits.sampleBy" name="sampleBy" required>
+        <!-- Header Inputs -->
+        <h5 class="text-secondary mb-3">General Information</h5>
+        <div class="row g-3 mb-4">
+          <div class="col-md-3">
+            <label class="form-label">Sample By</label>
+            <input type="text" class="form-control" [(ngModel)]="atterbergLimits.sampleBy" name="sampleBy" required>
           </div>
-          <div class="align-items-center">
-            <label class="col-form-label me-1">Sample Date</label>
-            <input type="date" class="form-control compact-input"
-                   [(ngModel)]="atterbergLimits.sampleDate" name="sampleDate" required>
+          <div class="col-md-3">
+            <label class="form-label">Sample Date</label>
+            <input type="date" class="form-control" [(ngModel)]="atterbergLimits.sampleDate" name="sampleDate" required>
           </div>
-
-          <div class="align-items-center">
-            <label class="col-form-label me-1">Test Name</label>
-            <input type="text" class="form-control compact-input"
-                   [(ngModel)]="atterbergLimits.nameOfTest" name="nameOfTest" required>
+          <div class="col-md-3">
+            <label class="form-label">Test Name</label>
+            <input type="text" class="form-control" [(ngModel)]="atterbergLimits.nameOfTest" name="nameOfTest" required>
           </div>
-          <div class="align-items-center">
-            <label class="col-form-label me-1">Testing Date</label>
-            <input type="date" class="form-control compact-input"
-                   [(ngModel)]="atterbergLimits.testingDate" name="testingDate" required>
+          <div class="col-md-3">
+            <label class="form-label">Testing Date</label>
+            <input type="date" class="form-control" [(ngModel)]="atterbergLimits.testingDate" name="testingDate"
+              required>
           </div>
-
-          <div class="align-items-center">
-            <label class="col-form-label me-1">Standard</label>
-            <input type="text" class="form-control compact-input"
-                   [(ngModel)]="atterbergLimits.classification" name="classification" required>
+          <div class="col-md-3">
+            <label class="form-label">Standard</label>
+            <input type="text" class="form-control" [(ngModel)]="atterbergLimits.classification" name="classification"
+              required>
           </div>
-          <div class="align-items-center">
-            <label class="col-form-label me-1">Report No</label>
-            <input type="text" class="form-control compact-input"
-                   [(ngModel)]="atterbergLimits.reportNo" name="reportNo" required>
+          <div class="col-md-3">
+            <label class="form-label">Report No</label>
+            <input type="text" class="form-control" [(ngModel)]="atterbergLimits.reportNo" name="reportNo" required>
           </div>
-        </div>
-
-        <!-- Notes Line -->
-        <div class="d-flex align-items-center mb-1">
-          <div class="align-items-center">
-            <label class="col-form-label me-1">Remarks</label>
-            <textarea type="text" class="form-control compact-input"
-                  [(ngModel)]="atterbergLimits.notes" name="notes" style="width: 890px; height: 100px;"></textarea>
+          <div class="col-md-6">
+            <label class="form-label">Remarks</label>
+            <textarea class="form-control" [(ngModel)]="atterbergLimits.notes" name="notes" rows="2"></textarea>
           </div>
         </div>
 
         <!-- Test Data Table -->
-        <div class="test-table-container">
-          <table class="test-data-table">
-            <thead>
-            <tr>
-              <th rowspan="2">TEST</th>
-              <th colspan="4">PLASTIC LIMIT</th>
-              <th colspan="4">LIQUID LIMIT</th>
-            </tr>
-            <tr>
-              <th>1</th>
-              <th>2</th>
-              <th>3</th>
-              <th>4</th>
-              <th>1</th>
-              <th>2</th>
-              <th>3</th>
-              <th>4</th>
-            </tr>
+        <h5 class="text-secondary mb-3">Test Data</h5>
+        <div class="table-responsive mb-4">
+          <table class="table table-bordered table-striped text-center align-middle">
+            <thead class="table-dark">
+              <tr>
+                <th rowspan="2" class="align-middle">TEST</th>
+                <th colspan="4">PLASTIC LIMIT</th>
+                <th colspan="4">LIQUID LIMIT</th>
+              </tr>
+              <tr>
+                <th>1</th>
+                <th>2</th>
+                <th>3</th>
+                <th>4</th>
+                <th>1</th>
+                <th>2</th>
+                <th>3</th>
+                <th>4</th>
+              </tr>
             </thead>
             <tbody>
-            <!-- Number of Blows -->
-            <tr>
-              <td class="variable-cell">
-                <label>Number of Blows</label>
-                <div class="units">(blows)</div>
-              </td>
-              <td colspan="4" class="empty-cell"></td>
+              <!-- Number of Blows -->
+              <tr>
+                <td class="fw-bold text-start ps-3">Number of Blows <span
+                    class="text-muted small d-block">(blows)</span></td>
+                <td colspan="4" class="bg-light"></td> <!-- Empty for Plastic Limit -->
+                <td><input type="number" class="form-control" [(ngModel)]="atterbergLimits.numberOfBlows5"
+                    name="numberOfBlows5"></td>
+                <td><input type="number" class="form-control" [(ngModel)]="atterbergLimits.numberOfBlows6"
+                    name="numberOfBlows6"></td>
+                <td><input type="number" class="form-control" [(ngModel)]="atterbergLimits.numberOfBlows7"
+                    name="numberOfBlows7"></td>
+                <td><input type="number" class="form-control" [(ngModel)]="atterbergLimits.numberOfBlows8"
+                    name="numberOfBlows8"></td>
+              </tr>
 
-              <td>
-                <input type="number" class="form-control table-input" [(ngModel)]="atterbergLimits.numberOfBlows5"
-                       name="numberOfBlows5">
-              </td>
-              <td>
-                <input type="number" class="form-control table-input" [(ngModel)]="atterbergLimits.numberOfBlows6"
-                       name="numberOfBlows6">
-              </td>
-              <td>
-                <input type="number" class="form-control table-input" [(ngModel)]="atterbergLimits.numberOfBlows7"
-                       name="numberOfBlows7">
-              </td>
-              <td>
-                <input type="number" class="form-control table-input" [(ngModel)]="atterbergLimits.numberOfBlows8"
-                       name="numberOfBlows8">
-              </td>
-            </tr>
+              <!-- Can Number -->
+              <tr>
+                <td class="fw-bold text-start ps-3">Can Number</td>
+                <td><input type="number" class="form-control" [(ngModel)]="atterbergLimits.canNumber1"
+                    name="canNumber1"></td>
+                <td><input type="number" class="form-control" [(ngModel)]="atterbergLimits.canNumber2"
+                    name="canNumber2"></td>
+                <td><input type="number" class="form-control" [(ngModel)]="atterbergLimits.canNumber3"
+                    name="canNumber3"></td>
+                <td><input type="text" class="form-control" [(ngModel)]="atterbergLimits.canNumber4" name="canNumber4">
+                </td> <!-- Keep as text per original -->
+                <td><input type="number" class="form-control" [(ngModel)]="atterbergLimits.canNumber5"
+                    name="canNumber5"></td>
+                <td><input type="number" class="form-control" [(ngModel)]="atterbergLimits.canNumber6"
+                    name="canNumber6"></td>
+                <td><input type="text" class="form-control" [(ngModel)]="atterbergLimits.canNumber7" name="canNumber7">
+                </td> <!-- Keep as text per original -->
+                <td><input type="number" class="form-control" [(ngModel)]="atterbergLimits.canNumber8"
+                    name="canNumber8"></td>
+              </tr>
 
-            <!-- Can Number -->
-            <tr>
-              <td class="variable-cell">
-                <label>Can Number</label>
-              </td>
-              <td>
-                <input type="number" class="form-control table-input" [(ngModel)]="atterbergLimits.canNumber1"
-                       name="canNumber1">
-              </td>
-              <td>
-                <input type="number" class="form-control table-input" [(ngModel)]="atterbergLimits.canNumber2"
-                       name="canNumber2">
-              </td>
-              <td>
-                <input type="number" class="form-control table-input" [(ngModel)]="atterbergLimits.canNumber3"
-                       name="canNumber3">
-              </td>
-              <td>
-                <input type="text" class="form-control table-input" [(ngModel)]="atterbergLimits.canNumber4"
-                       name="canNumber4">
-              </td>
-              <td>
-                <input type="number" class="form-control table-input" [(ngModel)]="atterbergLimits.canNumber5"
-                       name="canNumber5">
-              </td>
-              <td>
-                <input type="number" class="form-control table-input" [(ngModel)]="atterbergLimits.canNumber6"
-                       name="canNumber6">
-              </td>
-              <td>
-                <input type="text" class="form-control table-input" [(ngModel)]="atterbergLimits.canNumber7"
-                       name="canNumber7">
-              </td>
-              <td>
-                <input type="number" class="form-control table-input" [(ngModel)]="atterbergLimits.canNumber8"
-                       name="canNumber8">
-              </td>
+              <!-- Mass of Empty Can -->
+              <tr>
+                <td class="fw-bold text-start ps-3">Mass of Empty Can <span class="text-muted small d-block">(g)</span>
+                </td>
+                <td><input type="number" step="0.01" class="form-control" [(ngModel)]="atterbergLimits.massOfEmptyCan1"
+                    name="massOfEmptyCan1"></td>
+                <td><input type="number" step="0.01" class="form-control" [(ngModel)]="atterbergLimits.massOfEmptyCan2"
+                    name="massOfEmptyCan2"></td>
+                <td><input type="number" step="0.01" class="form-control" [(ngModel)]="atterbergLimits.massOfEmptyCan3"
+                    name="massOfEmptyCan3"></td>
+                <td><input type="number" step="0.01" class="form-control" [(ngModel)]="atterbergLimits.massOfEmptyCan4"
+                    name="massOfEmptyCan4"></td>
+                <td><input type="number" step="0.01" class="form-control" [(ngModel)]="atterbergLimits.massOfEmptyCan5"
+                    name="massOfEmptyCan5"></td>
+                <td><input type="number" step="0.01" class="form-control" [(ngModel)]="atterbergLimits.massOfEmptyCan6"
+                    name="massOfEmptyCan6"></td>
+                <td><input type="number" step="0.01" class="form-control" [(ngModel)]="atterbergLimits.massOfEmptyCan7"
+                    name="massOfEmptyCan7"></td>
+                <td><input type="number" step="0.01" class="form-control" [(ngModel)]="atterbergLimits.massOfEmptyCan8"
+                    name="massOfEmptyCan8"></td>
+              </tr>
 
-            </tr>
+              <!-- Mass Can & Soil (Wet) -->
+              <tr>
+                <td class="fw-bold text-start ps-3">Mass Can & Soil (Wet) <span
+                    class="text-muted small d-block">(g)</span></td>
+                <td><input type="number" step="0.01" class="form-control"
+                    [(ngModel)]="atterbergLimits.massCanAndSoilWet1" name="massCanAndSoilWet1"></td>
+                <td><input type="number" step="0.01" class="form-control"
+                    [(ngModel)]="atterbergLimits.massCanAndSoilWet2" name="massCanAndSoilWet2"></td>
+                <td><input type="number" step="0.01" class="form-control"
+                    [(ngModel)]="atterbergLimits.massCanAndSoilWet3" name="massCanAndSoilWet3"></td>
+                <td><input type="number" step="0.01" class="form-control"
+                    [(ngModel)]="atterbergLimits.massCanAndSoilWet4" name="massCanAndSoilWet4"></td>
+                <td><input type="number" step="0.01" class="form-control"
+                    [(ngModel)]="atterbergLimits.massCanAndSoilWet5" name="massCanAndSoilWet5"></td>
+                <td><input type="number" step="0.01" class="form-control"
+                    [(ngModel)]="atterbergLimits.massCanAndSoilWet6" name="massCanAndSoilWet6"></td>
+                <td><input type="number" step="0.01" class="form-control"
+                    [(ngModel)]="atterbergLimits.massCanAndSoilWet7" name="massCanAndSoilWet7"></td>
+                <td><input type="number" step="0.01" class="form-control"
+                    [(ngModel)]="atterbergLimits.massCanAndSoilWet8" name="massCanAndSoilWet8"></td>
+              </tr>
 
-            <!-- Mass of Empty Can -->
-            <tr>
-              <td class="variable-cell">
-                <label>Mass of Empty Can</label>
-                <div class="units">(g)</div>
-              </td>
-              <td>
-                <input type="number" step="0.01" class="form-control table-input"
-                       [(ngModel)]="atterbergLimits.massOfEmptyCan1" name="massOfEmptyCan1">
-              </td>
-              <td>
-                <input type="number" step="0.01" class="form-control table-input"
-                       [(ngModel)]="atterbergLimits.massOfEmptyCan2" name="massOfEmptyCan2">
-              </td>
-              <td>
-                <input type="number" step="0.01" class="form-control table-input"
-                       [(ngModel)]="atterbergLimits.massOfEmptyCan3" name="massOfEmptyCan3">
-              </td>
-              <td>
-                <input type="number" step="0.01" class="form-control table-input"
-                       [(ngModel)]="atterbergLimits.massOfEmptyCan4" name="massOfEmptyCan4">
-              </td>
-              <td>
-                <input type="number" step="0.01" class="form-control table-input"
-                       [(ngModel)]="atterbergLimits.massOfEmptyCan5" name="massOfEmptyCan5">
-              </td>
-              <td>
-                <input type="number" step="0.01" class="form-control table-input"
-                       [(ngModel)]="atterbergLimits.massOfEmptyCan6" name="massOfEmptyCan6">
-              </td>
-              <td>
-                <input type="number" step="0.01" class="form-control table-input"
-                       [(ngModel)]="atterbergLimits.massOfEmptyCan7" name="massOfEmptyCan7">
-              </td>
-              <td>
-                <input type="number" step="0.01" class="form-control table-input"
-                       [(ngModel)]="atterbergLimits.massOfEmptyCan8" name="massOfEmptyCan8">
-              </td>
-
-
-            </tr>
-
-            <!-- Mass Can & Soil (Wet) -->
-            <tr>
-              <td class="variable-cell">
-                <label>Mass Can & Soil (Wet)</label>
-                <div class="units">(g)</div>
-              </td>
-              <td>
-                <input type="number" step="0.01" class="form-control table-input"
-                       [(ngModel)]="atterbergLimits.massCanAndSoilWet1" name="massCanAndSoilWet1">
-              </td>
-              <td>
-                <input type="number" step="0.01" class="form-control table-input"
-                       [(ngModel)]="atterbergLimits.massCanAndSoilWet2" name="massCanAndSoilWet2">
-              </td>
-              <td>
-                <input type="number" step="0.01" class="form-control table-input"
-                       [(ngModel)]="atterbergLimits.massCanAndSoilWet3" name="massCanAndSoilWet3">
-              </td>
-              <td>
-                <input type="number" step="0.01" class="form-control table-input"
-                       [(ngModel)]="atterbergLimits.massCanAndSoilWet4" name="massCanAndSoilWet4">
-              </td>
-              <td>
-                <input type="number" step="0.01" class="form-control table-input"
-                       [(ngModel)]="atterbergLimits.massCanAndSoilWet5" name="massCanAndSoilWet5">
-              </td>
-              <td>
-                <input type="number" step="0.01" class="form-control table-input"
-                       [(ngModel)]="atterbergLimits.massCanAndSoilWet6" name="massCanAndSoilWet6">
-              </td>
-              <td>
-                <input type="number" step="0.01" class="form-control table-input"
-                       [(ngModel)]="atterbergLimits.massCanAndSoilWet7" name="massCanAndSoilWet7">
-              </td>
-              <td>
-                <input type="number" step="0.01" class="form-control table-input"
-                       [(ngModel)]="atterbergLimits.massCanAndSoilWet8" name="massCanAndSoilWet8">
-              </td>
-
-            </tr>
-
-            <!-- Mass Can & Soil (Dry) -->
-            <tr>
-              <td class="variable-cell">
-                <label>Mass Can & Soil (Dry)</label>
-                <div class="units">(g)</div>
-              </td>
-              <td>
-                <input type="number" step="0.01" class="form-control table-input"
-                       [(ngModel)]="atterbergLimits.massCanAndSoilDry1" name="massCanAndSoilDry1">
-              </td>
-              <td>
-                <input type="number" step="0.01" class="form-control table-input"
-                       [(ngModel)]="atterbergLimits.massCanAndSoilDry2" name="massCanAndSoilDry2">
-              </td>
-              <td>
-                <input type="number" step="0.01" class="form-control table-input"
-                       [(ngModel)]="atterbergLimits.massCanAndSoilDry3" name="massCanAndSoilDry3">
-              </td>
-              <td>
-                <input type="number" step="0.01" class="form-control table-input"
-                       [(ngModel)]="atterbergLimits.massCanAndSoilDry4" name="massCanAndSoilDry4">
-              </td>
-              <td>
-                <input type="number" step="0.01" class="form-control table-input"
-                       [(ngModel)]="atterbergLimits.massCanAndSoilDry5" name="massCanAndSoilDry5">
-              </td>
-              <td>
-                <input type="number" step="0.01" class="form-control table-input"
-                       [(ngModel)]="atterbergLimits.massCanAndSoilDry6" name="massCanAndSoilDry6">
-              </td>
-              <td>
-                <input type="number" step="0.01" class="form-control table-input"
-                       [(ngModel)]="atterbergLimits.massCanAndSoilDry7" name="massCanAndSoilDry7">
-              </td>
-              <td>
-                <input type="number" step="0.01" class="form-control table-input"
-                       [(ngModel)]="atterbergLimits.massCanAndSoilDry8" name="massCanAndSoilDry8">
-              </td>
-
-
-            </tr>
-
+              <!-- Mass Can & Soil (Dry) -->
+              <tr>
+                <td class="fw-bold text-start ps-3">Mass Can & Soil (Dry) <span
+                    class="text-muted small d-block">(g)</span></td>
+                <td><input type="number" step="0.01" class="form-control"
+                    [(ngModel)]="atterbergLimits.massCanAndSoilDry1" name="massCanAndSoilDry1"></td>
+                <td><input type="number" step="0.01" class="form-control"
+                    [(ngModel)]="atterbergLimits.massCanAndSoilDry2" name="massCanAndSoilDry2"></td>
+                <td><input type="number" step="0.01" class="form-control"
+                    [(ngModel)]="atterbergLimits.massCanAndSoilDry3" name="massCanAndSoilDry3"></td>
+                <td><input type="number" step="0.01" class="form-control"
+                    [(ngModel)]="atterbergLimits.massCanAndSoilDry4" name="massCanAndSoilDry4"></td>
+                <td><input type="number" step="0.01" class="form-control"
+                    [(ngModel)]="atterbergLimits.massCanAndSoilDry5" name="massCanAndSoilDry5"></td>
+                <td><input type="number" step="0.01" class="form-control"
+                    [(ngModel)]="atterbergLimits.massCanAndSoilDry6" name="massCanAndSoilDry6"></td>
+                <td><input type="number" step="0.01" class="form-control"
+                    [(ngModel)]="atterbergLimits.massCanAndSoilDry7" name="massCanAndSoilDry7"></td>
+                <td><input type="number" step="0.01" class="form-control"
+                    [(ngModel)]="atterbergLimits.massCanAndSoilDry8" name="massCanAndSoilDry8"></td>
+              </tr>
             </tbody>
           </table>
         </div>
 
         <!-- Results Section -->
-        <div class="results-section">
-          <div class="result-row">
-            <label class="result-label">Liquid Limit (LL):</label>
-            <input type="number" step="0.1" class="form-control result-input"
-                   [(ngModel)]="atterbergLimits.liquidLimit" name="liquidLimit">
+        <h5 class="text-secondary mb-3">Results</h5>
+        <div class="row g-3">
+          <div class="col-md-4">
+            <label class="form-label">Liquid Limit (LL)</label>
+            <input type="number" step="0.1" class="form-control" [(ngModel)]="atterbergLimits.liquidLimit"
+              name="liquidLimit">
           </div>
-          <div class="result-row">
-            <label class="result-label">Plastic Limit (PL or wP):</label>
-            <input type="number" step="0.1" class="form-control result-input"
-                   [(ngModel)]="atterbergLimits.plasticLimit" name="plasticLimit">
+          <div class="col-md-4">
+            <label class="form-label">Plastic Limit (PL or wP)</label>
+            <input type="number" step="0.1" class="form-control" [(ngModel)]="atterbergLimits.plasticLimit"
+              name="plasticLimit">
           </div>
-          <div class="result-row">
-            <label class="result-label">USCS Classification::</label>
-            <input type="text" step="0.1" class="form-control result-input"
-                   [(ngModel)]="atterbergLimits.uscs" name="uscs">
+          <div class="col-md-4">
+            <label class="form-label">USCS Classification</label>
+            <input type="text" class="form-control" [(ngModel)]="atterbergLimits.uscs" name="uscs">
           </div>
         </div>
 
-
-        <div class="navigation-buttons">
-          <button type="submit" class="btn btn-primary" [disabled]="!form.valid">Submit</button>
+        <div class="card-footer bg-transparent border-0 d-flex justify-content-end mt-4">
+          <button type="submit" class="btn btn-primary px-5" [disabled]="!form.valid">
+            <i class="bi bi-save me-2"></i>Update
+          </button>
         </div>
-      </div>
+
+      </form>
     </div>
-
-  </form>
+  </div>
 </div>
