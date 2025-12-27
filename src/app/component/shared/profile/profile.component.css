@@ -1,5 +1,5 @@
 /* Global Layout */
-.main-container {
+.main-content {
   padding: 110px 40px 40px;
   /* Top padding > Navbar, Left/Right padding */
   margin-left: 260px;
@@ -67,4 +67,14 @@
 .btn-outline-danger:hover {
   background-color: #dc3545;
   color: white;
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+  .main-content {
+    margin-left: 0;
+    max-width: 100%;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
 }
