@@ -1,6 +1,6 @@
 <div class="main-content">
   <!-- Header Section -->
-  <div class="d-flex justify-content-between align-items-center mb-4">
+  <div class="d-flex justify-content-between align-items-center mb-4 header-section">
     <div>
       <h4 class="fw-bold text-dark mb-1">
         <i class="fas fa-water me-2 text-primary"></i>Moisture Density
@@ -8,31 +8,33 @@
       </h4>
       <p class="text-muted small mb-0">Manage moisture density relationship tests (Proctor).</p>
     </div>
-    <div class="d-flex gap-2">
-      <button class="btn btn-primary shadow-sm" routerLink="/moisture-density-relationship/insert/{{id}}"
-        *ngIf="role =='ROLE_TECH' || role == 'ROLE_ADMIN'">
-        <i class="fas fa-plus me-2"></i>New Trial
-      </button>
+    <div>
+      <div class="d-flex gap-2 flex-wrap">
+        <button class="btn btn-primary shadow-sm" routerLink="/moisture-density-relationship/insert/{{id}}"
+          *ngIf="role =='ROLE_TECH' || role == 'ROLE_ADMIN'">
+          <i class="fas fa-plus me-2"></i>New Trial
+        </button>
 
-      <!-- Supervisor Actions -->
-      <button class="btn btn-success shadow-sm" (click)="adopt(id)" *ngIf="(role =='ROLE_SUPERVISOR') && !test.adopt">
-        <i class="fas fa-check me-2"></i>Adopt
-      </button>
-      <button class="btn btn-danger shadow-sm" (click)="reject(id)" *ngIf="(role =='ROLE_SUPERVISOR') && !test.adopt">
-        <i class="fas fa-times me-2"></i>Reject
-      </button>
+        <!-- Supervisor Actions -->
+        <button class="btn btn-success shadow-sm" (click)="adopt(id)" *ngIf="(role =='ROLE_SUPERVISOR') && !test.adopt">
+          <i class="fas fa-check me-2"></i>Adopt
+        </button>
+        <button class="btn btn-danger shadow-sm" (click)="reject(id)" *ngIf="(role =='ROLE_SUPERVISOR') && !test.adopt">
+          <i class="fas fa-times me-2"></i>Reject
+        </button>
 
-      <!-- Manager/Admin Approve -->
-      <button class="btn btn-success shadow-sm" (click)="approve(id)"
-        *ngIf="(role == 'ROLE_MANAGER' || role == 'ROLE_ADMIN') && test.adopt && !test.approved">
-        <i class="fas fa-check-double me-2"></i>Approve
-      </button>
+        <!-- Manager/Admin Approve -->
+        <button class="btn btn-success shadow-sm" (click)="approve(id)"
+          *ngIf="(role == 'ROLE_MANAGER' || role == 'ROLE_ADMIN') && test.adopt && !test.approved">
+          <i class="fas fa-check-double me-2"></i>Approve
+        </button>
+      </div>
     </div>
   </div>
 
   <!-- Trials Grid -->
   <div class="row g-4">
-    <div class="col-md-6 col-lg-4" *ngFor="let temp of test.moistureDensityRelationships; index as i">
+    <div class="col-12 col-md-6 col-lg-4" *ngFor="let temp of test.moistureDensityRelationships; index as i">
       <div class="card border-0 shadow-sm h-100 trial-card">
         <div class="card-header border-0 pt-4 pb-0 d-flex justify-content-between align-items-center">
           <span class="badge text-primary border rounded-pill px-3">Trial #{{ i + 1 }}</span>
