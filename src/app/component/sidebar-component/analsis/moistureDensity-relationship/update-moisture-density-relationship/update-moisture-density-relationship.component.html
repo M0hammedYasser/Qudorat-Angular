@@ -1,67 +1,68 @@
-<div class="form-container">
-  <h1 class="header">Moisture Density Relationship Test (Proctor) </h1>
-  <form #form="ngForm" (submit)="update()">
-    <div class="form-step">
-      <div class="bitumen-form-container">
+<div class="container-fluid" style="margin-top: 90px; margin-left: 260px; width: calc(100% - 260px);">
+  <div class="card shadow-sm">
+    <div class="card-header bg-primary text-white">
+      <h3 class="mb-0">Moisture Density Relationship Test (Proctor) (Update)</h3>
+    </div>
+    <div class="card-body">
+      <form #form="ngForm" (submit)="update()">
 
-        <div class="d-flex align-items-center gap-1 mb-1">
-          <div class="align-items-center">
-            <label class="col-form-label me-1">Sample By</label>
-            <input type="text" class="form-control compact-input"
-                   [(ngModel)]="moistureDensityRelationship.sampleBy" name="sampleBy" required>
+        <!-- General Information -->
+        <h5 class="text-secondary mb-3">General Information</h5>
+        <div class="row g-3 mb-4">
+          <div class="col-md-3">
+            <label class="form-label">Sample By</label>
+            <input type="text" class="form-control" [(ngModel)]="moistureDensityRelationship.sampleBy" name="sampleBy"
+              required>
           </div>
-          <div class="align-items-center">
-            <label class="col-form-label me-1">Sample Date</label>
-            <input type="date" class="form-control compact-input"
-                   [(ngModel)]="moistureDensityRelationship.sampleDate" name="sampleDate" required>
+          <div class="col-md-3">
+            <label class="form-label">Sample Date</label>
+            <input type="date" class="form-control" [(ngModel)]="moistureDensityRelationship.sampleDate"
+              name="sampleDate" required>
           </div>
-          <div class="align-items-center">
-            <label class="col-form-label me-1">Test Name</label>
-            <input type="text" class="form-control compact-input"
-                   [(ngModel)]="moistureDensityRelationship.nameOfTest" name="nameOfTest" required>
+          <div class="col-md-3">
+            <label class="form-label">Test Name</label>
+            <input type="text" class="form-control" [(ngModel)]="moistureDensityRelationship.nameOfTest"
+              name="nameOfTest" required>
           </div>
-          <div class="align-items-center">
-            <label class="col-form-label me-1">Testing Date</label>
-            <input type="date" class="form-control compact-input"
-                   [(ngModel)]="moistureDensityRelationship.testingDate" name="testingDate" required>
+          <div class="col-md-3">
+            <label class="form-label">Testing Date</label>
+            <input type="date" class="form-control" [(ngModel)]="moistureDensityRelationship.testingDate"
+              name="testingDate" required>
           </div>
-          <div class="align-items-center">
-            <label class="col-form-label me-1">Standard</label>
-            <input type="text" class="form-control compact-input"
-                   [(ngModel)]="moistureDensityRelationship.classification" name="classification" required>
+          <div class="col-md-3">
+            <label class="form-label">Standard</label>
+            <input type="text" class="form-control" [(ngModel)]="moistureDensityRelationship.classification"
+              name="classification" required>
           </div>
-          <div class="align-items-center">
-            <label class="col-form-label me-1">Report No</label>
-            <input type="text" class="form-control compact-input"
-                   [(ngModel)]="moistureDensityRelationship.reportNo" name="moistureDensityRelationship" required>
+          <div class="col-md-3">
+            <label class="form-label">Report No</label>
+            <input type="text" class="form-control" [(ngModel)]="moistureDensityRelationship.reportNo"
+              name="moistureDensityRelationship" required>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">Remarks</label>
+            <textarea class="form-control" [(ngModel)]="moistureDensityRelationship.notes" name="notes"
+              rows="1"></textarea>
           </div>
         </div>
 
-        <!-- Notes Line -->
-        <div class="d-flex align-items-center mb-1">
-          <div class="align-items-center">
-            <label class="col-form-label me-1">Remarks</label>
-            <textarea type="text" class="form-control compact-input"
-                  [(ngModel)]="moistureDensityRelationship.notes" name="notes" style="width: 890px; height: 100px;"></textarea>
-          </div>
-        </div>
-
-        <div class="row g-2 mb-2">
-
+        <!-- Initial Parameters -->
+        <h5 class="text-secondary mb-3">Test Parameters</h5>
+        <div class="row g-3 mb-4">
           <div class="col-md-2">
             <label class="form-label">Wt. of Mould (g)</label>
             <input type="number" class="form-control" [(ngModel)]="moistureDensityRelationship.wtOfMould"
-                   name="WtOfMould">
+              name="WtOfMould">
           </div>
           <div class="col-md-2">
             <label class="form-label">Vol. of Mould (cc)</label>
             <input type="number" class="form-control" [(ngModel)]="moistureDensityRelationship.volOfMould"
-                   name="VolOfMould">
+              name="VolOfMould">
           </div>
           <div class="col-md-2">
             <label class="form-label">Wt. of Rammer (kg)</label>
             <input type="number" class="form-control" [(ngModel)]="moistureDensityRelationship.wtOfRammer"
-                   name="WtOfRammer">
+              name="WtOfRammer">
           </div>
           <div class="col-md-2">
             <label class="form-label">Blows/Layers</label>
@@ -70,81 +71,107 @@
           <div class="col-md-2">
             <label class="form-label">No. of Layers</label>
             <input type="number" class="form-control" [(ngModel)]="moistureDensityRelationship.noOfLayers"
-                   name="NoOfLayers">
+              name="NoOfLayers">
           </div>
         </div>
 
-        <h5 class="mt-3">Mould Data</h5>
-        <table class="table table-bordered table-sm text-center">
-          <thead class="table-light">
-          <tr>
-            <th>Trial Number #</th>
-            <th>1</th>
-            <th>2</th>
-            <th>3</th>
-            <th>4</th>
-            <th>5</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr>
-            <td>Wet Wt.Soil+Mould (gm)</td>
-            <td><input type="number" [(ngModel)]="moistureDensityRelationship.wetWtSoilMouldA" name="wetWtSoilContA"></td>
-            <td><input type="number" [(ngModel)]="moistureDensityRelationship.wetWtSoilMouldB" name="wetWtSoilMouldB"></td>
-            <td><input type="number" [(ngModel)]="moistureDensityRelationship.wetWtSoilMouldC" name="wetWtSoilMouldC"></td>
-            <td><input type="number" [(ngModel)]="moistureDensityRelationship.wetWtSoilMouldD" name="wetWtSoilMouldD"></td>
-            <td><input type="number" [(ngModel)]="moistureDensityRelationship.wetWtSoilMouldE" name="wetWtSoilMouldE"></td>
-          </tr>
-          </tbody>
-        </table>
-
-        <h5 class="mt-3">Moisture Content Data %</h5>
-        <table class="table table-bordered table-sm text-center">
-          <thead class="table-light">
-          <tr>
-            <th>Container #</th>
-            <th>1</th>
-            <th>2</th>
-            <th>3</th>
-            <th>4</th>
-            <th>5</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr>
-            <td>Wet Wt.Soil+Cont. (gm)</td>
-            <td><input type="number" [(ngModel)]="moistureDensityRelationship.wetWtSoilContA" name="wetWtSoilContA"></td>
-            <td><input type="number" [(ngModel)]="moistureDensityRelationship.wetWtSoilContB" name="wetWtSoilContB"></td>
-            <td><input type="number" [(ngModel)]="moistureDensityRelationship.wetWtSoilContC" name="wetWtSoilContC"></td>
-            <td><input type="number" [(ngModel)]="moistureDensityRelationship.wetWtSoilContD" name="wetWtSoilContD"></td>
-            <td><input type="number" [(ngModel)]="moistureDensityRelationship.wetWtSoilContE" name="wetWtSoilContE"></td>
-          </tr>
-          <tr>
-            <td>Dry Wt.Soil+Cont. (gm)</td>
-            <td><input type="number" [(ngModel)]="moistureDensityRelationship.dryWtSoilContA" name="dryWtSoilContA"></td>
-            <td><input type="number" [(ngModel)]="moistureDensityRelationship.dryWtSoilContB" name="dryWtSoilContB"></td>
-            <td><input type="number" [(ngModel)]="moistureDensityRelationship.dryWtSoilContC" name="dryWtSoilContC"></td>
-            <td><input type="number" [(ngModel)]="moistureDensityRelationship.dryWtSoilContD" name="dryWtSoilContD"></td>
-            <td><input type="number" [(ngModel)]="moistureDensityRelationship.dryWtSoilContE" name="dryWtSoilContE"></td>
-          </tr>
-          <tr>
-            <td>Wt. of Container (gm)</td>
-            <td><input type="number" [(ngModel)]="moistureDensityRelationship.wtOfContainerA" name="wtOfContainerA"></td>
-            <td><input type="number" [(ngModel)]="moistureDensityRelationship.wtOfContainerB" name="wtOfContainerB"></td>
-            <td><input type="number" [(ngModel)]="moistureDensityRelationship.wtOfContainerC" name="wtOfContainerC"></td>
-            <td><input type="number" [(ngModel)]="moistureDensityRelationship.wtOfContainerD" name="wtOfContainerD"></td>
-            <td><input type="number" [(ngModel)]="moistureDensityRelationship.wtOfContainerE" name="wtOfContainerE"></td>
-          </tr>
-
-          </tbody>
-        </table>
-
-
-        <div class="navigation-buttons">
-          <button type="submit" class="btn btn-primary" [disabled]="!form.valid">Submit</button>
+        <!-- Mould Data Table -->
+        <h5 class="text-secondary mb-3">Mould Data</h5>
+        <div class="table-responsive mb-4">
+          <table class="table table-bordered table-striped text-center align-middle">
+            <thead class="table-dark">
+              <tr>
+                <th class="text-start ps-3" style="width: 250px;">Trial Number #</th>
+                <th>1</th>
+                <th>2</th>
+                <th>3</th>
+                <th>4</th>
+                <th>5</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="fw-bold text-start ps-3">Wet Wt.Soil+Mould (gm)</td>
+                <td><input type="number" class="form-control" [(ngModel)]="moistureDensityRelationship.wetWtSoilMouldA"
+                    name="wetWtSoilMouldA"></td>
+                <td><input type="number" class="form-control" [(ngModel)]="moistureDensityRelationship.wetWtSoilMouldB"
+                    name="wetWtSoilMouldB"></td>
+                <td><input type="number" class="form-control" [(ngModel)]="moistureDensityRelationship.wetWtSoilMouldC"
+                    name="wetWtSoilMouldC"></td>
+                <td><input type="number" class="form-control" [(ngModel)]="moistureDensityRelationship.wetWtSoilMouldD"
+                    name="wetWtSoilMouldD"></td>
+                <td><input type="number" class="form-control" [(ngModel)]="moistureDensityRelationship.wetWtSoilMouldE"
+                    name="wetWtSoilMouldE"></td>
+              </tr>
+            </tbody>
+          </table>
         </div>
-      </div>
-    </div>
 
-  </form>
+        <!-- Moisture Content Data Table -->
+        <h5 class="text-secondary mb-3">Moisture Content Data %</h5>
+        <div class="table-responsive mb-4">
+          <table class="table table-bordered table-striped text-center align-middle">
+            <thead class="table-dark">
+              <tr>
+                <th class="text-start ps-3" style="width: 250px;">Container #</th>
+                <th>1</th>
+                <th>2</th>
+                <th>3</th>
+                <th>4</th>
+                <th>5</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="fw-bold text-start ps-3">Wet Wt.Soil+Cont. (gm)</td>
+                <td><input type="number" class="form-control" [(ngModel)]="moistureDensityRelationship.wetWtSoilContA"
+                    name="wetWtSoilContA"></td>
+                <td><input type="number" class="form-control" [(ngModel)]="moistureDensityRelationship.wetWtSoilContB"
+                    name="wetWtSoilContB"></td>
+                <td><input type="number" class="form-control" [(ngModel)]="moistureDensityRelationship.wetWtSoilContC"
+                    name="wetWtSoilContC"></td>
+                <td><input type="number" class="form-control" [(ngModel)]="moistureDensityRelationship.wetWtSoilContD"
+                    name="wetWtSoilContD"></td>
+                <td><input type="number" class="form-control" [(ngModel)]="moistureDensityRelationship.wetWtSoilContE"
+                    name="wetWtSoilContE"></td>
+              </tr>
+              <tr>
+                <td class="fw-bold text-start ps-3">Dry Wt.Soil+Cont. (gm)</td>
+                <td><input type="number" class="form-control" [(ngModel)]="moistureDensityRelationship.dryWtSoilContA"
+                    name="dryWtSoilContA"></td>
+                <td><input type="number" class="form-control" [(ngModel)]="moistureDensityRelationship.dryWtSoilContB"
+                    name="dryWtSoilContB"></td>
+                <td><input type="number" class="form-control" [(ngModel)]="moistureDensityRelationship.dryWtSoilContC"
+                    name="dryWtSoilContC"></td>
+                <td><input type="number" class="form-control" [(ngModel)]="moistureDensityRelationship.dryWtSoilContD"
+                    name="dryWtSoilContD"></td>
+                <td><input type="number" class="form-control" [(ngModel)]="moistureDensityRelationship.dryWtSoilContE"
+                    name="dryWtSoilContE"></td>
+              </tr>
+              <tr>
+                <td class="fw-bold text-start ps-3">Wt. of Container (gm)</td>
+                <td><input type="number" class="form-control" [(ngModel)]="moistureDensityRelationship.wtOfContainerA"
+                    name="wtOfContainerA"></td>
+                <td><input type="number" class="form-control" [(ngModel)]="moistureDensityRelationship.wtOfContainerB"
+                    name="wtOfContainerB"></td>
+                <td><input type="number" class="form-control" [(ngModel)]="moistureDensityRelationship.wtOfContainerC"
+                    name="wtOfContainerC"></td>
+                <td><input type="number" class="form-control" [(ngModel)]="moistureDensityRelationship.wtOfContainerD"
+                    name="wtOfContainerD"></td>
+                <td><input type="number" class="form-control" [(ngModel)]="moistureDensityRelationship.wtOfContainerE"
+                    name="wtOfContainerE"></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="card-footer bg-transparent border-0 d-flex justify-content-end mt-4">
+          <button type="submit" class="btn btn-primary px-5" [disabled]="!form.valid">
+            <i class="bi bi-save me-2"></i>Update
+          </button>
+        </div>
+
+      </form>
+    </div>
+  </div>
 </div>
